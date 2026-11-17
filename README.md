@@ -2,6 +2,14 @@
 
 Syntax highlighting for pasted **GDB**, **pwndbg**, **GEF** and **PEDA** output in Obsidian code blocks.
 
+**Before** (Obsidian's default code block)
+
+![pwndbg context output as plain text](./images/before.jpeg)
+
+**After**
+
+![The same output highlighted](./images/after.jpeg)
+
 ````markdown
 ```pwndbg
 pwndbg> context
