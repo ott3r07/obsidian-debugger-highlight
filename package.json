@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-debugger-highlight",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Syntax highlighting for GDB / pwndbg / GEF / PEDA output in Obsidian code blocks.",
 	"main": "main.js",
 	"type": "module",

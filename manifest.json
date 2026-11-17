@@ -1,7 +1,7 @@
 {
 	"id": "debugger-highlight",
 	"name": "Debugger Output Highlight",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"minAppVersion": "1.4.0",
 	"description": "Syntax highlighting for GDB, pwndbg, GEF and PEDA output in code blocks.",
 	"author": "ott3r07",
