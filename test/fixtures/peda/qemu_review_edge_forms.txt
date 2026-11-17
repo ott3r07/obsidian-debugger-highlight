@@ -1,0 +1,55 @@
+[----------------------------------registers-----------------------------------]
+RAX: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBX: 0x2 
+RCX: 0x2000 ('')
+RDX: 0x2aaaab2abb88 (0x00002aaaab2abb88)
+RSI: 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+RDI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBP: 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+RIP: 0x4018d3 (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+R8 : 0x4aa840 --> 0x4b3930 --> 0x0 
+R9 : 0x20 (' ')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4018c7 <probe+18>:	mov    QWORD PTR [rbp-0x28],rsi
+   0x4018cb <probe+22>:	mov    QWORD PTR [rbp-0x30],rdx
+   0x4018cf <probe+26>:	mov    QWORD PTR [rbp-0x38],rcx
+=> 0x4018d3 <probe+30>:	mov    rax,QWORD PTR [rbp-0x38]
+   0x4018d7 <probe+34>:	mov    r12,rax
+   0x4018da <probe+37>:	mov    rax,QWORD PTR [rip+0xa87f7]        # 0x4aa0d8 <quote>
+   0x4018e1 <probe+44>:	mov    r13,rax
+   0x4018e4 <probe+47>:	mov    rax,QWORD PTR [rip+0xa87f5]        # 0x4aa0e0 <longstr>
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb50 --> 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0016| 0x2aaaab2abb58 --> 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+0024| 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0032| 0x2aaaab2abb68 --> 0x4019db (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+0040| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0048| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0056| 0x2aaaab2abb80 --> 0x100 
+[------------------------------------------------------------------------------]
+[-------------------------------------code-------------------------------------]
+   0x4018f8 <spin>:	endbr64
+   0x4018fc <spin+4>:	push   rbp
+   0x4018fd <spin+5>:	mov    rbp,rsp
+=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>
+ | 0x401902 <spin+10>:	nop
+ | 0x401903 <spin+11>:	pop    rbp
+ | 0x401904 <spin+12>:	ret
+ | 0x401905 <main>:	endbr64
+ |->=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>
+       0x401902 <spin+10>:	nop
+       0x401903 <spin+11>:	pop    rbp
+       0x401904 <spin+12>:	ret
+                                                                  JUMP is taken
+0x00001000         0x00001395         rx-p	/rv/rvpie
+0x00401000         0x0047e8ad         rx-p	/rv/rv
+0016| Cannot access memory address

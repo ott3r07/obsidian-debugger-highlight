@@ -1,0 +1,94 @@
+ [----------------------------------registers-----------------------------------]
+RAX: 0x400526 (<main>:	push   rbp)
+RBX: 0x0
+RCX: 0x0
+RDX: 0x7fffffffe5e8 --> 0x7fffffffe811 ("XDG_SESSION_ID=3")
+RSI: 0x7fffffffe5d8 --> 0x7fffffffe7e0 ("/vagrant/lessons/3_intro_to_tools/build/1_sample")
+RDI: 0x1
+RBP: 0x7fffffffe4f0 --> 0x400540 (<__libc_csu_init>:	push   r15)
+RSP: 0x7fffffffe4f0 --> 0x400540 (<__libc_csu_init>:	push   r15)
+RIP: 0x40052a (<main+4>:	mov    edi,0x4005c4)
+R8 : 0x4005b0 (<__libc_csu_fini>:	repz ret)
+R9 : 0x7ffff7de78e0 (<_dl_fini>:	push   rbp)
+R10: 0x846
+R11: 0x7ffff7a2e740 (<__libc_start_main>:	push   r14)
+R12: 0x400430 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffe5d0 --> 0x1
+R14: 0x0
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x400521 <frame_dummy+33>:	jmp    0x4004a0 <register_tm_clones>
+   0x400526 <main>:	push   rbp
+   0x400527 <main+1>:	mov    rbp,rsp
+=> 0x40052a <main+4>:	mov    edi,0x4005c4
+   0x40052f <main+9>:	call   0x400400 <puts@plt>
+   0x400534 <main+14>:	mov    eax,0x0
+   0x400539 <main+19>:	pop    rbp
+   0x40053a <main+20>:	ret
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffe4f0 --> 0x400540 (<__libc_csu_init>:	push   r15)
+0008| 0x7fffffffe4f8 --> 0x7ffff7a2e830 (<__libc_start_main+240>:	mov    edi,eax)
+0016| 0x7fffffffe500 --> 0x0
+0024| 0x7fffffffe508 --> 0x7fffffffe5d8 --> 0x7fffffffe7e0 ("/vagrant/lessons/3_intro_to_tools/build/1_sample")
+0032| 0x7fffffffe510 --> 0x100000000
+   0x08048f77 <+1191>:	mov    DWORD PTR [esp],0xa
+[----------------------------------registers-----------------------------------]
+EAX: 0x1
+EBX: 0xbfffeb3f --> 0xffed9cb7
+ECX: 0x0
+EDX: 0xb7fc7180 --> 0x0
+ESI: 0xffffffff
+EDI: 0xbffff174 ('A' <repeats 200 times>...)
+EBP: 0xbfffef58 --> 0x0
+ESP: 0xbfffe6d0 --> 0xbfffeb3f --> 0xffed9cb7
+EIP: 0x8048dff (<main+815>:	call   0x8048950 <strcpy@plt>)
+EFLAGS: 0x286 (carry PARITY adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x8048df1 <main+801>:	lea    ebx,[esp+0x46f]
+   0x8048df8 <main+808>:	mov    DWORD PTR [esp+0x4],edi
+   0x8048dfc <main+812>:	mov    DWORD PTR [esp],ebx
+=> 0x8048dff <main+815>:	call   0x8048950 <strcpy@plt>
+   0x8048e04 <main+820>:	xor    eax,eax
+   0x8048e06 <main+822>:	mov    ecx,esi
+   0x8048e08 <main+824>:	repnz scas al,BYTE PTR es:[edi]
+   0x8048e0a <main+826>:	not    ecx
+Guessed arguments:
+arg[0]: 0xbfffeb3f --> 0xffed9cb7
+arg[1]: 0xbffff174 ('A' <repeats 200 times>...)
+[------------------------------------stack-------------------------------------]
+0000| 0xbfffe6d0 --> 0xbfffeb3f --> 0xffed9cb7
+0004| 0xbfffe6d4 --> 0xbffff174 ('A' <repeats 200 times>...)
+EAX: 0xffffc9e8 ("bla bla bla")
+EBX: 0xf7f94e54 --> 0x1a6d5c 
+ECX: 0x28 ('(')
+EDX: 0xc ('\x0c')
+ESI: 0x0 
+EDI: 0x0 
+EBP: 0xffffcdd8 --> 0x0 
+ESP: 0xffffc9cc --> 0x8048620 (<main+121>:	test   eax,eax)
+EIP: 0x80484fc (<my_strcmp>:	push   ebp)
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x80484e3:	mov    ebp,esp
+   0x80484e5:	sub    esp,0x18
+   0x80484e8:	mov    DWORD PTR [esp],0x8049f08
+   0x80484ef:	call   eax
+RSP: 0x7fffffffa830 --> 0xc ('\x0c')
+R9 : 0xc ('\x0c')
+EFLAGS: 0x10217 (CARRY PARITY ADJUST zero sign trap INTERRUPT direction overflow)
+0x00400883 : (b'5fc3')  pop rdi; ret
+0x08048576 : (b'83c4085bc3')    add esp,0x8; pop ebx; ret
+EAX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+R9 : 0x7ffff7fb94c0 (0x00007ffff7fb94c0)
+0056| 0x7fffffffe2b0 --> 0x7fffffffe400 --> 0x7ffff7fd9740 (0x00007ffff7fd9740)
+        [vdso] : 0xf7fd8001 (inc    ebp)
+ESP: 0xbffff508 ("AoAATAApAAUAAqAAVAArAAWAAsAAXAAtAAYAAuAAZAAvAAwAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%b")
+EIP: 0x41416d41 ('AmAA')
+Warning: not running or target is remote
+Start              End                Perm  Name
+0x00601000         0x00602000         rw-p	/vagrant/lessons/3_intro_to_tools/build/1_sample
+Searching for 'AAA%AAsA' in: None ranges
+Found 2 results, display max 2 items:
+ [heap] : 0x6aad83 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+[stack] : 0x7fffffffcf40 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)

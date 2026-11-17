@@ -1,0 +1,90 @@
+gef➤  heap bins
+────────────────────────────────────────── Tcachebins for thread 1 ──────────────────────────────────────────
+Tcachebins[idx=1, size=0x30, count=7] ←  Chunk(addr=0xaaaaaaac13c0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1390, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1360, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1330, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1300, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac12d0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac12a0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Tcachebins[idx=7, size=0x90, count=1] ←  Chunk(addr=0xaaaaaaac1420, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+──────────────────────────────────── Fastbins for arena at 0xfffff7fa0a50 ────────────────────────────────────
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30]  ←  Chunk(addr=0xaaaaaaac13f0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+────────────────────────────────── Unsorted Bin for arena at 0xfffff7fa0a50 ──────────────────────────────────
+[+] unsorted_bins[0]: fw=0xaaaaaaac15c0, bk=0xaaaaaaac15c0
+ →   Chunk(addr=0xaaaaaaac15d0, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in unsorted bin.
+─────────────────────────────────── Small Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] Found 0 chunks in 0 small non-empty bins.
+─────────────────────────────────── Large Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] Found 0 chunks in 0 large non-empty bins.
+gef➤  heap chunk mid[1]
+Chunk(addr=0xaaaaaaac14b0, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 144 (0x90)
+Usable size: 136 (0x88)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+gef➤  heap chunk small[0]
+Chunk(addr=0xaaaaaaac12a0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 48 (0x30)
+Usable size: 40 (0x28)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+gef➤  heap arenas
+Arena(base=0xfffff7fa0a50, top=0xaaaaaaac1fe0, last_remainder=0x0, next=0xfffff7fa0a50, mem=135168, mempeak=135168)
+(qemu) gef➤  heap chunks
+Chunk(addr=0x4b2d10, size=0x290, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b2d10     00 00 07 00 00 00 00 00 00 00 00 00 00 00 01 00    ................]
+Chunk(addr=0x4b2fa0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b2fa0     2f 77 6f 72 6b 00 00 00 00 00 00 00 00 00 00 00    /work...........]
+Chunk(addr=0x4b2fc0, size=0x4f0, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b2fc0     00 00 00 00 00 00 00 00 90 c4 2a ab aa 2a 00 00    ..........*..*..]
+Chunk(addr=0x4b34b0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b4140     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x4b4650, size=0x1f9c0, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  top chunk
+gef➤  heap bins small
+─────────────────────────────────── Small Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   Chunk(addr=0xaaaaaaac1ac0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)   →   Chunk(addr=0xaaaaaaac19a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 2 chunks in 1 small non-empty bins.
+gef➤  heap chunk s1
+[!] Command 'heap chunk' failed to execute properly, reason: No symbol "s1" in current context.
+gef➤  heap chunk s1
+Chunk(addr=0xaaaaaaac19a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 256 (0x100)
+Usable size: 248 (0xf8)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+
+Forward pointer: 0xfffff7fa0ba0
+Backward pointer: 0xaaaaaaac1ab0
+
+gef➤  heap chunk l1
+Chunk(addr=0xaaaaaaac1be0, size=0x810, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 2064 (0x810)
+Usable size: 2056 (0x808)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+
+Forward pointer: 0xfffff7fa0fa0
+Backward pointer: 0xfffff7fa0fa0
+
+gef➤  heap chunks --summary
+== Chunk distribution by size ==
+ChunkBytes	Count     	TotalBytes     	Description
+125936    	1         	125936         	
+4112      	1         	4112           	
+256       	9         	2304           	
+2064      	1         	2064           	
+656       	1         	656            	
+32        	3         	96             	
+
+== Chunk distribution by flag ==
+Flag           	TotalCount	TotalBytes
+PREV_INUSE     	13        	135072
+IS_MMAPPED     	0         	0
+NON_MAIN_ARENA 	0         	0

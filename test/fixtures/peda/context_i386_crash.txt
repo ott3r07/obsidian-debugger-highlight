@@ -1,0 +1,25 @@
+[----------------------------------registers-----------------------------------]
+EAX: 0x6a ('j')
+EBX: 0x61414145 ('EAAa')
+ECX: 0x0 
+EDX: 0x0 
+ESI: 0x40800c30 --> 0x2 
+EDI: 0x1 
+EBP: 0x41304141 ('AA0A')
+ESP: 0x40800ba0 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+EIP: 0x41414641 ('AFAA')
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x41414641
+[------------------------------------stack-------------------------------------]
+0000| 0x40800ba0 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0004| 0x40800ba4 ("AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0008| 0x40800ba8 ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0012| 0x40800bac ("2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0016| 0x40800bb0 ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0020| 0x40800bb4 ("A3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0024| 0x40800bb8 ("IAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0028| 0x40800bbc ("AA4AAJAAfAA5AAKAAgAA6AAL")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV

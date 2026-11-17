@@ -1,0 +1,12 @@
+   0x080485a7 <+0>:	push   ebp
+[Inferior 1 (process 27480) exited with code 041]
+#0  bar (arg=0xbffff7a0 'A' <repeats 200 times>...) at off_by_one.c:14
+#1  0x080484de in foo (arg=0x41414141 <error: Cannot access memory at address 0x41414141>) at off_by_one.c:8
+$10 = {int (int, char **)} 0x401954 <main>
+0xf7e6fdd9 in free () from /lib/i386-linux-gnu/libc.so.6
+Breakpoint 1, 0xf7e6fdc0 in free () from /lib/i386-linux-gnu/libc.so.6
+Error in re-setting breakpoint 1: Function "bar" not defined.
+Program terminated with signal SIGILL, Illegal instruction.
+Reading symbols from /lib/ld-linux.so.2...(no debugging symbols found)...done.
+Run till exit from #0  0xf7e27c20 in printf () from /usr/lib32/libc.so.6
+Thread 1 "revengme" hit Breakpoint 2, 0x0000000000488e99 in ?? ()

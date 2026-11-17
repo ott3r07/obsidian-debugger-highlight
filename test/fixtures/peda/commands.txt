@@ -1,0 +1,75 @@
+gdb-peda$ x/10i $pc
+--More--(25/52)
+[----------------------------------registers-----------------------------------]
+ [-------------------------------------code-------------------------------------]
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+Invalid $PC address: 0x4141464141304141
+=> 0x4141464141304141:	Cannot access memory at address 0x4141464141304141
+Guessed arguments:
+arg[0]: 0x481032 ("%s %s %d\n")
+No argument
+                                                              JUMP is NOT taken
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/work/test_static
+0x00002aaaaaaac000 0x00002aaaab2ac000 rw-p	[stack]
+0x00001000 0x00001395 rx-p	/rv/rvpie
+CANARY    : ENABLED
+FORTIFY   : disabled
+RELRO     : Partial
+Virtual memory mapping:
+Start : 0x004b4000
+Offset: 0x1900
+Perm  : rw-p
+Name  : [heap]
+0x4b5900 ("heap string AAAABBBB")
+0xdeadbeef 
+From 0x2aaaab2abac0 (SP) to 0x2aaaab2abac0: 0 bytes, 0 dwords
+0x00002aaaab2abba0 : 28 bd 2a ab aa 2a 00 00 00 c2 4a 00 01 00 00 00   (.*..*....J.....
+Searching for 'PEDA' in: None ranges
+Found 3 results, display max 3 items:
+test_static : 0x481017 ("PEDA highlighter!")
+Searching for reference to: '0x4b5900' in: all ranges
+Searching for 'heap' in range: 0x4b5000 - 0x4b6000
+libc.so.6 : 0x2aaaab4b942f --> 0x68732f6e69622f ('/bin/sh')
+Not found
+0x481010: Hello, PEDA highlighter!
+0x481029: buf: %s
+All references to 'compute':
+0x4019e8 <main+148>:	call   0x4018d4 <compute>
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAH'
+Writing pattern of 40 chars to filename "/tmp/pat.txt"
+AA8A found at offset: 112
+1094790465 found at offset: 20
+RBP+0 found at offset: 32
+FS_BASE+-92 found at offset: 52742
+Registers contain pattern buffer:
+[RSP] --> offset 48 - size ~52
+0x004aa78b : offset 37729 - size    4 (/work/test_static)
+0x00002aaaab2aab76 : offset 37729 - size    4 ($sp + -0xfba [-1007 dwords])
+0x00002aaaab2ab370 : 0x00002aaaab2abb00 ($sp + -0x7c0 [-496 dwords])
+addesp_1 = 0x41d911
+pop2ret = 0x401738
+Writing ROP gadgets to file: test_static-rop.txt ...
+Searching for ROP gadget: 'pop rdi' in: binary ranges
+0x00400883 : (b'5fc3')  pop rdi; ret
+0x401014 : call rax
+.note.ABI-tag = 0x4002c4
+rodata.cst32 = 0x49d340
+.text: 0x4011c0 - 0x480740 (code)
+'printf': no match found
+ansicolor = 'on'
+pagesize = 0
+exe = /usr/bin/qemu-x86_64
+fd[0] -> /dev/null
+ASLR is OFF
+Warning: not running
+Error: missing argument
+aslr -- Show/set ASLR setting of GDB
+RAX: 0x4d4100 ('')
+0000| 0x40800ba0 ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+0048| 0x2aaaab2abd10 --> 0x2aaaab2abee3 ("GDB_EXTRA=-ex 'set sysroot /usr/x86_64-linux-gnu'")
+   0x00000000004019f0 <+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+EBX: 0x0 
+RIP: 0x401967 --> 0x8d48097e029c7d83 

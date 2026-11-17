@@ -1,0 +1,54 @@
+(qemu) gef➤  si
+compute (f=0x8049865 <add>, x=0x6, y=0x7) at /work/test.c:13
+13	int compute(op_fn f, int x, int y) {
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x510     
+$ebx   : 0x080e4ff4  →  0x00000000
+$ecx   : 0x080e5198  →  0x080eac68  →  0x00000000
+$edx   : 0x511     
+$esp   : 0x40800c4c  →  0x08049acd  →  <main+01a0> add esp, 0x10
+$ebp   : 0x40800d08  →  0x00000001
+$esi   : 0x40800d20  →  0x00000001
+$edi   : 0x1       
+$eip   : 0x0804989a  →  <compute+0000> endbr32 
+$eflags: [zero carry PARITY ADJUST sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x33 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x40800c4c│+0x0000: 0x08049acd  →  <main+01a0> add esp, 0x10	 ← $esp
+0x40800c50│+0x0004: 0x08049865  →  <add+0000> endbr32 
+0x40800c54│+0x0008: 0x00000006
+0x40800c58│+0x000c: 0x00000007
+0x40800c5c│+0x0010: 0x0804994c  →  <main+001f> add ebx, 0x9b6a8
+0x40800c60│+0x0014: 0x080e4ff4  →  0x00000000
+0x40800c64│+0x0018: 0x080e5198  →  0x080eac68  →  0x00000000
+0x40800c68│+0x001c: 0x080e9380  →  0x080e9380  →  [loop detected]
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8049894 <mul+0014>       imul   eax, DWORD PTR [ebp+0xc]
+    0x8049898 <mul+0018>       pop    ebp
+    0x8049899 <mul+0019>       ret    
+ →  0x804989a <compute+0000>   endbr32 
+    0x804989e <compute+0004>   push   ebp
+    0x804989f <compute+0005>   mov    ebp, esp
+    0x80498a1 <compute+0007>   sub    esp, 0x18
+    0x80498a4 <compute+000a>   call   0x8049b6e <__x86.get_pc_thunk.ax>
+    0x80498a9 <compute+000f>   add    eax, 0x9b74b
+────────────────────────────────────────────────────────────────────────────────── source:/work/test.c+13 ────
+      8	 char global_buf[64] = "global data string";
+      9	 
+     10	 int add(int a, int b) { return a + b; }
+     11	 int mul(int a, int b) { return a * b; }
+     12	 
+         // x=0x6, y=0x7
+ →   13	 int compute(op_fn f, int x, int y) {
+     14	     int r = f(x, y);
+     15	     return r;
+     16	 }
+     17	 
+     18	 void vuln(const char *src) {
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x804989a in compute (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x804989a → compute(f=0x8049865 <add>, x=0x6, y=0x7)
+[#1] 0x8049acd → main(argc=0x1, argv=0x40800e44)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

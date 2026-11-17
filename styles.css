@@ -1,0 +1,76 @@
+/*
+ * Debugger Output Highlight — colours follow Obsidian's theme palette
+ * (--color-red etc. exist in light and dark themes). Rules are scoped to
+ * reading view (.dbg-hl, set on the <pre>) and the editor (.HyperMD-codeblock
+ * lines / .cm-line inside .markdown-source-view), so theme token colours for
+ * other languages are untouched.
+ *
+ * Users can override any colour with a CSS snippet, e.g.
+ *   body { --dbg-address-stack: #e5c07b; }
+ */
+body {
+	--dbg-prompt: var(--color-purple);
+	--dbg-command: var(--text-normal);
+	--dbg-section: var(--color-cyan);
+	--dbg-legend: var(--text-faint);
+	--dbg-register: var(--color-yellow);
+	--dbg-flag-set: var(--color-green);
+	--dbg-flag-clear: var(--text-faint);
+	--dbg-address: var(--color-cyan);
+	--dbg-address-stack: var(--color-yellow);
+	--dbg-address-heap: var(--color-blue);
+	--dbg-address-code: var(--color-red);
+	--dbg-address-data: var(--color-purple);
+	--dbg-address-rodata: var(--color-green);
+	--dbg-number: var(--color-orange);
+	--dbg-symbol: var(--color-green);
+	--dbg-mnemonic: var(--color-blue);
+	--dbg-current: var(--color-green);
+	--dbg-arrow: var(--text-faint);
+	--dbg-string: var(--color-orange);
+	--dbg-comment: var(--text-faint);
+	--dbg-taken: var(--color-green);
+	--dbg-not-taken: var(--color-red);
+	--dbg-perm: var(--color-purple);
+	--dbg-path: var(--text-muted);
+	--dbg-ok: var(--color-green);
+	--dbg-info: var(--color-blue);
+	--dbg-warn: var(--color-yellow);
+	--dbg-error: var(--color-red);
+	--dbg-heap-chunk: var(--color-blue);
+}
+
+:is(.dbg-hl, .markdown-source-view .cm-line) .token {
+	&.prompt { color: var(--dbg-prompt); font-weight: 600; }
+	&.command { color: var(--dbg-command); font-weight: 600; }
+	&.section { color: var(--dbg-section); }
+	&.legend { color: var(--dbg-legend); }
+	&.register { color: var(--dbg-register); }
+	&.flag-set { color: var(--dbg-flag-set); font-weight: 600; }
+	&.flag-clear { color: var(--dbg-flag-clear); }
+	&.address { color: var(--dbg-address); }
+	&.address-stack { color: var(--dbg-address-stack); }
+	&.address-heap { color: var(--dbg-address-heap); }
+	&.address-code { color: var(--dbg-address-code); }
+	&.address-data { color: var(--dbg-address-data); }
+	&.address-rodata { color: var(--dbg-address-rodata); }
+	&.number { color: var(--dbg-number); }
+	&.symbol { color: var(--dbg-symbol); }
+	&.mnemonic, &.mnemonic-branch { color: var(--dbg-mnemonic); }
+	&.mnemonic-branch { font-weight: 600; }
+	&.current { color: var(--dbg-current); font-weight: 700; }
+	&.arrow { color: var(--dbg-arrow); }
+	&.string { color: var(--dbg-string); }
+	&.comment, &.offset, &.punctuation { color: var(--dbg-comment); }
+	&.taken { color: var(--dbg-taken); font-weight: 600; }
+	&.not-taken { color: var(--dbg-not-taken); }
+	&.perm { color: var(--dbg-perm); }
+	&.path { color: var(--dbg-path); }
+	&.msg-ok, &.enabled { color: var(--dbg-ok); }
+	&.msg-info { color: var(--dbg-info); }
+	&.msg-warn { color: var(--dbg-warn); }
+	&.msg-error, &.signal, &.disabled { color: var(--dbg-error); }
+	&.signal { font-weight: 700; }
+	&.keyword { font-weight: 600; }
+	&.heap-chunk, &.bin { color: var(--dbg-heap-chunk); font-weight: 600; }
+}

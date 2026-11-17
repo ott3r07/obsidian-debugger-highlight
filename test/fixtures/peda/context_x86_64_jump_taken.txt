@@ -1,0 +1,45 @@
+gdb-peda$ ni
+[----------------------------------registers-----------------------------------]
+RAX: 0x401954 (<main>:	endbr64)
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RDI: 0x1 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x40196b (<main+23>:	jle    0x401976 <main+34>)
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x297 (CARRY PARITY ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401960 <main+12>:	mov    DWORD PTR [rbp-0x64],edi
+   0x401963 <main+15>:	mov    QWORD PTR [rbp-0x70],rsi
+   0x401967 <main+19>:	cmp    DWORD PTR [rbp-0x64],0x2
+=> 0x40196b <main+23>:	jle    0x401976 <main+34>
+ | 0x40196d <main+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+ | 0x401974 <main+32>:	jmp    0x40197d <main+41>
+ | 0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+ | 0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+ |->   0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+       0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+       0x401981 <main+45>:	mov    edi,0x40
+       0x401986 <main+50>:	call   0x40f000 <malloc>
+                                                                  JUMP is taken
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
