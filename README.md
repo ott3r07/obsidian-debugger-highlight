@@ -57,6 +57,12 @@ Object.assign(Prism.languages, LANGUAGES);
 
 The token contract is documented in [`src/grammars/TOKENS.md`](src/grammars/TOKENS.md).
 
+## Install
+
+Until it is listed in Obsidian's community plugins: download `main.js`, `manifest.json` and
+`styles.css` from the latest release into `<vault>/.obsidian/plugins/debugger-highlight/`, then
+enable it under *Settings → Community plugins*.
+
 ## Development
 
 ```sh
@@ -67,8 +73,16 @@ node scripts/hl.ts pwndbg path/to/output.txt          # render in the terminal
 node scripts/hl.ts pwndbg --stats path/to/output.txt  # lines no rule matched
 ```
 
-`research/` holds the format specifications, adversarial reviews and the real captures
-(pwndbg 2026.10, GEF 2021.10–2026, PEDA, GDB 15) the grammars were built and tested against.
+The format specifications, adversarial reviews and real captures the grammars were built and
+tested against (pwndbg 2026.10, GEF 2021.10–2026, PEDA, GDB 15; about 26 MB) live on the separate
+`research` branch, so a normal checkout stays small:
+
+```sh
+git clone --single-branch https://github.com/<you>/<repo>.git   # plugin code only
+git fetch origin research && git archive origin/research research | tar -x   # optional: ./research
+```
+
+With `./research` present, the tests also verify that every quoted sample line exists in its source.
 
 ## License
 
