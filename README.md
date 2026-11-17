@@ -59,9 +59,16 @@ The token contract is documented in [`src/grammars/TOKENS.md`](src/grammars/TOKE
 
 ## Install
 
-Until it is listed in Obsidian's community plugins: download `main.js`, `manifest.json` and
-`styles.css` from the latest release into `<vault>/.obsidian/plugins/debugger-highlight/`, then
-enable it under *Settings → Community plugins*.
+Until it is listed in Obsidian's community plugins, either:
+
+- **BRAT**: install the [BRAT](https://github.com/TfTHacker/obsidian42-brat) plugin, then
+  *Add beta plugin* → `ott3r07/obsidian-debugger-highlight`. BRAT also keeps it updated.
+- **Manually**: download `main.js`, `manifest.json` and `styles.css` from the
+  [latest release](https://github.com/ott3r07/obsidian-debugger-highlight/releases) into
+  `<vault>/.obsidian/plugins/debugger-highlight/`.
+- **From source**: `npm install && npm run install-vault -- "/path/to/your/vault"`.
+
+Then enable *Debugger Output Highlight* under *Settings → Community plugins*.
 
 ## Development
 
@@ -78,7 +85,7 @@ tested against (pwndbg 2026.10, GEF 2021.10–2026, PEDA, GDB 15; about 26 MB) l
 `research` branch, so a normal checkout stays small:
 
 ```sh
-git clone --single-branch https://github.com/<you>/<repo>.git   # plugin code only
+git clone --single-branch https://github.com/ott3r07/obsidian-debugger-highlight.git   # plugin code only
 git fetch origin research && git archive origin/research research | tar -x   # optional: ./research
 ```
 

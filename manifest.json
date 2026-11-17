@@ -4,6 +4,7 @@
 	"version": "0.1.0",
 	"minAppVersion": "1.4.0",
 	"description": "Syntax highlighting for GDB, pwndbg, GEF and PEDA output in code blocks.",
-	"author": "",
-	"isDesktopOnly": false
+	"author": "ott3r07",
+	"isDesktopOnly": false,
+	"authorUrl": "https://github.com/ott3r07"
 }

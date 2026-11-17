@@ -1,17 +1,10 @@
 import { loadPrism, MarkdownView, Plugin } from "obsidian";
 import { blockSegments, renderSegments } from "./core/tokens.ts";
-import type { PrismLike } from "./core/tokens.ts";
+import type { PrismEnv, PrismHook, PrismLike } from "./core/tokens.ts";
 import { LANGUAGE_ALIASES, LANGUAGES, resolveLanguage } from "./grammars/index.ts";
 import { debuggerHighlightExtension } from "./obsidian/editor.ts";
 
 const DONE_ATTR = "data-dbg-hl";
-
-interface PrismEnv {
-	language?: unknown;
-	type?: string;
-	classes?: string[];
-	element?: HTMLElement;
-}
 
 const ourLanguage = (lang: unknown) => (typeof lang === "string" ? resolveLanguage(lang) : undefined);
 
@@ -52,9 +45,10 @@ export default class DebuggerHighlightPlugin extends Plugin {
 		const prism = this.prism;
 		if (!prism) return;
 		for (const name of this.languageNames()) delete prism.languages[name];
-		for (const [name, fn] of [["wrap", this.wrapHook], ["complete", this.completeHook]] as const) {
+		const hooks: Array<[string, PrismHook]> = [["wrap", this.wrapHook], ["complete", this.completeHook]];
+		for (const [name, fn] of hooks) {
 			const list = prism.hooks.all[name];
-			const i = list ? list.indexOf(fn as (env: any) => void) : -1;
+			const i = list ? list.indexOf(fn) : -1;
 			if (list && i >= 0) list.splice(i, 1);
 		}
 		this.rerenderPreviews();

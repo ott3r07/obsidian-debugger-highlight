@@ -329,7 +329,7 @@ line(String.raw`${H} : ${H} \(.*\)`, {
 line(String.raw`${H} : \((?:b'[0-9a-f]*'|[0-9a-f]*)\)${W}+.*`, {
 	"peda-gadget": { pattern: /(\)[\t ]+)\S[^]*/, lookbehind: true, inside: gadget },
 	"address-code": addr(I(`^${H}`)),
-	string: { pattern: /b?'[0-9a-f]*'|(?<=\()[0-9a-f]+(?=\))/, alias: "string" },
+	string: { pattern: /b?'[0-9a-f]*'|(\()[0-9a-f]+(?=\))/, lookbehind: true, alias: "string" },
 	punctuation: /[():]/,
 });
 // jmpcall: `0x401014 : call rax`
@@ -355,19 +355,19 @@ line(String.raw`\.?[\w.]+: ${H} - ${H} \(code\)`, {
 	"address-code": addr(I(H)),
 	keyword: kw(/\(code\)$/),
 	symbol: { pattern: /^\.?[\w.]+(?=:)/, alias: "function" },
-	punctuation: /[:\-]/,
+	punctuation: /[:-]/,
 });
 line(String.raw`\.?[\w.]+: ${H} - ${H} \(rodata\)`, {
 	"address-rodata": addr(I(H)),
 	keyword: kw(/\(rodata\)$/),
 	symbol: { pattern: /^\.?[\w.]+(?=:)/, alias: "function" },
-	punctuation: /[:\-]/,
+	punctuation: /[:-]/,
 });
 line(String.raw`\.?[\w.]+: ${H} - ${H} \(data\)`, {
 	address: addr(I(H)),
 	keyword: kw(/\(data\)$/),
 	symbol: { pattern: /^\.?[\w.]+(?=:)/, alias: "function" },
-	punctuation: /[:\-]/,
+	punctuation: /[:-]/,
 });
 line(String.raw`'[^'\n]*': no match found`, {
 	string: { pattern: /^'[^']*'/, alias: "string" },

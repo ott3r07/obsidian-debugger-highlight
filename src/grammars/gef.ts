@@ -56,7 +56,7 @@ function join(...parts: Grammar[]): Grammar {
 /** hex printed `0x%016x` / `0x%08x` = GEF says it is mapped; anything else is a value */
 const value: Grammar = {
 	address: re(String.raw`\b0x(?:[0-9a-fA-F]{16}|[0-9a-fA-F]{8})\b`),
-	number: /\b0x[0-9a-fA-F]+\b|(?<![\w.])\d+\b/,
+	number: lb(/\b0x[0-9a-fA-F]+\b|(^|[^\w.])\d+\b/),
 };
 
 const PREFIX = String.raw`(?:(?:lock|rep[a-z]*|bnd|notrack|data16|addr32)[\t ]+)*`;
@@ -110,7 +110,8 @@ function hexByteLine(addrType: string): Grammar {
 }
 
 const regHint: GrammarValue = {
-	pattern: /(?<![\t ])[\t ]+←[\t ]*\$\w+(?:,[\t ]*\$\w+)*[\t ]*$/,
+	pattern: /(^|[^\t ])[\t ]+←[\t ]*\$\w+(?:,[\t ]*\$\w+)*[\t ]*$/,
+	lookbehind: true,
 	inside: { arrow: /←/, register: /\$\w+/, punctuation: /,/ },
 };
 
@@ -267,7 +268,7 @@ const vmmap: Grammar = {
 	"address-data": vmmapRow(String.raw`[r-]w-p?(?![\w-])`),
 	address: vmmapRow(PERM),
 	number: re(H),
-	perm: re(String.raw`(?<=^|[\t ])${PERM}(?=[\t ]|$)`),
+	perm: lb(re(String.raw`(^|[\t ])${PERM}(?=[\t ]|$)`)),
 	path: /\S.*/,
 };
 
@@ -334,7 +335,7 @@ const configLine: Grammar = {
 	comment: /\(\w+\)(?= = )/,
 	punctuation: / = /,
 	string: [/"[^"\n]*"/, /'[^'\n]*'/],
-	number: /(?<![\w.])-?(?:0x[0-9a-fA-F]+|\d+(?:\.\d+)?)\b(?![\w.])/,
+	number: lb(/(^|[^\w.])-?(?:0x[0-9a-fA-F]+|\d+(?:\.\d+)?)\b(?![\w.])/),
 };
 
 /** Builds whole-line multiline regexes; trailing blanks stay outside (see shared `lineSrc`). */
@@ -647,7 +648,7 @@ function withAliases(g: Grammar, memo = new Map<Grammar, Grammar>()): Grammar {
 			if (o.inside) o.inside = withAliases(o.inside as Grammar, memo);
 			return o;
 		};
-		out[type] = Array.isArray(v) ? (v as (RegExp | PatternObj)[]).map(one) : one(v as RegExp | PatternObj);
+		out[type] = Array.isArray(v) ? v.map(one) : one(v);
 	}
 	return out;
 }
@@ -657,7 +658,7 @@ function trimAll(g: Grammar): Grammar {
 	const one = (v: RegExp | PatternObj): RegExp | PatternObj =>
 		v instanceof RegExp || !v.inside ? v : { ...v, inside: trimmed("gef", v.inside) };
 	return Object.fromEntries(
-		Object.entries(g).map(([k, v]) => [k, Array.isArray(v) ? (v as (RegExp | PatternObj)[]).map(one) : one(v as RegExp | PatternObj)]),
+		Object.entries(g).map(([k, v]) => [k, Array.isArray(v) ? v.map(one) : one(v)]),
 	);
 }
 

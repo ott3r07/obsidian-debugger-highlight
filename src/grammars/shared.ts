@@ -57,7 +57,7 @@ export const lineSrc = (body: string) => String.raw`^(?:${body})[\t ]*$`;
  */
 export function trimmed(prefix: string, inside: Grammar): Grammar {
 	// `(?![^])`: the very end even when a grammar adds the `m` flag (multi-line block wrappers)
-	return { [`${prefix}-trail`]: /(?<![\t ])[\t ]+(?![^])/, ...inside };
+	return { [`${prefix}-trail`]: { pattern: /(^|[^\t ])[\t ]+(?![^])/, lookbehind: true }, ...inside };
 }
 
 /** x86 (64/32/16/8-bit, segment, vector) + aarch64 + arm register names. */
@@ -83,7 +83,7 @@ export const tokens = {
 		alias: "comment",
 	},
 	/** a path not glued to a preceding word (so `x/20gx` and `read/write` are not paths) */
-	path: { pattern: re(`(?<![\\w.)\\]/:])${SRC.path}`), alias: "string" },
+	path: { pattern: re(`(^|[^\\w.)\\]/:])${SRC.path}`), lookbehind: true, alias: "string" },
 } satisfies Record<string, GrammarValue>;
 
 /**
@@ -148,5 +148,7 @@ export const asmInstruction: Grammar = {
 
 /** Prepend `extra` rules to `base` (Prism tries keys in insertion order). */
 export function compose(...parts: Grammar[]): Grammar {
-	return Object.assign({}, ...parts);
+	const out: Grammar = {};
+	for (const part of parts) Object.assign(out, part);
+	return out;
 }

@@ -63,7 +63,7 @@ export const gdbValue: Grammar = {
 	"msg-error": { pattern: /<error: [^<>\n]*>/, alias: "deleted" },
 	comment: tokens.gdbPlaceholder,
 	// a base-class subobject `{<Base> = {…}, …}` is a field label, not a symbol (unstyled)
-	"gdb-base": { pattern: /(?<=\{|, )<(?:[^<>\n]|<[^<>\n]*>)+>(?= = )/ },
+	"gdb-base": { pattern: /(\{|, )<(?:[^<>\n]|<[^<>\n]*>)+>(?= = )/, lookbehind: true },
 	symbol: tokens.symbol,
 	number: num,
 	punctuation: /[{}[\],]/,
@@ -94,7 +94,7 @@ export const gdbFrame: Grammar = {
 		// C++ signature with its own parens: `in CheckPassword(Napi::CallbackInfo const&) ()`
 		{ pattern: /(^ in )[^\s(].*?(?= \()/, lookbehind: true, alias: "function" },
 		{ pattern: /(^#\d+[\t ]+)(?!0x)[A-Za-z_~$][^\s(]*(?: [^\s(]+)*?(?= \()/, lookbehind: true, alias: "function" },
-		{ pattern: re(`(?<![\\w$.:])${FN}(?=[\\t ]\\()`), alias: "function" },
+		{ pattern: re(`(^|[^\\w$.:])${FN}(?=[\\t ]\\()`), lookbehind: true, alias: "function" },
 		tokens.symbol,
 	],
 	number: { pattern: /#\d+\b|-?\b(?:0x[0-9a-fA-F]+|\d+)\b/, alias: "number" },
@@ -123,8 +123,8 @@ const mappingRow: Grammar = {
 	"address-rodata": { pattern: MAP_TAIL(String.raw`r--[ps-](?![\w-])`), alias: "number" },
 	address: { pattern: re(`\\b${H}(?=(?:${W}+${H}){2,3})`), alias: "number" },
 	number: { pattern: re(`\\b${H}\\b`), alias: "number" },
-	perm: { pattern: /(?<=[\t ])[r-][w-][x-][ps-](?=[\t ]|$)/, alias: "keyword" },
-	path: { pattern: /(?<=[\t ])[/[].*?(?=[\t ]*$)/, alias: "string" },
+	perm: { pattern: /([\t ])[r-][w-][x-][ps-](?=[\t ]|$)/, lookbehind: true, alias: "keyword" },
+	path: { pattern: /([\t ])[/[].*?(?=[\t ]*$)/, lookbehind: true, alias: "string" },
 };
 
 const errorInside: Grammar = {
@@ -196,7 +196,7 @@ export const gdb: Grammar = {
 		address: [
 			{ pattern: re(`^${H}`), alias: "number" },
 			{ pattern: re(`(at address )${H}`), lookbehind: true, alias: "number" },
-			{ pattern: re(`(?<=[\\t ,{])${H}(?=${W}+(?!<[-=])${SYM})`), alias: "number" },
+			{ pattern: re(`([\\t ,{])${H}(?=${W}+(?!<[-=])${SYM})`), lookbehind: true, alias: "number" },
 		],
 		current: { pattern: /^=>/, alias: "important" },
 		"msg-error": [{ pattern: /Cannot access memory at address/, alias: "deleted" }, { pattern: /<error: [^<>\n]*>/, alias: "deleted" }],
@@ -374,9 +374,9 @@ export const gdb: Grammar = {
 		String.raw`\d+(?:\.\d+)?${W}+(?:breakpoint|(?:hw |read |acc )watchpoint|catchpoint|dprintf|(?:fast |static )?tracepoint)${W}+(?:keep|del|dis|dstp)${W}+[yn].*|\d+\.\d+${W}+[yn]-?${W}+${H}.*`,
 		{
 			comment: { pattern: /<(?:PENDING|MULTIPLE)>/, alias: "comment" },
-			enabled: { pattern: /(?<=[\t ])y(?=-?[\t ]|$)/, alias: "inserted" },
-			disabled: { pattern: /(?<=[\t ])n(?=-?[\t ]|$)/, alias: "deleted" },
-			"address-code": { pattern: re(`(?<=[\\t ])${H}(?=${W}+in\\b|${W}*$)`), alias: "number" },
+			enabled: { pattern: /([\t ])y(?=-?[\t ]|$)/, lookbehind: true, alias: "inserted" },
+			disabled: { pattern: /([\t ])n(?=-?[\t ]|$)/, lookbehind: true, alias: "deleted" },
+			"address-code": { pattern: re(`([\\t ])${H}(?=${W}+in\\b|${W}*$)`), lookbehind: true, alias: "number" },
 			keyword: kw(String.raw`\b(?:(?:hw |read |acc )?watchpoint|breakpoint|catchpoint|dprintf|(?:fast |static )?tracepoint|keep|del|dis|dstp)\b`),
 			symbol: { pattern: /(\bin )\S+(?= at )/, lookbehind: true, alias: "function" },
 			path: { pattern: /(\bat )\S+?(?=:\d+[\t ]*$)/, lookbehind: true, alias: "string" },
@@ -430,7 +430,7 @@ export const gdb: Grammar = {
 			register: [
 				{ pattern: re(`(^${W}+)(?:[re]?ip|pc)(?= =)`), lookbehind: true, alias: "variable" },
 				{ pattern: /(\bsaved )(?:[re]?ip|pc)(?= =)/, lookbehind: true, alias: "variable" },
-				{ pattern: re(`\\b${REGNAME}(?= at $)(?<!\\b(?:frame|Arglist|Locals))`), alias: "variable" },
+				{ pattern: re(`\\b(?!(?:frame|Arglist|Locals) at $)${REGNAME}(?= at $)`), alias: "variable" },
 			],
 			path: { pattern: /(\()[^()\s]+(?=:\d+\))/, lookbehind: true, alias: "string" },
 			symbol: { pattern: /(\bin )[^\s(;]+/, lookbehind: true, alias: "function" },
@@ -447,7 +447,7 @@ export const gdb: Grammar = {
 	}),
 	"gdb-info-symbol": wrap(String.raw`\S+(?: \+ \d+)? in section \S+(?: of \S+)?`, {
 		symbol: { pattern: /^\S+/, alias: "function" },
-		keyword: kw(String.raw`(?<=section )\S+`),
+		keyword: { ...kw(String.raw`(section )\S+`), lookbehind: true },
 		path: { pattern: /(\bof )\S+$/, lookbehind: true, alias: "string" },
 		number: /\b\d+\b/,
 	}),

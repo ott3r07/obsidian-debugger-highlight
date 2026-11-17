@@ -84,7 +84,12 @@ const LINK_TAIL = String.raw`(?:${W}+(?:${PSYM}|${VAR}))*`;
 /** an instruction starts here (mnemonic, `.inst`, `(bad)`) */
 const INSN_START = String.raw`(?:\.?[a-z]|\(bad\))`;
 /** `—▸ ...` (dereference limit) — not the `...` inside a truncated string */
-const ELLIPSIS = /(?<![^\t ])\.\.\.(?![^\t ])/;
+const ELLIPSIS = lb(/(^|[\t ])\.\.\.(?![^\t ])/);
+/**
+ * Rules whose `^` means the start of the fragment, not of a line: they must not
+ * get the `m` flag (`ELLIPSIS` is not preceded by a newline inside its fragment).
+ */
+const FRAGMENT_START = new WeakSet<RegExp>([ELLIPSIS.pattern]);
 
 const flagsInside: Grammar = {
 	number: lb(/(:)\d+/),
@@ -244,7 +249,7 @@ const disasmLine: Grammar = {
 	"pwndbg-insn": lb(re(String.raw`(^${DIS_HEAD})${NOT_MNEM}${MNEM}.*`), { inside: insn }),
 	keyword: /^[\t ]*b\+?/,
 	symbol: re(SYM),
-	current: /►|(?<=^[\t ]*)_(?=[\t ])/,
+	current: lb(/►|(^[\t ]*)_(?=[\t ])/),
 	"address-code": re(H),
 	number: /\b[0-9a-f]{2}\b|\.\.\./,
 	punctuation: re(`[${ART_CH}]+`),
@@ -261,7 +266,7 @@ const TELE_REG = String.raw`[a-z][a-z0-9_]*(?:[-+]\d+)?`;
 const TELE_COL = String.raw`${W}*(?:${FRAME_OFF}${W}+|(?:${TELE_REG}${W}+)*)`;
 const SP_REG = String.raw`(?:[re]?sp|[re]?bp|sp|wsp|x29|fp|s0)(?:[-+]\d+)?`;
 const teleHead: Grammar = {
-	offset: [re(`^[0-9a-f]+:[0-9a-f]+`), re(String.raw`(?<=│${W}*)${FRAME_OFF}`)],
+	offset: [re(`^[0-9a-f]+:[0-9a-f]+`), lb(re(String.raw`(│${W}*)${FRAME_OFF}`))],
 	punctuation: /│/,
 	register: re(TELE_REG),
 };
@@ -358,7 +363,7 @@ const vmmapRow: Grammar = {
 		),
 	),
 	keyword: /\b(?:ADJACENT|GUARD)\b/,
-	perm: re(String.raw`(?<=[\t ])${PERM}(?=[\t ])`),
+	perm: lb(re(String.raw`([\t ])${PERM}(?=[\t ])`)),
 	number: [/\+0x[0-9a-f]+/, /\b(?:0x)?[0-9a-f]+\b/],
 };
 
@@ -381,7 +386,7 @@ const message: Grammar = {
 	// pwntools `[x] Starting local process …` is a progress line, not a failure
 	"msg-info": /^\[[*x]\]/,
 	"msg-error": /^\[[!-]\]/,
-	path: re(String.raw`(?<=')\/[^'\n]*(?=')`),
+	path: lb(re(String.raw`(')\/[^'\n]*(?=')`)),
 	string: /'[^'\n]*'|`[^`\n]*`/,
 	address: re(H),
 };
@@ -696,7 +701,7 @@ const rules: Grammar = {
 				},
 			},
 			"address-heap": re(`^${H}`),
-			number: /(?<=^[\t ]*(?:0x[0-9a-f]+[\t ]+)?)0x[0-9a-f]+/,
+			number: lb(/(^[\t ]*(?:0x[0-9a-f]+[\t ]+)??)0x[0-9a-f]+/),
 			comment: /\S(?:.*\S)?/,
 		},
 	},
@@ -794,8 +799,8 @@ const rules: Grammar = {
 			},
 			symbol: /^[\t ]*\.[\w.]+/,
 			keyword: /^[\t ]*[A-Za-z][A-Za-z() ]*[A-Za-z)](?= 0x)/,
-			number: re(String.raw`(?<=[-+] )${H}`),
-			path: /(?<== )[^\s0][^\s]*/,
+			number: lb(re(String.raw`([-+] )${H}`)),
+			path: lb(/(= )[^\s0][^\s]*/),
 			address: re(H),
 			punctuation: /[=+-]/,
 		},
@@ -810,7 +815,7 @@ const rules: Grammar = {
 		inside: {
 			keyword: /^\S+/,
 			string: /'[^'\n]*'/,
-			path: /(?<=[\t ])\/\S*/,
+			path: lb(/([\t ])\/\S*/),
 			arrow: /=>/,
 			number: /\b\d+(?:\.\d+){0,3}(?::\d+)?\b/,
 			comment: /\((?:listen|established|[a-z_ ]+)\)/,
@@ -905,13 +910,13 @@ function withAliases(g: Grammar, memo = new Map<Grammar, Grammar>()): Grammar {
 		const one = (x: RegExp | PatternObj): PatternObj => {
 			const o: PatternObj = x instanceof RegExp ? { pattern: x } : { ...x };
 			// every rule is line-scoped: `m` lets `$` stop before a stray `\r` (CRLF pastes)
-			if (!o.pattern.multiline) o.pattern = new RegExp(o.pattern.source, o.pattern.flags + "m");
+			if (!o.pattern.multiline && !FRAGMENT_START.has(o.pattern)) o.pattern = new RegExp(o.pattern.source, o.pattern.flags + "m");
 			const alias = ALIAS[type];
 			if (!o.alias && alias && alias !== type) o.alias = alias;
 			if (o.inside) o.inside = withAliases(o.inside as Grammar, memo);
 			return o;
 		};
-		out[type] = Array.isArray(v) ? (v as (RegExp | PatternObj)[]).map(one) : one(v as RegExp | PatternObj);
+		out[type] = Array.isArray(v) ? v.map(one) : one(v);
 	}
 	return out;
 }
@@ -921,7 +926,7 @@ function trimAll(g: Grammar): Grammar {
 	const one = (v: RegExp | PatternObj): RegExp | PatternObj =>
 		v instanceof RegExp || !v.inside ? v : { ...v, inside: trimmed("pwndbg", v.inside) };
 	return Object.fromEntries(
-		Object.entries(g).map(([k, v]) => [k, Array.isArray(v) ? (v as (RegExp | PatternObj)[]).map(one) : one(v as RegExp | PatternObj)]),
+		Object.entries(g).map(([k, v]) => [k, Array.isArray(v) ? v.map(one) : one(v)]),
 	);
 }
 

@@ -1,10 +1,19 @@
 import type { Grammar, Token, TokenStream } from "prismjs";
 
+/** The subset of a Prism hook environment the plugin reads or writes. */
+export interface PrismEnv {
+	language?: unknown;
+	type?: string;
+	classes?: string[];
+	element?: HTMLElement;
+}
+export type PrismHook = (env: PrismEnv) => void;
+
 /** Minimal surface of Prism we rely on (works with Obsidian's bundled Prism or the npm one). */
 export interface PrismLike {
 	languages: Record<string, unknown>;
-	tokenize(text: string, grammar: Grammar): Array<string | Token>;
-	hooks: { add(name: string, fn: (env: any) => void): void; all: Record<string, Array<(env: any) => void>> };
+	tokenize(text: string, grammar: Grammar): TokenStream;
+	hooks: { add(name: string, fn: PrismHook): void; all: Record<string, PrismHook[] | undefined> };
 }
 
 /** A flat, non-overlapping highlighted span: [from, to) with the CSS classes to apply. */
@@ -46,7 +55,7 @@ export function flatten(stream: TokenStream, base = 0, inherited: string[] = [],
 
 export function segmentsFor(prism: PrismLike, text: string, grammar: Grammar): Segment[] {
 	const out: Segment[] = [];
-	flatten(prism.tokenize(text, grammar) as TokenStream, 0, [], out);
+	flatten(prism.tokenize(text, grammar), 0, [], out);
 	return out;
 }
 
@@ -82,7 +91,7 @@ export function blockSegments(prism: PrismLike, text: string, grammar: Grammar):
 	const norm = orig.map((l) => {
 		const cut = l.startsWith(indent) ? indent.length : /^[\t ]*/.exec(l)![0].length;
 		cuts.push(cut);
-		return l.slice(cut).replace(/ /g, " ").replace(/\r$/, "");
+		return l.slice(cut).replace(/\u00a0/g, " ").replace(/\r$/, "");
 	});
 
 	const segs = segmentsFor(prism, norm.join("\n"), grammar);
@@ -111,15 +120,12 @@ export function blockSegments(prism: PrismLike, text: string, grammar: Grammar):
 	return out;
 }
 
-/** Render `text` with segments into `parent` (no innerHTML). */
+/** Render `text` with segments into `parent` (no innerHTML; `createSpan` is Obsidian's DOM helper). */
 export function renderSegments(text: string, segs: Segment[], parent: HTMLElement): void {
 	let pos = 0;
 	for (const s of segs) {
 		if (s.from > pos) parent.appendChild(document.createTextNode(text.slice(pos, s.from)));
-		const span = document.createElement("span");
-		span.className = s.classes.join(" ");
-		span.textContent = text.slice(s.from, s.to);
-		parent.appendChild(span);
+		parent.createSpan({ cls: s.classes, text: text.slice(s.from, s.to) });
 		pos = s.to;
 	}
 	if (pos < text.length) parent.appendChild(document.createTextNode(text.slice(pos)));
