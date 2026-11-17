@@ -1,0 +1,28 @@
+Reading symbols from ./test_arm64...
+(gdb) run AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Starting program: /work/test_arm64 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+*** stack smashing detected ***: terminated
+
+Program received signal SIGABRT, Aborted.
+__pthread_kill_implementation (threadid=281474842459872, signo=signo@entry=6, no_tid=no_tid@entry=0)
+    at ./nptl/pthread_kill.c:44
+warning: 44	./nptl/pthread_kill.c: No such file or directory
+(gdb) bt
+#0  __pthread_kill_implementation (threadid=281474842459872, signo=signo@entry=6, no_tid=no_tid@entry=0)
+    at ./nptl/pthread_kill.c:44
+#1  0x0000fffff7e77520 in __pthread_kill_internal (signo=6, threadid=<optimized out>) at ./nptl/pthread_kill.c:78
+#2  0x0000fffff7e2cb3c in __GI_raise (sig=sig@entry=6) at ../sysdeps/posix/raise.c:26
+#3  0x0000fffff7e17e00 in __GI_abort () at ./stdlib/abort.c:79
+#4  0x0000fffff7e6aac4 in __libc_message_impl (fmt=fmt@entry=0xfffff7f52c98 "*** %s ***: terminated\n")
+    at ../sysdeps/posix/libc_fatal.c:134
+#5  0x0000fffff7ee82a8 in __GI___fortify_fail (msg=msg@entry=0xfffff7f52cb0 "stack smashing detected")
+    at ./debug/fortify_fail.c:24
+#6  0x0000fffff7ee9264 in __stack_chk_fail () at ./debug/stack_chk_fail.c:24
+#7  0x0000aaaaaaaa0ac8 in vuln (src=0xfffffffffe72 'A' <repeats 100 times>) at test.c:22
+#8  0x4141414141414141 in ?? ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+(gdb) 

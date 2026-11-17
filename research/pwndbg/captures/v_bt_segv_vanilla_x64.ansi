@@ -1,0 +1,4 @@
+(gdb) bt
+#0  [34m0x0000000000000000[m in [33m??[m ()
+#1  [34m0x000055555555727b[m in [33mcompute[m ([36mf[m=0x0, [36mx[m=6, [36my[m=7) at [32mtest.c[m:14
+#2  [34m0x00005555555574a2[m in [33mmain[m ([36margc[m=1, [36margv[m=0xffffa3675cf8) at [32mtest.c[m:38

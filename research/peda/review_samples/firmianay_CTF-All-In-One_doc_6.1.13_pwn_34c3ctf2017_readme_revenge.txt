@@ -1,0 +1,76 @@
+# SOURCE: https://github.com/firmianay/CTF-All-In-One/blob/HEAD/doc/6.1.13_pwn_34c3ctf2017_readme_revenge.md
+# (fenced code blocks containing PEDA output, verbatim; blocks separated by a line "# ---- block ----")
+# ---- block ----
+gdb-peda$ r < crash_input
+Starting program: /home/firmy/Desktop/RE4B/readme/readme_revenge < crash_input
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+RAX: 0x4141414141414141 ('AAAAAAAA')
+RBX: 0x7fffffffd190 --> 0xffffffff
+RCX: 0x7fffffffd160 --> 0x0
+RDX: 0x73 ('s')
+RSI: 0x0
+RDI: 0x48d18b ("%s. Bye.\n")
+RBP: 0x0
+RSP: 0x7fffffffd050 --> 0x0
+RIP: 0x45ad64 (<__parse_one_specmb+1300>:       cmp    QWORD PTR [rax+rdx*8],0x0)
+R8 : 0x48d18b ("%s. Bye.\n")
+R9 : 0x4
+R10: 0x48d18c ("s. Bye.\n")
+R11: 0x7fffffffd160 --> 0x0
+R12: 0x0
+R13: 0x7fffffffd190 --> 0xffffffff
+R14: 0x48d18b ("%s. Bye.\n")
+R15: 0x1
+EFLAGS: 0x10206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x45ad53 <__parse_one_specmb+1283>:  jmp    0x45ab95 <__parse_one_specmb+837>
+   0x45ad58 <__parse_one_specmb+1288>:  nop    DWORD PTR [rax+rax*1+0x0]
+   0x45ad60 <__parse_one_specmb+1296>:  movzx  edx,BYTE PTR [r10]
+=> 0x45ad64 <__parse_one_specmb+1300>:  cmp    QWORD PTR [rax+rdx*8],0x0
+   0x45ad69 <__parse_one_specmb+1305>:  je     0x45a944 <__parse_one_specmb+244>
+   0x45ad6f <__parse_one_specmb+1311>:  lea    rdi,[rsp+0x8]
+   0x45ad74 <__parse_one_specmb+1316>:  mov    rsi,rbx
+   0x45ad77 <__parse_one_specmb+1319>:  addr32 call 0x44cfa0 <__handle_registered_modifier_mb>
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffd050 --> 0x0
+0008| 0x7fffffffd058 --> 0x48d18c ("s. Bye.\n")
+0016| 0x7fffffffd060 --> 0x0
+0024| 0x7fffffffd068 --> 0x0
+0032| 0x7fffffffd070 --> 0x7fffffffd5e0 --> 0x7fffffffdb90 --> 0x7fffffffdc80 --> 0x4014a0 (<__libc_csu_init>:        push   r15)
+0040| 0x7fffffffd078 --> 0x7fffffffd190 --> 0xffffffff
+0048| 0x7fffffffd080 --> 0x7fffffffd190 --> 0xffffffff
+0056| 0x7fffffffd088 --> 0x443153 (<printf_positional+259>:     mov    r14,QWORD PTR [r12+0x20])
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x000000000045ad64 in __parse_one_specmb ()
+gdb-peda$ x/8gx &name
+0x6b73e0 <name>:        0x4141414141414141      0x4141414141414141
+0x6b73f0 <name+16>:     0x4141414141414141      0x4141414141414141
+0x6b7400 <_dl_tls_static_used>: 0x4141414141414141      0x4141414141414141
+0x6b7410 <_dl_tls_max_dtv_idx>: 0x4141414141414141      0x4141414141414141
+# ---- block ----
+gdb-peda$
+0x6b7978 <__libc_argc>: 0x4141414141414141
+gdb-peda$
+0x6b7980 <__libc_argv>: 0x4141414141414141
+gdb-peda$
+0x6b7a28 <__printf_function_table>:     0x4141414141414141
+gdb-peda$
+0x6b7a30 <__printf_modifier_table>:     0x4141414141414141
+gdb-peda$
+0x6b7aa8 <__printf_arginfo_table>:      0x4141414141414141
+gdb-peda$
+0x6b7ab0 <__printf_va_arg_table>:       0x4141414141414141
+# ---- block ----
+gdb-peda$ bt
+#0  0x000000000045ad64 in __parse_one_specmb ()
+#1  0x0000000000443153 in printf_positional ()
+#2  0x0000000000446ed2 in vfprintf ()
+#3  0x0000000000407a74 in printf ()
+#4  0x0000000000400a56 in main ()
+#5  0x0000000000400c84 in generic_start_main ()
+#6  0x0000000000400efd in __libc_start_main ()
+#7  0x000000000040092a in _start ()

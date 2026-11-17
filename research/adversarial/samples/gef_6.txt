@@ -1,0 +1,43 @@
+# SOURCE: https://xuanxuanblingbling.github.io/ctf/tools/2021/11/11/gdb/
+$ gdb -q `which true` -x ./gdb.cmd
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00000000deadbeef in ?? ()
+
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x00007ffff7ffd060  →  0x00007ffff7ffe190  →  0x0000555555554000  →  0x00010102464c457f
+$rbx   : 0x00007ffff7ffd060  →  0x00007ffff7ffe190  →  0x0000555555554000  →  0x00010102464c457f
+$rcx   : 0x1               
+$rdx   : 0x00007ffff7fe0d50  →   endbr64 
+$rsp   : 0x00007fffffffded8  →  0x00007ffff7fe0dc7  →   mov ecx, DWORD PTR [rbx+0x8]
+$rbp   : 0x00007fffffffdf30  →  0x0000000000000000
+$rsi   : 0x0               
+$rdi   : 0x00007ffff7ffd968  →  0x0000000000000000
+$rip   : 0xdeadbeef        
+$r8    : 0x0               
+$r9    : 0x0               
+$r10   : 0x0               
+$r11   : 0x00007ffff7f738f0  →  0x0000800003400468
+$r12   : 0x0               
+$r13   : 0x1               
+$r14   : 0x00007ffff7fb1fc8  →  0x0000000000000000
+$r15   : 0x00007ffff7fae980  →  0x0000000000000000
+$eflags: [zero carry PARITY adjust sign trap INTERRUPT direction overflow RESUME virtualx86 identification]
+$cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000 
+──────────────────────────────────────────────────────────────────────── stack ────
+0x00007fffffffded8│+0x0000: 0x00007ffff7fe0dc7  →   mov ecx, DWORD PTR [rbx+0x8]	 ← $rsp
+0x00007fffffffdee0│+0x0008: 0x00005555555594d0  →   endbr64 
+0x00007fffffffdee8│+0x0010: 0x00007fffffffdef8  →  0x00007fffffffdf0f  →  0x0000000000000000
+0x00007fffffffdef0│+0x0018: 0x0000000055556610
+0x00007fffffffdef8│+0x0020: 0x00007fffffffdf0f  →  0x0000000000000000
+0x00007fffffffdf00│+0x0028: 0x0000000000000000
+0x00007fffffffdf08│+0x0030: 0x00007ffff7fac718  →  0x00007ffff7fae980  →  0x0000000000000000
+0x00007fffffffdf10│+0x0038: 0x0000000000000000
+────────────────────────────────────────────────────────────────── code:x86:64 ────
+[!] Cannot disassemble from $PC
+[!] Cannot access memory at address 0xdeadbeef
+────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "true", stopped 0xdeadbeef in ?? (), reason: SIGSEGV
+──────────────────────────────────────────────────────────────────────── trace ────
+───────────────────────────────────────────────────────────────────────────────────

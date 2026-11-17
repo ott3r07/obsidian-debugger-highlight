@@ -1,0 +1,178 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1000
+Size: 0x290 (with flag bits: 0x291)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1290
+Size: 0x20 (with flag bits: 0x21)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac12b0
+Size: 0x20 (with flag bits: 0x21)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac12d0
+Size: 0x20 (with flag bits: 0x21)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac12f0
+Size: 0x20 (with flag bits: 0x21)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1310
+Size: 0x20 (with flag bits: 0x21)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1330
+Size: 0x20 (with flag bits: 0x21)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1350
+Size: 0x20 (with flag bits: 0x21)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1370
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1390
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaaaaaac1
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1420
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1440
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaa00006b961
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac14d0
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac14f0
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaa00006be91
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1580
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac15a0
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaa00006bfc1
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1630
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1650
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaa00006bf71
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac16e0
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1700
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaa00006bca1
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1790
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac17b0
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaa00006bdd1
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1840
+Size: 0x20 (with flag bits: 0x21)
+
+Free chunk (smallbins) | PREV_INUSE
+Addr: 0xaaaaaaac1860
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xfffff7fa0b30
+bk: 0xaaaaaaac1910
+
+Allocated chunk
+Addr: 0xaaaaaaac18f0
+Size: 0x20 (with flag bits: 0x20)
+
+Free chunk (smallbins) | PREV_INUSE
+Addr: 0xaaaaaaac1910
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaaaaaac1860
+bk: 0xfffff7fa0b30
+
+Allocated chunk
+Addr: 0xaaaaaaac19a0
+Size: 0x20 (with flag bits: 0x20)
+
+Free chunk (largebins) | PREV_INUSE
+Addr: 0xaaaaaaac19c0
+Size: 0x510 (with flag bits: 0x511)
+fd: 0xfffff7fa0ee0
+bk: 0xfffff7fa0ee0
+fd_nextsize: 0xaaaaaaac19c0
+bk_nextsize: 0xaaaaaaac19c0
+
+Allocated chunk
+Addr: 0xaaaaaaac1ed0
+Size: 0x20 (with flag bits: 0x20)
+
+Free chunk (largebins) | PREV_INUSE
+Addr: 0xaaaaaaac1ef0
+Size: 0x550 (with flag bits: 0x551)
+fd: 0xfffff7fa0ef0
+bk: 0xfffff7fa0ef0
+fd_nextsize: 0xaaaaaaac1ef0
+bk_nextsize: 0xaaaaaaac1ef0
+
+Allocated chunk
+Addr: 0xaaaaaaac2440
+Size: 0x20 (with flag bits: 0x20)
+
+Free chunk (largebins) | PREV_INUSE
+Addr: 0xaaaaaaac2460
+Size: 0x590 (with flag bits: 0x591)
+fd: 0xfffff7fa0f00
+bk: 0xfffff7fa0f00
+fd_nextsize: 0xaaaaaaac2460
+bk_nextsize: 0xaaaaaaac2460
+
+Allocated chunk
+Addr: 0xaaaaaaac29f0
+Size: 0x20 (with flag bits: 0x20)
+
+Free chunk (largebins) | PREV_INUSE
+Addr: 0xaaaaaaac2a10
+Size: 0x5d0 (with flag bits: 0x5d1)
+fd: 0xfffff7fa0f10
+bk: 0xfffff7fa0f10
+fd_nextsize: 0xaaaaaaac2a10
+bk_nextsize: 0xaaaaaaac2a10
+
+Allocated chunk
+Addr: 0xaaaaaaac2fe0
+Size: 0x20 (with flag bits: 0x20)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac3000
+Size: 0x1010 (with flag bits: 0x1011)
+
+Top chunk | PREV_INUSE
+Addr: 0xaaaaaaac4010
+Size: 0x1dff0 (with flag bits: 0x1dff1)
+

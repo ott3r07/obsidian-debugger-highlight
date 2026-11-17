@@ -1,0 +1,11 @@
+pwndbg> checksec
+File:     /work/test_nopie_arm64
+Arch:     aarch64
+RELRO:      No RELRO
+Stack:      No canary found
+NX:         NX unknown - GNU_STACK missing
+PIE:        No PIE (0x400000)
+Stack:      Executable
+RWX:        Has RWX segments
+Stripped:   No
+Debuginfo:  Yes

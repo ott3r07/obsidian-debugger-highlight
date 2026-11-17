@@ -1,0 +1,7 @@
+nth paddr       size vaddr        vsize perm flags type             name
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+0   0x00000460  0xb0 0x100000460   0xb0 -r-x 0x0   REGULAR          0.__TEXT.__text
+1   0x00000510  0x24 0x100000510   0x24 -r-x 0x0   SYMBOL_STUBS     1.__TEXT.__stubs
+2   0x00000534   0xf 0x100000534    0xf -r-x 0x0   CSTRINGS         2.__TEXT.__cstring
+3   0x00000544  0x58 0x100000544   0x58 -r-x 0x0   REGULAR          3.__TEXT.__unwind_info
+4   0x00004000  0x20 0x100004000   0x20 -rw- 0x0   NONLAZY_POINTERS 4.__DATA_CONST.__got

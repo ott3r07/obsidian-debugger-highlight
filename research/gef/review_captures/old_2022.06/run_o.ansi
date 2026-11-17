@@ -1,0 +1,71 @@
+[?2004h[1;31mgef➤  [0mrun
+[?2004lStarting program: [32m/t/t2[m 
+[1m[33m[*][0m Failed to find objfile or not a valid file format: [Errno 2] No such file or directory: 'system-supplied DSO at 0xfffff7ffb000'
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33m__GI__IO_puts[m ([36mstr[m=0xaaaaaaaa0af8 "bins ready") at [32m./libio/ioputs.c[m:35
+warning: 35	[32m./libio/ioputs.c[m: No such file or directory
+[H[2J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[1;38;5;240m ────[0m
+[1m[31m$x0  [0m: 0xaaaa0af8
+[1m[31m$x1  [0m: 0xaaac2400
+[1m[31m$x2  [0m: 0x1011    
+[34m$x3  [0m: 0x0       
+[1m[31m$x4  [0m: 0xf7ff8620
+[34m$x5  [0m: 0x0       
+[1m[31m$x6  [0m: 0xfffffff0
+[1m[31m$x7  [0m: 0x4       
+[34m$x8  [0m: 0x0       
+[1m[31m$x9  [0m: 0x10000   
+[1m[31m$x10 [0m: 0x1ccef0  
+[34m$x11 [0m: 0x0       
+[1m[31m$x12 [0m: 0xf7ffeb48
+[1m[31m$x13 [0m: 0x2f      
+[1m[31m$x14 [0m: 0x1f22b4b 
+[1m[31m$x15 [0m: 0xf7ff8e70
+[1m[31m$x16 [0m: 0xaaabffa8
+[1m[31m$x17 [0m: 0xf7e619d0
+[1m[31m$x18 [0m: 0x3       
+[1m[31m$x19 [0m: 0xfffffd38
+[1m[31m$x20 [0m: 0x1       
+[1m[31m$x21 [0m: 0xaaabfd58
+[1m[31m$x22 [0m: 0xaaaa0958
+[1m[31m$x23 [0m: 0xfffffd48
+[1m[31m$x24 [0m: 0xf7ffdb58
+[34m$x25 [0m: 0x0       
+[1m[31m$x26 [0m: 0xf7ffe000
+[1m[31m$x27 [0m: 0xaaabfd58
+[34m$x28 [0m: 0x0       
+[1m[31m$x29 [0m: 0xfffffbb0
+[1m[31m$x30 [0m: 0xaaaa0a68
+[1m[31m$sp  [0m: 0xfffffae0
+[1m[31m$pc  [0m: 0xf7e619d0
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt fast]
+[34m$fpsr[0m: 0x0       
+[34m$fpcr[0m: 0x0       
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[1;38;5;240m ────[0m
+[36m0xfffffae0[0m│+0x0000:           
+[36m0xfffffae4[0m│+0x0004:           
+[36m0xfffffae8[0m│+0x0008:           
+[36m0xfffffaec[0m│+0x000c:           
+[36m0xfffffaf0[0m│+0x0010:           
+[36m0xfffffaf4[0m│+0x0014:           
+[36m0xfffffaf8[0m│+0x0018:           
+[36m0xfffffafc[0m│+0x001c:           
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[1;38;5;240m ────[0m
+   [1;38;5;240m0xfffff7e619c4 <_IO_proc_close+596> str    x25,  [sp,  #112][0m
+   [1;38;5;240m0xfffff7e619c8 <_IO_proc_close+600> bl     0xfffff7ee9250 <__stack_chk_fail>[0m
+   [1;38;5;240m0xfffff7e619cc                  nop    [0m
+ [32m→ 0xfffff7e619d0 <puts+0>         stp    x29,  x30,  [sp,  #-64]![0m
+   0xfffff7e619d4 <puts+4>         mov    x29,  sp
+   0xfffff7e619d8 <puts+8>         stp    x21,  x22,  [sp,  #32]
+   0xfffff7e619dc <puts+12>        mov    x21,  x0
+   0xfffff7e619e0 <puts+16>        adrp   x22,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e619e4 <puts+20>        ldr    x22,  [x22,  #3600]
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xfffff7e619d0[0m in [1m[33m__GI__IO_puts[0m (), reason: [1m[35mBREAKPOINT[0m
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[35m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[1;38;5;240m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

@@ -1,0 +1,2 @@
+pwndbg> set show-compact-regs on
+Set whether to show a compact register view with columns to 'on'.

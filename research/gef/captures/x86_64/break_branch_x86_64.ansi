@@ -1,0 +1,2 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mbreak *(main+168)
+[?2004lBreakpoint 3 at [34m0x4019ce[m: file [32mtest.c[m, line 31.

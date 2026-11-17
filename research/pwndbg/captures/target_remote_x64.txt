@@ -1,0 +1,56 @@
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffffaa0be550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffffaa8ddc60 ◂— 2
+ RIP  0xffffaa0be550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffffaa0be543    call   0xffffaa0adce0              <0xffffaa0adce0>
+ 
+   0xffffaa0be548    jmp    0xffffaa0be3e2              <0xffffaa0be3e2>
+ 
+   0xffffaa0be54d    nop    dword ptr [rax]
+ ► 0xffffaa0be550    mov    rdi, rsp            RDI => 0xffffaa8ddc60 ◂— 2
+   0xffffaa0be553    call   0xffffaa0bf1e0              <0xffffaa0bf1e0>
+ 
+   0xffffaa0be558    mov    r12, rax
+   0xffffaa0be55b    mov    r13, rsp
+   0xffffaa0be55e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffffaa0be564    test   edx, 2
+   0xffffaa0be56a  ? je     0xffffaa0be57d              <0xffffaa0be57d>
+ 
+   0xffffaa0be56c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffaa8ddc60 ◂— 2
+01:0008│     0xffffaa8ddc68 —▸ 0xffffaa8dde57 ◂— './test_nopie_x64'
+02:0010│     0xffffaa8ddc70 —▸ 0xffffaa8dde68 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+03:0018│     0xffffaa8ddc78 ◂— 0
+04:0020│     0xffffaa8ddc80 —▸ 0xffffaa8ddecd ◂— 'HOSTNAME=3e37fc6690d4'
+05:0028│     0xffffaa8ddc88 —▸ 0xffffaa8ddee3 ◂— 'PWD=/work'
+06:0030│     0xffffaa8ddc90 —▸ 0xffffaa8ddeed ◂— '_=/usr/local/bin/qemu-x86_64'
+07:0038│     0xffffaa8ddc98 —▸ 0xffffaa8ddf0a ◂— 'LINES=50'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffffaa0be550
+   1 0x2
+   2 0xffffaa8dde57
+   3 0xffffaa8dde68
+   4 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

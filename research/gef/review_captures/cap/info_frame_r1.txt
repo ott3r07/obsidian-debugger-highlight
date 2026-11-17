@@ -1,0 +1,8 @@
+gef➤  info frame
+Stack level 0, frame at 0xfffffffffbc0:
+ pc = 0xaaaaaaaa0aa0 in main (/rv/t2.c:18); saved pc = 0xfffff7e184c4
+ source language c.
+ Arglist at 0xfffffffffbb0, args: argc=0x1, argv=0xfffffffffd38
+ Locals at 0xfffffffffbb0, Previous frame's sp is 0xfffffffffbc0
+ Saved registers:
+  x29 at 0xfffffffffbb0, x30 at 0xfffffffffbb8

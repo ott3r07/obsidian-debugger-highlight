@@ -1,0 +1,26 @@
+break *0x401a16
+continue
+ni
+break vuln
+continue
+nextcall
+ni
+continue
+#SLEEP 2
+pattern search
+#SLEEP 3
+x/gx $rsp
+pattern offset 0x4141464141304141
+pattern offset AA0AAFAAbAA1AAGAAcAA2AAH
+xinfo $rsp
+bt
+context stack 12
+info registers rip rsp rbp
+p $pc
+x/i $pc
+continue
+signal SIGSEGV
+#SLEEP 2
+info registers
+context
+quit

@@ -1,0 +1,2 @@
+pwndbg> db $sp 16
+0000fffffffffa80     c8 fc ff ff ff ff 00 00 00 00 00 00 01 00 00 00

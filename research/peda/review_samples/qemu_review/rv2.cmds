@@ -1,0 +1,9 @@
+break probe
+continue
+vmmap
+telescope 0xffffffffff600ff0 4
+telescope 0x4b5ff0 4
+xinfo 0x4b5ff8
+info frame
+pdisass main
+quit

@@ -1,0 +1,7 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> info threads
+  Id   Target Id                                  Frame 
+  1    Thread 0xfffff7ff7ee0 (LWP 380) "rv_arm64" 0x0000fffff7e71d4c in __futex_abstimed_wait_common64 (private=0x80, 
+    cancel=0x1, abstime=0x0, op=0x109, expected=0x17e, futex_word=0xfffff7def270) at ./nptl/futex-internal.c:57
+* 2    Thread 0xfffff7def1a0 (LWP 382) "rv_arm64" worker (arg=0x29) at rv.c:22

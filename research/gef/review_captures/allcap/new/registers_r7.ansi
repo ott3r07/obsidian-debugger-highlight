@@ -1,0 +1,12 @@
+[?2004h[?2004l[?2004h[1m(qemu) [0m[1;32mgef➤  [0mregisters
+[?2004l[1m[31m$eax   [0m: 0x510     
+[1m[31m$ebx   [0m: 0x080e4ff4  →  0x00000000
+[1m[31m$ecx   [0m: 0x080e5198  →  0x080eac68  →  0x00000000
+[1m[31m$edx   [0m: 0x511     
+[1m[31m$esp   [0m: [35m0x40800c50[0m  →  [31m0x08049865[0m  →  [90m<add+0000> endbr32 [0m
+[1m[31m$ebp   [0m: [35m0x40800d08[0m  →  0x00000001
+[1m[31m$esi   [0m: [35m0x40800d20[0m  →  0x00000001
+[1m[31m$edi   [0m: 0x1       
+[1m[31m$eip   [0m: [31m0x08049ac8[0m  →  [90m<main+019b> call 0x804989a <compute>[0m
+[1m[31m$eflags[0m: [zero carry [1mPARITY[0m [1mADJUST[0m sign trap [1mINTERRUPT[0m direction overflow resume virtualx86 identification]
+[34m$cs[0m: 0x23 [34m$ss[0m: 0x2b [34m$ds[0m: 0x2b [34m$es[0m: 0x2b [34m$fs[0m: 0x00 [1m[31m$gs[0m: 0x33 

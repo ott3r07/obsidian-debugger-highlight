@@ -1,0 +1,3 @@
+gef➤  pattern search $pc
+[+] Searching for '1f044031e097805a'/'5a8097e03140041f' with period=8
+[!] Pattern '$pc' not found

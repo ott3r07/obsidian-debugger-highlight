@@ -1,0 +1,26 @@
+# SOURCE: https://raw.githubusercontent.com/mebeim/ctf-challenges/master/challenges/librpn/README.md
+# DATE: approx 2024 (python3.12; WX legend)
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size Offset File
+    0x55e91fd68000     0x55e91fd69000 r--p     1000      0 /usr/local/bin/python3.12
+    0x55e91fd69000     0x55e91fd6a000 r-xp     1000   1000 /usr/local/bin/python3.12
+    0x55e91fd6a000     0x55e91fd6b000 r--p     1000   2000 /usr/local/bin/python3.12
+    0x55e91fd6b000     0x55e91fd6c000 r--p     1000   2000 /usr/local/bin/python3.12
+    0x55e91fd6c000     0x55e91fd6d000 rw-p     1000   3000 /usr/local/bin/python3.12
+    0x55e946f3f000     0x55e946f40000 ---p     1000      0 [heap]
+    0x55e946f40000     0x55e946f44000 rw-p     4000      0 [heap]
+    0x7fc0e61ce000     0x7fc0e62ce000 rw-p   100000      0 [anon_7fc0e61ce]
+    0x7fc0e6374000     0x7fc0e6474000 rw-p   100000      0 [anon_7fc0e6374] <<<<<<<<<<<<<< HERE
+    0x7fc0e663b000     0x7fc0e663f000 rw-p     4000      0 [anon_7fc0e663b]
+    0x7fc0e66b2000     0x7fc0e66b4000 rw-p     2000      0 [anon_7fc0e66b2]
+    0x7fc0e66f9000     0x7fc0e66fd000 rw-p     4000      0 [anon_7fc0e66f9]
+    0x7fc0e66fe000     0x7fc0e66ff000 r--p     1000      0 /home/user/librpn.so
+    0x7fc0e66ff000     0x7fc0e6700000 r-xp     1000   1000 /home/user/librpn.so
+    0x7fc0e6700000     0x7fc0e6701000 r--p     1000   2000 /home/user/librpn.so
+    0x7fc0e6701000     0x7fc0e6702000 r--p     1000   2000 /home/user/librpn.so
+    0x7fc0e6702000     0x7fc0e6703000 rw-p     1000   3000 /home/user/librpn.so
+    0x7fc0e6703000     0x7fc0e670d000 rw-p     a000      0 [anon_7fc0e6703]
+    0x7fc0e670f000     0x7fc0e6735000 rw-p    26000      0 [anon_7fc0e670f]
+    0x7fc0e6735000     0x7fc0e6738000 r--p     3000      0 /usr/local/lib/python3.12/lib-dynload/_struct.cpython-312-x86_64-linux-musl.so
+    ...

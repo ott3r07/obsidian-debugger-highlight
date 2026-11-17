@@ -1,0 +1,1748 @@
+Script started on 2026-11-17 05:30:41+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./test_static" <not executed on terminal>]
+break main
+Reading symbols from ./test_static...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x2aaaab2abd20 --> 0x1 
+RIP: 0x401780 (<_start>:	endbr64)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x0 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401777 <release_registered_frames+39>:	pop    rbp
+   0x401778 <release_registered_frames+40>:	ret
+   0x401779:	nop    DWORD PTR [rax+0x0]
+=> 0x401780 <_start>:	endbr64
+   0x401784 <_start+4>:	xor    ebp,ebp
+   0x401786 <_start+6>:	mov    r9,rdx
+   0x401789 <_start+9>:	pop    rsi
+   0x40178a <_start+10>:	mov    rdx,rsp
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abd20 --> 0x1 
+0008| 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0016| 0x2aaaab2abd30 --> 0x0 
+0024| 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+0032| 0x2aaaab2abd40 --> 0x2aaaab2abf08 ("PWD=/work")
+0040| 0x2aaaab2abd48 --> 0x2aaaab2abf12 ("HOME=/root")
+0048| 0x2aaaab2abd50 --> 0x2aaaab2abf1d --> 0x303d4c564c4853 ('SHLVL=0')
+0056| 0x2aaaab2abd58 --> 0x2aaaab2abf25 ("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGTRAP
+0x0000000000401780 in _start ()
+gdb-peda$ break main
+Breakpoint 1 at 0x401967: file test.c, line 26.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x401954 (<main>:	endbr64)
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RDI: 0x1 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x401967 (<main+19>:	cmp    DWORD PTR [rbp-0x64],0x2)
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40195c <main+8>:	sub    rsp,0x70
+   0x401960 <main+12>:	mov    DWORD PTR [rbp-0x64],edi
+   0x401963 <main+15>:	mov    QWORD PTR [rbp-0x70],rsi
+=> 0x401967 <main+19>:	cmp    DWORD PTR [rbp-0x64],0x2
+   0x40196b <main+23>:	jle    0x401976 <main+34>
+   0x40196d <main+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+   0x401974 <main+32>:	jmp    0x40197d <main+41>
+   0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, main (argc=0x1, argv=0x2aaaab2abd28) at test.c:26
+26	    op_fn fp = (argc > 2) ? mul : add;
+gdb-peda$ ni
+[----------------------------------registers-----------------------------------]
+RAX: 0x401954 (<main>:	endbr64)
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RDI: 0x1 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x40196b (<main+23>:	jle    0x401976 <main+34>)
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x297 (CARRY PARITY ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401960 <main+12>:	mov    DWORD PTR [rbp-0x64],edi
+   0x401963 <main+15>:	mov    QWORD PTR [rbp-0x70],rsi
+   0x401967 <main+19>:	cmp    DWORD PTR [rbp-0x64],0x2
+=> 0x40196b <main+23>:	jle    0x401976 <main+34>
+ | 0x40196d <main+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+ | 0x401974 <main+32>:	jmp    0x40197d <main+41>
+ | 0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+ | 0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+ |->   0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+       0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+       0x401981 <main+45>:	mov    edi,0x40
+       0x401986 <main+50>:	call   0x40f000 <malloc>
+                                                                  JUMP is taken
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000000000040196b	26	    op_fn fp = (argc > 2) ? mul : add;
+gdb-peda$ si
+[----------------------------------registers-----------------------------------]
+RAX: 0x401954 (<main>:	endbr64)
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RDI: 0x1 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x401976 (<main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>)
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x297 (CARRY PARITY ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40196b <main+23>:	jle    0x401976 <main+34>
+   0x40196d <main+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+   0x401974 <main+32>:	jmp    0x40197d <main+41>
+=> 0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+   0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+   0x401981 <main+45>:	mov    edi,0x40
+   0x401986 <main+50>:	call   0x40f000 <malloc>
+   0x40198b <main+55>:	mov    QWORD PTR [rbp-0x10],rax
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x0000000000401976	26	    op_fn fp = (argc > 2) ? mul : add;
+gdb-peda$ ni
+[----------------------------------registers-----------------------------------]
+RAX: 0x4018a5 (<add>:	endbr64)
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RDI: 0x1 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x40197d (<main+41>:	mov    QWORD PTR [rbp-0x8],rax)
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x297 (CARRY PARITY ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40196d <main+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+   0x401974 <main+32>:	jmp    0x40197d <main+41>
+   0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+=> 0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+   0x401981 <main+45>:	mov    edi,0x40
+   0x401986 <main+50>:	call   0x40f000 <malloc>
+   0x40198b <main+55>:	mov    QWORD PTR [rbp-0x10],rax
+   0x40198f <main+59>:	mov    rax,QWORD PTR [rbp-0x10]
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000000000040197d	26	    op_fn fp = (argc > 2) ? mul : add;
+gdb-peda$ ni
+[----------------------------------registers-----------------------------------]
+RAX: 0x4018a5 (<add>:	endbr64)
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RDI: 0x1 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x401981 (<main+45>:	mov    edi,0x40)
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x297 (CARRY PARITY ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401974 <main+32>:	jmp    0x40197d <main+41>
+   0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+   0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+=> 0x401981 <main+45>:	mov    edi,0x40
+   0x401986 <main+50>:	call   0x40f000 <malloc>
+   0x40198b <main+55>:	mov    QWORD PTR [rbp-0x10],rax
+   0x40198f <main+59>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x401993 <main+63>:	movabs rsi,0x7274732070616568
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+27	    char *heap = malloc(64);
+gdb-peda$ ni
+[----------------------------------registers-----------------------------------]
+RAX: 0x4018a5 (<add>:	endbr64)
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RDI: 0x40 ('@')
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x401986 (<main+50>:	call   0x40f000 <malloc>)
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x297 (CARRY PARITY ADJUST zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+   0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+   0x401981 <main+45>:	mov    edi,0x40
+=> 0x401986 <main+50>:	call   0x40f000 <malloc>
+   0x40198b <main+55>:	mov    QWORD PTR [rbp-0x10],rax
+   0x40198f <main+59>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x401993 <main+63>:	movabs rsi,0x7274732070616568
+   0x40199d <main+73>:	movabs rdi,0x4141414120676e69
+Guessed arguments:
+arg[0]: 0x40 ('@')
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x0000000000401986	27	    char *heap = malloc(64);
+gdb-peda$ ni
+[----------------------------------registers-----------------------------------]
+RAX: 0x4b5900 --> 0x0 
+RBX: 0x1 
+RCX: 0x4b5940 --> 0x0 
+RDX: 0x0 
+RSI: 0x40 ('@')
+RDI: 0x4b5900 --> 0x0 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x40198b (<main+55>:	mov    QWORD PTR [rbp-0x10],rax)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+   0x401981 <main+45>:	mov    edi,0x40
+   0x401986 <main+50>:	call   0x40f000 <malloc>
+=> 0x40198b <main+55>:	mov    QWORD PTR [rbp-0x10],rax
+   0x40198f <main+59>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x401993 <main+63>:	movabs rsi,0x7274732070616568
+   0x40199d <main+73>:	movabs rdi,0x4141414120676e69
+   0x4019a7 <main+83>:	mov    QWORD PTR [rax],rsi
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000000000040198b	27	    char *heap = malloc(64);
+gdb-peda$ context
+[----------------------------------registers-----------------------------------]
+RAX: 0x4b5900 --> 0x0 
+RBX: 0x1 
+RCX: 0x4b5940 --> 0x0 
+RDX: 0x0 
+RSI: 0x40 ('@')
+RDI: 0x4b5900 --> 0x0 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x40198b (<main+55>:	mov    QWORD PTR [rbp-0x10],rax)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40197d <main+41>:	mov    QWORD PTR [rbp-0x8],rax
+   0x401981 <main+45>:	mov    edi,0x40
+   0x401986 <main+50>:	call   0x40f000 <malloc>
+=> 0x40198b <main+55>:	mov    QWORD PTR [rbp-0x10],rax
+   0x40198f <main+59>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x401993 <main+63>:	movabs rsi,0x7274732070616568
+   0x40199d <main+73>:	movabs rdi,0x4141414120676e69
+   0x4019a7 <main+83>:	mov    QWORD PTR [rax],rsi
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 --> 0xf 
+0024| 0x2aaaab2abbb8 --> 0x0 
+0032| 0x2aaaab2abbc0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbc8 --> 0x7f580 
+0048| 0x2aaaab2abbd0 --> 0x2aaaab2abc00 --> 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 (--> ...)
+0056| 0x2aaaab2abbd8 --> 0x40f1a2 (<malloc+418>:	test   rax,rax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ break *0x4019e8
+Breakpoint 2 at 0x4019e8: file test.c, line 30.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x4018a5 (<add>:	endbr64)
+RBX: 0x1 
+RCX: 0x18 
+RDX: 0x7 
+RSI: 0x6 
+RDI: 0x4018a5 (<add>:	endbr64)
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x4019e8 (<main+148>:	call   0x4018d4 <compute>)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x287 (CARRY PARITY adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4019db <main+135>:	mov    edx,0x7
+   0x4019e0 <main+140>:	mov    esi,0x6
+   0x4019e5 <main+145>:	mov    rdi,rax
+=> 0x4019e8 <main+148>:	call   0x4018d4 <compute>
+   0x4019ed <main+153>:	mov    DWORD PTR [rbp-0x14],eax
+   0x4019f0 <main+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x4019f3 <main+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x4019f7 <main+163>:	lea    rax,[rbp-0x60]
+Guessed arguments:
+arg[0]: 0x4018a5 (<add>:	endbr64)
+arg[1]: 0x6 
+arg[2]: 0x7 
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+0032| 0x2aaaab2abbc0 ("lighter!")
+0040| 0x2aaaab2abbc8 --> 0x0 
+0048| 0x2aaaab2abbd0 --> 0x0 
+0056| 0x2aaaab2abbd8 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 2, 0x00000000004019e8 in main (argc=0x1, argv=0x2aaaab2abd28) at test.c:30
+30	    int r = compute(fp, 6, 7);
+gdb-peda$ si
+[----------------------------------registers-----------------------------------]
+RAX: 0x4018a5 (<add>:	endbr64)
+RBX: 0x1 
+RCX: 0x18 
+RDX: 0x7 
+RSI: 0x6 
+RDI: 0x4018a5 (<add>:	endbr64)
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb98 --> 0x4019ed (<main+153>:	mov    DWORD PTR [rbp-0x14],eax)
+RIP: 0x4018d4 (<compute>:	endbr64)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x287 (CARRY PARITY adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4018ce <mul+17>:	imul   eax,DWORD PTR [rbp-0x8]
+   0x4018d2 <mul+21>:	pop    rbp
+   0x4018d3 <mul+22>:	ret
+=> 0x4018d4 <compute>:	endbr64
+   0x4018d8 <compute+4>:	push   rbp
+   0x4018d9 <compute+5>:	mov    rbp,rsp
+   0x4018dc <compute+8>:	sub    rsp,0x20
+   0x4018e0 <compute+12>:	mov    QWORD PTR [rbp-0x18],rdi
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb98 --> 0x4019ed (<main+153>:	mov    DWORD PTR [rbp-0x14],eax)
+0008| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0016| 0x2aaaab2abba8 --> 0x1004ac200 
+0024| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0032| 0x2aaaab2abbb8 ("EDA highlighter!")
+0040| 0x2aaaab2abbc0 ("lighter!")
+0048| 0x2aaaab2abbc8 --> 0x0 
+0056| 0x2aaaab2abbd0 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+compute (f=0x4ac200 <main_arena>, x=0x0, y=0x4b4fc0) at test.c:12
+12	int compute(op_fn f, int x, int y) {
+gdb-peda$ info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000401967 in main at test.c:26
+	breakpoint already hit 1 time
+2       breakpoint     keep y   0x00000000004019e8 in main at test.c:30
+	breakpoint already hit 1 time
+gdb-peda$ bt
+#0  compute (f=0x4ac200 <main_arena>, x=0x0, y=0x4b4fc0) at test.c:12
+#1  0x00000000004019ed in main (argc=0x1, argv=0x2aaaab2abd28) at test.c:30
+#2  0x0000000000401f68 in __libc_start_call_main ()
+#3  0x0000000000404130 in __libc_start_main_impl ()
+#4  0x00000000004017a5 in _start ()
+gdb-peda$ finish
+Run till exit from #0  compute (f=0x4ac200 <main_arena>, x=0x0, y=0x4b4fc0) at test.c:12
+[----------------------------------registers-----------------------------------]
+RAX: 0xd ('\r')
+RBX: 0x1 
+RCX: 0x4018a5 (<add>:	endbr64)
+RDX: 0x2a ('*')
+RSI: 0x7 
+RDI: 0x6 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x4019ed (<main+153>:	mov    DWORD PTR [rbp-0x14],eax)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x212 (carry parity ADJUST zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4019e0 <main+140>:	mov    esi,0x6
+   0x4019e5 <main+145>:	mov    rdi,rax
+   0x4019e8 <main+148>:	call   0x4018d4 <compute>
+=> 0x4019ed <main+153>:	mov    DWORD PTR [rbp-0x14],eax
+   0x4019f0 <main+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x4019f3 <main+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x4019f7 <main+163>:	lea    rax,[rbp-0x60]
+   0x4019fb <main+167>:	mov    rsi,rax
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+0032| 0x2aaaab2abbc0 ("lighter!")
+0040| 0x2aaaab2abbc8 --> 0x0 
+0048| 0x2aaaab2abbd0 --> 0x0 
+0056| 0x2aaaab2abbd8 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x00000000004019ed in main (argc=0x1, argv=0x2aaaab2abd28) at test.c:30
+30	    int r = compute(fp, 6, 7);
+Value returned is $2 = 0xd
+gdb-peda$ context reg
+[----------------------------------registers-----------------------------------]
+RAX: 0xd ('\r')
+RBX: 0x1 
+RCX: 0x4018a5 (<add>:	endbr64)
+RDX: 0x2a ('*')
+RSI: 0x7 
+RDI: 0x6 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x4019ed (<main+153>:	mov    DWORD PTR [rbp-0x14],eax)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x212 (carry parity ADJUST zero sign trap INTERRUPT direction overflow)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ context code 4
+[-------------------------------------code-------------------------------------]
+   0x4019e8 <main+148>:	call   0x4018d4 <compute>
+=> 0x4019ed <main+153>:	mov    DWORD PTR [rbp-0x14],eax
+   0x4019f0 <main+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x4019f3 <main+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ context stack 4
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ telescope $rsp 12
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+0032| 0x2aaaab2abbc0 ("lighter!")
+0040| 0x2aaaab2abbc8 --> 0x0 
+0048| 0x2aaaab2abbd0 --> 0x0 
+0056| 0x2aaaab2abbd8 --> 0x0 
+0064| 0x2aaaab2abbe0 --> 0x0 
+0072| 0x2aaaab2abbe8 --> 0x0 
+0080| 0x2aaaab2abbf0 --> 0x0 
+0088| 0x2aaaab2abbf8 --> 0x4b3198 --> 0x0 
+gdb-peda$ telescope
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+0032| 0x2aaaab2abbc0 ("lighter!")
+0040| 0x2aaaab2abbc8 --> 0x0 
+0048| 0x2aaaab2abbd0 --> 0x0 
+0056| 0x2aaaab2abbd8 --> 0x0 
+gdb-peda$ stack 6
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+0032| 0x2aaaab2abbc0 ("lighter!")
+0040| 0x2aaaab2abbc8 --> 0x0 
+gdb-peda$ x/20gx $rsp
+0x2aaaab2abba0:	0x00002aaaab2abd28	0x00000001004ac200
+0x2aaaab2abbb0:	0x50202c6f6c6c6548	0x6867696820414445
+0x2aaaab2abbc0:	0x217265746867696c	0x0000000000000000
+0x2aaaab2abbd0:	0x0000000000000000	0x0000000000000000
+0x2aaaab2abbe0:	0x0000000000000000	0x0000000000000000
+0x2aaaab2abbf0:	0x0000000000000000	0x00000000004b3198
+0x2aaaab2abc00:	0x00000000004b5900	0x00000000004018a5
+0x2aaaab2abc10:	0x00002aaaab2abcb0	0x0000000000401f68
+0x2aaaab2abc20:	0x00002aaaab2abca0	0x00002aaaab2abd28
+0x2aaaab2abc30:	0x0000000100401672	0x0000000000401954
+gdb-peda$ x/s *(char**)&greeting
+0x481010:	"Hello, PEDA highlighter!"
+gdb-peda$ x/s $rbp-0x60
+0x2aaaab2abbb0:	"Hello, PEDA highlighter!"
+gdb-peda$ x/4s *(char**)&greeting
+0x481010:	"Hello, PEDA highlighter!"
+0x481029:	"buf: %s\n"
+0x481032:	"%s %s %d\n"
+0x48103c:	""
+gdb-peda$ x/10i $pc
+=> 0x4019ed <main+153>:	mov    DWORD PTR [rbp-0x14],eax
+   0x4019f0 <main+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x4019f3 <main+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x4019f7 <main+163>:	lea    rax,[rbp-0x60]
+   0x4019fb <main+167>:	mov    rsi,rax
+   0x4019fe <main+170>:	lea    rax,[rip+0x7f62d]        # 0x481032
+   0x401a05 <main+177>:	mov    rdi,rax
+   0x401a08 <main+180>:	mov    eax,0x0
+   0x401a0d <main+185>:	call   0x404e90 <printf>
+   0x401a12 <main+190>:	cmp    DWORD PTR [rbp-0x64],0x1
+gdb-peda$ x/8wx $rsp
+0x2aaaab2abba0:	0xab2abd28	0x00002aaa	0x004ac200	0x00000001
+0x2aaaab2abbb0:	0x6c6c6548	0x50202c6f	0x20414445	0x68676968
+gdb-peda$ x/16bx $rsp
+0x2aaaab2abba0:	0x28	0xbd	0x2a	0xab	0xaa	0x2a	0x00	0x00
+0x2aaaab2abba8:	0x00	0xc2	0x4a	0x00	0x01	0x00	0x00	0x00
+gdb-peda$ info registers
+rax            0xd                 0xd
+rbx            0x1                 0x1
+rcx            0x4018a5            0x4018a5
+rdx            0x2a                0x2a
+rsi            0x7                 0x7
+rdi            0x6                 0x6
+rbp            0x2aaaab2abc10      0x2aaaab2abc10
+rsp            0x2aaaab2abba0      0x2aaaab2abba0
+r8             0x4ac260            0x4ac260
+r9             0x50                0x50
+r10            0x1                 0x1
+r11            0x0                 0x0
+r12            0x2aaaab2abd28      0x2aaaab2abd28
+r13            0x2aaaab2abd38      0x2aaaab2abd38
+r14            0x4a7f68            0x4a7f68
+r15            0x1                 0x1
+rip            0x4019ed            0x4019ed <main+153>
+eflags         0x212               [ IOPL=0 IF AF ]
+cs             0x33                0x33
+ss             0x2b                0x2b
+ds             0x0                 0x0
+es             0x0                 0x0
+fs             0x0                 0x0
+gs             0x0                 0x0
+fs_base        0x4b4380            0x4b4380
+gs_base        0x0                 0x0
+k_gs_base      0x0                 0x0
+cr0            0x80010001          [ PG WP PE ]
+cr2            0x0                 0x0
+cr3            0x0                 [ PDBR=0 PCID=0 ]
+cr4            0x50220             [ OSXSAVE FSGSBASE OSFXSR PAE ]
+cr8            0x0                 0x0
+efer           0x500               [ LMA LME ]
+xmm0           {
+  v4_float = {0x6c6c6548, 0x50202c6f, 0x20414445, 0x68676968},
+  v2_double = {0x50202c6f6c6c6548, 0x6867696820414445},
+  v16_int8 = {0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x50, 0x45, 0x44, 0x41, 0x20, 0x68, 0x69, 0x67, 0x68},
+  v8_int16 = {0x6548, 0x6c6c, 0x2c6f, 0x5020, 0x4445, 0x2041, 0x6968, 0x6867},
+  v4_int32 = {0x6c6c6548, 0x50202c6f, 0x20414445, 0x68676968},
+  v2_int64 = {0x50202c6f6c6c6548, 0x6867696820414445},
+  uint128 = 0x686769682041444550202c6f6c6c6548
+}
+xmm1           {
+  v4_float = {0xff0000, 0x0, 0x0, 0xffff00},
+  v2_double = {0xff0000, 0xffff0000000000},
+  v16_int8 = {0x0, 0x0, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0},
+  v8_int16 = {0x0, 0xff, 0x0, 0x0, 0x0, 0x0, 0xff00, 0xff},
+  v4_int32 = {0xff0000, 0x0, 0x0, 0xffff00},
+  v2_int64 = {0xff0000, 0xffff0000000000},
+  uint128 = 0xffff00000000000000000000ff0000
+}
+xmm2           {
+  v4_float = {0x4a7f50, 0x0, 0x4b3228, 0x0},
+  v2_double = {0x4a7f50, 0x4b3228},
+  v16_int8 = {0x50, 0x7f, 0x4a, 0x0, 0x0, 0x0, 0x0, 0x0, 0x28, 0x32, 0x4b, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v8_int16 = {0x7f50, 0x4a, 0x0, 0x0, 0x3228, 0x4b, 0x0, 0x0},
+  v4_int32 = {0x4a7f50, 0x0, 0x4b3228, 0x0},
+  v2_int64 = {0x4a7f50, 0x4b3228},
+  uint128 = 0x4b322800000000004a7f50
+}
+xmm3           {
+  v4_float = {0x4acc40, 0x0, 0x0, 0x0},
+  v2_double = {0x4acc40, 0x0},
+  v16_int8 = {0x40, 0xcc, 0x4a, 0x0 <repeats 13 times>},
+  v8_int16 = {0xcc40, 0x4a, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x4acc40, 0x0, 0x0, 0x0},
+  v2_int64 = {0x4acc40, 0x0},
+  uint128 = 0x4acc40
+}
+xmm4           {
+  v4_float = {0x4acc40, 0x0, 0x0, 0x0},
+  v2_double = {0x4acc40, 0x0},
+  v16_int8 = {0x40, 0xcc, 0x4a, 0x0 <repeats 13 times>},
+  v8_int16 = {0xcc40, 0x4a, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x4acc40, 0x0, 0x0, 0x0},
+  v2_int64 = {0x4acc40, 0x0},
+  uint128 = 0x4acc40
+}
+xmm5           {
+  v4_float = {0x1, 0x0, 0x1, 0x0},
+  v2_double = {0x1, 0x1},
+  v16_int8 = {0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v8_int16 = {0x1, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0},
+  v4_int32 = {0x1, 0x0, 0x1, 0x0},
+  v2_int64 = {0x1, 0x1},
+  uint128 = 0x10000000000000001
+}
+xmm6           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm7           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm8           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm9           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm10          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm11          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm12          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm13          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm14          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm15          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+mxcsr          0x1f80              [ IM DM ZM OM UM PM ]
+gdb-peda$ info registers rip
+rip            0x4019ed            0x4019ed <main+153>
+gdb-peda$ p $rsp
+$5 = (void *) 0x2aaaab2abba0
+gdb-peda$ p/x $rip
+$6 = 0x4019ed
+gdb-peda$ p greeting
+$7 = 0x481010 "Hello, PEDA highlighter!"
+gdb-peda$ p global_counter
+$8 = 0x37
+gdb-peda$ p/x global_counter
+$9 = 0x37
+gdb-peda$ p main
+$10 = {int (int, char **)} 0x401954 <main>
+gdb-peda$ p $eflags
+$11 = [ IOPL=0 IF AF ]
+gdb-peda$ eflags
+EFLAGS: 0x212 (carry parity ADJUST zero sign trap INTERRUPT direction overflow)
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/work/test_static
+0x00401000         0x00481000         r-xp	/work/test_static
+0x00481000         0x004a7000         r--p	/work/test_static
+0x004a7000         0x004ae000         rw-p	/work/test_static
+0x004ae000         0x004b4000         rw-p	/work/test_static
+0x004b4000         0x004d6000         rw-p	[heap]
+0x00002aaaaaaac000 0x00002aaaab2ac000 rw-p	[stack]
+0x00002aaaab2ac000 0x00002aaaab2ad000 r-xp	mapped
+0x00002aaaab2ad000 0x00002aaaab2af000 rw-p	mapped
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+gdb-peda$ vmmap binary
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/work/test_static
+0x00401000         0x00481000         r-xp	/work/test_static
+0x00481000         0x004a7000         r--p	/work/test_static
+0x004a7000         0x004ae000         rw-p	/work/test_static
+0x004ae000         0x004b4000         rw-p	/work/test_static
+gdb-peda$ vmmap stack
+Start              End                Perm	Name
+0x00002aaaaaaac000 0x00002aaaab2ac000 rw-p	[stack]
+gdb-peda$ vmmap 0x401a86
+Start              End                Perm	Name
+0x00401000         0x00481000         r-xp	/work/test_static
+gdb-peda$ checksec
+CANARY    : ENABLED
+FORTIFY   : disabled
+NX        : ENABLED
+PIE       : disabled
+RELRO     : Partial
+gdb-peda$ disassemble main
+Dump of assembler code for function main:
+   0x0000000000401954 <+0>:	endbr64
+   0x0000000000401958 <+4>:	push   rbp
+   0x0000000000401959 <+5>:	mov    rbp,rsp
+   0x000000000040195c <+8>:	sub    rsp,0x70
+   0x0000000000401960 <+12>:	mov    DWORD PTR [rbp-0x64],edi
+   0x0000000000401963 <+15>:	mov    QWORD PTR [rbp-0x70],rsi
+   0x0000000000401967 <+19>:	cmp    DWORD PTR [rbp-0x64],0x2
+   0x000000000040196b <+23>:	jle    0x401976 <main+34>
+   0x000000000040196d <+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+   0x0000000000401974 <+32>:	jmp    0x40197d <main+41>
+   0x0000000000401976 <+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+   0x000000000040197d <+41>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000000000401981 <+45>:	mov    edi,0x40
+   0x0000000000401986 <+50>:	call   0x40f000 <malloc>
+   0x000000000040198b <+55>:	mov    QWORD PTR [rbp-0x10],rax
+   0x000000000040198f <+59>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x0000000000401993 <+63>:	movabs rsi,0x7274732070616568
+   0x000000000040199d <+73>:	movabs rdi,0x4141414120676e69
+   0x00000000004019a7 <+83>:	mov    QWORD PTR [rax],rsi
+   0x00000000004019aa <+86>:	mov    QWORD PTR [rax+0x8],rdi
+   0x00000000004019ae <+90>:	movabs rdx,0x42424242414141
+   0x00000000004019b8 <+100>:	mov    QWORD PTR [rax+0xd],rdx
+   0x00000000004019bc <+104>:	mov    rcx,QWORD PTR [rip+0xaa715]        # 0x4ac0d8 <greeting>
+   0x00000000004019c3 <+111>:	lea    rax,[rbp-0x60]
+   0x00000000004019c7 <+115>:	mov    edx,0x40
+   0x00000000004019cc <+120>:	mov    rsi,rcx
+   0x00000000004019cf <+123>:	mov    rdi,rax
+   0x00000000004019d2 <+126>:	call   0x4010d0
+   0x00000000004019d7 <+131>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x00000000004019db <+135>:	mov    edx,0x7
+   0x00000000004019e0 <+140>:	mov    esi,0x6
+   0x00000000004019e5 <+145>:	mov    rdi,rax
+   0x00000000004019e8 <+148>:	call   0x4018d4 <compute>
+=> 0x00000000004019ed <+153>:	mov    DWORD PTR [rbp-0x14],eax
+   0x00000000004019f0 <+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x00000000004019f3 <+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x00000000004019f7 <+163>:	lea    rax,[rbp-0x60]
+   0x00000000004019fb <+167>:	mov    rsi,rax
+   0x00000000004019fe <+170>:	lea    rax,[rip+0x7f62d]        # 0x481032
+   0x0000000000401a05 <+177>:	mov    rdi,rax
+   0x0000000000401a08 <+180>:	mov    eax,0x0
+   0x0000000000401a0d <+185>:	call   0x404e90 <printf>
+   0x0000000000401a12 <+190>:	cmp    DWORD PTR [rbp-0x64],0x1
+   0x0000000000401a16 <+194>:	jle    0x401a2b <main+215>
+   0x0000000000401a18 <+196>:	mov    rax,QWORD PTR [rbp-0x70]
+   0x0000000000401a1c <+200>:	add    rax,0x8
+   0x0000000000401a20 <+204>:	mov    rax,QWORD PTR [rax]
+   0x0000000000401a23 <+207>:	mov    rdi,rax
+   0x0000000000401a26 <+210>:	call   0x401913 <vuln>
+   0x0000000000401a2b <+215>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x0000000000401a2f <+219>:	mov    rdi,rax
+   0x0000000000401a32 <+222>:	call   0x40f6d0 <free>
+   0x0000000000401a37 <+227>:	mov    eax,0x0
+   0x0000000000401a3c <+232>:	leave
+   0x0000000000401a3d <+233>:	ret
+End of assembler dump.
+gdb-peda$ pdisass main 6
+Dump of assembler code from 0x401954 to 0x6::	Dump of assembler code from 0x401954 to 0x6:
+End of assembler dump.
+gdb-peda$ hexdump $rsp 64
+0x00002aaaab2abba0 : 28 bd 2a ab aa 2a 00 00 00 c2 4a 00 01 00 00 00   (.*..*....J.....
+0x00002aaaab2abbb0 : 48 65 6c 6c 6f 2c 20 50 45 44 41 20 68 69 67 68   Hello, PEDA high
+0x00002aaaab2abbc0 : 6c 69 67 68 74 65 72 21 00 00 00 00 00 00 00 00   lighter!........
+0x00002aaaab2abbd0 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+gdb-peda$ hexdump 0x481010 /2
+0x00481010 : 48 65 6c 6c 6f 2c 20 50 45 44 41 20 68 69 67 68   Hello, PEDA high
+0x00481020 : 6c 69 67 68 74 65 72 21 00 62 75 66 3a 20 25 73   lighter!.buf: %s
+gdb-peda$ hexdump 0x481010 20
+0x00481010 : 48 65 6c 6c 6f 2c 20 50 45 44 41 20 68 69 67 68   Hello, PEDA high
+0x00481020 : 6c 69 67 68                                       ligh
+gdb-peda$ nextcall
+Stepping through, Ctrl-C to stop...
+31	    printf("%s %s %d\n", stackbuf, heap, r);
+0x00000000004019f3	31	    printf("%s %s %d\n", stackbuf, heap, r);
+0x00000000004019f7	31	    printf("%s %s %d\n", stackbuf, heap, r);
+0x00000000004019fb	31	    printf("%s %s %d\n", stackbuf, heap, r);
+0x00000000004019fe	31	    printf("%s %s %d\n", stackbuf, heap, r);
+0x0000000000401a05	31	    printf("%s %s %d\n", stackbuf, heap, r);
+0x0000000000401a08	31	    printf("%s %s %d\n", stackbuf, heap, r);
+0x0000000000401a0d	31	    printf("%s %s %d\n", stackbuf, heap, r);
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x1 
+RCX: 0xd ('\r')
+RDX: 0x4b5900 ("heap string AAAABBBB")
+RSI: 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+RDI: 0x481032 ("%s %s %d\n")
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x401a0d (<main+185>:	call   0x404e90 <printf>)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x212 (carry parity ADJUST zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4019fe <main+170>:	lea    rax,[rip+0x7f62d]        # 0x481032
+   0x401a05 <main+177>:	mov    rdi,rax
+   0x401a08 <main+180>:	mov    eax,0x0
+=> 0x401a0d <main+185>:	call   0x404e90 <printf>
+   0x401a12 <main+190>:	cmp    DWORD PTR [rbp-0x64],0x1
+   0x401a16 <main+194>:	jle    0x401a2b <main+215>
+   0x401a18 <main+196>:	mov    rax,QWORD PTR [rbp-0x70]
+   0x401a1c <main+200>:	add    rax,0x8
+Guessed arguments:
+arg[0]: 0x481032 ("%s %s %d\n")
+arg[1]: 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+arg[2]: 0x4b5900 ("heap string AAAABBBB")
+arg[3]: 0xd ('\r')
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+0032| 0x2aaaab2abbc0 ("lighter!")
+0040| 0x2aaaab2abbc8 --> 0x0 
+0048| 0x2aaaab2abbd0 --> 0x0 
+0056| 0x2aaaab2abbd8 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ nextjmp
+Stepping through, Ctrl-C to stop...
+0x0000000000404e90 in printf ()
+0x0000000000404e94 in printf ()
+0x0000000000404e95 in printf ()
+0x0000000000404e98 in printf ()
+0x0000000000404e9f in printf ()
+0x0000000000404ea6 in printf ()
+0x0000000000404ead in printf ()
+0x0000000000404eb4 in printf ()
+0x0000000000404ebb in printf ()
+0x0000000000404ec2 in printf ()
+0x0000000000404ec4 in printf ()
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x1 
+RCX: 0xd ('\r')
+RDX: 0x4b5900 ("heap string AAAABBBB")
+RSI: 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+RDI: 0x481032 ("%s %s %d\n")
+RBP: 0x2aaaab2abb90 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abac0 --> 0x0 
+RIP: 0x404ec4 (<printf+52>:	je     0x404ee6 <printf+86>)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x404eb4 <printf+36>:	mov    QWORD PTR [rbp-0x90],r8
+   0x404ebb <printf+43>:	mov    QWORD PTR [rbp-0x88],r9
+   0x404ec2 <printf+50>:	test   al,al
+=> 0x404ec4 <printf+52>:	je     0x404ee6 <printf+86>
+ | 0x404ec6 <printf+54>:	movaps XMMWORD PTR [rbp-0x80],xmm0
+ | 0x404eca <printf+58>:	movaps XMMWORD PTR [rbp-0x70],xmm1
+ | 0x404ece <printf+62>:	movaps XMMWORD PTR [rbp-0x60],xmm2
+ | 0x404ed2 <printf+66>:	movaps XMMWORD PTR [rbp-0x50],xmm3
+ |->   0x404ee6 <printf+86>:	mov    rax,QWORD PTR fs:0x28
+       0x404eef <printf+95>:	mov    QWORD PTR [rbp-0xb8],rax
+       0x404ef6 <printf+102>:	xor    eax,eax
+       0x404ef8 <printf+104>:	mov    rsi,rdi
+                                                                  JUMP is taken
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abac0 --> 0x0 
+0008| 0x2aaaab2abac8 --> 0x4a86a0 --> 0x481dc8 ("LINUX_2.6")
+0016| 0x2aaaab2abad0 --> 0x4b5390 --> 0x4b52b8 --> 0x4b4fe8 --> 0x4b4fc0 --> 0x0 
+0024| 0x2aaaab2abad8 --> 0x40ddfc (<_int_malloc+3836>:	jmp    0x40d46a <_int_malloc+1386>)
+0032| 0x2aaaab2abae0 --> 0x68308f53 
+0040| 0x2aaaab2abae8 --> 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0048| 0x2aaaab2abaf0 --> 0x4b5900 ("heap string AAAABBBB")
+0056| 0x2aaaab2abaf8 --> 0xd ('\r')
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ xinfo $rsp
+0x2aaaab2abac0 --> 0x0 
+Virtual memory mapping:
+Start : 0x00002aaaaaaac000
+End   : 0x00002aaaab2ac000
+Offset: 0x7ffac0
+Perm  : rw-p
+Name  : [stack]
+gdb-peda$ xinfo $pc
+0x404ec4 (<printf+52>:	je     0x404ee6 <printf+86>)
+Virtual memory mapping:
+Start : 0x00401000
+End   : 0x00481000
+Offset: 0x3ec4
+Perm  : r-xp
+Name  : /work/test_static
+gdb-peda$ xinfo 0x4b5900
+0x4b5900 ("heap string AAAABBBB")
+Virtual memory mapping:
+Start : 0x004b4000
+End   : 0x004d6000
+Offset: 0x1900
+Perm  : rw-p
+Name  : [heap]
+gdb-peda$ xinfo 0x481010
+0x481010 ("Hello, PEDA highlighter!")
+Virtual memory mapping:
+Start : 0x00481000
+End   : 0x004a7000
+Offset: 0x10
+Perm  : r--p
+Name  : /work/test_static
+gdb-peda$ xprint $rsp
+0x2aaaab2abac0 --> 0x0 
+gdb-peda$ xinfo register
+RAX: 0x0 
+RBX: 0x1 
+RCX: 0xd ('\r')
+RDX: 0x4b5900 ("heap string AAAABBBB")
+RSI: 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+RDI: 0x481032 ("%s %s %d\n")
+RBP: 0x2aaaab2abb90 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abac0 --> 0x0 
+RIP: 0x404ec4 (<printf+52>:	je     0x404ee6 <printf+86>)
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+gdb-peda$ xinfo 0xdeadbeef
+0xdeadbeef 
+
+gdb-peda$ distance $rsp $rbp
+From 0x2aaaab2abac0 to 0x2aaaab2abb90: 208 bytes, 52 dwords
+gdb-peda$ distance $rsp
+From 0x2aaaab2abac0 (SP) to 0x2aaaab2abac0: 0 bytes, 0 dwords
+gdb-peda$ elfheader
+.note.gnu.property = 0x400270
+.note.gnu.build-id = 0x4002a0
+.note.ABI-tag = 0x4002c4
+.rela.plt = 0x4002e8
+.init = 0x401000
+.plt = 0x401020
+.text = 0x4011c0
+.fini = 0x480740
+.rodata = 0x481000
+rodata.cst32 = 0x49d340
+.eh_frame = 0x49d3a0
+.gcc_except_table = 0x4a6950
+.tdata = 0x4a7f50
+.init_array = 0x4a7f68
+.tbss = 0x4a7f68
+.fini_array = 0x4a7f70
+.data.rel.ro = 0x4a7f80
+.got = 0x4abf48
+.got.plt = 0x4abfe8
+.data = 0x4ac0c0
+.bss = 0x4adac0
+gdb-peda$ elfheader .text
+.text: 0x4011c0 - 0x480740 (code)
+gdb-peda$ elfsymbol printf
+'printf': no match found
+gdb-peda$ searchmem "heap string"
+Searching for 'heap string' in: None ranges
+Found 1 results, display max 1 items:
+[heap] : 0x4b5900 ("heap string AAAABBBB")
+gdb-peda$ find "PEDA"
+Searching for 'PEDA' in: None ranges
+Found 3 results, display max 3 items:
+test_static : 0x481017 ("PEDA highlighter!")
+    [stack] : 0x2aaaab2abbb7 ("PEDA highlighter!")
+    [stack] : 0x2aaaab2abf9c ("PEDA_QEMU_PAGELOG=/tmp/qemu_pages.log")
+gdb-peda$ find 0x4141414120676e69 heap
+Searching for '0x4141414120676e69' in: heap ranges
+Found 1 results, display max 1 items:
+[heap] : 0x4b5908 ("ing AAAABBBB")
+gdb-peda$ find "heap" 0x4b5000 0x4b6000
+Searching for 'heap' in range: 0x4b5000 - 0x4b6000
+Found 1 results, display max 1 items:
+[heap] : 0x4b5900 ("heap string AAAABBBB")
+gdb-peda$ refsearch 0x4b5900
+Searching for reference to: '0x4b5900' in: all ranges
+sgrep PEDA
+Found 2 results, display max 2 items:
+[stack] : 0x2aaaab2aba00 --> 0x2aaaab2abaf0 --> 0x4b5900 ("heap string AAAABBBB")
+[stack] : 0x2aaaab2aabd0 --> 0x2aaaab2abc00 --> 0x4b5900 ("heap string AAAABBBB")
+gdb-peda$ sgrep PEDA
+Searching for '[^\x00]*PEDA[^\x00]*' in: binary ranges
+Found 1 results, display max 1 items:
+test_static : 0x48100e ("@@Hello, PEDA highlighter!")
+gdb-peda$ strings 0x481010 0x481040 4
+0x481010: Hello, PEDA highlighter!
+0x481029: buf: %s
+0x481032: %s %s %d
+gdb-peda$ find "/bin" binary
+Searching for '/bin' in: binary ranges
+Not found
+gdb-peda$ pattern create 64
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAH'
+gdb-peda$ pattern create 40 /tmp/pat.txt
+Writing pattern of 40 chars to filename "/tmp/pat.txt"
+gdb-peda$ pattern offset AA8A
+AA8A found at offset: 112
+gdb-peda$ pattern offset 0x41412d41
+1094790465 found at offset: 20
+gdb-peda$ dumpargs
+No argument
+gdb-peda$ getpid
+865
+gdb-peda$ skeleton
+Error: missing argument
+Generate python exploit code template
+Usage:
+    skeleton type [file]
+        type = argv: local exploit via argument
+        type = env: local exploit via crafted environment (including NULL byte)
+        type = stdin: local exploit via stdin
+        type = remote: remote exploit via TCP socket
+
+gdb-peda$ pshow option ansicolor
+ansicolor = 'on'
+gdb-peda$ phelp context
+Display various information of current execution context
+Usage:
+    context [reg,code,stack,all] [code/stack length]
+
+gdb-peda$ info frame
+Stack level 0, frame at 0x2aaaab2abba0:
+ rip = 0x404ec4 in printf; saved rip = 0x401a12
+ called by frame at 0x2aaaab2abc20
+ Arglist at 0x2aaaab2abb90, args: 
+ Locals at 0x2aaaab2abb90, Previous frame's sp is 0x2aaaab2abba0
+ Saved registers:
+  rbp at 0x2aaaab2abb90, rip at 0x2aaaab2abb98
+gdb-peda$ ropgadget
+addesp_1 = 0x41d911
+ret = 0x40101a
+popret = 0x401739
+pop2ret = 0x401738
+addesp_8 = 0x401017
+addesp_16 = 0x4477a8
+addesp_24 = 0x4026a7
+addesp_28 = 0x40f100
+addesp_32 = 0x47378c
+addesp_40 = 0x4028ad
+addesp_44 = 0x40be8c
+addesp_48 = 0x42406c
+addesp_56 = 0x4045a9
+addesp_60 = 0x46e375
+addesp_64 = 0x470dd4
+addesp_72 = 0x441c74
+addesp_88 = 0x40d47e
+addesp_104 = 0x410924
+addesp_108 = 0x45e615
+addesp_120 = 0x410bee
+addesp_136 = 0x473b5f
+addesp_144 = 0x420cf4
+addesp_168 = 0x4035e8
+addesp_172 = 0x45d7de
+addesp_176 = 0x402c16
+--More--(25/52)
+addesp_184 = 0x43ec52
+addesp_188 = 0x430a97
+addesp_200 = 0x43e653
+addesp_216 = 0x4282c8
+addesp_248 = 0x409614
+addesp_264 = 0x46e8f1
+addesp_272 = 0x47bf16
+addesp_280 = 0x431a54
+addesp_296 = 0x43fb5f
+addesp_312 = 0x44ad9c
+addesp_344 = 0x405142
+addesp_408 = 0x434415
+addesp_504 = 0x47cfdc
+addesp_508 = 0x47c59c
+addesp_536 = 0x4798ce
+addesp_600 = 0x43e9a2
+addesp_1032 = 0x4230e5
+addesp_1064 = 0x41b761
+addesp_1080 = 0x41b47e
+addesp_1144 = 0x439fce
+addesp_1912 = 0x438e00
+addesp_2104 = 0x46f458
+addesp_2136 = 0x44a96e
+addesp_2152 = 0x47d5b9
+addesp_2360 = 0x42162a
+--More--(50/52)
+addesp_2376 = 0x4055f2
+addesp_4104 = 0x4214a8
+gdb-peda$ 
+gdb-peda$ pset option pagesize 0
+pagesize = 0
+gdb-peda$ pshow option pagesize
+pagesize = 0
+gdb-peda$ ropsearch "pop rdi" binary
+Searching for ROP gadget: 'pop rdi' in: binary ranges
+0x004021f8 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004028b8 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00402c24 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004035f6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004045b4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00405150 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004052f1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00405600 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004072bf : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00409622 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00409c60 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040a90f : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040b44d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040b698 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040b858 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040c1ee : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040c5b1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040c7a9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040d48c : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040e996 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040ecd3 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040f954 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0040fabf : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041032d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041042c : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004106e1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00410932 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00410bf9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00410edc : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041aab1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041ad46 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041af2a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041b48e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041b771 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041c0d8 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041c4a6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041cb1f : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041cef4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041d3c9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041d8b6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041d9c7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041dc1b : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041de89 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041defb : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041dfa4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041eda7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0041fe22 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00420ab1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004212ec : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00421638 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00422697 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00422951 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004229d7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00422d89 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004232ba : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042360d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00423710 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00423a66 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00423be4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00424cb2 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00426371 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00426f74 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042713a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042789e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00427a6f : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00427cb7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00427f6c : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004280c9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004282d6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00428a93 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00429153 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004297b7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00429ee4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042a621 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042ab22 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042b871 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042c889 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042d7a7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042e0b3 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042eed6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0042f763 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004304e7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004307f2 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00430810 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043094e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00430cdb : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00431379 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00431595 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043183e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00431a65 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004329e0 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004336fa : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00433e0a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00434423 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004366a0 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00436afd : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004370b7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043738d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00437a8d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00437eee : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004387f1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00438e10 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004397e0 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00439ee7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00439fdc : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043a537 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043ab61 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043b1dc : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043b682 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043bdcd : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043be68 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043bea3 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043c4c7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043e661 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043ec60 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0043fb6f : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00440a7f : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00440e52 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00441161 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004419d9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00441c82 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004431c8 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004437dc : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00443bc4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00443c5c : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00443ca6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00443ebc : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00444412 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004454c4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00445772 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0044625a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004465af : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004468be : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00446d53 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004470b3 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004471ad : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004475c9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004477b5 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00447d32 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00447f7e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00449525 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00449b85 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00449f1c : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00449fe8 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0044a97c : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0044adad : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0045db30 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0045e1a2 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0045f06b : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0045f465 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004601f7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00460411 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004605ea : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00460910 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00460cc1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00460e73 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046172e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004628a9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046565a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00465709 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00466152 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046655f : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004666ae : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004669ec : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00466b85 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004673e5 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00467c67 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004685d3 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00468f43 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004693fd : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004699ef : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00469b3e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046a198 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046b2b6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046b30d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046b441 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046b76a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046bb48 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046c302 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046cae4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046cce9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046dc1d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046e18a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046e901 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046ea33 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046f466 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0046f749 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00470d27 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047221e : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047325b : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00473685 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047399f : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00473b6d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004741b3 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00474c02 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047529d : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00477854 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00477f33 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00478036 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x00478268 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004786fa : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004798dc : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047a38a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047a5d1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047af29 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047bbd1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047bdde : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047c114 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047c2e0 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047cfed : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047d0cc : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047d5c7 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047d80a : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047e132 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047e68c : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047e998 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047ebb9 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047eee4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047f1b1 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047f1d6 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x0047f7a8 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004804d4 : (b'5f5dc3')	pop rdi; pop rbp; ret
+0x004067cd : (b'5fa8ffff4889c3')	pop rdi; test al,0xff; dec DWORD PTR [rax-0x77]; ret
+0x00416067 : (b'5f4801f8c5f877c3')	pop rdi; add rax,rdi; vzeroupper; ret
+0x00417667 : (b'5f4801f8c5f877c3')	pop rdi; add rax,rdi; vzeroupper; ret
+0x00419c27 : (b'5f4801f8c5f877c3')	pop rdi; add rax,rdi; vzeroupper; ret
+0x0045b288 : (b'5f0262b2662026c3')	pop rdi; add ah,BYTE PTR [rdx-0x4e]; data16 and BYTE PTR [rsi],ah; ret
+0x00417cb3 : (b'5f40c5fe7f7c0f40c5f877c3')	pop rdi; rex vmovdqu YMMWORD PTR [rdi+rcx*1+0x40],ymm7; vzeroupper; ret
+0x0045c3a7 : (b'5f4801f848c1e802c5f877c3')	pop rdi; add rax,rdi; shr rax,0x2; vzeroupper; ret
+0x0045cd87 : (b'5f4801f848c1e802c5f877c3')	pop rdi; add rax,rdi; shr rax,0x2; vzeroupper; ret
+0x0046fd75 : (b'5f4883c7214801f8c5f877c3')	pop rdi; add rdi,0x21; add rax,rdi; vzeroupper; ret
+0x0045308b : (b'5f403a340775074801f8c5f877c3')	pop rdi; cmp sil,BYTE PTR [rdi+rax*1]; jne 0x453099 <__strchr_avx2+505>; add rax,rdi; vzeroupper; ret
+
+gdb-peda$ asmsearch "pop rdi ; ret" binary
+Searching for ASM code: 'pop rdi ; ret' in: binary ranges
+Not found
+gdb-peda$ jmpcall rax
+0x401014 : call rax
+0x40125d : jmp [rax]
+0x4017dc : jmp rax
+0x40181e : jmp rax
+0x401cd4 : jmp rax
+0x401de8 : jmp rax
+0x401e01 : jmp rax
+0x401f66 : call rax
+0x403d38 : jmp rax
+0x404a1e : call rax
+0x404ac8 : call rax
+0x404b0f : call rax
+0x40604b : jmp [rax]
+0x406185 : jmp [rax]
+0x406220 : call [rax]
+0x4062c3 : call [rax]
+0x406558 : jmp [rax]
+0x406768 : jmp [rax]
+0x40679f : jmp [rax]
+0x4069cd : jmp [rax]
+0x406e55 : jmp [rax]
+0x40736b : jmp [rax]
+0x4073b9 : jmp rax
+0x40757b : jmp rax
+0x40761a : call [rax]
+0x4077d5 : jmp rax
+0x407825 : jmp rax
+0x407abf : call [rax]
+0x407ae2 : jmp [rax]
+0x407c5c : jmp [rax]
+0x407dbf : jmp rax
+0x407e21 : jmp rax
+0x407f72 : jmp rax
+0x407fbd : jmp rax
+0x408003 : jmp rax
+0x408049 : jmp rax
+0x408062 : call [rax]
+0x408194 : jmp [rax]
+0x4081d9 : jmp rax
+0x408225 : jmp rax
+0x40825c : jmp [rax]
+0x40827c : jmp rax
+0x4082c1 : jmp rax
+0x408425 : jmp [rax]
+0x408610 : jmp [rax]
+0x4086c5 : jmp [rax]
+0x4088d9 : jmp [rax]
+0x4091bc : jmp [rax]
+0x4098a2 : jmp rax
+0x40994b : jmp rax
+0x4099a3 : jmp rax
+0x409f14 : call rax
+0x40e93f : call [rax]
+0x40f332 : call [rax]
+0x40f477 : jmp [rax]
+0x410c6a : jmp rax
+0x415c07 : jmp rax
+0x41a54a : call rax
+0x41a5d1 : call rax
+0x41a720 : call rax
+0x41a799 : call rax
+0x41b114 : call rax
+0x421d8d : call [rax]
+0x425d1f : call rax
+0x426320 : call rax
+0x426abe : call rax
+0x426be4 : call rax
+0x426df1 : call rax
+0x426ee7 : call rax
+0x427317 : call rax
+0x428a14 : call rax
+0x428cbc : jmp rax
+0x429045 : call rax
+0x429386 : jmp rax
+0x429746 : call rax
+0x42998b : jmp rax
+0x429e58 : call rax
+0x42a12a : jmp rax
+0x42a554 : call rax
+0x42a7ba : jmp rax
+0x42aa8c : call rax
+0x42b007 : jmp rax
+0x42b7e9 : call rax
+0x42bd28 : jmp rax
+0x42c76c : call rax
+0x42cd88 : jmp rax
+0x42d713 : call rax
+0x42daf2 : jmp rax
+0x42e01c : call rax
+0x42e582 : jmp rax
+0x42ee08 : call rax
+0x42f169 : jmp rax
+0x42f6cc : call rax
+0x42fc35 : jmp rax
+0x43058e : call rax
+0x4306a5 : call rax
+0x4317d3 : call rax
+0x4319b2 : call rax
+0x431d21 : call rax
+0x43260b : jmp rax
+0x4343c3 : jmp rax
+0x434722 : jmp [rax]
+0x434792 : jmp rax
+0x435129 : jmp rax
+0x435161 : jmp rax
+0x435207 : jmp rax
+0x4352ad : jmp rax
+0x43545f : jmp rax
+0x43560e : jmp rax
+0x435673 : jmp rax
+0x4356ad : jmp rax
+0x43584f : jmp rax
+0x4358d1 : jmp rax
+0x435901 : jmp rax
+0x435a18 : jmp rax
+0x435a9a : jmp rax
+0x435b40 : jmp rax
+0x435b7a : jmp rax
+0x435c3a : jmp rax
+0x435c84 : jmp rax
+0x435d32 : jmp rax
+0x435e1e : jmp rax
+0x435e54 : jmp rax
+0x435f1b : jmp rax
+0x435f65 : jmp rax
+0x436013 : jmp rax
+0x436095 : jmp rax
+0x436203 : jmp rax
+0x436233 : jmp rax
+0x439b51 : call rax
+0x439bf6 : call rax
+0x439c97 : call rax
+0x439cde : call rax
+0x43d77e : call [rax]
+0x441c4c : jmp rax
+0x441ce1 : jmp rax
+0x441d2a : jmp rax
+0x441d9a : jmp rax
+0x441de2 : jmp rax
+0x441e1e : jmp rax
+0x442904 : jmp rax
+0x442a7c : jmp rax
+0x4430f7 : call rax
+0x444154 : jmp rax
+0x444e56 : jmp rax
+0x444e7c : jmp rax
+0x444f3f : jmp rax
+0x445121 : jmp rax
+0x445602 : jmp rax
+0x44562e : jmp rax
+0x445ab6 : jmp rax
+0x445ae6 : jmp rax
+0x45ebce : jmp rax
+0x45ec6e : jmp rax
+0x45ed08 : jmp rax
+0x45ed3e : jmp rax
+0x45ef92 : call rax
+0x45fa25 : jmp rax
+0x45faee : jmp rax
+0x4627d1 : call rax
+0x462cba : jmp rax
+0x462e8c : call rax
+0x463007 : call rax
+0x46359d : jmp rax
+0x463726 : call rax
+0x4638aa : call rax
+0x463f10 : call rax
+0x46411b : jmp rax
+0x46afd3 : jmp rax
+0x46ba11 : jmp rax
+0x46bf45 : jmp rax
+0x46c0c3 : jmp rax
+0x46d384 : jmp rax
+0x46da1b : call rax
+0x46e51c : call rax
+0x46e5eb : call rax
+0x46ebef : jmp rax
+0x470e37 : jmp rax
+0x470f33 : jmp rax
+0x471011 : jmp rax
+0x474950 : call rax
+0x4762ff : jmp rax
+0x476a02 : jmp rax
+0x476c4d : jmp rax
+0x477ed3 : call rax
+0x477f1d : call [rax]
+0x478b08 : call rax
+0x478d40 : call rax
+0x478ec1 : call [rax]
+0x4796f2 : jmp rax
+0x479880 : jmp rax
+0x479991 : jmp rax
+0x47a03f : jmp rax
+0x47a2c9 : jmp rax
+0x47a5a8 : jmp rax
+0x47aef8 : jmp rax
+0x47c040 : call rax
+0x47c215 : call rax
+0x47c715 : call rax
+0x47cee5 : jmp rax
+0x47d05c : call rax
+0x47d0ac : call rax
+0x47d1ae : jmp rax
+0x47d3ef : call rax
+0x47d4eb : call rax
+0x48034e : jmp rax
+
+gdb-peda$ aslr
+gdb-peda$ procinfo
+exe = /usr/bin/qemu-x86_64
+fd[0] -> /dev/null
+fd[1] -> /tmp/prog_stdout.txt
+fd[2] -> /tmp/prog_stdout.txt
+fd[3] -> /tmp/qemu_pages.log
+fd[4] -> socket:[91499]
+fd[5] -> socket:[91500]
+pid = 865
+ppid = 855
+uid = [0, 0, 0, 0]
+gid = [0, 0, 0, 0]
+gdb-peda$ lookup pointer stack binary
+Searching for pointers on: stack pointed to: binary, this may take minutes to complete...
+Found 5 results, display max 5 items:
+[stack] : 0x2aaaab2aab60 --> 0x4ac000 --> 0x4166b0 (<__strcpy_avx2>:	endbr64)
+[stack] : 0x2aaaab2aab90 --> 0x4ac000 --> 0x4166b0 (<__strcpy_avx2>:	endbr64)
+[stack] : 0x2aaaab2abac8 --> 0x4a86a0 --> 0x481dc8 ("LINUX_2.6")
+[stack] : 0x2aaaab2abb50 --> 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+[stack] : 0x2aaaab2abc60 --> 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+
+gdb-peda$ delete
+gdb-peda$ continue
+Continuing.
+[Inferior 1 (process 865) exited normally]
+Warning: not running
+gdb-peda$ quit
+
+Script done on 2026-11-17 05:33:17+00:00 [COMMAND_EXIT_CODE="0"]

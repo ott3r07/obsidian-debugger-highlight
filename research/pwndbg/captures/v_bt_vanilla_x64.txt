@@ -1,0 +1,2 @@
+(gdb) bt
+#0  main (argc=1, argv=0xffff935a9cf8) at test.c:38

@@ -1,0 +1,3 @@
+pwndbg> cyclic -l 0x6161616161616166
+Finding cyclic pattern of 4 bytes: b'faaa' (hex: 0x66616161)
+Found at offset 20

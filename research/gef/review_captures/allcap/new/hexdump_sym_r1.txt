@@ -1,0 +1,2 @@
+gef➤  hexdump byte main --size 48
+[!] Command 'hexdump byte' failed to execute properly, reason: Cannot convert value to long.

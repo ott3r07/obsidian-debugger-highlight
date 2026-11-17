@@ -1,0 +1,439 @@
+Script started on 2026-11-17 05:17:30+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./test_static" <not executed on terminal>]
+break *0x401a16
+Reading symbols from [32m./test_static[m...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: '[1mset logging off[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled off[m'.
+
+Warning: '[1mset logging on[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled on[m'.
+
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x0 
+[;32mRBX[0m: 0x0 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: 0x0 
+[;32mRDI[0m: 0x0 
+[;32mRBP[0m: 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abcb0[0m --> 0x2 
+[;32mRIP[0m: [;31m0x401780[0m (<_start>:	endbr64)
+[;32mR8 [0m: 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x0 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: 0x0 
+[;32mR13[0m: 0x0 
+[;32mR14[0m: 0x0 
+[;32mR15[0m: 0x0[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401777 <release_registered_frames+39>:[;2m	pop    rbp[0m
+   0x401778 <release_registered_frames+40>:[;2;34m	ret[0m
+   0x401779:[;2m	nop    DWORD PTR [rax+0x0][0m
+=> 0x401780 <_start>:[;1;32m	endbr64[0m
+   0x401784 <_start+4>:[m	xor    ebp,ebp[0m
+   0x401786 <_start+6>:[m	mov    r9,rdx[0m
+   0x401789 <_start+9>:[m	pop    rsi[0m
+   0x40178a <_start+10>:[m	mov    rdx,rsp[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abcb0[0m --> 0x2 [0m
+[m0008| [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")[0m
+[m0016| [;34m0x2aaaab2abcc0[0m --> [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0024| [;34m0x2aaaab2abcc8[0m --> 0x0 [0m
+[m0032| [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")[0m
+[m0040| [;34m0x2aaaab2abcd8[0m --> [;34m0x2aaaab2abf08[0m ("PWD=/work")[0m
+[m0048| [;34m0x2aaaab2abce0[0m --> [;34m0x2aaaab2abf12[0m ("HOME=/root")[0m
+[m0056| [;34m0x2aaaab2abce8[0m --> [;34m0x2aaaab2abf1d[0m --> 0x303d4c564c4853 ('SHLVL=0')[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGTRAP[0m[0m
+[34m0x0000000000401780[m in [33m_start[m ()
+[?2004h[;31mgdb-peda$ [0mbreak *0x401a16
+[?2004lBreakpoint 1 at [34m0x401a16[m: file [32mtest.c[m, line 32.
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x31 ('1')
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: [;34m0x2aaaab2ab980[0m ("Hello, PEDA highlighter! heap string AAAABBBB 13\nOK")
+[;32mRDI[0m: [;34m0x2aaaab2ab950[0m --> [;34m0x4b5981[0m --> 0x0 
+[;32mRBP[0m: [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb30[0m --> [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mRIP[0m: [;31m0x401a16[0m (<main+194>:	jle    0x401a2b <main+215>)
+[;32mR8 [0m: [;34m0x4ac260[0m --> [;34m0x4b6950[0m --> 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x3 
+[;32mR12[0m: [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;34m0x4a7f68[0m --> [;31m0x401870[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401a08 <main+180>:[;2m	mov    eax,0x0[0m
+   0x401a0d <main+185>:[;2;31m	call   0x404e90 <printf>[0m
+   0x401a12 <main+190>:[;2;31m	cmp    DWORD PTR [rbp-0x64],0x1[0m
+=> 0x401a16 <main+194>:[;1;32m	jle    0x401a2b <main+215>[0m
+   0x401a18 <main+196>:[m	mov    rax,QWORD PTR [rbp-0x70][0m
+   0x401a1c <main+200>:[m	add    rax,0x8[0m
+   0x401a20 <main+204>:[m	mov    rax,QWORD PTR [rax][0m
+   0x401a23 <main+207>:[m	mov    rdi,rax[0m
+[;32m                                                              JUMP is NOT taken[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb30[0m --> [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")[0m
+[m0008| [;34m0x2aaaab2abb38[0m --> 0x2004ac200 [0m
+[m0016| [;34m0x2aaaab2abb40[0m ("Hello, PEDA highlighter!")[0m
+[m0024| [;34m0x2aaaab2abb48[0m ("EDA highlighter!")[0m
+[m0032| [;34m0x2aaaab2abb50[0m ("lighter!")[0m
+[m0040| [;34m0x2aaaab2abb58[0m --> 0x0 [0m
+[m0048| [;34m0x2aaaab2abb60[0m --> 0x0 [0m
+[m0056| [;34m0x2aaaab2abb68[0m --> 0x0 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+
+Breakpoint 1, [34m0x0000000000401a16[m in [33mmain[m ([36margc[m=0x2, [36margv[m=0x2aaaab2abcb8) at [32mtest.c[m:32
+32	    [01;34mif[m [31m([margc [31m>[m [35m1[m[31m)[m [01mvuln[m[31m([margv[31m[[m[35m1[m[31m]);[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mni
+[?2004l[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x31 ('1')
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: [;34m0x2aaaab2ab980[0m ("Hello, PEDA highlighter! heap string AAAABBBB 13\nOK")
+[;32mRDI[0m: [;34m0x2aaaab2ab950[0m --> [;34m0x4b5981[0m --> 0x0 
+[;32mRBP[0m: [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb30[0m --> [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mRIP[0m: [;31m0x401a18[0m (<main+196>:	mov    rax,QWORD PTR [rbp-0x70])
+[;32mR8 [0m: [;34m0x4ac260[0m --> [;34m0x4b6950[0m --> 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x3 
+[;32mR12[0m: [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;34m0x4a7f68[0m --> [;31m0x401870[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401a0d <main+185>:[;2;31m	call   0x404e90 <printf>[0m
+   0x401a12 <main+190>:[;2;31m	cmp    DWORD PTR [rbp-0x64],0x1[0m
+   0x401a16 <main+194>:[;2;33m	jle    0x401a2b <main+215>[0m
+=> 0x401a18 <main+196>:[;1;32m	mov    rax,QWORD PTR [rbp-0x70][0m
+   0x401a1c <main+200>:[m	add    rax,0x8[0m
+   0x401a20 <main+204>:[m	mov    rax,QWORD PTR [rax][0m
+   0x401a23 <main+207>:[m	mov    rdi,rax[0m
+   0x401a26 <main+210>:[;32m	call   0x401913 <vuln>[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb30[0m --> [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")[0m
+[m0008| [;34m0x2aaaab2abb38[0m --> 0x2004ac200 [0m
+[m0016| [;34m0x2aaaab2abb40[0m ("Hello, PEDA highlighter!")[0m
+[m0024| [;34m0x2aaaab2abb48[0m ("EDA highlighter!")[0m
+[m0032| [;34m0x2aaaab2abb50[0m ("lighter!")[0m
+[m0040| [;34m0x2aaaab2abb58[0m --> 0x0 [0m
+[m0048| [;34m0x2aaaab2abb60[0m --> 0x0 [0m
+[m0056| [;34m0x2aaaab2abb68[0m --> 0x0 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[34m0x0000000000401a18[m	32	    [01;34mif[m [31m([margc [31m>[m [35m1[m[31m)[m [01mvuln[m[31m([margv[31m[[m[35m1[m[31m]);[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mbreak vuln
+[?2004lBreakpoint 2 at [34m0x401923[m: file [32mtest.c[m, line 20.
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: [;34m0x2aaaab2ab980[0m ("Hello, PEDA highlighter! heap string AAAABBBB 13\nOK")
+[;32mRDI[0m: [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRBP[0m: [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abaf0[0m --> [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 
+[;32mRIP[0m: [;31m0x401923[0m (<vuln+16>:	mov    rdx,QWORD PTR [rbp-0x28])
+[;32mR8 [0m: [;34m0x4ac260[0m --> [;34m0x4b6950[0m --> 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x3 
+[;32mR12[0m: [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;34m0x4a7f68[0m --> [;31m0x401870[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401918 <vuln+5>:[;2m	mov    rbp,rsp[0m
+   0x40191b <vuln+8>:[;2m	sub    rsp,0x30[0m
+   0x40191f <vuln+12>:[;2m	mov    QWORD PTR [rbp-0x28],rdi[0m
+=> 0x401923 <vuln+16>:[;1;32m	mov    rdx,QWORD PTR [rbp-0x28][0m
+   0x401927 <vuln+20>:[m	lea    rax,[rbp-0x20][0m
+   0x40192b <vuln+24>:[m	mov    rsi,rdx[0m
+   0x40192e <vuln+27>:[m	mov    rdi,rax[0m
+   0x401931 <vuln+30>:[;32m	call   0x401020[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abaf0[0m --> [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 [0m
+[m0008| [;34m0x2aaaab2abaf8[0m --> [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x2aaaab2abb00[0m --> 0x600000007 [0m
+[m0024| [;34m0x2aaaab2abb08[0m --> [;31m0x4018a5[0m (<add>:	endbr64)[0m
+[m0032| [;34m0x2aaaab2abb10[0m --> 0x2 [0m
+[m0040| [;34m0x2aaaab2abb18[0m --> 0xdab2abcb8 [0m
+[m0048| [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 [0m
+[m0056| [;34m0x2aaaab2abb28[0m --> [;31m0x401a2b[0m (<main+215>:	mov    rax,QWORD PTR [rbp-0x10])[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+
+Breakpoint 2, [33mvuln[m (
+    [36msrc[m=0x2aaaab2abe8d "AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL") at [32mtest.c[m:20
+20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mnextcall
+[?2004l[mStepping through, Ctrl-C to stop...[0m
+[34m0x0000000000401927[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[34m0x000000000040192b[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[34m0x000000000040192e[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[34m0x0000000000401931[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;34m0x2aaaab2abb00[0m --> 0x600000007 
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRSI[0m: [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRDI[0m: [;34m0x2aaaab2abb00[0m --> 0x600000007 
+[;32mRBP[0m: [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abaf0[0m --> [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 
+[;32mRIP[0m: [;31m0x401931[0m (<vuln+30>:	call   0x401020)
+[;32mR8 [0m: [;34m0x4ac260[0m --> [;34m0x4b6950[0m --> 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x3 
+[;32mR12[0m: [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;34m0x4a7f68[0m --> [;31m0x401870[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401927 <vuln+20>:[;2m	lea    rax,[rbp-0x20][0m
+   0x40192b <vuln+24>:[;2m	mov    rsi,rdx[0m
+   0x40192e <vuln+27>:[;2m	mov    rdi,rax[0m
+=> 0x401931 <vuln+30>:[;1;32m	call   0x401020[0m
+   0x401936 <vuln+35>:[m	lea    rax,[rbp-0x20][0m
+   0x40193a <vuln+39>:[m	mov    rsi,rax[0m
+   0x40193d <vuln+42>:[m	lea    rax,[rip+0x7f6e5]        # 0x481029[0m
+   0x401944 <vuln+49>:[m	mov    rdi,rax[0m[0m
+[mGuessed arguments:[0m
+[marg[0]: [;34m0x2aaaab2abb00[0m --> 0x600000007 [0m
+[marg[1]: [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[marg[2]: [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abaf0[0m --> [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 [0m
+[m0008| [;34m0x2aaaab2abaf8[0m --> [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x2aaaab2abb00[0m --> 0x600000007 [0m
+[m0024| [;34m0x2aaaab2abb08[0m --> [;31m0x4018a5[0m (<add>:	endbr64)[0m
+[m0032| [;34m0x2aaaab2abb10[0m --> 0x2 [0m
+[m0040| [;34m0x2aaaab2abb18[0m --> 0xdab2abcb8 [0m
+[m0048| [;34m0x2aaaab2abb20[0m --> [;34m0x2aaaab2abba0[0m --> [;34m0x2aaaab2abc40[0m --> [;34m0x2aaaab2abc90[0m --> 0x0 [0m
+[m0056| [;34m0x2aaaab2abb28[0m --> [;31m0x401a2b[0m (<main+215>:	mov    rax,QWORD PTR [rbp-0x10])[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[?2004h[;31mgdb-peda$ [0mni
+[?2004l[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;34m0x2aaaab2abb00[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x11 
+[;32mRDX[0m: [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRSI[0m: [;34m0x2aaaab2abe9f[0m ("CAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRDI[0m: [;34m0x2aaaab2abb12[0m ("CAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRBP[0m: [;34m0x2aaaab2abb20[0m ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRSP[0m: [;34m0x2aaaab2abaf0[0m --> [;34m0x2aaaab2abb20[0m ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRIP[0m: [;31m0x401936[0m (<vuln+35>:	lea    rax,[rbp-0x20])
+[;32mR8 [0m: [;34m0x4ac260[0m --> [;34m0x4b6950[0m --> 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x3 
+[;32mR12[0m: [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;34m0x4a7f68[0m --> [;31m0x401870[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x40192b <vuln+24>:[;2m	mov    rsi,rdx[0m
+   0x40192e <vuln+27>:[;2m	mov    rdi,rax[0m
+   0x401931 <vuln+30>:[;2;32m	call   0x401020[0m
+=> 0x401936 <vuln+35>:[;1;32m	lea    rax,[rbp-0x20][0m
+   0x40193a <vuln+39>:[m	mov    rsi,rax[0m
+   0x40193d <vuln+42>:[m	lea    rax,[rip+0x7f6e5]        # 0x481029[0m
+   0x401944 <vuln+49>:[m	mov    rdi,rax[0m
+   0x401947 <vuln+52>:[m	mov    eax,0x0[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abaf0[0m --> [;34m0x2aaaab2abb20[0m ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0008| [;34m0x2aaaab2abaf8[0m --> [;34m0x2aaaab2abe8d[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x2aaaab2abb00[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0024| [;34m0x2aaaab2abb08[0m ("ABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0032| [;34m0x2aaaab2abb10[0m ("AACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0040| [;34m0x2aaaab2abb18[0m ("(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0048| [;34m0x2aaaab2abb20[0m ("A)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0056| [;34m0x2aaaab2abb28[0m ("AA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+21	    [01mprintf[m[31m([m[31m"buf: %s[m[35m\n[m[31m"[m[31m,[m buf[31m);[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x6a ('j')
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: [;34m0x4ad6c0[0m --> 0xfbad2884 
+[;32mRDI[0m: [;34m0x2aaaab2ab910[0m --> [;34m0x4b59eb[0m --> 0x0 
+[;32mRBP[0m: 0x6141414541412941 ('A)AAEAAa')
+[;32mRSP[0m: [;34m0x2aaaab2abb30[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRIP[0m: 0x4141464141304141 ('AA0AAFAA')
+[;32mR8 [0m: 0x73 ('s')
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x0 
+[;32mR11[0m: 0xffffffff 
+[;32mR12[0m: [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;34m0x4a7f68[0m --> [;31m0x401870[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x246 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;1;31mZERO[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[;31mInvalid $PC address: 0x4141464141304141[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb30[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0008| [;34m0x2aaaab2abb38[0m ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x2aaaab2abb40[0m ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0024| [;34m0x2aaaab2abb48[0m ("IAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0032| [;34m0x2aaaab2abb50[0m ("AJAAfAA5AAKAAgAA6AAL")[0m
+[m0040| [;34m0x2aaaab2abb58[0m ("AAKAAgAA6AAL")[0m
+[m0048| [;34m0x2aaaab2abb60[0m --> 0x4c414136 ('6AAL')[0m
+[m0056| [;34m0x2aaaab2abb68[0m --> 0x0 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGSEGV[0m[0m
+[34m0x4141464141304141[m in [33m??[m ()
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mpattern search
+[?2004l[;31mRegisters contain pattern buffer:[0m
+[mRBP+0 found at offset: 32[0m
+[mR11+52 found at offset: 69[0m
+[mRIP+0 found at offset: 40[0m
+[mFS_BASE+-92 found at offset: 52742[0m
+[mCR2+0 found at offset: 40[0m
+[;33mRegisters point to pattern buffer:[0m
+[m[RSP] --> offset 48 - size ~52[0m
+[;32mPattern buffer found at:[0m
+[m0x004aa78b : offset 37729 - size    4 (/work/test_static)[0m
+[m0x004b5986 : offset    0 - size  100 ([heap])[0m
+[m0x00002aaaab2aab76 : offset 37729 - size    4 ($sp + -0xfba [-1007 dwords])[0m
+[m0x00002aaaab2abb00 : offset    0 - size  100 ($sp + -0x30 [-12 dwords])[0m
+[m0x00002aaaab2abe81 : offset 37729 - size    4 ($sp + 0x351 [212 dwords])[0m
+[m0x00002aaaab2abe8d : offset    0 - size  100 ($sp + 0x35d [215 dwords])[0m
+[m0x00002aaaab2abfec : offset 37729 - size    4 ($sp + 0x4bc [303 dwords])[0m
+[;34mReferences to pattern buffer found at:[0m
+[m0x00002aaaab2ab370 : 0x00002aaaab2abb00 ($sp + -0x7c0 [-496 dwords])[0m
+[m0x00002aaaab2aba38 : 0x00002aaaab2abb00 ($sp + -0xf8 [-62 dwords])[0m
+[m0x004ada90 : 0x00002aaaab2abe81 (/work/test_static)[0m
+[m0x00002aaaab2aba40 : 0x00002aaaab2abe8d ($sp + -0xf0 [-60 dwords])[0m
+[m0x00002aaaab2abaf8 : 0x00002aaaab2abe8d ($sp + -0x38 [-14 dwords])[0m
+[m0x00002aaaab2abcc0 : 0x00002aaaab2abe8d ($sp + 0x190 [100 dwords])[0m
+[?2004h[;31mgdb-peda$ [0mx/gx $rsp
+[?2004l[34m0x2aaaab2abb30[m:	0x4147414131414162
+[?2004h[;31mgdb-peda$ [0mpattern offset 0x4141464141304141
+[?2004l[m4702116732032008513 found at offset: 40[0m
+[?2004h[;31mgdb-peda$ [0mpattern offset AA0AAFAAbAA1AAGAAcAA2AAH
+[?2004l[mAA0AAFAAbAA1AAGAAcAA2AAH found at offset: 40[0m
+[?2004h[;31mgdb-peda$ [0mxinfo $rsp
+[?2004l[m[;34m0x2aaaab2abb30[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+Virtual memory mapping:
+[;32mStart : 0x00002aaaaaaac000
+[0m[;32mEnd   : 0x00002aaaab2ac000
+[0m[;33mOffset: 0x7ffb30
+[0m[;31mPerm  : rw-p
+[0m[;34mName  : [stack][0m[0m
+[?2004h[;31mgdb-peda$ [0mbt
+[?2004l#0  [34m0x4141464141304141[m in [33m??[m ()
+#1  [34m0x4147414131414162[m in [33m??[m ()
+#2  [34m0x4841413241416341[m in [33m??[m ()
+#3  [34m0x4141334141644141[m in [33m??[m ()
+#4  [34m0x4134414165414149[m in [33m??[m ()
+#5  [34m0x3541416641414a41[m in [33m??[m ()
+#6  [34m0x41416741414b4141[m in [33m??[m ()
+#7  [34m0x000000004c414136[m in [33m??[m ()
+#8  [34m0x0000000000000000[m in [33m??[m ()
+[?2004h[;31mgdb-peda$ [0mcontext stack 12
+[?2004l[2J[H[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb30[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0008| [;34m0x2aaaab2abb38[0m ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x2aaaab2abb40[0m ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0024| [;34m0x2aaaab2abb48[0m ("IAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0032| [;34m0x2aaaab2abb50[0m ("AJAAfAA5AAKAAgAA6AAL")[0m
+[m0040| [;34m0x2aaaab2abb58[0m ("AAKAAgAA6AAL")[0m
+[m0048| [;34m0x2aaaab2abb60[0m --> 0x4c414136 ('6AAL')[0m
+[m0056| [;34m0x2aaaab2abb68[0m --> 0x0 [0m
+[m0064| [;34m0x2aaaab2abb70[0m --> 0x0 [0m
+[m0072| [;34m0x2aaaab2abb78[0m --> 0x0 [0m
+[m0080| [;34m0x2aaaab2abb80[0m --> 0x0 [0m
+[m0088| [;34m0x2aaaab2abb88[0m --> 0xd004b3198 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGSEGV[0m[0m
+[?2004h[;31mgdb-peda$ [0minfo registers rip rsp rbp
+[?2004lrip            0x4141464141304141  0x4141464141304141
+rsp            0x2aaaab2abb30      0x2aaaab2abb30
+rbp            0x6141414541412941  0x6141414541412941
+[?2004h[;31mgdb-peda$ [0mp $pc
+[?2004l[36m$3[m = (void (*[36m[m)()) [34m0x4141464141304141[m
+[?2004h[;31mgdb-peda$ [0mx/i $pc
+[?2004l=> [34m0x4141464141304141[m:	Cannot access memory at address 0x4141464141304141
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x6a ('j')
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: [;34m0x4ad6c0[0m --> 0xfbad2884 
+[;32mRDI[0m: [;34m0x2aaaab2ab910[0m --> [;34m0x4b59eb[0m --> 0x0 
+[;32mRBP[0m: 0x6141414541412941 ('A)AAEAAa')
+[;32mRSP[0m: [;34m0x2aaaab2abb30[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mRIP[0m: 0x4141464141304141 ('AA0AAFAA')
+[;32mR8 [0m: 0x73 ('s')
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x0 
+[;32mR11[0m: 0xffffffff 
+[;32mR12[0m: [;34m0x2aaaab2abcb8[0m --> [;34m0x2aaaab2abe7f[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abcd0[0m --> [;34m0x2aaaab2abef2[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;34m0x4a7f68[0m --> [;31m0x401870[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x246 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;1;31mZERO[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[;31mInvalid $PC address: 0x4141464141304141[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb30[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0008| [;34m0x2aaaab2abb38[0m ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x2aaaab2abb40[0m ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0024| [;34m0x2aaaab2abb48[0m ("IAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0032| [;34m0x2aaaab2abb50[0m ("AJAAfAA5AAKAAgAA6AAL")[0m
+[m0040| [;34m0x2aaaab2abb58[0m ("AAKAAgAA6AAL")[0m
+[m0048| [;34m0x2aaaab2abb60[0m --> 0x4c414136 ('6AAL')[0m
+[m0056| [;34m0x2aaaab2abb68[0m --> 0x0 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGSEGV[0m[0m
+[34m0x4141464141304141[m in [33m??[m ()
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0msignal SIGSEGV
+[?2004lContinuing with signal SIGSEGV.
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+[m[;33mWarning: not running[0m[0m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0minfo registers
+[?2004lThe program has no registers now.
+[?2004h[;31mgdb-peda$ [0mcontext
+[?2004l[m[;33mWarning: not running[0m[0m
+[?2004h[;31mgdb-peda$ [0mquit
+[?2004l
+Script done on 2026-11-17 05:18:04+00:00 [COMMAND_EXIT_CODE="0"]

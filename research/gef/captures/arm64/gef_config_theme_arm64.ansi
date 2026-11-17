@@ -1,0 +1,20 @@
+[?2004h[1;31mgef➤  [0mgef config theme
+[?2004l[90m──────────────────────────────── [0m[36mGEF configuration settings matching 'theme'[0m[90m ────────────────────────────────[0m
+[32mtheme.context_title_line[0m (str) = "[33mgray[0m"
+[32mtheme.context_title_message[0m (str) = "[33mcyan[0m"
+[32mtheme.default_title_line[0m (str) = "[33mgray[0m"
+[32mtheme.default_title_message[0m (str) = "[33mcyan[0m"
+[32mtheme.table_heading[0m (str) = "[33mblue[0m"
+[32mtheme.old_context[0m (str) = "[33mgray[0m"
+[32mtheme.disassemble_current_instruction[0m (str) = "[33mgreen[0m"
+[32mtheme.dereference_string[0m (str) = "[33myellow[0m"
+[32mtheme.dereference_code[0m (str) = "[33mgray[0m"
+[32mtheme.dereference_base_address[0m (str) = "[33mcyan[0m"
+[32mtheme.dereference_register_value[0m (str) = "[33mbold blue[0m"
+[32mtheme.registers_register_name[0m (str) = "[33mblue[0m"
+[32mtheme.registers_value_changed[0m (str) = "[33mbold red[0m"
+[32mtheme.address_stack[0m (str) = "[33mpink[0m"
+[32mtheme.address_heap[0m (str) = "[33mgreen[0m"
+[32mtheme.address_code[0m (str) = "[33mred[0m"
+[32mtheme.source_current_line[0m (str) = "[33mgreen[0m"
+[32mtheme.threads_pc[0m (str) = "[33mblue[0m"

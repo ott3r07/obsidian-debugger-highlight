@@ -1,0 +1,12 @@
+(qemu) gef➤  registers
+$eax   : 0x510     
+$ebx   : 0x080e4ff4  →  0x00000000
+$ecx   : 0x080e5198  →  0x080eac68  →  0x00000000
+$edx   : 0x511     
+$esp   : 0x40800c50  →  0x08049865  →  <add+0000> endbr32 
+$ebp   : 0x40800d08  →  0x00000001
+$esi   : 0x40800d20  →  0x00000001
+$edi   : 0x1       
+$eip   : 0x08049ac8  →  <main+019b> call 0x804989a <compute>
+$eflags: [zero carry PARITY ADJUST sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x33 

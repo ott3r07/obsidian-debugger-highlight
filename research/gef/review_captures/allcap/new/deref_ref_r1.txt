@@ -1,0 +1,5 @@
+gef➤  dereference $sp -l 4 -r $sp
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000

@@ -1,0 +1,2 @@
+(gdb) info registers pc
+pc             0xaaaaaaaa0c44      0xaaaaaaaa0c44 <main+368>

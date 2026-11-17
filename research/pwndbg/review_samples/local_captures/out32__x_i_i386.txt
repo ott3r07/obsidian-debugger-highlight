@@ -1,0 +1,7 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> x/4i $pc
+=> 0x8049965 <many_args+17>:	mov    edx,DWORD PTR [ebp+0x8]
+   0x8049968 <many_args+20>:	mov    eax,DWORD PTR [ebp+0xc]
+   0x804996b <many_args+23>:	add    edx,eax
+   0x804996d <many_args+25>:	mov    eax,DWORD PTR [ebp+0x18]

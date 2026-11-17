@@ -1,0 +1,7 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mchecksec
+[?2004l[1m[34m[+][0m checksec for '/tmp/tmpmmw4p5xd/work/test_x64'
+Canary                        : [32m[1m✓ [0m[0m(value: 0x3d49d510b9e3f700)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [31m[1m✘ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [33mPartial[0m

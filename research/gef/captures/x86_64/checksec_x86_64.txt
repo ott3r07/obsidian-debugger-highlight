@@ -1,0 +1,7 @@
+(qemu) gef➤  checksec
+[+] checksec for '/tmp/tmpmmw4p5xd/work/test_x64'
+Canary                        : ✓ (value: 0x3d49d510b9e3f700)
+NX                            : ✓ 
+PIE                           : ✘ 
+Fortify                       : ✘ 
+RelRO                         : Partial

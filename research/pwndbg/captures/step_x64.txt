@@ -1,0 +1,50 @@
+pwndbg> step
+0x0000ffff929df500 in malloc () from /usr/x86_64-linux-gnu/lib/libc.so.6
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0xffff9342cb90 ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+*RDI  0x20
+ RSI  0x4342424242424242 ('BBBBBBBC')
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342caf8 —▸ 0x555555557385 (main+138) ◂— mov rdx, rax
+*RIP  0xffff929df500 (malloc) ◂— endbr64
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+ ► 0xffff929df500 <malloc>        endbr64
+   0xffff929df504 <malloc+4>      push   rbp
+   0xffff929df505 <malloc+5>      mov    rbp, rsp                         RBP => 0xffff9342caf0 —▸ 0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 —▸ ...
+   0xffff929df508 <malloc+8>      push   r13
+   0xffff929df50a <malloc+10>     push   r12
+   0xffff929df50c <malloc+12>     push   rbx
+   0xffff929df50d <malloc+13>     mov    rbx, rdi                         RBX => 0x20
+   0xffff929df510 <malloc+16>     sub    rsp, 0x18                        RSP => 0xffff9342cac0 (0xffff9342cad8 - 0x18)
+   0xffff929df514 <malloc+20>     cmp    byte ptr [rip + 0x15cc6d], 0     0 - 0     EFLAGS => 0x246 [ cf PF af ZF sf IF df of iopl:00 ac ]
+   0xffff929df51b <malloc+27>   ✔ je     malloc+528                  <malloc+528>
+    ↓
+   0xffff929df710 <malloc+528>    call   0xffff929dbc60              <0xffff929dbc60>
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342caf8 —▸ 0x555555557385 (main+138) ◂— mov rdx, rax
+01:0008│-0d0 0xffff9342cb00 —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+02:0010│-0c8 0xffff9342cb08 ◂— 0x100000006
+03:0018│-0c0 0xffff9342cb10 ◂— 0
+04:0020│-0b8 0xffff9342cb18 —▸ 0x5555555571c9 (add) ◂— endbr64
+05:0028│-0b0 0xffff9342cb20 ◂— 2
+06:0030│-0a8 0xffff9342cb28 ◂— 0xc60000
+07:0038│-0a0 0xffff9342cb30 ◂— 0x800
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff929df500 malloc
+   1 0x555555557385 main+138
+   2 0xffff9295c1ca
+   3 0xffff9295c28b __libc_start_main+139
+   4 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

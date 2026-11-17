@@ -1,0 +1,3 @@
+[32m[1mpwndbg> [0m[32m[0mdisplay/i $pc
+1: x/i $pc
+=> [34m0xaaaaaaaa0c58[m <[33mmain[m+388>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m

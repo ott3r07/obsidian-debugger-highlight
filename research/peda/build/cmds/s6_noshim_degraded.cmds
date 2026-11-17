@@ -1,0 +1,7 @@
+break main
+continue
+vmmap stack
+xinfo $rip
+telescope 4
+procinfo
+quit

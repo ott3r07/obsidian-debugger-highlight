@@ -1,0 +1,7 @@
+gef➤  checksec
+[+] checksec for '/t/t2'
+Canary                        : ✓ (value: 0xdbfdc1c71e65c700)
+NX                            : ✓ 
+PIE                           : ✓ 
+Fortify                       : ✘ 
+RelRO                         : Full

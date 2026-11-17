@@ -1,0 +1,5 @@
+gef➤  heap bins large
+─────────────────────────────────── Large Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   Chunk(addr=0xaaaaaaac1be0, size=0x810, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in 1 large non-empty bins.

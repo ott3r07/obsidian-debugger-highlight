@@ -1,0 +1,20 @@
+gef➤  heap bins
+────────────────────────────────────────── Tcachebins for thread 1 ──────────────────────────────────────────
+Tcachebins[idx=1, size=0x30, count=7] ←  Chunk(addr=0xaaaaaaac13c0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1390, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1360, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1330, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac1300, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac12d0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac12a0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Tcachebins[idx=7, size=0x90, count=1] ←  Chunk(addr=0xaaaaaaac1420, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+──────────────────────────────────── Fastbins for arena at 0xfffff7fa0a50 ────────────────────────────────────
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30]  ←  Chunk(addr=0xaaaaaaac13f0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+────────────────────────────────── Unsorted Bin for arena at 0xfffff7fa0a50 ──────────────────────────────────
+[+] unsorted_bins[0]: fw=0xaaaaaaac15c0, bk=0xaaaaaaac15c0
+ →   Chunk(addr=0xaaaaaaac15d0, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in unsorted bin.
+─────────────────────────────────── Small Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] Found 0 chunks in 0 small non-empty bins.
+─────────────────────────────────── Large Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] Found 0 chunks in 0 large non-empty bins.

@@ -1,0 +1,21 @@
+[32m[1mpwndbg> [0m[32m[0mtelescope $sp 20
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m sp[0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m-0b8 [33m0xfffffffffa88[0m ◂— 0x100000000
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m-0b0 [33m0xfffffffffa90 {i}[0m ◂— 8
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m-0a8 [33m0xfffffffffa98 {fp}[0m —▸ [31m0xaaaaaaaa0918 (add)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m-0a0 [33m0xfffffffffaa0 {big}[0m —▸ [34m0xaaaaaaac15d0[0m —▸ [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m-098 [33m0xfffffffffaa8 {big+0x8}[0m —▸ [34m0xaaaaaaac1ae0[0m ◂— 0
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m-090 [33m0xfffffffffab0 {mid}[0m —▸ [34m0xaaaaaaac1420[0m ◂— 0xaaaaaaac1
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m-088 [33m0xfffffffffab8 {mid+0x8}[0m —▸ [34m0xaaaaaaac14b0[0m ◂— 0
+[0m08[0m[0m:[0m[0m0040[0m[0m│[0m[0m[0m-080 [33m0xfffffffffac0 {mid+0x10}[0m —▸ [34m0xaaaaaaac1540[0m ◂— 0
+[0m09[0m[0m:[0m[0m0048[0m[0m│[0m[0m[0m-078 [33m0xfffffffffac8 {small}[0m —▸ [34m0xaaaaaaac12a0[0m ◂— 0xaaaaaaac1
+[0m0a[0m[0m:[0m[0m0050[0m[0m│[0m[0m[0m-070 [33m0xfffffffffad0 {small+0x8}[0m —▸ [34m0xaaaaaaac12d0[0m ◂— 0xaaa00006b861
+[0m0b[0m[0m:[0m[0m0058[0m[0m│[0m[0m[0m-068 [33m0xfffffffffad8 {small+0x10}[0m —▸ [34m0xaaaaaaac1300[0m ◂— 0xaaa00006b811
+[0m0c[0m[0m:[0m[0m0060[0m[0m│[0m[0m[0m-060 [33m0xfffffffffae0 {small+0x18}[0m —▸ [34m0xaaaaaaac1330[0m ◂— 0xaaa00006b9c1
+[0m0d[0m[0m:[0m[0m0068[0m[0m│[0m[0m[0m-058 [33m0xfffffffffae8 {small+0x20}[0m —▸ [34m0xaaaaaaac1360[0m ◂— 0xaaa00006b9f1
+[0m0e[0m[0m:[0m[0m0070[0m[0m│[0m[0m[0m-050 [33m0xfffffffffaf0 {small+0x28}[0m —▸ [34m0xaaaaaaac1390[0m ◂— 0xaaa00006b9a1
+[0m0f[0m[0m:[0m[0m0078[0m[0m│[0m[0m[0m-048 [33m0xfffffffffaf8 {small+0x30}[0m —▸ [34m0xaaaaaaac13c0[0m ◂— 0xaaa00006b951
+[0m10[0m[0m:[0m[0m0080[0m[0m│[0m[0m[0m-040 [33m0xfffffffffb00 {small+0x38}[0m —▸ [34m0xaaaaaaac13f0[0m ◂— 0xaaaaaaac1
+[0m11[0m[0m:[0m[0m0088[0m[0m│[0m[0m[0m-038 [33m0xfffffffffb08 {stackbuf}[0m ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+[0m12[0m[0m:[0m[0m0090[0m[0m│[0m[0m[0m-030 [33m0xfffffffffb10 {stackbuf+0x8}[0m ◂— 'BBBBBBBBCCCCCCCC'
+[0m13[0m[0m:[0m[0m0098[0m[0m│[0m[0m[0m-028 [33m0xfffffffffb18 {stackbuf+0x10}[0m ◂— 'CCCCCCCC'

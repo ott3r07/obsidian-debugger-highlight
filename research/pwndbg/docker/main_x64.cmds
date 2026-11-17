@@ -1,0 +1,81 @@
+target_remote|target remote :1234
+break_main|break main
+info_breakpoints|info breakpoints
+continue_main|continue
+context|context
+ni|ni
+ni2|ni
+si|si
+nexti_count|ni 3
+next_source|next
+step|step
+break_line|break test.c:38
+continue_bp|continue
+heap|heap
+bins|bins
+tcachebins|tcachebins
+fastbins|fastbins
+unsortedbin|unsortedbin
+smallbins|smallbins
+old_vis_heap_chunks|vis_heap_chunks
+vis|vis 5
+arena|arena
+old_malloc_chunk|malloc_chunk small[7]-0x10
+old_top_chunk|top_chunk
+telescope|telescope $sp 20
+stack|stack
+stack_default|stack 30
+x_20gx|x/20gx $sp
+x_4wx|x/4wx $sp
+x_8bx|x/8bx $sp
+x_s|x/s greeting
+x_s2|x/2s &global_buf
+x_10i|x/10i $pc
+info_registers|info registers
+regs|regs
+vmmap|vmmap
+vmmap_stack|vmmap stack
+checksec|checksec
+bt|bt
+backtrace_full|bt full
+search|search "heap string"
+search_t|search -t dword 0x41414141
+search_x|search -x 4242424242424242
+p|p r
+p_x|p/x fp
+p_struct|p *small@3
+p_str|p greeting
+p_global|p global_buf
+ptype|ptype fp
+info_locals|info locals
+info_frame|info frame
+disassemble|disassemble main
+disassemble_compute|disassemble compute
+hexdump|hexdump $sp
+hexdump2|hexdump &global_buf 64
+canary|canary
+got|got
+plt|plt
+piebase|piebase
+breakrva|brva 0x1000
+xinfo|xinfo $sp
+retaddr|retaddr
+distance|distance $sp $pc
+nearpc|nearpc
+procinfo|procinfo
+aslr|aslr
+elfsections|elfsections
+libc|libc
+break_compute|break compute
+continue_compute|continue
+bt_nested|bt
+backtrace_pwndbg|context backtrace
+finish|finish
+context_regs|context regs
+context_disasm|context disasm
+context_code|context code
+context_stack|context stack
+watch|watch global_buf[0]
+delete|delete
+info_sharedlibrary|info sharedlibrary
+continue_end|continue

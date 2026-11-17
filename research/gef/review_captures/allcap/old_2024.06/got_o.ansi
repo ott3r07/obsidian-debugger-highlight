@@ -1,0 +1,15 @@
+[?2004h[1;32mgef➤  [0mgot
+[?2004l[1;38;5;240m─────────────────────────────────────────────────── [0m[36m/t/t2[0m[1;38;5;240m ───────────────────────────────────────────────────[0m
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabff78] [32m__libc_start_main@GLIBC_2.34  →  0xfffff7e18500[0m
+[0xaaaaaaabff80] [32m__cxa_finalize@GLIBC_2.17  →  0xfffff7e2eb50[0m
+[0xaaaaaaabff88] [32mmalloc@GLIBC_2.17  →  0xfffff7e86470[0m
+[0xaaaaaaabff90] [32m__stack_chk_fail@GLIBC_2.17  →  0xfffff7ee9250[0m
+[0xaaaaaaabff98] [32m__gmon_start__  →  0x0[0m
+[0xaaaaaaabffa0] [32mabort@GLIBC_2.17  →  0xfffff7e17d0c[0m
+[0xaaaaaaabffa8] [32mputs@GLIBC_2.17  →  0xfffff7e619d0[0m
+[0xaaaaaaabffb0] [32mfree@GLIBC_2.17  →  0xfffff7e86d70[0m
+[0xaaaaaaabffb8] [32mstrcpy@GLIBC_2.17  →  0xfffff7e8d240[0m
+[0xaaaaaaabffc0] [32mprintf@GLIBC_2.17  →  0xfffff7e40590[0m

@@ -1,0 +1,16 @@
+pwndbg> procinfo
+QEMU target detected: showing result for the qemu process - so it will be a bit inaccurate (excessive for the parts used directly by the qemu process)
+exe        './test_x64'
+cmdline    ./test_x64 ''
+cwd        '/work'
+pid        624
+tid        624
+ppid       623
+uid        [0, 0, 0, 0]
+gid        [0, 0, 0, 0]
+groups     [0]
+fd[0]      /dev/null
+fd[1]      /dev/pts/0
+fd[2]      /dev/pts/0
+fd[3]      tcp 0.0.0.0:1234 => 0.0.0.0:0 (listen)
+fd[4]      tcp 127.0.0.1:1234 => 127.0.0.1:44786 (established)

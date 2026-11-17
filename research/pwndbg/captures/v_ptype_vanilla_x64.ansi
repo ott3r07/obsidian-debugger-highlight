@@ -1,0 +1,2 @@
+(gdb) ptype fp
+type = int (*[36m[m)(int[36m[m, int[36m[m)

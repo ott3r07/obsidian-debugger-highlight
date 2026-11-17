@@ -1,0 +1,2 @@
+pwndbg> watch r
+Hardware watchpoint 2: r

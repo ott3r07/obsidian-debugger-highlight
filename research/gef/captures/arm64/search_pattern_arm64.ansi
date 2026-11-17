@@ -1,0 +1,10 @@
+[?2004h[1;32mgef➤  [0msearch-pattern "heap string"
+[?2004l[1m[34m[+][0m Searching '[33mheap string[0m' in memory
+[1m[32m[+][0m In '[34m/host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/gef/build/test_arm64[0m'(0xaaaaaaaa0000-0xaaaaaaaa1000), permission=r-x
+  0xaaaaaaaa0c90 - 0xaaaaaaaa0ca0  →   "[35mheap string here[0m" 
+[?2004h[1;32mgef➤  [0msearch-pattern AAAAAAAABBBB
+[?2004l[1m[34m[+][0m Searching '[33mAAAAAAAABBBB[0m' in memory
+[1m[32m[+][0m In '[34m/host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/gef/build/test_arm64[0m'(0xaaaaaaaa0000-0xaaaaaaaa1000), permission=r-x
+  0xaaaaaaaa0c70 - 0xaaaaaaaa0c88  →   "[35mAAAAAAAABBBBBBBBCCCCCCCC[0m" 
+[1m[32m[+][0m In '[34m[stack][0m'(0xfffffffdf000-0x1000000000000), permission=rw-
+  0xfffffffffb58 - 0xfffffffffb70  →   "[35mAAAAAAAABBBBBBBBCCCCCCCC[0m" 

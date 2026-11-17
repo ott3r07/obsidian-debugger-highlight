@@ -1,0 +1,2 @@
+(qemu) gef➤  break *(main+168)
+Breakpoint 3 at 0x4019ce: file test.c, line 31.

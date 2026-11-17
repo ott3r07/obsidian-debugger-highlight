@@ -1,0 +1,15 @@
+[?2004h[1;32mgef➤  [0mgot
+[?2004l[1m[33m[*][0m gef-2022.06.py:L8817 'checksec' is deprecated and will be removed in a feature release. Use Elf(fname).checksec()
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabff78] [32m__libc_start_main@GLIBC_2.34  →  0xf7e18500[0m
+[0xaaaaaaabff80] [32m__cxa_finalize@GLIBC_2.17  →  0xf7e2eb50[0m
+[0xaaaaaaabff88] [32mmalloc@GLIBC_2.17  →  0xf7e86470[0m
+[0xaaaaaaabff90] [32m__stack_chk_fail@GLIBC_2.17  →  0xf7ee9250[0m
+[0xaaaaaaabff98] [32m__gmon_start__  →  0x0[0m
+[0xaaaaaaabffa0] [32mabort@GLIBC_2.17  →  0xf7e17d0c[0m
+[0xaaaaaaabffa8] [32mputs@GLIBC_2.17  →  0xf7e619d0[0m
+[0xaaaaaaabffb0] [32mfree@GLIBC_2.17  →  0xf7e86d70[0m
+[0xaaaaaaabffb8] [32mstrcpy@GLIBC_2.17  →  0xf7e8d240[0m
+[0xaaaaaaabffc0] [32mprintf@GLIBC_2.17  →  0xf7e40590[0m

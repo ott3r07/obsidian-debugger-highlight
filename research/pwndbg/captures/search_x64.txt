@@ -1,0 +1,2 @@
+pwndbg> search "heap string"
+Searching for byte: b'heap string'

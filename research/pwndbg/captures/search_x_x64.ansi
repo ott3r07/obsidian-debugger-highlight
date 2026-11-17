@@ -1,0 +1,4 @@
+[32m[1mpwndbg> [0m[32m[0msearch -x 4242424242424242
+Searching for byte: b'BBBBBBBB'
+[31mtest_x64       [0m [31m0x555555557344[0m [38;5;148mmov[39m[38;5;255m [39m[38;5;81mqword[39m[38;5;255m [39m[38;5;81mptr[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81mrax[39m[38;5;255m][39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mrsi[39m
+[33m[stack]        [0m [33m0xffff9342cb98[0m 'BBBBBBBBCCCCCCCC'

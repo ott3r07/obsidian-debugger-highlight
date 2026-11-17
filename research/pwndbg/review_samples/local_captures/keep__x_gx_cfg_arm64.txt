@@ -1,0 +1,9 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> x/12gx &g_cfg
+0xaaaaaaac0010 <g_cfg>:	0x0000aaaaaaaa0e30	0x0000000200000001
+0xaaaaaaac0020 <g_cfg+16>:	0x0000000000000003	0x0000000000000000
+0xaaaaaaac0030 <g_cfg+32>:	0x006e6e6900000007	0x0000000000000000
+0xaaaaaaac0040 <g_cfg+48>:	0x3fe0000000000000	0x0000aaaaaaaa09d8
+0xaaaaaaac0050 <g_cfg+64>:	0x0000000000000000	0x0000000000000000
+0xaaaaaaac0060 <g_cfg+80>:	0x0000000000000000	0x0000000000000000

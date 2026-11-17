@@ -1,0 +1,68 @@
+pwndbg> continue
+Continuing.
+
+Breakpoint 4, compute (f=0x5555555571c9 <add>, x=0x6, y=0x7) at test.c:13
+13	int compute(op_fn f, int x, int y) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x5555555571c9 (add) ◂— endbr64
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0
+*RDX  7
+*RDI  0x5555555571c9 (add) ◂— endbr64
+*RSI  6
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342caf0 —▸ 0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cad0 {y} ◂— 0x600000007
+*RIP  0x55555555725c (compute+22) ◂— mov rax, qword ptr fs:[0x28]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557252 <compute+12>    mov    qword ptr [rbp - 0x18], rdi
+   0x555555557256 <compute+16>    mov    dword ptr [rbp - 0x1c], esi
+   0x555555557259 <compute+19>    mov    dword ptr [rbp - 0x20], edx
+b► 0x55555555725c <compute+22>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+   0x555555557265 <compute+31>    mov    qword ptr [rbp - 8], rax        [0xffff9342cae8] <= 0x76f85efbfd30d300
+   0x555555557269 <compute+35>    xor    eax, eax                        EAX => 0
+   0x55555555726b <compute+37>    mov    edx, dword ptr [rbp - 0x20]     EDX, [{y}] => 7
+   0x55555555726e <compute+40>    mov    eax, dword ptr [rbp - 0x1c]     EAX, [{x}] => 6
+   0x555555557271 <compute+43>    mov    rcx, qword ptr [rbp - 0x18]     RCX, [{f}] => 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557275 <compute+47>    mov    esi, edx                        ESI => 7
+   0x555555557277 <compute+49>    mov    edi, eax                        EDI => 6
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:13
+    7 const char *greeting = "Hello, pwndbg!";
+    8 char global_buf[64] = "global data string";
+    9 
+   10 int add(int a, int b) { return a + b; }
+   11 int mul(int a, int b) { return a * b; }
+   12 
+ ► 13 int compute(op_fn f, int x, int y) {
+   14     int r = f(x, y);
+   15     return r;
+   16 }
+   17 
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cad0 {y} ◂— 0x600000007
+01:0008│-018 0xffff9342cad8 {f} —▸ 0x5555555571c9 (add) ◂— endbr64
+02:0010│-010 0xffff9342cae0 ◂— 1
+03:0018│-008 0xffff9342cae8 ◂— 0
+04:0020│ rbp 0xffff9342caf0 —▸ 0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+05:0028│+008 0xffff9342caf8 —▸ 0x5555555574a2 (main+423) ◂— mov dword ptr [rbp - 0xbc], eax
+06:0030│+010 0xffff9342cb00 —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+07:0038│+018 0xffff9342cb08 ◂— 0x100000006
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x55555555725c compute+22
+   1 0x5555555574a2 main+423
+   2 0xffff9295c1ca
+   3 0xffff9295c28b __libc_start_main+139
+   4 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

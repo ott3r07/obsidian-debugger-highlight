@@ -1,0 +1,21 @@
+(gdb) disassemble /r add
+Dump of assembler code for function add:
+   0x00005555555571c9 <+0>:	f3 0f 1e fa        	endbr64
+   0x00005555555571cd <+4>:	55                 	push   rbp
+   0x00005555555571ce <+5>:	48 89 e5           	mov    rbp,rsp
+   0x00005555555571d1 <+8>:	48 83 ec 20        	sub    rsp,0x20
+   0x00005555555571d5 <+12>:	89 7d ec           	mov    DWORD PTR [rbp-0x14],edi
+   0x00005555555571d8 <+15>:	89 75 e8           	mov    DWORD PTR [rbp-0x18],esi
+   0x00005555555571db <+18>:	64 48 8b 04 25 28 00 00 00	mov    rax,QWORD PTR fs:0x28
+   0x00005555555571e4 <+27>:	48 89 45 f8        	mov    QWORD PTR [rbp-0x8],rax
+   0x00005555555571e8 <+31>:	31 c0              	xor    eax,eax
+   0x00005555555571ea <+33>:	8b 55 ec           	mov    edx,DWORD PTR [rbp-0x14]
+   0x00005555555571ed <+36>:	8b 45 e8           	mov    eax,DWORD PTR [rbp-0x18]
+   0x00005555555571f0 <+39>:	01 d0              	add    eax,edx
+   0x00005555555571f2 <+41>:	48 8b 55 f8        	mov    rdx,QWORD PTR [rbp-0x8]
+   0x00005555555571f6 <+45>:	64 48 2b 14 25 28 00 00 00	sub    rdx,QWORD PTR fs:0x28
+   0x00005555555571ff <+54>:	74 05              	je     0x555555557206 <add+61>
+   0x0000555555557201 <+56>:	e8 aa fe ff ff     	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x0000555555557206 <+61>:	c9                 	leave
+   0x0000555555557207 <+62>:	c3                 	ret
+End of assembler dump.

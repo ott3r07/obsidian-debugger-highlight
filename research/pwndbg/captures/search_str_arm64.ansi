@@ -1,0 +1,4 @@
+[32m[1mpwndbg> [0m[32m[0msearch "global data"
+Searching for byte: b'global data'
+[35mtest_arm64     [0m [35m0xaaaaaaac0010[0m 'global data string'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d0a, halting search.

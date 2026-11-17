@@ -1,0 +1,3 @@
+pwndbg> find-fake-fast &global_buf
+Searching for fastbin size fields up to 0x80, starting at 0xaaaaaaabff98 resulting in an overlap of 0xaaaaaaac0010
+FAKE CHUNKS

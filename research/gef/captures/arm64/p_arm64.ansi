@@ -1,0 +1,10 @@
+[?2004h[1;32mgef➤  [0mp greeting
+[?2004l[36m$1[m = [34m0xaaaaaaaa0c58[m "Hello, gef!"
+[?2004h[1;32mgef➤  [0mp/x $sp
+[?2004l[36m$2[m = 0xfffffffffad0
+[?2004h[1;32mgef➤  [0mp $pc
+[?2004l[36m$3[m = (void (*[36m[m)()) [34m0xaaaaaaaa0a20[m <[33mmain[m+32>
+[?2004h[1;32mgef➤  [0mp fp
+[?2004l[36m$4[m = (op_fn[36m[m) [34m0x0[m
+[?2004h[1;32mgef➤  [0mp stackbuf
+[?2004l[36m$5[m = '\000' <repeats 40 times>, "\240\374\377\377\377\377\000"

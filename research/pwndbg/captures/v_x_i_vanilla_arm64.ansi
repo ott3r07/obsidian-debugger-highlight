@@ -1,0 +1,2 @@
+(gdb) x/i $pc
+=> [34m0xaaaaaaaa0b10[m <[33mmain[m+60>:	[32madd[m	[31mx1[m, [31mx0[m, [34m#0xd40[m

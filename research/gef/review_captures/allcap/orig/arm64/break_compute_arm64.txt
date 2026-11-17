@@ -1,0 +1,2 @@
+gef➤  break *(compute+32)
+Breakpoint 2 at 0x978: file test.c, line 14.

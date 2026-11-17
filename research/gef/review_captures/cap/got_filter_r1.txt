@@ -1,0 +1,6 @@
+gef➤  got puts
+─────────────────────────────────────────────────── /t/t2 ───────────────────────────────────────────────────
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabffa8] puts@GLIBC_2.17  →  0xfffff7e619d0

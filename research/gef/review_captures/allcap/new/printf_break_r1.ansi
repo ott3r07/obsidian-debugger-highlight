@@ -1,0 +1,2 @@
+[?2004l[?2004h[1;32mgef➤  [0mbreak printf
+[?2004lBreakpoint 7 at [34m0xfffff7e40590[m: file [32m./stdio-common/printf.c[m, line 28.

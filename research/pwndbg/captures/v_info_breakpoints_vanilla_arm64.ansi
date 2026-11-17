@@ -1,0 +1,5 @@
+(gdb) info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   [34m0x0000000000000ae8[m in [33mmain[m at [32mtest.c[m:24
+2       breakpoint     del  y   [34m0x0000000000000a00[m in [33mcompute[m at [32mtest.c[m:13
+3       breakpoint     keep y   [34m0x0000000000000c44[m in [33mmain[m at [32mtest.c[m:38

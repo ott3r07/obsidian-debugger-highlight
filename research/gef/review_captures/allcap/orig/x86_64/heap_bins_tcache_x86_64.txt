@@ -1,0 +1,4 @@
+(qemu) gef➤  heap bins tcache
+────────────────────────────────────────── Tcachebins for thread 1 ──────────────────────────────────────────
+Tcachebins[idx=1, size=0x30, count=7] ←  Chunk(addr=0x4b3a20, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b39f0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b39c0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3990, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3960, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3930, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3900, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Tcachebins[idx=7, size=0x90, count=1] ←  Chunk(addr=0x4b3a80, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 

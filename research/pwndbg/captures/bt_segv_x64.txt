@@ -1,0 +1,7 @@
+pwndbg> bt
+#0  0x0000000000000000 in ?? ()
+#1  0x000055555555727b in compute (f=0x0, x=0x6, y=0x7) at test.c:14
+#2  0x00005555555574a2 in main (argc=0x1, argv=0xffffafdd5cf8) at test.c:38
+#3  0x0000ffffaf3051ca in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#4  0x0000ffffaf30528b in __libc_start_main () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#5  0x0000555555557105 in _start ()

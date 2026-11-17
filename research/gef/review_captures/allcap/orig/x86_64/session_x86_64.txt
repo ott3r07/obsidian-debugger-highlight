@@ -1,0 +1,1405 @@
+GEF for linux ready, type `gef' to start, `gef config' to configure
+90 commands loaded and 5 functions added for GDB 15.1 in 0.00ms using Python engine 3.12
+Reading symbols from /work/test_x64...
+gef➤  gef-remote --qemu-user --qemu-binary /work/test_x64 localhost 1234
+0x0000000000401740 in _start ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x0000000000000000  →  0x0000000000000000
+$rbx   : 0x0000000000000000  →  0x0000000000000000
+$rcx   : 0x0000000000000000  →  0x0000000000000000
+$rdx   : 0x0000000000000000  →  0x0000000000000000
+$rsp   : 0x00002aaaab2abd80  →  0x0000000000000001  →  0x0000000000000001
+$rbp   : 0x0000000000000000  →  0x0000000000000000
+$rsi   : 0x0000000000000000  →  0x0000000000000000
+$rdi   : 0x0000000000000000  →  0x0000000000000000
+$rip   : 0x0000000000401740  →  0x8949ed31fa1e0ff3  →  0x8949ed31fa1e0ff3
+$r8    : 0x0000000000000000  →  0x0000000000000000
+$r9    : 0x0000000000000000  →  0x0000000000000000
+$r10   : 0x0000000000000000  →  0x0000000000000000
+$r11   : 0x0000000000000000  →  0x0000000000000000
+$r12   : 0x0000000000000000  →  0x0000000000000000
+$r13   : 0x0000000000000000  →  0x0000000000000000
+$r14   : 0x0000000000000000  →  0x0000000000000000
+$r15   : 0x0000000000000000  →  0x0000000000000000
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abd80│+0x0000: 0x0000000000000001  →  0x0000000000000001	 ← $rsp
+0x00002aaaab2abd88│+0x0008: 0x00002aaaab2abf32  →  0x65742f6b726f772f  →  0x65742f6b726f772f
+0x00002aaaab2abd90│+0x0010: 0x0000000000000000  →  0x0000000000000000
+0x00002aaaab2abd98│+0x0018: 0x00002aaaab2abf41  →  0x454d414e54534f48  →  0x454d414e54534f48
+0x00002aaaab2abda0│+0x0020: 0x00002aaaab2abf57  →  0x6f722f3d454d4f48  →  0x6f722f3d454d4f48
+0x00002aaaab2abda8│+0x0028: 0x00002aaaab2abf62  →  0x73752f3d48544150  →  0x73752f3d48544150
+0x00002aaaab2abdb0│+0x0030: 0x00002aaaab2abfa4  →  0x552e433d474e414c  →  0x552e433d474e414c
+0x00002aaaab2abdb8│+0x0038: 0x00002aaaab2abfb1  →  0x465f4e4149424544  →  0x465f4e4149424544
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x401737 <release_registered_frames+0027> pop    rbp
+     0x401738 <release_registered_frames+0028> ret    
+     0x401739                  nop    DWORD PTR [rax+0x0]
+ →   0x401740 <_start+0000>    endbr64 
+     0x401744 <_start+0004>    xor    ebp, ebp
+     0x401746 <_start+0006>    mov    r9, rdx
+     0x401749 <_start+0009>    pop    rsi
+     0x40174a <_start+000a>    mov    rdx, rsp
+     0x40174d <_start+000d>    and    rsp, 0xfffffffffffffff0
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x401740 in _start (), reason: SIGTRAP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x401740 → _start()
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  python import shutil; shutil.copy('/work/maps_x64_qemu.txt', str(gef.session.remote.maps)); reset_all_caches(); print('[research] replaced fake qemu maps with real guest layout (from qemu -d page)')
+[research] replaced fake qemu maps with real guest layout (from qemu -d page)
+(qemu) gef➤  gef config gef.libc_version 2.39
+(qemu) gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x0               
+$rbx   : 0x0               
+$rcx   : 0x0               
+$rdx   : 0x0               
+$rsp   : 0x00002aaaab2abd80  →  0x0000000000000001
+$rbp   : 0x0               
+$rsi   : 0x0               
+$rdi   : 0x0               
+$rip   : 0x0000000000401740  →  <_start+0000> endbr64 
+$r8    : 0x0               
+$r9    : 0x0               
+$r10   : 0x0               
+$r11   : 0x0               
+$r12   : 0x0               
+$r13   : 0x0               
+$r14   : 0x0               
+$r15   : 0x0               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abd80│+0x0000: 0x0000000000000001	 ← $rsp
+0x00002aaaab2abd88│+0x0008: 0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abd90│+0x0010: 0x0000000000000000
+0x00002aaaab2abd98│+0x0018: 0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+0x00002aaaab2abda0│+0x0020: 0x00002aaaab2abf57  →  "HOME=/root"
+0x00002aaaab2abda8│+0x0028: 0x00002aaaab2abf62  →  "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr[...]"
+0x00002aaaab2abdb0│+0x0030: 0x00002aaaab2abfa4  →  "LANG=C.UTF-8"
+0x00002aaaab2abdb8│+0x0038: 0x00002aaaab2abfb1  →  "DEBIAN_FRONTEND=noninteractive"
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x401737 <release_registered_frames+0027> pop    rbp
+     0x401738 <release_registered_frames+0028> ret    
+     0x401739                  nop    DWORD PTR [rax+0x0]
+ →   0x401740 <_start+0000>    endbr64 
+     0x401744 <_start+0004>    xor    ebp, ebp
+     0x401746 <_start+0006>    mov    r9, rdx
+     0x401749 <_start+0009>    pop    rsi
+     0x40174a <_start+000a>    mov    rdx, rsp
+     0x40174d <_start+000d>    and    rsp, 0xfffffffffffffff0
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x401740 in _start (), reason: SIGTRAP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x401740 → _start()
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  break main
+Breakpoint 1 at 0x401942: file test.c, line 24.
+(qemu) gef➤  break *(compute+36)
+Breakpoint 2 at 0x4018b8: file test.c, line 14.
+(qemu) gef➤  break *(main+168)
+Breakpoint 3 at 0x4019ce: file test.c, line 31.
+(qemu) gef➤  info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000401942 in main at test.c:24
+2       breakpoint     keep y   0x00000000004018b8 in compute at test.c:14
+3       breakpoint     keep y   0x00000000004019ce in main at test.c:31
+(qemu) gef➤  continue
+Continuing.
+
+Breakpoint 1, main (argc=0x1, argv=0x2aaaab2abd88) at test.c:24
+24	int main(int argc, char **argv) {
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x0000000000401926  →  <main+0000> endbr64 
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rdi   : 0x1               
+$rip   : 0x0000000000401942  →  <main+001c> mov rax, QWORD PTR fs:0x28
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000100
+0x00002aaaab2abbb8│+0x0018: 0x0000000000000000
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x40192e <main+0008>      sub    rsp, 0xd0
+     0x401935 <main+000f>      mov    DWORD PTR [rbp-0xc4], edi
+     0x40193b <main+0015>      mov    QWORD PTR [rbp-0xd0], rsi
+●→   0x401942 <main+001c>      mov    rax, QWORD PTR fs:0x28
+     0x40194b <main+0025>      mov    QWORD PTR [rbp-0x8], rax
+     0x40194f <main+0029>      xor    eax, eax
+     0x401951 <main+002b>      lea    rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+     0x401958 <main+0032>      mov    QWORD PTR [rbp-0xb8], rax
+     0x40195f <main+0039>      lea    rax, [rbp-0x40]
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+24 ────
+     19	     char buf[32];
+     20	     strcpy(buf, src);
+     21	     printf("buf=%s\n", buf);
+     22	 }
+     23	 
+         // argc=0x1, argv=0x00002aaaab2abba0  →  [...]  →  "/work/test_x64"
+ →   24	 int main(int argc, char **argv) {
+     25	     char stackbuf[48];
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x401942 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x401942 → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x0000000000401926  →  <main+0000> endbr64 
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rdi   : 0x1               
+$rip   : 0x0000000000401942  →  <main+001c> mov rax, QWORD PTR fs:0x28
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000100
+0x00002aaaab2abbb8│+0x0018: 0x0000000000000000
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x40192e <main+0008>      sub    rsp, 0xd0
+     0x401935 <main+000f>      mov    DWORD PTR [rbp-0xc4], edi
+     0x40193b <main+0015>      mov    QWORD PTR [rbp-0xd0], rsi
+●→   0x401942 <main+001c>      mov    rax, QWORD PTR fs:0x28
+     0x40194b <main+0025>      mov    QWORD PTR [rbp-0x8], rax
+     0x40194f <main+0029>      xor    eax, eax
+     0x401951 <main+002b>      lea    rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+     0x401958 <main+0032>      mov    QWORD PTR [rbp-0xb8], rax
+     0x40195f <main+0039>      lea    rax, [rbp-0x40]
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+24 ────
+     19	     char buf[32];
+     20	     strcpy(buf, src);
+     21	     printf("buf=%s\n", buf);
+     22	 }
+     23	 
+         // argc=0x1, argv=0x00002aaaab2abba0  →  [...]  →  "/work/test_x64"
+ →   24	 int main(int argc, char **argv) {
+     25	     char stackbuf[48];
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x401942 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x401942 → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  ni
+0x000000000040194b	24	int main(int argc, char **argv) {
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x3d49d510b9e3f700
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rdi   : 0x1               
+$rip   : 0x000000000040194b  →  <main+0025> mov QWORD PTR [rbp-0x8], rax
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000100
+0x00002aaaab2abbb8│+0x0018: 0x0000000000000000
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x401935 <main+000f>      mov    DWORD PTR [rbp-0xc4], edi
+     0x40193b <main+0015>      mov    QWORD PTR [rbp-0xd0], rsi
+●    0x401942 <main+001c>      mov    rax, QWORD PTR fs:0x28
+ →   0x40194b <main+0025>      mov    QWORD PTR [rbp-0x8], rax
+     0x40194f <main+0029>      xor    eax, eax
+     0x401951 <main+002b>      lea    rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+     0x401958 <main+0032>      mov    QWORD PTR [rbp-0xb8], rax
+     0x40195f <main+0039>      lea    rax, [rbp-0x40]
+     0x401963 <main+003d>      movabs rsi, 0x4141414141414141
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+24 ────
+     19	     char buf[32];
+     20	     strcpy(buf, src);
+     21	     printf("buf=%s\n", buf);
+     22	 }
+     23	 
+         // argc=0x1, argv=0x00002aaaab2abba0  →  [...]  →  "/work/test_x64"
+ →   24	 int main(int argc, char **argv) {
+     25	     char stackbuf[48];
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x40194b in main (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x40194b → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  ni
+0x000000000040194f	24	int main(int argc, char **argv) {
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x3d49d510b9e3f700
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rdi   : 0x1               
+$rip   : 0x000000000040194f  →  <main+0029> xor eax, eax
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000100
+0x00002aaaab2abbb8│+0x0018: 0x0000000000000000
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x40193b <main+0015>      mov    QWORD PTR [rbp-0xd0], rsi
+●    0x401942 <main+001c>      mov    rax, QWORD PTR fs:0x28
+     0x40194b <main+0025>      mov    QWORD PTR [rbp-0x8], rax
+ →   0x40194f <main+0029>      xor    eax, eax
+     0x401951 <main+002b>      lea    rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+     0x401958 <main+0032>      mov    QWORD PTR [rbp-0xb8], rax
+     0x40195f <main+0039>      lea    rax, [rbp-0x40]
+     0x401963 <main+003d>      movabs rsi, 0x4141414141414141
+     0x40196d <main+0047>      movabs rdi, 0x4242424242424242
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+24 ────
+     19	     char buf[32];
+     20	     strcpy(buf, src);
+     21	     printf("buf=%s\n", buf);
+     22	 }
+     23	 
+         // argc=0x1, argv=0x00002aaaab2abba0  →  [...]  →  "/work/test_x64"
+ →   24	 int main(int argc, char **argv) {
+     25	     char stackbuf[48];
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x40194f in main (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x40194f → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  si
+26	    op_fn fp = add;
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x0               
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rdi   : 0x1               
+$rip   : 0x0000000000401951  →  <main+002b> lea rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000100
+0x00002aaaab2abbb8│+0x0018: 0x0000000000000000
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+●    0x401942 <main+001c>      mov    rax, QWORD PTR fs:0x28
+     0x40194b <main+0025>      mov    QWORD PTR [rbp-0x8], rax
+     0x40194f <main+0029>      xor    eax, eax
+ →   0x401951 <main+002b>      lea    rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+     0x401958 <main+0032>      mov    QWORD PTR [rbp-0xb8], rax
+     0x40195f <main+0039>      lea    rax, [rbp-0x40]
+     0x401963 <main+003d>      movabs rsi, 0x4141414141414141
+     0x40196d <main+0047>      movabs rdi, 0x4242424242424242
+     0x401977 <main+0051>      mov    QWORD PTR [rax], rsi
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+26 ────
+     21	     printf("buf=%s\n", buf);
+     22	 }
+     23	 
+     24	 int main(int argc, char **argv) {
+     25	     char stackbuf[48];
+ →   26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+     30	     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+     31	     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x401951 in main (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x401951 → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  registers
+$rax   : 0x0               
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rdi   : 0x1               
+$rip   : 0x0000000000401951  →  <main+002b> lea rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+(qemu) gef➤  registers $rax $rsp $rip
+$rax   : 0x0               
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rip   : 0x0000000000401951  →  <main+002b> lea rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+(qemu) gef➤  info registers
+rax            0x0                 0x0
+rbx            0x1                 0x1
+rcx            0x4b38f0            0x4b38f0
+rdx            0x2aaaab2abd98      0x2aaaab2abd98
+rsi            0x2aaaab2abd88      0x2aaaab2abd88
+rdi            0x1                 0x1
+rbp            0x2aaaab2abc70      0x2aaaab2abc70
+rsp            0x2aaaab2abba0      0x2aaaab2abba0
+r8             0x4aa2a0            0x4aa2a0
+r9             0x110               0x110
+r10            0x1                 0x1
+r11            0x0                 0x0
+r12            0x2aaaab2abd88      0x2aaaab2abd88
+r13            0x2aaaab2abd98      0x2aaaab2abd98
+r14            0x4a5f68            0x4a5f68
+r15            0x1                 0x1
+rip            0x401951            0x401951 <main+43>
+eflags         0x246               [ IOPL=0 IF ZF PF ]
+cs             0x33                0x33
+ss             0x2b                0x2b
+ds             0x0                 0x0
+es             0x0                 0x0
+fs             0x0                 0x0
+gs             0x0                 0x0
+fs_base        0x4b2380            0x4b2380
+gs_base        0x0                 0x0
+k_gs_base      0x0                 0x0
+cr0            0x80010001          [ PG WP PE ]
+cr2            0x0                 0x0
+cr3            0x0                 [ PDBR=0 PCID=0 ]
+cr4            0x50220             [ OSXSAVE FSGSBASE OSFXSR PAE ]
+cr8            0x0                 0x0
+efer           0x500               [ LMA LME ]
+xmm0           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm1           {
+  v4_float = {0xff0000, 0x0, 0x0, 0xffff00},
+  v2_double = {0xff0000, 0xffff0000000000},
+  v16_int8 = {0x0, 0x0, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0xff, 0x0},
+  v8_int16 = {0x0, 0xff, 0x0, 0x0, 0x0, 0x0, 0xff00, 0xff},
+  v4_int32 = {0xff0000, 0x0, 0x0, 0xffff00},
+  v2_int64 = {0xff0000, 0xffff0000000000},
+  uint128 = 0xffff00000000000000000000ff0000
+}
+xmm2           {
+  v4_float = {0x4a5f50, 0x0, 0x4b1268, 0x0},
+  v2_double = {0x4a5f50, 0x4b1268},
+  v16_int8 = {0x50, 0x5f, 0x4a, 0x0, 0x0, 0x0, 0x0, 0x0, 0x68, 0x12, 0x4b, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v8_int16 = {0x5f50, 0x4a, 0x0, 0x0, 0x1268, 0x4b, 0x0, 0x0},
+  v4_int32 = {0x4a5f50, 0x0, 0x4b1268, 0x0},
+  v2_int64 = {0x4a5f50, 0x4b1268},
+  uint128 = 0x4b126800000000004a5f50
+}
+xmm3           {
+  v4_float = {0x4aac80, 0x0, 0x0, 0x0},
+  v2_double = {0x4aac80, 0x0},
+  v16_int8 = {0x80, 0xac, 0x4a, 0x0 <repeats 13 times>},
+  v8_int16 = {0xac80, 0x4a, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x4aac80, 0x0, 0x0, 0x0},
+  v2_int64 = {0x4aac80, 0x0},
+  uint128 = 0x4aac80
+}
+xmm4           {
+  v4_float = {0x4aac80, 0x0, 0x0, 0x0},
+  v2_double = {0x4aac80, 0x0},
+  v16_int8 = {0x80, 0xac, 0x4a, 0x0 <repeats 13 times>},
+  v8_int16 = {0xac80, 0x4a, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x4aac80, 0x0, 0x0, 0x0},
+  v2_int64 = {0x4aac80, 0x0},
+  uint128 = 0x4aac80
+}
+xmm5           {
+  v4_float = {0x1, 0x0, 0x1, 0x0},
+  v2_double = {0x1, 0x1},
+  v16_int8 = {0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v8_int16 = {0x1, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0},
+  v4_int32 = {0x1, 0x0, 0x1, 0x0},
+  v2_int64 = {0x1, 0x1},
+  uint128 = 0x10000000000000001
+}
+xmm6           {
+  v4_float = {0x0, 0x0, 0x0, 0xff0000},
+  v2_double = {0x0, 0xff000000000000},
+  v16_int8 = {0x0 <repeats 14 times>, 0xff, 0x0},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff},
+  v4_int32 = {0x0, 0x0, 0x0, 0xff0000},
+  v2_int64 = {0x0, 0xff000000000000},
+  uint128 = 0xff0000000000000000000000000000
+}
+xmm7           {
+  v4_float = {0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f},
+  v2_double = {0x2f2f2f2f2f2f2f2f, 0x2f2f2f2f2f2f2f2f},
+  v16_int8 = {0x2f <repeats 16 times>},
+  v8_int16 = {0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f},
+  v4_int32 = {0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f},
+  v2_int64 = {0x2f2f2f2f2f2f2f2f, 0x2f2f2f2f2f2f2f2f},
+  uint128 = 0x2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f
+}
+xmm8           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm9           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm10          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm11          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm12          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm13          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm14          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm15          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+mxcsr          0x1f80              [ IM DM ZM OM UM PM ]
+(qemu) gef➤  telescope $sp -l 12
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000100
+0x00002aaaab2abbb8│+0x0018: 0x0000000000000000
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+0x00002aaaab2abbe0│+0x0040: 0x0000000000000100
+0x00002aaaab2abbe8│+0x0048: 0x0000000000000000
+0x00002aaaab2abbf0│+0x0050: 0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbf8│+0x0058: 0x3d49d510b9e3f700
+(qemu) gef➤  dereference $sp -l 6
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000100
+0x00002aaaab2abbb8│+0x0018: 0x0000000000000000
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+(qemu) gef➤  x/20gx $sp
+0x2aaaab2abba0:	0x00002aaaab2abd88	0x000000010040df3c
+0x2aaaab2abbb0:	0x0000000000000100	0x0000000000000000
+0x2aaaab2abbc0:	0x00002aaaab2abbf0	0x3d49d510b9e3f700
+0x2aaaab2abbd0:	0x00000000004b2fc0	0x00000000004aa240
+0x2aaaab2abbe0:	0x0000000000000100	0x0000000000000000
+0x2aaaab2abbf0:	0x00000000004b11b0	0x3d49d510b9e3f700
+0x2aaaab2abc00:	0x00002aaaab2abc30	0x00000000004aa240
+0x2aaaab2abc10:	0x000000000000000f	0x0000000000000000
+0x2aaaab2abc20:	0x00000000004b11d0	0x000000000007d780
+0x2aaaab2abc30:	0x00002aaaab2abc60	0x000000000040f2e2
+(qemu) gef➤  x/s greeting
+0x47f010:	"Hello, gef!"
+(qemu) gef➤  x/10i $pc
+=> 0x401951 <main+43>:	lea    rax,[rip+0xffffffffffffff0d]        # 0x401865 <add>
+   0x401958 <main+50>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x40195f <main+57>:	lea    rax,[rbp-0x40]
+   0x401963 <main+61>:	movabs rsi,0x4141414141414141
+   0x40196d <main+71>:	movabs rdi,0x4242424242424242
+   0x401977 <main+81>:	mov    QWORD PTR [rax],rsi
+   0x40197a <main+84>:	mov    QWORD PTR [rax+0x8],rdi
+   0x40197e <main+88>:	movabs rsi,0x4342424242424242
+   0x401988 <main+98>:	movabs rdi,0x43434343434343
+   0x401992 <main+108>:	mov    QWORD PTR [rax+0x9],rsi
+(qemu) gef➤  vmmap
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+0x0000000000400000 0x0000000000401000 0x0000000000000000 r-- /work/test_x64
+0x0000000000401000 0x000000000047f000 0x0000000000001000 r-x /work/test_x64
+0x000000000047f000 0x00000000004a5000 0x000000000007f000 r-- /work/test_x64
+0x00000000004a5000 0x00000000004ac000 0x00000000000a4000 rw- /work/test_x64
+0x00000000004ac000 0x00000000004b2000 0x0000000000000000 rw- 
+0x00000000004b2000 0x00000000004d4000 0x0000000000000000 rw- [heap]
+0x00002aaaaaaab000 0x00002aaaaaaac000 0x0000000000000000 --- 
+0x00002aaaaaaac000 0x00002aaaab2ac000 0x0000000000000000 rw- [stack]
+0x00002aaaab2ac000 0x00002aaaab2ad000 0x0000000000000000 r-x [vdso]
+0x00002aaaab2ad000 0x00002aaaab2af000 0x0000000000000000 rw- 
+0xffffffffff600000 0xffffffffff601000 0x0000000000000000 --x [vsyscall]
+
+(qemu) gef➤  vmmap libc
+[*] `libc` has no type specified. We guessed it was a name filter.
+[*] You can use --name or --addr before the filter value for specifying its type manually.
+
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+
+(qemu) gef➤  checksec
+[+] checksec for '/tmp/tmpmmw4p5xd/work/test_x64'
+Canary                        : ✓ (value: 0x3d49d510b9e3f700)
+NX                            : ✓ 
+PIE                           : ✘ 
+Fortify                       : ✘ 
+RelRO                         : Partial
+(qemu) gef➤  elf-info
+Magic                 : 7f 45 4c 46
+Class                 : 0x2 - ELF_64_BITS
+Endianness            : 0x1 - LITTLE_ENDIAN
+Version               : 0x1
+OS ABI                : 0x3 - LINUX
+ABI Version           : 0x0
+Type                  : 0x2 - ET_EXEC
+Machine               : 0x3e - X86_64
+Program Header Table  : 0x0000000000000040
+Section Header Table  : 0x00000000000be838
+Header Table          : 0x0000000000000040
+ELF Version           : 0x1
+Header size           : 64 (0x40)
+Entry point           : 0x0000000000401740
+
+─────────────────────────────────────────────── Program Header ───────────────────────────────────────────────
+  [ #] Type           Offset   Virtaddr   Physaddr  FileSiz   MemSiz Flags    Align
+  [ 0] PT_LOAD           0x0   0x400000   0x400000    0x4f8    0x4f8 PF_R    0x1000
+  [ 1] PT_LOAD        0x1000   0x401000   0x401000  0x7d90d  0x7d90d PF_X|PF_R   0x1000
+  [ 2] PT_LOAD       0x7f000   0x47f000   0x47f000  0x25854  0x25854 PF_R    0x1000
+  [ 3] PT_LOAD       0xa4f50   0x4a5f50   0x4a5f50   0x5ba0   0xb318 PF_W|PF_R   0x1000
+  [ 4] PT_NOTE         0x270   0x400270   0x400270     0x30     0x30 PF_R       0x8
+  [ 5] PT_NOTE         0x2a0   0x4002a0   0x4002a0     0x44     0x44 PF_R       0x4
+  [ 6] PT_TLS        0xa4f50   0x4a5f50   0x4a5f50     0x18     0x58 PF_R       0x8
+  [ 7] PT_GNU_PROPERTY    0x270   0x400270   0x400270     0x30     0x30 PF_R       0x8
+  [ 8] PT_GNU_STACK      0x0        0x0        0x0      0x0      0x0 PF_W|PF_R     0x10
+  [ 9] PT_GNU_RELRO  0xa4f50   0x4a5f50   0x4a5f50   0x40b0   0x40b0 PF_R       0x1
+
+─────────────────────────────────────────────── Section Header ───────────────────────────────────────────────
+  [ #] Name                            Type    Address   Offset     Size   EntSiz Flags Link Info    Align
+  [ 0]                                 UNKN        0x0      0x0      0x0      0x0 4294967295  0x0  0x0      0x0
+  [ 1] .note.gnu.property          SHT_NOTE   0x400270    0x270     0x30      0x0 2      0x0  0x0      0x8
+  [ 2] .note.gnu.build-id          SHT_NOTE   0x4002a0    0x2a0     0x24      0x0 2      0x0  0x0      0x4
+  [ 3] .note.ABI-tag               SHT_NOTE   0x4002c4    0x2c4     0x20      0x0 2      0x0  0x0      0x4
+  [ 4] .rela.plt                   SHT_RELA   0x4002e8    0x2e8    0x210     0x18 4294967295  0x0 0x13      0x8
+  [ 5] .init                   SHT_PROGBITS   0x401000   0x1000     0x1b      0x0 4294967295  0x0  0x0      0x4
+  [ 6] .plt                    SHT_PROGBITS   0x401020   0x1020    0x160      0x0 4294967295  0x0  0x0     0x10
+  [ 7] .text                   SHT_PROGBITS   0x401180   0x1180  0x7d780      0x0 4294967295  0x0  0x0     0x40
+  [ 8] .fini                   SHT_PROGBITS   0x47e900  0x7e900      0xd      0x0 4294967295  0x0  0x0      0x4
+  [ 9] .rodata                 SHT_PROGBITS   0x47f000  0x7f000  0x1c1c4      0x0 2      0x0  0x0     0x20
+  [10] rodata.cst32            SHT_PROGBITS   0x49b1e0  0x9b1e0     0x60     0x20 4294967295  0x0  0x0     0x20
+  [11] .eh_frame               SHT_PROGBITS   0x49b240  0x9b240   0x9538      0x0 2      0x0  0x0      0x8
+  [12] .gcc_except_table       SHT_PROGBITS   0x4a4778  0xa4778     0xdc      0x0 2      0x0  0x0      0x1
+  [13] .tdata                  SHT_PROGBITS   0x4a5f50  0xa4f50     0x18      0x0 4294967295  0x0  0x0      0x8
+  [14] .tbss                     SHT_NOBITS   0x4a5f68  0xa4f68     0x40      0x0 4294967295  0x0  0x0      0x8
+  [15] .init_array           SHT_INIT_ARRAY   0x4a5f68  0xa4f68      0x8      0x8 4294967295  0x0  0x0      0x8
+  [16] .fini_array           SHT_FINI_ARRAY   0x4a5f70  0xa4f70     0x10      0x8 4294967295  0x0  0x0      0x8
+  [17] .data.rel.ro            SHT_PROGBITS   0x4a5f80  0xa4f80   0x3fc8      0x0 4294967295  0x0  0x0     0x20
+  [18] .got                    SHT_PROGBITS   0x4a9f48  0xa8f48     0x90      0x0 4294967295  0x0  0x0      0x8
+  [19] .got.plt                SHT_PROGBITS   0x4a9fe8  0xa8fe8     0xc8      0x8 4294967295  0x0  0x0      0x8
+  [20] .data                   SHT_PROGBITS   0x4aa0c0  0xa90c0   0x1a30      0x0 4294967295  0x0  0x0     0x20
+  [21] .bss                      SHT_NOBITS   0x4abb00  0xaaaf0   0x5768      0x0 4294967295  0x0  0x0     0x20
+  [22] .comment                SHT_PROGBITS        0x0  0xaaaf0     0x2d      0x1 4294967295  0x0  0x0      0x1
+  [23] .debug_aranges          SHT_PROGBITS        0x0  0xaab1d     0x30      0x0 4294967295  0x0  0x0      0x1
+  [24] .debug_info             SHT_PROGBITS        0x0  0xaab4d    0x34a      0x0 4294967295  0x0  0x0      0x1
+  [25] .debug_abbrev           SHT_PROGBITS        0x0  0xaae97    0x18c      0x0 4294967295  0x0  0x0      0x1
+  [26] .debug_line             SHT_PROGBITS        0x0  0xab023    0x15b      0x0 4294967295  0x0  0x0      0x1
+  [27] .debug_str              SHT_PROGBITS        0x0  0xab17e    0x160      0x1 4294967295  0x0  0x0      0x1
+  [28] .debug_line_str         SHT_PROGBITS        0x0  0xab2de     0x7d      0x1 4294967295  0x0  0x0      0x1
+  [29] .symtab                   SHT_SYMTAB        0x0  0xab360   0xbc40     0x18 4294967295 0x1e 0x2c7      0x8
+  [30] .strtab                   SHT_STRTAB        0x0  0xb6fa0   0x7755      0x0 4294967295  0x0  0x0      0x1
+  [31] .shstrtab                 SHT_STRTAB        0x0  0xbe6f5    0x140      0x0 4294967295  0x0  0x0      0x1
+(qemu) gef➤  got
+─────────────────────────────────────────────── /work/test_x64 ───────────────────────────────────────────────
+
+GOT protection: Partial RelRO | GOT functions: 0
+ 
+(qemu) gef➤  canary
+[+] The canary of process 686 is at 0x4b23a8, value is 0x3d49d510b9e3f700
+(qemu) gef➤  p greeting
+$1 = 0x47f010 "Hello, gef!"
+(qemu) gef➤  p/x $sp
+$2 = 0x2aaaab2abba0
+(qemu) gef➤  p $pc
+$3 = (void (*)()) 0x401951 <main+43>
+(qemu) gef➤  p fp
+$4 = (op_fn) 0x0
+(qemu) gef➤  p stackbuf
+$5 = "`\274*\253\252*\000\000\342\362@\000\000\000\000\000\200\262I\000\000\000\000\000\370\264J", '\000' <repeats 13 times>, "\330\021K\000\000\000\000"
+(qemu) gef➤  xinfo $sp
+─────────────────────────────────────────── xinfo: 0x2aaaab2abba0 ───────────────────────────────────────────
+Page: 0x00002aaaaaaac000  →  0x00002aaaab2ac000 (size=0x800000)
+Permissions: rw-
+Pathname: [stack]
+Offset (from page): 0x7ffba0
+Inode: 0
+(qemu) gef➤  xinfo $pc
+────────────────────────────────────────────── xinfo: 0x401951 ──────────────────────────────────────────────
+Page: 0x0000000000401000  →  0x000000000047f000 (size=0x7e000)
+Permissions: r-x
+Pathname: /work/test_x64
+Offset (from page): 0x951
+Inode: 0
+Segment: .text (0x0000000000401180-0x000000000047e900)
+Offset (from segment): 0x7d1
+Symbol: main+43
+(qemu) gef➤  xinfo &global_buf
+────────────────────────────────────────────── xinfo: 0x4aa0e0 ──────────────────────────────────────────────
+Page: 0x00000000004a5000  →  0x00000000004ac000 (size=0x7000)
+Permissions: rw-
+Pathname: /work/test_x64
+Offset (from page): 0x50e0
+Inode: 0
+Segment: .data (0x00000000004aa0c0-0x00000000004abaf0)
+Offset (from segment): 0x20
+Symbol: global_buf
+(qemu) gef➤  continue
+Continuing.
+
+Breakpoint 3, 0x00000000004019ce in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:31
+31	    for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x00002aaaab2abc30  →  "AAAAAAAABBBBBBBBCCCCCCCC"
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x4342424242424242 ("BBBBBBBC"?)
+$rdi   : 0x43434343434343  
+$rip   : 0x00000000004019ce  →  <main+00a8> jle 0x4019a6 <main+128>
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero CARRY PARITY ADJUST SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000000
+0x00002aaaab2abbb8│+0x0018: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b11b0  →  0x00000000004b36e0  →  0x0000000000000004
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x4019bb <main+0095>      mov    QWORD PTR [rbp+rax*8-0x80], rdx
+     0x4019c0 <main+009a>      add    DWORD PTR [rbp-0xc0], 0x1
+     0x4019c7 <main+00a1>      cmp    DWORD PTR [rbp-0xc0], 0x7
+●→   0x4019ce <main+00a8>      jle    0x4019a6 <main+128>	TAKEN [Reason: Z || S!=O]
+   ↳    0x4019a6 <main+0080>      mov    edi, 0x20
+        0x4019ab <main+0085>      call   0x40f140 <malloc>
+        0x4019b0 <main+008a>      mov    rdx, rax
+        0x4019b3 <main+008d>      mov    eax, DWORD PTR [rbp-0xc0]
+        0x4019b9 <main+0093>      cdqe   
+        0x4019bb <main+0095>      mov    QWORD PTR [rbp+rax*8-0x80], rdx
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+31 ────
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+     30	     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+             // small=0x00002aaaab2abbf0  →  [...]  →  0x0000000000000004, i=0x0
+ →   31	     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+     32	     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+     33	     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+     34	     strcpy((char *)small[0], "heap string here");
+     35	     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+     36	     free(mid[0]);
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x4019ce in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x4019ce → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  ignore 3 7
+Will ignore next 7 crossings of breakpoint 3.
+(qemu) gef➤  continue
+Continuing.
+
+Breakpoint 3, 0x00000000004019ce in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:31
+31	    for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x7               
+$rbx   : 0x1               
+$rcx   : 0x00000000004b3a70  →  0x0000000000000000
+$rdx   : 0x00000000004b3a50  →  0x0000000000000000
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x20              
+$rdi   : 0x00000000004b3a50  →  0x0000000000000000
+$rip   : 0x00000000004019ce  →  <main+00a8> jle 0x4019a6 <main+128>
+$r8    : 0x00000000004aa2a0  →  0x00000000004b3a70  →  0x0000000000000000
+$r9    : 0x30              
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000008
+0x00002aaaab2abbb8│+0x0018: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b3900  →  0x0000000000000000
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x4019bb <main+0095>      mov    QWORD PTR [rbp+rax*8-0x80], rdx
+     0x4019c0 <main+009a>      add    DWORD PTR [rbp-0xc0], 0x1
+     0x4019c7 <main+00a1>      cmp    DWORD PTR [rbp-0xc0], 0x7
+●→   0x4019ce <main+00a8>      jle    0x4019a6 <main+128>	NOT taken [Reason: !(Z || S!=O)]
+     0x4019d0 <main+00aa>      mov    DWORD PTR [rbp-0xc0], 0x0
+     0x4019da <main+00b4>      jmp    0x401a00 <main+218>
+     0x4019dc <main+00b6>      mov    edi, 0x80
+     0x4019e1 <main+00bb>      call   0x40f140 <malloc>
+     0x4019e6 <main+00c0>      mov    rdx, rax
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+31 ────
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+     30	     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+             // small=0x00002aaaab2abbf0  →  [...]  →  0x0000000000000000, i=0x8
+ →   31	     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+     32	     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+     33	     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+     34	     strcpy((char *)small[0], "heap string here");
+     35	     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+     36	     free(mid[0]);
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x4019ce in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x4019ce → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  continue
+Continuing.
+
+Breakpoint 2, 0x00000000004018b8 in compute (f=0x401865 <add>, x=0x6, y=0x7) at test.c:14
+14	    int r = f(x, y);
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x6               
+$rbx   : 0x1               
+$rcx   : 0x0000000000401865  →  <add+0000> endbr64 
+$rdx   : 0x7               
+$rsp   : 0x00002aaaab2abb70  →  0x0000000600000007
+$rbp   : 0x00002aaaab2abb90  →  0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x7               
+$rdi   : 0x6               
+$rip   : 0x00000000004018b8  →  <compute+0024> call rcx
+$r8    : 0x00000000004b2d10  →  0x0000000000070000
+$r9    : 0x0               
+$r10   : 0x7               
+$r11   : 0x00000000004b3a80  →  0x00000000000004b3
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abb70│+0x0000: 0x0000000600000007	 ← $rsp
+0x00002aaaab2abb78│+0x0008: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abb80│+0x0010: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abb88│+0x0018: 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+0x00002aaaab2abb90│+0x0020: 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000	 ← $rbp
+0x00002aaaab2abb98│+0x0028: 0x0000000000401acd  →  <main+01a7> mov DWORD PTR [rbp-0xbc], eax
+0x00002aaaab2abba0│+0x0030: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abba8│+0x0038: 0x000000010040df3c
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x4018b0 <compute+001c>   mov    rcx, QWORD PTR [rbp-0x18]
+     0x4018b4 <compute+0020>   mov    esi, edx
+     0x4018b6 <compute+0022>   mov    edi, eax
+●→   0x4018b8 <compute+0024>   call   rcx
+     0x4018ba <compute+0026>   mov    DWORD PTR [rbp-0x4], eax
+     0x4018bd <compute+0029>   mov    eax, DWORD PTR [rbp-0x4]
+     0x4018c0 <compute+002c>   leave  
+     0x4018c1 <compute+002d>   ret    
+     0x4018c2 <vuln+0000>      endbr64 
+───────────────────────────────────────────────────────────────────────────────────── arguments (guessed) ────
+*0x401865 (
+   $rdi = 0x0000000000000006,
+   $rsi = 0x0000000000000007,
+   $rdx = 0x0000000000000007,
+   $rcx = 0x0000000000401865 → <add+0000> endbr64 
+)
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+14 ────
+      9	 
+     10	 int add(int a, int b) { return a + b; }
+     11	 int mul(int a, int b) { return a * b; }
+     12	 
+     13	 int compute(op_fn f, int x, int y) {
+             // x=0x6, y=0x7, r=0x2aaa
+ →   14	     int r = f(x, y);
+     15	     return r;
+     16	 }
+     17	 
+     18	 void vuln(const char *src) {
+     19	     char buf[32];
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x4018b8 in compute (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x4018b8 → compute(f=0x401865 <add>, x=0x6, y=0x7)
+[#1] 0x401acd → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  bt
+#0  0x00000000004018b8 in compute (f=0x401865 <add>, x=0x6, y=0x7) at test.c:14
+#1  0x0000000000401acd in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:38
+(qemu) gef➤  si
+add (a=0x0, b=0x40f88c) at test.c:10
+10	int add(int a, int b) { return a + b; }
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x6               
+$rbx   : 0x1               
+$rcx   : 0x0000000000401865  →  <add+0000> endbr64 
+$rdx   : 0x7               
+$rsp   : 0x00002aaaab2abb68  →  0x00000000004018ba  →  <compute+0026> mov DWORD PTR [rbp-0x4], eax
+$rbp   : 0x00002aaaab2abb90  →  0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x7               
+$rdi   : 0x6               
+$rip   : 0x0000000000401865  →  <add+0000> endbr64 
+$r8    : 0x00000000004b2d10  →  0x0000000000070000
+$r9    : 0x0               
+$r10   : 0x7               
+$r11   : 0x00000000004b3a80  →  0x00000000000004b3
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abb68│+0x0000: 0x00000000004018ba  →  <compute+0026> mov DWORD PTR [rbp-0x4], eax	 ← $rsp
+0x00002aaaab2abb70│+0x0008: 0x0000000600000007
+0x00002aaaab2abb78│+0x0010: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abb80│+0x0018: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abb88│+0x0020: 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+0x00002aaaab2abb90│+0x0028: 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000	 ← $rbp
+0x00002aaaab2abb98│+0x0030: 0x0000000000401acd  →  <main+01a7> mov DWORD PTR [rbp-0xbc], eax
+0x00002aaaab2abba0│+0x0038: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x40185c <frame_dummy+002c> add    BYTE PTR [rax], al
+     0x40185e <frame_dummy+002e> add    BYTE PTR [rax], al
+     0x401860 <frame_dummy+0030> jmp    0x4017b0 <register_tm_clones>
+ →   0x401865 <add+0000>       endbr64 
+     0x401869 <add+0004>       push   rbp
+     0x40186a <add+0005>       mov    rbp, rsp
+     0x40186d <add+0008>       mov    DWORD PTR [rbp-0x4], edi
+     0x401870 <add+000b>       mov    DWORD PTR [rbp-0x8], esi
+     0x401873 <add+000e>       mov    edx, DWORD PTR [rbp-0x4]
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+10 ────
+      5	 typedef int (*op_fn)(int, int);
+      6	 
+      7	 const char *greeting = "Hello, gef!";
+      8	 char global_buf[64] = "global data string";
+      9	 
+         // a=0x0, b=0x40f88c
+ →   10	 int add(int a, int b) { return a + b; }
+     11	 int mul(int a, int b) { return a * b; }
+     12	 
+     13	 int compute(op_fn f, int x, int y) {
+     14	     int r = f(x, y);
+     15	     return r;
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x401865 in add (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x401865 → add(a=0x0, b=0x40f88c)
+[#1] 0x4018ba → compute(f=0x401865 <add>, x=0x6, y=0x7)
+[#2] 0x401acd → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  bt
+#0  add (a=0x0, b=0x40f88c) at test.c:10
+#1  0x00000000004018ba in compute (f=0x401865 <add>, x=0x6, y=0x7) at test.c:14
+#2  0x0000000000401acd in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:38
+(qemu) gef➤  finish
+Run till exit from #0  add (a=0x0, b=0x40f88c) at test.c:10
+0x00000000004018ba in compute (f=0x401865 <add>, x=0x6, y=0x7) at test.c:14
+14	    int r = f(x, y);
+Value returned is $6 = 0xd
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0xd               
+$rbx   : 0x1               
+$rcx   : 0x0000000000401865  →  <add+0000> endbr64 
+$rdx   : 0x6               
+$rsp   : 0x00002aaaab2abb70  →  0x0000000600000007
+$rbp   : 0x00002aaaab2abb90  →  0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x7               
+$rdi   : 0x6               
+$rip   : 0x00000000004018ba  →  <compute+0026> mov DWORD PTR [rbp-0x4], eax
+$r8    : 0x00000000004b2d10  →  0x0000000000070000
+$r9    : 0x0               
+$r10   : 0x7               
+$r11   : 0x00000000004b3a80  →  0x00000000000004b3
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abb70│+0x0000: 0x0000000600000007	 ← $rsp
+0x00002aaaab2abb78│+0x0008: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abb80│+0x0010: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abb88│+0x0018: 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+0x00002aaaab2abb90│+0x0020: 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000	 ← $rbp
+0x00002aaaab2abb98│+0x0028: 0x0000000000401acd  →  <main+01a7> mov DWORD PTR [rbp-0xbc], eax
+0x00002aaaab2abba0│+0x0030: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abba8│+0x0038: 0x000000010040df3c
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x4018b4 <compute+0020>   mov    esi, edx
+     0x4018b6 <compute+0022>   mov    edi, eax
+●    0x4018b8 <compute+0024>   call   rcx
+ →   0x4018ba <compute+0026>   mov    DWORD PTR [rbp-0x4], eax
+     0x4018bd <compute+0029>   mov    eax, DWORD PTR [rbp-0x4]
+     0x4018c0 <compute+002c>   leave  
+     0x4018c1 <compute+002d>   ret    
+     0x4018c2 <vuln+0000>      endbr64 
+     0x4018c6 <vuln+0004>      push   rbp
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+14 ────
+      9	 
+     10	 int add(int a, int b) { return a + b; }
+     11	 int mul(int a, int b) { return a * b; }
+     12	 
+     13	 int compute(op_fn f, int x, int y) {
+             // x=0x6, y=0x7, r=0x2aaa
+ →   14	     int r = f(x, y);
+     15	     return r;
+     16	 }
+     17	 
+     18	 void vuln(const char *src) {
+     19	     char buf[32];
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x4018ba in compute (), reason: TEMPORARY BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x4018ba → compute(f=0x401865 <add>, x=0x6, y=0x7)
+[#1] 0x401acd → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  up
+#1  0x0000000000401acd in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:38
+38	    int r = compute(fp, 6, 7);
+(qemu) gef➤  python h=gef.heap; b=int(gdb.parse_and_eval("*(unsigned long*)((char*)&mp_+96)")); [setattr(h,k,b) for k in list(vars(h)) if k.endswith("__heap_base")]; print("[research] heap base forced to mp_.sbrk_base=%#x" % b)
+[research] heap base forced to mp_.sbrk_base=0x4b2d00
+(qemu) gef➤  heap chunks
+Chunk(addr=0x4b2d10, size=0x290, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b2d10     00 00 07 00 00 00 00 00 00 00 00 00 00 00 01 00    ................]
+Chunk(addr=0x4b2fa0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b2fa0     2f 77 6f 72 6b 00 00 00 00 00 00 00 00 00 00 00    /work...........]
+Chunk(addr=0x4b2fc0, size=0x4f0, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b2fc0     00 00 00 00 00 00 00 00 90 c4 2a ab aa 2a 00 00    ..........*..*..]
+Chunk(addr=0x4b34b0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b34b0     e0 34 4b 00 00 00 00 00 30 35 4b 00 00 00 00 00    .4K.....05K.....]
+Chunk(addr=0x4b34e0, size=0x150, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b34e0     30 35 4b 00 00 00 00 00 97 fa 47 00 00 00 00 00    05K.......G.....]
+Chunk(addr=0x4b3630, size=0xb0, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3630     00 00 40 00 00 00 00 00 f8 04 40 00 00 00 00 00    ..@.......@.....]
+Chunk(addr=0x4b36e0, size=0x110, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b36e0     04 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00    ................]
+Chunk(addr=0x4b37f0, size=0x110, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b37f0     04 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00    ................]
+Chunk(addr=0x4b3900, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3900     b3 04 00 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    .........v..c.6.]
+Chunk(addr=0x4b3930, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3930     b3 3d 4b 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    .=K......v..c.6.]
+Chunk(addr=0x4b3960, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3960     83 3d 4b 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    .=K......v..c.6.]
+Chunk(addr=0x4b3990, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3990     d3 3d 4b 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    .=K......v..c.6.]
+Chunk(addr=0x4b39c0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b39c0     23 3d 4b 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    #=K......v..c.6.]
+Chunk(addr=0x4b39f0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b39f0     73 3d 4b 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    s=K......v..c.6.]
+Chunk(addr=0x4b3a20, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3a20     43 3d 4b 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    C=K......v..c.6.]
+Chunk(addr=0x4b3a50, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3a50     b3 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x4b3a80, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3a80     b3 04 00 00 00 00 00 00 86 76 e8 0b 63 8e 36 d6    .........v..c.6.]
+Chunk(addr=0x4b3b10, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3b10     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x4b3ba0, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3ba0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x4b3c30, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b3c30     a0 a2 4a 00 00 00 00 00 a0 a2 4a 00 00 00 00 00    ..J.......J.....]
+Chunk(addr=0x4b4140, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004b4140     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x4b4650, size=0x1f9c0, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  top chunk
+(qemu) gef➤  heap bins
+────────────────────────────────────────── Tcachebins for thread 1 ──────────────────────────────────────────
+Tcachebins[idx=1, size=0x30, count=7] ←  Chunk(addr=0x4b3a20, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b39f0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b39c0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3990, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3960, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3930, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3900, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Tcachebins[idx=7, size=0x90, count=1] ←  Chunk(addr=0x4b3a80, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+─────────────────────────────────────── Fastbins for arena at 0x4aa240 ───────────────────────────────────────
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30]  ←  Chunk(addr=0x4b3a50, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+───────────────────────────────────── Unsorted Bin for arena at 0x4aa240 ─────────────────────────────────────
+[+] unsorted_bins[0]: fw=0x4b3c20, bk=0x4b3c20
+ →   Chunk(addr=0x4b3c30, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in unsorted bin.
+────────────────────────────────────── Small Bins for arena at 0x4aa240 ──────────────────────────────────────
+[+] Found 0 chunks in 0 small non-empty bins.
+────────────────────────────────────── Large Bins for arena at 0x4aa240 ──────────────────────────────────────
+[+] Found 0 chunks in 0 large non-empty bins.
+(qemu) gef➤  heap bins tcache
+────────────────────────────────────────── Tcachebins for thread 1 ──────────────────────────────────────────
+Tcachebins[idx=1, size=0x30, count=7] ←  Chunk(addr=0x4b3a20, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b39f0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b39c0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3990, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3960, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3930, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0x4b3900, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Tcachebins[idx=7, size=0x90, count=1] ←  Chunk(addr=0x4b3a80, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+(qemu) gef➤  heap bins fast
+─────────────────────────────────────── Fastbins for arena at 0x4aa240 ───────────────────────────────────────
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30]  ←  Chunk(addr=0x4b3a50, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+(qemu) gef➤  heap bins unsorted
+───────────────────────────────────── Unsorted Bin for arena at 0x4aa240 ─────────────────────────────────────
+[+] unsorted_bins[0]: fw=0x4b3c20, bk=0x4b3c20
+ →   Chunk(addr=0x4b3c30, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in unsorted bin.
+(qemu) gef➤  heap bins small
+────────────────────────────────────── Small Bins for arena at 0x4aa240 ──────────────────────────────────────
+[+] Found 0 chunks in 0 small non-empty bins.
+(qemu) gef➤  heap arenas
+Arena(base=0x4aa240, top=0x4b4640, last_remainder=0x0, next=0x4aa240, mem=135936, mempeak=135936)
+(qemu) gef➤  heap chunk mid[1]
+Chunk(addr=0x4b3b10, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 144 (0x90)
+Usable size: 136 (0x88)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+(qemu) gef➤  heap chunk small[0]
+Chunk(addr=0x4b3900, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 48 (0x30)
+Usable size: 40 (0x28)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+(qemu) gef➤  search-pattern "heap string"
+[+] Searching 'heap string' in memory
+(qemu) gef➤  search-pattern AAAAAAAABBBB
+[+] Searching 'AAAAAAAABBBB' in memory
+[+] In '[stack]'(0x2aaaaaaac000-0x2aaaab2ac000), permission=rw-
+  0x2aaaab2abc30 - 0x2aaaab2abc48  →   "AAAAAAAABBBBBBBBCCCCCCCC" 
+(qemu) gef➤  hexdump byte $sp --size 64
+0x00002aaaab2abba0     88 bd 2a ab aa 2a 00 00 3c df 40 00 01 00 00 00    ..*..*..<.@.....
+0x00002aaaab2abbb0     08 00 00 00 00 00 00 00 65 18 40 00 00 00 00 00    ........e.@.....
+0x00002aaaab2abbc0     30 3c 4b 00 00 00 00 00 40 41 4b 00 00 00 00 00    0<K.....@AK.....
+0x00002aaaab2abbd0     80 3a 4b 00 00 00 00 00 10 3b 4b 00 00 00 00 00    .:K......;K.....
+(qemu) gef➤  hexdump qword $sp --size 8
+0x00002aaaab2abba0│+0x0000   0x00002aaaab2abd88   
+0x00002aaaab2abba8│+0x0008   0x000000010040df3c   
+0x00002aaaab2abbb0│+0x0010   0x0000000000000008   
+0x00002aaaab2abbb8│+0x0018   0x0000000000401865   
+0x00002aaaab2abbc0│+0x0020   0x00000000004b3c30   
+0x00002aaaab2abbc8│+0x0028   0x00000000004b4140   
+0x00002aaaab2abbd0│+0x0030   0x00000000004b3a80   
+0x00002aaaab2abbd8│+0x0038   0x00000000004b3b10   
+(qemu) gef➤  hexdump dword $sp --size 8
+0x00002aaaab2abba0│+0x0000   0xab2abd88   
+0x00002aaaab2abba4│+0x0004   0x00002aaa   
+0x00002aaaab2abba8│+0x0008   0x0040df3c   
+0x00002aaaab2abbac│+0x000c   0x00000001   
+0x00002aaaab2abbb0│+0x0010   0x00000008   
+0x00002aaaab2abbb4│+0x0014   0x00000000   
+0x00002aaaab2abbb8│+0x0018   0x00401865   
+0x00002aaaab2abbbc│+0x001c   0x00000000   
+(qemu) gef➤  pattern create 64
+[+] Generating a pattern of 64 bytes (n=8)
+aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaa
+[+] Saved as '$_gef0'
+(qemu) gef➤  pattern search 0x6161616161616167
+[+] Searching for '6761616161616161'/'6161616161616167' with period=8
+[+] Found at offset 48 (little-endian search) likely
+(qemu) gef➤  pattern search aaaaaaba
+[+] Searching for '6162616161616161'/'6161616161616261' with period=8
+[+] Found at offset 7 (little-endian search) likely
+(qemu) gef➤  disassemble main
+Dump of assembler code for function main:
+   0x0000000000401926 <+0>:	endbr64
+   0x000000000040192a <+4>:	push   rbp
+   0x000000000040192b <+5>:	mov    rbp,rsp
+   0x000000000040192e <+8>:	sub    rsp,0xd0
+   0x0000000000401935 <+15>:	mov    DWORD PTR [rbp-0xc4],edi
+   0x000000000040193b <+21>:	mov    QWORD PTR [rbp-0xd0],rsi
+   0x0000000000401942 <+28>:	mov    rax,QWORD PTR fs:0x28
+   0x000000000040194b <+37>:	mov    QWORD PTR [rbp-0x8],rax
+   0x000000000040194f <+41>:	xor    eax,eax
+   0x0000000000401951 <+43>:	lea    rax,[rip+0xffffffffffffff0d]        # 0x401865 <add>
+   0x0000000000401958 <+50>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x000000000040195f <+57>:	lea    rax,[rbp-0x40]
+   0x0000000000401963 <+61>:	movabs rsi,0x4141414141414141
+   0x000000000040196d <+71>:	movabs rdi,0x4242424242424242
+   0x0000000000401977 <+81>:	mov    QWORD PTR [rax],rsi
+   0x000000000040197a <+84>:	mov    QWORD PTR [rax+0x8],rdi
+   0x000000000040197e <+88>:	movabs rsi,0x4342424242424242
+   0x0000000000401988 <+98>:	movabs rdi,0x43434343434343
+   0x0000000000401992 <+108>:	mov    QWORD PTR [rax+0x9],rsi
+   0x0000000000401996 <+112>:	mov    QWORD PTR [rax+0x11],rdi
+   0x000000000040199a <+116>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x00000000004019a4 <+126>:	jmp    0x4019c7 <main+161>
+   0x00000000004019a6 <+128>:	mov    edi,0x20
+   0x00000000004019ab <+133>:	call   0x40f140 <malloc>
+   0x00000000004019b0 <+138>:	mov    rdx,rax
+   0x00000000004019b3 <+141>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x00000000004019b9 <+147>:	cdqe
+   0x00000000004019bb <+149>:	mov    QWORD PTR [rbp+rax*8-0x80],rdx
+   0x00000000004019c0 <+154>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x00000000004019c7 <+161>:	cmp    DWORD PTR [rbp-0xc0],0x7
+   0x00000000004019ce <+168>:	jle    0x4019a6 <main+128>
+   0x00000000004019d0 <+170>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x00000000004019da <+180>:	jmp    0x401a00 <main+218>
+   0x00000000004019dc <+182>:	mov    edi,0x80
+   0x00000000004019e1 <+187>:	call   0x40f140 <malloc>
+   0x00000000004019e6 <+192>:	mov    rdx,rax
+   0x00000000004019e9 <+195>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x00000000004019ef <+201>:	cdqe
+   0x00000000004019f1 <+203>:	mov    QWORD PTR [rbp+rax*8-0xa0],rdx
+   0x00000000004019f9 <+211>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a00 <+218>:	cmp    DWORD PTR [rbp-0xc0],0x2
+   0x0000000000401a07 <+225>:	jle    0x4019dc <main+182>
+   0x0000000000401a09 <+227>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x0000000000401a13 <+237>:	jmp    0x401a39 <main+275>
+   0x0000000000401a15 <+239>:	mov    edi,0x500
+   0x0000000000401a1a <+244>:	call   0x40f140 <malloc>
+   0x0000000000401a1f <+249>:	mov    rdx,rax
+   0x0000000000401a22 <+252>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x0000000000401a28 <+258>:	cdqe
+   0x0000000000401a2a <+260>:	mov    QWORD PTR [rbp+rax*8-0xb0],rdx
+   0x0000000000401a32 <+268>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a39 <+275>:	cmp    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a40 <+282>:	jle    0x401a15 <main+239>
+   0x0000000000401a42 <+284>:	mov    rax,QWORD PTR [rbp-0x80]
+   0x0000000000401a46 <+288>:	movabs rsi,0x7274732070616568
+   0x0000000000401a50 <+298>:	movabs rdi,0x6572656820676e69
+   0x0000000000401a5a <+308>:	mov    QWORD PTR [rax],rsi
+   0x0000000000401a5d <+311>:	mov    QWORD PTR [rax+0x8],rdi
+   0x0000000000401a61 <+315>:	mov    BYTE PTR [rax+0x10],0x0
+   0x0000000000401a65 <+319>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x0000000000401a6f <+329>:	jmp    0x401a8d <main+359>
+   0x0000000000401a71 <+331>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x0000000000401a77 <+337>:	cdqe
+   0x0000000000401a79 <+339>:	mov    rax,QWORD PTR [rbp+rax*8-0x80]
+   0x0000000000401a7e <+344>:	mov    rdi,rax
+   0x0000000000401a81 <+347>:	call   0x40f810 <free>
+   0x0000000000401a86 <+352>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a8d <+359>:	cmp    DWORD PTR [rbp-0xc0],0x7
+   0x0000000000401a94 <+366>:	jle    0x401a71 <main+331>
+   0x0000000000401a96 <+368>:	mov    rax,QWORD PTR [rbp-0xa0]
+   0x0000000000401a9d <+375>:	mov    rdi,rax
+   0x0000000000401aa0 <+378>:	call   0x40f810 <free>
+   0x0000000000401aa5 <+383>:	mov    rax,QWORD PTR [rbp-0xb0]
+   0x0000000000401aac <+390>:	mov    rdi,rax
+   0x0000000000401aaf <+393>:	call   0x40f810 <free>
+   0x0000000000401ab4 <+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x0000000000401abb <+405>:	mov    edx,0x7
+   0x0000000000401ac0 <+410>:	mov    esi,0x6
+   0x0000000000401ac5 <+415>:	mov    rdi,rax
+   0x0000000000401ac8 <+418>:	call   0x401894 <compute>
+=> 0x0000000000401acd <+423>:	mov    DWORD PTR [rbp-0xbc],eax
+   0x0000000000401ad3 <+429>:	lea    rax,[rip+0xfffffffffffffda3]        # 0x40187d <mul>
+   0x0000000000401ada <+436>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x0000000000401ae1 <+443>:	mov    ecx,DWORD PTR [rbp-0xbc]
+   0x0000000000401ae7 <+449>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x0000000000401aee <+456>:	mov    edx,0x2
+   0x0000000000401af3 <+461>:	mov    esi,ecx
+   0x0000000000401af5 <+463>:	mov    rdi,rax
+   0x0000000000401af8 <+466>:	call   0x401894 <compute>
+   0x0000000000401afd <+471>:	add    DWORD PTR [rbp-0xbc],eax
+   0x0000000000401b03 <+477>:	mov    rax,QWORD PTR [rip+0xa8616]        # 0x4aa120 <greeting>
+   0x0000000000401b0a <+484>:	lea    rcx,[rbp-0x40]
+   0x0000000000401b0e <+488>:	mov    edx,DWORD PTR [rbp-0xbc]
+   0x0000000000401b14 <+494>:	mov    r8,rcx
+   0x0000000000401b17 <+497>:	mov    ecx,edx
+   0x0000000000401b19 <+499>:	lea    rdx,[rip+0xa85c0]        # 0x4aa0e0 <global_buf>
+   0x0000000000401b20 <+506>:	mov    rsi,rax
+   0x0000000000401b23 <+509>:	lea    rax,[rip+0x7d4fa]        # 0x47f024
+   0x0000000000401b2a <+516>:	mov    rdi,rax
+   0x0000000000401b2d <+519>:	mov    eax,0x0
+   0x0000000000401b32 <+524>:	call   0x404fd0 <printf>
+   0x0000000000401b37 <+529>:	cmp    DWORD PTR [rbp-0xc4],0x1
+   0x0000000000401b3e <+536>:	jle    0x401b4d <main+551>
+   0x0000000000401b40 <+538>:	mov    rax,QWORD PTR [rbp-0xd0]
+   0x0000000000401b47 <+545>:	mov    rax,QWORD PTR [rax+0x8]
+   0x0000000000401b4b <+549>:	jmp    0x401b54 <main+558>
+   0x0000000000401b4d <+551>:	lea    rax,[rip+0x7d4e5]        # 0x47f039
+   0x0000000000401b54 <+558>:	mov    rdi,rax
+   0x0000000000401b57 <+561>:	call   0x4018c2 <vuln>
+   0x0000000000401b5c <+566>:	mov    eax,0x0
+   0x0000000000401b61 <+571>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x0000000000401b65 <+575>:	sub    rdx,QWORD PTR fs:0x28
+   0x0000000000401b6e <+584>:	je     0x401b75 <main+591>
+   0x0000000000401b70 <+586>:	call   0x41a6c0 <__stack_chk_fail_local>
+   0x0000000000401b75 <+591>:	leave
+   0x0000000000401b76 <+592>:	ret
+End of assembler dump.
+(qemu) gef➤  heap chunk 0x10
+[!] Command 'heap chunk' failed to execute properly, reason: Cannot access memory at address 0x0
+(qemu) gef➤  xinfo 0x10
+──────────────────────────────────────────────── xinfo: 0x10 ────────────────────────────────────────────────
+[*] Cannot reach 0x10 in memory space
+(qemu) gef➤  nosuchcommand
+Undefined command: "nosuchcommand".  Try "help".
+(qemu) gef➤  delete
+(qemu) gef➤  continue
+Continuing.
+[Inferior 1 (process 686) exited normally]
+gef➤  quit
+y

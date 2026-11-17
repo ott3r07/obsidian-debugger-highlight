@@ -1,0 +1,4 @@
+(qemu) gef➤  registers $rax $rsp $rip
+$rax   : 0x0               
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rip   : 0x0000000000401951  →  <main+002b> lea rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>

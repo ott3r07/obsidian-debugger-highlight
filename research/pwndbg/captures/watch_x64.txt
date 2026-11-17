@@ -1,0 +1,2 @@
+pwndbg> watch global_buf[0]
+Hardware watchpoint 5: global_buf[0]

@@ -1,0 +1,7 @@
+(qemu) gef➤  xinfo $sp
+─────────────────────────────────────────── xinfo: 0x2aaaab2abb90 ───────────────────────────────────────────
+Page: 0x0000000000000000  →  0xffffffffffffffff (size=0xffffffffffffffff)
+Permissions: rwx
+Pathname: /work/test_x64
+Offset (from page): 0x2aaaab2abb90
+Inode: 0

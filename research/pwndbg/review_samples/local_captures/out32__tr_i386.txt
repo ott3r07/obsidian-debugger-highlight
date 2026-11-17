@@ -1,0 +1,42 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> target remote :1235
+Remote debugging using :1235
+warning: BFD: warning: system-supplied DSO at 0x40801000 has a corrupt string table index
+0x080497b0 in _start ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ EAX  0
+ EBX  0
+ ECX  0
+ EDX  0
+ EDI  0
+ ESI  0
+ EBP  0
+ ESP  0x40800dd0 ◂— 1
+ EIP  0x80497b0 (_start) ◂— xor ebp, ebp
+───────────────────────────────────────────[ DISASM / i386 / set emulate on ]───────────────────────────────────────────
+ ► 0x80497b0 <_start>       xor    ebp, ebp            EBP => 0
+   0x80497b2 <_start+2>     pop    esi                 ESI => 1
+   0x80497b3 <_start+3>     mov    ecx, esp            ECX => 0x40800dd4 —▸ 0x40800edf ◂— './rv_i386'
+   0x80497b5 <_start+5>     and    esp, 0xfffffff0     ESP => 0x40800dd0 (0x40800dd4 & 0xfffffff0)
+   0x80497b8 <_start+8>     push   eax
+   0x80497b9 <_start+9>     push   esp
+   0x80497ba <_start+10>    push   edx
+   0x80497bb <_start+11>    call   _start+41                   <_start+41>
+ 
+   0x80497c0 <_start+16>    add    ebx, 0xb9834
+   0x80497c6 <_start+22>    push   0
+   0x80497c8 <_start+24>    push   0
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ esp 0x40800dd0 ◂— 1
+01:0004│     0x40800dd4 —▸ 0x40800edf ◂— './rv_i386'
+02:0008│     0x40800dd8 ◂— 0
+03:000c│     0x40800ddc —▸ 0x40800ee9 ◂— 'HOSTNAME=83281bbedf83'
+04:0010│     0x40800de0 —▸ 0x40800eff ◂— 'PWD=/rv'
+05:0014│     0x40800de4 —▸ 0x40800f07 ◂— '_=/usr/bin/qemu-i386'
+06:0018│     0x40800de8 —▸ 0x40800f1c ◂— 'LINES=50'
+07:001c│     0x40800dec —▸ 0x40800f25 ◂— 'HOME=/root'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x80497b0 _start
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

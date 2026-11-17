@@ -1,0 +1,4 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mpattern create 64
+[?2004l[1m[34m[+][0m Generating a pattern of 64 bytes (n=8)
+aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaa
+[1m[32m[+][0m Saved as '$_gef0'

@@ -1,0 +1,4 @@
+pwndbg> search -x 4242424242424242
+Searching for byte: b'BBBBBBBB'
+test_x64        0x555555557344 mov qword ptr [rax], rsi
+[stack]         0xffff9342cb98 'BBBBBBBBCCCCCCCC'

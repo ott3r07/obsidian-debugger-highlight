@@ -1,0 +1,6 @@
+pwndbg> vmmap stack
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+               Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+      0xffff92c2c000     0xffff92c2d000 ---p     1000       0 [anon_ffff92c2c]
+►     0xffff92c2d000     0xffff9342d000 rw-p   800000       0 [stack]
+  0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall]

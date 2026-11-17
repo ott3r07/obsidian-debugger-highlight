@@ -1,0 +1,22 @@
+$ ls -la /proc/self/maps
+-r--r--r-- 1 user user 0 Jan  1 00:00 /proc/self/maps
+$ cat /proc/self/maps
+55d0c8a00000-55d0c8a02000 r--p 00000000 08:01 1234567                    /usr/bin/cat
+55d0c8a02000-55d0c8a07000 r-xp 00002000 08:01 1234567                    /usr/bin/cat
+55d0c9c45000-55d0c9c66000 rw-p 00000000 00:00 0                          [heap]
+7ffd8c1d3000-7ffd8c1f4000 rw-p 00000000 00:00 0                          [stack]
+$ checksec --file=./vuln
+RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE
+Partial RELRO   No canary found   NX enabled    No PIE          No RPATH   No RUNPATH   66 Symbols	  No	0		1		./vuln
+user@host:~$ echo $((0x10 + 0x20))
+48
+root@kali:~# gcc -g -o test test.c && ./test
+Segmentation fault (core dumped)
+$ dmesg | tail -1
+[12345.678901] test[4242]: segfault at 0 ip 000055555555513d sp 00007ffc6b2c8a50 error 6 in test[555555555000+1000]
+$ strace ./test
+execve("./test", ["./test"], 0x7ffc6b2c8b60 /* 24 vars */) = 0
+brk(NULL)                               = 0x5555555a9000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f3c1a2b4000
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=NULL} ---
++++ killed by SIGSEGV (core dumped) +++

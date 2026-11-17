@@ -1,0 +1,13 @@
+# SOURCE: https://raw.githubusercontent.com/mullerdavid/ctf_writeups/master/cyberquest24/Online_Pwn_Framed/WRITEUP.md
+# DATE: 2024 (CyberQuest 2024)
+(gdb) info proc mappings
+process 3969
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset  Perms  objfile
+             0x41000            0x42000     0x1000        0x0  r--p   ./framed
+             0x42000            0x43000     0x1000     0x1000  rwxp   ./framed
+            0x400000           0x401000     0x1000     0x1000  r--p   ./framed
+      0x7ffff7ff9000     0x7ffff7ffd000     0x4000        0x0  r--p   [vvar]
+      0x7ffff7ffd000     0x7ffff7fff000     0x2000        0x0  r-xp   [vdso]
+      0x7ffffffde000     0x7ffffffff000    0x21000        0x0  rwxp   [stack]

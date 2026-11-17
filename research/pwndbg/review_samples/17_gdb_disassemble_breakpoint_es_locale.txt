@@ -1,0 +1,27 @@
+# SOURCE: https://raw.githubusercontent.com/HackiitUGR/writeups-ctf-deiit23/main/pwn/touch/README.md
+# DATE: 2023 (DEIIT CTF 2023)
+(gdb) start
+Punto de interrupción temporal 1 at 0x401b4e: file touch.c, line 14.
+Starting program: /tmp/touch
+
+Temporary breakpoint 1, main () at touch.c:14
+(gdb) disassemble main
+Dump of assembler code for function main:
+[...]
+   0x0000000000401c9e <+348>:   leave  
+   0x0000000000401c9f <+349>:   ret    
+End of assembler dump.
+(gdb) break *0x0000000000401c9f
+Punto de interrupción 2 at 0x401c9f: file touch.c, line 37.
+(gdb) continue
+Continuando.
+Código secreto de ayuda para flag2: 0x7fffffffd8d0
+Introduce un índice: 0
+Introduce un valor: 0
+Nope! Valores: 31337 31337
+
+Breakpoint 2, 0x0000000000401c9f in main () at touch.c:37
+(gdb) print $rsp
+$1 = (void *) 0x7fffffffd8f8
+(gdb) x/gx $rsp
+0x7fffffffd8f8: 0x00000000004020ca

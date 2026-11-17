@@ -1,0 +1,4 @@
+(gdb) bt
+#0  0x0000000000000000 in ?? ()
+#1  0x0000aaaaaaaa0a24 in compute (f=0x0, x=6, y=7) at test.c:14
+#2  0x0000aaaaaaaa0c54 in main (argc=1, argv=0xfffffffffcc8) at test.c:38

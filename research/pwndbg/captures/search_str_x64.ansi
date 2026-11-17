@@ -1,0 +1,3 @@
+[32m[1mpwndbg> [0m[32m[0msearch "global data"
+Searching for byte: b'global data'
+[35mtest_x64       [0m [35m0x55555555a020[0m 'global data string'

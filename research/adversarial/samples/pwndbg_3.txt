@@ -1,0 +1,211 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/2787
+> $ aarch64-linux-gnu-gdb --ex "target remote :1234" --ex "c"                                                        
+GNU gdb (GDB) 16.2
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "--host=x86_64-pc-linux-gnu --target=aarch64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+pwndbg: loaded 187 pwndbg commands and 46 shell commands. Type pwndbg [--shell | --all] [filter] for a list.
+pwndbg: created $rebase, $base, $hex2ptr, $argv, $envp, $argc, $environ, $bn_sym, $bn_var, $bn_eval, $ida GDB functions (can be used with print/break)
+Remote debugging using :1234
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0xffffa429260f5678 in ?? ()
+Continuing.
+^C
+Program received signal SIGINT, Interrupt.
+0xffffa429260f5678 in ?? ()
+------- tip of the day (disable with set show-tips off) -------
+Use hi to see if a an address belongs to a glibc heap chunk
+Exception occurred: context: address must be positive (<class 'AssertionError'>)
+For more info invoke `set exception-verbose on` and rerun the command
+or debug it by yourself with `set exception-debugger on`
+pwndbg> set exception-verbose on
+Set whether to print a full stacktrace for exceptions raised in Pwndbg commands to 'on'.
+pwndbg> ctx
+╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/commands/__init__.py:187 in __call__                        │
+│                                                                                                  │
+│   184 │                                                                                          │
+│   185 │   def __call__(self, *args: Any, **kwargs: Any) -> str | None:                           │
+│   186 │   │   try:                                                                               │
+│ ❱ 187 │   │   │   return self.function(*args, **kwargs)                                          │
+│   188 │   │   except TypeError:                                                                  │
+│   189 │   │   │   print(f"{self.function.__name__.strip()!r}: {self.function.__doc__.strip()}"   │
+│   190 │   │   │   pwndbg.exception.handle(self.function.__name__)                                │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/commands/context.py:728 in context                          │
+│                                                                                                  │
+│    725 │   │   │   │   result_settings[target].update(settings)                                  │
+│    726 │   │   │   │   with target as out:                                                       │
+│    727 │   │   │   │   │   result[target].extend(                                                │
+│ ❱  728 │   │   │   │   │   │   func(                                                             │
+│    729 │   │   │   │   │   │   │   target=out,                                                   │
+│    730 │   │   │   │   │   │   │   width=settings.get("width", None),                            │
+│    731 │   │   │   │   │   │   │   with_banner=settings.get("banner_top", True),                 │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/commands/context.py:390 in _serve_context_history           │
+│                                                                                                  │
+│    387 │   │   │   ):                                                                            │
+│    388 │   │   │   │   current_output = context_history[section_name][-1]                        │
+│    389 │   │   │   else:                                                                         │
+│ ❱  390 │   │   │   │   current_output = function(*a, **kw)                                       │
+│    391 │   │   │   if (                                                                          │
+│    392 │   │   │   │   len(context_history[section_name]) == 0                                   │
+│    393 │   │   │   │   or context_history[section_name][-1] != current_output                    │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/commands/context.py:984 in context_disasm                   │
+│                                                                                                  │
+│    981 │   if cs is not None and cs.syntax != syntax:                                            │
+│    982 │   │   pwndbg.lib.cache.clear_caches()                                                   │
+│    983 │                                                                                         │
+│ ❱  984 │   result = try_emulate_if_bug_disable(                                                  │
+│    985 │   │   lambda: pwndbg.aglib.nearpc.nearpc(                                               │
+│    986 │   │   │   lines=disasm_lines // 2,                                                      │
+│    987 │   │   │   emulate=bool(not pwndbg.config.emulate == "off"),                             │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/commands/context.py:960 in try_emulate_if_bug_disable       │
+│                                                                                                  │
+│    957                                                                                           │
+│    958 def try_emulate_if_bug_disable(handler: Callable[[], T]) -> T:                            │
+│    959 │   try:                                                                                  │
+│ ❱  960 │   │   return handler()                                                                  │
+│    961 │   except U.UcError as e:                                                                │
+│    962 │   │   print(                                                                            │
+│    963 │   │   │   message.warn(                                                                 │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/commands/context.py:985 in <lambda>                         │
+│                                                                                                  │
+│    982 │   │   pwndbg.lib.cache.clear_caches()                                                   │
+│    983 │                                                                                         │
+│    984 │   result = try_emulate_if_bug_disable(                                                  │
+│ ❱  985 │   │   lambda: pwndbg.aglib.nearpc.nearpc(                                               │
+│    986 │   │   │   lines=disasm_lines // 2,                                                      │
+│    987 │   │   │   emulate=bool(not pwndbg.config.emulate == "off"),                             │
+│    988 │   │   │   use_cache=True,                                                               │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/nearpc.py:143 in nearpc                               │
+│                                                                                                  │
+│   140 │   #         for line in symtab.linetable():                                              │
+│   141 │   #             pc_to_linenos[line.pc].append(line.line)                                 │
+│   142 │                                                                                          │
+│ ❱ 143 │   instructions, index_of_pc = pwndbg.aglib.disasm.near(                                  │
+│   144 │   │   pc, lines, emulate=emulate, show_prev_insns=not repeat, use_cache=use_cache, lin   │
+│   145 │   )                                                                                      │
+│   146                                                                                            │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/disasm/__init__.py:500 in near                        │
+│                                                                                                  │
+│   497 │   │   next_addresses_cache.add(target)                                                   │
+│   498 │   │                                                                                      │
+│   499 │   │   # The emulator is stepped within this call                                         │
+│ ❱ 500 │   │   insn = one(target, emu, put_cache=True)                                            │
+│   501 │   │                                                                                      │
+│   502 │   │   if insn:                                                                           │
+│   503 │   │   │   insns.append(insn)                                                             │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/disasm/__init__.py:245 in one                         │
+│                                                                                                  │
+│   242 │   │   return None                                                                        │
+│   243 │                                                                                          │
+│   244 │   # A for loop in case this returns an empty list                                        │
+│ ❱ 245 │   for insn in get(address, 1, emu, enhance=enhance, from_cache=from_cache, put_cache=p   │
+│   246 │   │   if put_backward_cache:                                                             │
+│   247 │   │   │   backward_cache[insn.next] = insn.address                                       │
+│   248 │   │   return insn                                                                        │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/disasm/__init__.py:280 in get                         │
+│                                                                                                  │
+│   277 │                                                                                          │
+│   278 │   retval: List[PwndbgInstruction] = []                                                   │
+│   279 │   for _ in range(instructions):                                                          │
+│ ❱ 280 │   │   i = get_one_instruction(                                                           │
+│   281 │   │   │   address, emu, enhance=enhance, from_cache=from_cache, put_cache=put_cache      │
+│   282 │   │   )                                                                                  │
+│   283 │   │   if i is None:                                                                      │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/disasm/__init__.py:218 in get_one_instruction         │
+│                                                                                                  │
+│   215 │   │   pwn_ins: PwndbgInstruction = PwndbgInstructionImpl(ins)                            │
+│   216 │   │                                                                                      │
+│   217 │   │   if enhance:                                                                        │
+│ ❱ 218 │   │   │   pwndbg.aglib.disasm.arch.DisassemblyAssistant.enhance(pwn_ins, emu)            │
+│   219 │   │                                                                                      │
+│   220 │   │   if put_cache:                                                                      │
+│   221 │   │   │   computed_instruction_cache[address] = pwn_ins                                  │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/disasm/arch.py:250 in enhance                         │
+│                                                                                                  │
+│    247 │   │   enhancer._enhance_conditional(instruction, emu)                                   │
+│    248 │   │                                                                                     │
+│    249 │   │   # Set the .target and .next fields                                                │
+│ ❱  250 │   │   enhancer._enhance_next(instruction, emu, jump_emu)                                │
+│    251 │   │                                                                                     │
+│    252 │   │   if bool(pwndbg.config.disasm_annotations):                                        │
+│    253 │   │   │   enhancer._set_annotation_string(instruction, emu)                             │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/disasm/arch.py:696 in _enhance_next                   │
+│                                                                                                  │
+│    693 │   │                                                                                     │
+│    694 │   │   if instruction.has_jump_target:                                                   │
+│    695 │   │   │   # Only bother doing the symbol lookup if this is a jump                       │
+│ ❱  696 │   │   │   instruction.target_string = MemoryColor.get_address_or_symbol(instruction.ta  │
+│    697 │   │                                                                                     │
+│    698 │   │   if (                                                                              │
+│    699 │   │   │   instruction.operands                                                          │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/color/memory.py:48 in get_address_or_symbol                 │
+│                                                                                                  │
+│    45 │   """                                                                                    │
+│    46 │   Convert and colorize address to symbol if it can be resolved, else return colorized    │
+│    47 │   """                                                                                    │
+│ ❱  48 │   return attempt_colorized_symbol(address) or get(address)                               │
+│    49                                                                                            │
+│    50                                                                                            │
+│    51 def attempt_colorized_symbol(address: int) -> str | None:                                  │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/color/memory.py:55 in attempt_colorized_symbol              │
+│                                                                                                  │
+│    52 │   """                                                                                    │
+│    53 │   Convert address to colorized symbol (if symbol is there), else None                    │
+│    54 │   """                                                                                    │
+│ ❱  55 │   symbol = pwndbg.aglib.symbol.resolve_addr(address)                                     │
+│    56 │   if symbol:                                                                             │
+│    57 │   │   return get(address, symbol)                                                        │
+│    58 │   else:                                                                                  │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/lib/cache.py:162 in decorator                               │
+│                                                                                                  │
+│   159 │   │   │   │   if cached_value is not _NOT_FOUND_IN_CACHE:                                │
+│   160 │   │   │   │   │   return cached_value                                                    │
+│   161 │   │   │   │                                                                              │
+│ ❱ 162 │   │   │   │   value = func(*a, **kw)                                                     │
+│   163 │   │   │   │                                                                              │
+│   164 │   │   │   │   # Sanity check: its not perfect and won't cover all cases like ([],)       │
+│   165 │   │   │   │   # but it should be good enough                                             │
+│                                                                                                  │
+│ /home/pazu/Tools/devel/pwndbg/pwndbg/aglib/symbol.py:109 in resolve_addr                         │
+│                                                                                                  │
+│   106 │   Resolution is performed in the following order:                                        │
+│   107 │   - Global scope symbols.                                                                │
+│   108 │   """                                                                                    │
+│ ❱ 109 │   assert addr >= 0, "address must be positive"                                           │
+│   110 │                                                                                          │
+│   111 │   symbol_name = pwndbg.dbg.selected_inferior().symbol_name_at_address(addr)              │
+│   112 │   if symbol_name:                                                                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+AssertionError: address must be positive
+If that is an issue, you can report it on https://github.com/pwndbg/pwndbg/issues
+(Please don't forget to search if it hasn't been reported before)
+To generate the report and open a browser, you may run `bugreport --run-browser`
+PS: Pull requests are welcome

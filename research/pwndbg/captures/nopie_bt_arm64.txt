@@ -1,0 +1,4 @@
+pwndbg> bt
+#0  0x0041414141414141 in ?? ()
+#1  0x4141414141414141 in ?? ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)

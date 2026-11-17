@@ -1,0 +1,13 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/3412
+pwndbg> vmmap kernel
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+0xffffff76001fa000 0xffffff76001fb000 r--p     1000  1f0000 espfix
+►xffffffff81000000 0xffffffff82000000 r-xp  1000000       0 kernel [.text]
+►xffffffff82000000 0xffffffff82a59000 r--p   a59000 1000000 kernel [.rodata]
+►xffffffff82c00000 0xffffffff83419000 rw-p   819000       0 kernel [stack]
+►xffffffff8378a000 0xffffffff83798000 rw-p     e000       0 kernel [.bss]
+►xffffffff83798000 0xffffffff83799000 r--p     1000    e000 kernel [.rodata]
+►xffffffff83799000 0xffffffff83e00000 rw-p   667000    f000 kernel [.bss]
+►xffffffffc0000000 0xffffffffc0200000 r-xp   200000       0 kernel [.driver .bpf]
+pwndbg> 

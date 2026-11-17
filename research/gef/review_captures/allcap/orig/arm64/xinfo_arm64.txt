@@ -1,0 +1,27 @@
+gef➤  xinfo $sp
+─────────────────────────────────────────── xinfo: 0xfffffffffad0 ───────────────────────────────────────────
+Page: 0x0000fffffffdf000  →  0x0001000000000000 (size=0x21000)
+Permissions: rw-
+Pathname: [stack]
+Offset (from page): 0x20ad0
+Inode: 0
+gef➤  xinfo $pc
+─────────────────────────────────────────── xinfo: 0xaaaaaaaa0a20 ───────────────────────────────────────────
+Page: 0x0000aaaaaaaa0000  →  0x0000aaaaaaaa1000 (size=0x1000)
+Permissions: r-x
+Pathname: /host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/gef/build/test_arm64
+Offset (from page): 0xa20
+Inode: 0
+Segment: .text (0x0000aaaaaaaa0800-0x0000aaaaaaaa0c38)
+Offset (from segment): 0x220
+Symbol: main+32
+gef➤  xinfo &global_buf
+─────────────────────────────────────────── xinfo: 0xaaaaaaac0010 ───────────────────────────────────────────
+Page: 0x0000aaaaaaac0000  →  0x0000aaaaaaac1000 (size=0x1000)
+Permissions: rw-
+Pathname: /host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/gef/build/test_arm64
+Offset (from page): 0x10
+Inode: 0
+Segment: .data (0x0000aaaaaaac0000-0x0000aaaaaaac0058)
+Offset (from segment): 0x10
+Symbol: global_buf

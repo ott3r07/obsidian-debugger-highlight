@@ -1,0 +1,5 @@
+[32m[1mpwndbg> [0m[32m[0mmalloc-chunk mid[1]-0x10
+[33mAllocated chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b4a0[0m
+Size: 0x90 (with flag bits: 0x91)
+

@@ -1,0 +1,21 @@
+# SOURCE: https://bkaraceylan.github.io/hack/binary-exploitation/2020/05/02/defeating-aslr-part-2.html
+gef➤  pattern create 200                                                                                                                                  
+[+] Generating a pattern of 200 bytes                                                                                                                     
+aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaaqaaaaaaaraaaaaaasaaaaaaata
+aaaaaauaaaaaaavaaaaaaawaaaaaaaxaaaaaaayaaaaaaa                                                                                                            
+[+] Saved as '$_gef0' 
+...
+gef➤  run
+Starting program: /root/Tuts/blogposts/smashbin/aslr_leak/garbage 
+Enter access password: aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaaqaa
+aaaaaraaaaaaasaaaaaaataaaaaaauaaaaaaavaaaaaaawaaaaaaaxaaaaaaayaaaaaaa
+
+access denied.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000401618 in auth ()
+...
+gef➤  pattern search $rsp
+[+] Searching '$rsp'
+[+] Found at offset 136 (little-endian search) likely
+[+] Found at offset 129 (big-endian search) 

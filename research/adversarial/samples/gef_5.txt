@@ -1,0 +1,34 @@
+# SOURCE: https://xuanxuanblingbling.github.io/ctf/tools/2021/11/11/gdb/
+gef➤  p __libc_malloc(20)
+$1 = (void *) 0x55555555f2a0
+gef➤  heap chunks
+Chunk(addr=0x55555555f010, size=0x290, flags=PREV_INUSE)
+    [0x000055555555f010     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x55555555f2a0, size=0x20, flags=PREV_INUSE)
+    [0x000055555555f2a0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x55555555f2c0, size=0x20d50, flags=PREV_INUSE)  ←  top chunk
+gef➤  p __libc_free(0x55555555f2a0)
+$2 = void
+gef➤  heap bins
+──────────────────────────────────────── Tcachebins for thread 1 ────────────────────────────────────────
+Tcachebins[idx=0, size=0x20] count=1  ←  Chunk(addr=0x55555555f2a0, size=0x20, flags=PREV_INUSE) 
+─────────────────────────────────── Fastbins for arena 0x7ffff7facb80 ───────────────────────────────────
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30] 0x00
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+────────────────────────────────── Unsorted Bin for arena 'main_arena' ──────────────────────────────────
+[+] Found 0 chunks in unsorted bin.
+─────────────────────────────────── Small Bins for arena 'main_arena' ───────────────────────────────────
+[+] Found 0 chunks in 0 small non-empty bins.
+─────────────────────────────────── Large Bins for arena 'main_arena' ───────────────────────────────────
+[+] Found 0 chunks in 0 large non-empty bins.
+gef➤  heap chunks
+Chunk(addr=0x55555555f010, size=0x290, flags=PREV_INUSE)
+    [0x000055555555f010     01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x55555555f2a0, size=0x20, flags=PREV_INUSE)
+    [0x000055555555f2a0     00 00 00 00 00 00 00 00 10 f0 55 55 55 55 00 00    ..........UUUU..]
+Chunk(addr=0x55555555f2c0, size=0x20d50, flags=PREV_INUSE)  ←  top chunk

@@ -1,0 +1,12 @@
+gef➤  heap chunk s1
+Chunk(addr=0xaaaaaaac19a0, size=0x0, flags=! PREV_INUSE)
+Chunk size: 0 (0x0)
+Usable size: 0 (0x0)
+Previous chunk size: 257 (0x101)
+PREV_INUSE flag: Off
+IS_MMAPPED flag: Off
+NON_MAIN_ARENA flag: Off
+
+Forward pointer: 0xf7fa0ba0
+Backward pointer: 0xffff
+

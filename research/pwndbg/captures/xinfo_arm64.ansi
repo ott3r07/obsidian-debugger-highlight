@@ -1,0 +1,12 @@
+[32m[1mpwndbg> [0m[32m[0mxinfo $sp
+Extended information for virtual address [33m0xfffffffffa80[0m:
+
+  Containing mapping:
+[33m    0xfffffffdf000    0x1000000000000 rw-p    21000       0 [stack][0m
+
+  Offset information:
+           Stack Top [33m0xfffffffffa80[0m = [33m0xfffffffdf000[0m + 0x20a80
+           Stack End [33m0xfffffffffa80[0m = [0m0x1000000000000[0m - 0x580
+       Stack Pointer [33m0xfffffffffa80[0m = [33m0xfffffffffa80[0m + 0x0
+       Frame Pointer [33m0xfffffffffa80[0m = [33m0xfffffffffb40[0m - 0xc0
+   Next Stack Canary [33m0xfffffffffa80[0m = [33m0xfffffffffb38[0m - 0xb8

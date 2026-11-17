@@ -1,0 +1,203 @@
+Script started on 2026-11-17 05:45:42+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./rv" <not executed on terminal>]
+break probe
+Reading symbols from ./rv...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x2aaaab2abd20 --> 0x2 
+RIP: 0x401790 (<_start>:	endbr64)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x0 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401787 <release_registered_frames+39>:	pop    rbp
+   0x401788 <release_registered_frames+40>:	ret
+   0x401789:	nop    DWORD PTR [rax+0x0]
+=> 0x401790 <_start>:	endbr64
+   0x401794 <_start+4>:	xor    ebp,ebp
+   0x401796 <_start+6>:	mov    r9,rdx
+   0x401799 <_start+9>:	pop    rsi
+   0x40179a <_start+10>:	mov    rdx,rsp
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abd20 --> 0x2 
+0008| 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0016| 0x2aaaab2abd30 --> 0x2aaaab2abef3 --> 0x414e54534f480078 ('x')
+0024| 0x2aaaab2abd38 --> 0x0 
+0032| 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0040| 0x2aaaab2abd48 --> 0x2aaaab2abf0b --> 0x76722f3d445750 ('PWD=/rv')
+0048| 0x2aaaab2abd50 --> 0x2aaaab2abf13 ("HOME=/root")
+0056| 0x2aaaab2abd58 --> 0x2aaaab2abf1e ("DELAY=1.5")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGTRAP
+0x0000000000401790 in _start ()
+gdb-peda$ break probe
+Breakpoint 1 at 0x4018d3: file rv.c, line 10.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBX: 0x2 
+RCX: 0x2000 ('')
+RDX: 0x2aaaab2abb88 (0x00002aaaab2abb88)
+RSI: 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+RDI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBP: 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+RIP: 0x4018d3 (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+R8 : 0x4aa840 --> 0x4b3930 --> 0x0 
+R9 : 0x20 (' ')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4018c7 <probe+18>:	mov    QWORD PTR [rbp-0x28],rsi
+   0x4018cb <probe+22>:	mov    QWORD PTR [rbp-0x30],rdx
+   0x4018cf <probe+26>:	mov    QWORD PTR [rbp-0x38],rcx
+=> 0x4018d3 <probe+30>:	mov    rax,QWORD PTR [rbp-0x38]
+   0x4018d7 <probe+34>:	mov    r12,rax
+   0x4018da <probe+37>:	mov    rax,QWORD PTR [rip+0xa87f7]        # 0x4aa0d8 <quote>
+   0x4018e1 <probe+44>:	mov    r13,rax
+   0x4018e4 <probe+47>:	mov    rax,QWORD PTR [rip+0xa87f5]        # 0x4aa0e0 <longstr>
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb50 --> 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0016| 0x2aaaab2abb58 --> 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+0024| 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0032| 0x2aaaab2abb68 --> 0x4019db (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+0040| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0048| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0056| 0x2aaaab2abb80 --> 0x100 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, probe (buf=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", a=0x2aaaab2abb98, b=0x2aaaab2abb88, v=0x2000)
+    at rv.c:10
+10	    asm volatile("mov %0, %%r12" :: "r"(v) : "r12");
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00400000         0x00401000         r--p	/rv/rv
+0x00401000         0x0047f000         r-xp	/rv/rv
+0x0047f000         0x004a5000         r--p	/rv/rv
+0x004a5000         0x004ac000         rw-p	/rv/rv
+0x004ac000         0x004b2000         rw-p	/rv/rv
+0x004b2000         0x004d4000         rw-p	[heap]
+0x00002aaaaaaac000 0x00002aaaab2ac000 rw-p	[stack]
+0x00002aaaab2ac000 0x00002aaaab2ad000 r-xp	mapped
+0x00002aaaab2ad000 0x00002aaaab2af000 rw-p	mapped
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+gdb-peda$ telescope 0xffffffffff600ff0 4
+Display memory content at an address with smart dereferences
+Usage:
+    telescope [linecount] (analyze at current $SP)
+    telescope address [linecount]
+
+gdb-peda$ telescope 0x4b5ff0 4
+0000| 0x4b5ff0 --> 0x0 
+0008| 0x4b5ff8 --> 0x0 
+0016| 0x4b6000 --> 0x0 
+0024| 0x4b6008 --> 0x0 
+gdb-peda$ xinfo 0x4b5ff8
+0x4b5ff8 --> 0x0 
+Virtual memory mapping:
+Start : 0x004b2000
+End   : 0x004d4000
+Offset: 0x3ff8
+Perm  : rw-p
+Name  : [heap]
+gdb-peda$ info frame
+Stack level 0, frame at 0x2aaaab2abb70:
+ rip = 0x4018d3 in probe (rv.c:10); saved rip = 0x4019db
+ called by frame at 0x2aaaab2abc20
+ source language c.
+ Arglist at 0x2aaaab2abb60, args: buf=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", a=0x2aaaab2abb98, 
+    b=0x2aaaab2abb88, v=0x2000
+ Locals at 0x2aaaab2abb60, Previous frame's sp is 0x2aaaab2abb70
+ Saved registers:
+  rbp at 0x2aaaab2abb60, r12 at 0x2aaaab2abb48, r13 at 0x2aaaab2abb50, r14 at 0x2aaaab2abb58, rip at 0x2aaaab2abb68
+gdb-peda$ pdisass main
+Dump of assembler code for function main:
+   0x0000000000401905 <+0>:	endbr64
+   0x0000000000401909 <+4>:	push   rbp
+   0x000000000040190a <+5>:	mov    rbp,rsp
+   0x000000000040190d <+8>:	sub    rsp,0xa0
+   0x0000000000401914 <+15>:	mov    DWORD PTR [rbp-0x94],edi
+   0x000000000040191a <+21>:	mov    QWORD PTR [rbp-0xa0],rsi
+   0x0000000000401921 <+28>:	lea    rax,[rbp-0x70]
+   0x0000000000401925 <+32>:	mov    edx,0x50
+   0x000000000040192a <+37>:	mov    esi,0x41
+   0x000000000040192f <+42>:	mov    rdi,rax
+   0x0000000000401932 <+45>:	call   0x401100
+   0x0000000000401937 <+50>:	lea    rax,[rbp-0x70]
+   0x000000000040193b <+54>:	add    rax,0x50
+   0x000000000040193f <+58>:	mov    DWORD PTR [rax],0x42424242
+   0x0000000000401945 <+64>:	mov    BYTE PTR [rax+0x4],0x0
+   0x0000000000401949 <+68>:	lea    rax,[rbp-0x80]
+   0x000000000040194d <+72>:	mov    QWORD PTR [rbp-0x78],rax
+   0x0000000000401951 <+76>:	lea    rax,[rbp-0x78]
+   0x0000000000401955 <+80>:	mov    QWORD PTR [rbp-0x80],rax
+   0x0000000000401959 <+84>:	lea    rax,[rbp-0x88]
+   0x0000000000401960 <+91>:	mov    QWORD PTR [rbp-0x88],rax
+   0x0000000000401967 <+98>:	lea    rax,[rip+0xaa1c2]        # 0x4abb30 <gself>
+   0x000000000040196e <+105>:	mov    QWORD PTR [rip+0xaa1bb],rax        # 0x4abb30 <gself>
+   0x0000000000401975 <+112>:	mov    edi,0x10
+   0x000000000040197a <+117>:	call   0x4100c0 <malloc>
+   0x000000000040197f <+122>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000000000401983 <+126>:	mov    edi,0x10
+   0x0000000000401988 <+131>:	call   0x4100c0 <malloc>
+   0x000000000040198d <+136>:	mov    QWORD PTR [rbp-0x10],rax
+   0x0000000000401991 <+140>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x0000000000401995 <+144>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x0000000000401999 <+148>:	mov    QWORD PTR [rax],rdx
+   0x000000000040199c <+151>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x00000000004019a0 <+155>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x00000000004019a4 <+159>:	mov    QWORD PTR [rax],rdx
+   0x00000000004019a7 <+162>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x00000000004019ab <+166>:	mov    QWORD PTR [rax+0x8],0x2000
+   0x00000000004019b3 <+174>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x00000000004019b7 <+178>:	mov    QWORD PTR [rax+0x8],0xa00
+   0x00000000004019bf <+186>:	lea    rdx,[rbp-0x88]
+   0x00000000004019c6 <+193>:	lea    rsi,[rbp-0x78]
+   0x00000000004019ca <+197>:	lea    rax,[rbp-0x70]
+   0x00000000004019ce <+201>:	mov    ecx,0x2000
+   0x00000000004019d3 <+206>:	mov    rdi,rax
+   0x00000000004019d6 <+209>:	call   0x4018b5 <probe>
+   0x00000000004019db <+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>
+   0x00000000004019e2 <+221>:	add    rax,0x5
+   0x00000000004019e6 <+225>:	mov    QWORD PTR [rip+0xa86e3],rax        # 0x4aa0d0 <gcounter>
+   0x00000000004019ed <+232>:	lea    rax,[rbp-0x70]
+   0x00000000004019f1 <+236>:	mov    rdi,rax
+   0x00000000004019f4 <+239>:	call   0x404e60 <puts>
+   0x00000000004019f9 <+244>:	cmp    DWORD PTR [rbp-0x94],0x1
+   0x0000000000401a00 <+251>:	jle    0x401a07 <main+258>
+   0x0000000000401a02 <+253>:	call   0x4018f8 <spin>
+   0x0000000000401a07 <+258>:	mov    eax,0x0
+   0x0000000000401a0c <+263>:	leave
+   0x0000000000401a0d <+264>:	ret
+End of assembler dump.
+gdb-peda$ quit
+
+Script done on 2026-11-17 05:45:55+00:00 [COMMAND_EXIT_CODE="0"]

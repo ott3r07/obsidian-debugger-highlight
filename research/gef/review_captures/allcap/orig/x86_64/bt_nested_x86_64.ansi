@@ -1,0 +1,4 @@
+[?2004h[?2004l[?2004h[1m(qemu) [0m[1;32mgef➤  [0mbt
+[?2004l#0  [33madd[m ([36ma[m=0x0, [36mb[m=0x40f88c) at [32mtest.c[m:10
+#1  [34m0x00000000004018ba[m in [33mcompute[m ([36mf[m=0x401865 <add>, [36mx[m=0x6, [36my[m=0x7) at [32mtest.c[m:14
+#2  [34m0x0000000000401acd[m in [33mmain[m ([36margc[m=0x1, [36margv[m=0x2aaaab2abd88) at [32mtest.c[m:38

@@ -1,0 +1,3 @@
+(gdb) x/3xg &global_buf
+0xaaaaaaac0010 <global_buf>:	0x64206c61626f6c67	0x6972747320617461
+0xaaaaaaac0020 <global_buf+16>:	0x000000000000676e

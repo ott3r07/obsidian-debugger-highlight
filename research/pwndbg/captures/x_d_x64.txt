@@ -1,0 +1,2 @@
+pwndbg> x/4dw $sp
+0xffff9b1bdb00:	-1692672776	65535	6	1

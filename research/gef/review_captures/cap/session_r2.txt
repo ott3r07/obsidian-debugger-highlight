@@ -1,0 +1,157 @@
+GEF for linux ready, type `gef' to start, `gef config' to configure
+90 commands loaded and 5 functions added for GDB 15.1 in 0.00ms using Python engine 3.12
+Reading symbols from /t/t2...
+gef➤  format-string-helper
+
+
+
+
+
+[+] Enabled 5 FormatString breakpoints
+gef➤  run
+Starting program: /t/t2 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+bins ready
+
+Breakpoint 1, __printf (format=0xfffffffffb68 "%p %p %p\n") at ./stdio-common/printf.c:28
+warning: 28	./stdio-common/printf.c: No such file or directory
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000fffffffffb68  →  "%p %p %p\n"
+$x1  : 0x0000aaaaaaaa0b08  →  "%p %p %p\n"
+$x2  : 0x0000aaaaaaaa0b10  →  0x3b031b010000000a ("\n"?)
+$x3  : 0x1               
+$x4  : 0x9               
+$x5  : 0x2               
+$x6  : 0x7025207025207025 ("%p %p %p"?)
+$x7  : 0xa702520702520   
+$x8  : 0x40              
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffc0  →  0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x17 : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0aa0  →  <main+0148> mov w0,  #0x0                   	// #0
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xfffff7e40584                  nop    
+   0xfffff7e40588                  nop    
+   0xfffff7e4058c                  nop    
+●→ 0xfffff7e40590 <printf+0000>    sub    sp,  sp,  #0x120
+   0xfffff7e40594 <printf+0004>    mov    w12,  #0xffffffc8            	// #-56
+   0xfffff7e40598 <printf+0008>    adrp   x9,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e4059c <printf+000c>    ldr    x9,  [x9,  #3720]
+   0xfffff7e405a0 <printf+0010>    add    x13,  sp,  #0xe0
+   0xfffff7e405a4 <printf+0014>    stp    x29,  x30,  [sp,  #80]
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xfffff7e40590 in __printf (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e40590 → __printf(format=0xfffffffffb68 "%p %p %p\n")
+[#1] 0xaaaaaaaa0aa0 → main(argc=0x1, argv=0xfffffffffd38)
+─────────────────────────────────────────────────────────────────────────────────────────────────── extra ────
+[*] Format string helper
+Possible insecure format string: printf('$x0'  →  0xfffffffffb68: '%p %p %p\n')
+Reason: Call to 'printf()' with format string argument in position #0 is in page 0xfffffffdf000 ([stack]) that has write permission
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000fffffffffb68  →  "%p %p %p\n"
+$x1  : 0x0000aaaaaaaa0b08  →  "%p %p %p\n"
+$x2  : 0x0000aaaaaaaa0b10  →  0x3b031b010000000a ("\n"?)
+$x3  : 0x1               
+$x4  : 0x9               
+$x5  : 0x2               
+$x6  : 0x7025207025207025 ("%p %p %p"?)
+$x7  : 0xa702520702520   
+$x8  : 0x40              
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffc0  →  0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x17 : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0aa0  →  <main+0148> mov w0,  #0x0                   	// #0
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xfffff7e40584                  nop    
+   0xfffff7e40588                  nop    
+   0xfffff7e4058c                  nop    
+●→ 0xfffff7e40590 <printf+0000>    sub    sp,  sp,  #0x120
+   0xfffff7e40594 <printf+0004>    mov    w12,  #0xffffffc8            	// #-56
+   0xfffff7e40598 <printf+0008>    adrp   x9,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e4059c <printf+000c>    ldr    x9,  [x9,  #3720]
+   0xfffff7e405a0 <printf+0010>    add    x13,  sp,  #0xe0
+   0xfffff7e405a4 <printf+0014>    stp    x29,  x30,  [sp,  #80]
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xfffff7e40590 in __printf (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e40590 → __printf(format=0xfffffffffb68 "%p %p %p\n")
+[#1] 0xaaaaaaaa0aa0 → main(argc=0x1, argv=0xfffffffffd38)
+─────────────────────────────────────────────────────────────────────────────────────────────────── extra ────
+[*] Format string helper
+Possible insecure format string: printf('$x0'  →  0xfffffffffb68: '%p %p %p\n')
+Reason: Call to 'printf()' with format string argument in position #0 is in page 0xfffffffdf000 ([stack]) that has write permission
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  kill
+[Inferior 1 (process 245) killed]
+gef➤  quit
+y

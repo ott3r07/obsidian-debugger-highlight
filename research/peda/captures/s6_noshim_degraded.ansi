@@ -1,0 +1,130 @@
+Script started on 2026-11-17 05:28:45+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -ex echo1 -ex 'target remote :1234' ./test_static" <not executed on terminal>]
+break main
+Reading symbols from [32m./test_static[m...
+The target architecture is set to "i386:x86-64".
+Undefined command: "echo1".  Try "help".
+Remote debugging using :1234
+Warning: '[1mset logging off[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled off[m'.
+
+Warning: '[1mset logging on[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled on[m'.
+
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x0 
+[;32mRBX[0m: 0x0 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: 0x0 
+[;32mRDI[0m: 0x0 
+[;32mRBP[0m: 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abd10[0m --> 0x1 
+[;32mRIP[0m: [;32m0x401780[0m --> 0x8949ed31fa1e0ff3 
+[;32mR8 [0m: 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x0 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: 0x0 
+[;32mR13[0m: 0x0 
+[;32mR14[0m: 0x0 
+[;32mR15[0m: 0x0[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401777 <release_registered_frames+39>:[;2m	pop    rbp[0m
+   0x401778 <release_registered_frames+40>:[;2;34m	ret[0m
+   0x401779:[;2m	nop    DWORD PTR [rax+0x0][0m
+=> 0x401780 <_start>:[;1;32m	endbr64[0m
+   0x401784 <_start+4>:[m	xor    ebp,ebp[0m
+   0x401786 <_start+6>:[m	mov    r9,rdx[0m
+   0x401789 <_start+9>:[m	pop    rsi[0m
+   0x40178a <_start+10>:[m	mov    rdx,rsp[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abd10[0m --> 0x1 [0m
+[m0008| [;34m0x2aaaab2abd18[0m --> [;34m0x2aaaab2abedb[0m ("./test_static")[0m
+[m0016| [;34m0x2aaaab2abd20[0m --> 0x0 [0m
+[m0024| [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abee9[0m ("HOSTNAME=e34b95a55858")[0m
+[m0032| [;34m0x2aaaab2abd30[0m --> [;34m0x2aaaab2abeff[0m ("PWD=/work")[0m
+[m0040| [;34m0x2aaaab2abd38[0m --> [;34m0x2aaaab2abf09[0m ("HOME=/root")[0m
+[m0048| [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abf14[0m ("NOSHIM=1")[0m
+[m0056| [;34m0x2aaaab2abd48[0m --> [;34m0x2aaaab2abf1d[0m --> 0x303d4c564c4853 ('SHLVL=0')[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGTRAP[0m[0m
+[34m0x0000000000401780[m in [33m_start[m ()
+[?2004h[;31mgdb-peda$ [0mbreak main
+[?2004lBreakpoint 1 at [34m0x401967[m: file [32mtest.c[m, line 26.
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;32m0x401954[0m --> 0xe5894855fa1e0ff3 
+[;32mRBX[0m: 0x1 
+[;32mRCX[0m: [;34m0x4b58f0[0m --> 0x0 
+[;32mRDX[0m: [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abee9[0m ("HOSTNAME=e34b95a55858")
+[;32mRSI[0m: [;34m0x2aaaab2abd18[0m --> [;34m0x2aaaab2abedb[0m ("./test_static")
+[;32mRDI[0m: 0x1 
+[;32mRBP[0m: [;34m0x2aaaab2abc00[0m --> [;34m0x2aaaab2abca0[0m --> [;34m0x2aaaab2abcf0[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb90[0m --> [;34m0x2aaaab2abd18[0m --> [;34m0x2aaaab2abedb[0m ("./test_static")
+[;32mRIP[0m: [;32m0x401967[0m --> 0x8d48097e029c7d83 
+[;32mR8 [0m: [;34m0x4ac260[0m --> [;34m0x4b58f0[0m --> 0x0 
+[;32mR9 [0m: 0x110 
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: [;34m0x2aaaab2abd18[0m --> [;34m0x2aaaab2abedb[0m ("./test_static")
+[;32mR13[0m: [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abee9[0m ("HOSTNAME=e34b95a55858")
+[;32mR14[0m: [;32m0x4a7f68[0m --> [;32m0x401870[0m --> 0x47f370b8fa1e0ff3 
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x40195c <main+8>:[;2m	sub    rsp,0x70[0m
+   0x401960 <main+12>:[;2m	mov    DWORD PTR [rbp-0x64],edi[0m
+   0x401963 <main+15>:[;2m	mov    QWORD PTR [rbp-0x70],rsi[0m
+=> 0x401967 <main+19>:[;1;32m	cmp    DWORD PTR [rbp-0x64],0x2[0m
+   0x40196b <main+23>:[;33m	jle    0x401976 <main+34>[0m
+   0x40196d <main+25>:[m	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>[0m
+   0x401974 <main+32>:[;33m	jmp    0x40197d <main+41>[0m
+   0x401976 <main+34>:[m	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb90[0m --> [;34m0x2aaaab2abd18[0m --> [;34m0x2aaaab2abedb[0m ("./test_static")[0m
+[m0008| [;34m0x2aaaab2abb98[0m --> 0x1004ac200 [0m
+[m0016| [;34m0x2aaaab2abba0[0m --> 0xf [0m
+[m0024| [;34m0x2aaaab2abba8[0m --> 0x0 [0m
+[m0032| [;34m0x2aaaab2abbb0[0m --> [;34m0x4b3190[0m --> [;34m0x4b57f0[0m --> 0x4 [0m
+[m0040| [;34m0x2aaaab2abbb8[0m --> 0x7f580 [0m
+[m0048| [;34m0x2aaaab2abbc0[0m --> [;34m0x2aaaab2abbf0[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abc90[0m --> [;34m0x2aaaab2abca0[0m --> [;34m0x2aaaab2abcf0[0m (--> ...)[0m
+[m0056| [;34m0x2aaaab2abbc8[0m --> [;32m0x40f1a2[0m --> 0x81840fc08548 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+
+Breakpoint 1, [33mmain[m ([36margc[m=0x1, [36margv[m=0x2aaaab2abd18) at [32mtest.c[m:26
+26	    op_fn fp [31m=[m [31m([margc [31m>[m [35m2[m[31m)[m [31m?[m mul [31m:[m add[31m;[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mvmmap stack
+[?2004l[;1;34mStart              End                Perm	Name[0m
+[m0x0000ffffcd990000 0x0000ffffcd9b1000 rw-p	[stack][0m
+[?2004h[;31mgdb-peda$ [0mxinfo $rip
+[?2004l[m[;32m0x401967[0m --> 0x8d48097e029c7d83 
+Virtual memory mapping:
+[;32mStart : 0x00401000
+[0m[;32mEnd   : 0x00481000
+[0m[;33mOffset: 0x967
+[0m[;31mPerm  : r--p
+[0m[;34mName  : /host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/peda/build/test_static[0m[0m
+[?2004h[;31mgdb-peda$ [0mtelescope 4
+[?2004l[m0000| [;34m0x2aaaab2abb90[0m --> [;34m0x2aaaab2abd18[0m --> [;34m0x2aaaab2abedb[0m ("./test_static")[0m
+[m0008| [;34m0x2aaaab2abb98[0m --> 0x1004ac200 [0m
+[m0016| [;34m0x2aaaab2abba0[0m --> 0xf [0m
+[m0024| [;34m0x2aaaab2abba8[0m --> 0x0 [0m
+[?2004h[;31mgdb-peda$ [0mprocinfo
+[?2004l[mexe = /usr/bin/qemu-x86_64[0m
+[mfd[0] -> /dev/null[0m
+[mfd[1] -> /tmp/prog_stdout.txt[0m
+[mfd[2] -> /tmp/prog_stdout.txt[0m
+[mfd[3] -> /tmp/qemu_pages.log[0m
+[mfd[4] -> socket:[88396][0m
+[mfd[5] -> socket:[88397][0m
+[mpid = 821[0m
+[mppid = 811[0m
+[muid = [0, 0, 0, 0][0m
+[mgid = [0, 0, 0, 0][0m
+[?2004h[;31mgdb-peda$ [0mquit
+[?2004l
+Script done on 2026-11-17 05:28:52+00:00 [COMMAND_EXIT_CODE="0"]

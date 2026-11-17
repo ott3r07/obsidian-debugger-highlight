@@ -1,0 +1,3 @@
+[32m[1mpwndbg> [0m[32m[0mx/2i $pc
+=> [34m0xaaaaaaaa0c44[m <[33mmain[m+368>:	[32mmov[m	[31mw2[m, [34m#0x7                   [m[37;2m	// #7[m
+   [34m0xaaaaaaaa0c48[m <[33mmain[m+372>:	[32mmov[m	[31mw1[m, [34m#0x6                   [m[37;2m	// #6[m

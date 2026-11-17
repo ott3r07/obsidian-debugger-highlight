@@ -1,0 +1,12 @@
+break_puts	break puts
+run	run
+up	up
+heap_chunks	heap chunks
+heap_bins	heap bins
+heap_chunk	heap chunk s1
+checksec	checksec
+got	got
+vmmap	vmmap
+telescope	telescope $sp -l 4
+registers	registers $x0 $sp $pc $cpsr
+xinfo	xinfo $sp

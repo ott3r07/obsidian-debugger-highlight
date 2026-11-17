@@ -1,0 +1,4 @@
+[32m[1mpwndbg> [0m[32m[0minfo sharedlibrary
+From                To                  Syms Read   Shared Object Library
+[34m0x0000fffff7fbedc0[m  [34m0x0000fffff7fdae70[m  Yes         [32m/lib/ld-linux-aarch64.so.1[m
+[34m0x0000fffff7e17d00[m  [34m0x0000fffff7f343d4[m  Yes         [32m/lib/aarch64-linux-gnu/libc.so.6[m

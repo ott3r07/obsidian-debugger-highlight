@@ -1,0 +1,3 @@
+pwndbg> smallbins
+smallbins
+empty

@@ -1,0 +1,2 @@
+(gdb) info registers rip
+rip            0x555555557489      0x555555557489 <main+398>

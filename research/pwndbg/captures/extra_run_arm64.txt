@@ -1,0 +1,88 @@
+pwndbg> run
+Starting program: /work/test_arm64 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=0x1, argv=0xfffffffffcc8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   0x510
+ X1   0xffff
+ X2   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X3   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X4   0x510
+ X5   0x40
+ X6   0x71fae20c11f79487
+ X7   0
+ X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+ PC   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0c38 <main+356>    bl     free@plt                    <free@plt>
+ 
+   0xaaaaaaaa0c3c <main+360>    ldr    x0, [sp, #0x20]
+   0xaaaaaaaa0c40 <main+364>    bl     free@plt                    <free@plt>
+ 
+b► 0xaaaaaaaa0c44 <main+368>    mov    w2, #7              W2 => 7
+   0xaaaaaaaa0c48 <main+372>    mov    w1, #6              W1 => 6
+   0xaaaaaaaa0c4c <main+376>    ldr    x0, [sp, #0x18]     X0, [{fp}] => 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0c50 <main+380>    bl     compute                     <compute>
+ 
+   0xaaaaaaaa0c54 <main+384>    str    w0, [sp, #0x14]
+   0xaaaaaaaa0c58 <main+388>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0c5c <main+392>    add    x0, x0, #0x980
+   0xaaaaaaaa0c60 <main+396>    str    x0, [sp, #0x18]
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0c44 main+368
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

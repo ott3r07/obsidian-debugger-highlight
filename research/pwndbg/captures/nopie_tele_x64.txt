@@ -1,0 +1,7 @@
+pwndbg> telescope $sp 10
+00:0000│ rsp 0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+... ↓        5 skipped
+06:0030│     0xffffaa8ddaa0 ◂— 0x41414141 /* 'AAAA' */
+07:0038│     0xffffaa8ddaa8 ◂— 0xc60000
+08:0040│     0xffffaa8ddab0 —▸ 0x4042a0 ◂— 0x404
+09:0048│     0xffffaa8ddab8 —▸ 0x4042d0 —▸ 0x4046a4 ◂— 0

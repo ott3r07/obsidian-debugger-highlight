@@ -1,0 +1,41 @@
+(gdb) info registers
+x0             0x510               1296
+x1             0xffff              65535
+x2             0xfffff7fa0ab0      281474842102448
+x3             0xfffff7fa0ab0      281474842102448
+x4             0x510               1296
+x5             0x40                64
+x6             0xc919919a563bbc5e  -3955970705610523554
+x7             0x0                 0
+x8             0xfffff7fa0ab0      281474842102448
+x9             0x28                40
+x10            0x1ccef0            1887984
+x11            0x0                 0
+x12            0xfffff7ffeb48      281474842487624
+x13            0x2f                47
+x14            0x1f22b4b           32648011
+x15            0xfffff7ff8e70      281474842463856
+x16            0xaaaaaaabffb0      187649984561072
+x17            0xfffff7e86d70      281474840948080
+x18            0x3                 3
+x19            0xfffffffffcc8      281474976709832
+x20            0x1                 1
+x21            0xaaaaaaabfd60      187649984560480
+x22            0xaaaaaaaa0ad4      187649984432852
+x23            0xfffffffffcd8      281474976709848
+x24            0xfffff7ffdb58      281474842483544
+x25            0x0                 0
+x26            0xfffff7ffe000      281474842484736
+x27            0xaaaaaaabfd60      187649984560480
+x28            0x0                 0
+x29            0xfffffffffb40      281474976709440
+x30            0xaaaaaaaa0c44      187649984433220
+sp             0xfffffffffa80      0xfffffffffa80
+pc             0xaaaaaaaa0c44      0xaaaaaaaa0c44 <main+368>
+cpsr           0x80001000          [ EL=0 BTYPE=0 SSBS N ]
+fpsr           0x0                 [ ]
+fpcr           0x0                 [ Len=0 Stride=0 RMode=0 ]
+tpidr          0xfffff7ff8620      0xfffff7ff8620
+tpidr2         0x0                 0x0
+pauth_dmask    0x7f000000000000    35747322042253312
+pauth_cmask    0x7f000000000000    35747322042253312

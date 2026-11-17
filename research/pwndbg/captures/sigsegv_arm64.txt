@@ -1,0 +1,71 @@
+pwndbg> continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000000000 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   6
+*X1   7
+*X2   0
+ X3   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X4   0x510
+ X5   0x40
+ X6   0x192799cd13d9e8b0
+ X7   0
+ X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+*X29  0xfffffffffa70 —▸ 0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+*SP   0xfffffffffa50 ◂— 0x600000007
+ LR   0xaaaaaaaa0a24 (compute+60) ◂— str w0, [sp, #0x14]
+*PC   0
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+Invalid address 0x0
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ sp  0xfffffffffa50 ◂— 0x600000007
+01:0008│-018 0xfffffffffa58 ◂— 0
+02:0010│-010 0xfffffffffa60 —▸ 0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+03:0018│-008 0xfffffffffa68 ◂— 0xf97e6a7af1457300
+04:0020│ x29 0xfffffffffa70 —▸ 0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+05:0028│+008 0xfffffffffa78 —▸ 0xaaaaaaaa0c54 (main+384) ◂— str w0, [sp, #0x14]
+06:0030│+010 0xfffffffffa80 —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+07:0038│+018 0xfffffffffa88 ◂— 0x100000000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x0
+   1 0xaaaaaaaa0a24 compute+60
+   2 0xaaaaaaaa0c54 main+384
+   3 0xfffff7e184c4 __libc_start_call_main+116
+   4 0xfffff7e18598 __libc_start_main+152
+   5 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────[ LAST SIGNAL ]─────────────────────────────────────────────────────
+Program received signal SIGSEGV (fault address: 0x0).
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

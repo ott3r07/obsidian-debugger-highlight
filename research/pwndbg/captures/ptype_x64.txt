@@ -1,0 +1,2 @@
+pwndbg> ptype fp
+type = int (*)(int, int)

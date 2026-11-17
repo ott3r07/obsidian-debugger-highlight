@@ -1,0 +1,3 @@
+gef➤  pattern search $sp
+[+] Searching for '70f7ffffffff0000'/'0000fffffffff770' with period=8
+[!] Pattern '$sp' not found

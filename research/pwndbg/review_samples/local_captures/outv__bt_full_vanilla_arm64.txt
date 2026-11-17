@@ -1,0 +1,19 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+(gdb) bt full
+#0  many_args (alpha_parameter=4369, beta_parameter=8738, 
+    gamma_string=0xaaaaaaaa0e78 "a fairly long string argument to force gdb line wrapping", 
+    delta_config=0xaaaaaaac0010 <g_cfg>, epsilon_value=21845, zeta_value=26214) at rv.c:16
+No locals.
+#1  0x0000aaaaaaaa0db8 in main (argc=1, argv=0xfffffffffce8) at rv.c:41
+        small = {0xaaaaaaac13a0, 0xaaaaaaac1450, 0xaaaaaaac1500, 0xaaaaaaac15b0, 0xaaaaaaac1660, 0xaaaaaaac1710, 
+          0xaaaaaaac17c0, 0xaaaaaaac1870, 0xaaaaaaac1920, 0x0, 0x0, 0x0, 0x0, 0x0, 0xfffffffffeb8, 0x181}
+        large = {0xaaaaaaac19d0, 0xaaaaaaac1f00, 0xaaaaaaac2470, 0xaaaaaaac2a20}
+        guard = {0xaaaaaaac1430, 0xaaaaaaac14e0, 0xaaaaaaac1590, 0xaaaaaaac1640, 0xaaaaaaac16f0, 0xaaaaaaac17a0, 
+          0xaaaaaaac1850, 0xaaaaaaac1900, 0xaaaaaaac19b0, 0xaaaaaaac1ee0, 0xaaaaaaac2450, 0xaaaaaaac2a00, 
+          0xaaaaaaac2ff0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}
+        gi = 13
+        i = 4
+        big = 0xaaaaaaac3010
+        t = 281474840326560
+        r = 43690

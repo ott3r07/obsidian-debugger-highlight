@@ -1,0 +1,41 @@
+gef➤  gef-remote --qemu-user --qemu-binary /t/test_x86 localhost 1235
+warning: BFD: warning: system-supplied DSO at 0x40801000 has a corrupt string table index
+0x080496f0 in _start ()
+[*] [remote] skipping 'system-supplied DSO at 0x40801000'
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x0       
+$ebx   : 0x0       
+$ecx   : 0x0       
+$edx   : 0x0       
+$esp   : 0x40800e40  →  0x00000001
+$ebp   : 0x0       
+$esi   : 0x0       
+$edi   : 0x0       
+$eip   : 0x080496f0  →  <_start+0000> xor ebp, ebp
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x2b 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x40800e40│+0x0000: 0x00000001	 ← $esp
+0x40800e44│+0x0004: 0x40800f2e  →  "/t/test_x86"
+0x40800e48│+0x0008: 0x00000000
+0x40800e4c│+0x000c: 0x40800f3a  →  "HOSTNAME=c024fe10785d"
+0x40800e50│+0x0010: 0x40800f50  →  "HOME=/root"
+0x40800e54│+0x0014: 0x40800f5b  →  "OLDPWD=/work"
+0x40800e58│+0x0018: 0x40800f68  →  "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr[...]"
+0x40800e5c│+0x001c: 0x40800faa  →  "LANG=C.UTF-8"
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x80496eb                  xchg   ax, ax
+    0x80496ed                  xchg   ax, ax
+    0x80496ef                  nop    
+ →  0x80496f0 <_start+0000>    xor    ebp, ebp
+    0x80496f2 <_start+0002>    pop    esi
+    0x80496f3 <_start+0003>    mov    ecx, esp
+    0x80496f5 <_start+0005>    and    esp, 0xfffffff0
+    0x80496f8 <_start+0008>    push   eax
+    0x80496f9 <_start+0009>    push   esp
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x80496f0 in _start (), reason: SIGTRAP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x80496f0 → _start()
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

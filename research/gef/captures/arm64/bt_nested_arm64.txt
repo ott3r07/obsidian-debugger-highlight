@@ -1,0 +1,4 @@
+gef➤  bt
+#0  add (a=0xaaaa, b=0xaaaa0b70) at test.c:10
+#1  0x0000aaaaaaaa097c in compute (f=0xaaaaaaaa0918 <add>, x=0x6, y=0x7) at test.c:14
+#2  0x0000aaaaaaaa0b80 in main (argc=0x1, argv=0xfffffffffd18) at test.c:38

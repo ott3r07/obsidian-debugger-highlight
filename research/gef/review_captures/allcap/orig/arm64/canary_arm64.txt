@@ -1,0 +1,2 @@
+gef➤  canary
+[+] The canary of process 453 is at 0xfffffffffed8, value is 0x154844b1b73fc000

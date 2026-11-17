@@ -1,0 +1,5 @@
+pwndbg> telescope &global_buf 4
+00:0000│     0x55555555a020 (global_buf) ◂— 'global data string'
+01:0008│     0x55555555a028 (global_buf+8) ◂— 'ata string'
+02:0010│     0x55555555a030 (global_buf+16) ◂— 0x676e /* 'ng' */
+03:0018│     0x55555555a038 (global_buf+24) ◂— 0

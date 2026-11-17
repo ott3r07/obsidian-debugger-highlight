@@ -1,0 +1,82 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/766
+# DATE: 2020-05-28
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+─────────────────────────────[ REGISTERS ]─────────────────────────────
+ EAX  0x0
+ EBX  0x0
+ ECX  0x0
+ EDX  0x0
+ EDI  0x0
+ ESI  0x0
+ EBP  0x0
+ ESP  0xffd3dd30 ◂— 0x1
+ EIP  0x10000 (_start) ◂— push   0x68 /* 0x2f68686a */
+──────────────────────────────[ DISASM ]───────────────────────────────
+ ► 0x10000 <_start>       push   0x68
+   0x10002 <_start+2>     push   0x732f2f2f
+   0x10007 <_start+7>     push   0x6e69622f
+   0x1000c <_start+12>    mov    ebx, esp
+   0x1000e <_start+14>    push   0x1010101
+   0x10013 <_start+19>    xor    dword ptr [esp], 0x1016972
+   0x1001a <_start+26>    xor    ecx, ecx
+   0x1001c <_start+28>    push   ecx
+   0x1001d <_start+29>    push   4
+   0x1001f <_start+31>    pop    ecx
+   0x10020 <_start+32>    add    ecx, esp
+───────────────────────────────[ STACK ]───────────────────────────────
+00:0000│ esp  0xffd3dd30 ◂— 0x1
+01:0004│      0xffd3dd34 —▸ 0xffd3ede6 ◂— 0x2d667463 ('ctf-')
+02:0008│      0xffd3dd38 ◂— 0x0
+03:000c│      0xffd3dd3c —▸ 0xffd3ee05 ◂— 0x3d202020 ('   =')
+04:0010│      0xffd3dd40 —▸ 0xffd3ee26 ◂— 0x752f3d5f ('_=/u')
+05:0014│      0xffd3dd44 —▸ 0xffd3ee3f ◂— 0x4c524550 ('PERL')
+06:0018│      0xffd3dd48 —▸ 0xffd3ee6c ◂— 0x5353454c ('LESS')
+07:001c│      0xffd3dd4c —▸ 0xffd3ee8e ◂— 0x5353454c ('LESS')
+─────────────────────────────[ BACKTRACE ]─────────────────────────────
+ ► f 0    10000 _start
+pwndbg>
+pwndbg> c
+Continuing.
+
+Program received signal SIGTRAP, Trace/breakpoint trap.
+ERROR: Could not find ELF base!
+0x1d66a090 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+─────────────────────────────[ REGISTERS ]─────────────────────────────
+ EAX  0x0
+ EBX  0x0
+ ECX  0x0
+ EDX  0x0
+ EDI  0x0
+ ESI  0x0
+ EBP  0x0
+ ESP  0xd4be1680
+ EIP  0x1d66a090
+──────────────────────────────[ DISASM ]───────────────────────────────
+Invalid address 0x1d66a090
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────[ STACK ]───────────────────────────────
+<Could not read memory at 0xd4be1680>
+─────────────────────────────[ BACKTRACE ]─────────────────────────────
+ ► f 0 1d66a090
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+0x561691661000 0x56169167d000 r-xp    1c000 0      /bin/dash
+0x56169187c000 0x56169187f000 rw-p     3000 1b000  /bin/dash
+0x56169187f000 0x561691881000 rw-p     2000 0
+0x7f111d669000 0x7f111d690000 r-xp    27000 0      /lib/x86_64-linux-gnu/ld-2.27.so
+0x7f111d890000 0x7f111d892000 rw-p     2000 27000  /lib/x86_64-linux-gnu/ld-2.27.so
+0x7f111d892000 0x7f111d893000 rw-p     1000 0
+0x7ffcd4bc1000 0x7ffcd4be2000 rw-p    21000 0      [stack]
+0x7ffcd4be7000 0x7ffcd4bea000 r--p     3000 0      [vvar]
+0x7ffcd4bea000 0x7ffcd4bec000 r-xp     2000 0      [vdso]
+0xffffffffff600000 0xffffffffff601000 r-xp     1000 0      [vsyscall]

@@ -1,0 +1,46 @@
+# SOURCE: local test program used for local_captures (compiled gcc -g -O0 -fstack-protector-all -pthread; rv_hard: -O2 -D_FORTIFY_SOURCE=2 -s; rv_i386: i686-linux-gnu-gcc -static -no-pie)
+# DATE: 2026-11-17
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <pthread.h>
+#include <unistd.h>
+
+struct inner { int a; char tag[8]; };
+struct cfg { const char *name; int vals[6]; struct inner in; double ratio; void (*cb)(void); unsigned char pad[40]; };
+struct node { struct node *next; long val; };
+
+struct cfg g_cfg = { "review", {1,2,3,0,0,0}, {7, "inn"}, 0.5, 0, {0} };
+struct node *head;
+
+void cb(void) { puts("cb"); }
+
+int many_args(long alpha_parameter, long beta_parameter, const char *gamma_string, struct cfg *delta_config, long epsilon_value, long zeta_value) {
+    return (int)(alpha_parameter + beta_parameter + epsilon_value + zeta_value) + gamma_string[0] + delta_config->vals[0];
+}
+
+void *worker(void *arg) {
+    volatile int x = (int)(long)arg;
+    x += 1;                    /* bp here in thread */
+    return (void*)(long)x;
+}
+
+int main(int argc, char **argv) {
+    void *small[16], *large[4], *guard[20];
+    int gi = 0, i;
+    g_cfg.cb = cb;
+    /* linked list on heap for long chains */
+    head = NULL;
+    for (i = 0; i < 8; i++) { struct node *n = malloc(sizeof *n); n->next = head; n->val = i; head = n; }
+    /* fill tcache for 0x90 and push extra into unsorted -> smallbin */
+    for (i = 0; i < 9; i++) { small[i] = malloc(0x80); guard[gi++] = malloc(0x18); }
+    for (i = 0; i < 4; i++) { large[i] = malloc(0x500 + i*0x40); guard[gi++] = malloc(0x18); }
+    for (i = 0; i < 9; i++) free(small[i]);
+    for (i = 0; i < 4; i++) free(large[i]);
+    void *big = malloc(0x1000);       /* sorts unsorted chunks into small/large bins */
+    strcpy(big, "AAAAAAAABBBBBBBB with spaces and \\ backslash <-- tricky");
+    pthread_t t; pthread_create(&t, NULL, worker, (void*)41); pthread_join(t, NULL);
+    int r = many_args(0x1111, 0x2222, "a fairly long string argument to force gdb line wrapping", &g_cfg, 0x5555, 0x6666);
+    printf("r=%d\n", r);
+    return argc > 1 ? 0 : 1;   /* exit code 1 */
+}

@@ -1,0 +1,3 @@
+pwndbg> search -p mid[1]
+Searching for a pointer-width integer: b'\xb0\xb4UUUU\x00\x00'
+[stack]         0xffff9b1bdb38 0x55555555b4b0

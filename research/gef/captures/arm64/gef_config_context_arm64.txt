@@ -1,0 +1,25 @@
+gef➤  gef config context
+─────────────────────────────── GEF configuration settings matching 'context' ───────────────────────────────
+context.enable (bool) = True
+context.show_source_code_variable_values (bool) = True
+context.show_full_source_file_name_max_len (int) = 30
+context.show_basename_source_file_name_max_len (int) = 20
+context.show_prefix_source_path_name_len (int) = 10
+context.show_stack_raw (bool) = False
+context.show_registers_raw (bool) = False
+context.show_opcodes_size (int) = 0
+context.peek_calls (bool) = True
+context.peek_ret (bool) = True
+context.nb_lines_stack (int) = 8
+context.grow_stack_down (bool) = False
+context.nb_lines_backtrace (int) = 10
+context.nb_lines_backtrace_before (int) = 2
+context.nb_lines_threads (int) = -1
+context.nb_lines_code (int) = 6
+context.nb_lines_code_prev (int) = 3
+context.ignore_registers (str) = ""
+context.clear_screen (bool) = True
+context.layout (str) = "legend regs stack code args source memory threads trace extra"
+context.redirect (str) = ""
+context.libc_args (bool) = False
+context.libc_args_path (str) = ""

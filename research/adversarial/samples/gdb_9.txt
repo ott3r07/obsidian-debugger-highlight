@@ -1,0 +1,45 @@
+# SOURCE: https://github.com/golang/go/issues/10468
+daemon404@bb-nas:~/test$ cat test.go
+package main
+import "fmt"
+func main() {
+        mapvar := make(map[string]string,5)
+        mapvar["abc"] = "def"
+        mapvar["ghi"] = "jkl"
+        strvar := "abc"
+        ptrvar := &strvar
+        fmt.Println("hi") // line 10
+        _ = ptrvar
+}
+daemon404@bb-nas:~/test$ gdb782 ./test
+GNU gdb (GDB) 7.8.2 [GDB v7.8.2 for FreeBSD]
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-portbld-freebsd10.1".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./test...done.
+Loading Go Runtime support.
+(gdb) br test.go:9
+Breakpoint 1 at 0x400d5c: file /home/daemon404/test/test.go, line 9.
+(gdb) r
+Starting program: /usr/home/daemon404/test/test
+
+Breakpoint 1, main.main () at /home/daemon404/test/test.go:9
+9               fmt.Println("hi") // line 10
+(gdb) info goroutine
+* 1 running  runtime.systemstack_switch
+  2 waiting  runtime.gopark
+  3 waiting  runtime.gopark
+  4 runnable runtime.runfinq
+(gdb) goroutine 1 bt
+#0  runtime.systemstack_switch () at /home/daemon404/go/src/runtime/asm_amd64.s:216
+Backtrace stopped: Cannot access memory at address 0x0

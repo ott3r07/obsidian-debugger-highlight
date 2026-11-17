@@ -1,0 +1,3 @@
+gef➤  telescope $sp -l 2
+0x0000fffffffffa90│+0x0000: 0x0000fffffffffb80  →  0x0000fffffffffc90  →  0x0000fffffffffca0  →  0x0000000000000000	 ← $x29, $sp
+0x0000fffffffffa98│+0x0008: 0x0000aaaaaaaa0b80  →  <main+0180> str w0,  [sp,  #20]

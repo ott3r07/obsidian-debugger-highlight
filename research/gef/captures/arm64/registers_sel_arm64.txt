@@ -1,0 +1,4 @@
+gef➤  registers $x0 $sp $pc
+$x0  : 0x0000fffff7ffdb50  →  0x154844b1b73fc000
+$sp  : 0x0000fffffffffad0  →  0x0000fffffffffd18  →  0x0000fffffffffef8  →  "/work/test_arm64"
+$pc  : 0x0000aaaaaaaa0a20  →  <main+0020> str x1,  [sp,  #184]

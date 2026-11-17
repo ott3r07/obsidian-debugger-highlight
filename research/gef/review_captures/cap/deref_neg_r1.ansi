@@ -1,0 +1,2 @@
+[?2004h[1;32mgef➤  [0mdereference $sp -l 4 -r 0x40
+[?2004l[1m[31m[!][0m Unmapped address: '0x40'

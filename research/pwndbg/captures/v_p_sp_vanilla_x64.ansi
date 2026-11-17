@@ -1,0 +1,2 @@
+(gdb) p $sp
+[36m$1[m = (void *[36m[m) [34m0xffff935a9b00[m

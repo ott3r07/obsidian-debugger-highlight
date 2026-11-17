@@ -1,0 +1,11 @@
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of /work/test_nopie_x64:
+GOT protection: No RELRO | Found 6 GOT entries passing the filter
+[0x403398] __libc_start_main@GLIBC_2.34 -> 0xffffa9e0d200 (__libc_start_main) ◂— endbr64
+[0x4033a0] __gmon_start__ -> 0
+[0x4033c0] free@GLIBC_2.2.5 -> 0xffffa9e90be0 (free) ◂— endbr64
+[0x4033c8] strcpy@GLIBC_2.2.5 -> 0x401040 ◂— endbr64
+[0x4033d0] printf@GLIBC_2.2.5 -> 0xffffa9e430e0 (printf) ◂— endbr64
+[0x4033d8] malloc@GLIBC_2.2.5 -> 0xffffa9e90500 (malloc) ◂— endbr64

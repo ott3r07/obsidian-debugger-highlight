@@ -1,0 +1,5 @@
+pwndbg> info sharedlibrary
+From                To                  Syms Read   Shared Object Library
+0x0000ffff92bef000  0x0000ffff92c19195  Yes (*)     /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+0x0000ffff9295a800  0x0000ffff92ae1b4d  Yes (*)     /usr/x86_64-linux-gnu/lib/libc.so.6
+(*): Shared library is missing debugging information.

@@ -1,0 +1,39 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/199
+# DATE: 2017-04-03
+pwndbg> heap
+Top Chunk: 0x603050
+Last Remainder: 0
+
+0x603000 FASTBIN {
+  prev_size = 0, 
+  size = 33, 
+  fd = 0x603030, 
+  bk = 0x0, 
+  fd_nextsize = 0x0, 
+  bk_nextsize = 0x31
+}
+0x603020 FASTBIN {
+  prev_size = 0, 
+  size = 49, 
+  fd = 0x676e6978676e6978, 
+  bk = 0x0, 
+  fd_nextsize = 0x0, 
+  bk_nextsize = 0x0
+}
+0x603050 PREV_INUSE {
+  prev_size = 0, 
+  size = 135089, 
+  fd = 0x0, 
+  bk = 0x0, 
+  fd_nextsize = 0x0, 
+  bk_nextsize = 0x0
+}
+pwndbg> x/gx 0x603020
+0x603020:	0x0000000000000000
+pwndbg> x/10gx 0x603020
+0x603020:	0x0000000000000000	0x0000000000000031
+0x603030:	0x676e6978676e6978	0x0000000000000000
+0x603040:	0x0000000000000000	0x0000000000000000
+0x603050:	0x0000000000000000	0x0000000000020fb1
+0x603060:	0x0000000000000000	0x0000000000000000
+pwndbg> 

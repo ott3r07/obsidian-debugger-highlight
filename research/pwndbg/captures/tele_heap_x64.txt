@@ -1,0 +1,4 @@
+pwndbg> telescope small[7] 4
+00:0000│     0x55555555b3f0 ◂— 0x55555555b
+01:0008│     0x55555555b3f8 ◂— 0
+... ↓     2 skipped

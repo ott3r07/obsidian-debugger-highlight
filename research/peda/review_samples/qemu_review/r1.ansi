@@ -1,0 +1,338 @@
+Script started on 2026-11-17 05:44:30+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./rv" <not executed on terminal>]
+break probe
+Reading symbols from [32m./rv[m...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: '[1mset logging off[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled off[m'.
+
+Warning: '[1mset logging on[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled on[m'.
+
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x0 
+[;32mRBX[0m: 0x0 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: 0x0 
+[;32mRDI[0m: 0x0 
+[;32mRBP[0m: 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abd20[0m --> 0x2 
+[;32mRIP[0m: [;31m0x401790[0m (<_start>:	endbr64)
+[;32mR8 [0m: 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x0 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: 0x0 
+[;32mR13[0m: 0x0 
+[;32mR14[0m: 0x0 
+[;32mR15[0m: 0x0[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401787 <release_registered_frames+39>:[;2m	pop    rbp[0m
+   0x401788 <release_registered_frames+40>:[;2;34m	ret[0m
+   0x401789:[;2m	nop    DWORD PTR [rax+0x0][0m
+=> 0x401790 <_start>:[;1;32m	endbr64[0m
+   0x401794 <_start+4>:[m	xor    ebp,ebp[0m
+   0x401796 <_start+6>:[m	mov    r9,rdx[0m
+   0x401799 <_start+9>:[m	pop    rsi[0m
+   0x40179a <_start+10>:[m	mov    rdx,rsp[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abd20[0m --> 0x2 [0m
+[m0008| [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0016| [;34m0x2aaaab2abd30[0m --> [;34m0x2aaaab2abef3[0m --> 0x414e54534f480078 ('x')[0m
+[m0024| [;34m0x2aaaab2abd38[0m --> 0x0 [0m
+[m0032| [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")[0m
+[m0040| [;34m0x2aaaab2abd48[0m --> [;34m0x2aaaab2abf0b[0m --> 0x76722f3d445750 ('PWD=/rv')[0m
+[m0048| [;34m0x2aaaab2abd50[0m --> [;34m0x2aaaab2abf13[0m ("HOME=/root")[0m
+[m0056| [;34m0x2aaaab2abd58[0m --> [;34m0x2aaaab2abf1e[0m ("DELAY=1.5")[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGTRAP[0m[0m
+[34m0x0000000000401790[m in [33m_start[m ()
+[?2004h[;31mgdb-peda$ [0mbreak probe
+[?2004lBreakpoint 1 at [34m0x4018d3[m: file [32mrv.c[m, line 10.
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x2000 ('')
+[;32mRDX[0m: [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)
+[;32mRSI[0m: [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)
+[;32mRDI[0m: [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+[;32mRBP[0m: [;34m0x2aaaab2abb60[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb48[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mRIP[0m: [;31m0x4018d3[0m (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+[;32mR8 [0m: [;34m0x4aa840[0m --> [;34m0x4b3930[0m --> 0x0 
+[;32mR9 [0m: 0x20 (' ')
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mR13[0m: [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")
+[;32mR14[0m: [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x4018c7 <probe+18>:[;2m	mov    QWORD PTR [rbp-0x28],rsi[0m
+   0x4018cb <probe+22>:[;2m	mov    QWORD PTR [rbp-0x30],rdx[0m
+   0x4018cf <probe+26>:[;2m	mov    QWORD PTR [rbp-0x38],rcx[0m
+=> 0x4018d3 <probe+30>:[;1;32m	mov    rax,QWORD PTR [rbp-0x38][0m
+   0x4018d7 <probe+34>:[m	mov    r12,rax[0m
+   0x4018da <probe+37>:[m	mov    rax,QWORD PTR [rip+0xa87f7]        # 0x4aa0d8 <quote>[0m
+   0x4018e1 <probe+44>:[m	mov    r13,rax[0m
+   0x4018e4 <probe+47>:[m	mov    rax,QWORD PTR [rip+0xa87f5]        # 0x4aa0e0 <longstr>[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb48[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0008| [;34m0x2aaaab2abb50[0m --> [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")[0m
+[m0016| [;34m0x2aaaab2abb58[0m --> [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)[0m
+[m0024| [;34m0x2aaaab2abb60[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 [0m
+[m0032| [;34m0x2aaaab2abb68[0m --> [;31m0x4019db[0m (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)[0m
+[m0040| [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0048| [;34m0x2aaaab2abb78[0m --> 0x2004aa7e0 [0m
+[m0056| [;34m0x2aaaab2abb80[0m --> 0x100 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+
+Breakpoint 1, [33mprobe[m ([36mbuf[m=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", [36ma[m=0x2aaaab2abb98, [36mb[m=0x2aaaab2abb88, [36mv[m=0x2000)
+    at [32mrv.c[m:10
+10	    [01;34masm[m [01;34mvolatile[m[31m([m[31m"mov %0, %%r12"[m [31m::[m [31m"r"[m[31m([mv[31m)[m [31m:[m [31m"r12"[m[31m);[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mfinish
+[?2004lRun till exit from #0  [33mprobe[m ([36mbuf[m=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", [36ma[m=0x2aaaab2abb98, [36mb[m=0x2aaaab2abb88, 
+    [36mv[m=0x2000) at [32mrv.c[m:10
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;32m0x47f028[0m ('L' <repeats 200 times>...)
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x2000 ('')
+[;32mRDX[0m: [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)
+[;32mRSI[0m: [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)
+[;32mRDI[0m: [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+[;32mRBP[0m: [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mRIP[0m: [;31m0x4019db[0m (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+[;32mR8 [0m: [;34m0x4aa840[0m --> [;34m0x4b3930[0m --> 0x0 
+[;32mR9 [0m: 0x20 (' ')
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mR13[0m: [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")
+[;32mR14[0m: [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x4019ce <main+201>:[;2m	mov    ecx,0x2000[0m
+   0x4019d3 <main+206>:[;2m	mov    rdi,rax[0m
+   0x4019d6 <main+209>:[;2;32m	call   0x4018b5 <probe>[0m
+=> 0x4019db <main+214>:[;1;32m	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>[0m
+   0x4019e2 <main+221>:[m	add    rax,0x5[0m
+   0x4019e6 <main+225>:[m	mov    QWORD PTR [rip+0xa86e3],rax        # 0x4aa0d0 <gcounter>[0m
+   0x4019ed <main+232>:[m	lea    rax,[rbp-0x70][0m
+   0x4019f1 <main+236>:[m	mov    rdi,rax[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0008| [;34m0x2aaaab2abb78[0m --> 0x2004aa7e0 [0m
+[m0016| [;34m0x2aaaab2abb80[0m --> 0x100 [0m
+[m0024| [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)[0m
+[m0032| [;34m0x2aaaab2abb90[0m --> [;34m0x2aaaab2abb98[0m (0x00002aaaab2abb90)[0m
+[m0040| [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)[0m
+[m0048| [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")[0m
+[m0056| [;34m0x2aaaab2abba8[0m ('A' <repeats 72 times>, "BBBB")[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[33mmain[m ([36margc[m=0x2, [36margv[m=0x2aaaab2abd28) at [32mrv.c[m:25
+25	    gcounter [31m+=[m [35m5[m[31m;[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mtelescope $rsp 24
+[?2004l[m0000| [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0008| [;34m0x2aaaab2abb78[0m --> 0x2004aa7e0 [0m
+[m0016| [;34m0x2aaaab2abb80[0m --> 0x100 [0m
+[m0024| [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)[0m
+[m0032| [;34m0x2aaaab2abb90[0m --> [;34m0x2aaaab2abb98[0m (0x00002aaaab2abb90)[0m
+[m0040| [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)[0m
+[m0048| [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")[0m
+[m0056| [;34m0x2aaaab2abba8[0m ('A' <repeats 72 times>, "BBBB")[0m
+[m0064| [;34m0x2aaaab2abbb0[0m ('A' <repeats 64 times>, "BBBB")[0m
+[m0072| [;34m0x2aaaab2abbb8[0m ('A' <repeats 56 times>, "BBBB")[0m
+[m0080| [;34m0x2aaaab2abbc0[0m ('A' <repeats 48 times>, "BBBB")[0m
+[m0088| [;34m0x2aaaab2abbc8[0m ('A' <repeats 40 times>, "BBBB")[0m
+[m0096| [;34m0x2aaaab2abbd0[0m ('A' <repeats 32 times>, "BBBB")[0m
+[m0104| [;34m0x2aaaab2abbd8[0m ('A' <repeats 24 times>, "BBBB")[0m
+[m0112| [;34m0x2aaaab2abbe0[0m ('A' <repeats 16 times>, "BBBB")[0m
+[m0120| [;34m0x2aaaab2abbe8[0m ("AAAAAAAABBBB")[0m
+[m0128| [;34m0x2aaaab2abbf0[0m --> 0x42424242 ('BBBB')[0m
+[m0136| [;34m0x2aaaab2abbf8[0m --> [;34m0x4b11d8[0m --> 0x0 [0m
+[m0144| [;34m0x2aaaab2abc00[0m --> [;34m0x4b3920[0m --> [;34m0x4b3900[0m (0x00000000004b3920)[0m
+[m0152| [;34m0x2aaaab2abc08[0m --> [;34m0x4b3900[0m --> [;34m0x4b3920[0m (0x00000000004b3900)[0m
+[m0160| [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 [0m
+[m0168| [;34m0x2aaaab2abc18[0m --> [;31m0x401f38[0m (<__libc_start_call_main+104>:	mov    edi,eax)[0m
+[m0176| [;34m0x2aaaab2abc20[0m --> [;34m0x2aaaab2abca0[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 [0m
+[m0184| [;34m0x2aaaab2abc28[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[?2004h[;31mgdb-peda$ [0mx/s $rsp+0x20
+[?2004l[34m0x2aaaab2abb90[m:	"\230\273*\253\252*"
+[?2004h[;31mgdb-peda$ [0minfo registers r12
+[?2004lr12            0x2aaaab2abd28      0x2aaaab2abd28
+[?2004h[;31mgdb-peda$ [0mcontext reg
+[?2004l[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;32m0x47f028[0m ('L' <repeats 200 times>...)
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x2000 ('')
+[;32mRDX[0m: [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)
+[;32mRSI[0m: [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)
+[;32mRDI[0m: [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+[;32mRBP[0m: [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mRIP[0m: [;31m0x4019db[0m (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+[;32mR8 [0m: [;34m0x4aa840[0m --> [;34m0x4b3930[0m --> 0x0 
+[;32mR9 [0m: 0x20 (' ')
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mR13[0m: [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")
+[;32mR14[0m: [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[?2004h[;31mgdb-peda$ [0mxinfo &gself
+[?2004l[m[;33mWarning: not a register nor an address[0m[0m
+[m[0m
+[?2004h[;31mgdb-peda$ [0mtelescope &gself 2
+[?2004l[m[;32mDisplay memory content at an address with smart dereferences[0m
+[;34mUsage:[0m
+    telescope [linecount] (analyze at current $SP)
+    telescope address [linecount]
+[0m
+[?2004h[;31mgdb-peda$ [0mxinfo $r13
+[?2004l[m[;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")
+Virtual memory mapping:
+[;32mStart : 0x00002aaaaaaac000
+[0m[;32mEnd   : 0x00002aaaab2ac000
+[0m[;33mOffset: 0x7ffd40
+[0m[;31mPerm  : rw-p
+[0m[;34mName  : [stack][0m[0m
+[?2004h[;31mgdb-peda$ [0mpset option pagesize 0
+[?2004l[mpagesize = 0[0m
+[?2004h[;31mgdb-peda$ [0mtelescope $rsp 40
+[?2004l[m0000| [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+0008| [;34m0x2aaaab2abb78[0m --> 0x2004aa7e0 
+0016| [;34m0x2aaaab2abb80[0m --> 0x100 
+0024| [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)
+0032| [;34m0x2aaaab2abb90[0m --> [;34m0x2aaaab2abb98[0m (0x00002aaaab2abb90)
+0040| [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)
+0048| [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+0056| [;34m0x2aaaab2abba8[0m ('A' <repeats 72 times>, "BBBB")
+0064| [;34m0x2aaaab2abbb0[0m ('A' <repeats 64 times>, "BBBB")
+0072| [;34m0x2aaaab2abbb8[0m ('A' <repeats 56 times>, "BBBB")
+0080| [;34m0x2aaaab2abbc0[0m ('A' <repeats 48 times>, "BBBB")
+0088| [;34m0x2aaaab2abbc8[0m ('A' <repeats 40 times>, "BBBB")
+0096| [;34m0x2aaaab2abbd0[0m ('A' <repeats 32 times>, "BBBB")
+0104| [;34m0x2aaaab2abbd8[0m ('A' <repeats 24 times>, "BBBB")
+0112| [;34m0x2aaaab2abbe0[0m ('A' <repeats 16 times>, "BBBB")
+0120| [;34m0x2aaaab2abbe8[0m ("AAAAAAAABBBB")
+0128| [;34m0x2aaaab2abbf0[0m --> 0x42424242 ('BBBB')
+0136| [;34m0x2aaaab2abbf8[0m --> [;34m0x4b11d8[0m --> 0x0 
+0144| [;34m0x2aaaab2abc00[0m --> [;34m0x4b3920[0m --> [;34m0x4b3900[0m (0x00000000004b3920)
+0152| [;34m0x2aaaab2abc08[0m --> [;34m0x4b3900[0m --> [;34m0x4b3920[0m (0x00000000004b3900)
+0160| [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+0168| [;34m0x2aaaab2abc18[0m --> [;31m0x401f38[0m (<__libc_start_call_main+104>:	mov    edi,eax)
+0176| [;34m0x2aaaab2abc20[0m --> [;34m0x2aaaab2abca0[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+0184| [;34m0x2aaaab2abc28[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+0192| [;34m0x2aaaab2abc30[0m --> 0x200401685 
+0200| [;34m0x2aaaab2abc38[0m --> [;31m0x401905[0m (<main>:	endbr64)
+0208| [;34m0x2aaaab2abc40[0m --> 0x2 
+0216| [;34m0x2aaaab2abc48[0m --> 0xb6db5646106e4e29 
+0224| [;34m0x2aaaab2abc50[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+0232| [;34m0x2aaaab2abc58[0m --> [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")
+0240| [;34m0x2aaaab2abc60[0m --> [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)
+0248| [;34m0x2aaaab2abc68[0m --> 0x1 
+0256| [;34m0x2aaaab2abc70[0m --> 0xb6db5646114e4e29 
+0264| [;34m0x2aaaab2abc78[0m --> 0xe38e009354ea4e29 
+0272| [;34m0x2aaaab2abc80[0m --> 0x2aaa00000000 
+0280| [;34m0x2aaaab2abc88[0m --> 0x0 
+0288| [;34m0x2aaaab2abc90[0m --> 0x0 
+0296| [;34m0x2aaaab2abc98[0m --> 0x0 
+0304| [;34m0x2aaaab2abca0[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+0312| [;34m0x2aaaab2abca8[0m --> [;31m0x4018a1[0m (<frame_dummy+33>:	pop    rbp)
+[0m
+[?2004h[;31mgdb-peda$ [0mwatch gcounter
+[?2004lHardware watchpoint 2: gcounter
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+Warning:
+Could not insert hardware watchpoint 2.
+Could not insert hardware breakpoints:
+You may have requested too many hardware breakpoints/watchpoints.
+
+Command aborted.
+[?2004h[;31mgdb-peda$ [0mdelete
+[?2004l[?2004h[;31mgdb-peda$ [0mbreak spin
+[?2004lBreakpoint 3 at [34m0x401900[m: file [32mrv.c[m, line 15.
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x55 ('U')
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+[;32mRDI[0m: [;34m0x4ac860[0m --> 0x0 
+[;32mRBP[0m: [;34m0x2aaaab2abb60[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb60[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+[;32mRIP[0m: [;31m0x401900[0m (<spin+8>:	jmp    0x401900 <spin+8>)
+[;32mR8 [0m: [;34m0x4aa840[0m --> [;34m0x4b4940[0m --> 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x3 
+[;32mR12[0m: [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mR13[0m: [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")
+[;32mR14[0m: [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x4018f8 <spin>:[;2m	endbr64[0m
+   0x4018fc <spin+4>:[;2m	push   rbp[0m
+   0x4018fd <spin+5>:[;2m	mov    rbp,rsp[0m
+=> 0x401900 <spin+8>:[;1;32m	jmp    0x401900 <spin+8>[0m
+ | 0x401902 <spin+10>:[m	nop[0m
+ | 0x401903 <spin+11>:[m	pop    rbp[0m
+ | 0x401904 <spin+12>:[;34m	ret[0m
+ | 0x401905 <main>:[m	endbr64[0m
+ |->[;31m=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>[0m
+       0x401902 <spin+10>:	nop
+       0x401903 <spin+11>:	pop    rbp
+       0x401904 <spin+12>:	ret
+[;31m                                                                  JUMP is taken[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb60[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+0008| [;34m0x2aaaab2abb68[0m --> [;31m0x401a07[0m (<main+258>:	mov    eax,0x0)
+0016| [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+0024| [;34m0x2aaaab2abb78[0m --> 0x2004aa7e0 
+0032| [;34m0x2aaaab2abb80[0m --> 0x100 
+0040| [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)
+0048| [;34m0x2aaaab2abb90[0m --> [;34m0x2aaaab2abb98[0m (0x00002aaaab2abb90)
+0056| [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)
+[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+
+Breakpoint 3, [33mspin[m () at [32mrv.c[m:15
+15	[01m__attribute__[m[31m(([mnoinline[31m))[m [32mvoid[m [01mspin[m[31m([m[32mvoid[m[31m)[m [31m{[m [01;34masm[m [01;34mvolatile[m[31m([m[31m"1: jmp 1b"[m[31m);[m [31m}[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mcontext code
+[?2004l[2J[H[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x4018f8 <spin>:[;2m	endbr64[0m
+   0x4018fc <spin+4>:[;2m	push   rbp[0m
+   0x4018fd <spin+5>:[;2m	mov    rbp,rsp[0m
+=> 0x401900 <spin+8>:[;1;32m	jmp    0x401900 <spin+8>[0m
+ | 0x401902 <spin+10>:[m	nop[0m
+ | 0x401903 <spin+11>:[m	pop    rbp[0m
+ | 0x401904 <spin+12>:[;34m	ret[0m
+ | 0x401905 <main>:[m	endbr64[0m
+ |->[;31m=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>[0m
+       0x401902 <spin+10>:	nop
+       0x401903 <spin+11>:	pop    rbp
+       0x401904 <spin+12>:	ret
+[;31m                                                                  JUMP is taken[0m[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[?2004h[;31mgdb-peda$ [0mquit
+[?2004l
+Script done on 2026-11-17 05:44:58+00:00 [COMMAND_EXIT_CODE="0"]

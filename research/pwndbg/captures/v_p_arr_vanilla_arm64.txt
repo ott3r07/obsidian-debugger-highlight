@@ -1,0 +1,3 @@
+(gdb) p small
+$7 = {0xaaaaaaac12a0, 0xaaaaaaac12d0, 0xaaaaaaac1300, 0xaaaaaaac1330, 0xaaaaaaac1360, 0xaaaaaaac1390, 0xaaaaaaac13c0, 
+  0xaaaaaaac13f0}

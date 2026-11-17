@@ -1,0 +1,13 @@
+pwndbg> got -r
+State of the GOT of /work/test_x64:
+GOT protection: Full RELRO | Found 10 GOT entries passing the filter
+[0x555555559fb0] free@GLIBC_2.2.5 -> 0xffff9a770be0 (free) ◂— endbr64
+[0x555555559fb8] strcpy@GLIBC_2.2.5 -> 0xffff9a84e3b0 ◂— endbr64
+[0x555555559fc0] __stack_chk_fail@GLIBC_2.4 -> 0xffff9a7fad50 (__stack_chk_fail) ◂— endbr64
+[0x555555559fc8] printf@GLIBC_2.2.5 -> 0xffff9a7230e0 (printf) ◂— endbr64
+[0x555555559fd0] malloc@GLIBC_2.2.5 -> 0xffff9a770500 (malloc) ◂— endbr64
+[0x555555559fd8] __libc_start_main@GLIBC_2.34 -> 0xffff9a6ed200 (__libc_start_main) ◂— endbr64
+[0x555555559fe0] _ITM_deregisterTMCloneTable -> 0
+[0x555555559fe8] __gmon_start__ -> 0
+[0x555555559ff0] _ITM_registerTMCloneTable -> 0
+[0x555555559ff8] __cxa_finalize@GLIBC_2.2.5 -> 0xffff9a70a2a0 (__cxa_finalize) ◂— endbr64

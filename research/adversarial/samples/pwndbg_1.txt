@@ -1,0 +1,45 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/1548
+pwndbg> ctx
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+──────────────────[ REGISTERS / show-flags off / show-compact-regs off ]───────────────────
+*R0   0x2c5f3c4 ◂— 0x73637000 /* 'scp' */
+*R1   0x13212a0 ◂— stcleq p0, c10, [r0, #0x384]
+*R2   0x3da2c28 —▸ 0xa819a5c8 —▸ 0xa819a6b8 —▸ 0xa819a7a8 —▸ 0xa819a898 ◂— ...
+*R3   0x11
+*R4   0x1
+*R5   0x8000 ◂— svcvc #0x454c46
+*R6   0x2c5f3c4 ◂— 0x73637000 /* 'scp' */
+ R7   0x0
+*R8   0x11
+*R9   0x12
+*R10  0x0
+*R11  0xb5efed34 —▸ 0x3c869c ◂— ldrbne r4, [r0], #0xde2
+*R12  0x118acac ◂— stcleq p0, c10, [r0, #0x384]
+*SP   0xb5efed08 —▸ 0x8000 ◂— svcvc #0x454c46
+*PC   0x3c86c0 ◂— ldcllo p15, c2, [pc], #0x384
+─────────────────────────────[ DISASM / arm / set emulate on ]─────────────────────────────
+ ► 0x3c86c0    ldcllo p15, c2, [pc], #0x384
+   0x3c86c4    subeq  r5, r0, r2, ror #1
+   0x3c86c8    bleq   #0x3c8738                     <0x3c8738>
+
+   0x3c86cc    stmdagt lr!, {r0, r1, r5, r6, r7, fp}
+   0x3c86d0    strbmi r0, [ip], #0xfe3
+   0x3c86d4    ldrteq sl, [r0], -r1, ror #1
+   0x3c86d8    cdphs  p0, #0, c10, c0, c3, #7
+   0x3c86dc    stclt  p0, c4, [r2], #-0x38c
+   0x3c86e0    stclpl p0, c4, [r0], {0xe3}
+   0x3c86e4    ldreq  sl, [r0], #-0xe1
+   0x3c86e8    ldcllo p15, c2, [pc], #0x384
+─────────────────────────────────────────[ STACK ]─────────────────────────────────────────
+00:0000│ sp 0xb5efed08 —▸ 0x8000 ◂— svcvc #0x454c46
+01:0004│    0xb5efed0c ◂— 0x1
+02:0008│    0xb5efed10 ◂— 0x0
+03:000c│    0xb5efed14 —▸ 0xa819a5 —▸ 0x240e337 ◂— smlabb r3, r0, r0, r3
+04:0010│    0xb5efed18 —▸ 0xa819 —▸ 0x19ba00 —▸ 0x500a0e1 ◂— 0x0
+05:0014│    0xb5efed1c —▸ 0x3da2c0c —▸ 0x2c5f3c4 ◂— 0x73637000 /* 'scp' */
+06:0018│    0xb5efed20 —▸ 0x1320000 —▸ 0x200a0e3 ◂— movw r2, #0x1040
+07:001c│    0xb5efed24 ◂— 0x0
+───────────────────────────────────────[ BACKTRACE ]───────────────────────────────────────
+ ► f 0 0x3c86c0
+   f 1      0x0
+───────────────────────────────────────────────────────────────────────────────────────────

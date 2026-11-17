@@ -1,0 +1,12 @@
+pwndbg> xinfo $sp
+Extended information for virtual address 0xfffffffffa80:
+
+  Containing mapping:
+    0xfffffffdf000    0x1000000000000 rw-p    21000       0 [stack]
+
+  Offset information:
+           Stack Top 0xfffffffffa80 = 0xfffffffdf000 + 0x20a80
+           Stack End 0xfffffffffa80 = 0x1000000000000 - 0x580
+       Stack Pointer 0xfffffffffa80 = 0xfffffffffa80 + 0x0
+       Frame Pointer 0xfffffffffa80 = 0xfffffffffb40 - 0xc0
+   Next Stack Canary 0xfffffffffa80 = 0xfffffffffb38 - 0xb8

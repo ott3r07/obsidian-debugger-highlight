@@ -1,0 +1,2 @@
+(gdb) p fp
+$4 = (op_fn) 0xaaaaaaaa0918 <add>

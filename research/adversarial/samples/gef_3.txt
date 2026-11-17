@@ -1,0 +1,48 @@
+# SOURCE: https://github.com/hugsy/gef/issues/829
+gef➤  gef-remote localhost:1234
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x90216c0f in ?? ()
+[+] Connected to 'localhost:1234'
+[+] Remote information loaded to temporary path '/tmp/gef/1'
+[!] Command 'gef-remote' failed to execute properly, reason: Not a valid ELF file (magic)
+gef➤  si
+0x90216c12 in ?? ()
+
+[ Legend: Modified register | Code | Heap | Stack | String ]
+───────────────────────────────────────────────────────────────── registers ────
+[!] Command 'registers' failed to execute properly, reason: max() arg is an empty sequence
+───────────────────────────────────────────────────────────────────── stack ────
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+0x00000090275a64│+0x0000: 0x0000000000f9ef  →  0x0000000000f9ef
+───────────────────────────────────────────────────────────── code:generic: ────
+   0x90216c0d                  push   ebx
+   0x90216c0e                  popf   
+   0x90216c0f                  movzx  edx, dl
+ → 0x90216c12                  shl    edx, 0x8
+   0x90216c15                  movzx  eax, cl
+   0x90216c18                  or     edx, eax
+   0x90216c1a                  mov    eax, edx
+   0x90216c1c                  pop    ebx
+   0x90216c1d                  pop    esi
+─────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x90216c12 in ?? (), reason: SINGLE STEP
+───────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x90216c12 → shl edx, 0x8
+[#1] 0x90216c6d → mov edx, eax
+[#2] 0x90137768 → add esp, 0xfffffffc
+[#3] 0x9020c7a7 → lea esp, [ebp-0x18]
+[#4] 0x90193596 → add esp, 0x20
+[#5] 0x9020a63c → add esp, 0x10
+[#6] 0x90192ed0 → jmp 0x90192f0f
+[#7] 0x90193060 → add esp, 0x10
+[#8] 0x9020a0c4 → lea esp, [ebp-0x18]
+[#9] 0x90193596 → add esp, 0x20
+────────────────────────────────────────────────────────────────────────────────
+gef➤  

@@ -1,0 +1,18 @@
+[32m[1mpwndbg> [0m[32m[0mlibc
+libc: glibc
+libc version: 2.39
+linked: dynamically
+URLs:
+    project homepage:       https://sourceware.org/glibc/
+    read the source:        https://elixir.bootlin.com/glibc/glibc-2.39/source
+    download the archive:   https://ftp.gnu.org/gnu/libc/glibc-2.39.tar.gz
+    git clone               https://sourceware.org/git/glibc.git
+Mappings:
+    libc is at:             [31m0xfffff7df0000[0m
+           /usr/lib/aarch64-linux-gnu/libc.so.6
+    ld is at:               [31m0xfffff7fbe000[0m
+           /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+Symbolication:
+    has exported symbols:  yes
+    has internal symbols:  yes
+    has debug info:        yes

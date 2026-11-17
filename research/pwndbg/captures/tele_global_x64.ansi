@@ -1,0 +1,5 @@
+[32m[1mpwndbg> [0m[32m[0mtelescope &global_buf 4
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m   [0m [35m0x55555555a020 (global_buf)[0m ◂— 'global data string'
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m [1m   [0m [35m0x55555555a028 (global_buf+8)[0m ◂— 'ata string'
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m [1m   [0m [35m0x55555555a030 (global_buf+16)[0m ◂— 0x676e /* 'ng' */
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m [1m   [0m [35m0x55555555a038 (global_buf+24)[0m ◂— 0

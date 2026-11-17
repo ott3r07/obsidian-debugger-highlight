@@ -1,0 +1,6 @@
+(qemu) gef➤  pattern search 0x6161616161616167
+[+] Searching for '6761616161616161'/'6161616161616167' with period=8
+[+] Found at offset 48 (little-endian search) likely
+(qemu) gef➤  pattern search aaaaaaba
+[+] Searching for '6162616161616161'/'6161616161616261' with period=8
+[+] Found at offset 7 (little-endian search) likely

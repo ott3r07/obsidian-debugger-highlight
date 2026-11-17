@@ -1,0 +1,32 @@
+pset option pagesize 0
+break main
+continue
+nextcall
+nextcall
+nextcall
+info sharedlibrary
+vmmap
+vmmap libc
+checksec
+elfsymbol printf
+elfsymbol
+elfheader
+xinfo 0x2aaaab3181ca
+telescope $rbp 8
+telescope $rsp 16
+xinfo $rip
+ropgadget libc
+#SLEEP 8
+readelf libc .text
+break vuln
+continue
+nextcall
+x/12i $pc
+disassemble vuln
+dumprop binary "pop"
+#SLEEP 6
+searchmem "/bin/sh" libc
+#SLEEP 3
+continue
+#SLEEP 2
+quit

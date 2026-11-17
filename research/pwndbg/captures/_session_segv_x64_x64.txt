@@ -1,0 +1,193 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_x64...
+------- tip of the day (disable with set show-tips off) -------
+If your program has multiple threads they will be displayed in the context display or using the context threads command
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffffaf5b6550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffffafdd5cf0 ◂— 1
+ RIP  0xffffaf5b6550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffffaf5b6543    call   0xffffaf5a5ce0              <0xffffaf5a5ce0>
+ 
+   0xffffaf5b6548    jmp    0xffffaf5b63e2              <0xffffaf5b63e2>
+ 
+   0xffffaf5b654d    nop    dword ptr [rax]
+ ► 0xffffaf5b6550    mov    rdi, rsp            RDI => 0xffffafdd5cf0 ◂— 1
+   0xffffaf5b6553    call   0xffffaf5b71e0              <0xffffaf5b71e0>
+ 
+   0xffffaf5b6558    mov    r12, rax
+   0xffffaf5b655b    mov    r13, rsp
+   0xffffaf5b655e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffffaf5b6564    test   edx, 2
+   0xffffaf5b656a  ? je     0xffffaf5b657d              <0xffffaf5b657d>
+ 
+   0xffffaf5b656c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffafdd5cf0 ◂— 1
+01:0008│     0xffffafdd5cf8 —▸ 0xffffafdd5ec8 ◂— './test_x64'
+02:0010│     0xffffafdd5d00 ◂— 0
+03:0018│     0xffffafdd5d08 —▸ 0xffffafdd5ed3 ◂— 'HOSTNAME=3e37fc6690d4'
+04:0020│     0xffffafdd5d10 —▸ 0xffffafdd5ee9 ◂— 'PWD=/work'
+05:0028│     0xffffafdd5d18 —▸ 0xffffafdd5ef3 ◂— '_=/usr/local/bin/qemu-x86_64'
+06:0030│     0xffffafdd5d20 —▸ 0xffffafdd5f10 ◂— 'LINES=50'
+07:0038│     0xffffafdd5d28 —▸ 0xffffafdd5f19 ◂— 'HOME=/root'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffffaf5b6550
+   1 0x1
+   2 0xffffafdd5ec8
+   3 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> break test.c:38
+Breakpoint 1 at 0x555555557489: file test.c, line 38.
+pwndbg> continue
+Continuing.
+
+Breakpoint 1, main (argc=0x1, argv=0xffffafdd5cf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+*RBX  0xffffafdd5cf8 —▸ 0xffffafdd5ec8 ◂— './test_x64'
+ RCX  0
+*RDX  0xffffaf4deb20 —▸ 0x55555555bfe0 ◂— 0
+*RDI  0xffffaf4deac0 ◂— 0
+*RSI  0x510
+ R8   0
+ R9   0
+*R10  7
+*R11  0x55555555b420 ◂— 0x55555555b
+*R12  1
+ R13  0
+*R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*R15  0xffffaf5cf000 (_rtld_global) —▸ 0xffffaf5d02e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffffafdd5bd0 —▸ 0xffffafdd5c70 —▸ 0xffffafdd5cd0 ◂— 0
+*RSP  0xffffafdd5b00 {argv} —▸ 0xffffafdd5cf8 —▸ 0xffffafdd5ec8 ◂— './test_x64'
+*RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+b► 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax                        RDI => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffafdd5b00 {argv} —▸ 0xffffafdd5cf8 —▸ 0xffffafdd5ec8 ◂— './test_x64'
+01:0008│-0c8 0xffffafdd5b08 ◂— 0x100000006
+02:0010│-0c0 0xffffafdd5b10 {i} ◂— 8
+03:0018│-0b8 0xffffafdd5b18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffffafdd5b20 {big} —▸ 0x55555555b5d0 —▸ 0xffffaf4deb20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffffafdd5b28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffffafdd5b30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffffafdd5b38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557489 main+398
+   1 0xffffaf3051ca
+   2 0xffffaf30528b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> set var fp = 0
+pwndbg> continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000000000 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  6
+ RBX  0xffffafdd5cf8 —▸ 0xffffafdd5ec8 ◂— './test_x64'
+ RCX  0
+*RDX  7
+*RDI  6
+*RSI  7
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffffaf5cf000 (_rtld_global) —▸ 0xffffaf5d02e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffffafdd5af0 —▸ 0xffffafdd5bd0 —▸ 0xffffafdd5c70 —▸ 0xffffafdd5cd0 ◂— 0
+*RSP  0xffffafdd5ac8 —▸ 0x55555555727b (compute+53) ◂— mov dword ptr [rbp - 0xc], eax
+*RIP  0
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+Invalid address 0x0
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffafdd5ac8 —▸ 0x55555555727b (compute+53) ◂— mov dword ptr [rbp - 0xc], eax
+01:0008│-020 0xffffafdd5ad0 ◂— 0x600000007
+02:0010│-018 0xffffafdd5ad8 ◂— 0
+03:0018│-010 0xffffafdd5ae0 ◂— 1
+04:0020│-008 0xffffafdd5ae8 ◂— 0xce7bce3e1d3a500
+05:0028│ rbp 0xffffafdd5af0 —▸ 0xffffafdd5bd0 —▸ 0xffffafdd5c70 —▸ 0xffffafdd5cd0 ◂— 0
+06:0030│+008 0xffffafdd5af8 —▸ 0x5555555574a2 (main+423) ◂— mov dword ptr [rbp - 0xbc], eax
+07:0038│+010 0xffffafdd5b00 —▸ 0xffffafdd5cf8 —▸ 0xffffafdd5ec8 ◂— './test_x64'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x0
+   1 0x55555555727b compute+53
+   2 0x5555555574a2 main+423
+   3 0xffffaf3051ca
+   4 0xffffaf30528b __libc_start_main+139
+   5 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> bt
+#0  0x0000000000000000 in ?? ()
+#1  0x000055555555727b in compute (f=0x0, x=0x6, y=0x7) at test.c:14
+#2  0x00005555555574a2 in main (argc=0x1, argv=0xffffafdd5cf8) at test.c:38
+#3  0x0000ffffaf3051ca in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#4  0x0000ffffaf30528b in __libc_start_main () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#5  0x0000555555557105 in _start ()
+pwndbg> 

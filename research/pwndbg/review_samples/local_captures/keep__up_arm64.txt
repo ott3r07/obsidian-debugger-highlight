@@ -1,0 +1,8 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> up
+   0 0xaaaaaaaa0a58 many_args+36
+ ► 1 0xaaaaaaaa0db8 main+616
+   2 0xfffff7e184c4 __libc_start_call_main+116
+   3 0xfffff7e18598 __libc_start_main+152
+   4 0xaaaaaaaa08f0 _start+48

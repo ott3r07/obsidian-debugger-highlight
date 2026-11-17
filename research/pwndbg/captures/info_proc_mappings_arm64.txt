@@ -1,0 +1,21 @@
+pwndbg> info proc mappings
+process 713
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset  Perms  objfile
+      0xaaaaaaaa0000     0xaaaaaaaa1000     0x1000        0x0  r-xp   /work/test_arm64
+      0xaaaaaaabf000     0xaaaaaaac0000     0x1000     0xf000  r--p   /work/test_arm64
+      0xaaaaaaac0000     0xaaaaaaac1000     0x1000    0x10000  rw-p   /work/test_arm64
+      0xaaaaaaac1000     0xaaaaaaae2000    0x21000        0x0  rw-p   [heap]
+      0xfffff7df0000     0xfffff7f8a000   0x19a000        0x0  r-xp   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7f8a000     0xfffff7f9d000    0x13000   0x19a000  ---p   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7f9d000     0xfffff7fa0000     0x3000   0x19d000  r--p   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7fa0000     0xfffff7fa2000     0x2000   0x1a0000  rw-p   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7fa2000     0xfffff7fae000     0xc000        0x0  rw-p   
+      0xfffff7fbe000     0xfffff7fe5000    0x27000        0x0  r-xp   /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+      0xfffff7ff7000     0xfffff7ff9000     0x2000        0x0  rw-p   
+      0xfffff7ff9000     0xfffff7ffb000     0x2000        0x0  r--p   [vvar]
+      0xfffff7ffb000     0xfffff7ffc000     0x1000        0x0  r-xp   [vdso]
+      0xfffff7ffc000     0xfffff7ffe000     0x2000    0x2e000  r--p   /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+      0xfffff7ffe000     0xfffff8000000     0x2000    0x30000  rw-p   /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+      0xfffffffdf000    0x1000000000000    0x21000        0x0  rw-p   [stack]

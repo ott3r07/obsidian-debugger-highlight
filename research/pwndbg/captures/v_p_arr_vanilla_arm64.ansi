@@ -1,0 +1,3 @@
+(gdb) p small
+[36m$7[m = {[34m0xaaaaaaac12a0[m, [34m0xaaaaaaac12d0[m, [34m0xaaaaaaac1300[m, [34m0xaaaaaaac1330[m, [34m0xaaaaaaac1360[m, [34m0xaaaaaaac1390[m, [34m0xaaaaaaac13c0[m, 
+  [34m0xaaaaaaac13f0[m}

@@ -1,0 +1,5 @@
+[?2004h[1;32mgef➤  [0mdereference $sp -l 4 -r $sp
+[?2004l[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000

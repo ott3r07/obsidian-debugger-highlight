@@ -1,0 +1,32 @@
+gef➤  heap chunks
+Chunk(addr=0x421010, size=0x290, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000000000421010     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x4212a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004212a0     21 04 00 00 00 00 00 00 11 f2 9c d0 6e ad 33 97    !...........n.3.]
+Chunk(addr=0x4213a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004213a0     81 16 42 00 00 00 00 00 11 f2 9c d0 6e ad 33 97    ..B.........n.3.]
+Chunk(addr=0x4214a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004214a0     81 17 42 00 00 00 00 00 11 f2 9c d0 6e ad 33 97    ..B.........n.3.]
+Chunk(addr=0x4215a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004215a0     81 10 42 00 00 00 00 00 11 f2 9c d0 6e ad 33 97    ..B.........n.3.]
+Chunk(addr=0x4216a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004216a0     81 11 42 00 00 00 00 00 11 f2 9c d0 6e ad 33 97    ..B.........n.3.]
+Chunk(addr=0x4217a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004217a0     81 12 42 00 00 00 00 00 11 f2 9c d0 6e ad 33 97    ..B.........n.3.]
+Chunk(addr=0x4218a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004218a0     81 13 42 00 00 00 00 00 11 f2 9c d0 6e ad 33 97    ..B.........n.3.]
+Chunk(addr=0x4219a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004219a0     a0 0b fa f7 ff ff 00 00 b0 1a 42 00 00 00 00 00    ..........B.....]
+Chunk(addr=0x421aa0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000000000421aa0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x421ac0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000000000421ac0     90 19 42 00 00 00 00 00 a0 0b fa f7 ff ff 00 00    ..B.............]
+Chunk(addr=0x421bc0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000000000421bc0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x421be0, size=0x810, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000000000421be0     a0 0f fa f7 ff ff 00 00 a0 0f fa f7 ff ff 00 00    ................]
+Chunk(addr=0x4223f0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x00000000004223f0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x422410, size=0x1010, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000000000422410     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0x423420, size=0x1ebf0, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  top chunk

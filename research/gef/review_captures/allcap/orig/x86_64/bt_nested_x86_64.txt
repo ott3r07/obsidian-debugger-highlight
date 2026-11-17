@@ -1,0 +1,4 @@
+(qemu) gef➤  bt
+#0  add (a=0x0, b=0x40f88c) at test.c:10
+#1  0x00000000004018ba in compute (f=0x401865 <add>, x=0x6, y=0x7) at test.c:14
+#2  0x0000000000401acd in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:38

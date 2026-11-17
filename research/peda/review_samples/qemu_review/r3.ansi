@@ -1,0 +1,22 @@
+Script started on 2026-11-17 05:45:57+00:00 [COMMAND="stty cols 120; gdb-multiarch -q -ex vmmap -ex checksec -ex "context" -ex "telescope" -ex quit ./rv" <not executed on terminal>]
+Reading symbols from ./rv...
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[m[;33mWarning: not running[0m[0m
+[;1;34mStart              End                Perm	Name[0m
+[m0x00401000         0x0047e8ad         rx-p	/rv/rv[0m
+[m0x00400270         0x004a4910         r--p	/rv/rv[0m
+[m0x004a5f50         0x004b1268         rw-p	/rv/rv[0m
+[mCANARY    : [;31mdisabled[0m[0m
+[mFORTIFY   : [;31mdisabled[0m[0m
+[mNX        : [;32mENABLED[0m[0m
+[mPIE       : [;31mdisabled[0m[0m
+[mRELRO     : [;31mdisabled[0m[0m
+[m[;33mWarning: not running[0m[0m
+[m[;33mWarning: not running[0m[0m
+
+Script done on 2026-11-17 05:45:57+00:00 [COMMAND_EXIT_CODE="0"]

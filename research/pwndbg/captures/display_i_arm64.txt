@@ -1,0 +1,3 @@
+pwndbg> display/i $pc
+1: x/i $pc
+=> 0xaaaaaaaa0c58 <main+388>:	adrp	x0, 0xaaaaaaaa0000

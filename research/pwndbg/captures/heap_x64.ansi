@@ -1,0 +1,72 @@
+[32m[1mpwndbg> [0m[32m[0mheap
+[33mAllocated chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b000[0m
+Size: 0x290 (with flag bits: 0x291)
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b290[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55555555b
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b2c0[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55500000e7fb
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b2f0[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55500000e78b
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b320[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55500000e65b
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b350[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55500000e66b
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b380[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55500000e63b
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b3b0[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55500000e6cb
+
+[32mFree chunk (fastbins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b3e0[0m
+Size: 0x30 (with flag bits: 0x31)
+[91mfd[0m: 0x55555555b
+
+[32mFree chunk (tcachebins)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b410[0m
+Size: 0x90 (with flag bits: 0x91)
+[91mfd[0m: 0x55555555b
+
+[33mAllocated chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b4a0[0m
+Size: 0x90 (with flag bits: 0x91)
+
+[33mAllocated chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b530[0m
+Size: 0x90 (with flag bits: 0x91)
+
+[32mFree chunk (unsortedbin)[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555b5c0[0m
+Size: 0x510 (with flag bits: 0x511)
+[91mfd[0m: 0xffff92b35b20
+[91mbk[0m: 0xffff92b35b20
+
+[33mAllocated chunk[0m
+Addr: [34m0x55555555bad0[0m
+Size: 0x510 (with flag bits: 0x510)
+
+[31mTop chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555bfe0[0m
+Size: 0x20020 (with flag bits: 0x20021)
+

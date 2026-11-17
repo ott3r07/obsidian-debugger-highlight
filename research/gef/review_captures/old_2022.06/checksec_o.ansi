@@ -1,0 +1,8 @@
+[?2004h[1;32mgef➤  [0mchecksec
+[?2004l[1m[34m[+][0m checksec for '/t/t2'
+[1m[33m[*][0m gef-2022.06.py:L8764 'checksec' is deprecated and will be removed in a feature release. Use Elf(fname).checksec()
+Canary                        : [32m[1m✓ [0m[0m(value: 0x761ae200)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [32m[1m✓ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [32mFull[0m

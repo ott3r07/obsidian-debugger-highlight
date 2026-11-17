@@ -1,0 +1,39 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/2267
+# DATE: 2024-06-28
+pwndbg> checksec
+[*] '/usr/bin/ls'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+    FORTIFY:  Enabled
+File:     /usr/bin/ls
+Arch:     amd64
+RELRO:    Full RELRO
+Stack:    Canary found
+NX:       NX enabled
+PIE:      PIE enabled
+FORTIFY:  Enabled
+pwndbg> checksec
+[*] '/usr/bin/ls'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+    FORTIFY:  Enabled
+'/usr/bin/ls'
+Arch:     amd64-64-little
+RELRO:    Full RELRO
+Stack:    Canary found
+NX:       NX enabled
+PIE:      PIE enabled
+FORTIFY:  Enabled
+File:     /usr/bin/ls
+Arch:     amd64
+RELRO:    Full RELRO
+Stack:    Canary found
+NX:       NX enabled
+PIE:      PIE enabled
+FORTIFY:  Enabled

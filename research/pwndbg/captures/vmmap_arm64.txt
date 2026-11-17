@@ -1,0 +1,19 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+    0xaaaaaaaa0000     0xaaaaaaaa1000 r-xp     1000       0 test_arm64
+    0xaaaaaaabf000     0xaaaaaaac0000 r--p     1000    f000 test_arm64
+    0xaaaaaaac0000     0xaaaaaaac1000 rw-p     1000   10000 test_arm64
+    0xaaaaaaac1000     0xaaaaaaae2000 rw-p    21000       0 [heap]
+    0xfffff7df0000     0xfffff7f8a000 r-xp   19a000       0 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7f8a000     0xfffff7f9d000 ---p    13000  19a000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7f9d000     0xfffff7fa0000 r--p     3000  19d000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7fa0000     0xfffff7fa2000 rw-p     2000  1a0000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7fa2000     0xfffff7fae000 rw-p     c000       0 [anon_fffff7fa2]
+    0xfffff7fbe000     0xfffff7fe5000 r-xp    27000       0 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffff7ff7000     0xfffff7ff9000 rw-p     2000       0 [anon_fffff7ff7]
+    0xfffff7ff9000     0xfffff7ffb000 r--p     2000       0 [vvar]
+    0xfffff7ffb000     0xfffff7ffc000 r-xp     1000       0 [vdso]
+    0xfffff7ffc000     0xfffff7ffe000 r--p     2000   2e000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffff7ffe000     0xfffff8000000 rw-p     2000   30000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffffffdf000    0x1000000000000 rw-p    21000       0 [stack]

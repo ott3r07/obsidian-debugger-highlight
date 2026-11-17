@@ -1,0 +1,3 @@
+(qemu) gef➤  pattern search $rbp
+[+] Searching for '6561616161616161'/'6161616161616165' with period=8
+[+] Found at offset 32 (little-endian search) likely

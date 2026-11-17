@@ -1,0 +1,7 @@
+20k-line note, gdb block every 200 lines [viewport top]: rebuild(keystroke)=0.0ms (tokenize calls/rebuild=0)  rebuild(scroll 1 line)=0.0ms (tokenize calls=0/5)
+20k-line note, gdb block every 200 lines [viewport bottom]: rebuild(keystroke)=7.7ms (tokenize calls/rebuild=0)  rebuild(scroll 1 line)=7.4ms (tokenize calls=5/5)
+20k-line note, no debugger blocks [viewport top]: rebuild(keystroke)=0.0ms (tokenize calls/rebuild=0)  rebuild(scroll 1 line)=0.0ms (tokenize calls=0/5)
+20k-line note, no debugger blocks [viewport bottom]: rebuild(keystroke)=3.9ms (tokenize calls/rebuild=0)  rebuild(scroll 1 line)=3.9ms (tokenize calls=0/5)
+one 2000-line pwndbg block [viewport top]: rebuild(keystroke)=0.2ms (tokenize calls/rebuild=0)  rebuild(scroll 1 line)=0.7ms (tokenize calls=5/5)
+one 2000-line pwndbg block [viewport bottom]: rebuild(keystroke)=0.6ms (tokenize calls/rebuild=0)  rebuild(scroll 1 line)=1.8ms (tokenize calls=5/5)
+typing in the middle of a 2000-line pwndbg block (69KB): median rebuild 6.8ms, max 7.7ms, tokenize calls 11

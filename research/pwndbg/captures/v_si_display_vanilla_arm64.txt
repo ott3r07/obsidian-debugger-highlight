@@ -1,0 +1,4 @@
+(gdb) si
+0x0000aaaaaaaa0b14	30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+1: x/i $pc
+=> 0xaaaaaaaa0b14 <main+64>:	mov	x0, x2

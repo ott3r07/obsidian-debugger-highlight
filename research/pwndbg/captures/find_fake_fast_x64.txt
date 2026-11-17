@@ -1,0 +1,7 @@
+pwndbg> find-fake-fast &global_buf
+global_max_fast symbol not found, using the default value: 0x80
+Searching for fastbin size fields up to 0x80, starting at 0x555555559fa8 resulting in an overlap of 0x55555555a020
+FAKE CHUNKS
+Exception occurred: malloc_chunk: Cannot access memory at address 0x555554000000 (<class 'pwndbg.dbg_mod.DebuggerError'>)
+For more info invoke `set exception-verbose on` and rerun the command
+or debug it by yourself with `set exception-debugger on`

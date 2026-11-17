@@ -1,0 +1,2 @@
+pwndbg> p/x fp
+$2 = 0xaaaaaaaa0918

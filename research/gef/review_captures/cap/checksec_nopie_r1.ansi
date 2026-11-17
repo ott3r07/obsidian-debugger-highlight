@@ -1,0 +1,7 @@
+[?2004h[1;32mgef➤  [0mchecksec /t/t2_nopie
+[?2004l[1m[34m[+][0m checksec for '/t/t2_nopie'
+Canary                        : [32m[1m✓ [0m[0m(value: 0x387fb66d57ee7900)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [31m[1m✘ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [33mPartial[0m

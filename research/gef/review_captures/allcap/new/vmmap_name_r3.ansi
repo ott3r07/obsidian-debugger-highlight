@@ -1,0 +1,10 @@
+[?2004h[1;32mgef➤  [0mvmmap --name libc
+[?2004l[ Legend:  [31mCode[0m | [35mStack[0m | [32mHeap[0m ]
+[34mStart              End                Offset             Perm Path[0m
+
+[32m[name = 'libc'][0m
+[31m0x0000fffff7df0000[0m [31m0x0000fffff7f8a000[0m [31m0x0000000000000000[0m [31mr-x[0m [31m/usr/lib/aarch64-linux-gnu/libc.so.6[0m
+0x0000fffff7f8a000[0m 0x0000fffff7f9d000[0m 0x000000000019a000[0m ---[0m /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+0x0000fffff7f9d000[0m 0x0000fffff7fa0000[0m 0x000000000019d000[0m r--[0m /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+0x0000fffff7fa0000[0m 0x0000fffff7fa2000[0m 0x00000000001a0000[0m rw-[0m /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+

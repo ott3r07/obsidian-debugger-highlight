@@ -1,0 +1,6 @@
+[32m[1mpwndbg> [0m[32m[0mvmmap stack
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+               Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+[0m      0xffff92c2c000     0xffff92c2d000 ---p     1000       0 [anon_ffff92c2c][0m
+[33m►     0xffff92c2d000     0xffff9342d000 rw-p   800000       0 [stack][0m
+[31m  0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall][0m

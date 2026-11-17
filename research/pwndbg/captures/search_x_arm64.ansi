@@ -1,0 +1,5 @@
+[32m[1mpwndbg> [0m[32m[0msearch -x 4242424242424242
+Searching for byte: b'BBBBBBBB'
+[31mtest_arm64     [0m [31m0xaaaaaaaa0d48[0m 'BBBBBBBBCCCCCCCC'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.
+[33m[stack]        [0m [33m0xfffffffffb10[0m 'BBBBBBBBCCCCCCCC'

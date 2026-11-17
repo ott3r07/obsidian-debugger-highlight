@@ -1,0 +1,41 @@
+# SOURCE: https://github.com/hugsy/gef/issues/1174
+─────────────────────────────── Exception raised ───────────────────────────────
+KeyError: 'syscall_args'
+───────────────────────────── Detailed stacktrace ──────────────────────────────
+↳ File "/usr/share/gef/gef.py", line 7693, in do_invoke()
+    →     display_pane_function, pane_title_function, condition = self.layout_mapping[section]
+↳ File "/usr/share/gef/gef.py", line 368, in wrapper()
+    →     return f(*args, **kwargs)
+↳ File "/usr/share/gef/gef.py", line 242, in wrapper()
+    →     rv = f(*args, **kwargs)
+↳ File "/usr/share/gef/gef.py", line 4724, in invoke()
+    →     bufferize(self.do_invoke)(argv)
+─────────────────────────────────── Version ────────────────────────────────────
+GEF: (Standalone)
+Blob Hash(/usr/share/gef/gef.py): 342d581b09ef0ec7f96ec90f6b0b48912e9c4cac
+SHA256(/usr/share/gef/gef.py): cf5795a042585d3791e5d63880050364f6338c10a91b409e530391c2391fe48d
+GDB: 16.2
+GDB-Python: 3.13
+obsolete loaded_command_names
+Loaded commands: $, aliases, aliases add, aliases ls, aliases rm, arch, arch get, arch list, arch set, aslr, canary, checksec, context, dereference, edit-flags, elf-info, entry-break, format-string-helper, functions, gef-remote, got, heap, heap arenas, heap bins, heap bins fast, heap bins large, heap bins small, heap bins tcache, heap bins unsorted, heap chunk, heap chunks, heap set-arena, heap-analysis-helper, hexdump, hexdump byte, hexdump dword, hexdump qword, hexdump word, highlight, highlight add, highlight clear, highlight list, highlight remove, hijack-fd, memory, memory list, memory reset, memory unwatch, memory watch, name-break, nop, patch, patch byte, patch dword, patch qword, patch string, patch word, pattern, pattern create, pattern search, pcustom, pcustom edit, pcustom list, pcustom show, pie, pie attach, pie breakpoint, pie delete, pie info, pie remote, pie run, print-format, process-search, process-status, registers, reset-cache, scan, search-pattern, shellcode, shellcode get, shellcode search, skipi, stepover, stub, theme, trace-run, version, vmmap, xfiles, xinfo, xor-memory, xor-memory display, xor-memory patch
+───────────────────────────── Last 10 GDB commands ─────────────────────────────
+  250  b read_args
+  251  r
+  252  b main
+  253  r
+  254  version
+  255  b main
+  256  r
+  257  gef config gef.debug 1
+  258  b main
+  259  r
+───────────────────────────── Runtime environment ──────────────────────────────
+* GDB: 16.2
+* Python: 3.13.2 - final
+* OS: Linux - 6.13.2-zen1-1-zen (x86_64)
+LSB Version:    n/a
+Distributor ID: Arch
+Description:    Arch Linux
+Release:        rolling
+Codename:       n/a
+────────────────────────────────────────────────────────────────────────────────

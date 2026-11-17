@@ -1,0 +1,18 @@
+# SOURCE: https://raw.githubusercontent.com/mufl0n/mufl0n.github.io/main/shc/pwn/terminal-mate/README.md
+# DATE: 2025-03-15
+pwndbg> vis_heap_chunks
+(...)
+0x564f746f6910	0x0000000000000042	0x0000000000000021	B.......!.......
+0x564f746f6920	0x0000564f746f71b0	0x0000000000000431	.qotOV..1.......
+0x564f746f6930	0x0000000000000000	0x0000000000000431	........1.......	 <-- largebins[0x0][0]
+0x564f746f6940	0x00007f57d921b0d0	0x00007f57d921b0d0	..!.W.....!.W...
+
+pwndbg> bins
+(...)
+largebins
+0x400-0x430: 0x564f746f6930 —▸ 0x7f57d921b0d0 (main_arena+1104) ◂— 0x564f746f6930 /* '0iotOV' */
+pwndbg> vmmap
+    0x55cb8b378000     0x55cb8b399000 rw-p    21000      0 [heap]
+    0x7f1389428000     0x7f13895bd000 r-xp   195000  28000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7f13895bd000     0x7f1389615000 r--p    58000 1bd000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7f138961a000     0x7f138961c000 rw-p     2000 219000 /usr/lib/x86_64-linux-gnu/libc.so.6

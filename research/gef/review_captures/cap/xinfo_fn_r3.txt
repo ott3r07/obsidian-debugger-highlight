@@ -1,0 +1,10 @@
+gef➤  xinfo &add
+────────────────── xinfo: 0xaaaaaaaa0918 ──────────────────
+Page: 0x0000aaaaaaaa0000  →  0x0000aaaaaaaa1000 (size=0x1000)
+Permissions: r-x
+Pathname: /t/test_arm64
+Offset (from page): 0x918
+Inode: 0
+Segment: .text (0x0000aaaaaaaa0800-0x0000aaaaaaaa0c38)
+Offset (from segment): 0x118
+Symbol: add

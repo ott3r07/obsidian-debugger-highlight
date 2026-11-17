@@ -1,0 +1,3 @@
+[?2004h[1;32mgef➤  [0mheap bins small
+[?2004l[90m─────────────────────────────────── [0m[36mSmall Bins for arena at 0xfffff7fa0a50[0m[90m ───────────────────────────────────[0m
+[1m[34m[+][0m Found 0 chunks in 0 small non-empty bins.

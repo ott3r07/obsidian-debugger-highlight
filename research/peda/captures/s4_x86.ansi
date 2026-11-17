@@ -1,0 +1,408 @@
+Script started on 2026-11-17 05:25:48+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./test_static32" <not executed on terminal>]
+break vuln
+Reading symbols from [32m./test_static32[m...
+The target architecture is set to "i386".
+Remote debugging using :1234
+warning: BFD: warning: system-supplied DSO at 0x40801000 has a corrupt string table index
+Warning: '[1mset logging off[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled off[m'.
+
+Warning: '[1mset logging on[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled on[m'.
+
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mEAX[0m: 0x0 
+[;32mEBX[0m: 0x0 
+[;32mECX[0m: 0x0 
+[;32mEDX[0m: 0x0 
+[;32mESI[0m: 0x0 
+[;32mEDI[0m: 0x0 
+[;32mEBP[0m: 0x0 
+[;32mESP[0m: [;34m0x40800d50[0m --> 0x2 
+[;32mEIP[0m: [;31m0x80496f0[0m (<_start>:	xor    ebp,ebp)[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x80496eb:[;2m	xchg   ax,ax[0m
+   0x80496ed:[;2m	xchg   ax,ax[0m
+   0x80496ef:[;2m	nop[0m
+=> 0x80496f0 <_start>:[;1;32m	xor    ebp,ebp[0m
+   0x80496f2 <_start+2>:[m	pop    esi[0m
+   0x80496f3 <_start+3>:[m	mov    ecx,esp[0m
+   0x80496f5 <_start+5>:[m	and    esp,0xfffffff0[0m
+   0x80496f8 <_start+8>:[m	push   eax[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x40800d50[0m --> 0x2 [0m
+[m0004| [;34m0x40800d54[0m --> [;34m0x40800e61[0m ("./test_static32")[0m
+[m0008| [;34m0x40800d58[0m --> [;34m0x40800e71[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0012| [;34m0x40800d5c[0m --> 0x0 [0m
+[m0016| [;34m0x40800d60[0m --> [;34m0x40800ed6[0m ("HOSTNAME=e34b95a55858")[0m
+[m0020| [;34m0x40800d64[0m --> [;34m0x40800eec[0m ("PWD=/work")[0m
+[m0024| [;34m0x40800d68[0m --> [;34m0x40800ef6[0m ("HOME=/root")[0m
+[m0028| [;34m0x40800d6c[0m --> [;34m0x40800f01[0m ("QEMU=qemu-i386")[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGTRAP[0m[0m
+[34m0x080496f0[m in [33m_start[m ()
+[?2004h[;31mgdb-peda$ [0mbreak vuln
+[?2004lBreakpoint 1 at [34m0x80498f3[m: file [32mtest.c[m, line 20.
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mEAX[0m: [;34m0x40800e71[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mEBX[0m: [;34m0x80e8ff4[0m --> 0x0 
+[;32mECX[0m: 0x0 
+[;32mEDX[0m: 0x0 
+[;32mESI[0m: [;34m0x40800c30[0m --> 0x2 
+[;32mEDI[0m: 0x1 
+[;32mEBP[0m: [;34m0x40800b98[0m --> [;34m0x40800c18[0m --> 0x1 
+[;32mESP[0m: [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 
+[;32mEIP[0m: [;31m0x80498f3[0m (<vuln+22>:	sub    esp,0x8)[0m
+[m[;32mEFLAGS[0m: 0x212 ([;32mcarry[0m [;32mparity[0m [;1;31mADJUST[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x80498e5 <vuln+8>:[;2m	sub    esp,0x24[0m
+   0x80498e8 <vuln+11>:[;2;32m	call   0x8049740 <__x86.get_pc_thunk.bx>[0m
+   0x80498ed <vuln+16>:[;2m	add    ebx,0x9f707[0m
+=> 0x80498f3 <vuln+22>:[;1;32m	sub    esp,0x8[0m
+   0x80498f6 <vuln+25>:[m	push   DWORD PTR [ebp+0x8][0m
+   0x80498f9 <vuln+28>:[m	lea    eax,[ebp-0x28][0m
+   0x80498fc <vuln+31>:[m	push   eax[0m
+   0x80498fd <vuln+32>:[;32m	call   0x8049020[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[m0004| [;34m0x40800b74[0m --> 0x1 [0m
+[m0008| [;34m0x40800b78[0m --> [;34m0x40800c18[0m --> 0x1 [0m
+[m0012| [;34m0x40800b7c[0m --> [;31m0x804cbe9[0m (<printf+41>:	add    esp,0x1c)[0m
+[m0016| [;34m0x40800b80[0m --> [;34m0x80e9c60[0m --> 0xfbad2884 [0m
+[m0020| [;34m0x40800b84[0m --> [;32m0x80b4036[0m ("%s %s %d\n")[0m
+[m0024| [;34m0x40800b88[0m --> [;34m0x40800ba4[0m --> [;34m0x40800bb4[0m ("Hello, PEDA highlighter!")[0m
+[m0028| [;34m0x40800b8c[0m --> 0x0 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+
+Breakpoint 1, [33mvuln[m (
+    [36msrc[m=0x40800e71 "AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL") at [32mtest.c[m:20
+20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mnextcall
+[?2004l[mStepping through, Ctrl-C to stop...[0m
+[34m0x080498f6[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[34m0x080498f9[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[34m0x080498fc[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[34m0x080498fd[m	20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mEAX[0m: [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 
+[;32mEBX[0m: [;34m0x80e8ff4[0m --> 0x0 
+[;32mECX[0m: 0x0 
+[;32mEDX[0m: 0x0 
+[;32mESI[0m: [;34m0x40800c30[0m --> 0x2 
+[;32mEDI[0m: 0x1 
+[;32mEBP[0m: [;34m0x40800b98[0m --> [;34m0x40800c18[0m --> 0x1 
+[;32mESP[0m: [;34m0x40800b60[0m --> [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 
+[;32mEIP[0m: [;31m0x80498fd[0m (<vuln+32>:	call   0x8049020)[0m
+[m[;32mEFLAGS[0m: 0x212 ([;32mcarry[0m [;32mparity[0m [;1;31mADJUST[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x80498f6 <vuln+25>:[;2m	push   DWORD PTR [ebp+0x8][0m
+   0x80498f9 <vuln+28>:[;2m	lea    eax,[ebp-0x28][0m
+   0x80498fc <vuln+31>:[;2m	push   eax[0m
+=> 0x80498fd <vuln+32>:[;1;32m	call   0x8049020[0m
+   0x8049902 <vuln+37>:[m	add    esp,0x10[0m
+   0x8049905 <vuln+40>:[m	sub    esp,0x8[0m
+   0x8049908 <vuln+43>:[m	lea    eax,[ebp-0x28][0m
+   0x804990b <vuln+46>:[m	push   eax[0m[0m
+[mGuessed arguments:[0m
+[marg[0]: [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[marg[1]: [;34m0x40800e71[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x40800b60[0m --> [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[m0004| [;34m0x40800b64[0m --> [;34m0x40800e71[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0008| [;34m0x40800b68[0m --> [;31m0x80506dd[0m (<__vfprintf_internal+13>:	add    ebx,0x98917)[0m
+[m0012| [;34m0x40800b6c[0m --> [;31m0x80498ed[0m (<vuln+16>:	add    ebx,0x9f707)[0m
+[m0016| [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[m0020| [;34m0x40800b74[0m --> 0x1 [0m
+[m0024| [;34m0x40800b78[0m --> [;34m0x40800c18[0m --> 0x1 [0m
+[m0028| [;34m0x40800b7c[0m --> [;31m0x804cbe9[0m (<printf+41>:	add    esp,0x1c)[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[?2004h[;31mgdb-peda$ [0mni
+[?2004l[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mEAX[0m: [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 
+[;32mEBX[0m: [;34m0x80e8ff4[0m --> 0x0 
+[;32mECX[0m: 0x0 
+[;32mEDX[0m: 0x0 
+[;32mESI[0m: [;34m0x40800c30[0m --> 0x2 
+[;32mEDI[0m: 0x1 
+[;32mEBP[0m: [;34m0x40800b98[0m --> [;34m0x40800c18[0m --> 0x1 
+[;32mESP[0m: [;34m0x40800b5c[0m --> [;31m0x8049902[0m (<vuln+37>:	add    esp,0x10)
+[;32mEIP[0m: [;31m0x8049020[0m (jmp    DWORD PTR ds:0x80e9000)[0m
+[m[;32mEFLAGS[0m: 0x212 ([;32mcarry[0m [;32mparity[0m [;1;31mADJUST[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x804901b <_init+27>:[;2m	add    esp,0x8[0m
+   0x804901e <_init+30>:[;2m	pop    ebx[0m
+   0x804901f <_init+31>:[;2;34m	ret[0m
+=> 0x8049020:[;1;32m	jmp    DWORD PTR ds:0x80e9000[0m
+ | 0x8049026:[m	xchg   ax,ax[0m
+ | 0x8049028:[m	jmp    DWORD PTR ds:0x80e9004[0m
+ | 0x804902e:[m	xchg   ax,ax[0m
+ | 0x8049030:[m	jmp    DWORD PTR ds:0x80e9008[0m
+ |->[;31m   0x80588d0 <__strcpy_ssse3>:	mov    edx,DWORD PTR [esp+0x4][0m
+       0x80588d4 <__strcpy_ssse3+4>:	mov    ecx,DWORD PTR [esp+0x8]
+       0x80588d8 <__strcpy_ssse3+8>:	cmp    BYTE PTR [ecx],0x0
+       0x80588db <__strcpy_ssse3+11>:	je     0x8059fb0 <__strcpy_ssse3+5856>
+[;31m                                                                  JUMP is taken[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x40800b5c[0m --> [;31m0x8049902[0m (<vuln+37>:	add    esp,0x10)[0m
+[m0004| [;34m0x40800b60[0m --> [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[m0008| [;34m0x40800b64[0m --> [;34m0x40800e71[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0012| [;34m0x40800b68[0m --> [;31m0x80506dd[0m (<__vfprintf_internal+13>:	add    ebx,0x98917)[0m
+[m0016| [;34m0x40800b6c[0m --> [;31m0x80498ed[0m (<vuln+16>:	add    ebx,0x9f707)[0m
+[m0020| [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[m0024| [;34m0x40800b74[0m --> 0x1 [0m
+[m0028| [;34m0x40800b78[0m --> [;34m0x40800c18[0m --> 0x1 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[34m0x08049020[m in [33m??[m ()
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mcontext code 12
+[?2004l[2J[H[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x8049017 <_init+23>:[;2;33m	je     0x804901b <_init+27>[0m
+   0x8049019 <_init+25>:[;2;32m	call   eax[0m
+   0x804901b <_init+27>:[;2m	add    esp,0x8[0m
+   0x804901e <_init+30>:[;2m	pop    ebx[0m
+   0x804901f <_init+31>:[;2;34m	ret[0m
+=> 0x8049020:[;1;32m	jmp    DWORD PTR ds:0x80e9000[0m
+ | 0x8049026:[m	xchg   ax,ax[0m
+ | 0x8049028:[m	jmp    DWORD PTR ds:0x80e9004[0m
+ | 0x804902e:[m	xchg   ax,ax[0m
+ | 0x8049030:[m	jmp    DWORD PTR ds:0x80e9008[0m
+ | 0x8049036:[m	xchg   ax,ax[0m
+ | 0x8049038:[m	jmp    DWORD PTR ds:0x80e900c[0m
+ |->[;31m   0x80588d0 <__strcpy_ssse3>:	mov    edx,DWORD PTR [esp+0x4][0m
+       0x80588d4 <__strcpy_ssse3+4>:	mov    ecx,DWORD PTR [esp+0x8]
+       0x80588d8 <__strcpy_ssse3+8>:	cmp    BYTE PTR [ecx],0x0
+       0x80588db <__strcpy_ssse3+11>:	je     0x8059fb0 <__strcpy_ssse3+5856>
+       0x80588e1 <__strcpy_ssse3+17>:	cmp    BYTE PTR [ecx+0x1],0x0
+       0x80588e5 <__strcpy_ssse3+21>:	je     0x8059fc0 <__strcpy_ssse3+5872>
+[;31m                                                                  JUMP is taken[0m[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[?2004h[;31mgdb-peda$ [0mx/8wx $esp
+[?2004l[34m0x40800b5c[m:	0x08049902	0x40800b70	0x40800e71	0x080506dd
+[34m0x40800b6c[m:	0x080498ed	0x40800c30	0x00000001	0x40800c18
+[?2004h[;31mgdb-peda$ [0mx/s $eax
+[?2004l[34m0x40800b70[m:	"0\f\200@\001"
+[?2004h[;31mgdb-peda$ [0mtelescope 6
+[?2004l[m0000| [;34m0x40800b5c[0m --> [;31m0x8049902[0m (<vuln+37>:	add    esp,0x10)[0m
+[m0004| [;34m0x40800b60[0m --> [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[m0008| [;34m0x40800b64[0m --> [;34m0x40800e71[0m ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0012| [;34m0x40800b68[0m --> [;31m0x80506dd[0m (<__vfprintf_internal+13>:	add    ebx,0x98917)[0m
+[m0016| [;34m0x40800b6c[0m --> [;31m0x80498ed[0m (<vuln+16>:	add    ebx,0x9f707)[0m
+[m0020| [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2 [0m
+[?2004h[;31mgdb-peda$ [0mhexdump $esp /3
+[?2004l[m[;34m0x40800b5c[0m : 02 99 04 08 70 0b 80 40 71 0e 80 40 dd 06 05 08   ....p..@q..@....[0m
+[m[;34m0x40800b6c[0m : ed 98 04 08 30 0c 80 40 01 00 00 00 18 0c 80 40   ....0..@.......@[0m
+[m[;34m0x40800b7c[0m : e9 cb 04 08 60 9c 0e 08 36 40 0b 08 a4 0b 80 40   ....`...6@.....@[0m
+[?2004h[;31mgdb-peda$ [0mxinfo $esp
+[?2004l[m[;34m0x40800b5c[0m --> [;31m0x8049902[0m (<vuln+37>:	add    esp,0x10)
+Virtual memory mapping:
+[;32mStart : 0x40001000
+[0m[;32mEnd   : 0x40801000
+[0m[;33mOffset: 0x7ffb5c
+[0m[;31mPerm  : rw-p
+[0m[;34mName  : [stack][0m[0m
+[?2004h[;31mgdb-peda$ [0mxinfo register eax
+[?2004l[m[;32mEAX[0m: [;34m0x40800b70[0m --> [;34m0x40800c30[0m --> 0x2[0m
+[?2004h[;31mgdb-peda$ [0mvmmap
+[?2004l[;1;34mStart      End        Perm	Name[0m
+[m0x08048000 0x08049000 r--p	/work/test_static32[0m
+[m0x08049000 0x080b4000 r-xp	/work/test_static32[0m
+[m0x080b4000 0x080e6000 r--p	/work/test_static32[0m
+[m0x080e6000 0x080ea000 rw-p	/work/test_static32[0m
+[m0x080ea000 0x080ed000 rw-p	/work/test_static32[0m
+[m0x080ed000 0x0810f000 rw-p	[heap][0m
+[m0x40001000 0x40801000 rw-p	[stack][0m
+[m0x40801000 0x40802000 r-xp	mapped[0m
+[m0x40802000 0x40804000 rw-p	mapped[0m
+[?2004h[;31mgdb-peda$ [0mchecksec
+[?2004l[mCANARY    : [;32mENABLED[0m[0m
+[mFORTIFY   : [;31mdisabled[0m[0m
+[mNX        : [;32mENABLED[0m[0m
+[mPIE       : [;31mdisabled[0m[0m
+[mRELRO     : [;33mPartial[0m[0m
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mEAX[0m: 0x6a ('j')
+[;32mEBX[0m: 0x61414145 ('EAAa')
+[;32mECX[0m: 0x0 
+[;32mEDX[0m: 0x0 
+[;32mESI[0m: [;34m0x40800c30[0m --> 0x2 
+[;32mEDI[0m: 0x1 
+[;32mEBP[0m: 0x41304141 ('AA0A')
+[;32mESP[0m: [;34m0x40800ba0[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mEIP[0m: 0x41414641 ('AFAA')[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[;31mInvalid $PC address: 0x41414641[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x40800ba0[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0004| [;34m0x40800ba4[0m ("AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0008| [;34m0x40800ba8[0m ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0012| [;34m0x40800bac[0m ("2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x40800bb0[0m ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0020| [;34m0x40800bb4[0m ("A3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0024| [;34m0x40800bb8[0m ("IAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0028| [;34m0x40800bbc[0m ("AA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGSEGV[0m[0m
+[34m0x41414641[m in [33m??[m ()
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mpattern search
+[?2004l[;31mRegisters contain pattern buffer:[0m
+[mEBX+0 found at offset: 36[0m
+[mEBP+0 found at offset: 40[0m
+[mEIP+0 found at offset: 44[0m
+[mCR2+0 found at offset: 44[0m
+[;33mRegisters point to pattern buffer:[0m
+[m[ESP] --> offset 48 - size ~52[0m
+[;32mPattern buffer found at:[0m
+[m0x080e8163 : offset 37729 - size    4 (/work/test_static32)[0m
+[m0x080edfa6 : offset    0 - size  100 ([heap])[0m
+[m0x407ffc16 : offset 37729 - size    4 ($sp + -0xf8a [-995 dwords])[0m
+[m0x40800b70 : offset    0 - size  100 ($sp + -0x30 [-12 dwords])[0m
+[m0x40800e63 : offset 37729 - size    4 ($sp + 0x2c3 [176 dwords])[0m
+[m0x40800e71 : offset    0 - size  100 ($sp + 0x2d1 [180 dwords])[0m
+[m0x40800fea : offset 37729 - size    4 ($sp + 0x44a [274 dwords])[0m
+[;34mReferences to pattern buffer found at:[0m
+[m0x40800b64 : 0x40800b70 ($sp + -0x3c [-15 dwords])[0m
+[m0x080e9eec : 0x40800e63 (/work/test_static32)[0m
+[m0x40800d58 : 0x40800e71 ($sp + 0x1b8 [110 dwords])[0m
+[?2004h[;31mgdb-peda$ [0mpattern offset 0x41414641
+[?2004l[m1094796865 found at offset: 44[0m
+[?2004h[;31mgdb-peda$ [0mcontext
+[?2004l[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mEAX[0m: 0x6a ('j')
+[;32mEBX[0m: 0x61414145 ('EAAa')
+[;32mECX[0m: 0x0 
+[;32mEDX[0m: 0x0 
+[;32mESI[0m: [;34m0x40800c30[0m --> 0x2 
+[;32mEDI[0m: 0x1 
+[;32mEBP[0m: 0x41304141 ('AA0A')
+[;32mESP[0m: [;34m0x40800ba0[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")
+[;32mEIP[0m: 0x41414641 ('AFAA')[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[;31mInvalid $PC address: 0x41414641[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x40800ba0[0m ("bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0004| [;34m0x40800ba4[0m ("AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0008| [;34m0x40800ba8[0m ("AcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0012| [;34m0x40800bac[0m ("2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0016| [;34m0x40800bb0[0m ("AAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0020| [;34m0x40800bb4[0m ("A3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0024| [;34m0x40800bb8[0m ("IAAeAA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[m0028| [;34m0x40800bbc[0m ("AA4AAJAAfAA5AAKAAgAA6AAL")[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGSEGV[0m[0m
+[?2004h[;31mgdb-peda$ [0minfo registers
+[?2004leax            0x6a                0x6a
+ecx            0x0                 0x0
+edx            0x0                 0x0
+ebx            0x61414145          0x61414145
+esp            0x40800ba0          0x40800ba0
+ebp            0x41304141          0x41304141
+esi            0x40800c30          0x40800c30
+edi            0x1                 0x1
+eip            0x41414641          0x41414641
+eflags         0x202               [ IOPL=0 IF ]
+cs             0x23                0x23
+ss             0x2b                0x2b
+ds             0x2b                0x2b
+es             0x2b                0x2b
+fs             0x0                 0x0
+gs             0x33                0x33
+fs_base        0x0                 0x0
+gs_base        0x80ed380           0x80ed380
+k_gs_base      0x0                 0x0
+cr0            0x80010001          [ PG WP PE ]
+cr2            0x41414641          0x41414641
+cr3            0x0                 [ PDBR=0 PCID=0 ]
+cr4            0x50220             [ PAE OSFXSR FSGSBASE OSXSAVE ]
+cr8            0x0                 0x0
+efer           0x500               [ LMA LME ]
+xmm0           {
+  v4_float = {0x4b414135, 0x41674141, 0x0, 0x0},
+  v2_double = {0x416741414b414135, 0x0},
+  v16_int8 = {0x35, 0x41, 0x41, 0x4b, 0x41, 0x41, 0x67, 0x41, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v8_int16 = {0x4135, 0x4b41, 0x4141, 0x4167, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x4b414135, 0x41674141, 0x0, 0x0},
+  v2_int64 = {0x416741414b414135, 0x0},
+  uint128 = 0x416741414b414135
+}
+xmm1           {
+  v4_float = {0x414a4141, 0x41416641, 0x4b414135, 0x41674141},
+  v2_double = {0x41416641414a4141, 0x416741414b414135},
+  v16_int8 = {0x41, 0x41, 0x4a, 0x41, 0x41, 0x66, 0x41, 0x41, 0x35, 0x41, 0x41, 0x4b, 0x41, 0x41, 0x67, 0x41},
+  v8_int16 = {0x4141, 0x414a, 0x6641, 0x4141, 0x4135, 0x4b41, 0x4141, 0x4167},
+  v4_int32 = {0x414a4141, 0x41416641, 0x4b414135, 0x41674141},
+  v2_int64 = {0x41416641414a4141, 0x416741414b414135},
+  uint128 = 0x416741414b41413541416641414a4141
+}
+xmm2           {
+  v4_float = {0x41413641, 0x4f48004c, 0x414e5453, 0x653d454d},
+  v2_double = {0x4f48004c41413641, 0x653d454d414e5453},
+  v16_int8 = {0x41, 0x36, 0x41, 0x41, 0x4c, 0x0, 0x48, 0x4f, 0x53, 0x54, 0x4e, 0x41, 0x4d, 0x45, 0x3d, 0x65},
+  v8_int16 = {0x3641, 0x4141, 0x4c, 0x4f48, 0x5453, 0x414e, 0x454d, 0x653d},
+  v4_int32 = {0x41413641, 0x4f48004c, 0x414e5453, 0x653d454d},
+  v2_int64 = {0x4f48004c41413641, 0x653d454d414e5453},
+  uint128 = 0x653d454d414e54534f48004c41413641
+}
+xmm3           {
+  v4_float = {0x41413641, 0x4f48004c, 0x414e5453, 0x653d454d},
+  v2_double = {0x4f48004c41413641, 0x653d454d414e5453},
+  v16_int8 = {0x41, 0x36, 0x41, 0x41, 0x4c, 0x0, 0x48, 0x4f, 0x53, 0x54, 0x4e, 0x41, 0x4d, 0x45, 0x3d, 0x65},
+  v8_int16 = {0x3641, 0x4141, 0x4c, 0x4f48, 0x5453, 0x414e, 0x454d, 0x653d},
+  v4_int32 = {0x41413641, 0x4f48004c, 0x414e5453, 0x653d454d},
+  v2_int64 = {0x4f48004c41413641, 0x653d454d414e5453},
+  uint128 = 0x653d454d414e54534f48004c41413641
+}
+xmm4           {
+  v4_float = {0x4c414136, 0x534f4800, 0x4d414e54, 0x33653d45},
+  v2_double = {0x534f48004c414136, 0x33653d454d414e54},
+  v16_int8 = {0x36, 0x41, 0x41, 0x4c, 0x0, 0x48, 0x4f, 0x53, 0x54, 0x4e, 0x41, 0x4d, 0x45, 0x3d, 0x65, 0x33},
+  v8_int16 = {0x4136, 0x4c41, 0x4800, 0x534f, 0x4e54, 0x4d41, 0x3d45, 0x3365},
+  v4_int32 = {0x4c414136, 0x534f4800, 0x4d414e54, 0x33653d45},
+  v2_int64 = {0x534f48004c414136, 0x33653d454d414e54},
+  uint128 = 0x33653d454d414e54534f48004c414136
+}
+xmm5           {
+  v4_float = {0x35396234, 0x38353561, 0x50003835, 0x2f3d4457},
+  v2_double = {0x3835356135396234, 0x2f3d445750003835},
+  v16_int8 = {0x34, 0x62, 0x39, 0x35, 0x61, 0x35, 0x35, 0x38, 0x35, 0x38, 0x0, 0x50, 0x57, 0x44, 0x3d, 0x2f},
+  v8_int16 = {0x6234, 0x3539, 0x3561, 0x3835, 0x3835, 0x5000, 0x4457, 0x2f3d},
+  v4_int32 = {0x35396234, 0x38353561, 0x50003835, 0x2f3d4457},
+  v2_int64 = {0x3835356135396234, 0x2f3d445750003835},
+  uint128 = 0x2f3d4457500038353835356135396234
+}
+xmm6           {
+  v4_float = {0x41413641, 0x41410041, 0x41414135, 0x413d4141},
+  v2_double = {0x4141004141413641, 0x413d414141414135},
+  v16_int8 = {0x41, 0x36, 0x41, 0x41, 0x41, 0x0, 0x41, 0x41, 0x35, 0x41, 0x41, 0x41, 0x41, 0x41, 0x3d, 0x41},
+  v8_int16 = {0x3641, 0x4141, 0x41, 0x4141, 0x4135, 0x4141, 0x4141, 0x413d},
+  v4_int32 = {0x41413641, 0x41410041, 0x41414135, 0x413d4141},
+  v2_int64 = {0x4141004141413641, 0x413d414141414135},
+  uint128 = 0x413d4141414141354141004141413641
+}
+xmm7           {
+  v4_float = {0x726f772f, 0x4f48006b, 0x2f3d454d, 0x746f6f72},
+  v2_double = {0x4f48006b726f772f, 0x746f6f722f3d454d},
+  v16_int8 = {0x2f, 0x77, 0x6f, 0x72, 0x6b, 0x0, 0x48, 0x4f, 0x4d, 0x45, 0x3d, 0x2f, 0x72, 0x6f, 0x6f, 0x74},
+  v8_int16 = {0x772f, 0x726f, 0x6b, 0x4f48, 0x454d, 0x2f3d, 0x6f72, 0x746f},
+  v4_int32 = {0x726f772f, 0x4f48006b, 0x2f3d454d, 0x746f6f72},
+  v2_int64 = {0x4f48006b726f772f, 0x746f6f722f3d454d},
+  uint128 = 0x746f6f722f3d454d4f48006b726f772f
+}
+mxcsr          0x1f80              [ IM DM ZM OM UM PM ]
+[?2004h[;31mgdb-peda$ [0mquit
+[?2004l
+Script done on 2026-11-17 05:26:15+00:00 [COMMAND_EXIT_CODE="0"]

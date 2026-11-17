@@ -1,0 +1,11 @@
+[32m[1mpwndbg> [0m[32m[0mtelescope $sp 10
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m sp[0m [4m[33m0xfffffffffae0[0m[4m[0m —▸ [4m[33m0xfffffffffb70[0m[4m[0m ◂— 0
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffae8[0m[4m[0m —▸ [31m0x400634 (_start+52)[0m ◂— [38;5;148mnop[39m[38;5;255m [39m
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffaf0[0m[4m[0m ◂— 0x200000000
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffaf8[0m[4m[0m —▸ [4m[33m0xfffffffffc58[0m[4m[0m —▸ [4m[33m0xfffffffffe55[0m[4m[0m ◂— '/work/test_nopie_arm64'
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffb00[0m[4m[0m —▸ [4m[33m0xfffffffffc58[0m[4m[0m —▸ [4m[33m0xfffffffffe55[0m[4m[0m ◂— '/work/test_nopie_arm64'
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffb08[0m[4m[0m ◂— 2
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffb10[0m[4m[0m —▸ [35m0x410c10 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0x4006e0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffb18[0m[4m[0m —▸ [31m0x400634 (_start+52)[0m ◂— [38;5;148mnop[39m[38;5;255m [39m
+[0m08[0m[0m:[0m[0m0040[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffb20[0m[4m[0m —▸ [4m[33m0xfffffffffc70[0m[4m[0m —▸ [4m[33m0xfffffffffed1[0m[4m[0m ◂— 'HOSTNAME=3e37fc6690d4'
+[0m09[0m[0m:[0m[0m0048[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xfffffffffb28[0m[4m[0m —▸ [0m0xfffff7ffdb58 (_rtld_global_ro)[0m ◂— 0

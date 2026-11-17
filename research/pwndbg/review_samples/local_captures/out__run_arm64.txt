@@ -1,0 +1,88 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> run
+Starting program: /rv/rv_arm64 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=0x1, argv=0xfffffffffce8) at rv.c:39
+39	    strcpy(big, "AAAAAAAABBBBBBBB with spaces and \\ backslash <-- tricky");
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   0xaaaaaaac3010 ◂— 0
+ X1   0xaaaaaaac3000 ◂— 0
+ X2   0x1011
+ X3   0
+ X4   0xfffff7ff8620 —▸ 0xfffff7ff8d70 ◂— 1
+ X5   0
+ X6   0xfffffffffffffff0
+ X7   4
+ X8   0
+ X9   0x80
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xaaaaaaabff80 (malloc@got[plt]) —▸ 0xfffff7e86470 (malloc) ◂— stp x29, x30, [sp, #-0x40]!
+ X17  0xfffff7e86470 (malloc) ◂— stp x29, x30, [sp, #-0x40]!
+ X18  3
+ X19  0xc
+ X20  1
+ X21  0xaaaaaaabfd50 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa0980 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0b50 (main) ◂— sub sp, sp, #0x1a0
+ X23  0xfffffffffcf8 —▸ 0xfffffffffeea ◂— 'HOSTNAME=83281bbedf83'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd50 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa0980 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb50 —▸ 0xfffffffffc70 —▸ 0xfffffffffc80 ◂— 0
+ SP   0xfffffffff9d0 {argv} —▸ 0xfffffffffce8 —▸ 0xfffffffffedd ◂— '/rv/rv_arm64'
+ LR   0xaaaaaaaa0d40 (main+496) ◂— str x0, [sp, #0x28]
+ PC   0xaaaaaaaa0d44 (main+500) ◂— ldr x2, [sp, #0x28]
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0d38 <main+488>    mov    x0, #0x1000     X0 => 0x1000
+   0xaaaaaaaa0d3c <main+492>    bl     malloc@plt                  <malloc@plt>
+ 
+   0xaaaaaaaa0d40 <main+496>    str    x0, [sp, #0x28]
+b► 0xaaaaaaaa0d44 <main+500>    ldr    x2, [sp, #0x28]        X2, [{big}] => 0xaaaaaaac3010 ◂— 0
+   0xaaaaaaaa0d48 <main+504>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0d4c <main+508>    add    x1, x0, #0xe40         X1 => 0xaaaaaaaa0e40 (0xaaaaaaaa0000 + 0xe40)
+   0xaaaaaaaa0d50 <main+512>    mov    x0, x2                 X0 => 0xaaaaaaac3010 ◂— 0
+   0xaaaaaaaa0d54 <main+516>    ldp    q0, q1, [x1]
+   0xaaaaaaaa0d58 <main+520>    stp    q0, q1, [x0]
+   0xaaaaaaaa0d5c <main+524>    ldr    q0, [x1, #0x20]        Q0, [0xaaaaaaaa0e60] => 0x736b636162205c20 (' \\ backs')
+   0xaaaaaaaa0d60 <main+528>    str    q0, [x0, #0x20]        [0xaaaaaaac3030] <= 0x736b636162205c20 (' \\ backs')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /rv/rv.c:39
+   31     head = NULL;
+   32     for (i = 0; i < 8; i++) { struct node *n = malloc(sizeof *n); n->next = head; n->val = i; head = n; }
+   33     /* fill tcache for 0x90 and push extra into unsorted -> smallbin */
+   34     for (i = 0; i < 9; i++) { small[i] = malloc(0x80); guard[gi++] = malloc(0x18); }
+   35     for (i = 0; i < 4; i++) { large[i] = malloc(0x500 + i*0x40); guard[gi++] = malloc(0x18); }
+   36     for (i = 0; i < 9; i++) free(small[i]);
+   37     for (i = 0; i < 4; i++) free(large[i]);
+   38     void *big = malloc(0x1000);       /* sorts unsorted chunks into small/large bins */
+ ► 39     strcpy(big, "AAAAAAAABBBBBBBB with spaces and \\ backslash <-- tricky");
+   40     pthread_t t; pthread_create(&t, NULL, worker, (void*)41); pthread_join(t, NULL);
+   41     int r = many_args(0x1111, 0x2222, "a fairly long string argument to force gdb line wrapping", &g_cfg, 0x5555, 0x6666);
+   42     printf("r=%d\n", r);
+   43     return argc > 1 ? 0 : 1;   /* exit code 1 */
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffff9d0 {argv} —▸ 0xfffffffffce8 —▸ 0xfffffffffedd ◂— '/rv/rv_arm64'
+01:0008│-178 0xfffffffff9d8 ◂— 0x100000000
+02:0010│-170 0xfffffffff9e0 ◂— 0xd00000000
+03:0018│-168 0xfffffffff9e8 {i} ◂— 0xaaaa00000004
+04:0020│-160 0xfffffffff9f0 {t} ◂— 0x38 /* '8' */
+05:0028│-158 0xfffffffff9f8 {big} —▸ 0xaaaaaaac3010 ◂— 0
+06:0030│-150 0xfffffffffa00 —▸ 0xaaaaaaac1380 —▸ 0xaaaaaaac1360 —▸ 0xaaaaaaac1340 —▸ 0xaaaaaaac1320 —▸ ...
+07:0038│-148 0xfffffffffa08 {large} —▸ 0xaaaaaaac19d0 —▸ 0xfffff7fa0ee0 (main_arena+1168) —▸ 0xfffff7fa0ed0 (main_arena+1152) —▸ 0xfffff7fa0ec0 (main_arena+1136) —▸ ...
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0d44 main+500
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa08f0 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

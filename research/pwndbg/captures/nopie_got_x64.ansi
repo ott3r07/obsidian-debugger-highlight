@@ -1,0 +1,11 @@
+[32m[1mpwndbg> [0m[32m[0mgot
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of [35m/work/test_nopie_x64[0m:
+GOT protection: [31mNo RELRO[0m | Found [33m6[0m GOT entries passing the filter
+[[35m0x403398[0m] [33m__libc_start_main@GLIBC_2.34[0m -> [31m0xffffa9e0d200 (__libc_start_main)[0m ◂— [38;5;148mendbr64[39m
+[[35m0x4033a0[0m] [33m__gmon_start__[0m -> 0
+[[35m0x4033c0[0m] [33mfree@GLIBC_2.2.5[0m -> [31m0xffffa9e90be0 (free)[0m ◂— [38;5;148mendbr64[39m
+[[35m0x4033c8[0m] [33mstrcpy@GLIBC_2.2.5[0m -> [31m0x401040[0m ◂— [38;5;148mendbr64[39m
+[[35m0x4033d0[0m] [33mprintf@GLIBC_2.2.5[0m -> [31m0xffffa9e430e0 (printf)[0m ◂— [38;5;148mendbr64[39m
+[[35m0x4033d8[0m] [33mmalloc@GLIBC_2.2.5[0m -> [31m0xffffa9e90500 (malloc)[0m ◂— [38;5;148mendbr64[39m

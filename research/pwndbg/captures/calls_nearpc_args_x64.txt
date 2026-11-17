@@ -1,0 +1,7 @@
+pwndbg> nearpc 3
+   0x5555555574ff <main+516>                         mov    rdi, rax
+   0x555555557502 <main+519>                         mov    eax, 0       EAX => 0
+ ► 0x555555557507 <main+524>                         call   printf@plt                  <printf@plt>
+                                                  
+   0x55555555750c <main+529>                         cmp    dword ptr [rbp - 0xc4], 1
+   0x555555557513 <main+536>                    ┌<   jle    main+551                    <main+551>

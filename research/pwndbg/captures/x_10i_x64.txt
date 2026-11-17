@@ -1,0 +1,11 @@
+pwndbg> x/10i $pc
+=> 0x555555557489 <main+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x555555557490 <main+405>:	mov    edx,0x7
+   0x555555557495 <main+410>:	mov    esi,0x6
+   0x55555555749a <main+415>:	mov    rdi,rax
+   0x55555555749d <main+418>:	call   0x555555557246 <compute>
+   0x5555555574a2 <main+423>:	mov    DWORD PTR [rbp-0xbc],eax
+   0x5555555574a8 <main+429>:	lea    rax,[rip+0xfffffffffffffd59]        # 0x555555557208 <mul>
+   0x5555555574af <main+436>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x5555555574b6 <main+443>:	mov    ecx,DWORD PTR [rbp-0xbc]
+   0x5555555574bc <main+449>:	mov    rax,QWORD PTR [rbp-0xb8]

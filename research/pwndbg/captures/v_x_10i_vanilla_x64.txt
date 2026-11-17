@@ -1,0 +1,11 @@
+(gdb) x/10i $pc
+=> 0x555555557489 <main+398>:	mov    -0xb8(%rbp),%rax
+   0x555555557490 <main+405>:	mov    $0x7,%edx
+   0x555555557495 <main+410>:	mov    $0x6,%esi
+   0x55555555749a <main+415>:	mov    %rax,%rdi
+   0x55555555749d <main+418>:	call   0x555555557246 <compute>
+   0x5555555574a2 <main+423>:	mov    %eax,-0xbc(%rbp)
+   0x5555555574a8 <main+429>:	lea    -0x2a7(%rip),%rax        # 0x555555557208 <mul>
+   0x5555555574af <main+436>:	mov    %rax,-0xb8(%rbp)
+   0x5555555574b6 <main+443>:	mov    -0xbc(%rbp),%ecx
+   0x5555555574bc <main+449>:	mov    -0xb8(%rbp),%rax

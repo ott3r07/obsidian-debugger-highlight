@@ -1,0 +1,1073 @@
+GEF for linux ready, type `gef' to start, `gef config' to configure
+90 commands loaded and 5 functions added for GDB 15.1 in 0.00ms using Python engine 3.12
+Reading symbols from /t/t2...
+gef➤  break puts
+Breakpoint 1 at 0x7f0
+gef➤  run
+Starting program: /t/t2 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, __GI__IO_puts (str=0xaaaaaaaa0af8 "bins ready") at ./libio/ioputs.c:35
+warning: 35	./libio/ioputs.c: No such file or directory
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xfffff7e619c4 <_IO_proc_close+0254> str    x25,  [sp,  #112]
+   0xfffff7e619c8 <_IO_proc_close+0258> bl     0xfffff7ee9250 <__stack_chk_fail>
+   0xfffff7e619cc                  nop    
+●→ 0xfffff7e619d0 <puts+0000>      stp    x29,  x30,  [sp,  #-64]!
+   0xfffff7e619d4 <puts+0004>      mov    x29,  sp
+   0xfffff7e619d8 <puts+0008>      stp    x21,  x22,  [sp,  #32]
+   0xfffff7e619dc <puts+000c>      mov    x21,  x0
+   0xfffff7e619e0 <puts+0010>      adrp   x22,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e619e4 <puts+0014>      ldr    x22,  [x22,  #3600]
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xfffff7e619d0 in __GI__IO_puts (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  got
+─────────────────────────────────────────────────── /t/t2 ───────────────────────────────────────────────────
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabff78] __libc_start_main@GLIBC_2.34  →  0xfffff7e18500
+[0xaaaaaaabff80] __cxa_finalize@GLIBC_2.17  →  0xfffff7e2eb50
+[0xaaaaaaabff88] malloc@GLIBC_2.17  →  0xfffff7e86470
+[0xaaaaaaabff90] __stack_chk_fail@GLIBC_2.17  →  0xfffff7ee9250
+[0xaaaaaaabff98] __gmon_start__  →  0x0
+[0xaaaaaaabffa0] abort@GLIBC_2.17  →  0xfffff7e17d0c
+[0xaaaaaaabffa8] puts@GLIBC_2.17  →  0xfffff7e619d0
+[0xaaaaaaabffb0] free@GLIBC_2.17  →  0xfffff7e86d70
+[0xaaaaaaabffb8] strcpy@GLIBC_2.17  →  0xfffff7e8d240
+[0xaaaaaaabffc0] printf@GLIBC_2.17  →  0xfffff7e40590
+gef➤  got puts
+─────────────────────────────────────────────────── /t/t2 ───────────────────────────────────────────────────
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabffa8] puts@GLIBC_2.17  →  0xfffff7e619d0
+gef➤  checksec
+[+] checksec for '/t/t2'
+Canary                        : ✓ (value: 0x387fb66d57ee7900)
+NX                            : ✓ 
+PIE                           : ✓ 
+Fortify                       : ✘ 
+RelRO                         : Full
+gef➤  checksec /t/t2_nopie
+[+] checksec for '/t/t2_nopie'
+Canary                        : ✓ (value: 0x387fb66d57ee7900)
+NX                            : ✓ 
+PIE                           : ✘ 
+Fortify                       : ✘ 
+RelRO                         : Partial
+gef➤  heap bins
+────────────────────────────────────────── Tcachebins for thread 1 ──────────────────────────────────────────
+Tcachebins[idx=14, size=0x100, count=7] ←  Chunk(addr=0xaaaaaaac18a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac17a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac16a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac15a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac14a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac13a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  Chunk(addr=0xaaaaaaac12a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+──────────────────────────────────── Fastbins for arena at 0xfffff7fa0a50 ────────────────────────────────────
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30] 0x00
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+────────────────────────────────── Unsorted Bin for arena at 0xfffff7fa0a50 ──────────────────────────────────
+[+] Found 0 chunks in unsorted bin.
+─────────────────────────────────── Small Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   Chunk(addr=0xaaaaaaac1ac0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)   →   Chunk(addr=0xaaaaaaac19a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 2 chunks in 1 small non-empty bins.
+─────────────────────────────────── Large Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   Chunk(addr=0xaaaaaaac1be0, size=0x810, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in 1 large non-empty bins.
+gef➤  heap bins small
+─────────────────────────────────── Small Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   Chunk(addr=0xaaaaaaac1ac0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)   →   Chunk(addr=0xaaaaaaac19a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 2 chunks in 1 small non-empty bins.
+gef➤  heap bins large
+─────────────────────────────────── Large Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   Chunk(addr=0xaaaaaaac1be0, size=0x810, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in 1 large non-empty bins.
+gef➤  heap chunks
+Chunk(addr=0xaaaaaaac1010, size=0x290, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac1010     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0xaaaaaaac12a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac12a0     c1 aa aa aa 0a 00 00 00 82 55 23 d1 7b 7b cf c2    .........U#.{{..]
+Chunk(addr=0xaaaaaaac13a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac13a0     61 b8 06 00 a0 aa 00 00 82 55 23 d1 7b 7b cf c2    a........U#.{{..]
+Chunk(addr=0xaaaaaaac14a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac14a0     61 b9 06 00 a0 aa 00 00 82 55 23 d1 7b 7b cf c2    a........U#.{{..]
+Chunk(addr=0xaaaaaaac15a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac15a0     61 be 06 00 a0 aa 00 00 82 55 23 d1 7b 7b cf c2    a........U#.{{..]
+Chunk(addr=0xaaaaaaac16a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac16a0     61 bf 06 00 a0 aa 00 00 82 55 23 d1 7b 7b cf c2    a........U#.{{..]
+Chunk(addr=0xaaaaaaac17a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac17a0     61 bc 06 00 a0 aa 00 00 82 55 23 d1 7b 7b cf c2    a........U#.{{..]
+Chunk(addr=0xaaaaaaac18a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac18a0     61 bd 06 00 a0 aa 00 00 82 55 23 d1 7b 7b cf c2    a........U#.{{..]
+Chunk(addr=0xaaaaaaac19a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac19a0     a0 0b fa f7 ff ff 00 00 b0 1a ac aa aa aa 00 00    ................]
+Chunk(addr=0xaaaaaaac1aa0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac1aa0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0xaaaaaaac1ac0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac1ac0     90 19 ac aa aa aa 00 00 a0 0b fa f7 ff ff 00 00    ................]
+Chunk(addr=0xaaaaaaac1bc0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac1bc0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0xaaaaaaac1be0, size=0x810, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac1be0     a0 0f fa f7 ff ff 00 00 a0 0f fa f7 ff ff 00 00    ................]
+Chunk(addr=0xaaaaaaac23f0, size=0x20, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac23f0     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0xaaaaaaac2410, size=0x1010, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+    [0x0000aaaaaaac2410     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+Chunk(addr=0xaaaaaaac3420, size=0x1ebf0, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)  ←  top chunk
+gef➤  heap chunk s1
+[!] Command 'heap chunk' failed to execute properly, reason: No symbol "s1" in current context.
+gef➤  up
+#1  0x0000aaaaaaaa0a68 in main (argc=0x1, argv=0xfffffffffd38) at /rv/t2.c:15
+15	    puts("bins ready");
+gef➤  heap chunk s1
+Chunk(addr=0xaaaaaaac19a0, size=0x100, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 256 (0x100)
+Usable size: 248 (0xf8)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+
+Forward pointer: 0xfffff7fa0ba0
+Backward pointer: 0xaaaaaaac1ab0
+
+gef➤  heap chunk l1
+Chunk(addr=0xaaaaaaac1be0, size=0x810, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 2064 (0x810)
+Usable size: 2056 (0x808)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+
+Forward pointer: 0xfffff7fa0fa0
+Backward pointer: 0xfffff7fa0fa0
+
+gef➤  heap chunks --summary
+== Chunk distribution by size ==
+ChunkBytes	Count     	TotalBytes     	Description
+125936    	1         	125936         	
+4112      	1         	4112           	
+256       	9         	2304           	
+2064      	1         	2064           	
+656       	1         	656            	
+32        	3         	96             	
+
+== Chunk distribution by flag ==
+Flag           	TotalCount	TotalBytes
+PREV_INUSE     	13        	135072
+IS_MMAPPED     	0         	0
+NON_MAIN_ARENA 	0         	0
+gef➤  hexdump byte main --size 48
+[!] Command 'hexdump byte' failed to execute properly, reason: Cannot convert value to long.
+gef➤  dereference $sp -l 4 -r $sp
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+gef➤  dereference $sp -l 4 -r 0x40
+[!] Unmapped address: '0x40'
+gef➤  format-string-helper
+
+
+
+
+
+[+] Enabled 5 FormatString breakpoints
+gef➤  xinfo puts
+[!] Cannot convert value to long.
+gef➤  vmmap $sp
+[*] `$sp` has no type specified. We guessed it was an address filter.
+[*] You can use --name or --addr before the filter value for specifying its type manually.
+
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+
+[addr = `$sp` (0xfffffffffae0)]
+0x0000fffffffdf000 0x0001000000000000 0x0000000000000000 rw- [stack]
+
+gef➤  aslr
+ASLR is currently disabled
+gef➤  pie info
+VNum    Num     Addr              
+gef➤  scan stack libc
+[+] Searching for addresses in 'stack' that point to 'libc'
+[stack]: 0x0000ffffffffed50│+0x1fd50: 0x0000fffff7e0efe5  →  "ld-linux-aarch64.so.1"
+[stack]: 0x0000ffffffffed90│+0x1fd90: 0x0000fffff7f9faf0  →  0x0000000000000001
+[stack]: 0x0000ffffffffedc0│+0x1fdc0: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[stack]: 0x0000fffffffff1a0│+0x201a0: 0x0000fffff7e0efe5  →  "ld-linux-aarch64.so.1"
+[stack]: 0x0000fffffffff1c0│+0x201c0: 0x0000fffff7e0efe5  →  "ld-linux-aarch64.so.1"
+[stack]: 0x0000fffffffff208│+0x20208: 0x0000fffff7e0efe5  →  "ld-linux-aarch64.so.1"
+[stack]: 0x0000fffffffff248│+0x20248: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[stack]: 0x0000fffffffff498│+0x20498: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[stack]: 0x0000fffffffff4a0│+0x204a0: 0x0000fffff7e0efe5  →  "ld-linux-aarch64.so.1"
+[stack]: 0x0000fffffffff5e0│+0x205e0: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[stack]: 0x0000fffffffff7e0│+0x207e0: 0x0000fffff7dfdbc8  →  0x000c001200000eaf
+[stack]: 0x0000fffffffff7f0│+0x207f0: 0x0000fffff7f9fbf0  →  0x000000006ffffffc
+[stack]: 0x0000fffffffff820│+0x20820: 0x0000fffff7df274c  →  0x12ef9860069682ac
+[stack]: 0x0000fffffffff848│+0x20848: 0x0000fffff7e78014  →  0xf9474400f0000920 (" \t"?)
+[stack]: 0x0000fffffffff868│+0x20868: 0x0000fffff7f2d8b8  →  <__libc_early_init+00c8> adrp x0,  0xfffff7f9f000 <_nl_C_locobj+32>
+[stack]: 0x0000fffffffff878│+0x20878: 0x0000fffff7f2d844  →  <__libc_early_init+0054> mov x4,  #0x200000              	// #2097152
+[stack]: 0x0000fffffffff938│+0x20938: 0x0000fffff7ed8ef8  →  <sbrk+00a8> tbnz w0,  #31,  0xfffff7ed8ecc <__GI___sbrk+124>
+[stack]: 0x0000fffffffff948│+0x20948: 0x0000fffff7e83a2c  →  <__default_morecore+0018> cmn x0,  #0x1
+[stack]: 0x0000fffffffff950│+0x20950: 0x0000fffff7fa0a50  →  0x0000000000000000
+[stack]: 0x0000fffffffff978│+0x20978: 0x0000fffff7e848b0  →  <sysmalloc+03d0> ldp x6,  x7,  [sp]
+[stack]: 0x0000fffffffff9a8│+0x209a8: 0x0000fffff7e85a3c  →  <_int_malloc+0de8> mov x20,  x0
+[stack]: 0x0000fffffffff9d0│+0x209d0: 0x0000fffff7fa0ab0  →  0x0000aaaaaaac3410  →  0x0000000000000000
+[stack]: 0x0000fffffffff9f8│+0x209f8: 0x0000fffff7e85954  →  <_int_malloc+0d00> ldp x21,  x22,  [sp,  #32]
+[stack]: 0x0000fffffffffa08│+0x20a08: 0x0000fffff7e85ba4  →  <tcache_init.part+0044> mov x20,  x0
+[stack]: 0x0000fffffffffa10│+0x20a10: 0x0000fffff7fa0a50  →  0x0000000000000000
+[stack]: 0x0000fffffffffa28│+0x20a28: 0x0000fffff7e85954  →  <_int_malloc+0d00> ldp x21,  x22,  [sp,  #32]
+[stack]: 0x0000fffffffffa38│+0x20a38: 0x0000fffff7e8668c  →  <malloc+021c> add x1,  x23,  #0x6f0
+[stack]: 0x0000fffffffffa40│+0x20a40: 0x0000fffff7fa0000  →  0x0000004000000022 ("""?)
+[stack]: 0x0000fffffffffbb8│+0x20bb8: 0x0000fffff7e184c4  →  <__libc_start_call_main+0074> bl 0xfffff7e2f2f0 <__GI_exit>
+[stack]: 0x0000fffffffffca8│+0x20ca8: 0x0000fffff7e18540  →  0xf9474b18f0000c38 ("8"?)
+[stack]: 0x0000fffffffffcc8│+0x20cc8: 0x0000fffff7e18598  →  0xf947d75af0000c3a (":"?)
+gef➤  memory watch $sp 0x20 qword
+[+] Adding memwatch to 0xfffffffffae0
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+16 ────
+     11	     l1 = malloc(0x800); x = malloc(0x18);
+     12	     for (i = 0; i < 7; i++) free(t[i]);
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+             // argc=0x1, argv=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("/t/t2"?), fmt=0x0000fffffffffb68  →  0x0000000000000000
+ →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+─────────────────────────────────────────────────────────────────────────────────── memory:0xfffffffffae0 ────
+0x0000fffffffffae0│+0x0000   0x0000fffffffffd38   
+0x0000fffffffffae8│+0x0008   0x00000001fffffef8   
+0x0000fffffffffaf0│+0x0010   0x0000000000000181   
+0x0000fffffffffaf8│+0x0018   0x0000000700000000   
+0x0000fffffffffb00│+0x0020   0x0000aaaaaaac19a0   
+0x0000fffffffffb08│+0x0028   0x0000aaaaaaac1aa0   
+0x0000fffffffffb10│+0x0030   0x0000aaaaaaac1ac0   
+0x0000fffffffffb18│+0x0038   0x0000aaaaaaac1bc0   
+0x0000fffffffffb20│+0x0040   0x0000aaaaaaac1be0   
+0x0000fffffffffb28│+0x0048   0x0000aaaaaaac2410   
+0x0000fffffffffb30│+0x0050   0x0000aaaaaaac12a0   
+0x0000fffffffffb38│+0x0058   0x0000aaaaaaac13a0   
+0x0000fffffffffb40│+0x0060   0x0000aaaaaaac14a0   
+0x0000fffffffffb48│+0x0068   0x0000aaaaaaac15a0   
+0x0000fffffffffb50│+0x0070   0x0000aaaaaaac16a0   
+0x0000fffffffffb58│+0x0078   0x0000aaaaaaac17a0   
+0x0000fffffffffb60│+0x0080   0x0000aaaaaaac18a0   
+0x0000fffffffffb68│+0x0088   0x0000000000000000   
+0x0000fffffffffb70│+0x0090   0x0000000000000000   
+0x0000fffffffffb78│+0x0098   0x0000000000000000   
+0x0000fffffffffb80│+0x00a0   0x0000000000000000   
+0x0000fffffffffb88│+0x00a8   0x0000000000000000   
+0x0000fffffffffb90│+0x00b0   0x0000000000000000   
+0x0000fffffffffb98│+0x00b8   0x0000000000000000   
+0x0000fffffffffba0│+0x00c0   0x0000fffffffffcc0   
+0x0000fffffffffba8│+0x00c8   0x387fb66d57ee7900   
+0x0000fffffffffbb0│+0x00d0   0x0000fffffffffcc0   
+0x0000fffffffffbb8│+0x00d8   0x0000fffff7e184c4   
+0x0000fffffffffbc0│+0x00e0   0x0000fffffffffc50   
+0x0000fffffffffbc8│+0x00e8   0x0000aaaaaaaa0958   
+0x0000fffffffffbd0│+0x00f0   0x00000001f7ffeb48   
+0x0000fffffffffbd8│+0x00f8   0x0000fffffffffd38   
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0a68 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  memory reset
+[+] Memory watches cleared
+gef➤  gef config context.layout "regs -stack code"
+gef➤  context
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  gef config context.layout "legend regs stack code args source memory threads trace extra"
+gef➤  gef config context.show_registers_raw 1
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8 $x1  : 0x0000aaaaaaac2400 $x2  : 0x1011             $x3  : 0x0                
+$x4  : 0x0000fffff7ff8620 $x5  : 0x0                $x6  : 0xfffffffffffffff0 $x7  : 0x4                
+$x8  : 0x0                $x9  : 0x10000            $x10 : 0x1ccef0           $x11 : 0x0                
+$x12 : 0x0000fffff7ffeb48 $x13 : 0x2f               $x14 : 0x1f22b4b          $x15 : 0x0000fffff7ff8e70 
+$x16 : 0x0000aaaaaaabffa8 $x17 : 0x0000fffff7e619d0 $x18 : 0x3                $x19 : 0x0000fffffffffd38 
+$x20 : 0x1                $x21 : 0x0000aaaaaaabfd58 $x22 : 0x0000aaaaaaaa0958 $x23 : 0x0000fffffffffd48 
+$x24 : 0x0000fffff7ffdb58 $x25 : 0x0                $x26 : 0x0000fffff7ffe000 $x27 : 0x0000aaaaaaabfd58 
+$x28 : 0x0                $x29 : 0x0000fffffffffbb0 $x30 : 0x0000aaaaaaaa0a68 $sp  : 0x0000fffffffffae0 
+$pc  : 0x0000aaaaaaaa0a68 $cpsr: 0x60001000         $fpsr: 0x0                $fpcr: 0x0                
+Flags: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+16 ────
+     11	     l1 = malloc(0x800); x = malloc(0x18);
+     12	     for (i = 0; i < 7; i++) free(t[i]);
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+             // argc=0x1, argv=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("/t/t2"?), fmt=0x0000fffffffffb68  →  0x0000000000000000
+ →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0a68 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  gef config context.show_registers_raw 0
+gef➤  gef config context.show_stack_raw 1
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0     38 fd ff ff ff ff 00 00 f8 fe ff ff 01 00 00 00    8...............
+0x0000fffffffffaf0     81 01 00 00 00 00 00 00 00 00 00 00 07 00 00 00    ................
+0x0000fffffffffb00     a0 19 ac aa aa aa 00 00 a0 1a ac aa aa aa 00 00    ................
+0x0000fffffffffb10     c0 1a ac aa aa aa 00 00 c0 1b ac aa aa aa 00 00    ................
+0x0000fffffffffb20     e0 1b ac aa aa aa 00 00 10 24 ac aa aa aa 00 00    .........$......
+0x0000fffffffffb30     a0 12 ac aa aa aa 00 00 a0 13 ac aa aa aa 00 00    ................
+0x0000fffffffffb40     a0 14 ac aa aa aa 00 00 a0 15 ac aa aa aa 00 00    ................
+0x0000fffffffffb50     a0 16 ac aa aa aa 00 00 a0 17 ac aa aa aa 00 00    ................
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+16 ────
+     11	     l1 = malloc(0x800); x = malloc(0x18);
+     12	     for (i = 0; i < 7; i++) free(t[i]);
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+             // argc=0x1, argv=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("/t/t2"?), fmt=0x0000fffffffffb68  →  0x0000000000000000
+ →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0a68 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  gef config context.show_stack_raw 0
+gef➤  gef config context.show_opcodes_size 4
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c 00000090    <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 00e02b91    <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 63ffff97    <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 e00f40b9    <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c 1f040071    <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 8d000054    <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 e00340f9    <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 000440f9    <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c 03000014    <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+16 ────
+     11	     l1 = malloc(0x800); x = malloc(0x18);
+     12	     for (i = 0; i < 7; i++) free(t[i]);
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+             // argc=0x1, argv=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("/t/t2"?), fmt=0x0000fffffffffb68  →  0x0000000000000000
+ →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0a68 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  gef config context.show_opcodes_size 0
+gef➤  gef config context.grow_stack_down 1
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+16 ────
+     11	     l1 = malloc(0x800); x = malloc(0x18);
+     12	     for (i = 0; i < 7; i++) free(t[i]);
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+             // argc=0x1, argv=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("/t/t2"?), fmt=0x0000fffffffffb68  →  0x0000000000000000
+ →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0a68 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  gef config context.grow_stack_down 0
+gef➤  gef config gef.disable_color 1
+gef➤  context
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+16 ────
+     11	     l1 = malloc(0x800); x = malloc(0x18);
+     12	     for (i = 0; i < 7; i++) free(t[i]);
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+             // argc=0x1, argv=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("/t/t2"?), fmt=0x0000fffffffffb68  →  0x0000000000000000
+ →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0a68 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  vmmap
+Start              End                Offset             Perm Path
+0x0000aaaaaaaa0000 0x0000aaaaaaaa1000 0x0000000000000000 r-x /t/t2
+0x0000aaaaaaabf000 0x0000aaaaaaac0000 0x000000000000f000 r-- /t/t2
+0x0000aaaaaaac0000 0x0000aaaaaaac1000 0x0000000000010000 rw- /t/t2
+0x0000aaaaaaac1000 0x0000aaaaaaae2000 0x0000000000000000 rw- [heap]
+0x0000fffff7df0000 0x0000fffff7f8a000 0x0000000000000000 r-x /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7f8a000 0x0000fffff7f9d000 0x000000000019a000 --- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7f9d000 0x0000fffff7fa0000 0x000000000019d000 r-- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7fa0000 0x0000fffff7fa2000 0x00000000001a0000 rw- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7fa2000 0x0000fffff7fae000 0x0000000000000000 rw- 
+0x0000fffff7fbe000 0x0000fffff7fe5000 0x0000000000000000 r-x /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000fffff7ff7000 0x0000fffff7ff9000 0x0000000000000000 rw- 
+0x0000fffff7ff9000 0x0000fffff7ffb000 0x0000000000000000 r-- [vvar]
+0x0000fffff7ffb000 0x0000fffff7ffc000 0x0000000000000000 r-x [vdso]
+0x0000fffff7ffc000 0x0000fffff7ffe000 0x000000000002e000 r-- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000fffff7ffe000 0x0000fffff8000000 0x0000000000030000 rw- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000fffffffdf000 0x0001000000000000 0x0000000000000000 rw- [stack]
+
+gef➤  gef config gef.disable_color 0
+gef➤  delete
+gef➤  break printf
+Breakpoint 7 at 0xfffff7e40590: file ./stdio-common/printf.c, line 28.
+gef➤  continue
+Continuing.
+bins ready
+
+Breakpoint 7, __printf (format=0xfffffffffb68 "%p %p %p\n") at ./stdio-common/printf.c:28
+warning: 28	./stdio-common/printf.c: No such file or directory
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000fffffffffb68  →  "%p %p %p\n"
+$x1  : 0x0000aaaaaaaa0b08  →  "%p %p %p\n"
+$x2  : 0x0000aaaaaaaa0b10  →  0x3b031b010000000a ("\n"?)
+$x3  : 0x1               
+$x4  : 0x9               
+$x5  : 0x2               
+$x6  : 0x7025207025207025 ("%p %p %p"?)
+$x7  : 0xa702520702520   
+$x8  : 0x40              
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffc0  →  0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x17 : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0aa0  →  <main+0148> mov w0,  #0x0                   	// #0
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xfffff7e40584                  nop    
+   0xfffff7e40588                  nop    
+   0xfffff7e4058c                  nop    
+●→ 0xfffff7e40590 <printf+0000>    sub    sp,  sp,  #0x120
+   0xfffff7e40594 <printf+0004>    mov    w12,  #0xffffffc8            	// #-56
+   0xfffff7e40598 <printf+0008>    adrp   x9,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e4059c <printf+000c>    ldr    x9,  [x9,  #3720]
+   0xfffff7e405a0 <printf+0010>    add    x13,  sp,  #0xe0
+   0xfffff7e405a4 <printf+0014>    stp    x29,  x30,  [sp,  #80]
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xfffff7e40590 in __printf (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e40590 → __printf(format=0xfffffffffb68 "%p %p %p\n")
+[#1] 0xaaaaaaaa0aa0 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  finish
+Run till exit from #0  __printf (format=0xfffffffffb68 "%p %p %p\n") at ./stdio-common/printf.c:28
+0xaaaaaaaa0b08 0xaaaaaaaa0b10 0x1
+main (argc=0x1, argv=0xfffffffffd38) at /rv/t2.c:18
+18	    return 0;
+Value returned is $1 = 0x22
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x22              
+$x1  : 0x0000fffff7ffdb50  →  0x387fb66d57ee7900
+$x2  : 0x0               
+$x3  : 0x0               
+$x4  : 0x0000fffffffff91a  →  0x15200000fffff7e5
+$x5  : 0x0000aaaaaaac1c02  →  0x0000000000000000
+$x6  : 0xa               
+$x7  : 0x1               
+$x8  : 0x40              
+$x9  : 0x0               
+$x10 : 0xa               
+$x11 : 0xffffff80        
+$x12 : 0xffffffc8        
+$x13 : 0x0000fffffffffaa0  →  0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x14 : 0x0               
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffc0  →  0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x17 : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0aa0  →  <main+0148> mov w0,  #0x0                   	// #0
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0aa0  →  <main+0148> mov w0,  #0x0                   	// #0
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a94 <main+013c>      bl     0xaaaaaaaa0810 <strcpy@plt>
+   0xaaaaaaaa0a98 <main+0140>      add    x0,  sp,  #0x88
+   0xaaaaaaaa0a9c <main+0144>      bl     0xaaaaaaaa0820 <printf@plt>
+ → 0xaaaaaaaa0aa0 <main+0148>      mov    w0,  #0x0                   	// #0
+   0xaaaaaaaa0aa4 <main+014c>      mov    w1,  w0
+   0xaaaaaaaa0aa8 <main+0150>      adrp   x0,  0xaaaaaaabf000
+   0xaaaaaaaa0aac <main+0154>      ldr    x0,  [x0,  #4072]
+   0xaaaaaaaa0ab0 <main+0158>      ldr    x3,  [sp,  #200]
+   0xaaaaaaaa0ab4 <main+015c>      ldr    x2,  [x0]
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+18 ────
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+     16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+ →   18	     return 0;
+     19	 }
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0aa0 in main (), reason: TEMPORARY BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xaaaaaaaa0aa0 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  print-format --lang py -l 16 $sp
+buf = [0xfd38, 0xffff, 0xffff, 0x0, 0xfef8, 0xffff, 0x1, 0x0, 0x181, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7, 0x0]
+gef➤  entry-break
+[*] gdb is already running
+gef➤  info frame
+Stack level 0, frame at 0xfffffffffbc0:
+ pc = 0xaaaaaaaa0aa0 in main (/rv/t2.c:18); saved pc = 0xfffff7e184c4
+ source language c.
+ Arglist at 0xfffffffffbb0, args: argc=0x1, argv=0xfffffffffd38
+ Locals at 0xfffffffffbb0, Previous frame's sp is 0xfffffffffbc0
+ Saved registers:
+  x29 at 0xfffffffffbb0, x30 at 0xfffffffffbb8
+gef➤  info sharedlibrary
+From                To                  Syms Read   Shared Object Library
+0x0000fffff7fbedc0  0x0000fffff7fdae70  Yes         /lib/ld-linux-aarch64.so.1
+0x0000fffff7e17d00  0x0000fffff7f343d4  Yes         /lib/aarch64-linux-gnu/libc.so.6
+gef➤  gef config
+───────────────────────────────────────── GEF configuration settings ─────────────────────────────────────────
+context.clear_screen (bool) = True
+context.enable (bool) = True
+context.grow_stack_down (bool) = False
+context.ignore_registers (str) = ""
+context.layout (str) = "legend regs stack code args source memory threads trace extra"
+context.libc_args (bool) = False
+context.libc_args_path (str) = ""
+context.nb_lines_backtrace (int) = 10
+context.nb_lines_backtrace_before (int) = 2
+context.nb_lines_code (int) = 6
+context.nb_lines_code_prev (int) = 3
+context.nb_lines_stack (int) = 8
+context.nb_lines_threads (int) = -1
+context.peek_calls (bool) = True
+context.peek_ret (bool) = True
+context.redirect (str) = ""
+context.show_basename_source_file_name_max_len (int) = 20
+context.show_full_source_file_name_max_len (int) = 30
+context.show_opcodes_size (int) = 0
+context.show_prefix_source_path_name_len (int) = 10
+context.show_registers_raw (bool) = False
+context.show_source_code_variable_values (bool) = True
+context.show_stack_raw (bool) = False
+dereference.max_recursion (int) = 7
+entry-break.entrypoint_symbols (str) = "main _main __libc_start_main __uClibc_main start _start"
+gef.autosave_breakpoints_file (str) = ""
+gef.bruteforce_main_arena (bool) = False
+gef.buffer (bool) = True
+gef.debug (bool) = False
+gef.disable_color (bool) = False
+gef.disable_target_remote_overwrite (bool) = False
+gef.extra_plugins_dir (str) = ""
+gef.follow_child (bool) = True
+gef.libc_version (str) = ""
+gef.main_arena_offset (str) = ""
+gef.propagate_debug_exception (bool) = False
+gef.readline_compat (bool) = False
+gef.show_deprecation_warnings (bool) = True
+gef.tempdir (Path) = /tmp/gef
+got.function_not_resolved (str) = "yellow"
+got.function_resolved (str) = "green"
+heap-analysis-helper.check_double_free (bool) = True
+heap-analysis-helper.check_free_null (bool) = False
+heap-analysis-helper.check_heap_overlap (bool) = True
+heap-analysis-helper.check_uaf (bool) = True
+heap-analysis-helper.check_weird_free (bool) = True
+heap-chunks.peek_nb_byte (int) = 16
+hexdump.always_show_ascii (bool) = False
+highlight.regex (bool) = False
+pattern.length (int) = 1024
+pcustom edit.struct_path (Path) = /tmp/gef/structs
+pcustom list.struct_path (Path) = /tmp/gef/structs
+pcustom show.struct_path (Path) = /tmp/gef/structs
+pcustom.max_depth (int) = 4
+pcustom.struct_path (Path) = /tmp/gef/structs
+pcustom.structure_name (str) = "bold blue"
+pcustom.structure_size (str) = "green"
+pcustom.structure_type (str) = "bold red"
+print-format.max_size_preview (int) = 10
+process-search.ps_command (str) = "/usr/bin/ps auxww"
+search-pattern.max_size_preview (int) = 10
+search-pattern.nr_pages_chunk (int) = 1024
+theme.address_code (str) = "red"
+theme.address_heap (str) = "green"
+theme.address_stack (str) = "pink"
+theme.context_title_line (str) = "gray"
+theme.context_title_message (str) = "cyan"
+theme.default_title_line (str) = "gray"
+theme.default_title_message (str) = "cyan"
+theme.dereference_base_address (str) = "cyan"
+theme.dereference_code (str) = "gray"
+theme.dereference_register_value (str) = "bold blue"
+theme.dereference_string (str) = "yellow"
+theme.disassemble_current_instruction (str) = "green"
+theme.old_context (str) = "gray"
+theme.registers_register_name (str) = "blue"
+theme.registers_value_changed (str) = "bold red"
+theme.source_current_line (str) = "green"
+theme.table_heading (str) = "blue"
+theme.threads_pc (str) = "blue"
+trace-run.max_tracing_recursion (int) = 1
+trace-run.tracefile_prefix (str) = "./gef-trace-"
+gef➤  continue
+Continuing.
+[Inferior 1 (process 49) exited normally]
+gef➤  quit
+y

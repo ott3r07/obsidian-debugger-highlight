@@ -1,0 +1,10 @@
+gef➤  search-pattern "heap string"
+[+] Searching 'heap string' in memory
+[+] In '/host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/gef/build/test_arm64'(0xaaaaaaaa0000-0xaaaaaaaa1000), permission=r-x
+  0xaaaaaaaa0c90 - 0xaaaaaaaa0ca0  →   "heap string here" 
+gef➤  search-pattern AAAAAAAABBBB
+[+] Searching 'AAAAAAAABBBB' in memory
+[+] In '/host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/gef/build/test_arm64'(0xaaaaaaaa0000-0xaaaaaaaa1000), permission=r-x
+  0xaaaaaaaa0c70 - 0xaaaaaaaa0c88  →   "AAAAAAAABBBBBBBBCCCCCCCC" 
+[+] In '[stack]'(0xfffffffdf000-0x1000000000000), permission=rw-
+  0xfffffffffb58 - 0xfffffffffb70  →   "AAAAAAAABBBBBBBBCCCCCCCC" 

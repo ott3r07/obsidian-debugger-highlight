@@ -1,0 +1,17 @@
+[32m[1mpwndbg> [0m[32m[0mgot -r
+State of the GOT of [35m/work/test_arm64[0m:
+GOT protection: [32mFull RELRO[0m | Found [33m14[0m GOT entries passing the filter
+[[0m0xaaaaaaabff80[0m] [33m__libc_start_main@GLIBC_2.34[0m -> [31m0xfffff7e18500 (__libc_start_main)[0m ◂— [38;5;148mstp[39m[38;5;255m [39m[38;5;81mx29[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx30[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#-0x60[39m[38;5;255m][39m[38;5;198;48;5;233m![39;49m
+[[0m0xaaaaaaabff88[0m] [33m__cxa_finalize@GLIBC_2.17[0m -> [31m0xfffff7e2eb50 (__cxa_finalize)[0m ◂— [38;5;148madrp[39m[38;5;255m [39m[38;5;81mx2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[0m_nl_C_locobj+32[0m[39m
+[[0m0xaaaaaaabff90[0m] [33mmalloc@GLIBC_2.17[0m -> [31m0xfffff7e86470 (malloc)[0m ◂— [38;5;148mstp[39m[38;5;255m [39m[38;5;81mx29[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx30[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#-0x40[39m[38;5;255m][39m[38;5;198;48;5;233m![39;49m
+[[0m0xaaaaaaabff98[0m] [33m__stack_chk_fail@GLIBC_2.17[0m -> [31m0xfffff7ee9250 (__stack_chk_fail)[0m ◂— [38;5;148mstp[39m[38;5;255m [39m[38;5;81mx29[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx30[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#-0x10[39m[38;5;255m][39m[38;5;198;48;5;233m![39;49m
+[[0m0xaaaaaaabffa0[0m] [33m__gmon_start__[0m -> 0
+[[0m0xaaaaaaabffa8[0m] [33mabort@GLIBC_2.17[0m -> [31m0xfffff7e17d0c (abort)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+[[0m0xaaaaaaabffb0[0m] [33mfree@GLIBC_2.17[0m -> [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+[[0m0xaaaaaaabffb8[0m] [33mstrcpy@GLIBC_2.17[0m -> [31m0xfffff7e8d240 (strcpy)[0m ◂— [38;5;148mnop[39m[38;5;255m [39m
+[[0m0xaaaaaaabffc0[0m] [33mprintf@GLIBC_2.17[0m -> [31m0xfffff7e40590 (printf)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x120[39m
+[[0m0xaaaaaaabffd0[0m] [33m_ITM_deregisterTMCloneTable[0m -> 0
+[[0m0xaaaaaaabffd8[0m] [33m__cxa_finalize@GLIBC_2.17[0m -> [31m0xfffff7e2eb50 (__cxa_finalize)[0m ◂— [38;5;148madrp[39m[38;5;255m [39m[38;5;81mx2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[0m_nl_C_locobj+32[0m[39m
+[[0m0xaaaaaaabffe0[0m] [33m__gmon_start__[0m -> 0
+[[0m0xaaaaaaabffe8[0m] [33m__stack_chk_guard@GLIBC_2.17[0m -> [0m0xfffff7ffdb50 (__stack_chk_guard)[0m ◂— 0x43e285dfeaf58100
+[[0m0xaaaaaaabfff8[0m] [33m_ITM_registerTMCloneTable[0m -> 0

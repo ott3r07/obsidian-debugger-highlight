@@ -1,0 +1,43 @@
+50k A                              gdb=2.3  pwndbg=5.7  gef=4.6  peda=5.1
+50k spaces                         gdb=6.5  pwndbg=12.0  gef=8.5  peda=9.7
+50k tabs                           gdb=6.3  pwndbg=10.8  gef=7.6  peda=9.1
+50k ─                              gdb=1.1  pwndbg=0.6  gef=0.4  peda=1.9
+25k 0x                             gdb=2.4  pwndbg=3.7  gef=3.3  peda=5.1
+0x41414141 x5000                   gdb=6.1  pwndbg=6.7  gef=6.3  peda=6.7
+50k <                              gdb=1.2  pwndbg=1.9  gef=1.6  peda=2.1
+<a x25k                            gdb=1.1  pwndbg=1.8  gef=1.7  peda=2.1
+<<<<…>>>> 1k deep                  gdb=0.1  pwndbg=0.1  gef=0.1  peda=0.1
+unclosed dq 50k                    gdb=1.7  pwndbg=3.0  gef=2.6  peda=3.1
+dq backslash 25k                   gdb=1.1  pwndbg=1.8  gef=1.7  peda=2.2
+single-quote x50k                  gdb=1.0  pwndbg=1.6  gef=1.5  peda=2.0
+50k [                              gdb=1.1  pwndbg=1.9  gef=1.9  peda=2.7
+50k │                              gdb=1.2  pwndbg=1.4  gef=1.8  peda=1.9
+50k :                              gdb=1.0  pwndbg=1.9  gef=1.7  peda=2.4
+50k -                              gdb=1.2  pwndbg=2.1  gef=2.0  peda=2.7
+50k =                              gdb=1.2  pwndbg=0.7  gef=1.9  peda=2.2
+50k digits                         gdb=2.8  pwndbg=4.0  gef=3.9  peda=5.2
+hex no 0x 50k                      gdb=1.2  pwndbg=2.1  gef=1.7  peda=2.6
+(gdb) + 50k                        gdb=0.1  pwndbg=1.2  gef=0.5  peda=1.4
+pwndbg> + 50k                      gdb=1.7  pwndbg=0.2  gef=2.3  peda=3.1
+emoji x2000 lines                  gdb=1.9  pwndbg=3.4  gef=2.8  peda=3.4
+garbage 2000x80                    gdb=4.6  pwndbg=8.1  gef=7.8  peda=7.9
+2000 lines '─'*200                 gdb=8.6  pwndbg=11.6  gef=8.6  peda=15.7
+2000 lines '0x'*100                gdb=19.7  pwndbg=30.4  gef=27.1  peda=41.2
+2000 lines spaces 500 then x       gdb=131.7!!  pwndbg=239.5!!  gef=172.0!!  peda=196.7!!
+2000 lines '[' 300                 gdb=12.7  pwndbg=23.2  gef=22.2  peda=32.3
+2000 lines '<' 300                 gdb=12.7  pwndbg=21.4  gef=19.4  peda=24.9
+2000 lines unclosed quote 300      gdb=24.0  pwndbg=44.9  gef=31.5  peda=42.4
+2000 lines 0x… 0x… 0x… x40         gdb=132.6!!  pwndbg=163.8!!  gef=144.8!!  peda=162.4!!
+2000 lines `:  ` x60               gdb=50.5!!  pwndbg=75.5!!  gef=64.6!!  peda=69.7!!
+2000 lines `—▸ ` x60               gdb=38.3  pwndbg=108.8!!  gef=56.9!!  peda=73.1!!
+2000 lines `-->` x60               gdb=40.3  pwndbg=74.0!!  gef=55.4!!  peda=104.9!!
+2000 lines `rax rbx` x100          gdb=22.8  pwndbg=43.3  gef=29.8  peda=42.8
+2000 lines 'Breakpoint 1, ' x50    gdb=78.8!!  pwndbg=96.0!!  gef=78.0!!  peda=98.6!!
+2000 lines '#' + spaces            gdb=37.7  pwndbg=73.6!!  gef=51.7!!  peda=65.1!!
+2000 lines `(` 300                 gdb=12.4  pwndbg=26.1  gef=17.9  peda=24.3
+2000 lines `{a = ` 100             gdb=29.4  pwndbg=56.8!!  gef=39.0  peda=55.6!!
+CRLF fixture x2000                 gdb=10.9  pwndbg=16.0  gef=14.0  peda=15.1
+pwndbg fixture 2000                gdb=3.3  pwndbg=18.6  gef=6.0  peda=6.1
+gef fixture 2000                   gdb=5.1  pwndbg=10.5  gef=23.0  peda=10.3
+peda fixture 2000                  gdb=6.3  pwndbg=6.9  gef=5.0  peda=10.9
+gdb fixture 2000                   gdb=10.5  pwndbg=15.7  gef=13.3  peda=14.7

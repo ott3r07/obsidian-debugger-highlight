@@ -1,0 +1,9 @@
+[?2004h[1;32mgef➤  [0mhexdump dword $sp --size 8
+[?2004l[36m0x0000fffffffffad0[0m│+0x0000   0xfffffd18   
+[36m0x0000fffffffffad4[0m│+0x0004   0x0000ffff   
+[36m0x0000fffffffffad8[0m│+0x0008   0x00000000   
+[36m0x0000fffffffffadc[0m│+0x000c   0x00000001   
+[36m0x0000fffffffffae0[0m│+0x0010   0x00000008   
+[36m0x0000fffffffffae4[0m│+0x0014   0x00000000   
+[36m0x0000fffffffffae8[0m│+0x0018   0xaaaa0918   
+[36m0x0000fffffffffaec[0m│+0x001c   0x0000aaaa   

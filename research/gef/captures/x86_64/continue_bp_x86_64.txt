@@ -1,0 +1,71 @@
+(qemu) gef➤  continue
+Continuing.
+
+Breakpoint 2, 0x00000000004018b8 in compute (f=0x401865 <add>, x=0x6, y=0x7) at test.c:14
+14	    int r = f(x, y);
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x6               
+$rbx   : 0x1               
+$rcx   : 0x0000000000401865  →  <add+0000> endbr64 
+$rdx   : 0x7               
+$rsp   : 0x00002aaaab2abb70  →  0x0000000600000007
+$rbp   : 0x00002aaaab2abb90  →  0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x7               
+$rdi   : 0x6               
+$rip   : 0x00000000004018b8  →  <compute+0024> call rcx
+$r8    : 0x00000000004b2d10  →  0x0000000000070000
+$r9    : 0x0               
+$r10   : 0x7               
+$r11   : 0x00000000004b3a80  →  0x00000000000004b3
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abb70│+0x0000: 0x0000000600000007	 ← $rsp
+0x00002aaaab2abb78│+0x0008: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abb80│+0x0010: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abb88│+0x0018: 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+0x00002aaaab2abb90│+0x0020: 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000	 ← $rbp
+0x00002aaaab2abb98│+0x0028: 0x0000000000401acd  →  <main+01a7> mov DWORD PTR [rbp-0xbc], eax
+0x00002aaaab2abba0│+0x0030: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abba8│+0x0038: 0x000000010040df3c
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x4018b0 <compute+001c>   mov    rcx, QWORD PTR [rbp-0x18]
+     0x4018b4 <compute+0020>   mov    esi, edx
+     0x4018b6 <compute+0022>   mov    edi, eax
+●→   0x4018b8 <compute+0024>   call   rcx
+     0x4018ba <compute+0026>   mov    DWORD PTR [rbp-0x4], eax
+     0x4018bd <compute+0029>   mov    eax, DWORD PTR [rbp-0x4]
+     0x4018c0 <compute+002c>   leave  
+     0x4018c1 <compute+002d>   ret    
+     0x4018c2 <vuln+0000>      endbr64 
+───────────────────────────────────────────────────────────────────────────────────── arguments (guessed) ────
+*0x401865 (
+   $rdi = 0x0000000000000006,
+   $rsi = 0x0000000000000007,
+   $rdx = 0x0000000000000007,
+   $rcx = 0x0000000000401865 → <add+0000> endbr64 
+)
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+14 ────
+      9	 
+     10	 int add(int a, int b) { return a + b; }
+     11	 int mul(int a, int b) { return a * b; }
+     12	 
+     13	 int compute(op_fn f, int x, int y) {
+             // x=0x6, y=0x7, r=0x2aaa
+ →   14	     int r = f(x, y);
+     15	     return r;
+     16	 }
+     17	 
+     18	 void vuln(const char *src) {
+     19	     char buf[32];
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x4018b8 in compute (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x4018b8 → compute(f=0x401865 <add>, x=0x6, y=0x7)
+[#1] 0x401acd → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

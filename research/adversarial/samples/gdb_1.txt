@@ -1,0 +1,30 @@
+# SOURCE: https://github.com/longld/peda/issues/102
+(gdb) r $(python -c 'print "A" * 260')
+Starting program: /tmp/vuln $(python -c 'print "A" * 260')
+Input: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+
+Program received signal SIGSEGV, Segmentation fault.
+0x41414141 in ?? ()
+(gdb) info registers
+eax            0x0	0
+ecx            0xffffd400	-11264
+edx            0xf7f9b870	-134629264
+ebx            0x0	0
+esp            0xffffd400	0xffffd400
+ebp            0x0	0x0
+esi            0xf7f9a000	-134635520
+edi            0xf7f9a000	-134635520
+eip            0x41414141	0x41414141
+eflags         0x10282	[ SF IF RF ]
+cs             0x23	35
+ss             0x2b	43
+ds             0x2b	43
+es             0x2b	43
+fs             0x0	0
+gs             0x63	99
+
+gdb-peda$ r $(python -c 'print "A" * 260')
+Starting program: /tmp/vuln $(python -c 'print "A" * 260')
+Input: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+[Inferior 1 (process 14450) exited normally]
+Warning: not running or target is remote

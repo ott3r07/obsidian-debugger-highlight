@@ -1,0 +1,2 @@
+(qemu) gef➤  canary
+[+] The canary of process 686 is at 0x4b23a8, value is 0x3d49d510b9e3f700

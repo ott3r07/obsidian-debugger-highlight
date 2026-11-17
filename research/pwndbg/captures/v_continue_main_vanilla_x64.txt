@@ -1,0 +1,5 @@
+(gdb) continue
+Continuing.
+
+Breakpoint 1, main (argc=1, argv=0xffff935a9cf8) at test.c:24
+24	int main(int argc, char **argv) {

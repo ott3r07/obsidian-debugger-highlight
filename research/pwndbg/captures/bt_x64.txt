@@ -1,0 +1,5 @@
+pwndbg> bt
+#0  main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+#1  0x0000ffff9295c1ca in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#2  0x0000ffff9295c28b in __libc_start_main () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#3  0x0000555555557105 in _start ()

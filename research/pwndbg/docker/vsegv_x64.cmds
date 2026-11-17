@@ -1,0 +1,9 @@
+v_segv_target_remote|target remote :1234
+v_segv_break|break test.c:38
+v_segv_continue_start|continue
+v_set_var|set var fp = 0
+v_sigsegv|continue
+v_bt_segv|bt
+v_x_i_segv|x/i $pc
+v_kill|kill
+v_kill_confirm|y

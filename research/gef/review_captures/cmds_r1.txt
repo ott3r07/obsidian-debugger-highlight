@@ -1,0 +1,56 @@
+break_puts	break puts
+run	run
+got	got
+got_filter	got puts
+checksec_pie	checksec
+checksec_nopie	checksec /t/t2_nopie
+heap_bins	heap bins
+heap_bins_small	heap bins small
+heap_bins_large	heap bins large
+heap_chunks	heap chunks
+heap_chunk_free	heap chunk s1
+up	up
+heap_chunk_free	heap chunk s1
+heap_chunk_free	heap chunk l1
+heap_chunks_summary	heap chunks --summary
+hexdump_sym	hexdump byte main --size 48
+deref_ref	dereference $sp -l 4 -r $sp
+deref_neg	dereference $sp -l 4 -r 0x40
+fsh	format-string-helper
+xinfo_libc	xinfo puts
+vmmap_addr	vmmap $sp
+aslr	aslr
+pie_info	pie info
+scan	scan stack libc
+memwatch	memory watch $sp 0x20 qword
+ctx_mem	context
+-	memory reset
+-	gef config context.layout "regs -stack code"
+ctx_layout	context
+-	gef config context.layout "legend regs stack code args source memory threads trace extra"
+-	gef config context.show_registers_raw 1
+ctx_rawregs	context
+-	gef config context.show_registers_raw 0
+-	gef config context.show_stack_raw 1
+ctx_rawstack	context
+-	gef config context.show_stack_raw 0
+-	gef config context.show_opcodes_size 4
+ctx_opcodes	context
+-	gef config context.show_opcodes_size 0
+-	gef config context.grow_stack_down 1
+ctx_growdown	context
+-	gef config context.grow_stack_down 0
+-	gef config gef.disable_color 1
+ctx_nocolor	context
+vmmap_nocolor	vmmap
+-	gef config gef.disable_color 0
+del	delete
+printf_break	break printf
+cont_fsh	continue
+finish_printf	finish
+pf	print-format --lang py -l 16 $sp
+entry	entry-break
+info_frame	info frame
+info_sharedlib	info sharedlibrary
+gef_cfg_all	gef config
+ctx_cont	continue

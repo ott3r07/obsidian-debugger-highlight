@@ -1,0 +1,11 @@
+[32m[1mpwndbg> [0m[32m[0mx/20gx $sp
+[34m0xfffffffffa80[m:	0x0000fffffffffcc8	0x0000000100000000
+[34m0xfffffffffa90[m:	0x0000000000000008	0x0000aaaaaaaa0918
+[34m0xfffffffffaa0[m:	0x0000aaaaaaac15d0	0x0000aaaaaaac1ae0
+[34m0xfffffffffab0[m:	0x0000aaaaaaac1420	0x0000aaaaaaac14b0
+[34m0xfffffffffac0[m:	0x0000aaaaaaac1540	0x0000aaaaaaac12a0
+[34m0xfffffffffad0[m:	0x0000aaaaaaac12d0	0x0000aaaaaaac1300
+[34m0xfffffffffae0[m:	0x0000aaaaaaac1330	0x0000aaaaaaac1360
+[34m0xfffffffffaf0[m:	0x0000aaaaaaac1390	0x0000aaaaaaac13c0
+[34m0xfffffffffb00[m:	0x0000aaaaaaac13f0	0x4141414141414141
+[34m0xfffffffffb10[m:	0x4242424242424242	0x4343434343434343

@@ -1,0 +1,7 @@
+pwndbg> nearpc 3
+   0xaaaaaaaa0ca4 <main+464>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0ca8 <main+468>    add    x0, x0, #0xd78
+ ► 0xaaaaaaaa0cac <main+472>    bl     printf@plt                  <printf@plt>
+ 
+   0xaaaaaaaa0cb0 <main+476>    ldr    w0, [sp, #0xc]
+   0xaaaaaaaa0cb4 <main+480>    cmp    w0, #1

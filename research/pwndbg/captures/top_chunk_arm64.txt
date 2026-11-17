@@ -1,0 +1,5 @@
+pwndbg> top-chunk
+Top chunk | PREV_INUSE
+Addr: 0xaaaaaaac1fe0
+Size: 0x20020 (with flag bits: 0x20021)
+

@@ -1,0 +1,63 @@
+(qemu) gef➤  continue
+Continuing.
+
+Breakpoint 3, 0x00000000004019ce in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:31
+31	    for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x7               
+$rbx   : 0x1               
+$rcx   : 0x00000000004b3a70  →  0x0000000000000000
+$rdx   : 0x00000000004b3a50  →  0x0000000000000000
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x20              
+$rdi   : 0x00000000004b3a50  →  0x0000000000000000
+$rip   : 0x00000000004019ce  →  <main+00a8> jle 0x4019a6 <main+128>
+$r8    : 0x00000000004aa2a0  →  0x00000000004b3a70  →  0x0000000000000000
+$r9    : 0x30              
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abba0│+0x0000: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"	 ← $rsp
+0x00002aaaab2abba8│+0x0008: 0x000000010040df3c
+0x00002aaaab2abbb0│+0x0010: 0x0000000000000008
+0x00002aaaab2abbb8│+0x0018: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abbc0│+0x0020: 0x00002aaaab2abbf0  →  0x00000000004b3900  →  0x0000000000000000
+0x00002aaaab2abbc8│+0x0028: 0x3d49d510b9e3f700
+0x00002aaaab2abbd0│+0x0030: 0x00000000004b2fc0  →  0x0000000000000000
+0x00002aaaab2abbd8│+0x0038: 0x00000000004aa240  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x4019bb <main+0095>      mov    QWORD PTR [rbp+rax*8-0x80], rdx
+     0x4019c0 <main+009a>      add    DWORD PTR [rbp-0xc0], 0x1
+     0x4019c7 <main+00a1>      cmp    DWORD PTR [rbp-0xc0], 0x7
+●→   0x4019ce <main+00a8>      jle    0x4019a6 <main+128>	NOT taken [Reason: !(Z || S!=O)]
+     0x4019d0 <main+00aa>      mov    DWORD PTR [rbp-0xc0], 0x0
+     0x4019da <main+00b4>      jmp    0x401a00 <main+218>
+     0x4019dc <main+00b6>      mov    edi, 0x80
+     0x4019e1 <main+00bb>      call   0x40f140 <malloc>
+     0x4019e6 <main+00c0>      mov    rdx, rax
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+31 ────
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+     30	     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+             // small=0x00002aaaab2abbf0  →  [...]  →  0x0000000000000000, i=0x8
+ →   31	     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+     32	     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+     33	     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+     34	     strcpy((char *)small[0], "heap string here");
+     35	     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+     36	     free(mid[0]);
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x4019ce in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x4019ce → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

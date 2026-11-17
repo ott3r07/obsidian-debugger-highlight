@@ -1,0 +1,15 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> telescope $esp 12
+00:0000│ ebp esp 0x40800b98 —▸ 0x40800c98 ◂— 1
+01:0004│+004     0x40800b9c —▸ 0x8049beb (main+567) ◂— add esp, 0x20
+02:0008│+008     0x40800ba0 {alpha_parameter} ◂— 0x1111
+03:000c│+00c     0x40800ba4 {beta_parameter} ◂— 0x2222 /* '""' */
+04:0010│+010     0x40800ba8 {gamma_string} —▸ 0x80c8030 ◂— 'a fairly long string argument to force gdb line wrapping'
+05:0014│+014     0x40800bac {delta_config} —▸ 0x8103080 (g_cfg) —▸ 0x80c8024 ◂— 'review'
+06:0018│+018     0x40800bb0 {epsilon_value} ◂— 0x5555 /* 'UU' */
+07:001c│+01c     0x40800bb4 {zeta_value} ◂— 0x6666 /* 'ff' */
+08:0020│+020     0x40800bb8 —▸ 0x804998c (worker) ◂— endbr32
+09:0024│+024     0x40800bbc ◂— 0x29 /* ')' */
+0a:0028│+028     0x40800bc0 —▸ 0x8102ff4 (_GLOBAL_OFFSET_TABLE_) ◂— 0
+0b:002c│+02c     0x40800bc4 —▸ 0x81035b8 (main_arena+56) —▸ 0x810ac18 ◂— 0

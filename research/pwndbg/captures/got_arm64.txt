@@ -1,0 +1,5 @@
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of /work/test_arm64:
+GOT protection: Full RELRO | Found 0 GOT entries passing the filter

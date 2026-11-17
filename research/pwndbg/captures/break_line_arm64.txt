@@ -1,0 +1,2 @@
+pwndbg> break test.c:38
+Breakpoint 2 at 0xaaaaaaaa0c44: file test.c, line 38.

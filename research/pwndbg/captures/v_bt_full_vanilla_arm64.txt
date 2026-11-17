@@ -1,0 +1,10 @@
+(gdb) bt full
+#0  main (argc=1, argv=0xfffffffffcc8) at test.c:38
+        stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 16 times>, "P\374\377\377\377\377\000"
+        fp = 0xaaaaaaaa0918 <add>
+        small = {0xaaaaaaac12a0, 0xaaaaaaac12d0, 0xaaaaaaac1300, 0xaaaaaaac1330, 0xaaaaaaac1360, 0xaaaaaaac1390, 
+          0xaaaaaaac13c0, 0xaaaaaaac13f0}
+        mid = {0xaaaaaaac1420, 0xaaaaaaac14b0, 0xaaaaaaac1540}
+        big = {0xaaaaaaac15d0, 0xaaaaaaac1ae0}
+        i = 8
+        r = 0

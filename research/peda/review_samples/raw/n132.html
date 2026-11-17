@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="">
+  <!-- Head -->
+  <head>
+    
+    <!-- Metadata, OpenGraph and Schema.org -->
+
+
+
+
+<!-- Standard metadata -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>
+  
+  
+    
+      Debug With GDB | n132
+    
+  
+</title>
+<meta name="author" content=" ">
+<meta name="description" content="">
+
+
+
+
+
+
+
+
+
+
+<!-- Bootstrap & MDB -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link
+  rel="stylesheet"
+  href=""
+  integrity=""
+  crossorigin="anonymous"
+>
+
+<!-- Bootstrap Table -->
+
+
+<!-- Fonts & Icons -->
+<link defer rel="stylesheet" href="/assets/css/academicons.min.css">
+<link
+  defer
+  rel="stylesheet"
+  type="text/css"
+  href=""
+>
+
+<!-- Code Syntax Highlighting -->
+<link
+  defer
+  rel="stylesheet"
+  href="/assets/css/jekyll-pygments-themes-github.css"
+  media=""
+  id="highlight_theme_light"
+>
+
+
+
+<!-- Styles -->
+
+<!-- pseudocode -->
+
+
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="canonical" href="https://github.com/n132/2018/03/06/Debug_With_GDB.html">
+
+<!-- Dark Mode -->
+<script src="/assets/js/theme.js"></script>
+
+
+<!-- GeoJSON support via Leaflet -->
+
+
+<!-- diff2html -->
+
+
+
+
+
+
+
+    <!-- Cinzel: engraved inscriptional serif (certificate style) for the header logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <style>
+      /* === Shared pz layout styles === */
+      .pz-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      /* === Header === */
+      .pz-header {
+        position: relative;
+        padding: 5rem 0 0 0;
+      }
+
+      .pz-header-nav {
+        display: flex;
+        justify-content: flex-end;
+        gap: 2rem;
+        position: relative;
+        z-index: 2;
+        margin-bottom: -4rem;
+        /* pin the nav's right edge to the viewport (with a small gap),
+           mirroring the logo's left pin, so it sits further right */
+        margin-right: calc(50% - 50vw + 2.5rem);
+      }
+
+      .pz-header-nav a {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        text-decoration: none;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        font-family: "Cinzel", "Times New Roman", serif;
+      }
+
+      .pz-header-nav a:hover,
+      .pz-header-nav a.active {
+        color: #1a1a1a;
+      }
+
+      /* hidden nav links: blend into the background until hovered */
+      .pz-header-nav a.hidden-nav {
+        color: #fff;                 /* == page background → invisible */
+        transition: color 0.2s ease;
+      }
+      .pz-header-nav a.hidden-nav:hover,
+      .pz-header-nav a.hidden-nav.active {
+        color: #1a1a1a;              /* reveal on hover / when active */
+      }
+
+      .pz-header-title-row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .pz-header-line {
+        position: absolute;
+        left: 50%;
+        top: 72%;
+        width: 100vw;
+        margin-left: -50vw;
+        height: 2px;
+        background: #1a1a1a;
+        transform: translateY(-50%);
+      }
+
+      .pz-header-logo {
+        position: relative;
+        z-index: 1;
+        /* pin to the viewport's left edge (with a small gap) so the logo
+           stays in the top-left corner regardless of zoom or the centered
+           wrapper's max-width; only the logo moves, the line is untouched */
+        margin-left: calc(50% - 50vw + 2.5rem);
+        font-family: "Cinzel", "Times New Roman", serif;
+        font-size: 5.5rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        color: transparent;
+        -webkit-text-stroke: 2px #1a1a1a;
+        line-height: 1;
+        cursor: default;
+        transition: color 0.3s, -webkit-text-stroke 0.3s;
+        user-select: none;
+        text-decoration: none;
+      }
+
+      /* fill in the outlined logo only when hovering the text itself
+         (not the whole header); also cancel the theme's a:hover underline */
+      .pz-header-logo:hover {
+        color: #1a1a1a;
+        -webkit-text-stroke: 0px transparent;
+        text-decoration: none;
+      }
+
+      /* === Footer === */
+      .pz-footer-slogan {
+        margin: 3rem 0 1rem 0;
+        padding: 0 0 1.5rem 0;
+        user-select: none;
+      }
+
+      .pz-footer-title-row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .pz-footer-line {
+        position: absolute;
+        left: 50%;
+        top: 37%;
+        width: 100vw;
+        margin-left: -50vw;
+        height: 2px;
+        background: #e0e0e0;
+        transform: translateY(-50%);
+        transition: background 0.3s;
+      }
+
+      .pz-footer-slogan:hover .pz-footer-line {
+        background: #1a1a1a;
+      }
+
+      .pz-footer-logo {
+        position: relative;
+        z-index: 1;
+        font-size: 6rem;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        color: #1a1a1a;
+        -webkit-text-stroke: 0px transparent;
+        transition: color 0.3s, -webkit-text-stroke 0.3s;
+        cursor: default;
+      }
+
+      .pz-footer-slogan:hover .pz-footer-logo {
+        color: transparent;
+        -webkit-text-stroke: 2px #e0e0e0;
+      }
+
+      .pz-footer-achievements {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.6rem;
+        padding-left: 1rem;
+        background: var(--global-bg-color);
+      }
+
+      .pz-achievement {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+      }
+
+      .pz-achievement img {
+        height: 2.6rem;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .pz-achievement:hover {
+        transform: translateY(-3px);
+      }
+
+      .pz-footer-note {
+        text-align: right;
+        font-size: 0.75rem;
+        color: #bbb;
+        margin-top: 0.5rem;
+      }
+
+      .pz-footer-note a {
+        color: #999;
+        text-decoration: none;
+      }
+
+      .pz-footer-note a:hover {
+        color: #555;
+      }
+
+      /* === Content area === */
+      .pz-content {
+        padding-top: 2rem;
+      }
+
+      .pz-content .post-header {
+        margin-bottom: 1.5rem;
+      }
+
+      .pz-content .post-title {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #1a1a1a;
+        line-height: 1.3;
+        margin: 0 0 0.3rem 0;
+      }
+
+      .pz-content .post-meta {
+        font-size: 0.85rem;
+        color: #999;
+        margin: 0;
+      }
+
+      .pz-content .post-tags {
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+
+      .pz-content .post-tags a {
+        color: #555;
+        text-decoration: none;
+      }
+
+      .pz-content .post-tags a:hover {
+        color: #1a1a1a;
+      }
+
+      .pz-content .post-description {
+        font-size: 1rem;
+        color: #666;
+        margin: 0;
+      }
+
+      .pz-content .post-content {
+        font-size: 1rem;
+        line-height: 1.75;
+        color: #333;
+      }
+
+      .pz-content .post-content h1,
+      .pz-content .post-content h2,
+      .pz-content .post-content h3,
+      .pz-content .post-content h4 {
+        color: #1a1a1a;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .pz-content .post-content a {
+        color: #1a1a1a;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .pz-content .post-content a:hover {
+        color: #555;
+      }
+
+      .pz-content .post-content pre {
+        background: #f6f6f6;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+      }
+
+      .pz-content .post-content code {
+        font-size: 0.9em;
+      }
+
+      .pz-content .post-content blockquote {
+        border-left: 3px solid #1a1a1a;
+        padding-left: 1rem;
+        color: #555;
+        margin: 1.5rem 0;
+      }
+
+      .pz-content .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+
+      .pz-content .post-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+      }
+
+      .pz-content .post-content table th,
+      .pz-content .post-content table td {
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+
+      .pz-content .post-content table th {
+        font-weight: 700;
+        color: #1a1a1a;
+        border-bottom: 2px solid #1a1a1a;
+      }
+
+      /* === About page profile === */
+      .pz-content .profile {
+        margin-bottom: 1.5rem;
+      }
+
+      .pz-content .profile.float-right {
+        margin-left: 2rem;
+      }
+
+      .pz-content .profile.float-left {
+        margin-right: 2rem;
+      }
+
+      /* === Archive tables === */
+      .pz-content .archive table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .pz-content .archive table th {
+        font-size: 0.85rem;
+        color: #999;
+        font-weight: 400;
+        white-space: nowrap;
+        padding: 0.6rem 1rem 0.6rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .pz-content .archive table td {
+        padding: 0.6rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .pz-content .archive table a {
+        color: #1a1a1a;
+        text-decoration: none;
+      }
+
+      .pz-content .archive table a:hover {
+        color: #555;
+      }
+
+      /* === Responsive === */
+      @media (max-width: 768px) {
+        .pz-header-logo {
+          font-size: 4rem;
+        }
+        .pz-header-nav {
+          flex-wrap: wrap;
+          gap: 0.8rem;
+        }
+        .pz-footer-logo {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <!-- Body -->
+  <body style="overflow-x: hidden;">
+    <div class="pz-wrapper">
+      <!-- Header -->
+      <header>
+  <div class="pz-header">
+    <nav class="pz-header-nav">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="/cheatsheet" class="hidden-nav">Cheatsheet</a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="/kernel" class="hidden-nav">Kernel</a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="/blog/">Blog</a>
+        
+      
+        
+      
+      
+        
+      
+        
+      
+        
+          <a href="/archive">Kernel Archive</a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <a href="/">About</a>
+    </nav>
+    <div class="pz-header-title-row">
+      <div class="pz-header-line"></div>
+      <a href="/" class="pz-header-logo">Xiang Mei</a>
+    </div>
+  </div>
+  
+</header>
+
+
+      <!-- Content -->
+      <div class="pz-content" role="main">
+        
+          
+
+
+
+
+
+
+
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">Debug With GDB</h1>
+    <p class="post-meta">
+      March 06, 2018
+      
+      
+      
+    </p>
+    <p class="post-tags">
+      
+        2018
+      
+      
+      
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <p>Debug With GDB
+<!--more--></p>
+
+<h1 id="install--plug-in">Install &amp; plug-in</h1>
+
+<p>Install gdb and choose one of the plug-ins to start you GDB!</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo apt install gdb</code></p>
+
+<h2 id="pedapwngdb">peda+pwngdb</h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cd</span> <span class="o">~</span><span class="sr">/</span><span class="err">
+</span><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/longld/peda.git ~/peda</span>
+<span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/scwuaptx/Pwngdb.git </span>
+<span class="nx">cp</span> <span class="o">~</span><span class="sr">/Pwngdb/</span><span class="p">.</span><span class="nx">gdbinit</span> <span class="o">~</span><span class="sr">/</span><span class="err">
+</span></code></pre></div></div>
+
+<p><a href="https://github.com/longld/peda">GitHub - longld/peda: PEDA - Python Exploit Development Assistance for GDB</a></p>
+
+<p><a href="https://github.com/scwuaptx/Pwngdb">GitHub - scwuaptx/Pwngdb: gdb for pwn</a></p>
+
+<h2 id="pwndbg">pwndbg</h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/pwndbg/pwndbg</span>
+<span class="nx">cd</span> <span class="nx">pwndbg</span>
+<span class="p">.</span><span class="o">/</span><span class="nx">setup</span><span class="p">.</span><span class="nx">sh</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/pwndbg/pwndbg">GitHub - pwndbg/pwndbg: Exploit Development and Reverse Engineering with GDB Made Easy</a></p>
+
+<h2 id="gef">gef</h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">bash</span> <span class="o">-</span><span class="nx">c</span> <span class="dl">"</span><span class="s2">$(wget http://gef.blah.cat/sh -O -)</span><span class="dl">"</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/hugsy/gef">GitHub - hugsy/gef: GEF (GDB Enhanced Features) - a modern experience for GDB with advanced debugging features for exploit developers &amp; reverse engineers ☢</a></p>
+
+<h1 id="commands">Commands</h1>
+
+<h2 id="command-start---set-args">Command <code class="language-plaintext highlighter-rouge">start</code>  &amp; <code class="language-plaintext highlighter-rouge">set args</code></h2>
+
+<p>I’ll introduce the main command we will use to debug a program.</p>
+
+<p>First, there are two ways to debug a program: attach to the progress or run the program by GDB.</p>
+
+<p><img src="/Figures/GDB/Untitled.png" alt="Untitled" /></p>
+
+<p>For attaching to the progress, we would run the program and use the command of <code class="language-plaintext highlighter-rouge">pidof</code> tp get the PID of the progress. Then we can attach to the progress in GDB by the GDB command <code class="language-plaintext highlighter-rouge">attach [pid]</code>. The limitation of this method is obvious: we can’t debug the program does not block. However, this method is useful in some situations. For example, while debugging some programs in industry environment you will find this method really useful.</p>
+
+<p><img src="/Figures/GDB/Untitled%201.png" alt="Untitled" /></p>
+
+<p>There is another more easy way to debug a program by GDB. We could use the command of <code class="language-plaintext highlighter-rouge">gdb [theNameOfBinary]</code> to start GDB. and use <code class="language-plaintext highlighter-rouge">start</code> to start the program. If we want to set the parameters of binary, we could use the GDB command <code class="language-plaintext highlighter-rouge">set args [prameter1] [prameter2] ...</code> to set the parameters.</p>
+
+<ul>
+  <li>
+    <p>Trick 1:</p>
+
+    <p>If you want to debug some function before main, you can just set the breakpoint before running the program.</p>
+  </li>
+</ul>
+
+<h2 id="command-ni--si">Command <code class="language-plaintext highlighter-rouge">ni</code> &amp; <code class="language-plaintext highlighter-rouge">si</code></h2>
+
+<p>After starting, we need to track the program. There are 2 super useful commands: <code class="language-plaintext highlighter-rouge">ni</code> , <code class="language-plaintext highlighter-rouge">si</code>. Commands <code class="language-plaintext highlighter-rouge">ni&amp;si</code> are the assembly language level. <code class="language-plaintext highlighter-rouge">ni</code> is the abbreviation of <code class="language-plaintext highlighter-rouge">next instruction</code> , which means go one instruction over and will not go into any functions. <code class="language-plaintext highlighter-rouge">si</code> is the abbreviation of <code class="language-plaintext highlighter-rouge">step instruction</code>, which means go one instruction over and will go into any functions.</p>
+
+<h2 id="command-breakpoint">Command <code class="language-plaintext highlighter-rouge">breakpoint</code></h2>
+
+<p>And another important feature is breakpoint. We could use</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">b</code> to set a breakpoint at current address</li>
+  <li><code class="language-plaintext highlighter-rouge">b *[addresse]</code> to set a breakpoint at <code class="language-plaintext highlighter-rouge">[address]</code> , example <code class="language-plaintext highlighter-rouge">b *0xdeadbeef</code></li>
+  <li><code class="language-plaintext highlighter-rouge">b [function_name]</code> to set a breakpoint at a function, example <code class="language-plaintext highlighter-rouge">b main</code></li>
+  <li><code class="language-plaintext highlighter-rouge">info b</code> to list all the breakpoints</li>
+  <li><code class="language-plaintext highlighter-rouge">delete [numberOfBreakpoint]</code> to delete a breakpoint</li>
+</ul>
+
+<p>After setting the breakpoint, we usually use <code class="language-plaintext highlighter-rouge">c</code> or <code class="language-plaintext highlighter-rouge">run</code> to run the program until it hit a breakpoint.</p>
+
+<ul>
+  <li>
+    <p>Trick 2:</p>
+
+    <p>While debugging the program with PIE (A mitigation will randomly set the base of the code segment). It’s hard to reuse a breakpoint when we use attach to debug a function. To reuse breakpoint and make it more easier, we can just close the ASLR (PIE is included by ASLR):</p>
+
+    <p><code class="language-plaintext highlighter-rouge">echo 0 | sudo tee /proc/sys/kernel/randomize</code> (Ubuntu). After that we can quickly find the address we want to set a breakpoint, we could combine GDB and IDA by use a feature of IDA: <code class="language-plaintext highlighter-rouge">rebase</code>.</p>
+
+    <p><img src="/Figures/GDB/Untitled%202.png" alt="Untitled" /></p>
+  </li>
+</ul>
+
+<h2 id="command-print--x">Command <code class="language-plaintext highlighter-rouge">print</code> &amp; <code class="language-plaintext highlighter-rouge">x</code></h2>
+
+<p>At the end of this section, I would like to introduce some print command <code class="language-plaintext highlighter-rouge">p</code> and <code class="language-plaintext highlighter-rouge">x</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">p</code> is the abbreviation of print, we could use it to print some variable, such as <code class="language-plaintext highlighter-rouge">p $rdi</code> and <code class="language-plaintext highlighter-rouge">p *0xdeadbeef</code> . And <code class="language-plaintext highlighter-rouge">x</code> is a good choice to show the memory,  we usually use <code class="language-plaintext highlighter-rouge">x/8gx [address]</code> to dump the memory. The first x means command <code class="language-plaintext highlighter-rouge">x</code>, and the parameter 8 means 8 times; and g means 64bits btw <code class="language-plaintext highlighter-rouge">w</code> means 32bits; and x means to print the result in hex, it could also be used in <code class="language-plaintext highlighter-rouge">p</code> for <code class="language-plaintext highlighter-rouge">p/x $rax</code> . This command it important please use it anytime when you feel confuse while debugging.</p>
+
+<p>example</p>
+
+<p>Print the data in hex:<code class="language-plaintext highlighter-rouge">x/8gx 0x55555000</code></p>
+
+<p>Print the data in string: <code class="language-plaintext highlighter-rouge">x/8s 0x55555000</code></p>
+
+<p>Print the data 4bytes by 4bytes: <code class="language-plaintext highlighter-rouge">x/8wx 0x55555000</code></p>
+
+<ul>
+  <li>
+    <p>Trick 3:</p>
+
+    <p>If you press <code class="language-plaintext highlighter-rouge">enter</code> without any command, GDB will repeat the latest command. This trick is usually used on <code class="language-plaintext highlighter-rouge">x/8gx</code>  <code class="language-plaintext highlighter-rouge">ni</code> <code class="language-plaintext highlighter-rouge">si</code> <code class="language-plaintext highlighter-rouge">c</code></p>
+  </li>
+</ul>
+
+<h2 id="command-finish">Command <code class="language-plaintext highlighter-rouge">finish</code></h2>
+
+<p>Another very useful command, when you are in a function and you wanna get out of it. You can use <code class="language-plaintext highlighter-rouge">finish</code> to finish current function. However, sometimes it’s not reliable and you need to use <code class="language-plaintext highlighter-rouge">si</code> or <code class="language-plaintext highlighter-rouge">ni</code> to get the end of funtion.</p>
+
+<h2 id="command-vmmap">Command <code class="language-plaintext highlighter-rouge">vmmap</code></h2>
+
+<p>command <code class="language-plaintext highlighter-rouge">vmmap</code> would print the memory layout so that you can find the <code class="language-plaintext highlighter-rouge">libc-base</code> address, <code class="language-plaintext highlighter-rouge">heap-base</code> address, and <code class="language-plaintext highlighter-rouge">bss</code> address.</p>
+
+<p><img src="/Figures/GDB/Untitled%203.png" alt="Untitled" /></p>
+
+<h2 id="command-backtractbt">Command <code class="language-plaintext highlighter-rouge">backtract(bt)</code></h2>
+
+<p>A <code class="language-plaintext highlighter-rouge">backtrace</code> is a summary of how your program got where it is. It shows one line per frame, for many frames, starting with the currently executing frame (frame zero), followed by its caller (frame one), and on up the stack.</p>
+
+<h2 id="command-next-and-step">Command <code class="language-plaintext highlighter-rouge">next</code> and <code class="language-plaintext highlighter-rouge">step</code></h2>
+
+<p>commands <code class="language-plaintext highlighter-rouge">n&amp;s</code> are the source code level, and they are usually used while debugging the binary with source code. And we can get these binaries by using GCC command <code class="language-plaintext highlighter-rouge">gcc ./main.c -o main -g</code>. <code class="language-plaintext highlighter-rouge">n</code> is the abbreviation of <code class="language-plaintext highlighter-rouge">next</code> , which means go one next line (source code line) over and will not go into any functions.<code class="language-plaintext highlighter-rouge">s</code> is the abbreviation of <code class="language-plaintext highlighter-rouge">step</code>, which means going one line (source code line) over and will go into any function.</p>
+
+<h2 id="command-watch">Command <code class="language-plaintext highlighter-rouge">watch</code></h2>
+
+<p>If you wanna locate a crash/condition, you can use watch.</p>
+
+<p><code class="language-plaintext highlighter-rouge">watch $rdi==0xdeadbeef</code> means if $rdi==0xdeadbeef, then stop. We can also use <code class="language-plaintext highlighter-rouge">*[address] == [value]</code> to set an conditional breakpoint. Or we can just use <code class="language-plaintext highlighter-rouge">watch [address]</code> or <code class="language-plaintext highlighter-rouge">watch [rigister]</code> to track the changing of registers.</p>
+
+<p>example:</p>
+
+<p><code class="language-plaintext highlighter-rouge">watch $rdi=0xdeadbeef</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">watch 0xdeadb000</code></p>
+
+<h2 id="command-searchmem-peda">Command <code class="language-plaintext highlighter-rouge">searchmem</code> (peda)</h2>
+
+<p>The last command I think is super helpful is <code class="language-plaintext highlighter-rouge">searchmem</code>, we can search everything: string and data.</p>
+
+<p>usage:</p>
+
+<p><code class="language-plaintext highlighter-rouge">searchmem [string]/[address]</code></p>
+
+<p>example:</p>
+
+<p><code class="language-plaintext highlighter-rouge">searchmem /bin/sh</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">searchmem 0xdeadbeef</code></p>
+
+<p><img src="/Figures/GDB/Untitled%204.png" alt="Untitled" /></p>
+
+    </div>
+  </article>
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+
+        
+      </div>
+
+      <!-- Footer -->
+      <div class="pz-footer-slogan">
+  <div class="pz-footer-title-row">
+    <div class="pz-footer-line"></div>
+    <span class="pz-footer-achievements">
+      <a class="pz-achievement" href="https://www.zerodayinitiative.com/blog" title="Pwn2Own"><img src="/assets/img/achievements/pwn2own.svg" alt="Pwn2Own"></a>
+      <a class="pz-achievement" href="https://google.github.io/security-research/kernelctf/rules.html" title="kernelCTF"><img src="/assets/img/achievements/kernelctf.gif" alt="kernelCTF"></a>
+      <a class="pz-achievement" href="https://typhooncon.com/" title="TyphoonPWN"><img src="/assets/img/achievements/typhoonpwn.png" alt="TyphoonPWN"></a>
+      <a class="pz-achievement" href="https://defcon.org/" title="DEF CON CTF Finalist (29–34)"><img src="/assets/img/achievements/defcon.jpg" alt="DEF CON CTF"></a>
+    </span>
+  </div>
+  <div class="pz-footer-note">UI inspired by <a href="https://googleprojectzero.blogspot.com/" target="_blank" rel="noopener">Google Project Zero</a> &middot; Page powered by <a href="https://claude.com/claude-code" target="_blank" rel="noopener">Claude Code</a> and <a href="https://openai.com/codex/" target="_blank" rel="noopener">Codex</a></div>
+</div>
+
+    </div>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+<script
+  src=""
+  integrity=""
+  crossorigin="anonymous"
+></script>
+
+    <!-- Bootsrap & MDB scripts -->
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="/assets/js/mdb.min.js"></script> -->
+<script
+  src=""
+  integrity=""
+  crossorigin="anonymous"
+></script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+<!-- Bootstrap Table -->
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/no_defer.js"></script>
+<script defer src="/assets/js/common.js"></script>
+<script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+
+<!-- Jupyter Open External Links New Tab -->
+<script defer src="/assets/js/jupyter_new_tab.js"></script>
+
+
+
+    
+
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    <script src="/assets/js/vanilla-back-to-top.min.js"></script>
+<script>
+  
+</script>
+
+    
+
+  </body>
+</html>

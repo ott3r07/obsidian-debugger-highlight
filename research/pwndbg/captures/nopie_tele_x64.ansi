@@ -1,0 +1,7 @@
+[32m[1mpwndbg> [0m[32m[0mtelescope $sp 10
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1mrsp[0m [4m[33m0xffffaa8dda70[0m[4m[0m ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+[0m... ↓        5 skipped[0m
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xffffaa8ddaa0[0m[4m[0m ◂— 0x41414141 /* 'AAAA' */
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xffffaa8ddaa8[0m[4m[0m ◂— 0xc60000
+[0m08[0m[0m:[0m[0m0040[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xffffaa8ddab0[0m[4m[0m —▸ [34m0x4042a0[0m ◂— 0x404
+[0m09[0m[0m:[0m[0m0048[0m[0m│[0m[0m[0m [1m   [0m [4m[33m0xffffaa8ddab8[0m[4m[0m —▸ [34m0x4042d0[0m —▸ [34m0x4046a4[0m ◂— 0

@@ -1,0 +1,29 @@
+[32m[1mpwndbg> [0m[32m[0minfo proc mappings
+process 717
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset  Perms  objfile
+      0x555555556000     0x555555557000     0x1000        0x0  r--p   /work/test_x64
+      0x555555557000     0x555555558000     0x1000     0x1000  r-xp   /work/test_x64
+      0x555555558000     0x555555559000     0x1000     0x2000  r--p   /work/test_x64
+      0x555555559000     0x55555555a000     0x1000     0x2000  r--p   /work/test_x64
+      0x55555555a000     0x55555555b000     0x1000     0x3000  rw-p   /work/test_x64
+      0x55555555b000     0x55555557c000    0x21000        0x0  rw-p   [heap]
+      0xffff9a6b8000     0xffff9a6bb000     0x3000        0x0  rw-p   
+      0xffff9a6c3000     0xffff9a6eb000    0x28000        0x0  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a6eb000     0xffff9a873000   0x188000    0x28000  r-xp   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a873000     0xffff9a8c2000    0x4f000   0x1b0000  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a8c2000     0xffff9a8c6000     0x4000   0x1fe000  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a8c6000     0xffff9a8c8000     0x2000   0x202000  rw-p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a8c8000     0xffff9a8d5000     0xd000        0x0  rw-p   
+      0xffff9a8d8000     0xffff9a8da000     0x2000        0x0  rw-p   
+      0xffff9a97a000     0xffff9a97c000     0x2000        0x0  rw-p   
+      0xffff9a97e000     0xffff9a97f000     0x1000        0x0  r-xp   [vdso]
+      0xffff9a97f000     0xffff9a980000     0x1000        0x0  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a980000     0xffff9a9ab000    0x2b000     0x1000  r-xp   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9ab000     0xffff9a9b5000     0xa000    0x2c000  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9b5000     0xffff9a9b7000     0x2000    0x36000  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9b7000     0xffff9a9b9000     0x2000    0x38000  rw-p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9bd000     0xffff9a9be000     0x1000        0x0  ---p   
+      0xffff9a9be000     0xffff9b1be000   0x800000        0x0  rw-p   [stack]
+  0xffffffffff600000 0xffffffffff601000     0x1000        0x0  --xp   [vsyscall]

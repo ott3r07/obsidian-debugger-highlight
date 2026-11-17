@@ -1,0 +1,11 @@
+[32m[1mpwndbg> [0m[32m[0mplt
+[35mSection .plt 0xaaaaaaaa0750 - 0xaaaaaaaa0800:[0m
+0xaaaaaaaa0770: __libc_start_main@plt
+0xaaaaaaaa0780: __cxa_finalize@plt
+0xaaaaaaaa0790: malloc@plt
+0xaaaaaaaa07a0: __stack_chk_fail@plt
+0xaaaaaaaa07b0: __gmon_start__@plt
+0xaaaaaaaa07c0: abort@plt
+0xaaaaaaaa07d0: free@plt
+0xaaaaaaaa07e0: strcpy@plt
+0xaaaaaaaa07f0: printf@plt

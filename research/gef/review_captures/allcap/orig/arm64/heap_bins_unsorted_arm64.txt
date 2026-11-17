@@ -1,0 +1,5 @@
+gef➤  heap bins unsorted
+────────────────────────────────── Unsorted Bin for arena at 0xfffff7fa0a50 ──────────────────────────────────
+[+] unsorted_bins[0]: fw=0xaaaaaaac15c0, bk=0xaaaaaaac15c0
+ →   Chunk(addr=0xaaaaaaac15d0, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in unsorted bin.

@@ -1,0 +1,67 @@
+pwndbg> continue
+Continuing.
+
+Program received signal SIGBUS, Bus error.
+0x0041414141414141 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0
+ X1   0xfffff7ffdb50 (__stack_chk_guard) ◂— 0x2ca3660ff9000300
+ X2   0
+ X3   0
+ X4   0xfffffffff851 ◂— 'ack=AAAAAAAABBBBBBBBCCC'
+ X5   0x411639 ◂— 0
+ X6   0xa
+ X7   2
+ X8   0x40
+ X9   0
+ X10  0xa
+ X11  0xffffff80
+ X12  0xffffffc8
+ X13  0xfffffffff990 ◂— 0xc00000000000
+ X14  0
+ X15  0xfffff7ff8e50 —▸ 0x400000 ◂— 0x10102464c457f
+ X16  0x410e50 (printf@got[plt]) —▸ 0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+ X17  0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+ X18  3
+ X19  0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+ X20  2
+ X21  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0x400634 (_start+52) ◂— nop 
+ X23  0xfffffffffc70 —▸ 0xfffffffffed1 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 ◂— 0
+ X27  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+*X29  0x4141414141414141 ('AAAAAAAA')
+*SP   0xfffffffffae0 —▸ 0xfffffffffb70 ◂— 0
+ LR   0x4141414141414141 ('AAAAAAAA')
+*PC   0x41414141414141
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+Invalid address 0x41414141414141
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffae0 —▸ 0xfffffffffb70 ◂— 0
+01:0008│     0xfffffffffae8 —▸ 0x400634 (_start+52) ◂— nop 
+02:0010│     0xfffffffffaf0 ◂— 0x200000000
+03:0018│     0xfffffffffaf8 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+04:0020│     0xfffffffffb00 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+05:0028│     0xfffffffffb08 ◂— 2
+06:0030│     0xfffffffffb10 —▸ 0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+07:0038│     0xfffffffffb18 —▸ 0x400634 (_start+52) ◂— nop 
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x41414141414141
+   1 0x4141414141414141
+────────────────────────────────────────────────────[ LAST SIGNAL ]─────────────────────────────────────────────────────
+Program received signal SIGBUS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

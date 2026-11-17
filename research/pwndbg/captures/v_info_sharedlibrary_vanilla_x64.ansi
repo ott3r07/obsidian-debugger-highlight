@@ -1,0 +1,5 @@
+(gdb) info sharedlibrary
+From                To                  Syms Read   Shared Object Library
+[34m0x0000ffff92d6c000[m  [34m0x0000ffff92d96195[m  Yes (*)     [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m
+[34m0x0000ffff92ad7800[m  [34m0x0000ffff92c5eb4d[m  Yes (*)     [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+(*): Shared library is missing debugging information.

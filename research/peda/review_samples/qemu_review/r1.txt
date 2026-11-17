@@ -1,0 +1,338 @@
+Script started on 2026-11-17 05:44:30+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./rv" <not executed on terminal>]
+break probe
+Reading symbols from ./rv...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x2aaaab2abd20 --> 0x2 
+RIP: 0x401790 (<_start>:	endbr64)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x0 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401787 <release_registered_frames+39>:	pop    rbp
+   0x401788 <release_registered_frames+40>:	ret
+   0x401789:	nop    DWORD PTR [rax+0x0]
+=> 0x401790 <_start>:	endbr64
+   0x401794 <_start+4>:	xor    ebp,ebp
+   0x401796 <_start+6>:	mov    r9,rdx
+   0x401799 <_start+9>:	pop    rsi
+   0x40179a <_start+10>:	mov    rdx,rsp
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abd20 --> 0x2 
+0008| 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0016| 0x2aaaab2abd30 --> 0x2aaaab2abef3 --> 0x414e54534f480078 ('x')
+0024| 0x2aaaab2abd38 --> 0x0 
+0032| 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0040| 0x2aaaab2abd48 --> 0x2aaaab2abf0b --> 0x76722f3d445750 ('PWD=/rv')
+0048| 0x2aaaab2abd50 --> 0x2aaaab2abf13 ("HOME=/root")
+0056| 0x2aaaab2abd58 --> 0x2aaaab2abf1e ("DELAY=1.5")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGTRAP
+0x0000000000401790 in _start ()
+gdb-peda$ break probe
+Breakpoint 1 at 0x4018d3: file rv.c, line 10.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBX: 0x2 
+RCX: 0x2000 ('')
+RDX: 0x2aaaab2abb88 (0x00002aaaab2abb88)
+RSI: 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+RDI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBP: 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+RIP: 0x4018d3 (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+R8 : 0x4aa840 --> 0x4b3930 --> 0x0 
+R9 : 0x20 (' ')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4018c7 <probe+18>:	mov    QWORD PTR [rbp-0x28],rsi
+   0x4018cb <probe+22>:	mov    QWORD PTR [rbp-0x30],rdx
+   0x4018cf <probe+26>:	mov    QWORD PTR [rbp-0x38],rcx
+=> 0x4018d3 <probe+30>:	mov    rax,QWORD PTR [rbp-0x38]
+   0x4018d7 <probe+34>:	mov    r12,rax
+   0x4018da <probe+37>:	mov    rax,QWORD PTR [rip+0xa87f7]        # 0x4aa0d8 <quote>
+   0x4018e1 <probe+44>:	mov    r13,rax
+   0x4018e4 <probe+47>:	mov    rax,QWORD PTR [rip+0xa87f5]        # 0x4aa0e0 <longstr>
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb50 --> 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0016| 0x2aaaab2abb58 --> 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+0024| 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0032| 0x2aaaab2abb68 --> 0x4019db (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+0040| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0048| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0056| 0x2aaaab2abb80 --> 0x100 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, probe (buf=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", a=0x2aaaab2abb98, b=0x2aaaab2abb88, v=0x2000)
+    at rv.c:10
+10	    asm volatile("mov %0, %%r12" :: "r"(v) : "r12");
+gdb-peda$ finish
+Run till exit from #0  probe (buf=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", a=0x2aaaab2abb98, b=0x2aaaab2abb88, 
+    v=0x2000) at rv.c:10
+[----------------------------------registers-----------------------------------]
+RAX: 0x47f028 ('L' <repeats 200 times>...)
+RBX: 0x2 
+RCX: 0x2000 ('')
+RDX: 0x2aaaab2abb88 (0x00002aaaab2abb88)
+RSI: 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+RDI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+RIP: 0x4019db (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+R8 : 0x4aa840 --> 0x4b3930 --> 0x0 
+R9 : 0x20 (' ')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4019ce <main+201>:	mov    ecx,0x2000
+   0x4019d3 <main+206>:	mov    rdi,rax
+   0x4019d6 <main+209>:	call   0x4018b5 <probe>
+=> 0x4019db <main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>
+   0x4019e2 <main+221>:	add    rax,0x5
+   0x4019e6 <main+225>:	mov    QWORD PTR [rip+0xa86e3],rax        # 0x4aa0d0 <gcounter>
+   0x4019ed <main+232>:	lea    rax,[rbp-0x70]
+   0x4019f1 <main+236>:	mov    rdi,rax
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0016| 0x2aaaab2abb80 --> 0x100 
+0024| 0x2aaaab2abb88 (0x00002aaaab2abb88)
+0032| 0x2aaaab2abb90 --> 0x2aaaab2abb98 (0x00002aaaab2abb90)
+0040| 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+0048| 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+0056| 0x2aaaab2abba8 ('A' <repeats 72 times>, "BBBB")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+main (argc=0x2, argv=0x2aaaab2abd28) at rv.c:25
+25	    gcounter += 5;
+gdb-peda$ telescope $rsp 24
+0000| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0016| 0x2aaaab2abb80 --> 0x100 
+0024| 0x2aaaab2abb88 (0x00002aaaab2abb88)
+0032| 0x2aaaab2abb90 --> 0x2aaaab2abb98 (0x00002aaaab2abb90)
+0040| 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+0048| 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+0056| 0x2aaaab2abba8 ('A' <repeats 72 times>, "BBBB")
+0064| 0x2aaaab2abbb0 ('A' <repeats 64 times>, "BBBB")
+0072| 0x2aaaab2abbb8 ('A' <repeats 56 times>, "BBBB")
+0080| 0x2aaaab2abbc0 ('A' <repeats 48 times>, "BBBB")
+0088| 0x2aaaab2abbc8 ('A' <repeats 40 times>, "BBBB")
+0096| 0x2aaaab2abbd0 ('A' <repeats 32 times>, "BBBB")
+0104| 0x2aaaab2abbd8 ('A' <repeats 24 times>, "BBBB")
+0112| 0x2aaaab2abbe0 ('A' <repeats 16 times>, "BBBB")
+0120| 0x2aaaab2abbe8 ("AAAAAAAABBBB")
+0128| 0x2aaaab2abbf0 --> 0x42424242 ('BBBB')
+0136| 0x2aaaab2abbf8 --> 0x4b11d8 --> 0x0 
+0144| 0x2aaaab2abc00 --> 0x4b3920 --> 0x4b3900 (0x00000000004b3920)
+0152| 0x2aaaab2abc08 --> 0x4b3900 --> 0x4b3920 (0x00000000004b3900)
+0160| 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0168| 0x2aaaab2abc18 --> 0x401f38 (<__libc_start_call_main+104>:	mov    edi,eax)
+0176| 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0184| 0x2aaaab2abc28 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+gdb-peda$ x/s $rsp+0x20
+0x2aaaab2abb90:	"\230\273*\253\252*"
+gdb-peda$ info registers r12
+r12            0x2aaaab2abd28      0x2aaaab2abd28
+gdb-peda$ context reg
+[----------------------------------registers-----------------------------------]
+RAX: 0x47f028 ('L' <repeats 200 times>...)
+RBX: 0x2 
+RCX: 0x2000 ('')
+RDX: 0x2aaaab2abb88 (0x00002aaaab2abb88)
+RSI: 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+RDI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+RIP: 0x4019db (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+R8 : 0x4aa840 --> 0x4b3930 --> 0x0 
+R9 : 0x20 (' ')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ xinfo &gself
+Warning: not a register nor an address
+
+gdb-peda$ telescope &gself 2
+Display memory content at an address with smart dereferences
+Usage:
+    telescope [linecount] (analyze at current $SP)
+    telescope address [linecount]
+
+gdb-peda$ xinfo $r13
+0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+Virtual memory mapping:
+Start : 0x00002aaaaaaac000
+End   : 0x00002aaaab2ac000
+Offset: 0x7ffd40
+Perm  : rw-p
+Name  : [stack]
+gdb-peda$ pset option pagesize 0
+pagesize = 0
+gdb-peda$ telescope $rsp 40
+0000| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0016| 0x2aaaab2abb80 --> 0x100 
+0024| 0x2aaaab2abb88 (0x00002aaaab2abb88)
+0032| 0x2aaaab2abb90 --> 0x2aaaab2abb98 (0x00002aaaab2abb90)
+0040| 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+0048| 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+0056| 0x2aaaab2abba8 ('A' <repeats 72 times>, "BBBB")
+0064| 0x2aaaab2abbb0 ('A' <repeats 64 times>, "BBBB")
+0072| 0x2aaaab2abbb8 ('A' <repeats 56 times>, "BBBB")
+0080| 0x2aaaab2abbc0 ('A' <repeats 48 times>, "BBBB")
+0088| 0x2aaaab2abbc8 ('A' <repeats 40 times>, "BBBB")
+0096| 0x2aaaab2abbd0 ('A' <repeats 32 times>, "BBBB")
+0104| 0x2aaaab2abbd8 ('A' <repeats 24 times>, "BBBB")
+0112| 0x2aaaab2abbe0 ('A' <repeats 16 times>, "BBBB")
+0120| 0x2aaaab2abbe8 ("AAAAAAAABBBB")
+0128| 0x2aaaab2abbf0 --> 0x42424242 ('BBBB')
+0136| 0x2aaaab2abbf8 --> 0x4b11d8 --> 0x0 
+0144| 0x2aaaab2abc00 --> 0x4b3920 --> 0x4b3900 (0x00000000004b3920)
+0152| 0x2aaaab2abc08 --> 0x4b3900 --> 0x4b3920 (0x00000000004b3900)
+0160| 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0168| 0x2aaaab2abc18 --> 0x401f38 (<__libc_start_call_main+104>:	mov    edi,eax)
+0176| 0x2aaaab2abc20 --> 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0184| 0x2aaaab2abc28 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0192| 0x2aaaab2abc30 --> 0x200401685 
+0200| 0x2aaaab2abc38 --> 0x401905 (<main>:	endbr64)
+0208| 0x2aaaab2abc40 --> 0x2 
+0216| 0x2aaaab2abc48 --> 0xb6db5646106e4e29 
+0224| 0x2aaaab2abc50 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0232| 0x2aaaab2abc58 --> 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0240| 0x2aaaab2abc60 --> 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+0248| 0x2aaaab2abc68 --> 0x1 
+0256| 0x2aaaab2abc70 --> 0xb6db5646114e4e29 
+0264| 0x2aaaab2abc78 --> 0xe38e009354ea4e29 
+0272| 0x2aaaab2abc80 --> 0x2aaa00000000 
+0280| 0x2aaaab2abc88 --> 0x0 
+0288| 0x2aaaab2abc90 --> 0x0 
+0296| 0x2aaaab2abc98 --> 0x0 
+0304| 0x2aaaab2abca0 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0312| 0x2aaaab2abca8 --> 0x4018a1 (<frame_dummy+33>:	pop    rbp)
+
+gdb-peda$ watch gcounter
+Hardware watchpoint 2: gcounter
+gdb-peda$ continue
+Continuing.
+Warning:
+Could not insert hardware watchpoint 2.
+Could not insert hardware breakpoints:
+You may have requested too many hardware breakpoints/watchpoints.
+
+Command aborted.
+gdb-peda$ delete
+gdb-peda$ break spin
+Breakpoint 3 at 0x401900: file rv.c, line 15.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x55 ('U')
+RBX: 0x2 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RDI: 0x4ac860 --> 0x0 
+RBP: 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RIP: 0x401900 (<spin+8>:	jmp    0x401900 <spin+8>)
+R8 : 0x4aa840 --> 0x4b4940 --> 0x0 
+R9 : 0x0 
+R10: 0x1 
+R11: 0x3 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4018f8 <spin>:	endbr64
+   0x4018fc <spin+4>:	push   rbp
+   0x4018fd <spin+5>:	mov    rbp,rsp
+=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>
+ | 0x401902 <spin+10>:	nop
+ | 0x401903 <spin+11>:	pop    rbp
+ | 0x401904 <spin+12>:	ret
+ | 0x401905 <main>:	endbr64
+ |->=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>
+       0x401902 <spin+10>:	nop
+       0x401903 <spin+11>:	pop    rbp
+       0x401904 <spin+12>:	ret
+                                                                  JUMP is taken
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0008| 0x2aaaab2abb68 --> 0x401a07 (<main+258>:	mov    eax,0x0)
+0016| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0024| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0032| 0x2aaaab2abb80 --> 0x100 
+0040| 0x2aaaab2abb88 (0x00002aaaab2abb88)
+0048| 0x2aaaab2abb90 --> 0x2aaaab2abb98 (0x00002aaaab2abb90)
+0056| 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 3, spin () at rv.c:15
+15	__attribute__((noinline)) void spin(void) { asm volatile("1: jmp 1b"); }
+gdb-peda$ context code
+[-------------------------------------code-------------------------------------]
+   0x4018f8 <spin>:	endbr64
+   0x4018fc <spin+4>:	push   rbp
+   0x4018fd <spin+5>:	mov    rbp,rsp
+=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>
+ | 0x401902 <spin+10>:	nop
+ | 0x401903 <spin+11>:	pop    rbp
+ | 0x401904 <spin+12>:	ret
+ | 0x401905 <main>:	endbr64
+ |->=> 0x401900 <spin+8>:	jmp    0x401900 <spin+8>
+       0x401902 <spin+10>:	nop
+       0x401903 <spin+11>:	pop    rbp
+       0x401904 <spin+12>:	ret
+                                                                  JUMP is taken
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ quit
+
+Script done on 2026-11-17 05:44:58+00:00 [COMMAND_EXIT_CODE="0"]

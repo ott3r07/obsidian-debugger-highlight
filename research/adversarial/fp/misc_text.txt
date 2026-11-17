@@ -1,0 +1,43 @@
+sh = process('./stack3')
+buf2_addr = 0xbffff4c0
+offset = 72
+x = 5;
+int a = 0;
+export FOO=bar
+name: value
+Note: remember to disable ASLR
+Error: something went wrong
+error: linker command failed with exit code 1
+WARNING: deprecated
+[x] done
+[1] first item
+---
+***
+=> this is an arrow
+-> another arrow
+{"rax": "0x1", "rip": "0x401136"}
+1. Set a breakpoint
+2) Run it
+Step 1: run the program
+Size: 12 MB
+Addr: Seoul, Korea
+Stack: React + Node
+Heap: priority queue
+TODO: Free chunk later
+The stack grows down; heap grows up. NX enabled means no exec.
+CANARY: yes
+a.out: ELF 64-bit LSB pie executable, x86-64, dynamically linked
+   10:	48 89 e5             	mov    %rsp,%rbp
+  401136:	55                   	push   %rbp
+0000000000401136 <main>:
+main+4
+puts@plt
+Breakpoint at line 4 of the essay.
+Thread 1 is a Reddit thread.
+<html><body>hi</body></html>
+std::vector<int> v;
+if (a < b && c > d) { }
+#include <stdio.h>
+#define FOO 0x10
+// comment 0x401000
+    return 0;

@@ -1,0 +1,180 @@
+[32mGEF[0m for linux ready, type `[4m[33mgef[24m[0m' to start, `[4m[35mgef config[24m[0m' to configure
+[1m[32m90[0m commands loaded and [1m[34m5[0m functions added for GDB [1m[33m15.1[0m in 0.00ms using Python engine [1m[31m3.12[0m
+Reading symbols from [32m/work/test_arm64[m...
+[?2004h[1;31mgef➤  [0mrun aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa
+[?2004lStarting program: [32m/work/test_arm64[m aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+Hello, gef! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa
+*** stack smashing detected ***: terminated
+
+Program received signal SIGABRT, Aborted.
+[33m__pthread_kill_implementation[m ([36mthreadid[m=0xfffff7ff7ee0, [36msigno=signo@entry[m=0x6, [36mno_tid=no_tid@entry[m=0x0)
+    at [32m./nptl/pthread_kill.c[m:44
+warning: 44	[32m./nptl/pthread_kill.c[m: No such file or directory
+[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[34m$x0  [0m: 0x0               
+[1m[31m$x1  [0m: 0x1ee             
+[1m[31m$x2  [0m: 0x6               
+[1m[31m$x3  [0m: 0x0000fffff7ff7ee0  →  0x0000000000000000
+[1m[31m$x4  [0m: 0x0000fffff7ffdb50  →  0x3632bfe07d28dd00
+[1m[31m$x5  [0m: 0x1               
+[1m[31m$x6  [0m: 0x20              
+[1m[31m$x7  [0m: 0x0000fffff7ffcaf0  →  [33m"glibc.rtld.nns"[0m
+[1m[31m$x8  [0m: 0x83              
+[34m$x9  [0m: 0x0               
+[1m[31m$x10 [0m: 0xa               
+[1m[31m$x11 [0m: 0xffffff80        
+[1m[31m$x12 [0m: 0xffffffc8        
+[1m[31m$x13 [0m: [35m0x0000fffffffff9b0[0m  →  [35m0x0000fffffffff80d[0m  →  [33m"aaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaa[...]"[0m
+[34m$x14 [0m: 0x0               
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[1m[31m$x16 [0m: 0x1               
+[1m[31m$x17 [0m: [31m0x0000fffff7fcef94[0m  →  [90m<__tunable_get_val+0000> ubfiz x4,  x0,  #7,  #32[0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: 0x1ee             
+[1m[31m$x20 [0m: 0x0000fffff7ff7ee0  →  0x0000000000000000
+[1m[31m$x21 [0m: 0x6               
+[1m[31m$x22 [0m: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[1m[31m$x23 [0m: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[1m[31m$x24 [0m: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[1m[31m$x25 [0m: 0x2c              
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd60  →  [31m0x0000aaaaaaaa08c0[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffff770[0m  →  [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m  →  [33m"faaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaala[...]"[0m
+[1m[31m$x30 [0m: [31m0x0000fffff7e774a4[0m  →  [90m<__pthread_kill_implementation+0124> mov x1,  x19[0m
+[1m[31m$sp  [0m: [35m0x0000fffffffff760[0m  →  [35m0x0000fffffffff770[0m  →  [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m
+[1m[31m$pc  [0m: [31m0x0000fffff7e774b8[0m  →  [90m<__pthread_kill_implementation+0138> cmn w0,  #0x1,  lsl #12[0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffff760[0m│+0x0000: [35m0x0000fffffffff770[0m  →  [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m[1m[34m	 ← $sp[0m
+[36m0x0000fffffffff768[0m│+0x0008: 0x3632bfe07d28dd00
+[36m0x0000fffffffff770[0m│+0x0010: [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m  →  [33m"faaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaala[...]"[0m[1m[34m	 ← $x29[0m
+[36m0x0000fffffffff778[0m│+0x0018: [31m0x0000fffff7e2cb3c[0m  →  [90m<raise+001c> cbnz w0,  0xfffff7e2cb4c <__GI_raise+44>[0m
+[36m0x0000fffffffff780[0m│+0x0020: 0x0000000000000006
+[36m0x0000fffffffff788[0m│+0x0028: 0x0000fffff7ff7ee0  →  0x0000000000000000
+[36m0x0000fffffffff790[0m│+0x0030: 0x0000fffff7fa1a20  →  0x0000000000000000
+[36m0x0000fffffffff798[0m│+0x0038: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xfffff7e774ac <__pthread_kill_implementation+012c> sxtw   x0,  w0[0m
+   [90m0xfffff7e774b0 <__pthread_kill_implementation+0130> mov    x8,  #0x83                  	// #131[0m
+   [90m0xfffff7e774b4 <__pthread_kill_implementation+0134> svc    #0x0[0m
+ [32m→ 0xfffff7e774b8 <__pthread_kill_implementation+0138> cmn    w0,  #0x1,  lsl #12[0m
+   0xfffff7e774bc <__pthread_kill_implementation+013c> csneg  w0,  wzr,  w0,  ls	// ls = plast
+   0xfffff7e774c0 <__pthread_kill_implementation+0140> b      0xfffff7e7743c <__pthread_kill_implementation+188>
+   0xfffff7e774c4 <__pthread_kill_implementation+0144> mov    x0,  x22
+   0xfffff7e774c8 <__pthread_kill_implementation+0148> bl     0xfffff7e72050 <__GI___lll_lock_wake_private>
+   0xfffff7e774cc <__pthread_kill_implementation+014c> b      0xfffff7e7741c <__pthread_kill_implementation+156>
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "test_arm64", [1m[31mstopped[0m [34m0xfffff7e774b8[0m in [1m[33m__pthread_kill_implementation[0m (), reason: [1m[35mSIGABRT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xfffff7e774b8 → [32m__pthread_kill_implementation[0m([33mthreadid[0m=0xfffff7ff7ee0, [33msigno[0m=0x6, [33mno_tid[0m=0x0)
+[[1m[35m#1[0m] 0xfffff7e77520 → [32m__pthread_kill_internal[0m([33msigno[0m=0x6, [33mthreadid[0m=<optimized out>)
+[[1m[35m#2[0m] 0xfffff7e2cb3c → [32m__GI_raise[0m([33msig[0m=0x6)
+[[1m[35m#3[0m] 0xfffff7e17e00 → [32m__GI_abort[0m()
+[[1m[35m#4[0m] 0xfffff7e6aac4 → [32m__libc_message_impl[0m([33mfmt[0m=0xfffff7f52c98 "*** %s ***: terminated\n")
+[[1m[35m#5[0m] 0xfffff7ee82a8 → [32m__GI___fortify_fail[0m([33mmsg[0m=0xfffff7f52cb0 "stack smashing detected")
+[[1m[35m#6[0m] 0xfffff7ee9264 → [32m__stack_chk_fail[0m()
+[[1m[35m#7[0m] 0xaaaaaaaa09f4 → [32mvuln[0m([33msrc[0m=0xfffffffffe88 "aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa")
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[34m$x0  [0m: 0x0               
+[1m[31m$x1  [0m: 0x1ee             
+[1m[31m$x2  [0m: 0x6               
+[1m[31m$x3  [0m: 0x0000fffff7ff7ee0  →  0x0000000000000000
+[1m[31m$x4  [0m: 0x0000fffff7ffdb50  →  0x3632bfe07d28dd00
+[1m[31m$x5  [0m: 0x1               
+[1m[31m$x6  [0m: 0x20              
+[1m[31m$x7  [0m: 0x0000fffff7ffcaf0  →  [33m"glibc.rtld.nns"[0m
+[1m[31m$x8  [0m: 0x83              
+[34m$x9  [0m: 0x0               
+[1m[31m$x10 [0m: 0xa               
+[1m[31m$x11 [0m: 0xffffff80        
+[1m[31m$x12 [0m: 0xffffffc8        
+[1m[31m$x13 [0m: [35m0x0000fffffffff9b0[0m  →  [35m0x0000fffffffff80d[0m  →  [33m"aaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaa[...]"[0m
+[34m$x14 [0m: 0x0               
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[1m[31m$x16 [0m: 0x1               
+[1m[31m$x17 [0m: [31m0x0000fffff7fcef94[0m  →  [90m<__tunable_get_val+0000> ubfiz x4,  x0,  #7,  #32[0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: 0x1ee             
+[1m[31m$x20 [0m: 0x0000fffff7ff7ee0  →  0x0000000000000000
+[1m[31m$x21 [0m: 0x6               
+[1m[31m$x22 [0m: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[1m[31m$x23 [0m: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[1m[31m$x24 [0m: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[1m[31m$x25 [0m: 0x2c              
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd60  →  [31m0x0000aaaaaaaa08c0[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffff770[0m  →  [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m  →  [33m"faaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaala[...]"[0m
+[1m[31m$x30 [0m: [31m0x0000fffff7e774a4[0m  →  [90m<__pthread_kill_implementation+0124> mov x1,  x19[0m
+[1m[31m$sp  [0m: [35m0x0000fffffffff760[0m  →  [35m0x0000fffffffff770[0m  →  [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m
+[1m[31m$pc  [0m: [31m0x0000fffff7e774b8[0m  →  [90m<__pthread_kill_implementation+0138> cmn w0,  #0x1,  lsl #12[0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffff760[0m│+0x0000: [35m0x0000fffffffff770[0m  →  [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m[1m[34m	 ← $sp[0m
+[36m0x0000fffffffff768[0m│+0x0008: 0x3632bfe07d28dd00
+[36m0x0000fffffffff770[0m│+0x0010: [35m0x0000fffffffff7b0[0m  →  [35m0x0000fffffffff870[0m  →  [35m0x0000fffffffff940[0m  →  [35m0x0000fffffffff9d0[0m  →  [35m0x0000fffffffff9e0[0m  →  [35m0x0000fffffffffa30[0m  →  [33m"faaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaala[...]"[0m[1m[34m	 ← $x29[0m
+[36m0x0000fffffffff778[0m│+0x0018: [31m0x0000fffff7e2cb3c[0m  →  [90m<raise+001c> cbnz w0,  0xfffff7e2cb4c <__GI_raise+44>[0m
+[36m0x0000fffffffff780[0m│+0x0020: 0x0000000000000006
+[36m0x0000fffffffff788[0m│+0x0028: 0x0000fffff7ff7ee0  →  0x0000000000000000
+[36m0x0000fffffffff790[0m│+0x0030: 0x0000fffff7fa1a20  →  0x0000000000000000
+[36m0x0000fffffffff798[0m│+0x0038: [35m0x0000fffffffff8f8[0m  →  [35m0x0000fffffffff9f0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xfffff7e774ac <__pthread_kill_implementation+012c> sxtw   x0,  w0[0m
+   [90m0xfffff7e774b0 <__pthread_kill_implementation+0130> mov    x8,  #0x83                  	// #131[0m
+   [90m0xfffff7e774b4 <__pthread_kill_implementation+0134> svc    #0x0[0m
+ [32m→ 0xfffff7e774b8 <__pthread_kill_implementation+0138> cmn    w0,  #0x1,  lsl #12[0m
+   0xfffff7e774bc <__pthread_kill_implementation+013c> csneg  w0,  wzr,  w0,  ls	// ls = plast
+   0xfffff7e774c0 <__pthread_kill_implementation+0140> b      0xfffff7e7743c <__pthread_kill_implementation+188>
+   0xfffff7e774c4 <__pthread_kill_implementation+0144> mov    x0,  x22
+   0xfffff7e774c8 <__pthread_kill_implementation+0148> bl     0xfffff7e72050 <__GI___lll_lock_wake_private>
+   0xfffff7e774cc <__pthread_kill_implementation+014c> b      0xfffff7e7741c <__pthread_kill_implementation+156>
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "test_arm64", [1m[31mstopped[0m [34m0xfffff7e774b8[0m in [1m[33m__pthread_kill_implementation[0m (), reason: [1m[35mSIGABRT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xfffff7e774b8 → [32m__pthread_kill_implementation[0m([33mthreadid[0m=0xfffff7ff7ee0, [33msigno[0m=0x6, [33mno_tid[0m=0x0)
+[[1m[35m#1[0m] 0xfffff7e77520 → [32m__pthread_kill_internal[0m([33msigno[0m=0x6, [33mthreadid[0m=<optimized out>)
+[[1m[35m#2[0m] 0xfffff7e2cb3c → [32m__GI_raise[0m([33msig[0m=0x6)
+[[1m[35m#3[0m] 0xfffff7e17e00 → [32m__GI_abort[0m()
+[[1m[35m#4[0m] 0xfffff7e6aac4 → [32m__libc_message_impl[0m([33mfmt[0m=0xfffff7f52c98 "*** %s ***: terminated\n")
+[[1m[35m#5[0m] 0xfffff7ee82a8 → [32m__GI___fortify_fail[0m([33mmsg[0m=0xfffff7f52cb0 "stack smashing detected")
+[[1m[35m#6[0m] 0xfffff7ee9264 → [32m__stack_chk_fail[0m()
+[[1m[35m#7[0m] 0xaaaaaaaa09f4 → [32mvuln[0m([33msrc[0m=0xfffffffffe88 "aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa")
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[1;32mgef➤  [0mpattern search $pc
+[?2004l[1m[34m[+][0m Searching for '1f044031e097805a'/'5a8097e03140041f' with period=8
+[1m[31m[!][0m Pattern '$pc' not found
+[?2004h[1;32mgef➤  [0mpattern search $sp
+[?2004l[1m[34m[+][0m Searching for '70f7ffffffff0000'/'0000fffffffff770' with period=8
+[1m[31m[!][0m Pattern '$sp' not found
+[?2004h[1;32mgef➤  [0mbt
+[?2004l#0  [33m__pthread_kill_implementation[m ([36mthreadid[m=0xfffff7ff7ee0, [36msigno=signo@entry[m=0x6, [36mno_tid=no_tid@entry[m=0x0)
+    at [32m./nptl/pthread_kill.c[m:44
+#1  [34m0x0000fffff7e77520[m in [33m__pthread_kill_internal[m ([36msigno[m=0x6, [36mthreadid[m=<optimized out>)
+    at [32m./nptl/pthread_kill.c[m:78
+#2  [34m0x0000fffff7e2cb3c[m in [33m__GI_raise[m ([36msig=sig@entry[m=0x6) at [32m../sysdeps/posix/raise.c[m:26
+#3  [34m0x0000fffff7e17e00[m in [33m__GI_abort[m () at [32m./stdlib/abort.c[m:79
+#4  [34m0x0000fffff7e6aac4[m in [33m__libc_message_impl[m ([36mfmt=fmt@entry[m=0xfffff7f52c98 "*** %s ***: terminated\n")
+    at [32m../sysdeps/posix/libc_fatal.c[m:134
+#5  [34m0x0000fffff7ee82a8[m in [33m__GI___fortify_fail[m ([36mmsg=msg@entry[m=0xfffff7f52cb0 "stack smashing detected")
+    at [32m./debug/fortify_fail.c[m:24
+#6  [34m0x0000fffff7ee9264[m in [33m__stack_chk_fail[m () at [32m./debug/stack_chk_fail.c[m:24
+#7  [34m0x0000aaaaaaaa09f4[m in [33mvuln[m (
+    [36msrc[m=0xfffffffffe88 "aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa") at [32mtest.c[m:22
+#8  [34m0x6161616161616167[m in [33m??[m ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+[?2004h[1;32mgef➤  [0mkill
+[?2004l[Inferior 1 (process 494) killed]
+[?2004h[1;31mgef➤  [0mquit
+[?2004ly

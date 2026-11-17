@@ -1,0 +1,21 @@
+[?2004h[1;32mgef➤  [0mheap bins
+[?2004l[90m────────────────────────────────────────── [0m[36mTcachebins for thread 1[0m[90m ──────────────────────────────────────────[0m
+Tcachebins[idx=14, size=0x100, count=7] ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac18a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac17a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac16a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac15a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac14a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac13a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac12a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m) 
+[90m──────────────────────────────────── [0m[36mFastbins for arena at 0xfffff7fa0a50[0m[90m ────────────────────────────────────[0m
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30] 0x00
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+[90m────────────────────────────────── [0m[36mUnsorted Bin for arena at 0xfffff7fa0a50[0m[90m ──────────────────────────────────[0m
+[1m[34m[+][0m Found 0 chunks in unsorted bin.
+[90m─────────────────────────────────── [0m[36mSmall Bins for arena at 0xfffff7fa0a50[0m[90m ───────────────────────────────────[0m
+[1m[32m[+][0m small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1ac0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)   →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac19a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 2 chunks in 1 small non-empty bins.
+[90m─────────────────────────────────── [0m[36mLarge Bins for arena at 0xfffff7fa0a50[0m[90m ───────────────────────────────────[0m
+[1m[32m[+][0m large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1be0, size=0x810, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 1 chunks in 1 large non-empty bins.

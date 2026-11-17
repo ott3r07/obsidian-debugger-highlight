@@ -1,0 +1,12 @@
+(gdb) run AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Starting program: [32m/work/test_arm64[m AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+*** stack smashing detected ***: terminated
+
+Program received signal SIGABRT, Aborted.
+[33m__pthread_kill_implementation[m ([36mthreadid[m=281474842459872, [36msigno=signo@entry[m=6, [36mno_tid=no_tid@entry[m=0)
+    at [32m./nptl/pthread_kill.c[m:44
+warning: 44	[32m./nptl/pthread_kill.c[m: No such file or directory

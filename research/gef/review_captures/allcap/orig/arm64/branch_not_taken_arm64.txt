@@ -1,0 +1,80 @@
+gef➤  continue
+Continuing.
+
+Breakpoint 3, 0x0000aaaaaaaa0a8c in main (argc=0x1, argv=0xfffffffffd18) at test.c:31
+31	    for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x8               
+$x1  : 0x0000fffffffffb18  →  0x0000aaaaaaac12a0  →  0x0000000000000000
+$x2  : 0x0000aaaaaaac13f0  →  0x0000000000000000
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x30              
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0000fffff7fa0ab0  →  0x0000aaaaaaac1410  →  0x0000000000000000
+$x9  : 0x28              
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+$x16 : 0x0000aaaaaaabff90  →  0x0000fffff7e86470  →  <malloc+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e86470  →  <malloc+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd18  →  0x0000fffffffffef8  →  "/work/test_arm64"
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd60  →  0x0000aaaaaaaa08c0  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0a00  →  <main+0000> sub sp,  sp,  #0xd0
+$x23 : 0x0000fffffffffd28  →  0x0000ffffffffff09  →  "HOSTNAME=47f545946d15"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+$x27 : 0x0000aaaaaaabfd60  →  0x0000aaaaaaaa08c0  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffb90  →  0x0000fffffffffca0  →  0x0000fffffffffcb0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a64  →  <main+0064> mov x2,  x0
+$sp  : 0x0000fffffffffad0  →  0x0000fffffffffd18  →  0x0000fffffffffef8  →  "/work/test_arm64"
+$pc  : 0x0000aaaaaaaa0a8c  →  <main+008c> b.le 0xaaaaaaaa0a5c <main+92>
+$cpsr: [negative zero CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffad0│+0x0000: 0x0000fffffffffd18  →  0x0000fffffffffef8  →  "/work/test_arm64"	 ← $sp
+0x0000fffffffffad8│+0x0008: 0x0000000100000000
+0x0000fffffffffae0│+0x0010: 0x0000000000000008
+0x0000fffffffffae8│+0x0018: 0x0000aaaaaaaa0918  →  <add+0000> sub sp,  sp,  #0x10
+0x0000fffffffffaf0│+0x0020: 0x0000000000000000
+0x0000fffffffffaf8│+0x0028: 0x0000ffffffffffe7  →  "/work/test_arm64"
+0x0000fffffffffb00│+0x0030: 0x0000000000000000
+0x0000fffffffffb08│+0x0038: 0x0000fffff7ffb000  →  0x00010102464c457f
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a80 <main+0080>      str    w0,  [sp,  #16]
+   0xaaaaaaaa0a84 <main+0084>      ldr    w0,  [sp,  #16]
+   0xaaaaaaaa0a88 <main+0088>      cmp    w0,  #0x7
+●→ 0xaaaaaaaa0a8c <main+008c>      b.le   0xaaaaaaaa0a5c <main+92>	NOT taken [Reason: !(Z || N!=V)]
+   0xaaaaaaaa0a90 <main+0090>      str    wzr,  [sp,  #16]
+   0xaaaaaaaa0a94 <main+0094>      b      0xaaaaaaaa0ac0 <main+192>
+   0xaaaaaaaa0a98 <main+0098>      mov    x0,  #0x80                  	// #128
+   0xaaaaaaaa0a9c <main+009c>      bl     0xaaaaaaaa0790 <malloc@plt>
+   0xaaaaaaaa0aa0 <main+00a0>      mov    x2,  x0
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+31 ────
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+     30	     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+             // small=0x0000fffffffffb18  →  [...]  →  0x0000000000000000, i=0x8
+ →   31	     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+     32	     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+     33	     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+     34	     strcpy((char *)small[0], "heap string here");
+     35	     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+     36	     free(mid[0]);
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "test_arm64", stopped 0xaaaaaaaa0a8c in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xaaaaaaaa0a8c → main(argc=0x1, argv=0xfffffffffd18)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

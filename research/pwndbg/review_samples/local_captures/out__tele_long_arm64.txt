@@ -1,0 +1,40 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> telescope $sp 40
+00:0000│  sp 0xfffffffff9d0 {argv} —▸ 0xfffffffffce8 —▸ 0xfffffffffedd ◂— '/rv/rv_arm64'
+01:0008│-178 0xfffffffff9d8 ◂— 0x100000000
+02:0010│-170 0xfffffffff9e0 ◂— 0xd00000000
+03:0018│-168 0xfffffffff9e8 {i} ◂— 0xaaaa00000004
+04:0020│-160 0xfffffffff9f0 {t} ◂— 0x38 /* '8' */
+05:0028│-158 0xfffffffff9f8 {big} —▸ 0xaaaaaaac3010 ◂— 0
+06:0030│-150 0xfffffffffa00 —▸ 0xaaaaaaac1380 —▸ 0xaaaaaaac1360 —▸ 0xaaaaaaac1340 —▸ 0xaaaaaaac1320 —▸ ...
+07:0038│-148 0xfffffffffa08 {large} —▸ 0xaaaaaaac19d0 —▸ 0xfffff7fa0ee0 (main_arena+1168) —▸ 0xfffff7fa0ed0 (main_arena+1152) —▸ 0xfffff7fa0ec0 (main_arena+1136) —▸ ...
+08:0040│-140 0xfffffffffa10 {large+0x8} —▸ 0xaaaaaaac1f00 —▸ 0xfffff7fa0ef0 (main_arena+1184) —▸ 0xaaaaaaac19c0 ◂— 0
+09:0048│-138 0xfffffffffa18 {large+0x10} —▸ 0xaaaaaaac2470 —▸ 0xfffff7fa0f00 (main_arena+1200) —▸ 0xaaaaaaac1ef0 ◂— 0
+0a:0050│-130 0xfffffffffa20 {large+0x18} —▸ 0xaaaaaaac2a20 —▸ 0xfffff7fa0f10 (main_arena+1216) —▸ 0xaaaaaaac2460 ◂— 0
+0b:0058│-128 0xfffffffffa28 {small} —▸ 0xaaaaaaac13a0 ◂— 0xaaaaaaac1
+0c:0060│-120 0xfffffffffa30 {small+0x8} —▸ 0xaaaaaaac1450 ◂— 0xaaa00006b961
+0d:0068│-118 0xfffffffffa38 {small+0x10} —▸ 0xaaaaaaac1500 ◂— 0xaaa00006be91
+0e:0070│-110 0xfffffffffa40 {small+0x18} —▸ 0xaaaaaaac15b0 ◂— 0xaaa00006bfc1
+0f:0078│-108 0xfffffffffa48 {small+0x20} —▸ 0xaaaaaaac1660 ◂— 0xaaa00006bf71
+10:0080│-100 0xfffffffffa50 {small+0x28} —▸ 0xaaaaaaac1710 ◂— 0xaaa00006bca1
+11:0088│-0f8 0xfffffffffa58 {small+0x30} —▸ 0xaaaaaaac17c0 ◂— 0xaaa00006bdd1
+12:0090│-0f0 0xfffffffffa60 {small+0x38} —▸ 0xaaaaaaac1870 —▸ 0xfffff7fa0b30 (main_arena+224) —▸ 0xfffff7fa0b20 (main_arena+208) —▸ 0xfffff7fa0b10 (main_arena+192) —▸ ...
+13:0098│-0e8 0xfffffffffa68 {small+0x40} —▸ 0xaaaaaaac1920 —▸ 0xaaaaaaac1860 ◂— 0
+14:00a0│-0e0 0xfffffffffa70 {small+0x48} ◂— 0
+... ↓       4 skipped
+19:00c8│-0b8 0xfffffffffa98 {small+0x70} —▸ 0xfffffffffeb8 ◂— 0x4f11450aae9cfea
+1a:00d0│-0b0 0xfffffffffaa0 {small+0x78} ◂— 0x181
+1b:00d8│-0a8 0xfffffffffaa8 {guard} —▸ 0xaaaaaaac1430 ◂— 0
+1c:00e0│-0a0 0xfffffffffab0 {guard+0x8} —▸ 0xaaaaaaac14e0 ◂— 0
+1d:00e8│-098 0xfffffffffab8 {guard+0x10} —▸ 0xaaaaaaac1590 ◂— 0
+1e:00f0│-090 0xfffffffffac0 {guard+0x18} —▸ 0xaaaaaaac1640 ◂— 0
+1f:00f8│-088 0xfffffffffac8 {guard+0x20} —▸ 0xaaaaaaac16f0 ◂— 0
+20:0100│-080 0xfffffffffad0 {guard+0x28} —▸ 0xaaaaaaac17a0 ◂— 0
+21:0108│-078 0xfffffffffad8 {guard+0x30} —▸ 0xaaaaaaac1850 ◂— 0
+22:0110│-070 0xfffffffffae0 {guard+0x38} —▸ 0xaaaaaaac1900 ◂— 0
+23:0118│-068 0xfffffffffae8 {guard+0x40} —▸ 0xaaaaaaac19b0 ◂— 0
+24:0120│-060 0xfffffffffaf0 {guard+0x48} —▸ 0xaaaaaaac1ee0 ◂— 0
+25:0128│-058 0xfffffffffaf8 {guard+0x50} —▸ 0xaaaaaaac2450 ◂— 0
+26:0130│-050 0xfffffffffb00 {guard+0x58} —▸ 0xaaaaaaac2a00 ◂— 0
+27:0138│-048 0xfffffffffb08 {guard+0x60} —▸ 0xaaaaaaac2ff0 ◂— 0

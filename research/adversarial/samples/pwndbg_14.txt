@@ -1,0 +1,9 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/332
+pwndbg> checksec 
+[!] Couldn't find relocations against PLT to get symbols
+[*] '/root/\xe6\xa1\x8c\xe9\x9d\xa2/sentosa/sentosa'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      PIE enabled

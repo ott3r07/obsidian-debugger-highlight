@@ -1,0 +1,69 @@
+pwndbg> continue
+Continuing.
+
+Breakpoint 2, main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0
+*RDX  0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+*RDI  0xffff92b35ac0 ◂— 0
+*RSI  0x510
+ R8   0
+*R9   0
+*R10  7
+*R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+b► 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax                        RDI => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 8
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9342cb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9342cb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9342cb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557489 main+398
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

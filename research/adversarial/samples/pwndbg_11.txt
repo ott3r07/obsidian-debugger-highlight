@@ -1,0 +1,83 @@
+# SOURCE: https://yi0934.github.io/2020/06/17/CTF/how2heap/my_wp3/
+pwndbg> bins
+tcachebins
+empty
+fastbins
+0x20: 0x0
+0x30: 0x0
+0x40: 0x0
+0x50: 0x0
+0x60: 0x0
+0x70: 0x0
+0x80: 0x0
+unsortedbin
+all: 0x55555555c250 —▸ 0x7ffff7dd2ca0 (main_arena+96) ◂— 0x55555555c250
+smallbins
+empty
+largebins
+empty
+
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555c000
+Size: 0x251
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0x55555555c250
+Size: 0x421
+fd: 0x7ffff7dd2ca0
+bk: 0x7ffff7dd2ca0
+
+Allocated chunk
+Addr: 0x55555555c670
+Size: 0x200
+
+Top chunk | PREV_INUSE
+0x55555555c260:	0x00007ffff7dd2ca0	0x00007ffff7dd2ca0
+0x55555555c270:	0x0000000000000000	0x0000000000000000
+0x55555555c280:	0x0000000000000000	0x0000000000000000
+0x55555555c290:	0x0000000000000000	0x0000000000000000
+//------------------------------------------------
+pwndbg> x/10x 0x55555555c250
+0x55555555c250:	0x0000000000000000	0x0000000000000421
+0x55555555c260:	0x00007ffff7dd2ca0	0x00007fffffffe0e8
+0x55555555c270:	0x0000000000000000	0x0000000000000000
+0x55555555c280:	0x0000000000000000	0x0000000000000000
+0x55555555c290:	0x0000000000000000	0x0000000000000000
+pwndbg> bins
+tcachebins
+empty
+fastbins
+0x20: 0x0
+0x30: 0x0
+0x40: 0x0
+0x50: 0x0
+0x60: 0x0
+0x70: 0x0
+0x80: 0x0
+unsortedbin
+all [corrupted]
+FD: 0x55555555c250 —▸ 0x7ffff7dd2ca0 (main_arena+96) ◂— 0x55555555c250
+BK: 0x55555555c250 —▸ 0x7fffffffe0e8 —▸ 0x55555555c260 ◂— 0x0
+smallbins
+empty
+largebins
+empty
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555c000
+Size: 0x251
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0x55555555c250
+Size: 0x421
+fd: 0x7ffff7dd2ca0
+bk: 0x7fffffffe0e8
+
+Allocated chunk
+Addr: 0x55555555c670
+Size: 0x200
+
+Top chunk | PREV_INUSE
+Addr: 0x55555555c870
+Size: 0x20791

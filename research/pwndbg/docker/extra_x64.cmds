@@ -1,0 +1,47 @@
+extra_target_remote|target remote :1234
+extra_break|break test.c:38
+extra_continue_start|continue
+show_flags|set show-flags on
+context_regs_flags|context regs
+show_flags_off|set show-flags off
+compact_regs|set show-compact-regs on
+context_regs_compact|context regs
+compact_regs_off|set show-compact-regs off
+search_str|search "global data"
+search_ptr|search -p mid[1]
+got_r|got -r
+dq|dq $sp 4
+dd|dd $sp 4
+db|db $sp 16
+dc|dc $sp 32
+ds|ds greeting
+cyclic|cyclic 32
+cyclic_l|cyclic -l 0x6161616c
+tele_global|telescope &global_buf 4
+tele_heap|telescope small[7] 4
+p_sp|p $sp
+p_pc|p/x $pc
+p_fp_val|p fp
+x_gx|x/gx $sp
+x_3xg|x/3xg &global_buf
+x_2i|x/2i $pc
+x_8xb_str|x/8xb greeting
+x_d|x/4dw $sp
+info_proc_mappings|info proc mappings
+xinfo_greeting|xinfo greeting
+malloc_chunk|malloc-chunk mid[1]-0x10
+top_chunk|top-chunk
+vis_heap_chunks|vis-heap-chunks
+try_free|try-free mid[1]
+find_fake_fast|find-fake-fast &global_buf
+tls|tls
+errno|errno
+info_threads|info threads
+watch_r|watch r
+watch_hit|continue
+delete_all|delete
+info_breakpoints_empty|info breakpoints
+display_i|display/i $pc
+si_display|si
+undisplay|undisplay 1
+kill|kill

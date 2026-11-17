@@ -1,0 +1,3 @@
+v_smash_target_remote|target remote :1234
+v_smash_continue|continue
+v_bt_smash|bt

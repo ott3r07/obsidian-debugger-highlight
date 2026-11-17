@@ -1,0 +1,12 @@
+[?2004h[1;32mgef➤  [0mheap chunk s1
+[?2004l[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac19a0, size=0x0, flags=[32m[1m! PREV_INUSE[0m)
+Chunk size: 0 (0x0)
+Usable size: 0 (0x0)
+Previous chunk size: 257 (0x101)
+PREV_INUSE flag: [31mOff[0m
+IS_MMAPPED flag: [31mOff[0m
+NON_MAIN_ARENA flag: [31mOff[0m
+
+Forward pointer: 0xf7fa0ba0
+Backward pointer: 0xffff
+

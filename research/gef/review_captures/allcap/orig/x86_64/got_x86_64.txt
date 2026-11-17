@@ -1,0 +1,5 @@
+(qemu) gef➤  got
+─────────────────────────────────────────────── /work/test_x64 ───────────────────────────────────────────────
+
+GOT protection: Partial RelRO | GOT functions: 0
+ 

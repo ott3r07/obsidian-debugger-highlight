@@ -1,0 +1,2 @@
+gef➤  x/s greeting
+0xaaaaaaaa0c58:	"Hello, gef!"

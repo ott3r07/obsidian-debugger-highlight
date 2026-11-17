@@ -1,0 +1,31 @@
+(gdb) bt
+#0  0x0000ffff86512a8c in pthread_kill () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#1  0x0000ffff864b925e in raise () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#2  0x0000ffff8649c8ff in abort () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#3  0x0000ffff8649d7b6 in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#4  0x0000ffff865aaad9 in __fortify_fail () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#5  0x0000ffff865abd64 in __stack_chk_fail () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#6  0x00005555555572f9 in vuln (src=0xffff86f6ee6e 'A' <repeats 100 times>) at test.c:22
+#7  0x4141414141414141 in ?? ()
+#8  0x4141414141414141 in ?? ()
+#9  0x4141414141414141 in ?? ()
+#10 0x4141414141414141 in ?? ()
+#11 0x4141414141414141 in ?? ()
+#12 0x0000550041414141 in ?? ()
+#13 0x000055555555bae0 in ?? ()
+#14 0x000055555555b420 in ?? ()
+#15 0x000055555555b4b0 in ?? ()
+#16 0x000055555555b540 in ?? ()
+#17 0x0000000001080000 in ?? ()
+#18 0x000055555555b2a0 in ?? ()
+#19 0x000055555555b2d0 in ?? ()
+#20 0x000055555555b300 in ?? ()
+#21 0x000055555555b330 in ?? ()
+#22 0x000055555555b360 in ?? ()
+#23 0x000055555555b390 in ?? ()
+#24 0x000055555555b3c0 in ?? ()
+#25 0x000055555555b3f0 in ?? ()
+#26 0x4141414141414141 in ?? ()
+#27 0x4242424242424242 in ?? ()
+#28 0x4343434343434343 in ?? ()
+#29 0x0000000000000000 in ?? ()

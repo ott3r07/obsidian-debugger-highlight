@@ -1,0 +1,15 @@
+gef➤  got
+[*] gef-2022.06.py:L8817 'checksec' is deprecated and will be removed in a feature release. Use Elf(fname).checksec()
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabff78] __libc_start_main@GLIBC_2.34  →  0xf7e18500
+[0xaaaaaaabff80] __cxa_finalize@GLIBC_2.17  →  0xf7e2eb50
+[0xaaaaaaabff88] malloc@GLIBC_2.17  →  0xf7e86470
+[0xaaaaaaabff90] __stack_chk_fail@GLIBC_2.17  →  0xf7ee9250
+[0xaaaaaaabff98] __gmon_start__  →  0x0
+[0xaaaaaaabffa0] abort@GLIBC_2.17  →  0xf7e17d0c
+[0xaaaaaaabffa8] puts@GLIBC_2.17  →  0xf7e619d0
+[0xaaaaaaabffb0] free@GLIBC_2.17  →  0xf7e86d70
+[0xaaaaaaabffb8] strcpy@GLIBC_2.17  →  0xf7e8d240
+[0xaaaaaaabffc0] printf@GLIBC_2.17  →  0xf7e40590

@@ -1,0 +1,120 @@
+[31m[1mpwndbg: [0m[31m[0m[91mloaded 200 pwndbg commands. Type [35mpwndbg [filter][0m[91m for a list.[0m
+[31m[1mpwndbg: [0m[31m[0m[91mcreated 12 GDB functions (can be used with print/break). Type [35mhelp function[0m[91m to see them.[0m
+Reading symbols from [32m./test_x64[m...
+[31m[1m------- tip of the day[0m[31m[0m[91m (disable with [35mset show-tips off[0m[91m)[0m[31m[1m -------[0m[31m[0m
+[33mbreak-if-taken[0m and [33mbreak-if-not-taken[0m commands sets breakpoints after a given jump instruction was taken or not
+[31m[1mpwndbg> [0m[31m[0mtarget remote :1234
+Remote debugging using :1234
+Reading symbols from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m...
+(No debugging symbols found in [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m)
+[34m0x0000ffff88ec2550[m in [33m??[m () from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────[0m
+ [1mRAX [0m 0
+ [1mRBX [0m 0
+ [1mRCX [0m 0
+ [1mRDX [0m 0
+ [1mRDI [0m 0
+ [1mRSI [0m 0
+ [1mR8  [0m 0
+ [1mR9  [0m 0
+ [1mR10 [0m 0
+ [1mR11 [0m 0
+ [1mR12 [0m 0
+ [1mR13 [0m 0
+ [1mR14 [0m 0
+ [1mR15 [0m 0
+ [1mRBP [0m 0
+ [1mRSP [0m [33m0xffff896e1c70[0m ◂— 2
+ [1mRIP [0m [31m0xffff88ec2550[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mrdi[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mrsp[39m
+[34m──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────[0m
+[90m   0xffff88ec2543    call   0xffff88eb1ce0              <0xffff88eb1ce0>[0m
+ 
+[90m   0xffff88ec2548    jmp    0xffff88ec23e2              <0xffff88ec23e2>[0m
+ 
+[90m   0xffff88ec254d    nop    dword ptr [rax][0m
+ ► [1m[32m0xffff88ec2550[0m[1m[0m [1m[32m[0m[1m[0m   [1m[32m[38;5;148mmov[39m[38;5;255m    [39m[38;5;81mrdi[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mrsp[39m[0m[1m[0m            [31m[1mRDI[0m[31m[0m => [33m0xffff896e1c70[0m ◂— 2
+   [0m0xffff88ec2553[0m [0m[0m   [38;5;148m[1mcall[0m[39m[38;5;255m   [39m[38;5;141m0xffff88ec31e0[39m              <[31m0xffff88ec31e0[0m>
+ 
+   [0m0xffff88ec2558[0m [0m[0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mr12[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mrax[39m
+   [0m0xffff88ec255b[0m [0m[0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mr13[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mrsp[39m
+   [0m0xffff88ec255e[0m [0m[0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81medx[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mdword[39m[38;5;255m [39m[38;5;81mptr[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81mrip[39m[38;5;255m [39m[38;5;255m+[39m[38;5;255m [39m[38;5;141m0x19b04[39m[38;5;255m][39m     [31m[1mEDX[0m[31m[0m, [[35m_rtld_global+4200[0m]
+   [0m0xffff88ec2564[0m [0m[0m   [38;5;148mtest[39m[38;5;255m   [39m[38;5;81medx[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m2[39m
+   [0m0xffff88ec256a[0m [0m[0m [90m? [0m[38;5;148m[1mje[0m[39m[38;5;255m     [39m[38;5;141m0xffff88ec257d[39m              <[31m0xffff88ec257d[0m>
+ 
+   [0m0xffff88ec256c[0m [0m[0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mesi[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m1[39m                             [31m[1mESI[0m[31m[0m => 1
+[34m───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────[0m
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1mrsp[0m [33m0xffff896e1c70[0m ◂— 2
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m [1m   [0m [33m0xffff896e1c78[0m —▸ [33m0xffff896e1e63[0m ◂— './test_x64'
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m [1m   [0m [33m0xffff896e1c80[0m —▸ [33m0xffff896e1e6e[0m ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m [1m   [0m [33m0xffff896e1c88[0m ◂— 0
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m [1m   [0m [33m0xffff896e1c90[0m —▸ [33m0xffff896e1ed3[0m ◂— 'HOSTNAME=3e37fc6690d4'
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m [1m   [0m [33m0xffff896e1c98[0m —▸ [33m0xffff896e1ee9[0m ◂— 'PWD=/work'
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m [1m   [0m [33m0xffff896e1ca0[0m —▸ [33m0xffff896e1ef3[0m ◂— '_=/usr/local/bin/qemu-x86_64'
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m [1m   [0m [33m0xffff896e1ca8[0m —▸ [33m0xffff896e1f10[0m ◂— 'LINES=50'
+[34m─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────[0m
+ ► 0 0xffff88ec2550
+   1 0x2
+   2 0xffff896e1e63
+   3 0xffff896e1e6e
+   4 0x0
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[32m[1mpwndbg> [0m[32m[0mcontinue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+*** stack smashing detected ***: terminated
+
+Program received signal SIGABRT, Aborted.
+[34m0x0000ffff88c85a8c[m in [33mpthread_kill[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────[0m
+ [1mRAX [0m 0
+[31m*[0m[31m[1mRBX [0m[31m[0m 0x2ae
+ [1mRCX [0m 0
+[31m*[0m[31m[1mRDX [0m[31m[0m 6
+[31m*[0m[31m[1mRDI [0m[31m[0m 0x2ae
+[31m*[0m[31m[1mRSI [0m[31m[0m 0x2ae
+ [1mR8  [0m 0
+[31m*[0m[31m[1mR9  [0m[31m[0m [0m0xffff88ed9440[0m ◂— 'glibc.malloc.mxfast'
+[31m*[0m[31m[1mR10 [0m[31m[0m 8
+ [1mR11 [0m 0
+[31m*[0m[31m[1mR12 [0m[31m[0m 6
+[31m*[0m[31m[1mR13 [0m[31m[0m [33m0xffff896e1950[0m ◂— 0x3000000010
+[31m*[0m[31m[1mR14 [0m[31m[0m 0x16
+[31m*[0m[31m[1mR15 [0m[31m[0m [33m0xffff896e1950[0m ◂— 0x3000000010
+[31m*[0m[31m[1mRBP [0m[31m[0m [33m0xffff896e1800[0m —▸ [33m0xffff896e1820[0m —▸ [33m0xffff896e18e0[0m —▸ [33m0xffff896e1a00[0m —▸ [33m0xffff896e1a10[0m —▸ ...
+[31m*[0m[31m[1mRSP [0m[31m[0m [33m0xffff896e17c0[0m —▸ [33m0xffff896e1850[0m —▸ [33m0xffff896e1880[0m ◂— 0x414141413d667562 ('buf=AAAA')
+[31m*[0m[31m[1mRIP [0m[31m[0m [31m0xffff88c85a8c (pthread_kill+284)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mr14d[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81meax[39m
+[34m──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────[0m
+[90m   0xffff88c85a83 <pthread_kill+275>    mov    edi, eax[0m
+[90m   0xffff88c85a85 <pthread_kill+277>    mov    eax, 0xea           EAX => 0xea[0m
+[90m   0xffff88c85a8a <pthread_kill+282>    syscall <SYS_tgkill>[0m
+ ► [1m[32m0xffff88c85a8c[0m[1m[0m [1m[32m<pthread_kill+284> [0m[1m[0m   [1m[32m[38;5;148mmov[39m[38;5;255m    [39m[38;5;81mr14d[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81meax[39m[0m[1m[0m           [31m[1mR14D[0m[31m[0m => 0
+   [0m0xffff88c85a8f[0m [0m<pthread_kill+287> [0m   [38;5;148mneg[39m[38;5;255m    [39m[38;5;81mr14d[39m
+   [0m0xffff88c85a92[0m [0m<pthread_kill+290> [0m   [38;5;148mcmp[39m[38;5;255m    [39m[38;5;81meax[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m0xfffff000[39m     0x0 - 0xfffff000     EFLAGS => 0x207 [ [1m[32mCF[0m[1m[0m [1m[32mPF[0m[1m[0m [31maf[0m [31mzf[0m [31msf[0m [1m[32mIF[0m[1m[0m [31mdf[0m [31mof[0m [31miopl:00[0m [31mac[0m ]
+   [0m0xffff88c85a97[0m [0m<pthread_kill+295> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81meax[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m0[39m              [1mEAX[0m => 0
+   [0m0xffff88c85a9c[0m [0m<pthread_kill+300> [0m [32m✔ [0m[38;5;148mcmovbe[39m[38;5;255m [39m[38;5;81mr14d[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81meax[39m
+   [0m0xffff88c85aa0[0m [0m<pthread_kill+304> [0m   [38;5;148m[1mjmp[0m[39m[38;5;255m    [39m[38;5;141m[31mpthread_kill+176[0m[39m            <[31mpthread_kill+176[0m>
+[0m    ↓[0m
+   [0m0xffff88c85a20[0m [0m<pthread_kill+176> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mrax[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mqword[39m[38;5;255m [39m[38;5;81mptr[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81mrbp[39m[38;5;255m [39m[38;5;255m-[39m[38;5;255m [39m[38;5;141m0x38[39m[38;5;255m][39m     [31m[1mRAX[0m[31m[0m, [[33m0xffff896e17c8[0m] => 0xc739f9701727ec00
+   [0m0xffff88c85a24[0m [0m<pthread_kill+180> [0m   [38;5;148msub[39m[38;5;255m    [39m[38;5;81mrax[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mqword[39m[38;5;255m [39m[38;5;81mptr[39m[38;5;255m [39m[38;5;81mfs[39m[38;5;255m:[39m[38;5;255m[[39m[38;5;141m0x28[39m[38;5;255m][39m        [31m[1mRAX[0m[31m[0m => [0m0[0m (0xc739f9701727ec00 - 0xc739f9701727ec00)
+[34m───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────[0m
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1mrsp[0m [33m0xffff896e17c0[0m —▸ [33m0xffff896e1850[0m —▸ [33m0xffff896e1880[0m ◂— 0x414141413d667562 ('buf=AAAA')
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m-038 [33m0xffff896e17c8[0m ◂— 0xc739f9701727ec00
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m-030 [33m0xffff896e17d0[0m —▸ [33m0xffff896e1810[0m —▸ [33m0xffff896e1940[0m —▸ [0m0xffff88db576b[0m ◂— ' ***: terminated\n'
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m-028 [33m0xffff896e17d8[0m ◂— 6
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m-020 [33m0xffff896e17e0[0m —▸ [35m0xffff88bdc740[0m ◂— [35m0xffff88bdc740[0m
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m-018 [33m0xffff896e17e8[0m —▸ [33m0xffff896e1950[0m ◂— 0x3000000010
+[0m... ↓        2 skipped[0m
+[34m─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────[0m
+ ► 0 0xffff88c85a8c     pthread_kill+284
+   1 0xffff88c2c25e     raise+30
+   2 0xffff88c0f8ff     abort+223
+   3 0xffff88c107b6
+   4 0xffff88d1dad9
+   5 0xffff88d1ed64
+   6 0x5555555572f9     vuln+98
+   7 0x4141414141414141
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[32m[1mpwndbg> [0m[32m[0m

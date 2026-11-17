@@ -1,0 +1,14 @@
+pwndbg> tls
+Thread Local Storage (TLS) base: 0xffff9a6b8740
+TLS is located at:
+    0xffff9a6b8000     0xffff9a6bb000 rw-p     3000       0 [anon_ffff9a6b8]
+Dumping the address:
+00:0000│ fs_base 0xffff9a6b8740 ◂— 0xffff9a6b8740
+01:0008│         0xffff9a6b8748 —▸ 0xffff9a6b90e0 ◂— 1
+02:0010│         0xffff9a6b8750 —▸ 0xffff9a6b8740 ◂— 0xffff9a6b8740
+03:0018│         0xffff9a6b8758 ◂— 0
+04:0020│         0xffff9a6b8760 ◂— 0
+05:0028│         0xffff9a6b8768 ◂— 0x5dbec8f0f83ce400
+06:0030│         0xffff9a6b8770 ◂— 0xadf675311ea4ac03
+07:0038│         0xffff9a6b8778 ◂— 0
+... ↓            2 skipped

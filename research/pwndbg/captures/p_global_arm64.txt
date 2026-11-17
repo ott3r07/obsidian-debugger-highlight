@@ -1,0 +1,2 @@
+pwndbg> p global_buf
+$5 = "global data string", '\000' <repeats 45 times>

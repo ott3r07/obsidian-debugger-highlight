@@ -1,0 +1,8 @@
+(gdb) info frame
+Stack level 0, frame at 0xfffffffffb50:
+ pc = 0xaaaaaaaa0c44 in main (test.c:38); saved pc = 0xfffff7e184c4
+ source language c.
+ Arglist at 0xfffffffffb40, args: argc=1, argv=0xfffffffffcc8
+ Locals at 0xfffffffffb40, Previous frame's sp is 0xfffffffffb50
+ Saved registers:
+  x29 at 0xfffffffffb40, x30 at 0xfffffffffb48

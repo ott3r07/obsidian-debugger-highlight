@@ -1,0 +1,2 @@
+(gdb) x/i $pc
+=> [34m0x0[m:	Cannot access memory at address 0x0

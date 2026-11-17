@@ -1,0 +1,7 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mheap chunk 0x10
+[?2004l[1m[31m[!][0m Command 'heap chunk' failed to execute properly, reason: Cannot access memory at address 0x0
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mxinfo 0x10
+[?2004l[90m──────────────────────────────────────────────── [0m[36mxinfo: 0x10[0m[90m ────────────────────────────────────────────────[0m
+[1m[33m[*][0m Cannot reach 0x10 in memory space
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mnosuchcommand
+[?2004lUndefined command: "nosuchcommand".  Try "help".

@@ -1,0 +1,4 @@
+[32m[1mpwndbg> [0m[32m[0msearch -p mid[1]
+Searching for a pointer-width integer: b'\xb0\x14\xac\xaa\xaa\xaa\x00\x00'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.
+[33m[stack]        [0m [33m0xfffffffffab8[0m [34m0xaaaaaaac14b0[0m

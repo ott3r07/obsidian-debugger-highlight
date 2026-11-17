@@ -1,0 +1,103 @@
+break main
+continue
+ni
+si
+ni
+ni
+ni
+ni
+context
+break *0x4019e8
+continue
+si
+info breakpoints
+bt
+finish
+context reg
+context code 4
+context stack 4
+telescope $rsp 12
+telescope
+stack 6
+x/20gx $rsp
+x/s *(char**)&greeting
+x/s $rbp-0x60
+x/4s *(char**)&greeting
+x/10i $pc
+x/8wx $rsp
+x/16bx $rsp
+info registers
+info registers rip
+p $rsp
+p/x $rip
+p greeting
+p global_counter
+p/x global_counter
+p main
+p $eflags
+eflags
+vmmap
+vmmap binary
+vmmap stack
+vmmap 0x401a86
+checksec
+disassemble main
+pdisass main 6
+hexdump $rsp 64
+hexdump 0x481010 /2
+hexdump 0x481010 20
+nextcall
+nextjmp
+xinfo $rsp
+xinfo $pc
+xinfo 0x4b5900
+xinfo 0x481010
+xprint $rsp
+xinfo register
+xinfo 0xdeadbeef
+distance $rsp $rbp
+distance $rsp
+elfheader
+elfheader .text
+elfsymbol printf
+searchmem "heap string"
+find "PEDA"
+find 0x4141414120676e69 heap
+find "heap" 0x4b5000 0x4b6000
+refsearch 0x4b5900
+sgrep PEDA
+strings 0x481010 0x481040 4
+find "/bin" binary
+pattern create 64
+pattern create 40 /tmp/pat.txt
+pattern offset AA8A
+pattern offset 0x41412d41
+dumpargs
+getpid
+skeleton
+pshow option ansicolor
+phelp context
+info frame
+#SLEEP 1
+ropgadget
+#SLEEP 6
+
+
+
+#SLEEP 2
+pset option pagesize 0
+pshow option pagesize
+ropsearch "pop rdi" binary
+#SLEEP 10
+asmsearch "pop rdi ; ret" binary
+#SLEEP 10
+jmpcall rax
+#SLEEP 6
+aslr
+procinfo
+lookup pointer stack binary
+#SLEEP 5
+delete
+continue
+#SLEEP 2
+quit

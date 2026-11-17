@@ -1,0 +1,10 @@
+gef➤  xinfo 0xfffff7e40590
+────────────────── xinfo: 0xfffff7e40590 ──────────────────
+Page: 0x0000fffff7df0000  →  0x0000fffff7f8a000 (size=0x19a000)
+Permissions: r-x
+Pathname: /usr/lib/aarch64-linux-gnu/libc.so.6
+Offset (from page): 0x50590
+Inode: 0
+Segment: .text (0x0000fffff7e17d00-0x0000fffff7f343d4)
+Offset (from segment): 0x28890
+Symbol: printf

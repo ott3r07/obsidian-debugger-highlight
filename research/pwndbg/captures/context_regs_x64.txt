@@ -1,0 +1,21 @@
+pwndbg> context regs
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0xd
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0x5555555571c9 (add) ◂— endbr64
+*RDX  0
+*RDI  6
+*RSI  7
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x5555555574a2 (main+423) ◂— mov dword ptr [rbp - 0xbc], eax
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

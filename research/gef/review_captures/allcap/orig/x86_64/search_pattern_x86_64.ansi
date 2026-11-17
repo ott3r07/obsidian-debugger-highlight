@@ -1,0 +1,6 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0msearch-pattern "heap string"
+[?2004l[1m[34m[+][0m Searching '[33mheap string[0m' in memory
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0msearch-pattern AAAAAAAABBBB
+[?2004l[1m[34m[+][0m Searching '[33mAAAAAAAABBBB[0m' in memory
+[1m[32m[+][0m In '[34m[stack][0m'(0x2aaaaaaac000-0x2aaaab2ac000), permission=rw-
+  0x2aaaab2abc30 - 0x2aaaab2abc48  →   "[35mAAAAAAAABBBBBBBBCCCCCCCC[0m" 

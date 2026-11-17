@@ -1,0 +1,3 @@
+(gdb) until 41
+main (argc=1, argv=0xfffffffffcc8) at test.c:41
+41	    printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);

@@ -1,0 +1,33 @@
+(gdb) disassemble compute
+Dump of assembler code for function [33mcompute[m:
+   [34m0x0000aaaaaaaa09e8[m <+0>:	[32msub[m	[31msp[m, [31msp[m, [34m#0x30[m
+   [34m0x0000aaaaaaaa09ec[m <+4>:	[32mstp[m	[31mx29[m, [31mx30[m, [[31msp[m, [34m#32[m]
+   [34m0x0000aaaaaaaa09f0[m <+8>:	[32madd[m	[31mx29[m, [31msp[m, [34m#0x20[m
+   [34m0x0000aaaaaaaa09f4[m <+12>:	[32mstr[m	[31mx0[m, [[31msp[m, [34m#8[m]
+   [34m0x0000aaaaaaaa09f8[m <+16>:	[32mstr[m	[31mw1[m, [[31msp[m, [34m#4[m]
+   [34m0x0000aaaaaaaa09fc[m <+20>:	[32mstr[m	[31mw2[m, [[31msp[m]
+   [34m0x0000aaaaaaaa0a00[m <+24>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaabf000[m
+   [34m0x0000aaaaaaaa0a04[m <+28>:	[32mldr[m	[31mx0[m, [[31mx0[m, [34m#4072[m]
+   [34m0x0000aaaaaaaa0a08[m <+32>:	[32mldr[m	[31mx1[m, [[31mx0[m]
+   [34m0x0000aaaaaaaa0a0c[m <+36>:	[32mstr[m	[31mx1[m, [[31msp[m, [34m#24[m]
+   [34m0x0000aaaaaaaa0a10[m <+40>:	[32mmov[m	[31mx1[m, [34m#0x0                   [m[37;2m	// #0[m
+   [34m0x0000aaaaaaaa0a14[m <+44>:	[32mldr[m	[31mx2[m, [[31msp[m, [34m#8[m]
+   [34m0x0000aaaaaaaa0a18[m <+48>:	[32mldr[m	[31mw1[m, [[31msp[m]
+   [34m0x0000aaaaaaaa0a1c[m <+52>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#4[m]
+   [34m0x0000aaaaaaaa0a20[m <+56>:	[32mblr[m	[31mx2[m
+   [34m0x0000aaaaaaaa0a24[m <+60>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#20[m]
+   [34m0x0000aaaaaaaa0a28[m <+64>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#20[m]
+   [34m0x0000aaaaaaaa0a2c[m <+68>:	[32mmov[m	[31mw1[m, [31mw0[m
+   [34m0x0000aaaaaaaa0a30[m <+72>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaabf000[m
+   [34m0x0000aaaaaaaa0a34[m <+76>:	[32mldr[m	[31mx0[m, [[31mx0[m, [34m#4072[m]
+   [34m0x0000aaaaaaaa0a38[m <+80>:	[32mldr[m	[31mx3[m, [[31msp[m, [34m#24[m]
+   [34m0x0000aaaaaaaa0a3c[m <+84>:	[32mldr[m	[31mx2[m, [[31mx0[m]
+   [34m0x0000aaaaaaaa0a40[m <+88>:	[32msubs[m	[31mx3[m, [31mx3[m, [31mx2[m
+   [34m0x0000aaaaaaaa0a44[m <+92>:	[32mmov[m	[31mx2[m, [34m#0x0                   [m[37;2m	// #0[m
+   [34m0x0000aaaaaaaa0a48[m <+96>:	[32mb.eq[m	[34m0xaaaaaaaa0a50[m <[33mcompute[m+104>[37;2m  // b.none[m
+   [34m0x0000aaaaaaaa0a4c[m <+100>:	[32mbl[m	[34m0xaaaaaaaa07a0[m <[33m__stack_chk_fail@plt[m>
+   [34m0x0000aaaaaaaa0a50[m <+104>:	[32mmov[m	[31mw0[m, [31mw1[m
+   [34m0x0000aaaaaaaa0a54[m <+108>:	[32mldp[m	[31mx29[m, [31mx30[m, [[31msp[m, [34m#32[m]
+   [34m0x0000aaaaaaaa0a58[m <+112>:	[32madd[m	[31msp[m, [31msp[m, [34m#0x30[m
+   [34m0x0000aaaaaaaa0a5c[m <+116>:	[32mret[m
+End of assembler dump.

@@ -1,0 +1,3 @@
+[32m[1mpwndbg> [0m[32m[0mx/3xg &global_buf
+[34m0xaaaaaaac0010[m <[33mglobal_buf[m>:	0x64206c61626f6c67	0x6972747320617461
+[34m0xaaaaaaac0020[m <[33mglobal_buf[m+16>:	0x000000000000676e

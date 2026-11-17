@@ -1,0 +1,7 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> search AAAAAAAA
+Searching for byte: b'AAAAAAAA'
+rv_arm64        0xaaaaaaaa0e40 'AAAAAAAABBBBBBBB with spaces and \\ backslash <-- tricky'
+[heap]          0xaaaaaaac3010 'AAAAAAAABBBBBBBB with spaces and \\ backslash <-- tricky'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.

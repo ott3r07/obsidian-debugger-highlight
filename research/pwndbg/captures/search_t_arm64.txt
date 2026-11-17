@@ -1,0 +1,7 @@
+pwndbg> search -t dword 0x41414141
+Searching for a 4-byte integer: b'AAAA'
+test_arm64      0xaaaaaaaa0d40 'AAAAAAAABBBBBBBBCCCCCCCC'
+test_arm64      0xaaaaaaaa0d44 'AAAABBBBBBBBCCCCCCCC'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d03, halting search.
+[stack]         0xfffffffffb08 'AAAAAAAABBBBBBBBCCCCCCCC'
+[stack]         0xfffffffffb0c 'AAAABBBBBBBBCCCCCCCC'

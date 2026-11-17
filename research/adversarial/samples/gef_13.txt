@@ -1,0 +1,60 @@
+# SOURCE: https://github.com/hugsy/gef/issues/752
+   0x77fe627c                  sw     gp, 24(sp)
+   0x77fe6280                  move   v0, s0
+●  0x77fe6284                  lw     v1, 0(v0)
+
+─────────────────────────────── Exception raised ───────────────────────────────
+AssertionError: 
+───────────────────────────── Detailed stacktrace ──────────────────────────────
+↳ File "~/.gdbinit-gef.py", line 3047, in __get_register_for_selected_frame()
+    →             assert regname[0] == "$"
+
+↳ File "~/.gdbinit-gef.py", line 3039, in get_register()
+    →         return __get_register_for_selected_frame(regname, key)
+
+↳ File "~/.gdbinit-gef.py", line 2707, in is_branch_taken()
+    →                 taken, reason = get_register(ops[0]) != 0, "{0[0]} != 0".format(ops)
+
+↳ File "~/.gdbinit-gef.py", line 8541, in context_code()
+    →                             is_taken, reason = current_arch.is_branch_taken(insn)
+
+↳ File "~/.gdbinit-gef.py", line 8372, in do_invoke()
+    →                     display_pane_function()
+
+↳ File "~/.gdbinit-gef.py", line 2854, in wrapper()
+    →                 return f(*args, **kwargs)
+
+↳ File "~/.gdbinit-gef.py", line 244, in wrapper()
+    →                 rv = f(*args, **kwargs)
+
+↳ File "~/.gdbinit-gef.py", line 4619, in invoke()
+    →                 bufferize(self.do_invoke)(argv)
+
+─────────────────────────────────── Version ────────────────────────────────────
+GEF: (Standalone)
+Blob Hash(/home/andrew/.gdbinit-gef.py): 2ad6e6e9ca1f68f9257b00baea569ae740dc85e0
+SHA256(/home/andrew/.gdbinit-gef.py): de35aedca9670a0401e5072c9a63d711e5295fa7b730efbac872dac18f24b859
+GDB: 9.2
+GDB-Python: 3.8
+Loaded commands: $, aliases, aliases add, aliases ls, aliases rm, aslr, assemble, canary, capstone-disassemble, checksec, context, dereference, edit-flags, elf-info, entry-break, format-string-helper, functions, gef-remote, got, heap, heap arenas, heap bins, heap bins fast, heap bins large, heap bins small, heap bins tcache, heap bins unsorted, heap chunk, heap chunks, heap set-arena, heap-analysis-helper, hexdump, hexdump byte, hexdump dword, hexdump qword, hexdump word, highlight, highlight add, highlight clear, highlight list, highlight remove, hijack-fd, ida-interact, is-syscall, ksymaddr, memory, memory list, memory reset, memory unwatch, memory watch, name-break, nop, patch, patch byte, patch dword, patch qword, patch string, patch word, pattern, pattern create, pattern search, pcustom, pcustom edit, pcustom list, pcustom show, pie, pie attach, pie breakpoint, pie delete, pie info, pie remote, pie run, print-format, process-search, process-status, registers, reset-cache, ropper, scan, search-pattern, set-permission, shellcode, shellcode get, shellcode search, stub, syscall-args, theme, trace-run, unicorn-emulate, version, vmmap, xfiles, xinfo, xor-memory, xor-memory display, xor-memory patch
+───────────────────────────── Last 10 GDB commands ─────────────────────────────
+  253  gef-remote 192.168.1.10:1234
+  254  b main
+  255  ni
+  256  x/2i $pc
+  257  file ~/routers/K3C/root/bin/sh
+  258  gef-remote 192.168.1.10:1234
+  259  b *0x77fe6284
+  260  gef config gef.debug 1
+  261  c
+  262  ni
+───────────────────────────── Runtime environment ──────────────────────────────
+* GDB: 9.2
+* Python: 3.8.10 - final
+* OS: Linux - 5.4.0-90-generic (x86_64)
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 20.04.3 LTS
+Release:	20.04
+Codename:	focal
+────────────────────────────────────────────────────────────────────────────────

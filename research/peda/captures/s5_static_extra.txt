@@ -1,0 +1,213 @@
+Script started on 2026-11-17 05:26:39+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./test_static" <not executed on terminal>]
+checksec
+Reading symbols from ./test_static...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x2aaaab2abd20 --> 0x1 
+RIP: 0x401780 (<_start>:	endbr64)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x0 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401777 <release_registered_frames+39>:	pop    rbp
+   0x401778 <release_registered_frames+40>:	ret
+   0x401779:	nop    DWORD PTR [rax+0x0]
+=> 0x401780 <_start>:	endbr64
+   0x401784 <_start+4>:	xor    ebp,ebp
+   0x401786 <_start+6>:	mov    r9,rdx
+   0x401789 <_start+9>:	pop    rsi
+   0x40178a <_start+10>:	mov    rdx,rsp
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abd20 --> 0x1 
+0008| 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0016| 0x2aaaab2abd30 --> 0x0 
+0024| 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+0032| 0x2aaaab2abd40 --> 0x2aaaab2abf08 ("PWD=/work")
+0040| 0x2aaaab2abd48 --> 0x2aaaab2abf12 ("HOME=/root")
+0048| 0x2aaaab2abd50 --> 0x2aaaab2abf1d --> 0x303d4c564c4853 ('SHLVL=0')
+0056| 0x2aaaab2abd58 --> 0x2aaaab2abf25 ("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGTRAP
+0x0000000000401780 in _start ()
+gdb-peda$ checksec
+CANARY    : ENABLED
+FORTIFY   : disabled
+NX        : ENABLED
+PIE       : disabled
+RELRO     : Partial
+gdb-peda$ break *0x4019f0
+Breakpoint 1 at 0x4019f0: file test.c, line 31.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0xd ('\r')
+RBX: 0x1 
+RCX: 0x4018a5 (<add>:	endbr64)
+RDX: 0x2a ('*')
+RSI: 0x7 
+RDI: 0x6 
+RBP: 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+RIP: 0x4019f0 (<main+156>:	mov    ecx,DWORD PTR [rbp-0x14])
+R8 : 0x4ac260 --> 0x4b5940 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+R13: 0x2aaaab2abd38 --> 0x2aaaab2abef2 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x212 (carry parity ADJUST zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4019e5 <main+145>:	mov    rdi,rax
+   0x4019e8 <main+148>:	call   0x4018d4 <compute>
+   0x4019ed <main+153>:	mov    DWORD PTR [rbp-0x14],eax
+=> 0x4019f0 <main+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x4019f3 <main+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x4019f7 <main+163>:	lea    rax,[rbp-0x60]
+   0x4019fb <main+167>:	mov    rsi,rax
+   0x4019fe <main+170>:	lea    rax,[rip+0x7f62d]        # 0x481032
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abba0 --> 0x2aaaab2abd28 --> 0x2aaaab2abee4 ("./test_static")
+0008| 0x2aaaab2abba8 --> 0x1004ac200 
+0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")
+0024| 0x2aaaab2abbb8 ("EDA highlighter!")
+0032| 0x2aaaab2abbc0 ("lighter!")
+0040| 0x2aaaab2abbc8 --> 0x0 
+0048| 0x2aaaab2abbd0 --> 0x0 
+0056| 0x2aaaab2abbd8 --> 0x0 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, main (argc=0x1, argv=0x2aaaab2abd28) at test.c:31
+31	    printf("%s %s %d\n", stackbuf, heap, r);
+gdb-peda$ context code 16
+[-------------------------------------code-------------------------------------]
+   0x4019d2 <main+126>:	call   0x4010d0
+   0x4019d7 <main+131>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x4019db <main+135>:	mov    edx,0x7
+   0x4019e0 <main+140>:	mov    esi,0x6
+   0x4019e5 <main+145>:	mov    rdi,rax
+   0x4019e8 <main+148>:	call   0x4018d4 <compute>
+   0x4019ed <main+153>:	mov    DWORD PTR [rbp-0x14],eax
+=> 0x4019f0 <main+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x4019f3 <main+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x4019f7 <main+163>:	lea    rax,[rbp-0x60]
+   0x4019fb <main+167>:	mov    rsi,rax
+   0x4019fe <main+170>:	lea    rax,[rip+0x7f62d]        # 0x481032
+   0x401a05 <main+177>:	mov    rdi,rax
+   0x401a08 <main+180>:	mov    eax,0x0
+   0x401a0d <main+185>:	call   0x404e90 <printf>
+   0x401a12 <main+190>:	cmp    DWORD PTR [rbp-0x64],0x1
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ pdisass main
+Dump of assembler code for function main:
+   0x0000000000401954 <+0>:	endbr64
+   0x0000000000401958 <+4>:	push   rbp
+   0x0000000000401959 <+5>:	mov    rbp,rsp
+   0x000000000040195c <+8>:	sub    rsp,0x70
+   0x0000000000401960 <+12>:	mov    DWORD PTR [rbp-0x64],edi
+   0x0000000000401963 <+15>:	mov    QWORD PTR [rbp-0x70],rsi
+   0x0000000000401967 <+19>:	cmp    DWORD PTR [rbp-0x64],0x2
+   0x000000000040196b <+23>:	jle    0x401976 <main+34>
+   0x000000000040196d <+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+   0x0000000000401974 <+32>:	jmp    0x40197d <main+41>
+   0x0000000000401976 <+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+   0x000000000040197d <+41>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000000000401981 <+45>:	mov    edi,0x40
+   0x0000000000401986 <+50>:	call   0x40f000 <malloc>
+   0x000000000040198b <+55>:	mov    QWORD PTR [rbp-0x10],rax
+   0x000000000040198f <+59>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x0000000000401993 <+63>:	movabs rsi,0x7274732070616568
+   0x000000000040199d <+73>:	movabs rdi,0x4141414120676e69
+   0x00000000004019a7 <+83>:	mov    QWORD PTR [rax],rsi
+   0x00000000004019aa <+86>:	mov    QWORD PTR [rax+0x8],rdi
+   0x00000000004019ae <+90>:	movabs rdx,0x42424242414141
+   0x00000000004019b8 <+100>:	mov    QWORD PTR [rax+0xd],rdx
+   0x00000000004019bc <+104>:	mov    rcx,QWORD PTR [rip+0xaa715]        # 0x4ac0d8 <greeting>
+   0x00000000004019c3 <+111>:	lea    rax,[rbp-0x60]
+   0x00000000004019c7 <+115>:	mov    edx,0x40
+   0x00000000004019cc <+120>:	mov    rsi,rcx
+   0x00000000004019cf <+123>:	mov    rdi,rax
+   0x00000000004019d2 <+126>:	call   0x4010d0
+   0x00000000004019d7 <+131>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x00000000004019db <+135>:	mov    edx,0x7
+   0x00000000004019e0 <+140>:	mov    esi,0x6
+   0x00000000004019e5 <+145>:	mov    rdi,rax
+   0x00000000004019e8 <+148>:	call   0x4018d4 <compute>
+   0x00000000004019ed <+153>:	mov    DWORD PTR [rbp-0x14],eax
+=> 0x00000000004019f0 <+156>:	mov    ecx,DWORD PTR [rbp-0x14]
+   0x00000000004019f3 <+159>:	mov    rdx,QWORD PTR [rbp-0x10]
+   0x00000000004019f7 <+163>:	lea    rax,[rbp-0x60]
+   0x00000000004019fb <+167>:	mov    rsi,rax
+   0x00000000004019fe <+170>:	lea    rax,[rip+0x7f62d]        # 0x481032
+   0x0000000000401a05 <+177>:	mov    rdi,rax
+   0x0000000000401a08 <+180>:	mov    eax,0x0
+   0x0000000000401a0d <+185>:	call   0x404e90 <printf>
+   0x0000000000401a12 <+190>:	cmp    DWORD PTR [rbp-0x64],0x1
+   0x0000000000401a16 <+194>:	jle    0x401a2b <main+215>
+   0x0000000000401a18 <+196>:	mov    rax,QWORD PTR [rbp-0x70]
+   0x0000000000401a1c <+200>:	add    rax,0x8
+   0x0000000000401a20 <+204>:	mov    rax,QWORD PTR [rax]
+   0x0000000000401a23 <+207>:	mov    rdi,rax
+   0x0000000000401a26 <+210>:	call   0x401913 <vuln>
+   0x0000000000401a2b <+215>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x0000000000401a2f <+219>:	mov    rdi,rax
+   0x0000000000401a32 <+222>:	call   0x40f6d0 <free>
+   0x0000000000401a37 <+227>:	mov    eax,0x0
+   0x0000000000401a3c <+232>:	leave
+   0x0000000000401a3d <+233>:	ret
+End of assembler dump.
+gdb-peda$ pdisass 0x401a0d 3
+Dump of assembler code from 0x401a0d to 0x3::	Dump of assembler code from 0x401a0d to 0x3:
+End of assembler dump.
+gdb-peda$ elfsymbol
+'plt symbols': no match found
+gdb-peda$ xrefs compute
+All references to 'compute':
+0x4019e8 <main+148>:	call   0x4018d4 <compute>
+gdb-peda$ eflags set CF
+gdb-peda$ eflags
+EFLAGS: 0x212 (carry parity ADJUST zero sign trap INTERRUPT direction overflow)
+gdb-peda$ p $eflags
+$1 = [ IOPL=0 IF AF ]
+gdb-peda$ dumprop 0x401000 0x401200
+Warning: this can be very slow, do not run for large memory range
+Writing ROP gadgets to file: test_static-rop.txt ...
+0x401017: add esp,0x8; ret
+0x401016: add rsp,0x8; ret
+0x401014: call rax; add rsp,0x8; ret
+0x401011: shl [rdx+rax*1-0x1],0xd0; add rsp,0x8; ret
+0x401012: je 0x401016 <_init+22>; call rax; add rsp,0x8; ret
+0x40100e: add [rax-0x7b],cl; shl [rdx+rax*1-0x1],0xd0; add rsp,0x8; ret
+0x401010: test eax,eax; je 0x401016 <_init+22>; call rax; add rsp,0x8; ret
+0x40100f: test rax,rax; je 0x401016 <_init+22>; call rax; add rsp,0x8; ret
+0x40100c: add [rax],al; add [rax-0x7b],cl; shl [rdx+rax*1-0x1],0xd0; add rsp,0x8; ret
+0x401009: mov eax,0x0; test rax,rax; je 0x401016 <_init+22>; call rax; add rsp,0x8; ret
+0x401008: mov rax,0x0; test rax,rax; je 0x401016 <_init+22>; call rax; add rsp,0x8; ret
+0x40100d: add [rax],al; test rax,rax; je 0x401016 <_init+22>; call rax; add rsp,0x8; ret
+gdb-peda$ quit
+
+Script done on 2026-11-17 05:27:08+00:00 [COMMAND_EXIT_CODE="0"]

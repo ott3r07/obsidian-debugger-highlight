@@ -1,0 +1,7 @@
+(gdb) run
+Starting program: [32m/work/test_arm64[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mmain[m ([36margc[m=1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:24
+24	[32mint[m [01mmain[m[31m([m[32mint[m argc[31m,[m [32mchar[m [31m**[margv[31m)[m [31m{[m

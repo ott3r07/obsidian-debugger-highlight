@@ -1,0 +1,5 @@
+(gdb) target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffff8674f550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2

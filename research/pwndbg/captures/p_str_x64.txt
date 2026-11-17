@@ -1,0 +1,2 @@
+pwndbg> p greeting
+$4 = 0x555555558004 "Hello, pwndbg!"

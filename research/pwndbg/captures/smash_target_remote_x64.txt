@@ -1,0 +1,56 @@
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffff88ec2550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffff896e1c70 ◂— 2
+ RIP  0xffff88ec2550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffff88ec2543    call   0xffff88eb1ce0              <0xffff88eb1ce0>
+ 
+   0xffff88ec2548    jmp    0xffff88ec23e2              <0xffff88ec23e2>
+ 
+   0xffff88ec254d    nop    dword ptr [rax]
+ ► 0xffff88ec2550    mov    rdi, rsp            RDI => 0xffff896e1c70 ◂— 2
+   0xffff88ec2553    call   0xffff88ec31e0              <0xffff88ec31e0>
+ 
+   0xffff88ec2558    mov    r12, rax
+   0xffff88ec255b    mov    r13, rsp
+   0xffff88ec255e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffff88ec2564    test   edx, 2
+   0xffff88ec256a  ? je     0xffff88ec257d              <0xffff88ec257d>
+ 
+   0xffff88ec256c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff896e1c70 ◂— 2
+01:0008│     0xffff896e1c78 —▸ 0xffff896e1e63 ◂— './test_x64'
+02:0010│     0xffff896e1c80 —▸ 0xffff896e1e6e ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+03:0018│     0xffff896e1c88 ◂— 0
+04:0020│     0xffff896e1c90 —▸ 0xffff896e1ed3 ◂— 'HOSTNAME=3e37fc6690d4'
+05:0028│     0xffff896e1c98 —▸ 0xffff896e1ee9 ◂— 'PWD=/work'
+06:0030│     0xffff896e1ca0 —▸ 0xffff896e1ef3 ◂— '_=/usr/local/bin/qemu-x86_64'
+07:0038│     0xffff896e1ca8 —▸ 0xffff896e1f10 ◂— 'LINES=50'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff88ec2550
+   1 0x2
+   2 0xffff896e1e63
+   3 0xffff896e1e6e
+   4 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,2 @@
+(gdb) p greeting
+$5 = 0x555555558004 "Hello, pwndbg!"

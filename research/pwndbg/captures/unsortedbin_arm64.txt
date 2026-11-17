@@ -1,0 +1,3 @@
+pwndbg> unsortedbin
+unsortedbin
+all:         0xaaaaaaac15c0 —▸ 0xfffff7fa0ab0 (main_arena+96) ◂— 0xaaaaaaac15c0

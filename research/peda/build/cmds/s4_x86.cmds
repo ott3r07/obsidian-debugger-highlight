@@ -1,0 +1,21 @@
+break vuln
+continue
+nextcall
+ni
+context code 12
+x/8wx $esp
+x/s $eax
+telescope 6
+hexdump $esp /3
+xinfo $esp
+xinfo register eax
+vmmap
+checksec
+continue
+#SLEEP 2
+pattern search
+#SLEEP 3
+pattern offset 0x41414641
+context
+info registers
+quit

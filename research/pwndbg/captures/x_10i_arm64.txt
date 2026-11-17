@@ -1,0 +1,11 @@
+pwndbg> x/10i $pc
+=> 0xaaaaaaaa0c44 <main+368>:	mov	w2, #0x7                   	// #7
+   0xaaaaaaaa0c48 <main+372>:	mov	w1, #0x6                   	// #6
+   0xaaaaaaaa0c4c <main+376>:	ldr	x0, [sp, #24]
+   0xaaaaaaaa0c50 <main+380>:	bl	0xaaaaaaaa09e8 <compute>
+   0xaaaaaaaa0c54 <main+384>:	str	w0, [sp, #20]
+   0xaaaaaaaa0c58 <main+388>:	adrp	x0, 0xaaaaaaaa0000
+   0xaaaaaaaa0c5c <main+392>:	add	x0, x0, #0x980
+   0xaaaaaaaa0c60 <main+396>:	str	x0, [sp, #24]
+   0xaaaaaaaa0c64 <main+400>:	mov	w2, #0x2                   	// #2
+   0xaaaaaaaa0c68 <main+404>:	ldr	w1, [sp, #20]

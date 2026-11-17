@@ -1,0 +1,28 @@
+# SOURCE: https://csc8.github.io/2023/04/06/qwarmup/
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+    0x564d47886000     0x564d47887000 r--p     1000 0      /home/chen/桌面/match/qw_s6/qwarmup/qwarmup
+    0x564d47887000     0x564d47888000 r-xp     1000 1000   /home/chen/桌面/match/qw_s6/qwarmup/qwarmup
+    0x564d47888000     0x564d47889000 r--p     1000 2000   /home/chen/桌面/match/qw_s6/qwarmup/qwarmup
+    0x564d47889000     0x564d4788a000 r--p     1000 2000   /home/chen/桌面/match/qw_s6/qwarmup/qwarmup
+    0x564d4788a000     0x564d47890000 rw-p     6000 3000   /home/chen/桌面/match/qw_s6/qwarmup/qwarmup
+    0x564d47d96000     0x564d47db7000 rw-p    21000 0      [heap]
+    
+    0x7fe747a6b000     0x7fe747b5f000 rw-p    f4000 0      [anon_7fe747a6b] --- heap_base+0x10
+    
+    0x7fe747b5f000     0x7fe747b8b000 r--p    2c000 0      /home/chen/桌面/match/qw_s6/qwarmup/libc.so.6
+    0x7fe747b8b000     0x7fe747cf8000 r-xp   16d000 2c000  /home/chen/桌面/match/qw_s6/qwarmup/libc.so.6
+    0x7fe747cf8000     0x7fe747d4e000 r--p    56000 199000 /home/chen/桌面/match/qw_s6/qwarmup/libc.so.6
+    0x7fe747d4e000     0x7fe747d51000 r--p     3000 1ee000 /home/chen/桌面/match/qw_s6/qwarmup/libc.so.6
+    0x7fe747d51000     0x7fe747d54000 rw-p     3000 1f1000 /home/chen/桌面/match/qw_s6/qwarmup/libc.so.6
+    
+    0x7fe747d54000     0x7fe747d63000 rw-p     f000 0      [anon_7fe747d54]
+    0x7fe747d63000     0x7fe747d65000 r--p     2000 0      /home/chen/桌面/match/qw_s6/qwarmup/ld-linux-x86-64.so.2
+    0x7fe747d65000     0x7fe747d8c000 r-xp    27000 2000   /home/chen/桌面/match/qw_s6/qwarmup/ld-linux-x86-64.so.2
+    0x7fe747d8c000     0x7fe747d98000 r--p     c000 29000  /home/chen/桌面/match/qw_s6/qwarmup/ld-linux-x86-64.so.2
+    0x7fe747d98000     0x7fe747d9a000 r--p     2000 34000  /home/chen/桌面/match/qw_s6/qwarmup/ld-linux-x86-64.so.2
+    0x7fe747d9a000     0x7fe747d9c000 rw-p     2000 36000  /home/chen/桌面/match/qw_s6/qwarmup/ld-linux-x86-64.so.2
+    0x7ffc99a12000     0x7ffc99a33000 rw-p    21000 0      [stack]
+    0x7ffc99a9f000     0x7ffc99aa3000 r--p     4000 0      [vvar]
+    0x7ffc99aa3000     0x7ffc99aa5000 r-xp     2000 0      [vdso]
+0xffffffffff600000 0xffffffffff601000 --xp     1000 0      [vsyscall]

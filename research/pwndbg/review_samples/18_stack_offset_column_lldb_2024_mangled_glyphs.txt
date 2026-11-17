@@ -1,0 +1,33 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/2578
+# DATE: 2024-11-27 (pwndbg-lldb)
+─────────────────────────────────────────────────────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]─────────────────────────────────────────────────────────────────────────────────────────
+   0x7ffff7e1e850 <execve>    endbr64
+   0x7ffff7e1e854 <execve>    mov    eax, 0x3b          EAX => 0x3b
+ _ 0x7ffff7e1e859 <execve>    syscall  <SYS_execve>
+        path: 0x402007 __ '/bin/ls'
+        argv: 0x7fffffffb6b0 __ 0x402004 __ 0x746f6f722f00736c /* 'ls' */
+        envp: 0x7fffffffb6a8 __ 0
+   0x7ffff7e1e85b <execve>    cmp    rax, -0xfff
+   0x7ffff7e1e861 <execve>    jae    execve                      <execve>
+
+   0x7ffff7e1e863 <execve>    ret
+
+   0x7ffff7e1e864 <execve>    mov    rcx, qword ptr [rip + 0x10d585]     RCX, [_GLOBAL_OFFSET_TABLE_] => 0xffffffffffffff88
+   0x7ffff7e1e86b <execve>    neg    eax
+   0x7ffff7e1e86d <execve>    mov    dword ptr fs:[rcx], eax
+   0x7ffff7e1e870 <execve>    or     rax, 0xffffffffffffffff
+   0x7ffff7e1e874 <execve>    ret
+──────────────────────────────────────────────────────────────────────────────────────────────────────[ STACK ]───────────────────────────────────────────────────────────────────────────────────────────────────────
+00:0000│ rsp 0x7fffffffb698 __ 0x401182 (main) __ mov eax, 0
+01:0008│-030 0x7fffffffb6a0 __ 0
+02:0010│ rdx 0x7fffffffb6a8 __ 0
+03:0018│ rsi 0x7fffffffb6b0 __ 0x402004 __ 0x746f6f722f00736c /* 'ls' */
+04:0020│-018 0x7fffffffb6b8 __ 0
+05:0028│-010 0x7fffffffb6c0 __ 0x7fffffffb7a0 __ 0
+06:0030│-008 0x7fffffffb6c8 __ 0xf07feb98cfa9b00
+07:0038│ rbp 0x7fffffffb6d0 __ 1
+────────────────────────────────────────────────────────────────────────────────────────────────────[ BACKTRACE ]─────────────────────────────────────────────────────────────────────────────────────────────────────
+ _ 0   0x7ffff7e1e859 execve
+   1         0x401182 main
+   2   0x7ffff7d6c27e __libc_start_call_main
+   3   0x7ffff7d6c339 __libc_start_main@@GLIBC_2.34

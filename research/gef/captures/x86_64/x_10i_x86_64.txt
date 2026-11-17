@@ -1,0 +1,11 @@
+(qemu) gef➤  x/10i $pc
+=> 0x401951 <main+43>:	lea    rax,[rip+0xffffffffffffff0d]        # 0x401865 <add>
+   0x401958 <main+50>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x40195f <main+57>:	lea    rax,[rbp-0x40]
+   0x401963 <main+61>:	movabs rsi,0x4141414141414141
+   0x40196d <main+71>:	movabs rdi,0x4242424242424242
+   0x401977 <main+81>:	mov    QWORD PTR [rax],rsi
+   0x40197a <main+84>:	mov    QWORD PTR [rax+0x8],rdi
+   0x40197e <main+88>:	movabs rsi,0x4342424242424242
+   0x401988 <main+98>:	movabs rdi,0x43434343434343
+   0x401992 <main+108>:	mov    QWORD PTR [rax+0x9],rsi

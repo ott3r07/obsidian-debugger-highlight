@@ -1,0 +1,26 @@
+Reading symbols from ./test_arm64...
+(gdb) break test.c:38
+Breakpoint 1 at 0xc44: file test.c, line 38.
+(gdb) run
+Starting program: /work/test_arm64 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=1, argv=0xfffffffffcc8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+(gdb) set var fp = 0
+(gdb) continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000000000 in ?? ()
+(gdb) bt
+#0  0x0000000000000000 in ?? ()
+#1  0x0000aaaaaaaa0a24 in compute (f=0x0, x=6, y=7) at test.c:14
+#2  0x0000aaaaaaaa0c54 in main (argc=1, argv=0xfffffffffcc8) at test.c:38
+(gdb) x/i $pc
+=> 0x0:	Cannot access memory at address 0x0
+(gdb) kill
+Kill the program being debugged? (y or n) y
+[Inferior 1 (process 1086) killed]
+(gdb) 

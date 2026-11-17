@@ -1,0 +1,8 @@
+pwndbg> tls
+Thread Local Storage (TLS) base: 0xfffff7ff8620
+TLS is located at:
+    0xfffff7ff7000     0xfffff7ff9000 rw-p     2000       0 [anon_fffff7ff7]
+Dumping the address:
+tcbhead_t @ 0xfffff7ff8620
+    0x0000fffff7ff8620 +0x0000 dtv                  : 0xfffff7ff8d70
+    0x0000fffff7ff8628 +0x0008 private              : 0x0

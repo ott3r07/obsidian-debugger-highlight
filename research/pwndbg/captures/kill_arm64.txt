@@ -1,0 +1,2 @@
+pwndbg> kill
+[Inferior 1 (process 713) killed]

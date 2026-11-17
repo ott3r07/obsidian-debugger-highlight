@@ -1,0 +1,27 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mxinfo $sp
+[?2004l[90m─────────────────────────────────────────── [0m[36mxinfo: 0x2aaaab2abba0[0m[90m ───────────────────────────────────────────[0m
+Page: 0x00002aaaaaaac000  →  0x00002aaaab2ac000 (size=0x800000)
+Permissions: rw-
+Pathname: [stack]
+Offset (from page): 0x7ffba0
+Inode: 0
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mxinfo $pc
+[?2004l[90m────────────────────────────────────────────── [0m[36mxinfo: 0x401951[0m[90m ──────────────────────────────────────────────[0m
+Page: 0x0000000000401000  →  0x000000000047f000 (size=0x7e000)
+Permissions: r-x
+Pathname: /work/test_x64
+Offset (from page): 0x951
+Inode: 0
+Segment: .text (0x0000000000401180-0x000000000047e900)
+Offset (from segment): 0x7d1
+Symbol: main+43
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mxinfo &global_buf
+[?2004l[90m────────────────────────────────────────────── [0m[36mxinfo: 0x4aa0e0[0m[90m ──────────────────────────────────────────────[0m
+Page: 0x00000000004a5000  →  0x00000000004ac000 (size=0x7000)
+Permissions: rw-
+Pathname: /work/test_x64
+Offset (from page): 0x50e0
+Inode: 0
+Segment: .data (0x00000000004aa0c0-0x00000000004abaf0)
+Offset (from segment): 0x20
+Symbol: global_buf

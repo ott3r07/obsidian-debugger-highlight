@@ -1,0 +1,12 @@
+[32m[1mpwndbg> [0m[32m[0mbins
+[34mtcachebins[0m
+[33m0x30[0m[33m [  7][0m:  [34m0xaaaaaaac13c0[0m —▸ [34m0xaaaaaaac1390[0m —▸ [34m0xaaaaaaac1360[0m —▸ [34m0xaaaaaaac1330[0m —▸ [34m0xaaaaaaac1300[0m —▸ [34m0xaaaaaaac12d0[0m —▸ [34m0xaaaaaaac12a0[0m ◂— 0
+[33m0x90[0m[33m [  1][0m:  [34m0xaaaaaaac1420[0m ◂— 0
+[34mfastbins[0m
+[33m0x30[0m:        [34m0xaaaaaaac13e0[0m ◂— 0
+[34munsortedbin[0m
+[33mall[0m:         [34m0xaaaaaaac15c0[0m —▸ [35m0xfffff7fa0ab0 (main_arena+96)[0m ◂— [34m0xaaaaaaac15c0[0m
+[34msmallbins[0m
+[33mempty[0m
+[34mlargebins[0m
+[33mempty[0m

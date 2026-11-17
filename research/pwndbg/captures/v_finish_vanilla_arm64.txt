@@ -1,0 +1,5 @@
+(gdb) finish
+Run till exit from #0  compute (f=0xaaaaaaaa0918 <add>, x=6, y=7) at test.c:13
+0x0000aaaaaaaa0c54 in main (argc=1, argv=0xfffffffffcc8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+Value returned is $10 = 13

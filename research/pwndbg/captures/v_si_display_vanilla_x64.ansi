@@ -1,0 +1,4 @@
+(gdb) si
+[34m0x000055555555734c[m	30	    [01mstrcpy[m[31m([mstackbuf[31m,[m [31m"AAAAAAAABBBBBBBBCCCCCCCC"[m[31m);[m
+1: x/i $pc
+=> [34m0x55555555734c[m <[33mmain[m+81>:	[32mmov    [m[31m%rsi[m,([31m%rax[m)

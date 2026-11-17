@@ -1,0 +1,75 @@
+[?2004h[1;31mgef➤  [0mrun
+[?2004lStarting program: [32m/t/t2[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+bins ready
+
+Breakpoint 1, [33m__printf[m ([36mformat[m=0xfffffffffb68 "%p %p %p\n") at [32m./stdio-common/printf.c[m:28
+warning: 28	[32m./stdio-common/printf.c[m: No such file or directory
+[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [35m0x0000fffffffffb68[0m  →  [33m"%p %p %p\n"[0m
+[1m[31m$x1  [0m: [31m0x0000aaaaaaaa0b08[0m  →  [33m"%p %p %p\n"[0m
+[1m[31m$x2  [0m: [31m0x0000aaaaaaaa0b10[0m  →  0x3b031b010000000a ("[33m\n[0m"?)
+[1m[31m$x3  [0m: 0x1               
+[1m[31m$x4  [0m: 0x9               
+[1m[31m$x5  [0m: 0x2               
+[1m[31m$x6  [0m: 0x7025207025207025 ("[33m%p %p %p[0m"?)
+[1m[31m$x7  [0m: 0xa702520702520   
+[1m[31m$x8  [0m: 0x40              
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffc0  →  [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0aa0[0m  →  [90m<main+0148> mov w0,  #0x0                   	// #0[0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xfffff7e40584                  nop    [0m
+   [90m0xfffff7e40588                  nop    [0m
+   [90m0xfffff7e4058c                  nop    [0m
+[31m●[0m[32m→ 0xfffff7e40590 <printf+0000>    sub    sp,  sp,  #0x120[0m
+   0xfffff7e40594 <printf+0004>    mov    w12,  #0xffffffc8            	// #-56
+   0xfffff7e40598 <printf+0008>    adrp   x9,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e4059c <printf+000c>    ldr    x9,  [x9,  #3720]
+   0xfffff7e405a0 <printf+0010>    add    x13,  sp,  #0xe0
+   0xfffff7e405a4 <printf+0014>    stp    x29,  x30,  [sp,  #80]
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xfffff7e40590[0m in [1m[33m__printf[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xfffff7e40590 → [32m__printf[0m([33mformat[0m=0xfffffffffb68 "%p %p %p\n")
+[[1m[35m#1[0m] 0xaaaaaaaa0aa0 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mextra[0m[90m ────[0m
+[1m[33m[*][0m [33m[1mFormat string helper[0m
+Possible insecure format string: printf('$x0'  →  0xfffffffffb68: '%p %p %p\n')
+Reason: Call to 'printf()' with format string argument in position #0 is in page 0xfffffffdf000 ([stack]) that has write permission
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

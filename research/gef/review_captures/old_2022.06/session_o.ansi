@@ -1,0 +1,421 @@
+Reading symbols from [32m/t/t2[m...
+[32mGEF[0m for linux ready, type `[4m[33mgef[24m[0m' to start, `[4m[35mgef config[24m[0m' to configure
+[1m[32m90[0m commands loaded and [1m[34m5[0m functions added for GDB [1m[33m15.1[0m in 1.96ms using Python engine [1m[31m3.12[0m
+[?2004h[1;31mgef➤  [0mbreak puts
+[?2004lBreakpoint 1 at [34m0x7f0[m
+[?2004h[1;31mgef➤  [0mrun
+[?2004lStarting program: [32m/t/t2[m 
+[1m[33m[*][0m Failed to find objfile or not a valid file format: [Errno 2] No such file or directory: 'system-supplied DSO at 0xfffff7ffb000'
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33m__GI__IO_puts[m ([36mstr[m=0xaaaaaaaa0af8 "bins ready") at [32m./libio/ioputs.c[m:35
+warning: 35	[32m./libio/ioputs.c[m: No such file or directory
+[H[2J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[1;38;5;240m ────[0m
+[1m[31m$x0  [0m: 0xaaaa0af8
+[1m[31m$x1  [0m: 0xaaac2400
+[1m[31m$x2  [0m: 0x1011    
+[34m$x3  [0m: 0x0       
+[1m[31m$x4  [0m: 0xf7ff8620
+[34m$x5  [0m: 0x0       
+[1m[31m$x6  [0m: 0xfffffff0
+[1m[31m$x7  [0m: 0x4       
+[34m$x8  [0m: 0x0       
+[1m[31m$x9  [0m: 0x10000   
+[1m[31m$x10 [0m: 0x1ccef0  
+[34m$x11 [0m: 0x0       
+[1m[31m$x12 [0m: 0xf7ffeb48
+[1m[31m$x13 [0m: 0x2f      
+[1m[31m$x14 [0m: 0x1f22b4b 
+[1m[31m$x15 [0m: 0xf7ff8e70
+[1m[31m$x16 [0m: 0xaaabffa8
+[1m[31m$x17 [0m: 0xf7e619d0
+[1m[31m$x18 [0m: 0x3       
+[1m[31m$x19 [0m: 0xfffffd38
+[1m[31m$x20 [0m: 0x1       
+[1m[31m$x21 [0m: 0xaaabfd58
+[1m[31m$x22 [0m: 0xaaaa0958
+[1m[31m$x23 [0m: 0xfffffd48
+[1m[31m$x24 [0m: 0xf7ffdb58
+[34m$x25 [0m: 0x0       
+[1m[31m$x26 [0m: 0xf7ffe000
+[1m[31m$x27 [0m: 0xaaabfd58
+[34m$x28 [0m: 0x0       
+[1m[31m$x29 [0m: 0xfffffbb0
+[1m[31m$x30 [0m: 0xaaaa0a68
+[1m[31m$sp  [0m: 0xfffffae0
+[1m[31m$pc  [0m: 0xf7e619d0
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt fast]
+[34m$fpsr[0m: 0x0       
+[34m$fpcr[0m: 0x0       
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[1;38;5;240m ────[0m
+[36m0xfffffae0[0m│+0x0000:           
+[36m0xfffffae4[0m│+0x0004:           
+[36m0xfffffae8[0m│+0x0008:           
+[36m0xfffffaec[0m│+0x000c:           
+[36m0xfffffaf0[0m│+0x0010:           
+[36m0xfffffaf4[0m│+0x0014:           
+[36m0xfffffaf8[0m│+0x0018:           
+[36m0xfffffafc[0m│+0x001c:           
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[1;38;5;240m ────[0m
+   [1;38;5;240m0xfffff7e619c4 <_IO_proc_close+596> str    x25,  [sp,  #112][0m
+   [1;38;5;240m0xfffff7e619c8 <_IO_proc_close+600> bl     0xfffff7ee9250 <__stack_chk_fail>[0m
+   [1;38;5;240m0xfffff7e619cc                  nop    [0m
+ [32m→ 0xfffff7e619d0 <puts+0>         stp    x29,  x30,  [sp,  #-64]![0m
+   0xfffff7e619d4 <puts+4>         mov    x29,  sp
+   0xfffff7e619d8 <puts+8>         stp    x21,  x22,  [sp,  #32]
+   0xfffff7e619dc <puts+12>        mov    x21,  x0
+   0xfffff7e619e0 <puts+16>        adrp   x22,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e619e4 <puts+20>        ldr    x22,  [x22,  #3600]
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xfffff7e619d0[0m in [1m[33m__GI__IO_puts[0m (), reason: [1m[35mBREAKPOINT[0m
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[35m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[1;38;5;240m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mup
+[?2004l#1  [34m0x0000aaaaaaaa0a68[m in [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffd38) at [32m/rv/t2.c[m:15
+15	    [01mputs[m[31m([m[31m"bins ready"[m[31m);[m
+[?2004h[1;32mgef➤  [0mheap chunks
+[?2004l[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1008, size=0x0, flags=[32m[1m! PREV_INUSE[0m)
+    [0xaaaaaaac1008     [33m91[0m [33m02[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m [1;38;5;240m00[0m    ................]
+[?2004h[1;32mgef➤  [0mheap bins
+[?2004l[1;38;5;240m────────────────────────────────────────── [0m[36mTcachebins for thread 1[0m[1;38;5;240m ──────────────────────────────────────────[0m
+Tcachebins[idx=1, size=0x18, count=0] ←  [Corrupted chunk at 0xaaac18a0]
+Tcachebins[idx=1, size=0x18, count=0] ←  [Corrupted chunk at 0xaaaa]
+[1;38;5;240m──────────────────────────────────── [0m[36mFastbins for arena at 0xfffff7fa0a50[0m[1;38;5;240m ────────────────────────────────────[0m
+Fastbins[idx=0, size=0x10] 0x00
+Fastbins[idx=1, size=0x18] 0x00
+Fastbins[idx=2, size=0x20] 0x00
+Fastbins[idx=3, size=0x28] 0x00
+Fastbins[idx=4, size=0x30] 0x00
+Fastbins[idx=5, size=0x38] 0x00
+Fastbins[idx=6, size=0x40] 0x00
+[1;38;5;240m────────────────────────────────── [0m[36mUnsorted Bin for arena at 0xfffff7fa0a50[0m[1;38;5;240m ──────────────────────────────────[0m
+[1m[32m[+][0m unsorted_bins[0]: fw=0xfffff7fa0ab0, bk=0xfffff7fa0ab0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ab8, size=0xaaa8, flags=[32m[1m! PREV_INUSE[0m|[31m[1mIS_MMAPPED[0m)
+[1m[34m[+][0m Found 1 chunks in unsorted bin.
+[1;38;5;240m─────────────────────────────────── [0m[36mSmall Bins for arena at 0xfffff7fa0a50[0m[1;38;5;240m ───────────────────────────────────[0m
+[1m[32m[+][0m small_bins[1]: fw=0xfffff7fa0ac0, bk=0xfffff7fa0ac0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ac8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[2]: fw=0xfffff7fa0ad0, bk=0xfffff7fa0ad0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ad8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[3]: fw=0xfffff7fa0ae0, bk=0xfffff7fa0ae0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ae8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[4]: fw=0xfffff7fa0af0, bk=0xfffff7fa0af0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0af8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[5]: fw=0xfffff7fa0b00, bk=0xfffff7fa0b00
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b08, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[6]: fw=0xfffff7fa0b10, bk=0xfffff7fa0b10
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b18, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[7]: fw=0xfffff7fa0b20, bk=0xfffff7fa0b20
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b28, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[8]: fw=0xfffff7fa0b30, bk=0xfffff7fa0b30
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b38, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[9]: fw=0xfffff7fa0b40, bk=0xfffff7fa0b40
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b48, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[10]: fw=0xfffff7fa0b50, bk=0xfffff7fa0b50
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b58, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[11]: fw=0xfffff7fa0b60, bk=0xfffff7fa0b60
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b68, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[12]: fw=0xfffff7fa0b70, bk=0xfffff7fa0b70
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b78, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[13]: fw=0xfffff7fa0b80, bk=0xfffff7fa0b80
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b88, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[14]: fw=0xfffff7fa0b90, bk=0xfffff7fa0b90
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0b98, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1ab8, size=0x0, flags=[32m[1m! PREV_INUSE[0m)
+[1m[32m[+][0m small_bins[16]: fw=0xfffff7fa0bb0, bk=0xfffff7fa0bb0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0bb8, size=0xaaa8, flags=[32m[1m! PREV_INUSE[0m|[31m[1mIS_MMAPPED[0m)
+[1m[32m[+][0m small_bins[17]: fw=0xfffff7fa0bc0, bk=0xfffff7fa0bc0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0bc8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[18]: fw=0xfffff7fa0bd0, bk=0xfffff7fa0bd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0bd8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[19]: fw=0xfffff7fa0be0, bk=0xfffff7fa0be0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0be8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[20]: fw=0xfffff7fa0bf0, bk=0xfffff7fa0bf0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0bf8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[21]: fw=0xfffff7fa0c00, bk=0xfffff7fa0c00
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c08, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[22]: fw=0xfffff7fa0c10, bk=0xfffff7fa0c10
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c18, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[23]: fw=0xfffff7fa0c20, bk=0xfffff7fa0c20
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c28, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[24]: fw=0xfffff7fa0c30, bk=0xfffff7fa0c30
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c38, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[25]: fw=0xfffff7fa0c40, bk=0xfffff7fa0c40
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c48, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[26]: fw=0xfffff7fa0c50, bk=0xfffff7fa0c50
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c58, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[27]: fw=0xfffff7fa0c60, bk=0xfffff7fa0c60
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c68, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[28]: fw=0xfffff7fa0c70, bk=0xfffff7fa0c70
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c78, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[29]: fw=0xfffff7fa0c80, bk=0xfffff7fa0c80
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c88, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[30]: fw=0xfffff7fa0c90, bk=0xfffff7fa0c90
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0c98, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[31]: fw=0xfffff7fa0ca0, bk=0xfffff7fa0ca0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ca8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[32]: fw=0xfffff7fa0cb0, bk=0xfffff7fa0cb0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0cb8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[33]: fw=0xfffff7fa0cc0, bk=0xfffff7fa0cc0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0cc8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[34]: fw=0xfffff7fa0cd0, bk=0xfffff7fa0cd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0cd8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[35]: fw=0xfffff7fa0ce0, bk=0xfffff7fa0ce0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ce8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[36]: fw=0xfffff7fa0cf0, bk=0xfffff7fa0cf0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0cf8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[37]: fw=0xfffff7fa0d00, bk=0xfffff7fa0d00
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d08, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[38]: fw=0xfffff7fa0d10, bk=0xfffff7fa0d10
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d18, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[39]: fw=0xfffff7fa0d20, bk=0xfffff7fa0d20
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d28, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[40]: fw=0xfffff7fa0d30, bk=0xfffff7fa0d30
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d38, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[41]: fw=0xfffff7fa0d40, bk=0xfffff7fa0d40
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d48, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[42]: fw=0xfffff7fa0d50, bk=0xfffff7fa0d50
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d58, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[43]: fw=0xfffff7fa0d60, bk=0xfffff7fa0d60
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d68, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[44]: fw=0xfffff7fa0d70, bk=0xfffff7fa0d70
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d78, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[45]: fw=0xfffff7fa0d80, bk=0xfffff7fa0d80
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d88, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[46]: fw=0xfffff7fa0d90, bk=0xfffff7fa0d90
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0d98, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[47]: fw=0xfffff7fa0da0, bk=0xfffff7fa0da0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0da8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[48]: fw=0xfffff7fa0db0, bk=0xfffff7fa0db0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0db8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[49]: fw=0xfffff7fa0dc0, bk=0xfffff7fa0dc0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0dc8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[50]: fw=0xfffff7fa0dd0, bk=0xfffff7fa0dd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0dd8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[51]: fw=0xfffff7fa0de0, bk=0xfffff7fa0de0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0de8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[52]: fw=0xfffff7fa0df0, bk=0xfffff7fa0df0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0df8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[53]: fw=0xfffff7fa0e00, bk=0xfffff7fa0e00
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e08, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[54]: fw=0xfffff7fa0e10, bk=0xfffff7fa0e10
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e18, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[55]: fw=0xfffff7fa0e20, bk=0xfffff7fa0e20
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e28, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[56]: fw=0xfffff7fa0e30, bk=0xfffff7fa0e30
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e38, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[57]: fw=0xfffff7fa0e40, bk=0xfffff7fa0e40
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e48, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[58]: fw=0xfffff7fa0e50, bk=0xfffff7fa0e50
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e58, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[59]: fw=0xfffff7fa0e60, bk=0xfffff7fa0e60
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e68, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[60]: fw=0xfffff7fa0e70, bk=0xfffff7fa0e70
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e78, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[61]: fw=0xfffff7fa0e80, bk=0xfffff7fa0e80
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e88, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m small_bins[62]: fw=0xfffff7fa0e90, bk=0xfffff7fa0e90
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0e98, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 62 chunks in 62 small non-empty bins.
+[1;38;5;240m─────────────────────────────────── [0m[36mLarge Bins for arena at 0xfffff7fa0a50[0m[1;38;5;240m ───────────────────────────────────[0m
+[1m[32m[+][0m large_bins[63]: fw=0xfffff7fa0ea0, bk=0xfffff7fa0ea0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ea8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[64]: fw=0xfffff7fa0eb0, bk=0xfffff7fa0eb0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0eb8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[65]: fw=0xfffff7fa0ec0, bk=0xfffff7fa0ec0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ec8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[66]: fw=0xfffff7fa0ed0, bk=0xfffff7fa0ed0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ed8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[67]: fw=0xfffff7fa0ee0, bk=0xfffff7fa0ee0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ee8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[68]: fw=0xfffff7fa0ef0, bk=0xfffff7fa0ef0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ef8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[69]: fw=0xfffff7fa0f00, bk=0xfffff7fa0f00
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f08, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[70]: fw=0xfffff7fa0f10, bk=0xfffff7fa0f10
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f18, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[71]: fw=0xfffff7fa0f20, bk=0xfffff7fa0f20
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f28, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[72]: fw=0xfffff7fa0f30, bk=0xfffff7fa0f30
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f38, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[73]: fw=0xfffff7fa0f40, bk=0xfffff7fa0f40
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f48, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[74]: fw=0xfffff7fa0f50, bk=0xfffff7fa0f50
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f58, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[75]: fw=0xfffff7fa0f60, bk=0xfffff7fa0f60
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f68, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[76]: fw=0xfffff7fa0f70, bk=0xfffff7fa0f70
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f78, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[77]: fw=0xfffff7fa0f80, bk=0xfffff7fa0f80
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f88, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[78]: fw=0xfffff7fa0f90, bk=0xfffff7fa0f90
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0f98, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1bd8, size=0x0, flags=[32m[1m! PREV_INUSE[0m)
+[1m[32m[+][0m large_bins[80]: fw=0xfffff7fa0fb0, bk=0xfffff7fa0fb0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0fb8, size=0xaaa8, flags=[32m[1m! PREV_INUSE[0m|[31m[1mIS_MMAPPED[0m)
+[1m[32m[+][0m large_bins[81]: fw=0xfffff7fa0fc0, bk=0xfffff7fa0fc0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0fc8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[82]: fw=0xfffff7fa0fd0, bk=0xfffff7fa0fd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0fd8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[83]: fw=0xfffff7fa0fe0, bk=0xfffff7fa0fe0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0fe8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[84]: fw=0xfffff7fa0ff0, bk=0xfffff7fa0ff0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa0ff8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[85]: fw=0xfffff7fa1000, bk=0xfffff7fa1000
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1008, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[86]: fw=0xfffff7fa1010, bk=0xfffff7fa1010
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1018, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[87]: fw=0xfffff7fa1020, bk=0xfffff7fa1020
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1028, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[88]: fw=0xfffff7fa1030, bk=0xfffff7fa1030
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1038, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[89]: fw=0xfffff7fa1040, bk=0xfffff7fa1040
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1048, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[90]: fw=0xfffff7fa1050, bk=0xfffff7fa1050
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1058, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[91]: fw=0xfffff7fa1060, bk=0xfffff7fa1060
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1068, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[92]: fw=0xfffff7fa1070, bk=0xfffff7fa1070
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1078, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[93]: fw=0xfffff7fa1080, bk=0xfffff7fa1080
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1088, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[94]: fw=0xfffff7fa1090, bk=0xfffff7fa1090
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1098, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[95]: fw=0xfffff7fa10a0, bk=0xfffff7fa10a0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa10a8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[96]: fw=0xfffff7fa10b0, bk=0xfffff7fa10b0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa10b8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[97]: fw=0xfffff7fa10c0, bk=0xfffff7fa10c0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa10c8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[98]: fw=0xfffff7fa10d0, bk=0xfffff7fa10d0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa10d8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[99]: fw=0xfffff7fa10e0, bk=0xfffff7fa10e0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa10e8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[100]: fw=0xfffff7fa10f0, bk=0xfffff7fa10f0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa10f8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[101]: fw=0xfffff7fa1100, bk=0xfffff7fa1100
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1108, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[102]: fw=0xfffff7fa1110, bk=0xfffff7fa1110
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1118, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[103]: fw=0xfffff7fa1120, bk=0xfffff7fa1120
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1128, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[104]: fw=0xfffff7fa1130, bk=0xfffff7fa1130
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1138, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[105]: fw=0xfffff7fa1140, bk=0xfffff7fa1140
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1148, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[106]: fw=0xfffff7fa1150, bk=0xfffff7fa1150
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1158, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[107]: fw=0xfffff7fa1160, bk=0xfffff7fa1160
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1168, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[108]: fw=0xfffff7fa1170, bk=0xfffff7fa1170
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1178, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[109]: fw=0xfffff7fa1180, bk=0xfffff7fa1180
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1188, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[110]: fw=0xfffff7fa1190, bk=0xfffff7fa1190
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1198, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[111]: fw=0xfffff7fa11a0, bk=0xfffff7fa11a0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa11a8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[112]: fw=0xfffff7fa11b0, bk=0xfffff7fa11b0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa11b8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[113]: fw=0xfffff7fa11c0, bk=0xfffff7fa11c0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa11c8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[114]: fw=0xfffff7fa11d0, bk=0xfffff7fa11d0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa11d8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[115]: fw=0xfffff7fa11e0, bk=0xfffff7fa11e0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa11e8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[116]: fw=0xfffff7fa11f0, bk=0xfffff7fa11f0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa11f8, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[117]: fw=0xfffff7fa1200, bk=0xfffff7fa1200
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1208, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[118]: fw=0xfffff7fa1210, bk=0xfffff7fa1210
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1218, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[119]: fw=0xfffff7fa1220, bk=0xfffff7fa1220
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1228, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[120]: fw=0xfffff7fa1230, bk=0xfffff7fa1230
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1238, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[121]: fw=0xfffff7fa1240, bk=0xfffff7fa1240
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1248, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[122]: fw=0xfffff7fa1250, bk=0xfffff7fa1250
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1258, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[123]: fw=0xfffff7fa1260, bk=0xfffff7fa1260
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1268, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[124]: fw=0xfffff7fa1270, bk=0xfffff7fa1270
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1278, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[32m[+][0m large_bins[125]: fw=0xfffff7fa1280, bk=0xfffff7fa1280
+ →   [33m[1m[4mChunk[24m[0m(addr=0xfffff7fa1288, size=0xfff8, flags=[31m[1mPREV_INUSE[0m|[31m[1mIS_MMAPPED[0m|[31m[1mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 63 chunks in 63 large non-empty bins.
+[?2004h[1;32mgef➤  [0mheap chunk s1
+[?2004l[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac19a0, size=0x0, flags=[32m[1m! PREV_INUSE[0m)
+Chunk size: 0 (0x0)
+Usable size: 0 (0x0)
+Previous chunk size: 257 (0x101)
+PREV_INUSE flag: [31mOff[0m
+IS_MMAPPED flag: [31mOff[0m
+NON_MAIN_ARENA flag: [31mOff[0m
+
+Forward pointer: 0xf7fa0ba0
+Backward pointer: 0xffff
+
+[?2004h[1;32mgef➤  [0mchecksec
+[?2004l[1m[34m[+][0m checksec for '/t/t2'
+[1m[33m[*][0m gef-2022.06.py:L8764 'checksec' is deprecated and will be removed in a feature release. Use Elf(fname).checksec()
+Canary                        : [32m[1m✓ [0m[0m(value: 0x761ae200)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [32m[1m✓ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [32mFull[0m
+[?2004h[1;32mgef➤  [0mgot
+[?2004l[1m[33m[*][0m gef-2022.06.py:L8817 'checksec' is deprecated and will be removed in a feature release. Use Elf(fname).checksec()
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabff78] [32m__libc_start_main@GLIBC_2.34  →  0xf7e18500[0m
+[0xaaaaaaabff80] [32m__cxa_finalize@GLIBC_2.17  →  0xf7e2eb50[0m
+[0xaaaaaaabff88] [32mmalloc@GLIBC_2.17  →  0xf7e86470[0m
+[0xaaaaaaabff90] [32m__stack_chk_fail@GLIBC_2.17  →  0xf7ee9250[0m
+[0xaaaaaaabff98] [32m__gmon_start__  →  0x0[0m
+[0xaaaaaaabffa0] [32mabort@GLIBC_2.17  →  0xf7e17d0c[0m
+[0xaaaaaaabffa8] [32mputs@GLIBC_2.17  →  0xf7e619d0[0m
+[0xaaaaaaabffb0] [32mfree@GLIBC_2.17  →  0xf7e86d70[0m
+[0xaaaaaaabffb8] [32mstrcpy@GLIBC_2.17  →  0xf7e8d240[0m
+[0xaaaaaaabffc0] [32mprintf@GLIBC_2.17  →  0xf7e40590[0m
+[?2004h[1;32mgef➤  [0mvmmap
+[?2004l[ Legend:  [31mCode[0m | [32mHeap[0m | [35mStack[0m ]
+[34mStart      End        Offset     Perm Path[0m
+[31m0xaaaa0000[0m [31m0xaaaa1000[0m [31m0x000000[0m [31mr-x[0m [31m/t/t2[0m
+0xaaabf000[0m 0xaaac0000[0m 0x00f000[0m r--[0m /t/t2[0m
+0xaaac0000[0m 0xaaac1000[0m 0x010000[0m rw-[0m /t/t2[0m
+[32m0xaaac1000[0m [32m0xaaae2000[0m [32m0x000000[0m [32mrw-[0m [32m[heap][0m
+[31m0xf7df0000[0m [31m0xf7f8a000[0m [31m0x000000[0m [31mr-x[0m [31m/usr/lib/aarch64-linux-gnu/libc.so.6[0m
+0xf7f8a000[0m 0xf7f9d000[0m 0x19a000[0m ---[0m /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+0xf7f9d000[0m 0xf7fa0000[0m 0x19d000[0m r--[0m /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+0xf7fa0000[0m 0xf7fa2000[0m 0x1a0000[0m rw-[0m /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+0xf7fa2000[0m 0xf7fae000[0m 0x000000[0m rw-[0m [0m
+[31m0xf7fbe000[0m [31m0xf7fe5000[0m [31m0x000000[0m [31mr-x[0m [31m/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1[0m
+0xf7ff7000[0m 0xf7ff9000[0m 0x000000[0m rw-[0m [0m
+0xf7ff9000[0m 0xf7ffb000[0m 0x000000[0m r--[0m [vvar][0m
+[31m0xf7ffb000[0m [31m0xf7ffc000[0m [31m0x000000[0m [31mr-x[0m [31m[vdso][0m
+0xf7ffc000[0m 0xf7ffe000[0m 0x02e000[0m r--[0m /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1[0m
+0xf7ffe000[0m 0xf8000000[0m 0x030000[0m rw-[0m /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1[0m
+[35m0xfffdf000[0m [35m0x000000[0m [35m0x000000[0m [35mrw-[0m [35m[stack][0m
+[?2004h[1;32mgef➤  [0mtelescope $sp -l 4
+[?2004l[36m0xfffffae0[0m│+0x0000:           
+[36m0xfffffae4[0m│+0x0004:           
+[36m0xfffffae8[0m│+0x0008:           
+[36m0xfffffaec[0m│+0x000c:           
+[?2004h[1;32mgef➤  [0mregisters $x0 $sp $pc $cpsr
+[?2004l[1m[31m$x0  [0m: 0xaaaa0af8
+[1m[31m$sp  [0m: 0xfffffae0
+[1m[31m$pc  [0m: 0xaaaa0a68
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt fast]
+[?2004h[1;32mgef➤  [0mxinfo $sp
+[?2004l[1;38;5;240m───────────────────────────────────────────── [0m[36mxinfo: 0xfffffae0[0m[1;38;5;240m ─────────────────────────────────────────────[0m
+[1m[33m[*][0m Cannot reach 0xfffffae0 in memory space
+[?2004h[1;32mgef➤  [0mquit
+[?2004ly

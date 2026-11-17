@@ -1,0 +1,561 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_x64...
+------- tip of the day (disable with set show-tips off) -------
+If your program has multiple threads they will be displayed in the context display or using the context threads command
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffff9a99e550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffff9b1bdcf0 ◂— 1
+ RIP  0xffff9a99e550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffff9a99e543    call   0xffff9a98dce0              <0xffff9a98dce0>
+ 
+   0xffff9a99e548    jmp    0xffff9a99e3e2              <0xffff9a99e3e2>
+ 
+   0xffff9a99e54d    nop    dword ptr [rax]
+ ► 0xffff9a99e550    mov    rdi, rsp            RDI => 0xffff9b1bdcf0 ◂— 1
+   0xffff9a99e553    call   0xffff9a99f1e0              <0xffff9a99f1e0>
+ 
+   0xffff9a99e558    mov    r12, rax
+   0xffff9a99e55b    mov    r13, rsp
+   0xffff9a99e55e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffff9a99e564    test   edx, 2
+   0xffff9a99e56a  ? je     0xffff9a99e57d              <0xffff9a99e57d>
+ 
+   0xffff9a99e56c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9b1bdcf0 ◂— 1
+01:0008│     0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+02:0010│     0xffff9b1bdd00 ◂— 0
+03:0018│     0xffff9b1bdd08 —▸ 0xffff9b1bded3 ◂— 'HOSTNAME=3e37fc6690d4'
+04:0020│     0xffff9b1bdd10 —▸ 0xffff9b1bdee9 ◂— 'PWD=/work'
+05:0028│     0xffff9b1bdd18 —▸ 0xffff9b1bdef3 ◂— '_=/usr/local/bin/qemu-x86_64'
+06:0030│     0xffff9b1bdd20 —▸ 0xffff9b1bdf10 ◂— 'LINES=50'
+07:0038│     0xffff9b1bdd28 —▸ 0xffff9b1bdf19 ◂— 'HOME=/root'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff9a99e550
+   1 0x1
+   2 0xffff9b1bdec8
+   3 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> break test.c:38
+Breakpoint 1 at 0x555555557489: file test.c, line 38.
+pwndbg> continue
+Continuing.
+
+Breakpoint 1, main (argc=0x1, argv=0xffff9b1bdcf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+*RBX  0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+ RCX  0
+*RDX  0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0
+*RDI  0xffff9a8c6ac0 ◂— 0
+*RSI  0x510
+ R8   0
+ R9   0
+*R10  7
+*R11  0x55555555b420 ◂— 0x55555555b
+*R12  1
+ R13  0
+*R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*R15  0xffff9a9b7000 (_rtld_global) —▸ 0xffff9a9b82e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9b1bdbd0 —▸ 0xffff9b1bdc70 —▸ 0xffff9b1bdcd0 ◂— 0
+*RSP  0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+*RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+b► 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax                        RDI => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9b1bdb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9b1bdb10 {i} ◂— 8
+03:0018│-0b8 0xffff9b1bdb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9b1bdb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9b1bdb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9b1bdb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9b1bdb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557489 main+398
+   1 0xffff9a6ed1ca
+   2 0xffff9a6ed28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> set show-flags on
+Set whether to show flags registers to 'on'.
+pwndbg> context regs
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags on / show-compact-regs off ]──────────────────────────────────
+ RAX  0
+*RBX  0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+ RCX  0
+*RDX  0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0
+*RDI  0xffff9a8c6ac0 ◂— 0
+*RSI  0x510
+ R8   0
+ R9   0
+*R10  7
+*R11  0x55555555b420 ◂— 0x55555555b
+*R12  1
+ R13  0
+*R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*R15  0xffff9a9b7000 (_rtld_global) —▸ 0xffff9a9b82e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9b1bdbd0 —▸ 0xffff9b1bdc70 —▸ 0xffff9b1bdcd0 ◂— 0
+*RSP  0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+*RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+*EFLAGS 0x206 [ cf PF af zf sf IF df of iopl:00 ac ]
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> set show-flags off
+Set whether to show flags registers to 'off'.
+pwndbg> set show-compact-regs on
+Set whether to show a compact register view with columns to 'on'.
+pwndbg> context regs
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs on ]──────────────────────────────────
+ RAX  0                                                       *R11  0x55555555b420 ◂— 0x55555555b
+*RBX  0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'        *R12  1
+ RCX  0                                                        R13  0
+*RDX  0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0                   *R14  ⏎
+*RDI  0xffff9a8c6ac0 ◂— 0                                     *R15  ⏎
+*RSI  0x510                                                   *RBP  ⏎
+ R8   0                                                       *RSP  ⏎
+ R9   0                                                       *RIP  ⏎
+*R10  7                                                       
+↪*R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+↪*R15  0xffff9a9b7000 (_rtld_global) —▸ 0xffff9a9b82e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+↪*RBP  0xffff9b1bdbd0 —▸ 0xffff9b1bdc70 —▸ 0xffff9b1bdcd0 ◂— 0
+↪*RSP  0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+↪*RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> set show-compact-regs off
+Set whether to show a compact register view with columns to 'off'.
+pwndbg> search "global data"
+Searching for byte: b'global data'
+test_x64        0x55555555a020 'global data string'
+pwndbg> search -p mid[1]
+Searching for a pointer-width integer: b'\xb0\xb4UUUU\x00\x00'
+[stack]         0xffff9b1bdb38 0x55555555b4b0
+pwndbg> got -r
+State of the GOT of /work/test_x64:
+GOT protection: Full RELRO | Found 10 GOT entries passing the filter
+[0x555555559fb0] free@GLIBC_2.2.5 -> 0xffff9a770be0 (free) ◂— endbr64
+[0x555555559fb8] strcpy@GLIBC_2.2.5 -> 0xffff9a84e3b0 ◂— endbr64
+[0x555555559fc0] __stack_chk_fail@GLIBC_2.4 -> 0xffff9a7fad50 (__stack_chk_fail) ◂— endbr64
+[0x555555559fc8] printf@GLIBC_2.2.5 -> 0xffff9a7230e0 (printf) ◂— endbr64
+[0x555555559fd0] malloc@GLIBC_2.2.5 -> 0xffff9a770500 (malloc) ◂— endbr64
+[0x555555559fd8] __libc_start_main@GLIBC_2.34 -> 0xffff9a6ed200 (__libc_start_main) ◂— endbr64
+[0x555555559fe0] _ITM_deregisterTMCloneTable -> 0
+[0x555555559fe8] __gmon_start__ -> 0
+[0x555555559ff0] _ITM_registerTMCloneTable -> 0
+[0x555555559ff8] __cxa_finalize@GLIBC_2.2.5 -> 0xffff9a70a2a0 (__cxa_finalize) ◂— endbr64
+pwndbg> dq $sp 4
+0000ffff9b1bdb00     0000ffff9b1bdcf8 0000000100000006
+0000ffff9b1bdb10     0000000000000008 00005555555571c9
+pwndbg> dd $sp 4
+0000ffff9b1bdb00     9b1bdcf8 0000ffff 00000006 00000001
+pwndbg> db $sp 16
+0000ffff9b1bdb00     f8 dc 1b 9b ff ff 00 00 06 00 00 00 01 00 00 00
+pwndbg> dc $sp 32
++0000 0xffff9b1bdb00  f8 dc 1b 9b ff ff 00 00  06 00 00 00 01 00 00 00  │........│........│
++0010 0xffff9b1bdb10  08 00 00 00 00 00 00 00  c9 71 55 55 55 55 00 00  │........│.qUUUU..│
+pwndbg> ds greeting
+555555558004 'Hello, pwndbg!'
+pwndbg> cyclic 32
+aaaabaaacaaadaaaeaaafaaagaaahaaa
+pwndbg> cyclic -l 0x6161616c
+Finding cyclic pattern of 4 bytes: b'laaa' (hex: 0x6c616161)
+Found at offset 44
+pwndbg> telescope &global_buf 4
+00:0000│     0x55555555a020 (global_buf) ◂— 'global data string'
+01:0008│     0x55555555a028 (global_buf+8) ◂— 'ata string'
+02:0010│     0x55555555a030 (global_buf+16) ◂— 0x676e /* 'ng' */
+03:0018│     0x55555555a038 (global_buf+24) ◂— 0
+pwndbg> telescope small[7] 4
+00:0000│     0x55555555b3f0 ◂— 0x55555555b
+01:0008│     0x55555555b3f8 ◂— 0
+... ↓     2 skipped
+pwndbg> p $sp
+$1 = (void *) 0xffff9b1bdb00
+pwndbg> p/x $pc
+$2 = 0x555555557489
+pwndbg> p fp
+$3 = (op_fn) 0x5555555571c9 <add>
+pwndbg> x/gx $sp
+0xffff9b1bdb00:	0x0000ffff9b1bdcf8
+pwndbg> x/3xg &global_buf
+0x55555555a020 <global_buf>:	0x64206c61626f6c67	0x6972747320617461
+0x55555555a030 <global_buf+16>:	0x000000000000676e
+pwndbg> x/2i $pc
+=> 0x555555557489 <main+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x555555557490 <main+405>:	mov    edx,0x7
+pwndbg> x/8xb greeting
+0x555555558004:	0x48	0x65	0x6c	0x6c	0x6f	0x2c	0x20	0x70
+pwndbg> x/4dw $sp
+0xffff9b1bdb00:	-1692672776	65535	6	1
+pwndbg> info proc mappings
+process 717
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset  Perms  objfile
+      0x555555556000     0x555555557000     0x1000        0x0  r--p   /work/test_x64
+      0x555555557000     0x555555558000     0x1000     0x1000  r-xp   /work/test_x64
+      0x555555558000     0x555555559000     0x1000     0x2000  r--p   /work/test_x64
+      0x555555559000     0x55555555a000     0x1000     0x2000  r--p   /work/test_x64
+      0x55555555a000     0x55555555b000     0x1000     0x3000  rw-p   /work/test_x64
+      0x55555555b000     0x55555557c000    0x21000        0x0  rw-p   [heap]
+      0xffff9a6b8000     0xffff9a6bb000     0x3000        0x0  rw-p   
+      0xffff9a6c3000     0xffff9a6eb000    0x28000        0x0  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a6eb000     0xffff9a873000   0x188000    0x28000  r-xp   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a873000     0xffff9a8c2000    0x4f000   0x1b0000  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a8c2000     0xffff9a8c6000     0x4000   0x1fe000  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a8c6000     0xffff9a8c8000     0x2000   0x202000  rw-p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff9a8c8000     0xffff9a8d5000     0xd000        0x0  rw-p   
+      0xffff9a8d8000     0xffff9a8da000     0x2000        0x0  rw-p   
+      0xffff9a97a000     0xffff9a97c000     0x2000        0x0  rw-p   
+      0xffff9a97e000     0xffff9a97f000     0x1000        0x0  r-xp   [vdso]
+      0xffff9a97f000     0xffff9a980000     0x1000        0x0  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a980000     0xffff9a9ab000    0x2b000     0x1000  r-xp   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9ab000     0xffff9a9b5000     0xa000    0x2c000  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9b5000     0xffff9a9b7000     0x2000    0x36000  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9b7000     0xffff9a9b9000     0x2000    0x38000  rw-p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff9a9bd000     0xffff9a9be000     0x1000        0x0  ---p   
+      0xffff9a9be000     0xffff9b1be000   0x800000        0x0  rw-p   [stack]
+  0xffffffffff600000 0xffffffffff601000     0x1000        0x0  --xp   [vsyscall]
+pwndbg> xinfo greeting
+Extended information for virtual address 0x555555558004:
+
+  Containing mapping:
+    0x555555558000     0x555555559000 r--p     1000    2000 test_x64
+
+  Offset information:
+         Mapped Area 0x555555558004 = 0x555555558000 + 0x4
+         File (Base) 0x555555558004 = 0x555555556000 + 0x2004
+      File (Segment) 0x555555558004 = 0x555555558000 + 0x4
+         File (Disk) 0x555555558004 = /work/test_x64 + 0x2004
+
+ Containing ELF sections:
+             .rodata 0x555555558004 = 0x555555558000 + 0x4
+pwndbg> malloc-chunk mid[1]-0x10
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b4a0
+Size: 0x90 (with flag bits: 0x91)
+
+pwndbg> top-chunk
+Top chunk | PREV_INUSE
+Addr: 0x55555555bfe0
+Size: 0x20020 (with flag bits: 0x20021)
+
+pwndbg> vis-heap-chunks
+0x55555555b000	0x0000000000000000	0x0000000000000291	................
+0x55555555b010	0x0000000000070000	0x0001000000000000	................
+0x55555555b020	0x0000000000000000	0x0000000000000000	................
+0x55555555b030	0x0000000000000000	0x0000000000000000	................
+0x55555555b040	0x0000000000000000	0x0000000000000000	................
+0x55555555b050	0x0000000000000000	0x0000000000000000	................
+0x55555555b060	0x0000000000000000	0x0000000000000000	................
+0x55555555b070	0x0000000000000000	0x0000000000000000	................
+0x55555555b080	0x0000000000000000	0x0000000000000000	................
+0x55555555b090	0x0000000000000000	0x000055555555b3c0	..........UUUU..
+0x55555555b0a0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0c0	0x0000000000000000	0x000055555555b420	........ .UUUU..
+0x55555555b0d0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0f0	0x0000000000000000	0x0000000000000000	................
+0x55555555b100	0x0000000000000000	0x0000000000000000	................
+0x55555555b110	0x0000000000000000	0x0000000000000000	................
+0x55555555b120	0x0000000000000000	0x0000000000000000	................
+0x55555555b130	0x0000000000000000	0x0000000000000000	................
+0x55555555b140	0x0000000000000000	0x0000000000000000	................
+0x55555555b150	0x0000000000000000	0x0000000000000000	................
+0x55555555b160	0x0000000000000000	0x0000000000000000	................
+0x55555555b170	0x0000000000000000	0x0000000000000000	................
+0x55555555b180	0x0000000000000000	0x0000000000000000	................
+0x55555555b190	0x0000000000000000	0x0000000000000000	................
+0x55555555b1a0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1c0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1d0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1f0	0x0000000000000000	0x0000000000000000	................
+0x55555555b200	0x0000000000000000	0x0000000000000000	................
+0x55555555b210	0x0000000000000000	0x0000000000000000	................
+0x55555555b220	0x0000000000000000	0x0000000000000000	................
+0x55555555b230	0x0000000000000000	0x0000000000000000	................
+0x55555555b240	0x0000000000000000	0x0000000000000000	................
+0x55555555b250	0x0000000000000000	0x0000000000000000	................
+0x55555555b260	0x0000000000000000	0x0000000000000000	................
+0x55555555b270	0x0000000000000000	0x0000000000000000	................
+0x55555555b280	0x0000000000000000	0x0000000000000000	................
+0x55555555b290	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b2a0	0x000000055555555b	0x71644a60d2e3d3b9	[UUU........`Jdq	 <-- tcachebins[0x30][6/7]
+0x55555555b2b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b2c0	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b2d0	0x000055500000e7fb	0x71644a60d2e3d3b9	....PU......`Jdq	 <-- tcachebins[0x30][5/7]
+0x55555555b2e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b2f0	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b300	0x000055500000e78b	0x71644a60d2e3d3b9	....PU......`Jdq	 <-- tcachebins[0x30][4/7]
+0x55555555b310	0x0000000000000000	0x0000000000000000	................
+0x55555555b320	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b330	0x000055500000e65b	0x71644a60d2e3d3b9	[...PU......`Jdq	 <-- tcachebins[0x30][3/7]
+0x55555555b340	0x0000000000000000	0x0000000000000000	................
+0x55555555b350	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b360	0x000055500000e66b	0x71644a60d2e3d3b9	k...PU......`Jdq	 <-- tcachebins[0x30][2/7]
+0x55555555b370	0x0000000000000000	0x0000000000000000	................
+0x55555555b380	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b390	0x000055500000e63b	0x71644a60d2e3d3b9	;...PU......`Jdq	 <-- tcachebins[0x30][1/7]
+0x55555555b3a0	0x0000000000000000	0x0000000000000000	................
+0x55555555b3b0	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b3c0	0x000055500000e6cb	0x71644a60d2e3d3b9	....PU......`Jdq	 <-- tcachebins[0x30][0/7]
+0x55555555b3d0	0x0000000000000000	0x0000000000000000	................
+0x55555555b3e0	0x0000000000000000	0x0000000000000031	........1.......	 <-- fastbins[0x30][0]
+0x55555555b3f0	0x000000055555555b	0x0000000000000000	[UUU............
+0x55555555b400	0x0000000000000000	0x0000000000000000	................
+0x55555555b410	0x0000000000000000	0x0000000000000091	................
+0x55555555b420	0x000000055555555b	0x71644a60d2e3d3b9	[UUU........`Jdq	 <-- tcachebins[0x90][0/1]
+0x55555555b430	0x0000000000000000	0x0000000000000000	................
+0x55555555b440	0x0000000000000000	0x0000000000000000	................
+0x55555555b450	0x0000000000000000	0x0000000000000000	................
+0x55555555b460	0x0000000000000000	0x0000000000000000	................
+0x55555555b470	0x0000000000000000	0x0000000000000000	................
+0x55555555b480	0x0000000000000000	0x0000000000000000	................
+0x55555555b490	0x0000000000000000	0x0000000000000000	................
+0x55555555b4a0	0x0000000000000000	                  	........
+Not all chunks were shown, see `vis --help` for more information.
+pwndbg> try-free mid[1]
+General checks
+Tcache checks
+Using tcache_put
+global_max_fast symbol not found, using the default value: 0x80
+Not mapped checks
+Next chunk is not top chunk
+Clearing next chunk's P bit
+----------
+Free should succeed!
+pwndbg> find-fake-fast &global_buf
+global_max_fast symbol not found, using the default value: 0x80
+Searching for fastbin size fields up to 0x80, starting at 0x555555559fa8 resulting in an overlap of 0x55555555a020
+FAKE CHUNKS
+Exception occurred: malloc_chunk: Cannot access memory at address 0x555554000000 (<class 'pwndbg.dbg_mod.DebuggerError'>)
+For more info invoke `set exception-verbose on` and rerun the command
+or debug it by yourself with `set exception-debugger on`
+pwndbg> tls
+Thread Local Storage (TLS) base: 0xffff9a6b8740
+TLS is located at:
+    0xffff9a6b8000     0xffff9a6bb000 rw-p     3000       0 [anon_ffff9a6b8]
+Dumping the address:
+00:0000│ fs_base 0xffff9a6b8740 ◂— 0xffff9a6b8740
+01:0008│         0xffff9a6b8748 —▸ 0xffff9a6b90e0 ◂— 1
+02:0010│         0xffff9a6b8750 —▸ 0xffff9a6b8740 ◂— 0xffff9a6b8740
+03:0018│         0xffff9a6b8758 ◂— 0
+04:0020│         0xffff9a6b8760 ◂— 0
+05:0028│         0xffff9a6b8768 ◂— 0x5dbec8f0f83ce400
+06:0030│         0xffff9a6b8770 ◂— 0xadf675311ea4ac03
+07:0038│         0xffff9a6b8778 ◂— 0
+... ↓            2 skipped
+pwndbg> errno
+Errno 0: OK
+pwndbg> info threads
+  Id   Target Id                        Frame 
+* 1    Thread 717.717 (CPU#0 [running]) main (argc=0x1, argv=0xffff9b1bdcf8) at test.c:38
+pwndbg> watch r
+Hardware watchpoint 2: r
+pwndbg> continue
+Continuing.
+Warning:
+Could not insert hardware watchpoint 2.
+Could not insert hardware breakpoints:
+You may have requested too many hardware breakpoints/watchpoints.
+
+Command aborted.
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+ RCX  0
+ RDX  0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0
+ RDI  0xffff9a8c6ac0 ◂— 0
+ RSI  0x510
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff9a9b7000 (_rtld_global) —▸ 0xffff9a9b82e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9b1bdbd0 —▸ 0xffff9b1bdc70 —▸ 0xffff9b1bdcd0 ◂— 0
+ RSP  0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+ RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+b► 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax                        RDI => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9b1bdb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9b1bdb10 {i} ◂— 8
+03:0018│-0b8 0xffff9b1bdb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9b1bdb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9b1bdb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9b1bdb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9b1bdb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557489 main+398
+   1 0xffff9a6ed1ca
+   2 0xffff9a6ed28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> delete
+pwndbg> info breakpoints
+No breakpoints, watchpoints, tracepoints, or catchpoints.
+pwndbg> display/i $pc
+1: x/i $pc
+=> 0x555555557489 <main+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+pwndbg> si
+0x0000555555557490	38	    int r = compute(fp, 6, 7);
+1: x/i $pc
+=> 0x555555557490 <main+405>:	mov    edx,0x7
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x5555555571c9 (add) ◂— endbr64
+ RBX  0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+ RCX  0
+ RDX  0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0
+ RDI  0xffff9a8c6ac0 ◂— 0
+ RSI  0x510
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff9a9b7000 (_rtld_global) —▸ 0xffff9a9b82e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9b1bdbd0 —▸ 0xffff9b1bdc70 —▸ 0xffff9b1bdcd0 ◂— 0
+ RSP  0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+*RIP  0x555555557490 (main+405) ◂— mov edx, 7
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+   0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64 
+ ► 0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax                        RDI => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9b1bdb00 {argv} —▸ 0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9b1bdb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9b1bdb10 {i} ◂— 8
+03:0018│-0b8 0xffff9b1bdb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9b1bdb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff9a8c6b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9b1bdb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9b1bdb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9b1bdb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557490 main+405
+   1 0xffff9a6ed1ca
+   2 0xffff9a6ed28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> undisplay 1
+pwndbg> kill
+qemu-x86_64: QEMU: Terminated via GDBstub
+[Inferior 1 (process 717) killed]
+pwndbg> 

@@ -1,0 +1,2 @@
+(gdb) stepi
+[34m0x0000aaaaaaaa0b10[m	30	    [01mstrcpy[m[31m([mstackbuf[31m,[m [31m"AAAAAAAABBBBBBBBCCCCCCCC"[m[31m);[m

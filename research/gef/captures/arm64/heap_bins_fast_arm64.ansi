@@ -1,0 +1,9 @@
+[?2004h[1;32mgef➤  [0mheap bins fast
+[?2004l[90m──────────────────────────────────── [0m[36mFastbins for arena at 0xfffff7fa0a50[0m[90m ────────────────────────────────────[0m
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30]  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac13f0, size=0x30, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m) 
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00

@@ -1,0 +1,2 @@
+(gdb) info line *$pc
+Line 39 of "test.c" starts at address [34m0xaaaaaaaa0c58[m <[33mmain[m+388> and ends at [34m0xaaaaaaaa0c64[m <[33mmain[m+400>.

@@ -1,0 +1,9 @@
+gef➤  heap bins fast
+──────────────────────────────────── Fastbins for arena at 0xfffff7fa0a50 ────────────────────────────────────
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30]  ←  Chunk(addr=0xaaaaaaac13f0, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA) 
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00

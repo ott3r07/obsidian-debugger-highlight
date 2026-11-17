@@ -1,0 +1,99 @@
+GEF for linux ready, type `gef' to start, `gef config' to configure
+90 commands loaded and 5 functions added for GDB 15.1 in 0.00ms using Python engine 3.12
+Reading symbols from /t/t2...
+gef➤  break puts
+Breakpoint 1 at 0x7f0
+gef➤  aslr on
+[+] Enabling ASLR
+gef➤  run
+Starting program: /t/t2 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, __GI__IO_puts (str=0xaaaad4460af8 "bins ready") at ./libio/ioputs.c:35
+warning: 35	./libio/ioputs.c: No such file or directory
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaad4460af8  →  "bins ready"
+$x1  : 0x0000aaaafbf22400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000ffff9ada0620  →  0x0000ffff9ada0d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1c4ef0          
+$x11 : 0x0               
+$x12 : 0x0000ffff9ada6b48  →  0x0000ffff9ad66000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000ffff9ada0e70  →  0x0000aaaad4460000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaad447ffa8  →  0x0000ffff9ac119d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000ffff9ac119d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000ffffe6b19998  →  0x0000ffffe6b19f1b  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaad447fd58  →  0x0000aaaad4460900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaad4460958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000ffffe6b199a8  →  0x0000ffffe6b19f21  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000ffff9ada5b58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000ffff9ada6000  →  0x0000ffff9ada7350  →  0x0000aaaad4460000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaad447fd58  →  0x0000aaaad4460900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000ffffe6b19810  →  0x0000ffffe6b19920  →  0x0000ffffe6b19930  →  0x0000000000000000
+$x30 : 0x0000aaaad4460a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000ffffe6b19740  →  0x0000ffffe6b19998  →  0x0000ffffe6b19f1b  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000ffff9ac119d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000ffffe6b19740│+0x0000: 0x0000ffffe6b19998  →  0x0000ffffe6b19f1b  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000ffffe6b19748│+0x0008: 0x00000001e6b19b58
+0x0000ffffe6b19750│+0x0010: 0x0000000000000181
+0x0000ffffe6b19758│+0x0018: 0x0000000700000000
+0x0000ffffe6b19760│+0x0020: 0x0000aaaafbf219a0  →  0x0000ffff9ad50ba0  →  0x0000ffff9ad50b90  →  0x0000ffff9ad50b80  →  0x0000ffff9ad50b70  →  0x0000ffff9ad50b60  →  0x0000ffff9ad50b50
+0x0000ffffe6b19768│+0x0028: 0x0000aaaafbf21aa0  →  0x0000000000000000
+0x0000ffffe6b19770│+0x0030: 0x0000aaaafbf21ac0  →  0x0000aaaafbf21990  →  0x0000000000000000
+0x0000ffffe6b19778│+0x0038: 0x0000aaaafbf21bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xffff9ac119c4 <_IO_proc_close+0254> str    x25,  [sp,  #112]
+   0xffff9ac119c8 <_IO_proc_close+0258> bl     0xffff9ac99250 <__stack_chk_fail>
+   0xffff9ac119cc                  nop    
+●→ 0xffff9ac119d0 <puts+0000>      stp    x29,  x30,  [sp,  #-64]!
+   0xffff9ac119d4 <puts+0004>      mov    x29,  sp
+   0xffff9ac119d8 <puts+0008>      stp    x21,  x22,  [sp,  #32]
+   0xffff9ac119dc <puts+000c>      mov    x21,  x0
+   0xffff9ac119e0 <puts+0010>      adrp   x22,  0xffff9ad4f000 <_nl_C_locobj+32>
+   0xffff9ac119e4 <puts+0014>      ldr    x22,  [x22,  #3600]
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xffff9ac119d0 in __GI__IO_puts (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xffff9ac119d0 → __GI__IO_puts(str=0xaaaad4460af8 "bins ready")
+[#1] 0xaaaad4460a68 → main(argc=0x1, argv=0xffffe6b19998)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  vmmap
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+0x0000aaaad4460000 0x0000aaaad4461000 0x0000000000000000 r-x /t/t2
+0x0000aaaad447f000 0x0000aaaad4480000 0x000000000000f000 r-- /t/t2
+0x0000aaaad4480000 0x0000aaaad4481000 0x0000000000010000 rw- /t/t2
+0x0000aaaafbf21000 0x0000aaaafbf42000 0x0000000000000000 rw- [heap]
+0x0000ffff9aba0000 0x0000ffff9ad3a000 0x0000000000000000 r-x /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000ffff9ad3a000 0x0000ffff9ad4d000 0x000000000019a000 --- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000ffff9ad4d000 0x0000ffff9ad50000 0x000000000019d000 r-- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000ffff9ad50000 0x0000ffff9ad52000 0x00000000001a0000 rw- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000ffff9ad52000 0x0000ffff9ad5e000 0x0000000000000000 rw- 
+0x0000ffff9ad66000 0x0000ffff9ad8d000 0x0000000000000000 r-x /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000ffff9ad9f000 0x0000ffff9ada1000 0x0000000000000000 rw- 
+0x0000ffff9ada1000 0x0000ffff9ada3000 0x0000000000000000 r-- [vvar]
+0x0000ffff9ada3000 0x0000ffff9ada4000 0x0000000000000000 r-x [vdso]
+0x0000ffff9ada4000 0x0000ffff9ada6000 0x000000000002e000 r-- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000ffff9ada6000 0x0000ffff9ada8000 0x0000000000030000 rw- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000ffffe6af9000 0x0000ffffe6b1a000 0x0000000000000000 rw- [stack]
+
+gef➤  quit
+y

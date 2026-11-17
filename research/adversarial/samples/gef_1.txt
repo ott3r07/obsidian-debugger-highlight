@@ -1,0 +1,58 @@
+# SOURCE: https://github.com/hugsy/gef/issues/1226
+(qemu) gef➤  show architecture
+The target architecture is set to "auto" (currently "mips:isa64r2").
+(qemu) gef➤  set $s0 = 0x1122334455667788
+(qemu) gef➤  i r $s0
+s0: 0x1122334455667788
+(qemu) gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+───────────────────────────────────────────────────────────────────────────── registers ────
+$zero: 0x0
+$at  : 0x0
+$v0  : 0x0
+$v1  : 0x0
+$a0  : 0x0
+$a1  : 0x0
+$a2  : 0x0
+$a3  : 0x0
+$t0  : 0x0
+$t1  : 0x0
+$t2  : 0x0
+$t3  : 0x0
+$s0  : 0x55667788 # only last 4 bytes are shown
+$s1  : 0x0
+$s2  : 0x0
+$s3  : 0x0
+$s4  : 0x0
+$s5  : 0x0
+$s6  : 0x0
+$s7  : 0x0
+$t8  : 0x0
+$t9  : 0x0
+$k0  : 0x0
+$k1  : 0x0
+$s8  : 0x0
+$pc  : 0x013abd10  →  <__start+0000> move t9, ra
+$sp  : 0x0138aea0  →  0x00000001
+$hi  : 0x0
+$lo  : 0x0
+$fir : 0x7f0000
+$ra  : 0x0
+$gp  : 0x0
+───────────────────────────────────────────────────────────────────────────────── stack ────
+[!] Command 'dereference' failed to execute properly, reason: Bad register
+────────────────────────────────────────────────────────────────────── code:mips:MIPS32 ────
+    0x13abd04                  nop
+    0x13abd08                  nop
+    0x13abd0c                  nop
+ →  0x13abd10 <__start+0000>   move   t9, ra
+    0x13abd14 <__start+0004>   bal    0x13abd1c <__start+12>
+    0x13abd18 <__start+0008>   nop
+    0x13abd1c <__start+000c>   move   s2, gp
+    0x13abd20 <__start+0010>   lui    gp, 0x3
+    0x13abd24 <__start+0014>   addiu  gp, gp, -15612
+─────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x13abd10 in __start (), reason: SIGTRAP
+───────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x13abd10 → __start()
+────────────────────────────────────────────────────────────────────────────────────────────

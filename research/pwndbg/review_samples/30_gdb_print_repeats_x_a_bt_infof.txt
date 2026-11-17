@@ -1,0 +1,71 @@
+# SOURCE: https://raw.githubusercontent.com/farhansyed1/Computer-Security/main/buffer-overflow/README.md
+# DATE: 2024-10
+~/lab-o/buffer/exercise0$ gdb main.elf
+
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from main.elf...
+
+(gdb) b main.c:11
+Breakpoint 1 at 0x11e8: file main.c, line 11.
+
+(gdb) run roberto
+Starting program: /home/student/lab-o/exercise0/main roberto
+
+Breakpoint 1, afunction (username=0x7fffffffe2e9 "roberto") at main.c:11
+11	  strcpy(local_var, username);
+(gdb) p 16
+$4 = 16
+(gdb) p 0x10
+$5 = 16
+(gdb) p (0x10-10)
+$6 = 6
+(gdb) p &local_var 
+$11 = (char (*)[16]) 0x7fffffffde10
+(gdb) p local_var 
+$12 = "6\336\377\377\377\177\000\000\335RUUUU\000"
+(gdb) p &global_var 
+$13 = (char (*)[16]) 0x555555558020 <global_var>
+(gdb) p global_var 
+$14 = '\000' <repeats 15 times>
+(gdb) p username 
+$16 = 0x7fffffffe2e9 "roberto"
+(gdb) p &username
+0x7fffffffde08
+(gdb) x/a 0x7fffffffde08
+0x7fffffffde08:	0x7fffffffe2e9
+(gdb) x/a (0x7fffffffde08-8)
+0x7fffffffde00:	0xc2
+(gdb) x/a (0x7fffffffde08+8)
+x7fffffffde10:	0x7fffffffde36
+(gdb) p &afunction 
+$17 = (void (*)(char *)) 0x5555555551c9 <afunction>
+(gdb) p &main
+$18 = (int (*)(int, char **)) 0x555555555249 <main>
+(gdb) x 0x555555555249
+0x555555555249 <main>:	0xe5894855fa1e0ff3
+(gdb) bt
+#0  afunction (username=0x7fffffffe2e9 "roberto") at main.c:11
+#1  0x0000555555555288 in main (argc=2, argv=0x7fffffffdf48) at main.c:24
+(gdb) info f
+Stack level 0, frame at 0x7fffffffde40:
+ rip = 0x5555555551e8 in afunction (main.c:11); saved rip = 0x555555555288
+ called by frame at 0x7fffffffde60
+ source language c.
+ Arglist at 0x7fffffffddf8, args: username=0x7fffffffe2e9 "roberto"
+ Locals at 0x7fffffffddf8, Previous frame's sp is 0x7fffffffde40
+ Saved registers:
+  rbp at 0x7fffffffde30, rip at 0x7fffffffde38

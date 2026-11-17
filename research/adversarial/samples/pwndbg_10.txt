@@ -1,0 +1,25 @@
+# SOURCE: https://yi0934.github.io/2020/06/17/CTF/how2heap/my_wp3/
+pwndbg> stack 30
+00:0000│ rsp  0x7fffffffe0b0 —▸ 0x555555555229 (jackpot) ◂— 0xe5894855fa1e0ff3
+01:0008│      0x7fffffffe0b8 —▸ 0x55555555b260 —▸ 0x7ffff7dd2cb0 (main_arena+112) —▸ 0x55555555b250 ◂— 0x0
+02:0010│      0x7fffffffe0c0 —▸ 0x55555555b680 ◂— 0x0
+03:0018│      0x7fffffffe0c8 —▸ 0x7fffffffe0e0 —▸ 0x7ffff7dd2ca0 (main_arena+96) —▸ 0x55555555b780 ◂— 0x0
+04:0020│      0x7fffffffe0d0 ◂— 0x0
+05:0028│      0x7fffffffe0d8 ◂— 0x110
+06:0030│      0x7fffffffe0e0 —▸ 0x7ffff7dd2ca0 (main_arena+96) —▸ 0x55555555b780 ◂— 0x0
+07:0038│      0x7fffffffe0e8 —▸ 0x7fffffffe0d0 ◂— 0x0
+08:0040│      0x7fffffffe0f0 —▸ 0x7fffffffe1e0 ◂— 0x1
+09:0048│      0x7fffffffe0f8 ◂— 0xa9ea08e29ac3d600
+0a:0050│ rbp  0x7fffffffe100 —▸ 0x555555555410 (__libc_csu_init) ◂— 0x8d4c5741fa1e0ff3
+0b:0058│ rdx  0x7fffffffe108 —▸ 0x555555555229 (jackpot) ◂— 0xe5894855fa1e0ff3
+
+   0x5555555553f5 <main+430>      mov    rcx, qword ptr [rbp - 8]
+   0x5555555553f9 <main+434>      xor    rcx, qword ptr fs:[0x28]
+   0x555555555402 <main+443>      je     main+450 <main+450>
+    ↓
+   0x555555555409 <main+450>      leave  
+ ► 0x55555555540a <main+451>      ret             <0x555555555229; jackpot>
+    ↓
+   0x555555555229 <jackpot>       endbr64 
+   0x55555555522d <jackpot+4>     push   rbp
+   0x55555555522e <jackpot+5>     mov    rbp, rsp

@@ -1,0 +1,5 @@
+Reading symbols from [32m/t/t2[m...
+[32mGEF[0m for linux ready, type `[4m[33mgef[24m[0m' to start, `[4m[35mgef config[24m[0m' to configure
+[1m[32m91[0m commands loaded for GDB [1m[33m15.1[0m using Python engine [1m[31m3.12[0m
+[1m[33m[*][0m [1m[31m5[0m commands could not be loaded, run `[4m[35mgef missing[24m[0m` to know why.
+[?2004h[1;31mgef➤  [0m

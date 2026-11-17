@@ -1,0 +1,3 @@
+(gdb) info args
+argc = 1
+argv = 0xffff935a9cf8

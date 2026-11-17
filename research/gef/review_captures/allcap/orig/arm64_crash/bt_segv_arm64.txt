@@ -1,0 +1,4 @@
+gef➤  bt
+#0  0x0061616161616166 in ?? ()
+#1  0x6161616161616166 in ?? ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)

@@ -1,0 +1,36 @@
+# SOURCE: https://github.com/longld/peda/issues/136
+run 'bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AA'
+
+=> 0x41414641:  Cannot access memory at address 0x41414641
+gdb-peda$ patts
+Registers contain pattern buffer:
+EBX+0 found at offset: 36
+EBP+0 found at offset: 40
+EIP+0 found at offset: 44
+Registers point to pattern buffer:
+[ESP] --> offset 48 - size ~152
+Pattern buffer found at:
+0x0804d16c : offset    0 - size  200 ([heap])
+0xffffc9b0 : offset    0 - size  200 ($sp + -0x30 [-12 dwords])
+0xffffcd1f : offset    0 - size  200 ($sp + 0x33f [207 dwords])
+0xffffd2a4 : offset 27105 - size    4 ($sp + 0x8c4 [561 dwords])
+0xffffd2b4 : offset 27105 - size    4 ($sp + 0x8d4 [565 dwords])
+0xffffd510 : offset 36258 - size    4 ($sp + 0xb30 [716 dwords])
+
+run "bAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AA"
+
+gdb-peda$ patts
+Registers contain pattern buffer:
+EBX+0 found at offset: 45
+EBP+0 found at offset: 49
+EIP+0 found at offset: 53
+Registers point to pattern buffer:
+[ESP] --> offset 57 - size ~143
+Pattern buffer found at:
+0x0804d176 : offset   19 - size  181 ([heap])
+0xffffc9ca : offset   19 - size  181 ($sp + -0x26 [-10 dwords])
+0xffffcd32 : offset   19 - size  181 ($sp + 0x342 [208 dwords])
+0xffffd2a4 : offset 27105 - size    4 ($sp + 0x8b4 [557 dwords])
+0xffffd2b4 : offset 27105 - size    4 ($sp + 0x8c4 [561 dwords])
+0xffffd510 : offset 36258 - size    4 ($sp + 0xb20 [712 dwords])
+Reference to pattern buffer not found in memory

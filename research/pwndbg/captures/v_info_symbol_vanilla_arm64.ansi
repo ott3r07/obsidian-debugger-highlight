@@ -1,0 +1,2 @@
+(gdb) info symbol $pc
+main + 388 in section .text of /work/test_arm64

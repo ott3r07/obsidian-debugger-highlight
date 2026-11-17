@@ -1,0 +1,2 @@
+smash_target_remote|target remote :1234
+smash_continue|continue

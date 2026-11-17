@@ -1,0 +1,5 @@
+(gdb) target remote :1234
+Remote debugging using :1234
+Reading symbols from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m...
+(No debugging symbols found in [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m)
+[34m0x0000ffffa2e56550[m in [33m??[m () from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m

@@ -1,0 +1,4 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mregisters $rax $rsp $rip
+[?2004l[1m[31m$rax   [0m: 0x0               
+[34m$rsp   [0m: [35m0x00002aaaab2abba0[0m  →  [35m0x00002aaaab2abd88[0m  →  [35m0x00002aaaab2abf32[0m  →  [33m"/work/test_x64"[0m
+[1m[31m$rip   [0m: [31m0x0000000000401951[0m  →  [90m<main+002b> lea rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>[0m

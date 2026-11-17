@@ -1,0 +1,327 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_nopie_x64...
+------- tip of the day (disable with set show-tips off) -------
+Want to display each context panel in a separate tmux window? See https://pwndbg.re/stable/tutorials/splitting-the-context/
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffffaa0be550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffffaa8ddc60 ◂— 2
+ RIP  0xffffaa0be550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffffaa0be543    call   0xffffaa0adce0              <0xffffaa0adce0>
+ 
+   0xffffaa0be548    jmp    0xffffaa0be3e2              <0xffffaa0be3e2>
+ 
+   0xffffaa0be54d    nop    dword ptr [rax]
+ ► 0xffffaa0be550    mov    rdi, rsp            RDI => 0xffffaa8ddc60 ◂— 2
+   0xffffaa0be553    call   0xffffaa0bf1e0              <0xffffaa0bf1e0>
+ 
+   0xffffaa0be558    mov    r12, rax
+   0xffffaa0be55b    mov    r13, rsp
+   0xffffaa0be55e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffffaa0be564    test   edx, 2
+   0xffffaa0be56a  ? je     0xffffaa0be57d              <0xffffaa0be57d>
+ 
+   0xffffaa0be56c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffaa8ddc60 ◂— 2
+01:0008│     0xffffaa8ddc68 —▸ 0xffffaa8dde57 ◂— './test_nopie_x64'
+02:0010│     0xffffaa8ddc70 —▸ 0xffffaa8dde68 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+03:0018│     0xffffaa8ddc78 ◂— 0
+04:0020│     0xffffaa8ddc80 —▸ 0xffffaa8ddecd ◂— 'HOSTNAME=3e37fc6690d4'
+05:0028│     0xffffaa8ddc88 —▸ 0xffffaa8ddee3 ◂— 'PWD=/work'
+06:0030│     0xffffaa8ddc90 —▸ 0xffffaa8ddeed ◂— '_=/usr/local/bin/qemu-x86_64'
+07:0038│     0xffffaa8ddc98 —▸ 0xffffaa8ddf0a ◂— 'LINES=50'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffffaa0be550
+   1 0x2
+   2 0xffffaa8dde57
+   3 0xffffaa8dde68
+   4 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> checksec
+File:     /work/test_nopie_x64
+Arch:     amd64
+RELRO:      No RELRO
+Stack:      No canary found
+NX:         NX unknown - GNU_STACK missing
+PIE:        No PIE (0x400000)
+Stack:      Executable
+RWX:        Has RWX segments
+SHSTK:      Enabled
+IBT:        Enabled
+Stripped:   No
+Debuginfo:  Yes
+pwndbg> break vuln
+Breakpoint 1 at 0x401203: file test.c, line 20.
+pwndbg> continue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+
+Breakpoint 1, vuln (src=0xffffaa8dde68 'A' <repeats 100 times>) at test.c:20
+20	    strcpy(buf, src);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0xffffaa8dde68 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+*RBX  0xffffaa8ddc68 —▸ 0xffffaa8dde57 ◂— './test_nopie_x64'
+ RCX  0
+ RDX  0
+*RDI  0xffffaa8dde68 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+*RSI  0x4045d0 ◂— 'Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC\n'
+*R8   0xffffa9fe6b20 —▸ 0x404fe0 ◂— 0
+*R9   0x410
+*R10  1
+*R11  2
+*R12  2
+ R13  0
+*R14  0x4031c0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x401160 (__do_global_dtors_aux) ◂— endbr64
+*R15  0xffffaa0d7000 (_rtld_global) —▸ 0xffffaa0d82e0 ◂— 0
+*RBP  0xffffaa8dda60 —▸ 0xffffaa8ddb40 —▸ 0xffffaa8ddbe0 —▸ 0xffffaa8ddc40 ◂— 0
+*RSP  0xffffaa8dda30 —▸ 0xffffaa8dda60 —▸ 0xffffaa8ddb40 —▸ 0xffffaa8ddbe0 —▸ 0xffffaa8ddc40 —▸ ...
+*RIP  0x401203 (vuln+16) ◂— mov rdx, qword ptr [rbp - 0x28]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x4011f8 <vuln+5>     mov    rbp, rsp
+   0x4011fb <vuln+8>     sub    rsp, 0x30
+   0x4011ff <vuln+12>    mov    qword ptr [rbp - 0x28], rdi
+b► 0x401203 <vuln+16>    mov    rdx, qword ptr [rbp - 0x28]     RDX, [{src}] => 0xffffaa8dde68 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...'
+   0x401207 <vuln+20>    lea    rax, [rbp - 0x20]               RAX => 0xffffaa8dda40 ◂— 0xd00000002
+   0x40120b <vuln+24>    mov    rsi, rdx                        RSI => 0xffffaa8dde68 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...'
+   0x40120e <vuln+27>    mov    rdi, rax                        RDI => 0xffffaa8dda40 ◂— 0xd00000002
+   0x401211 <vuln+30>    call   strcpy@plt                  <strcpy@plt>
+ 
+   0x401216 <vuln+35>    lea    rax, [rbp - 0x20]
+   0x40121a <vuln+39>    mov    rsi, rax
+   0x40121d <vuln+42>    lea    rax, [rip + 0xdef]     RAX => 0x402013 ◂— 0xa73253d667562 /* 'buf=%s\n' */
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:20
+   14     int r = f(x, y);
+   15     return r;
+   16 }
+   17 
+   18 void vuln(const char *src) {
+   19     char buf[32];
+ ► 20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+   24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffaa8dda30 —▸ 0xffffaa8dda60 —▸ 0xffffaa8ddb40 —▸ 0xffffaa8ddbe0 —▸ 0xffffaa8ddc40 —▸ ...
+01:0008│-028 0xffffaa8dda38 {src} —▸ 0xffffaa8dde68 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+02:0010│-020 0xffffaa8dda40 {buf} ◂— 0xd00000002
+03:0018│-018 0xffffaa8dda48 {buf+0x8} —▸ 0x4011ae (mul) ◂— endbr64
+04:0020│-010 0xffffaa8dda50 {buf+0x10} —▸ 0xffffaa8ddc68 —▸ 0xffffaa8dde57 ◂— './test_nopie_x64'
+05:0028│-008 0xffffaa8dda58 {buf+0x18} —▸ 0xffffaa0d82e0 ◂— 0
+06:0030│ rbp 0xffffaa8dda60 —▸ 0xffffaa8ddb40 —▸ 0xffffaa8ddbe0 —▸ 0xffffaa8ddc40 ◂— 0
+07:0038│+008 0xffffaa8dda68 —▸ 0x40141c (main+488) ◂— mov eax, 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x401203       vuln+16
+   1 0x40141c       main+488
+   2 0xffffa9e0d1ca
+   3 0xffffa9e0d28b __libc_start_main+139
+   4 0x4010d5       _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of /work/test_nopie_x64:
+GOT protection: No RELRO | Found 6 GOT entries passing the filter
+[0x403398] __libc_start_main@GLIBC_2.34 -> 0xffffa9e0d200 (__libc_start_main) ◂— endbr64
+[0x4033a0] __gmon_start__ -> 0
+[0x4033c0] free@GLIBC_2.2.5 -> 0xffffa9e90be0 (free) ◂— endbr64
+[0x4033c8] strcpy@GLIBC_2.2.5 -> 0x401040 ◂— endbr64
+[0x4033d0] printf@GLIBC_2.2.5 -> 0xffffa9e430e0 (printf) ◂— endbr64
+[0x4033d8] malloc@GLIBC_2.2.5 -> 0xffffa9e90500 (malloc) ◂— endbr64
+pwndbg> plt
+Section .plt 0x401020 - 0x401070:
+No symbols found in section .plt
+Section .plt.sec 0x401070 - 0x4010b0:
+0x401070: free@plt
+0x401080: strcpy@plt
+0x401090: printf@plt
+0x4010a0: malloc@plt
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+          0x400000           0x401000 r--p     1000       0 test_nopie_x64
+          0x401000           0x402000 r-xp     1000    1000 test_nopie_x64
+          0x402000           0x403000 r--p     1000    2000 test_nopie_x64
+          0x403000           0x404000 rw-p     1000    2000 test_nopie_x64
+          0x404000           0x425000 rw-p    21000       0 [heap]
+    0xffffa9dd8000     0xffffa9ddb000 rw-p     3000       0 [anon_ffffa9dd8]
+    0xffffa9de3000     0xffffa9e0b000 r--p    28000       0 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9e0b000     0xffffa9f93000 r-xp   188000   28000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9f93000     0xffffa9fe2000 r--p    4f000  1b0000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9fe2000     0xffffa9fe6000 r--p     4000  1fe000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9fe6000     0xffffa9fe8000 rw-p     2000  202000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9fe8000     0xffffa9ff5000 rw-p     d000       0 [anon_ffffa9fe8]
+    0xffffaa000000     0xffffaa002000 rw-p     2000       0 [anon_ffffaa000]
+    0xffffaa09a000     0xffffaa09c000 rw-p     2000       0 [anon_ffffaa09a]
+    0xffffaa09e000     0xffffaa09f000 r-xp     1000       0 [vdso]
+    0xffffaa09f000     0xffffaa0a0000 r--p     1000       0 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0a0000     0xffffaa0cb000 r-xp    2b000    1000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0cb000     0xffffaa0d5000 r--p     a000   2c000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0d5000     0xffffaa0d7000 r--p     2000   36000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0d7000     0xffffaa0d9000 rw-p     2000   38000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0dd000     0xffffaa0de000 ---p     1000       0 [anon_ffffaa0dd]
+    0xffffaa0de000     0xffffaa8de000 rwxp   800000       0 [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall]
+pwndbg> finish
+Run till exit from #0  vuln (src=0xffffaa8dde68 'A' <repeats 100 times>) at test.c:20
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Program received signal SIGSEGV, Segmentation fault.
+0x4141414141414141 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x69
+ RBX  0xffffaa8ddc68 —▸ 0xffffaa8dde57 ◂— './test_nopie_x64'
+ RCX  0
+ RDX  0
+*RDI  0xffffaa8dd850 —▸ 0xffffaa8dd880 ◂— 'buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nack=AAAAAAAABBBBBBBBCCCCCCCC\n'
+ RSI  0x4045d0 ◂— 'buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n'
+*R8   0x73
+*R9   0
+*R10  0xffffffff
+*R11  0
+ R12  2
+ R13  0
+ R14  0x4031c0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x401160 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffffaa0d7000 (_rtld_global) —▸ 0xffffaa0d82e0 ◂— 0
+*RBP  0x4141414141414141 ('AAAAAAAA')
+*RSP  0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+*RIP  0x4141414141414141 ('AAAAAAAA')
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+Invalid address 0x4141414141414141
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+... ↓        5 skipped
+06:0030│     0xffffaa8ddaa0 ◂— 0x41414141 /* 'AAAA' */
+07:0038│     0xffffaa8ddaa8 ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x4141414141414141
+   1 0x4141414141414141
+   2 0x4141414141414141
+   3 0x4141414141414141
+   4 0x4141414141414141
+   5 0x4141414141414141
+   6 0x4141414141414141
+   7 0x41414141
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x4141414141414141 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0x69
+ RBX  0xffffaa8ddc68 —▸ 0xffffaa8dde57 ◂— './test_nopie_x64'
+ RCX  0
+ RDX  0
+ RDI  0xffffaa8dd850 —▸ 0xffffaa8dd880 ◂— 'buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nack=AAAAAAAABBBBBBBBCCCCCCCC\n'
+ RSI  0x4045d0 ◂— 'buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n'
+ R8   0x73
+ R9   0
+ R10  0xffffffff
+ R11  0
+ R12  2
+ R13  0
+ R14  0x4031c0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x401160 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffffaa0d7000 (_rtld_global) —▸ 0xffffaa0d82e0 ◂— 0
+ RBP  0x4141414141414141 ('AAAAAAAA')
+ RSP  0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+ RIP  0x4141414141414141 ('AAAAAAAA')
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+Invalid address 0x4141414141414141
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+... ↓        5 skipped
+06:0030│     0xffffaa8ddaa0 ◂— 0x41414141 /* 'AAAA' */
+07:0038│     0xffffaa8ddaa8 ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x4141414141414141
+   1 0x4141414141414141
+   2 0x4141414141414141
+   3 0x4141414141414141
+   4 0x4141414141414141
+   5 0x4141414141414141
+   6 0x4141414141414141
+   7 0x41414141
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> bt
+#0  0x4141414141414141 in ?? ()
+#1  0x4141414141414141 in ?? ()
+#2  0x4141414141414141 in ?? ()
+#3  0x4141414141414141 in ?? ()
+#4  0x4141414141414141 in ?? ()
+#5  0x4141414141414141 in ?? ()
+#6  0x4141414141414141 in ?? ()
+#7  0x0000000041414141 in ?? ()
+#8  0x0000000000c60000 in ?? ()
+#9  0x00000000004042a0 in ?? ()
+#10 0x00000000004042d0 in ?? ()
+#11 0x0000000000404300 in ?? ()
+#12 0x0000000000404330 in ?? ()
+#13 0x0000000000404360 in ?? ()
+#14 0x0000000000404390 in ?? ()
+#15 0x00000000004043c0 in ?? ()
+#16 0x00000000004043f0 in ?? ()
+#17 0x4141414141414141 in ?? ()
+#18 0x4242424242424242 in ?? ()
+#19 0x4343434343434343 in ?? ()
+#20 0x0000000000000000 in ?? ()
+pwndbg> telescope $sp 10
+00:0000│ rsp 0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+... ↓        5 skipped
+06:0030│     0xffffaa8ddaa0 ◂— 0x41414141 /* 'AAAA' */
+07:0038│     0xffffaa8ddaa8 ◂— 0xc60000
+08:0040│     0xffffaa8ddab0 —▸ 0x4042a0 ◂— 0x404
+09:0048│     0xffffaa8ddab8 —▸ 0x4042d0 —▸ 0x4046a4 ◂— 0
+pwndbg> cyclic -l 0x6161616161616166
+Finding cyclic pattern of 4 bytes: b'faaa' (hex: 0x66616161)
+Found at offset 20
+pwndbg> 

@@ -1,0 +1,18 @@
+[32m[1mpwndbg> [0m[32m[0mvmmap
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+[31m          0x400000           0x401000 r-xp     1000       0 test_nopie_arm64[0m
+[35m          0x410000           0x411000 rw-p     1000       0 test_nopie_arm64[0m
+[34m          0x411000           0x432000 rw-p    21000       0 [heap][0m
+[31m    0xfffff7df0000     0xfffff7f8a000 r-xp   19a000       0 /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+[0m    0xfffff7f8a000     0xfffff7f9d000 ---p    13000  19a000 /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+[0m    0xfffff7f9d000     0xfffff7fa0000 r--p     3000  19d000 /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+[35m    0xfffff7fa0000     0xfffff7fa2000 rw-p     2000  1a0000 /usr/lib/aarch64-linux-gnu/libc.so.6[0m
+[35m    0xfffff7fa2000     0xfffff7fae000 rw-p     c000       0 [anon_fffff7fa2][0m
+[31m    0xfffff7fbe000     0xfffff7fe5000 r-xp    27000       0 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1[0m
+[35m    0xfffff7ff7000     0xfffff7ff9000 rw-p     2000       0 [anon_fffff7ff7][0m
+[0m    0xfffff7ff9000     0xfffff7ffb000 r--p     2000       0 [vvar][0m
+[31m    0xfffff7ffb000     0xfffff7ffc000 r-xp     1000       0 [vdso][0m
+[0m    0xfffff7ffc000     0xfffff7ffe000 r--p     2000   2e000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1[0m
+[35m    0xfffff7ffe000     0xfffff8000000 rw-p     2000   30000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1[0m
+[4m[33m    0xfffffffdf000    0x1000000000000 rwxp    21000       0 [stack][0m[4m[0m

@@ -1,0 +1,11 @@
+[32m[1mpwndbg> [0m[32m[0mplt
+[35mSection .plt 0x555555557020 - 0x555555557080:[0m
+[31mNo symbols found in section .plt[0m
+[35mSection .plt.got 0x555555557080 - 0x555555557090:[0m
+0x555555557080: __cxa_finalize@plt
+[35mSection .plt.sec 0x555555557090 - 0x5555555570e0:[0m
+0x555555557090: free@plt
+0x5555555570a0: strcpy@plt
+0x5555555570b0: __stack_chk_fail@plt
+0x5555555570c0: printf@plt
+0x5555555570d0: malloc@plt

@@ -1,0 +1,27 @@
+[32m[1mpwndbg> [0m[32m[0mvmmap
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+[0m    0x555555556000     0x555555557000 r--p     1000       0 test_x64[0m
+[31m    0x555555557000     0x555555558000 r-xp     1000    1000 test_x64[0m
+[0m    0x555555558000     0x555555559000 r--p     1000    2000 test_x64[0m
+[0m    0x555555559000     0x55555555a000 r--p     1000    2000 test_x64[0m
+[35m    0x55555555a000     0x55555555b000 rw-p     1000    3000 test_x64[0m
+[34m    0x55555555b000     0x55555557c000 rw-p    21000       0 [heap][0m
+[35m    0xffff92927000     0xffff9292a000 rw-p     3000       0 [anon_ffff92927][0m
+[0m    0xffff92932000     0xffff9295a000 r--p    28000       0 /usr/x86_64-linux-gnu/lib/libc.so.6[0m
+[31m    0xffff9295a000     0xffff92ae2000 r-xp   188000   28000 /usr/x86_64-linux-gnu/lib/libc.so.6[0m
+[0m    0xffff92ae2000     0xffff92b31000 r--p    4f000  1b0000 /usr/x86_64-linux-gnu/lib/libc.so.6[0m
+[0m    0xffff92b31000     0xffff92b35000 r--p     4000  1fe000 /usr/x86_64-linux-gnu/lib/libc.so.6[0m
+[35m    0xffff92b35000     0xffff92b37000 rw-p     2000  202000 /usr/x86_64-linux-gnu/lib/libc.so.6[0m
+[35m    0xffff92b37000     0xffff92b44000 rw-p     d000       0 [anon_ffff92b37][0m
+[35m    0xffff92b47000     0xffff92b49000 rw-p     2000       0 [anon_ffff92b47][0m
+[35m    0xffff92be9000     0xffff92beb000 rw-p     2000       0 [anon_ffff92be9][0m
+[31m    0xffff92bed000     0xffff92bee000 r-xp     1000       0 [vdso][0m
+[0m    0xffff92bee000     0xffff92bef000 r--p     1000       0 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2[0m
+[31m    0xffff92bef000     0xffff92c1a000 r-xp    2b000    1000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2[0m
+[0m    0xffff92c1a000     0xffff92c24000 r--p     a000   2c000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2[0m
+[0m    0xffff92c24000     0xffff92c26000 r--p     2000   36000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2[0m
+[35m    0xffff92c26000     0xffff92c28000 rw-p     2000   38000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2[0m
+[0m    0xffff92c2c000     0xffff92c2d000 ---p     1000       0 [anon_ffff92c2c][0m
+[33m    0xffff92c2d000     0xffff9342d000 rw-p   800000       0 [stack][0m
+[31m0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall][0m

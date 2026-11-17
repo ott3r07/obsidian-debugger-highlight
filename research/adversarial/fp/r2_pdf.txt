@@ -1,0 +1,40 @@
+            ;-- section.0.__TEXT.__text:
+            ;-- entry0:
+            ;-- func.100000460:
+            ;-- pc:
+            ; NULL XREF from aav.0x100000020 @ +0xb0(r)
+┌ 176: int main (int argc, char **argv);
+│ `- args(x0, x1) vars(10:sp[0x8..0x80])
+│           0x100000460      ff0302d1       sub sp, sp, 0x80           ; [00] -r-x section size 176 named 0.__TEXT.__text
+│           0x100000464      fd7b07a9       stp x29, x30, [var_70h]
+│           0x100000468      fdc30191       add x29, sp, 0x70
+│           0x10000046c      28000090       adrp x8, reloc.__stack_chk_guard ; 0x100004000
+│           0x100000470      080140f9       ldr x8, [x8]               ; [0x100004000:8]=0x8010000000000000 ; reloc.__stack_chk_guard
+│                                                                      [04] -rw- section size 32 named 4.__DATA_CONST.__got
+│           0x100000474      080140f9       ldr x8, [x8]
+│           0x100000478      a8831ff8       stur x8, [x29, -8]
+│           0x10000047c      ff2700b9       str wzr, [var_24h]         ; argc
+│           0x100000480      e02300b9       str w0, [var_20h]          ; argc
+│           0x100000484      e10f00f9       str x1, [var_18h]          ; argv
+│           0x100000488      080082d2       mov x8, 0x1000
+│           0x10000048c      a8fbbef2       movk x8, 0xf7dd, lsl 16
+│           0x100000490      e8ffcff2       movk x8, 0x7fff, lsl 32
+│           0x100000494      e80b00f9       str x8, [var_10h]
+│           0x100000498      e82340b9       ldr w8, [var_20h]
+│           0x10000049c      08050071       subs w8, w8, 1
+│       ┌─< 0x1000004a0      0d010054       b.le 0x1000004c0
+│      ┌──< 0x1000004a4      01000014       b 0x1000004a8
+│      ││   ; CODE XREF from main @ 0x1000004a4(x)
+│      └──> 0x1000004a8      e80f40f9       ldr x8, [var_18h]
+│       │   0x1000004ac      010540f9       ldr x1, [x8, 8]            ; const char *src
+│       │   0x1000004b0      e0a30091       add x0, sp, 0x28           ; char *dest
+│       │   0x1000004b4      020880d2       mov x2, 0x40               ; '@' ; size_t destlen
+│       │   0x1000004b8      16000094       bl sym.imp.__strcpy_chk    ; char *strcpy_chk(char *dest, const char *src, size_t destlen)
+│      ┌──< 0x1000004bc      01000014       b 0x1000004c0
+│      ││   ; CODE XREFS from main @ 0x1000004a0(x), 0x1000004bc(x)
+│      └└─> 0x1000004c0      ea0b40f9       ldr x10, [var_10h]
+│           0x1000004c4      e82340b9       ldr w8, [var_20h]
+│           0x1000004c8      e9030091       mov x9, sp
+│           0x1000004cc      2a0100f9       str x10, [x9]
+│           0x1000004d0      280500f9       str x8, [x9, 8]
+│           0x1000004d4      00000090       adrp x0, sym.__mh_execute_header ; 0x100000000

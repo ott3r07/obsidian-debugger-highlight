@@ -1,0 +1,6 @@
+gef➤  gef config dereference
+──────────────────────────── GEF configuration setting: dereference.max_recursion ────────────────────────────
+dereference.max_recursion (int) = 7
+
+Description:
+	Maximum level of pointer recursion

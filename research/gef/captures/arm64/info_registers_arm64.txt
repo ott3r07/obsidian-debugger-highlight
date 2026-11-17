@@ -1,0 +1,41 @@
+gef➤  info registers
+x0             0xfffff7ffdb50      0xfffff7ffdb50
+x1             0x154844b1b73fc000  0x154844b1b73fc000
+x2             0xfffffffffd28      0xfffffffffd28
+x3             0xaaaaaaaa0a00      0xaaaaaaaa0a00
+x4             0xfffff7ff8020      0xfffff7ff8020
+x5             0x6b69657c0b5b1843  0x6b69657c0b5b1843
+x6             0xfffff7fa1e60      0xfffff7fa1e60
+x7             0xfffff7ffcaf0      0xfffff7ffcaf0
+x8             0xd7                0xd7
+x9             0x28                0x28
+x10            0x1ccef0            0x1ccef0
+x11            0x0                 0x0
+x12            0xfffff7ffeb48      0xfffff7ffeb48
+x13            0x2f                0x2f
+x14            0x1f22b4b           0x1f22b4b
+x15            0xfffff7ff8e70      0xfffff7ff8e70
+x16            0xfffff7f9fd68      0xfffff7f9fd68
+x17            0xfffff7fd0d40      0xfffff7fd0d40
+x18            0x3                 0x3
+x19            0xfffffffffd18      0xfffffffffd18
+x20            0x1                 0x1
+x21            0xaaaaaaabfd60      0xaaaaaaabfd60
+x22            0xaaaaaaaa0a00      0xaaaaaaaa0a00
+x23            0xfffffffffd28      0xfffffffffd28
+x24            0xfffff7ffdb58      0xfffff7ffdb58
+x25            0x0                 0x0
+x26            0xfffff7ffe000      0xfffff7ffe000
+x27            0xaaaaaaabfd60      0xaaaaaaabfd60
+x28            0x0                 0x0
+x29            0xfffffffffb90      0xfffffffffb90
+x30            0xfffff7e184c4      0xfffff7e184c4
+sp             0xfffffffffad0      0xfffffffffad0
+pc             0xaaaaaaaa0a20      0xaaaaaaaa0a20 <main+32>
+cpsr           0x60201000          [ EL=0 BTYPE=0 SSBS SS C Z ]
+fpsr           0x0                 [ ]
+fpcr           0x0                 [ Len=0 Stride=0 RMode=0 ]
+tpidr          0xfffff7ff8620      0xfffff7ff8620
+tpidr2         0x0                 0x0
+pauth_dmask    0x7f000000000000    0x7f000000000000
+pauth_cmask    0x7f000000000000    0x7f000000000000

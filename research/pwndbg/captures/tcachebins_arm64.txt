@@ -1,0 +1,4 @@
+pwndbg> tcachebins
+tcachebins
+0x30 [  7]:  0xaaaaaaac13c0 —▸ 0xaaaaaaac1390 —▸ 0xaaaaaaac1360 —▸ 0xaaaaaaac1330 —▸ 0xaaaaaaac1300 —▸ 0xaaaaaaac12d0 —▸ 0xaaaaaaac12a0 ◂— 0
+0x90 [  1]:  0xaaaaaaac1420 ◂— 0

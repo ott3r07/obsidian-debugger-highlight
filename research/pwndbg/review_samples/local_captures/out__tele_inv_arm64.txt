@@ -1,0 +1,7 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> telescope -r $sp 4
+00:0000│-198 0xfffffffff9b8 —▸ 0xaaaaaaaa0b50 (main) ◂— sub sp, sp, #0x1a0
+01:0008│-190 0xfffffffff9c0 —▸ 0xfffffffffcf8 —▸ 0xfffffffffeea ◂— 'HOSTNAME=83281bbedf83'
+02:0010│-188 0xfffffffff9c8 —▸ 0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+03:0018│  sp 0xfffffffff9d0 {argv} —▸ 0xfffffffffce8 —▸ 0xfffffffffedd ◂— '/rv/rv_arm64'

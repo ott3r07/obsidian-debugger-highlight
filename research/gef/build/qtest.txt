@@ -1,0 +1,5 @@
+gef_remote	gef-remote --qemu-user --qemu-binary /work/test_x64 localhost 1234
+break_main	break main
+continue_main	continue
+heap_bins	heap bins
+vmmap	vmmap

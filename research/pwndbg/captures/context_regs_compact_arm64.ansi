@@ -1,0 +1,33 @@
+[32m[1mpwndbg> [0m[32m[0mcontext regs
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs on ]──────────────────────────────────[0m
+ [1mX0  [0m 0x510                                                    [1mX17 [0m [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX1  [0m 0xffff                                                   [1mX18 [0m 3
+ [1mX2 [37m  ⏎[0m                                                        [1mX19[37m  ⏎[0m
+ [1mX3 [37m  ⏎[0m                                                        [1mX20 [0m 1
+ [1mX4  [0m 0x510                                                    [1mX21[37m  ⏎[0m
+ [1mX5  [0m 0x40                                                     [1mX22 [0m [31m0xaaaaaaaa0ad4 (main)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+ [1mX6  [0m 0x71fae20c11f79487                                       [1mX23[37m  ⏎[0m
+ [1mX7  [0m 0                                                        [1mX24 [0m [0m0xfffff7ffdb58 (_rtld_global_ro)[0m ◂— 0
+ [1mX8 [37m  ⏎[0m                                                        [1mX25 [0m 0
+ [1mX9  [0m 0x28                                                     [1mX26[37m  ⏎[0m
+ [1mX10 [0m 0x1ccef0                                                 [1mX27[37m  ⏎[0m
+ [1mX11 [0m 0                                                        [1mX28 [0m 0
+ [1mX12[37m  ⏎[0m                                                        [1mX29[37m  ⏎[0m
+ [1mX13 [0m 0x2f                                                     [1mSP [37m  ⏎[0m
+ [1mX14 [0m 0x1f22b4b                                                [1mLR  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+ [1mX15 [0m [35m0xfffff7ff8e70[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f      [1mPC  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+ [1mX16[37m  ⏎[0m                                                       
+[90m↪[0m [1mX2  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[90m↪[0m [1mX19 [0m [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[90m↪[0m [1mX3  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[90m↪[0m [1mX21 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+[90m↪[0m [1mX23 [0m [33m0xfffffffffcd8[0m —▸ [33m0xfffffffffed7[0m ◂— 'HOSTNAME=3e37fc6690d4'
+[90m↪[0m [1mX8  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[90m↪[0m [1mX26 [0m [35m0xfffff7ffe000 (_rtld_global)[0m —▸ [35m0xfffff7fff350[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+[90m↪[0m [1mX27 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+[90m↪[0m [1mX12 [0m [35m0xfffff7ffeb48 (_rtld_global+2888)[0m —▸ [31m0xfffff7fbe000[0m ◂— 0x10102464c457f
+[90m↪[0m [1mX29 [0m [33m0xfffffffffb40[0m —▸ [33m0xfffffffffc50[0m —▸ [33m0xfffffffffc60[0m ◂— 0
+[90m↪[0m [1mSP  [0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[90m↪[0m [1mX16 [0m [0m0xaaaaaaabffb0 (free@got[plt])[0m —▸ [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

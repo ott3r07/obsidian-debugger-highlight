@@ -1,0 +1,10 @@
+gef➤  vmmap $sp
+[*] `$sp` has no type specified. We guessed it was an address filter.
+[*] You can use --name or --addr before the filter value for specifying its type manually.
+
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+
+[addr = `$sp` (0xfffffffffae0)]
+0x0000fffffffdf000 0x0001000000000000 0x0000000000000000 rw- [stack]
+

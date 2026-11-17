@@ -1,0 +1,2 @@
+pwndbg> p fp
+$3 = (op_fn) 0xaaaaaaaa0918 <add>

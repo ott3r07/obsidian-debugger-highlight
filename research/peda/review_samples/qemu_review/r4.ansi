@@ -1,0 +1,81 @@
+Script started on 2026-11-17 05:45:57+00:00 [COMMAND="stty cols 120; gdb-multiarch -q -ex vmmap -ex "pdisass main" -ex quit ./rvpie" <not executed on terminal>]
+Reading symbols from ./rvpie...
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[m[;33mWarning: not running[0m[0m
+[;1;34mStart              End                Perm	Name[0m
+[m0x00001000         0x00001395         rx-p	/rv/rvpie[0m
+[m0x00000318         0x0000224c         r--p	/rv/rvpie[0m
+[m0x00003da0         0x00004038         rw-p	/rv/rvpie[0m
+[mDump of assembler code for function main:
+   0x000000000000124b <+0>:[m	endbr64[0m
+   0x000000000000124f <+4>:[m	push   rbp[0m
+   0x0000000000001250 <+5>:[m	mov    rbp,rsp[0m
+   0x0000000000001253 <+8>:[m	sub    rsp,0xb0[0m
+   0x000000000000125a <+15>:[m	mov    DWORD PTR [rbp-0xa4],edi[0m
+   0x0000000000001260 <+21>:[m	mov    QWORD PTR [rbp-0xb0],rsi[0m
+   0x0000000000001267 <+28>:[m	mov    rax,QWORD PTR fs:0x28[0m
+   0x0000000000001270 <+37>:[m	mov    QWORD PTR [rbp-0x8],rax[0m
+   0x0000000000001274 <+41>:[m	xor    eax,eax[0m
+   0x0000000000001276 <+43>:[m	lea    rax,[rbp-0x70][0m
+   0x000000000000127a <+47>:[m	mov    edx,0x50[0m
+   0x000000000000127f <+52>:[m	mov    esi,0x41[0m
+   0x0000000000001284 <+57>:[m	mov    rdi,rax[0m
+   0x0000000000001287 <+60>:[;32m	call   0x10a0 <memset@plt>[0m
+   0x000000000000128c <+65>:[m	lea    rax,[rbp-0x70][0m
+   0x0000000000001290 <+69>:[m	add    rax,0x50[0m
+   0x0000000000001294 <+73>:[m	mov    DWORD PTR [rax],0x42424242[0m
+   0x000000000000129a <+79>:[m	mov    BYTE PTR [rax+0x4],0x0[0m
+   0x000000000000129e <+83>:[m	lea    rax,[rbp-0x90][0m
+   0x00000000000012a5 <+90>:[m	mov    QWORD PTR [rbp-0x98],rax[0m
+   0x00000000000012ac <+97>:[m	lea    rax,[rbp-0x98][0m
+   0x00000000000012b3 <+104>:[m	mov    QWORD PTR [rbp-0x90],rax[0m
+   0x00000000000012ba <+111>:[m	lea    rax,[rbp-0x88][0m
+   0x00000000000012c1 <+118>:[m	mov    QWORD PTR [rbp-0x88],rax[0m
+   0x00000000000012c8 <+125>:[m	lea    rax,[rip+0x2d61]        # 0x4030 <gself>[0m
+   0x00000000000012cf <+132>:[m	mov    QWORD PTR [rip+0x2d5a],rax        # 0x4030 <gself>[0m
+   0x00000000000012d6 <+139>:[m	mov    edi,0x10[0m
+   0x00000000000012db <+144>:[;32m	call   0x10b0 <malloc@plt>[0m
+   0x00000000000012e0 <+149>:[m	mov    QWORD PTR [rbp-0x80],rax[0m
+   0x00000000000012e4 <+153>:[m	mov    edi,0x10[0m
+   0x00000000000012e9 <+158>:[;32m	call   0x10b0 <malloc@plt>[0m
+   0x00000000000012ee <+163>:[m	mov    QWORD PTR [rbp-0x78],rax[0m
+   0x00000000000012f2 <+167>:[m	mov    rax,QWORD PTR [rbp-0x80][0m
+   0x00000000000012f6 <+171>:[m	mov    rdx,QWORD PTR [rbp-0x78][0m
+   0x00000000000012fa <+175>:[m	mov    QWORD PTR [rax],rdx[0m
+   0x00000000000012fd <+178>:[m	mov    rax,QWORD PTR [rbp-0x78][0m
+   0x0000000000001301 <+182>:[m	mov    rdx,QWORD PTR [rbp-0x80][0m
+   0x0000000000001305 <+186>:[m	mov    QWORD PTR [rax],rdx[0m
+   0x0000000000001308 <+189>:[m	mov    rax,QWORD PTR [rbp-0x80][0m
+   0x000000000000130c <+193>:[m	mov    QWORD PTR [rax+0x8],0x2000[0m
+   0x0000000000001314 <+201>:[m	mov    rax,QWORD PTR [rbp-0x78][0m
+   0x0000000000001318 <+205>:[m	mov    QWORD PTR [rax+0x8],0xa00[0m
+   0x0000000000001320 <+213>:[m	lea    rdx,[rbp-0x88][0m
+   0x0000000000001327 <+220>:[m	lea    rsi,[rbp-0x98][0m
+   0x000000000000132e <+227>:[m	lea    rax,[rbp-0x70][0m
+   0x0000000000001332 <+231>:[m	mov    ecx,0x2000[0m
+   0x0000000000001337 <+236>:[m	mov    rdi,rax[0m
+   0x000000000000133a <+239>:[;32m	call   0x11a9 <probe>[0m
+   0x000000000000133f <+244>:[m	mov    rax,QWORD PTR [rip+0x2cca]        # 0x4010 <gcounter>[0m
+   0x0000000000001346 <+251>:[m	add    rax,0x5[0m
+   0x000000000000134a <+255>:[m	mov    QWORD PTR [rip+0x2cbf],rax        # 0x4010 <gcounter>[0m
+   0x0000000000001351 <+262>:[m	lea    rax,[rbp-0x70][0m
+   0x0000000000001355 <+266>:[m	mov    rdi,rax[0m
+   0x0000000000001358 <+269>:[;32m	call   0x1080 <puts@plt>[0m
+   0x000000000000135d <+274>:[;31m	cmp    DWORD PTR [rbp-0xa4],0x1[0m
+   0x0000000000001364 <+281>:[;33m	jle    0x136b <main+288>[0m
+   0x0000000000001366 <+283>:[;32m	call   0x1217 <spin>[0m
+   0x000000000000136b <+288>:[m	mov    eax,0x0[0m
+   0x0000000000001370 <+293>:[m	mov    rdx,QWORD PTR [rbp-0x8][0m
+   0x0000000000001374 <+297>:[m	sub    rdx,QWORD PTR fs:0x28[0m
+   0x000000000000137d <+306>:[;33m	je     0x1384 <main+313>[0m
+   0x000000000000137f <+308>:[;32m	call   0x1090 <__stack_chk_fail@plt>[0m
+   0x0000000000001384 <+313>:[m	leave[0m
+   0x0000000000001385 <+314>:[;34m	ret[0m
+End of assembler dump.[0m
+
+Script done on 2026-11-17 05:45:58+00:00 [COMMAND_EXIT_CODE="0"]

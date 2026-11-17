@@ -1,0 +1,6 @@
+pwndbg> canary
+AT_RANDOM  = 0xfffffffffea8 # points to the canary value on glibc < 2.44
+TLS Canary @ 0xfffff7ff8648 # address where canary is stored
+Warning: TLS canary value 0xfffff7f35c40 doesn't match global canary 0xc989efb4cb5c2100!
+Canary     = 0xfffff7f35c40
+No canaries found.

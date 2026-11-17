@@ -1,0 +1,63 @@
+pwndbg> context
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x5555555572fb (main) ◂— endbr64
+*RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+*RDI  1
+*RSI  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ R8   0
+*R9   0xffff92bf3380 ◂— endbr64
+*R10  0xffff9342c8f0 ◂— 0x800000
+*R11  0xffff92c25f38 ◂— 0x6ffffff0
+*R12  1
+ R13  0
+*R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557317 (main+28) ◂— mov rax, qword ptr fs:[0x28]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557303 <main+8>     sub    rsp, 0xd0
+   0x55555555730a <main+15>    mov    dword ptr [rbp - 0xc4], edi
+   0x555555557310 <main+21>    mov    qword ptr [rbp - 0xd0], rsi
+b► 0x555555557317 <main+28>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+   0x555555557320 <main+37>    mov    qword ptr [rbp - 8], rax        [0xffff9342cbc8] <= 0x76f85efbfd30d300
+   0x555555557324 <main+41>    xor    eax, eax                        EAX => 0
+   0x555555557326 <main+43>    lea    rax, [rip - 0x164]              RAX => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555732d <main+50>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557334 <main+57>    lea    rax, [rbp - 0x40]               RAX => 0xffff9342cb90 ◂— 0
+   0x555555557338 <main+61>    movabs rsi, 0x4141414141414141         RSI => 0x4141414141414141 ('AAAAAAAA')
+   0x555555557342 <main+71>    movabs rdi, 0x4242424242424242         RDI => 0x4242424242424242 ('BBBBBBBB')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} ◂— 0x40 /* '@' */
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557317 main+28
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

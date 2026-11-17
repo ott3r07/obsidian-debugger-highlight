@@ -1,0 +1,14 @@
+(qemu) gef➤  heap chunk mid[1]
+Chunk(addr=0x4b3b10, size=0x90, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 144 (0x90)
+Usable size: 136 (0x88)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+
+(qemu) gef➤  heap chunk small[0]
+Chunk(addr=0x4b3900, size=0x30, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+Chunk size: 48 (0x30)
+Usable size: 40 (0x28)
+Previous chunk size: 0 (0x0)
+PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA
+

@@ -1,0 +1,14 @@
+[32m[1mpwndbg> [0m[32m[0mtls
+[32mThread Local Storage (TLS) base: 0xffff9a6b8740[0m
+[32mTLS is located at:[0m
+[35m    0xffff9a6b8000     0xffff9a6bb000 rw-p     3000       0 [anon_ffff9a6b8][0m
+[32mDumping the address:[0m
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1mfs_base[0m [35m0xffff9a6b8740[0m ◂— [35m0xffff9a6b8740[0m
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m [1m       [0m [35m0xffff9a6b8748[0m —▸ [35m0xffff9a6b90e0[0m ◂— 1
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m [1m       [0m [35m0xffff9a6b8750[0m —▸ [35m0xffff9a6b8740[0m ◂— [35m0xffff9a6b8740[0m
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m [1m       [0m [35m0xffff9a6b8758[0m ◂— 0
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m [1m       [0m [35m0xffff9a6b8760[0m ◂— 0
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m [1m       [0m [35m0xffff9a6b8768[0m ◂— 0x5dbec8f0f83ce400
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m [1m       [0m [35m0xffff9a6b8770[0m ◂— 0xadf675311ea4ac03
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m [1m       [0m [35m0xffff9a6b8778[0m ◂— 0
+[0m... ↓            2 skipped[0m

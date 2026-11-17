@@ -1,0 +1,1073 @@
+[32mGEF[0m for linux ready, type `[4m[33mgef[24m[0m' to start, `[4m[35mgef config[24m[0m' to configure
+[1m[32m90[0m commands loaded and [1m[34m5[0m functions added for GDB [1m[33m15.1[0m in 0.00ms using Python engine [1m[31m3.12[0m
+Reading symbols from [32m/t/t2[m...
+[?2004h[1;31mgef➤  [0mbreak puts
+[?2004lBreakpoint 1 at [34m0x7f0[m
+[?2004h[1;31mgef➤  [0mrun
+[?2004lStarting program: [32m/t/t2[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33m__GI__IO_puts[m ([36mstr[m=0xaaaaaaaa0af8 "bins ready") at [32m./libio/ioputs.c[m:35
+warning: 35	[32m./libio/ioputs.c[m: No such file or directory
+[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m  →  [33m"bins ready"[0m
+[1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m  →  0x0000000000000000
+[1m[31m$x2  [0m: 0x1011            
+[34m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+[34m$x5  [0m: 0x0               
+[1m[31m$x6  [0m: 0xfffffffffffffff0
+[1m[31m$x7  [0m: 0x4               
+[34m$x8  [0m: 0x0               
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8  →  [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xfffff7e619c4 <_IO_proc_close+0254> str    x25,  [sp,  #112][0m
+   [90m0xfffff7e619c8 <_IO_proc_close+0258> bl     0xfffff7ee9250 <__stack_chk_fail>[0m
+   [90m0xfffff7e619cc                  nop    [0m
+[31m●[0m[32m→ 0xfffff7e619d0 <puts+0000>      stp    x29,  x30,  [sp,  #-64]![0m
+   0xfffff7e619d4 <puts+0004>      mov    x29,  sp
+   0xfffff7e619d8 <puts+0008>      stp    x21,  x22,  [sp,  #32]
+   0xfffff7e619dc <puts+000c>      mov    x21,  x0
+   0xfffff7e619e0 <puts+0010>      adrp   x22,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e619e4 <puts+0014>      ldr    x22,  [x22,  #3600]
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xfffff7e619d0[0m in [1m[33m__GI__IO_puts[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[35m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mgot
+[?2004l[90m─────────────────────────────────────────────────── [0m[36m/t/t2[0m[90m ───────────────────────────────────────────────────[0m
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabff78] [32m__libc_start_main@GLIBC_2.34  →  0xfffff7e18500[0m
+[0xaaaaaaabff80] [32m__cxa_finalize@GLIBC_2.17  →  0xfffff7e2eb50[0m
+[0xaaaaaaabff88] [32mmalloc@GLIBC_2.17  →  0xfffff7e86470[0m
+[0xaaaaaaabff90] [32m__stack_chk_fail@GLIBC_2.17  →  0xfffff7ee9250[0m
+[0xaaaaaaabff98] [32m__gmon_start__  →  0x0[0m
+[0xaaaaaaabffa0] [32mabort@GLIBC_2.17  →  0xfffff7e17d0c[0m
+[0xaaaaaaabffa8] [32mputs@GLIBC_2.17  →  0xfffff7e619d0[0m
+[0xaaaaaaabffb0] [32mfree@GLIBC_2.17  →  0xfffff7e86d70[0m
+[0xaaaaaaabffb8] [32mstrcpy@GLIBC_2.17  →  0xfffff7e8d240[0m
+[0xaaaaaaabffc0] [32mprintf@GLIBC_2.17  →  0xfffff7e40590[0m
+[?2004h[1;32mgef➤  [0mgot puts
+[?2004l[90m─────────────────────────────────────────────────── [0m[36m/t/t2[0m[90m ───────────────────────────────────────────────────[0m
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabffa8] [32mputs@GLIBC_2.17  →  0xfffff7e619d0[0m
+[?2004h[1;32mgef➤  [0mchecksec
+[?2004l[1m[34m[+][0m checksec for '/t/t2'
+Canary                        : [32m[1m✓ [0m[0m(value: 0x387fb66d57ee7900)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [32m[1m✓ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [32mFull[0m
+[?2004h[1;32mgef➤  [0mchecksec /t/t2_nopie
+[?2004l[1m[34m[+][0m checksec for '/t/t2_nopie'
+Canary                        : [32m[1m✓ [0m[0m(value: 0x387fb66d57ee7900)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [31m[1m✘ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [33mPartial[0m
+[?2004h[1;32mgef➤  [0mheap bins
+[?2004l[90m────────────────────────────────────────── [0m[36mTcachebins for thread 1[0m[90m ──────────────────────────────────────────[0m
+Tcachebins[idx=14, size=0x100, count=7] ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac18a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac17a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac16a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac15a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac14a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac13a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac12a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m) 
+[90m──────────────────────────────────── [0m[36mFastbins for arena at 0xfffff7fa0a50[0m[90m ────────────────────────────────────[0m
+Fastbins[idx=0, size=0x20] 0x00
+Fastbins[idx=1, size=0x30] 0x00
+Fastbins[idx=2, size=0x40] 0x00
+Fastbins[idx=3, size=0x50] 0x00
+Fastbins[idx=4, size=0x60] 0x00
+Fastbins[idx=5, size=0x70] 0x00
+Fastbins[idx=6, size=0x80] 0x00
+[90m────────────────────────────────── [0m[36mUnsorted Bin for arena at 0xfffff7fa0a50[0m[90m ──────────────────────────────────[0m
+[1m[34m[+][0m Found 0 chunks in unsorted bin.
+[90m─────────────────────────────────── [0m[36mSmall Bins for arena at 0xfffff7fa0a50[0m[90m ───────────────────────────────────[0m
+[1m[32m[+][0m small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1ac0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)   →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac19a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 2 chunks in 1 small non-empty bins.
+[90m─────────────────────────────────── [0m[36mLarge Bins for arena at 0xfffff7fa0a50[0m[90m ───────────────────────────────────[0m
+[1m[32m[+][0m large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1be0, size=0x810, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 1 chunks in 1 large non-empty bins.
+[?2004h[1;32mgef➤  [0mheap bins small
+[?2004l[90m─────────────────────────────────── [0m[36mSmall Bins for arena at 0xfffff7fa0a50[0m[90m ───────────────────────────────────[0m
+[1m[32m[+][0m small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1ac0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)   →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac19a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 2 chunks in 1 small non-empty bins.
+[?2004h[1;32mgef➤  [0mheap bins large
+[?2004l[90m─────────────────────────────────── [0m[36mLarge Bins for arena at 0xfffff7fa0a50[0m[90m ───────────────────────────────────[0m
+[1m[32m[+][0m large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   [33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1be0, size=0x810, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 1 chunks in 1 large non-empty bins.
+[?2004h[1;32mgef➤  [0mheap chunks
+[?2004l[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1010, size=0x290, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac1010     [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac12a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac12a0     [33mc1[0m [33maa[0m [33maa[0m [33maa[0m [34m0a[0m [90m00[0m [90m00[0m [90m00[0m [33m82[0m 55[0m 23[0m [33md1[0m 7b[0m 7b[0m [33mcf[0m [33mc2[0m    .........U#.{{..]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac13a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac13a0     61[0m [33mb8[0m [33m06[0m [90m00[0m [33ma0[0m [33maa[0m [90m00[0m [90m00[0m [33m82[0m 55[0m 23[0m [33md1[0m 7b[0m 7b[0m [33mcf[0m [33mc2[0m    a........U#.{{..]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac14a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac14a0     61[0m [33mb9[0m [33m06[0m [90m00[0m [33ma0[0m [33maa[0m [90m00[0m [90m00[0m [33m82[0m 55[0m 23[0m [33md1[0m 7b[0m 7b[0m [33mcf[0m [33mc2[0m    a........U#.{{..]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac15a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac15a0     61[0m [33mbe[0m [33m06[0m [90m00[0m [33ma0[0m [33maa[0m [90m00[0m [90m00[0m [33m82[0m 55[0m 23[0m [33md1[0m 7b[0m 7b[0m [33mcf[0m [33mc2[0m    a........U#.{{..]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac16a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac16a0     61[0m [33mbf[0m [33m06[0m [90m00[0m [33ma0[0m [33maa[0m [90m00[0m [90m00[0m [33m82[0m 55[0m 23[0m [33md1[0m 7b[0m 7b[0m [33mcf[0m [33mc2[0m    a........U#.{{..]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac17a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac17a0     61[0m [33mbc[0m [33m06[0m [90m00[0m [33ma0[0m [33maa[0m [90m00[0m [90m00[0m [33m82[0m 55[0m 23[0m [33md1[0m 7b[0m 7b[0m [33mcf[0m [33mc2[0m    a........U#.{{..]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac18a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac18a0     61[0m [33mbd[0m [33m06[0m [90m00[0m [33ma0[0m [33maa[0m [90m00[0m [90m00[0m [33m82[0m 55[0m 23[0m [33md1[0m 7b[0m 7b[0m [33mcf[0m [33mc2[0m    a........U#.{{..]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac19a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac19a0     [33ma0[0m [33m0b[0m [33mfa[0m [33mf7[0m [32mff[0m [32mff[0m [90m00[0m [90m00[0m [33mb0[0m [33m1a[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1aa0, size=0x20, flags=[31mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac1aa0     [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1ac0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac1ac0     [33m90[0m [33m19[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m [33ma0[0m [33m0b[0m [33mfa[0m [33mf7[0m [32mff[0m [32mff[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1bc0, size=0x20, flags=[31mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac1bc0     [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1be0, size=0x810, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac1be0     [33ma0[0m [33m0f[0m [33mfa[0m [33mf7[0m [32mff[0m [32mff[0m [90m00[0m [90m00[0m [33ma0[0m [33m0f[0m [33mfa[0m [33mf7[0m [32mff[0m [32mff[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac23f0, size=0x20, flags=[31mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac23f0     [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac2410, size=0x1010, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+    [0x0000aaaaaaac2410     [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m    ................]
+[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac3420, size=0x1ebf0, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)  ←  [32mtop chunk[0m
+[?2004h[1;32mgef➤  [0mheap chunk s1
+[?2004l[1m[31m[!][0m Command 'heap chunk' failed to execute properly, reason: No symbol "s1" in current context.
+[?2004h[1;32mgef➤  [0mup
+[?2004l#1  [34m0x0000aaaaaaaa0a68[m in [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffd38) at [32m/rv/t2.c[m:15
+15	    [01mputs[m[31m([m[31m"bins ready"[m[31m);[m
+[?2004h[1;32mgef➤  [0mheap chunk s1
+[?2004l[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac19a0, size=0x100, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+Chunk size: 256 (0x100)
+Usable size: 248 (0xf8)
+Previous chunk size: 0 (0x0)
+[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m
+
+
+Forward pointer: 0xfffff7fa0ba0
+Backward pointer: 0xaaaaaaac1ab0
+
+[?2004h[1;32mgef➤  [0mheap chunk l1
+[?2004l[33m[1m[4mChunk[24m[0m(addr=0xaaaaaaac1be0, size=0x810, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+Chunk size: 2064 (0x810)
+Usable size: 2056 (0x808)
+Previous chunk size: 0 (0x0)
+[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m
+
+
+Forward pointer: 0xfffff7fa0fa0
+Backward pointer: 0xfffff7fa0fa0
+
+[?2004h[1;32mgef➤  [0mheap chunks --summary
+[?2004l== Chunk distribution by size ==
+ChunkBytes	Count     	TotalBytes     	Description
+125936    	1         	125936         	
+4112      	1         	4112           	
+256       	9         	2304           	
+2064      	1         	2064           	
+656       	1         	656            	
+32        	3         	96             	
+
+== Chunk distribution by flag ==
+Flag           	TotalCount	TotalBytes
+PREV_INUSE     	13        	135072
+IS_MMAPPED     	0         	0
+NON_MAIN_ARENA 	0         	0
+[?2004h[1;32mgef➤  [0mhexdump byte main --size 48
+[?2004l[1m[31m[!][0m Command 'hexdump byte' failed to execute properly, reason: Cannot convert value to long.
+[?2004h[1;32mgef➤  [0mdereference $sp -l 4 -r $sp
+[?2004l[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[?2004h[1;32mgef➤  [0mdereference $sp -l 4 -r 0x40
+[?2004l[1m[31m[!][0m Unmapped address: '0x40'
+[?2004h[1;32mgef➤  [0mformat-string-helper
+[?2004l
+
+
+
+
+[1m[32m[+][0m Enabled 5 FormatString breakpoints
+[?2004h[1;32mgef➤  [0mxinfo puts
+[?2004l[1m[31m[!][0m Cannot convert value to long.
+[?2004h[1;32mgef➤  [0mvmmap $sp
+[?2004l[1m[33m[*][0m `$sp` has no type specified. We guessed it was an address filter.
+[1m[33m[*][0m You can use --name or --addr before the filter value for specifying its type manually.
+
+[ Legend:  [31mCode[0m | [35mStack[0m | [32mHeap[0m ]
+[34mStart              End                Offset             Perm Path[0m
+
+[32m[addr = `$sp` (0xfffffffffae0)][0m
+[35m0x0000fffffffdf000[0m [35m0x0001000000000000[0m [35m0x0000000000000000[0m [35mrw-[0m [35m[stack][0m
+
+[?2004h[1;32mgef➤  [0maslr
+[?2004lASLR is currently [31mdisabled[0m
+[?2004h[1;32mgef➤  [0mpie info
+[?2004lVNum    Num     Addr              
+[?2004h[1;32mgef➤  [0mscan stack libc
+[?2004l[1m[34m[+][0m Searching for addresses in '[33mstack[0m' that point to '[33mlibc[0m'
+[33m[stack][0m: [36m0x0000ffffffffed50[0m│+0x1fd50: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000ffffffffed90[0m│+0x1fd90: 0x0000fffff7f9faf0  →  0x0000000000000001
+[33m[stack][0m: [36m0x0000ffffffffedc0[0m│+0x1fdc0: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff1a0[0m│+0x201a0: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff1c0[0m│+0x201c0: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff208[0m│+0x20208: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff248[0m│+0x20248: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff498[0m│+0x20498: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff4a0[0m│+0x204a0: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff5e0[0m│+0x205e0: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff7e0[0m│+0x207e0: 0x0000fffff7dfdbc8  →  0x000c001200000eaf
+[33m[stack][0m: [36m0x0000fffffffff7f0[0m│+0x207f0: 0x0000fffff7f9fbf0  →  0x000000006ffffffc
+[33m[stack][0m: [36m0x0000fffffffff820[0m│+0x20820: 0x0000fffff7df274c  →  0x12ef9860069682ac
+[33m[stack][0m: [36m0x0000fffffffff848[0m│+0x20848: [31m0x0000fffff7e78014[0m  →  0xf9474400f0000920 ("[33m \t[0m"?)
+[33m[stack][0m: [36m0x0000fffffffff868[0m│+0x20868: [31m0x0000fffff7f2d8b8[0m  →  [90m<__libc_early_init+00c8> adrp x0,  0xfffff7f9f000 <_nl_C_locobj+32>[0m
+[33m[stack][0m: [36m0x0000fffffffff878[0m│+0x20878: [31m0x0000fffff7f2d844[0m  →  [90m<__libc_early_init+0054> mov x4,  #0x200000              	// #2097152[0m
+[33m[stack][0m: [36m0x0000fffffffff938[0m│+0x20938: [31m0x0000fffff7ed8ef8[0m  →  [90m<sbrk+00a8> tbnz w0,  #31,  0xfffff7ed8ecc <__GI___sbrk+124>[0m
+[33m[stack][0m: [36m0x0000fffffffff948[0m│+0x20948: [31m0x0000fffff7e83a2c[0m  →  [90m<__default_morecore+0018> cmn x0,  #0x1[0m
+[33m[stack][0m: [36m0x0000fffffffff950[0m│+0x20950: 0x0000fffff7fa0a50  →  0x0000000000000000
+[33m[stack][0m: [36m0x0000fffffffff978[0m│+0x20978: [31m0x0000fffff7e848b0[0m  →  [90m<sysmalloc+03d0> ldp x6,  x7,  [sp][0m
+[33m[stack][0m: [36m0x0000fffffffff9a8[0m│+0x209a8: [31m0x0000fffff7e85a3c[0m  →  [90m<_int_malloc+0de8> mov x20,  x0[0m
+[33m[stack][0m: [36m0x0000fffffffff9d0[0m│+0x209d0: 0x0000fffff7fa0ab0  →  [32m0x0000aaaaaaac3410[0m  →  0x0000000000000000
+[33m[stack][0m: [36m0x0000fffffffff9f8[0m│+0x209f8: [31m0x0000fffff7e85954[0m  →  [90m<_int_malloc+0d00> ldp x21,  x22,  [sp,  #32][0m
+[33m[stack][0m: [36m0x0000fffffffffa08[0m│+0x20a08: [31m0x0000fffff7e85ba4[0m  →  [90m<tcache_init.part+0044> mov x20,  x0[0m
+[33m[stack][0m: [36m0x0000fffffffffa10[0m│+0x20a10: 0x0000fffff7fa0a50  →  0x0000000000000000
+[33m[stack][0m: [36m0x0000fffffffffa28[0m│+0x20a28: [31m0x0000fffff7e85954[0m  →  [90m<_int_malloc+0d00> ldp x21,  x22,  [sp,  #32][0m
+[33m[stack][0m: [36m0x0000fffffffffa38[0m│+0x20a38: [31m0x0000fffff7e8668c[0m  →  [90m<malloc+021c> add x1,  x23,  #0x6f0[0m
+[33m[stack][0m: [36m0x0000fffffffffa40[0m│+0x20a40: 0x0000fffff7fa0000  →  0x0000004000000022 ("[33m"[0m"?)
+[33m[stack][0m: [36m0x0000fffffffffbb8[0m│+0x20bb8: [31m0x0000fffff7e184c4[0m  →  [90m<__libc_start_call_main+0074> bl 0xfffff7e2f2f0 <__GI_exit>[0m
+[33m[stack][0m: [36m0x0000fffffffffca8[0m│+0x20ca8: [31m0x0000fffff7e18540[0m  →  0xf9474b18f0000c38 ("[33m8[0m"?)
+[33m[stack][0m: [36m0x0000fffffffffcc8[0m│+0x20cc8: [31m0x0000fffff7e18598[0m  →  0xf947d75af0000c3a ("[33m:[0m"?)
+[?2004h[1;32mgef➤  [0mmemory watch $sp 0x20 qword
+[?2004l[1m[32m[+][0m Adding memwatch to 0xfffffffffae0
+[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m  →  [33m"bins ready"[0m
+[1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m  →  0x0000000000000000
+[1m[31m$x2  [0m: 0x1011            
+[34m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+[34m$x5  [0m: 0x0               
+[1m[31m$x6  [0m: 0xfffffffffffffff0
+[1m[31m$x7  [0m: 0x4               
+[34m$x8  [0m: 0x0               
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8  →  [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000[0m
+   [90m0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8[0m
+   [90m0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>[0m
+ [32m→ 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12][0m
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+16[0m[90m ────[0m
+ [90m    11	     l1 = malloc(0x800); x = malloc(0x18);[0m
+ [90m    12	     for (i = 0; i < 7; i++) free(t[i]);[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+             // [33margc[0m=0x1, [33margv[0m=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("[33m/t/t2[0m"?), [33mfmt[0m=0x0000fffffffffb68  →  0x0000000000000000
+[32m →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+[90m─────────────────────────────────────────────────────────────────────────────────── [0m[36mmemory:0xfffffffffae0[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000   0x0000fffffffffd38   
+[36m0x0000fffffffffae8[0m│+0x0008   0x00000001fffffef8   
+[36m0x0000fffffffffaf0[0m│+0x0010   0x0000000000000181   
+[36m0x0000fffffffffaf8[0m│+0x0018   0x0000000700000000   
+[36m0x0000fffffffffb00[0m│+0x0020   0x0000aaaaaaac19a0   
+[36m0x0000fffffffffb08[0m│+0x0028   0x0000aaaaaaac1aa0   
+[36m0x0000fffffffffb10[0m│+0x0030   0x0000aaaaaaac1ac0   
+[36m0x0000fffffffffb18[0m│+0x0038   0x0000aaaaaaac1bc0   
+[36m0x0000fffffffffb20[0m│+0x0040   0x0000aaaaaaac1be0   
+[36m0x0000fffffffffb28[0m│+0x0048   0x0000aaaaaaac2410   
+[36m0x0000fffffffffb30[0m│+0x0050   0x0000aaaaaaac12a0   
+[36m0x0000fffffffffb38[0m│+0x0058   0x0000aaaaaaac13a0   
+[36m0x0000fffffffffb40[0m│+0x0060   0x0000aaaaaaac14a0   
+[36m0x0000fffffffffb48[0m│+0x0068   0x0000aaaaaaac15a0   
+[36m0x0000fffffffffb50[0m│+0x0070   0x0000aaaaaaac16a0   
+[36m0x0000fffffffffb58[0m│+0x0078   0x0000aaaaaaac17a0   
+[36m0x0000fffffffffb60[0m│+0x0080   0x0000aaaaaaac18a0   
+[36m0x0000fffffffffb68[0m│+0x0088   0x0000000000000000   
+[36m0x0000fffffffffb70[0m│+0x0090   0x0000000000000000   
+[36m0x0000fffffffffb78[0m│+0x0098   0x0000000000000000   
+[36m0x0000fffffffffb80[0m│+0x00a0   0x0000000000000000   
+[36m0x0000fffffffffb88[0m│+0x00a8   0x0000000000000000   
+[36m0x0000fffffffffb90[0m│+0x00b0   0x0000000000000000   
+[36m0x0000fffffffffb98[0m│+0x00b8   0x0000000000000000   
+[36m0x0000fffffffffba0[0m│+0x00c0   0x0000fffffffffcc0   
+[36m0x0000fffffffffba8[0m│+0x00c8   0x387fb66d57ee7900   
+[36m0x0000fffffffffbb0[0m│+0x00d0   0x0000fffffffffcc0   
+[36m0x0000fffffffffbb8[0m│+0x00d8   0x0000fffff7e184c4   
+[36m0x0000fffffffffbc0[0m│+0x00e0   0x0000fffffffffc50   
+[36m0x0000fffffffffbc8[0m│+0x00e8   0x0000aaaaaaaa0958   
+[36m0x0000fffffffffbd0[0m│+0x00f0   0x00000001f7ffeb48   
+[36m0x0000fffffffffbd8[0m│+0x00f8   0x0000fffffffffd38   
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0a68[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[35m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[32m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[1;32mgef➤  [0mmemory reset
+[?2004l[1m[32m[+][0m Memory watches cleared
+[?2004h[1;32mgef➤  [0mgef config context.layout "regs -stack code"
+[?2004l[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m  →  [33m"bins ready"[0m
+[1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m  →  0x0000000000000000
+[1m[31m$x2  [0m: 0x1011            
+[34m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+[34m$x5  [0m: 0x0               
+[1m[31m$x6  [0m: 0xfffffffffffffff0
+[1m[31m$x7  [0m: 0x4               
+[34m$x8  [0m: 0x0               
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8  →  [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000[0m
+   [90m0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8[0m
+   [90m0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>[0m
+ [32m→ 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12][0m
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[1;32mgef➤  [0mgef config context.layout "legend regs stack code args source memory threads trace extra"
+[?2004l[?2004h[1;32mgef➤  [0mgef config context.show_registers_raw 1
+[?2004l[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m [1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m [1m[31m$x2  [0m: 0x1011             [34m$x3  [0m: 0x0                
+[1m[31m$x4  [0m: 0x0000fffff7ff8620 [34m$x5  [0m: 0x0                [1m[31m$x6  [0m: 0xfffffffffffffff0 [1m[31m$x7  [0m: 0x4                
+[34m$x8  [0m: 0x0                [1m[31m$x9  [0m: 0x10000            [1m[31m$x10 [0m: 0x1ccef0           [34m$x11 [0m: 0x0                
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48 [1m[31m$x13 [0m: 0x2f               [1m[31m$x14 [0m: 0x1f22b4b          [1m[31m$x15 [0m: 0x0000fffff7ff8e70 
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8 [1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m [1m[31m$x18 [0m: 0x3                [1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m 
+[1m[31m$x20 [0m: 0x1                [1m[31m$x21 [0m: 0x0000aaaaaaabfd58 [1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m [1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m 
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58 [34m$x25 [0m: 0x0                [1m[31m$x26 [0m: 0x0000fffff7ffe000 [1m[31m$x27 [0m: 0x0000aaaaaaabfd58 
+[34m$x28 [0m: 0x0                [1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m [1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m [1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m 
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a68[0m [1m[31m$cpsr[0m: 0x60001000         [34m$fpsr[0m: 0x0                [34m$fpcr[0m: 0x0                
+Flags: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000[0m
+   [90m0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8[0m
+   [90m0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>[0m
+ [32m→ 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12][0m
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+16[0m[90m ────[0m
+ [90m    11	     l1 = malloc(0x800); x = malloc(0x18);[0m
+ [90m    12	     for (i = 0; i < 7; i++) free(t[i]);[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+             // [33margc[0m=0x1, [33margv[0m=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("[33m/t/t2[0m"?), [33mfmt[0m=0x0000fffffffffb68  →  0x0000000000000000
+[32m →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0a68[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[35m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[32m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[1;32mgef➤  [0mgef config context.show_registers_raw 0
+[?2004l[?2004h[1;32mgef➤  [0mgef config context.show_stack_raw 1
+[?2004l[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m  →  [33m"bins ready"[0m
+[1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m  →  0x0000000000000000
+[1m[31m$x2  [0m: 0x1011            
+[34m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+[34m$x5  [0m: 0x0               
+[1m[31m$x6  [0m: 0xfffffffffffffff0
+[1m[31m$x7  [0m: 0x4               
+[34m$x8  [0m: 0x0               
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8  →  [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+0x0000fffffffffae0     38[0m [33mfd[0m [32mff[0m [32mff[0m [32mff[0m [32mff[0m [90m00[0m [90m00[0m [33mf8[0m [33mfe[0m [32mff[0m [32mff[0m [33m01[0m [90m00[0m [90m00[0m [90m00[0m    8...............
+0x0000fffffffffaf0     [33m81[0m [33m01[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [90m00[0m [33m07[0m [90m00[0m [90m00[0m [90m00[0m    ................
+0x0000fffffffffb00     [33ma0[0m [33m19[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m [33ma0[0m [33m1a[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m    ................
+0x0000fffffffffb10     [33mc0[0m [33m1a[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m [33mc0[0m [33m1b[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m    ................
+0x0000fffffffffb20     [33me0[0m [33m1b[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m [33m10[0m 24[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m    .........$......
+0x0000fffffffffb30     [33ma0[0m [33m12[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m [33ma0[0m [33m13[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m    ................
+0x0000fffffffffb40     [33ma0[0m [33m14[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m [33ma0[0m [33m15[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m    ................
+0x0000fffffffffb50     [33ma0[0m [33m16[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m [33ma0[0m [33m17[0m [33mac[0m [33maa[0m [33maa[0m [33maa[0m [90m00[0m [90m00[0m    ................
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000[0m
+   [90m0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8[0m
+   [90m0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>[0m
+ [32m→ 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12][0m
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+16[0m[90m ────[0m
+ [90m    11	     l1 = malloc(0x800); x = malloc(0x18);[0m
+ [90m    12	     for (i = 0; i < 7; i++) free(t[i]);[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+             // [33margc[0m=0x1, [33margv[0m=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("[33m/t/t2[0m"?), [33mfmt[0m=0x0000fffffffffb68  →  0x0000000000000000
+[32m →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0a68[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[35m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[32m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[1;32mgef➤  [0mgef config context.show_stack_raw 0
+[?2004l[?2004h[1;32mgef➤  [0mgef config context.show_opcodes_size 4
+[?2004l[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m  →  [33m"bins ready"[0m
+[1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m  →  0x0000000000000000
+[1m[31m$x2  [0m: 0x1011            
+[34m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+[34m$x5  [0m: 0x0               
+[1m[31m$x6  [0m: 0xfffffffffffffff0
+[1m[31m$x7  [0m: 0x4               
+[34m$x8  [0m: 0x0               
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8  →  [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a5c 00000090    <main+0104>      adrp   x0,  0xaaaaaaaa0000[0m
+   [90m0xaaaaaaaa0a60 00e02b91    <main+0108>      add    x0,  x0,  #0xaf8[0m
+   [90m0xaaaaaaaa0a64 63ffff97    <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>[0m
+ [32m→ 0xaaaaaaaa0a68 e00f40b9    <main+0110>      ldr    w0,  [sp,  #12][0m
+   0xaaaaaaaa0a6c 1f040071    <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 8d000054    <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 e00340f9    <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 000440f9    <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c 03000014    <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+16[0m[90m ────[0m
+ [90m    11	     l1 = malloc(0x800); x = malloc(0x18);[0m
+ [90m    12	     for (i = 0; i < 7; i++) free(t[i]);[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+             // [33margc[0m=0x1, [33margv[0m=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("[33m/t/t2[0m"?), [33mfmt[0m=0x0000fffffffffb68  →  0x0000000000000000
+[32m →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0a68[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[35m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[32m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[1;32mgef➤  [0mgef config context.show_opcodes_size 0
+[?2004l[?2004h[1;32mgef➤  [0mgef config context.grow_stack_down 1
+[?2004l[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m  →  [33m"bins ready"[0m
+[1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m  →  0x0000000000000000
+[1m[31m$x2  [0m: 0x1011            
+[34m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+[34m$x5  [0m: 0x0               
+[1m[31m$x6  [0m: 0xfffffffffffffff0
+[1m[31m$x7  [0m: 0x4               
+[34m$x8  [0m: 0x0               
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8  →  [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000[0m
+   [90m0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8[0m
+   [90m0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>[0m
+ [32m→ 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12][0m
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+16[0m[90m ────[0m
+ [90m    11	     l1 = malloc(0x800); x = malloc(0x18);[0m
+ [90m    12	     for (i = 0; i < 7; i++) free(t[i]);[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+             // [33margc[0m=0x1, [33margv[0m=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("[33m/t/t2[0m"?), [33mfmt[0m=0x0000fffffffffb68  →  0x0000000000000000
+[32m →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0a68[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[35m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[32m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[1;32mgef➤  [0mgef config context.grow_stack_down 0
+[?2004l[?2004h[1;32mgef➤  [0mgef config gef.disable_color 1
+[?2004l[?2004hgef➤  context
+[?2004l[H[J─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$x1  : 0x0000aaaaaaac2400  →  0x0000000000000000
+$x2  : 0x1011            
+$x3  : 0x0               
+$x4  : 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+$x5  : 0x0               
+$x6  : 0xfffffffffffffff0
+$x7  : 0x4               
+$x8  : 0x0               
+$x9  : 0x10000           
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaabffa8  →  0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x17 : 0x0000fffff7e619d0  →  <puts+0000> stp x29,  x30,  [sp,  #-64]!
+$x18 : 0x3               
+$x19 : 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$x20 : 0x1               
+$x21 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0958  →  <main+0000> sub sp,  sp,  #0xe0
+$x23 : 0x0000fffffffffd48  →  0x0000ffffffffff17  →  "HOSTNAME=c024fe10785d"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x27 : 0x0000aaaaaaabfd58  →  0x0000aaaaaaaa0900  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x0000fffffffffbb0  →  0x0000fffffffffcc0  →  0x0000fffffffffcd0  →  0x0000000000000000
+$x30 : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+0110> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffae0│+0x0000: 0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)	 ← $sp
+0x0000fffffffffae8│+0x0008: 0x00000001fffffef8
+0x0000fffffffffaf0│+0x0010: 0x0000000000000181
+0x0000fffffffffaf8│+0x0018: 0x0000000700000000
+0x0000fffffffffb00│+0x0020: 0x0000aaaaaaac19a0  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+0x0000fffffffffb08│+0x0028: 0x0000aaaaaaac1aa0  →  0x0000000000000000
+0x0000fffffffffb10│+0x0030: 0x0000aaaaaaac1ac0  →  0x0000aaaaaaac1990  →  0x0000000000000000
+0x0000fffffffffb18│+0x0038: 0x0000aaaaaaac1bc0  →  0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000
+   0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8
+   0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>
+ → 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12]
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+────────────────────────────────────────────────────────────────────────────────────── source:/rv/t2.c+16 ────
+     11	     l1 = malloc(0x800); x = malloc(0x18);
+     12	     for (i = 0; i < 7; i++) free(t[i]);
+     13	     free(s1); free(s2); free(l1);
+     14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */
+     15	     puts("bins ready");
+             // argc=0x1, argv=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("/t/t2"?), fmt=0x0000fffffffffb68  →  0x0000000000000000
+ →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xaaaaaaaa0a68 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[?2004hgef➤  vmmap
+[?2004lStart              End                Offset             Perm Path
+0x0000aaaaaaaa0000 0x0000aaaaaaaa1000 0x0000000000000000 r-x /t/t2
+0x0000aaaaaaabf000 0x0000aaaaaaac0000 0x000000000000f000 r-- /t/t2
+0x0000aaaaaaac0000 0x0000aaaaaaac1000 0x0000000000010000 rw- /t/t2
+0x0000aaaaaaac1000 0x0000aaaaaaae2000 0x0000000000000000 rw- [heap]
+0x0000fffff7df0000 0x0000fffff7f8a000 0x0000000000000000 r-x /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7f8a000 0x0000fffff7f9d000 0x000000000019a000 --- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7f9d000 0x0000fffff7fa0000 0x000000000019d000 r-- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7fa0000 0x0000fffff7fa2000 0x00000000001a0000 rw- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7fa2000 0x0000fffff7fae000 0x0000000000000000 rw- 
+0x0000fffff7fbe000 0x0000fffff7fe5000 0x0000000000000000 r-x /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000fffff7ff7000 0x0000fffff7ff9000 0x0000000000000000 rw- 
+0x0000fffff7ff9000 0x0000fffff7ffb000 0x0000000000000000 r-- [vvar]
+0x0000fffff7ffb000 0x0000fffff7ffc000 0x0000000000000000 r-x [vdso]
+0x0000fffff7ffc000 0x0000fffff7ffe000 0x000000000002e000 r-- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000fffff7ffe000 0x0000fffff8000000 0x0000000000030000 rw- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0x0000fffffffdf000 0x0001000000000000 0x0000000000000000 rw- [stack]
+
+[?2004hgef➤  gef config gef.disable_color 0
+[?2004l[?2004h[1;32mgef➤  [0mdelete
+[?2004l[?2004h[1;32mgef➤  [0mbreak printf
+[?2004lBreakpoint 7 at [34m0xfffff7e40590[m: file [32m./stdio-common/printf.c[m, line 28.
+[?2004h[1;32mgef➤  [0mcontinue
+[?2004lContinuing.
+bins ready
+
+Breakpoint 7, [33m__printf[m ([36mformat[m=0xfffffffffb68 "%p %p %p\n") at [32m./stdio-common/printf.c[m:28
+warning: 28	[32m./stdio-common/printf.c[m: No such file or directory
+[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [35m0x0000fffffffffb68[0m  →  [33m"%p %p %p\n"[0m
+[1m[31m$x1  [0m: [31m0x0000aaaaaaaa0b08[0m  →  [33m"%p %p %p\n"[0m
+[1m[31m$x2  [0m: [31m0x0000aaaaaaaa0b10[0m  →  0x3b031b010000000a ("[33m\n[0m"?)
+[1m[31m$x3  [0m: 0x1               
+[1m[31m$x4  [0m: 0x9               
+[1m[31m$x5  [0m: 0x2               
+[1m[31m$x6  [0m: 0x7025207025207025 ("[33m%p %p %p[0m"?)
+[1m[31m$x7  [0m: 0xa702520702520   
+[1m[31m$x8  [0m: 0x40              
+[34m$x9  [0m: 0x10000           
+[34m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[34m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[34m$x13 [0m: 0x2f              
+[34m$x14 [0m: 0x1f22b4b         
+[34m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffc0  →  [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[34m$x18 [0m: 0x3               
+[34m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[34m$x20 [0m: 0x1               
+[34m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[34m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[34m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[34m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[34m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[34m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0aa0[0m  →  [90m<main+0148> mov w0,  #0x0                   	// #0[0m
+[34m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[34m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xfffff7e40584                  nop    [0m
+   [90m0xfffff7e40588                  nop    [0m
+   [90m0xfffff7e4058c                  nop    [0m
+[31m●[0m[32m→ 0xfffff7e40590 <printf+0000>    sub    sp,  sp,  #0x120[0m
+   0xfffff7e40594 <printf+0004>    mov    w12,  #0xffffffc8            	// #-56
+   0xfffff7e40598 <printf+0008>    adrp   x9,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e4059c <printf+000c>    ldr    x9,  [x9,  #3720]
+   0xfffff7e405a0 <printf+0010>    add    x13,  sp,  #0xe0
+   0xfffff7e405a4 <printf+0014>    stp    x29,  x30,  [sp,  #80]
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xfffff7e40590[0m in [1m[33m__printf[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xfffff7e40590 → [32m__printf[0m([33mformat[0m=0xfffffffffb68 "%p %p %p\n")
+[[1m[35m#1[0m] 0xaaaaaaaa0aa0 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mfinish
+[?2004lRun till exit from #0  [33m__printf[m ([36mformat[m=0xfffffffffb68 "%p %p %p\n") at [32m./stdio-common/printf.c[m:28
+0xaaaaaaaa0b08 0xaaaaaaaa0b10 0x1
+[33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffd38) at [32m/rv/t2.c[m:18
+18	    [01;34mreturn[m [35m0[m[31m;[m
+Value returned is $1 = 0x22
+[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: 0x22              
+[1m[31m$x1  [0m: 0x0000fffff7ffdb50  →  0x387fb66d57ee7900
+[1m[31m$x2  [0m: 0x0               
+[1m[31m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: [35m0x0000fffffffff91a[0m  →  0x15200000fffff7e5
+[1m[31m$x5  [0m: [32m0x0000aaaaaaac1c02[0m  →  0x0000000000000000
+[1m[31m$x6  [0m: 0xa               
+[1m[31m$x7  [0m: 0x1               
+[34m$x8  [0m: 0x40              
+[1m[31m$x9  [0m: 0x0               
+[1m[31m$x10 [0m: 0xa               
+[1m[31m$x11 [0m: 0xffffff80        
+[1m[31m$x12 [0m: 0xffffffc8        
+[1m[31m$x13 [0m: [35m0x0000fffffffffaa0[0m  →  [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x14 [0m: 0x0               
+[34m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[34m$x16 [0m: 0x0000aaaaaaabffc0  →  [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[34m$x17 [0m: [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[34m$x18 [0m: 0x3               
+[34m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[34m$x20 [0m: 0x1               
+[34m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[34m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[34m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[34m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[34m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[34m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[34m$x30 [0m: [31m0x0000aaaaaaaa0aa0[0m  →  [90m<main+0148> mov w0,  #0x0                   	// #0[0m
+[34m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0aa0[0m  →  [90m<main+0148> mov w0,  #0x0                   	// #0[0m
+[34m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a94 <main+013c>      bl     0xaaaaaaaa0810 <strcpy@plt>[0m
+   [90m0xaaaaaaaa0a98 <main+0140>      add    x0,  sp,  #0x88[0m
+   [90m0xaaaaaaaa0a9c <main+0144>      bl     0xaaaaaaaa0820 <printf@plt>[0m
+ [32m→ 0xaaaaaaaa0aa0 <main+0148>      mov    w0,  #0x0                   	// #0[0m
+   0xaaaaaaaa0aa4 <main+014c>      mov    w1,  w0
+   0xaaaaaaaa0aa8 <main+0150>      adrp   x0,  0xaaaaaaabf000
+   0xaaaaaaaa0aac <main+0154>      ldr    x0,  [x0,  #4072]
+   0xaaaaaaaa0ab0 <main+0158>      ldr    x3,  [sp,  #200]
+   0xaaaaaaaa0ab4 <main+015c>      ldr    x2,  [x0]
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+18[0m[90m ────[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+ [90m    16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+ [90m    17	     printf(fmt);[0m
+[32m →   18	     return 0;[0m
+     19	 }
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0aa0[0m in [1m[33mmain[0m (), reason: [1m[35mTEMPORARY BREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xaaaaaaaa0aa0 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mprint-format --lang py -l 16 $sp
+[?2004lbuf = [0xfd38, 0xffff, 0xffff, 0x0, 0xfef8, 0xffff, 0x1, 0x0, 0x181, 0x0, 0x0, 0x0, 0x0, 0x0, 0x7, 0x0]
+[?2004h[1;32mgef➤  [0mentry-break
+[?2004l[1m[33m[*][0m gdb is already running
+[?2004h[1;32mgef➤  [0minfo frame
+[?2004lStack level 0, frame at 0xfffffffffbc0:
+ pc = 0xaaaaaaaa0aa0 in main ([32m/rv/t2.c[m:18); saved pc = 0xfffff7e184c4
+ source language c.
+ Arglist at 0xfffffffffbb0, args: [36margc[m=0x1, [36margv[m=0xfffffffffd38
+ Locals at 0xfffffffffbb0, Previous frame's sp is 0xfffffffffbc0
+ Saved registers:
+  x29 at 0xfffffffffbb0, x30 at 0xfffffffffbb8
+[?2004h[1;32mgef➤  [0minfo sharedlibrary
+[?2004lFrom                To                  Syms Read   Shared Object Library
+[34m0x0000fffff7fbedc0[m  [34m0x0000fffff7fdae70[m  Yes         [32m/lib/ld-linux-aarch64.so.1[m
+[34m0x0000fffff7e17d00[m  [34m0x0000fffff7f343d4[m  Yes         [32m/lib/aarch64-linux-gnu/libc.so.6[m
+[?2004h[1;32mgef➤  [0mgef config
+[?2004l[90m───────────────────────────────────────── [0m[36mGEF configuration settings[0m[90m ─────────────────────────────────────────[0m
+[32mcontext.clear_screen[0m (bool) = [36mTrue[0m
+[32mcontext.enable[0m (bool) = [36mTrue[0m
+[32mcontext.grow_stack_down[0m (bool) = [36mFalse[0m
+[32mcontext.ignore_registers[0m (str) = "[33m[0m"
+[32mcontext.layout[0m (str) = "[33mlegend regs stack code args source memory threads trace extra[0m"
+[32mcontext.libc_args[0m (bool) = [36mFalse[0m
+[32mcontext.libc_args_path[0m (str) = "[33m[0m"
+[32mcontext.nb_lines_backtrace[0m (int) = [36m10[0m
+[32mcontext.nb_lines_backtrace_before[0m (int) = [36m2[0m
+[32mcontext.nb_lines_code[0m (int) = [36m6[0m
+[32mcontext.nb_lines_code_prev[0m (int) = [36m3[0m
+[32mcontext.nb_lines_stack[0m (int) = [36m8[0m
+[32mcontext.nb_lines_threads[0m (int) = [36m-1[0m
+[32mcontext.peek_calls[0m (bool) = [36mTrue[0m
+[32mcontext.peek_ret[0m (bool) = [36mTrue[0m
+[32mcontext.redirect[0m (str) = "[33m[0m"
+[32mcontext.show_basename_source_file_name_max_len[0m (int) = [36m20[0m
+[32mcontext.show_full_source_file_name_max_len[0m (int) = [36m30[0m
+[32mcontext.show_opcodes_size[0m (int) = [36m0[0m
+[32mcontext.show_prefix_source_path_name_len[0m (int) = [36m10[0m
+[32mcontext.show_registers_raw[0m (bool) = [36mFalse[0m
+[32mcontext.show_source_code_variable_values[0m (bool) = [36mTrue[0m
+[32mcontext.show_stack_raw[0m (bool) = [36mFalse[0m
+[32mdereference.max_recursion[0m (int) = [36m7[0m
+[32mentry-break.entrypoint_symbols[0m (str) = "[33mmain _main __libc_start_main __uClibc_main start _start[0m"
+[32mgef.autosave_breakpoints_file[0m (str) = "[33m[0m"
+[32mgef.bruteforce_main_arena[0m (bool) = [36mFalse[0m
+[32mgef.buffer[0m (bool) = [36mTrue[0m
+[32mgef.debug[0m (bool) = [36mFalse[0m
+[32mgef.disable_color[0m (bool) = [36mFalse[0m
+[32mgef.disable_target_remote_overwrite[0m (bool) = [36mFalse[0m
+[32mgef.extra_plugins_dir[0m (str) = "[33m[0m"
+[32mgef.follow_child[0m (bool) = [36mTrue[0m
+[32mgef.libc_version[0m (str) = "[33m[0m"
+[32mgef.main_arena_offset[0m (str) = "[33m[0m"
+[32mgef.propagate_debug_exception[0m (bool) = [36mFalse[0m
+[32mgef.readline_compat[0m (bool) = [36mFalse[0m
+[32mgef.show_deprecation_warnings[0m (bool) = [36mTrue[0m
+[32mgef.tempdir[0m (Path) = [36m/tmp/gef[0m
+[32mgot.function_not_resolved[0m (str) = "[33myellow[0m"
+[32mgot.function_resolved[0m (str) = "[33mgreen[0m"
+[32mheap-analysis-helper.check_double_free[0m (bool) = [36mTrue[0m
+[32mheap-analysis-helper.check_free_null[0m (bool) = [36mFalse[0m
+[32mheap-analysis-helper.check_heap_overlap[0m (bool) = [36mTrue[0m
+[32mheap-analysis-helper.check_uaf[0m (bool) = [36mTrue[0m
+[32mheap-analysis-helper.check_weird_free[0m (bool) = [36mTrue[0m
+[32mheap-chunks.peek_nb_byte[0m (int) = [36m16[0m
+[32mhexdump.always_show_ascii[0m (bool) = [36mFalse[0m
+[32mhighlight.regex[0m (bool) = [36mFalse[0m
+[32mpattern.length[0m (int) = [36m1024[0m
+[32mpcustom edit.struct_path[0m (Path) = [36m/tmp/gef/structs[0m
+[32mpcustom list.struct_path[0m (Path) = [36m/tmp/gef/structs[0m
+[32mpcustom show.struct_path[0m (Path) = [36m/tmp/gef/structs[0m
+[32mpcustom.max_depth[0m (int) = [36m4[0m
+[32mpcustom.struct_path[0m (Path) = [36m/tmp/gef/structs[0m
+[32mpcustom.structure_name[0m (str) = "[33mbold blue[0m"
+[32mpcustom.structure_size[0m (str) = "[33mgreen[0m"
+[32mpcustom.structure_type[0m (str) = "[33mbold red[0m"
+[32mprint-format.max_size_preview[0m (int) = [36m10[0m
+[32mprocess-search.ps_command[0m (str) = "[33m/usr/bin/ps auxww[0m"
+[32msearch-pattern.max_size_preview[0m (int) = [36m10[0m
+[32msearch-pattern.nr_pages_chunk[0m (int) = [36m1024[0m
+[32mtheme.address_code[0m (str) = "[33mred[0m"
+[32mtheme.address_heap[0m (str) = "[33mgreen[0m"
+[32mtheme.address_stack[0m (str) = "[33mpink[0m"
+[32mtheme.context_title_line[0m (str) = "[33mgray[0m"
+[32mtheme.context_title_message[0m (str) = "[33mcyan[0m"
+[32mtheme.default_title_line[0m (str) = "[33mgray[0m"
+[32mtheme.default_title_message[0m (str) = "[33mcyan[0m"
+[32mtheme.dereference_base_address[0m (str) = "[33mcyan[0m"
+[32mtheme.dereference_code[0m (str) = "[33mgray[0m"
+[32mtheme.dereference_register_value[0m (str) = "[33mbold blue[0m"
+[32mtheme.dereference_string[0m (str) = "[33myellow[0m"
+[32mtheme.disassemble_current_instruction[0m (str) = "[33mgreen[0m"
+[32mtheme.old_context[0m (str) = "[33mgray[0m"
+[32mtheme.registers_register_name[0m (str) = "[33mblue[0m"
+[32mtheme.registers_value_changed[0m (str) = "[33mbold red[0m"
+[32mtheme.source_current_line[0m (str) = "[33mgreen[0m"
+[32mtheme.table_heading[0m (str) = "[33mblue[0m"
+[32mtheme.threads_pc[0m (str) = "[33mblue[0m"
+[32mtrace-run.max_tracing_recursion[0m (int) = [36m1[0m
+[32mtrace-run.tracefile_prefix[0m (str) = "[33m./gef-trace-[0m"
+[?2004h[1;32mgef➤  [0mcontinue
+[?2004lContinuing.
+[Inferior 1 (process 49) exited normally]
+[?2004h[?2004l[?2004h[1;31mgef➤  [0mquit
+[?2004ly

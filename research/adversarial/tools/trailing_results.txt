@@ -1,0 +1,76 @@
+gdb [trail]: 173/1871 lines change tokens, 173 lose ALL highlighting
+    crash.txt: "[Thread debugging using libthread_db enabled]"
+        before: punctuation:[ msg-info:Thread debugging using libthread_db enabled punctuation:]
+        after : (nothing)
+    crash.txt: "(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)"
+        before: comment:(No debugging symbols found in path:/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2 comment:)
+        after : (nothing)
+    crash.txt: "Continuing."
+        before: keyword:Continuing.
+        after : (nothing)
+    crash.txt: "Continuing."
+        before: keyword:Continuing.
+        after : (nothing)
+    crash.txt: "[Inferior 1 (process 1090) killed]"
+        before: punctuation:[ keyword:Inferior number:1 punctuation:( keyword:process number:1090
+        after : (nothing)
+    crash.txt: "(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)"
+        before: comment:(No debugging symbols found in path:/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2 comment:)
+        after : (nothing)
+pwndbg [trail]: 49/2103 lines change tokens, 15 lose ALL highlighting
+    commands.txt: "State of the GOT of /work/test_x64:"
+        before: keyword:State of the GOT of path:/work/test_x64
+        after : keyword:State of the GOT of
+    commands.txt: "State of the GOT of /work/test_x64:"
+        before: keyword:State of the GOT of path:/work/test_x64
+        after : keyword:State of the GOT of
+    commands.txt: "0x555555557080: __cxa_finalize@plt"
+        before: address-code:0x555555557080 punctuation:: symbol:__cxa_finalize@plt
+        after : address-code:0x555555557080 punctuation::
+    commands.txt: "0x555555557090: free@plt"
+        before: address-code:0x555555557090 punctuation:: symbol:free@plt
+        after : address-code:0x555555557090 punctuation::
+    commands.txt: "0x5555555570a0: strcpy@plt"
+        before: address-code:0x5555555570a0 punctuation:: symbol:strcpy@plt
+        after : address-code:0x5555555570a0 punctuation::
+    commands.txt: "0x5555555570b0: __stack_chk_fail@plt"
+        before: address-code:0x5555555570b0 punctuation:: symbol:__stack_chk_fail@plt
+        after : address-code:0x5555555570b0 punctuation::
+gef [trail]: 11/633 lines change tokens, 3 lose ALL highlighting
+    commands.txt: "[0xaaaaaaabff98] __gmon_start__  →  0x0"
+        before: punctuation:[ address:0xaaaaaaabff98 punctuation:] symbol:__gmon_start__ arrow:→ number:0x0
+        after : punctuation:[ address:0xaaaaaaabff98 punctuation:] symbol:__gmon_start__ arrow:→ address:0x0
+    commands.txt: "Undefined command: \"nosuchcommand\".  Try \"help\"."
+        before: msg-error:Undefined command: string:"nosuchcommand" msg-error:.  Try string:"help" msg-error:.
+        after : (nothing)
+    context_arm64.txt: "Continuing."
+        before: keyword:Continuing.
+        after : (nothing)
+    context_x86_64.txt: "Continuing."
+        before: keyword:Continuing.
+        after : (nothing)
+    heap_new.txt: "    [0x00000000004b2d10     00 00 07 00 00 00 00 00 00 00 00 00 00 00 01 00    ................]"
+        before: punctuation:[ address-heap:0x00000000004b2d10 comment:00 comment:00 number:07 comment:00
+        after : punctuation:[ address-heap:0x00000000004b2d10 comment:00 comment:00 number:07 comment:00
+    heap_new.txt: "    [0x00000000004b2fa0     2f 77 6f 72 6b 00 00 00 00 00 00 00 00 00 00 00    /work...........]"
+        before: punctuation:[ address-heap:0x00000000004b2fa0 number:2f number:77 number:6f number:72
+        after : punctuation:[ address-heap:0x00000000004b2fa0 number:2f number:77 number:6f number:72
+peda [trail]: 20/294 lines change tokens, 0 lose ALL highlighting
+    commands.txt: "Invalid $PC address: 0x4141464141304141"
+        before: msg-error:Invalid $PC address punctuation:: address:0x4141464141304141
+        after : msg-error:Invalid $PC address punctuation::
+    commands.txt: "CANARY    : ENABLED"
+        before: keyword:CANARY punctuation:: enabled:ENABLED
+        after : keyword:CANARY punctuation::
+    commands.txt: "FORTIFY   : disabled"
+        before: keyword:FORTIFY punctuation:: disabled:disabled
+        after : keyword:FORTIFY punctuation::
+    commands.txt: "RELRO     : Partial"
+        before: keyword:RELRO punctuation:: keyword:Partial
+        after : keyword:RELRO punctuation::
+    commands.txt: "Perm  : rw-p"
+        before: keyword:Perm punctuation:: perm:rw-p
+        after : keyword:Perm punctuation::
+    commands.txt: "AA8A found at offset: 112"
+        before: string:AA8A punctuation:: number:112
+        after : string:AA8A punctuation::

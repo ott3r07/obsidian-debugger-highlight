@@ -1,0 +1,10 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/2307
+# DATE: 2024-07-14
+pwndbg> search 0x0
+Searching for value: '0x0'
+libpcre2-8.so.0.10.4 0x7ffff7f44525 xor byte ptr [rax + 0x30], bh
+ld-linux-x86-64.so.2 0x7ffff7ff1374 0x3d732500307830 /* '0x0' */
+pwndbg> search -8 0x0
+Searching for value: b'\x00\x00\x00\x00\x00\x00\x00\x00'
+ls              0x555555554007 0
+ls              0x55555555402b 0

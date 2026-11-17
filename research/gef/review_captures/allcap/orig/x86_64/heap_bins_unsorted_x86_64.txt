@@ -1,0 +1,5 @@
+(qemu) gef➤  heap bins unsorted
+───────────────────────────────────── Unsorted Bin for arena at 0x4aa240 ─────────────────────────────────────
+[+] unsorted_bins[0]: fw=0x4b3c20, bk=0x4b3c20
+ →   Chunk(addr=0x4b3c30, size=0x510, flags=PREV_INUSE | IS_MMAPPED | NON_MAIN_ARENA)
+[+] Found 1 chunks in unsorted bin.

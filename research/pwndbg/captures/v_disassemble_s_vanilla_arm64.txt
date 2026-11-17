@@ -1,0 +1,31 @@
+(gdb) disassemble /s mul
+Dump of assembler code for function mul:
+test.c:
+11	int mul(int a, int b) { return a * b; }
+   0x0000aaaaaaaa0980 <+0>:	sub	sp, sp, #0x30
+   0x0000aaaaaaaa0984 <+4>:	stp	x29, x30, [sp, #32]
+   0x0000aaaaaaaa0988 <+8>:	add	x29, sp, #0x20
+   0x0000aaaaaaaa098c <+12>:	str	w0, [sp, #12]
+   0x0000aaaaaaaa0990 <+16>:	str	w1, [sp, #8]
+   0x0000aaaaaaaa0994 <+20>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0998 <+24>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa099c <+28>:	ldr	x1, [x0]
+   0x0000aaaaaaaa09a0 <+32>:	str	x1, [sp, #24]
+   0x0000aaaaaaaa09a4 <+36>:	mov	x1, #0x0                   	// #0
+   0x0000aaaaaaaa09a8 <+40>:	ldr	w1, [sp, #12]
+   0x0000aaaaaaaa09ac <+44>:	ldr	w0, [sp, #8]
+   0x0000aaaaaaaa09b0 <+48>:	mul	w0, w1, w0
+   0x0000aaaaaaaa09b4 <+52>:	mov	w1, w0
+   0x0000aaaaaaaa09b8 <+56>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa09bc <+60>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa09c0 <+64>:	ldr	x3, [sp, #24]
+   0x0000aaaaaaaa09c4 <+68>:	ldr	x2, [x0]
+   0x0000aaaaaaaa09c8 <+72>:	subs	x3, x3, x2
+   0x0000aaaaaaaa09cc <+76>:	mov	x2, #0x0                   	// #0
+   0x0000aaaaaaaa09d0 <+80>:	b.eq	0xaaaaaaaa09d8 <mul+88>  // b.none
+   0x0000aaaaaaaa09d4 <+84>:	bl	0xaaaaaaaa07a0 <__stack_chk_fail@plt>
+   0x0000aaaaaaaa09d8 <+88>:	mov	w0, w1
+   0x0000aaaaaaaa09dc <+92>:	ldp	x29, x30, [sp, #32]
+   0x0000aaaaaaaa09e0 <+96>:	add	sp, sp, #0x30
+   0x0000aaaaaaaa09e4 <+100>:	ret
+End of assembler dump.

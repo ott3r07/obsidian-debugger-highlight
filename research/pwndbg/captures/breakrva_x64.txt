@@ -1,0 +1,2 @@
+pwndbg> brva 0x1000
+Breakpoint 3 at 0x555555557000

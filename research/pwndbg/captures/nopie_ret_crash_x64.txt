@@ -1,0 +1,51 @@
+pwndbg> continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x4141414141414141 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0x69
+ RBX  0xffffaa8ddc68 —▸ 0xffffaa8dde57 ◂— './test_nopie_x64'
+ RCX  0
+ RDX  0
+ RDI  0xffffaa8dd850 —▸ 0xffffaa8dd880 ◂— 'buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nack=AAAAAAAABBBBBBBBCCCCCCCC\n'
+ RSI  0x4045d0 ◂— 'buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n'
+ R8   0x73
+ R9   0
+ R10  0xffffffff
+ R11  0
+ R12  2
+ R13  0
+ R14  0x4031c0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x401160 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffffaa0d7000 (_rtld_global) —▸ 0xffffaa0d82e0 ◂— 0
+ RBP  0x4141414141414141 ('AAAAAAAA')
+ RSP  0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+ RIP  0x4141414141414141 ('AAAAAAAA')
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+Invalid address 0x4141414141414141
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffffaa8dda70 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+... ↓        5 skipped
+06:0030│     0xffffaa8ddaa0 ◂— 0x41414141 /* 'AAAA' */
+07:0038│     0xffffaa8ddaa8 ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x4141414141414141
+   1 0x4141414141414141
+   2 0x4141414141414141
+   3 0x4141414141414141
+   4 0x4141414141414141
+   5 0x4141414141414141
+   6 0x4141414141414141
+   7 0x41414141
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

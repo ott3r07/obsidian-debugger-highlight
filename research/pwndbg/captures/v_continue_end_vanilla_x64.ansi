@@ -1,0 +1,5 @@
+(gdb) continue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=short
+[Inferior 1 (process 1053) exited normally]

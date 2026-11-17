@@ -1,0 +1,9 @@
+(gdb) continue
+Continuing.
+
+Hardware watchpoint 4: r
+
+Old value = 0
+New value = 13
+[33mmain[m ([36margc[m=1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:39
+39	    fp [31m=[m mul[31m;[m

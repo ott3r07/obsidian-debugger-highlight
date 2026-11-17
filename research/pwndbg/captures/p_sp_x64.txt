@@ -1,0 +1,2 @@
+pwndbg> p $sp
+$1 = (void *) 0xffff9b1bdb00

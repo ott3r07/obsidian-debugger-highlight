@@ -1,0 +1,3 @@
+gef➤  xinfo $sp
+───────────────────────────────────────────── xinfo: 0xfffffae0 ─────────────────────────────────────────────
+[*] Cannot reach 0xfffffae0 in memory space

@@ -1,0 +1,67 @@
+pwndbg> next
+31	    for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0xffff9342cb90 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+*RDI  0x43434343434343
+*RSI  0x4342424242424242 ('BBBBBBBC')
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+ RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x55555555736f (main+116) ◂— mov dword ptr [rbp - 0xc0], 0
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555735d <main+98>     movabs rdi, 0x43434343434343           RDI => 0x43434343434343
+   0x555555557367 <main+108>    mov    qword ptr [rax + 9], rsi
+   0x55555555736b <main+112>    mov    qword ptr [rax + 0x11], rdi
+ ► 0x55555555736f <main+116>    mov    dword ptr [rbp - 0xc0], 0       [{i}] <= 0
+   0x555555557379 <main+126>    jmp    main+161                    <main+161>
+    ↓
+   0x55555555739c <main+161>    cmp    dword ptr [rbp - 0xc0], 7       0 - 7     EFLAGS => 0x297 [ CF PF AF zf SF IF df of iopl:00 ac ]
+   0x5555555573a3 <main+168>  ✔ jle    main+128                    <main+128>
+    ↓
+   0x55555555737b <main+128>    mov    edi, 0x20                       EDI => 0x20
+   0x555555557380 <main+133>    call   malloc@plt                  <malloc@plt>
+ 
+   0x555555557385 <main+138>    mov    rdx, rax
+   0x555555557388 <main+141>    mov    eax, dword ptr [rbp - 0xc0]
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:31
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+ ► 31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+   38     int r = compute(fp, 6, 7);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x55555555736f main+116
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

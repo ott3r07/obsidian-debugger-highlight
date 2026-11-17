@@ -1,0 +1,66 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/3905
+# DATE: 2026-05-09 (pwndbg 2026.02.18, glibc 2.43)
+pwndbg> heap
+Support for tcache large bins (a GLIBC 2.42 addition) has not been fully implemented. PR contributions are highly appreciated!
+Allocated chunk | PREV_INUSE
+Addr: 0x6159dfb06000
+Size: 0xb0 (with flag bits: 0xb1)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x6159dfb060b0
+Size: 0x1010 (with flag bits: 0x1011)
+
+Top chunk | PREV_INUSE
+Addr: 0x6159dfb070c0
+Size: 0x1ff40 (with flag bits: 0x1ff41)
+
+pwndbg> bins
+tcachebins
+0x20 [ 16]: 0
+0x30 [ 16]: 0
+0x40 [ 16]: 0x1011
+0x50 [ 16]: 0
+0x60 [ 16]: 0
+0x70 [ 16]: 0
+0x80 [ 16]: 0
+0x90 [ 16]: 0
+0xa0 [ 16]: 0
+0xb0 [ 16]: 0
+0xc0 [ 16]: 0
+0xd0 [ 16]: 0
+0xe0 [ 16]: 0
+0xf0 [ 16]: 0
+pwndbg> heap
+Support for tcache large bins (a GLIBC 2.42 addition) has not been fully implemented. PR contributions are highly appreciated!
+Allocated chunk | PREV_INUSE
+Addr: 0x6450e275d000
+Size: 0xb0 (with flag bits: 0xb1)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x6450e275d0b0
+Size: 0x1010 (with flag bits: 0x1011)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x6450e275e0c0
+Size: 0x20 (with flag bits: 0x21)
+
+Top chunk | PREV_INUSE
+Addr: 0x6450e275e0e0
+Size: 0x1ff20 (with flag bits: 0x1ff21)
+
+pwndbg> bins
+tcachebins
+0x20 [-57536]: 0
+0x30 [-57957]: 0
+0x40 [-25664]: 0x1011
+0x50 [ 16]: 0x3120636f6c6c616d ('malloc 1')
+0x60 [ 16]: 0xa36
+0x70 [ 16]: 0
+0x80 [ 16]: 0
+0x90 [ 16]: 0
+0xa0 [ 16]: 0
+0xb0 [ 16]: 0
+0xc0 [ 16]: 0
+0xd0 [ 16]: 0
+0xe0 [ 16]: 0
+0xf0 [ 16]: 0

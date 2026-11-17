@@ -1,0 +1,3 @@
+pwndbg> fastbins
+fastbins
+0x30:        0x55555555b3e0 ◂— 0

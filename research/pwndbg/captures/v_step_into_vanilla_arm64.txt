@@ -1,0 +1,2 @@
+(gdb) step
+30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");

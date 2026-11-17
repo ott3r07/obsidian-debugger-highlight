@@ -1,0 +1,2 @@
+[32m[1mpwndbg> [0m[32m[0mbreak vuln
+Breakpoint 1 at [34m0x401203[m: file [32mtest.c[m, line 20.

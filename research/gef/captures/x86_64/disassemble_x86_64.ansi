@@ -1,0 +1,119 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mdisassemble main
+[?2004lDump of assembler code for function [33mmain[m:
+   [34m0x0000000000401926[m <+0>:	[32mendbr64[m
+   [34m0x000000000040192a[m <+4>:	[32mpush   [m[31mrbp[m
+   [34m0x000000000040192b[m <+5>:	[32mmov    [m[31mrbp[m,[31mrsp[m
+   [34m0x000000000040192e[m <+8>:	[32msub    [m[31mrsp[m,[34m0xd0[m
+   [34m0x0000000000401935[m <+15>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc4[m],[31medi[m
+   [34m0x000000000040193b[m <+21>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0xd0[m],[31mrsi[m
+   [34m0x0000000000401942[m <+28>:	[32mmov    [m[31mrax[m,QWORD PTR [31mfs[m:0x28
+   [34m0x000000000040194b[m <+37>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0x8[m],[31mrax[m
+   [34m0x000000000040194f[m <+41>:	[32mxor    [m[31meax[m,[31meax[m
+   [34m0x0000000000401951[m <+43>:	[32mlea    [m[31mrax[m,[[31mrip[m+[34m0xffffffffffffff0d[m][37;2m        # [m[37;2m0x401865 <add>[m
+   [34m0x0000000000401958[m <+50>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0xb8[m],[31mrax[m
+   [34m0x000000000040195f[m <+57>:	[32mlea    [m[31mrax[m,[[31mrbp[m[34m-[m[34m0x40[m]
+   [34m0x0000000000401963[m <+61>:	[32mmovabs [m[31mrsi[m,[34m0x4141414141414141[m
+   [34m0x000000000040196d[m <+71>:	[32mmovabs [m[31mrdi[m,[34m0x4242424242424242[m
+   [34m0x0000000000401977[m <+81>:	[32mmov    [mQWORD PTR [[31mrax[m],[31mrsi[m
+   [34m0x000000000040197a[m <+84>:	[32mmov    [mQWORD PTR [[31mrax[m+[34m0x8[m],[31mrdi[m
+   [34m0x000000000040197e[m <+88>:	[32mmovabs [m[31mrsi[m,[34m0x4342424242424242[m
+   [34m0x0000000000401988[m <+98>:	[32mmovabs [m[31mrdi[m,[34m0x43434343434343[m
+   [34m0x0000000000401992[m <+108>:	[32mmov    [mQWORD PTR [[31mrax[m+[34m0x9[m],[31mrsi[m
+   [34m0x0000000000401996[m <+112>:	[32mmov    [mQWORD PTR [[31mrax[m+[34m0x11[m],[31mrdi[m
+   [34m0x000000000040199a[m <+116>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x0[m
+   [34m0x00000000004019a4[m <+126>:	[32mjmp    [m[34m0x4019c7[m <[33mmain[m+161>
+   [34m0x00000000004019a6[m <+128>:	[32mmov    [m[31medi[m,[34m0x20[m
+   [34m0x00000000004019ab[m <+133>:	[32mcall   [m[34m0x40f140[m <[33mmalloc[m>
+   [34m0x00000000004019b0[m <+138>:	[32mmov    [m[31mrdx[m,[31mrax[m
+   [34m0x00000000004019b3[m <+141>:	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m]
+   [34m0x00000000004019b9[m <+147>:	[32mcdqe[m
+   [34m0x00000000004019bb[m <+149>:	[32mmov    [mQWORD PTR [[31mrbp[m+[31mrax[m*[34m8[m[34m-[m[34m0x80[m],[31mrdx[m
+   [34m0x00000000004019c0[m <+154>:	[32madd    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x1[m
+   [34m0x00000000004019c7[m <+161>:	[32mcmp    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x7[m
+   [34m0x00000000004019ce[m <+168>:	[32mjle    [m[34m0x4019a6[m <[33mmain[m+128>
+   [34m0x00000000004019d0[m <+170>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x0[m
+   [34m0x00000000004019da[m <+180>:	[32mjmp    [m[34m0x401a00[m <[33mmain[m+218>
+   [34m0x00000000004019dc[m <+182>:	[32mmov    [m[31medi[m,[34m0x80[m
+   [34m0x00000000004019e1[m <+187>:	[32mcall   [m[34m0x40f140[m <[33mmalloc[m>
+   [34m0x00000000004019e6[m <+192>:	[32mmov    [m[31mrdx[m,[31mrax[m
+   [34m0x00000000004019e9[m <+195>:	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m]
+   [34m0x00000000004019ef[m <+201>:	[32mcdqe[m
+   [34m0x00000000004019f1[m <+203>:	[32mmov    [mQWORD PTR [[31mrbp[m+[31mrax[m*[34m8[m[34m-[m[34m0xa0[m],[31mrdx[m
+   [34m0x00000000004019f9[m <+211>:	[32madd    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x1[m
+   [34m0x0000000000401a00[m <+218>:	[32mcmp    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x2[m
+   [34m0x0000000000401a07[m <+225>:	[32mjle    [m[34m0x4019dc[m <[33mmain[m+182>
+   [34m0x0000000000401a09[m <+227>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x0[m
+   [34m0x0000000000401a13[m <+237>:	[32mjmp    [m[34m0x401a39[m <[33mmain[m+275>
+   [34m0x0000000000401a15[m <+239>:	[32mmov    [m[31medi[m,[34m0x500[m
+   [34m0x0000000000401a1a[m <+244>:	[32mcall   [m[34m0x40f140[m <[33mmalloc[m>
+   [34m0x0000000000401a1f[m <+249>:	[32mmov    [m[31mrdx[m,[31mrax[m
+   [34m0x0000000000401a22[m <+252>:	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m]
+   [34m0x0000000000401a28[m <+258>:	[32mcdqe[m
+   [34m0x0000000000401a2a[m <+260>:	[32mmov    [mQWORD PTR [[31mrbp[m+[31mrax[m*[34m8[m[34m-[m[34m0xb0[m],[31mrdx[m
+   [34m0x0000000000401a32[m <+268>:	[32madd    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x1[m
+   [34m0x0000000000401a39[m <+275>:	[32mcmp    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x1[m
+   [34m0x0000000000401a40[m <+282>:	[32mjle    [m[34m0x401a15[m <[33mmain[m+239>
+   [34m0x0000000000401a42[m <+284>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrbp[m[34m-[m[34m0x80[m]
+   [34m0x0000000000401a46[m <+288>:	[32mmovabs [m[31mrsi[m,[34m0x7274732070616568[m
+   [34m0x0000000000401a50[m <+298>:	[32mmovabs [m[31mrdi[m,[34m0x6572656820676e69[m
+   [34m0x0000000000401a5a[m <+308>:	[32mmov    [mQWORD PTR [[31mrax[m],[31mrsi[m
+   [34m0x0000000000401a5d[m <+311>:	[32mmov    [mQWORD PTR [[31mrax[m+[34m0x8[m],[31mrdi[m
+   [34m0x0000000000401a61[m <+315>:	[32mmov    [mBYTE PTR [[31mrax[m+[34m0x10[m],[34m0x0[m
+   [34m0x0000000000401a65[m <+319>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x0[m
+   [34m0x0000000000401a6f[m <+329>:	[32mjmp    [m[34m0x401a8d[m <[33mmain[m+359>
+   [34m0x0000000000401a71[m <+331>:	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m]
+   [34m0x0000000000401a77[m <+337>:	[32mcdqe[m
+   [34m0x0000000000401a79[m <+339>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrbp[m+[31mrax[m*[34m8[m[34m-[m[34m0x80[m]
+   [34m0x0000000000401a7e[m <+344>:	[32mmov    [m[31mrdi[m,[31mrax[m
+   [34m0x0000000000401a81[m <+347>:	[32mcall   [m[34m0x40f810[m <[33mfree[m>
+   [34m0x0000000000401a86[m <+352>:	[32madd    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x1[m
+   [34m0x0000000000401a8d[m <+359>:	[32mcmp    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc0[m],[34m0x7[m
+   [34m0x0000000000401a94[m <+366>:	[32mjle    [m[34m0x401a71[m <[33mmain[m+331>
+   [34m0x0000000000401a96[m <+368>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrbp[m[34m-[m[34m0xa0[m]
+   [34m0x0000000000401a9d[m <+375>:	[32mmov    [m[31mrdi[m,[31mrax[m
+   [34m0x0000000000401aa0[m <+378>:	[32mcall   [m[34m0x40f810[m <[33mfree[m>
+   [34m0x0000000000401aa5[m <+383>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrbp[m[34m-[m[34m0xb0[m]
+   [34m0x0000000000401aac[m <+390>:	[32mmov    [m[31mrdi[m,[31mrax[m
+   [34m0x0000000000401aaf[m <+393>:	[32mcall   [m[34m0x40f810[m <[33mfree[m>
+   [34m0x0000000000401ab4[m <+398>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrbp[m[34m-[m[34m0xb8[m]
+   [34m0x0000000000401abb[m <+405>:	[32mmov    [m[31medx[m,[34m0x7[m
+   [34m0x0000000000401ac0[m <+410>:	[32mmov    [m[31mesi[m,[34m0x6[m
+   [34m0x0000000000401ac5[m <+415>:	[32mmov    [m[31mrdi[m,[31mrax[m
+   [34m0x0000000000401ac8[m <+418>:	[32mcall   [m[34m0x401894[m <[33mcompute[m>
+=> [34m0x0000000000401acd[m <+423>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xbc[m],[31meax[m
+   [34m0x0000000000401ad3[m <+429>:	[32mlea    [m[31mrax[m,[[31mrip[m+[34m0xfffffffffffffda3[m][37;2m        # [m[37;2m0x40187d <mul>[m
+   [34m0x0000000000401ada[m <+436>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0xb8[m],[31mrax[m
+   [34m0x0000000000401ae1[m <+443>:	[32mmov    [m[31mecx[m,DWORD PTR [[31mrbp[m[34m-[m[34m0xbc[m]
+   [34m0x0000000000401ae7[m <+449>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrbp[m[34m-[m[34m0xb8[m]
+   [34m0x0000000000401aee[m <+456>:	[32mmov    [m[31medx[m,[34m0x2[m
+   [34m0x0000000000401af3[m <+461>:	[32mmov    [m[31mesi[m,[31mecx[m
+   [34m0x0000000000401af5[m <+463>:	[32mmov    [m[31mrdi[m,[31mrax[m
+   [34m0x0000000000401af8[m <+466>:	[32mcall   [m[34m0x401894[m <[33mcompute[m>
+   [34m0x0000000000401afd[m <+471>:	[32madd    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xbc[m],[31meax[m
+   [34m0x0000000000401b03[m <+477>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrip[m+[34m0xa8616[m][37;2m        # [m[37;2m0x4aa120 <greeting>[m
+   [34m0x0000000000401b0a[m <+484>:	[32mlea    [m[31mrcx[m,[[31mrbp[m[34m-[m[34m0x40[m]
+   [34m0x0000000000401b0e[m <+488>:	[32mmov    [m[31medx[m,DWORD PTR [[31mrbp[m[34m-[m[34m0xbc[m]
+   [34m0x0000000000401b14[m <+494>:	[32mmov    [m[31mr8[m,[31mrcx[m
+   [34m0x0000000000401b17[m <+497>:	[32mmov    [m[31mecx[m,[31medx[m
+   [34m0x0000000000401b19[m <+499>:	[32mlea    [m[31mrdx[m,[[31mrip[m+[34m0xa85c0[m][37;2m        # [m[37;2m0x4aa0e0 <global_buf>[m
+   [34m0x0000000000401b20[m <+506>:	[32mmov    [m[31mrsi[m,[31mrax[m
+   [34m0x0000000000401b23[m <+509>:	[32mlea    [m[31mrax[m,[[31mrip[m+[34m0x7d4fa[m][37;2m        # [m[37;2m0x47f024[m
+   [34m0x0000000000401b2a[m <+516>:	[32mmov    [m[31mrdi[m,[31mrax[m
+   [34m0x0000000000401b2d[m <+519>:	[32mmov    [m[31meax[m,[34m0x0[m
+   [34m0x0000000000401b32[m <+524>:	[32mcall   [m[34m0x404fd0[m <[33mprintf[m>
+   [34m0x0000000000401b37[m <+529>:	[32mcmp    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc4[m],[34m0x1[m
+   [34m0x0000000000401b3e[m <+536>:	[32mjle    [m[34m0x401b4d[m <[33mmain[m+551>
+   [34m0x0000000000401b40[m <+538>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrbp[m[34m-[m[34m0xd0[m]
+   [34m0x0000000000401b47[m <+545>:	[32mmov    [m[31mrax[m,QWORD PTR [[31mrax[m+[34m0x8[m]
+   [34m0x0000000000401b4b[m <+549>:	[32mjmp    [m[34m0x401b54[m <[33mmain[m+558>
+   [34m0x0000000000401b4d[m <+551>:	[32mlea    [m[31mrax[m,[[31mrip[m+[34m0x7d4e5[m][37;2m        # [m[37;2m0x47f039[m
+   [34m0x0000000000401b54[m <+558>:	[32mmov    [m[31mrdi[m,[31mrax[m
+   [34m0x0000000000401b57[m <+561>:	[32mcall   [m[34m0x4018c2[m <[33mvuln[m>
+   [34m0x0000000000401b5c[m <+566>:	[32mmov    [m[31meax[m,[34m0x0[m
+   [34m0x0000000000401b61[m <+571>:	[32mmov    [m[31mrdx[m,QWORD PTR [[31mrbp[m[34m-[m[34m0x8[m]
+   [34m0x0000000000401b65[m <+575>:	[32msub    [m[31mrdx[m,QWORD PTR [31mfs[m:0x28
+   [34m0x0000000000401b6e[m <+584>:	[32mje     [m[34m0x401b75[m <[33mmain[m+591>
+   [34m0x0000000000401b70[m <+586>:	[32mcall   [m[34m0x41a6c0[m <[33m__stack_chk_fail_local[m>
+   [34m0x0000000000401b75[m <+591>:	[32mleave[m
+   [34m0x0000000000401b76[m <+592>:	[32mret[m
+End of assembler dump.

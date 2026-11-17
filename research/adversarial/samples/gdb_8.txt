@@ -1,0 +1,95 @@
+# SOURCE: https://stackoverflow.com/questions/30455799
+info sharedlibrary
+    From        To          Syms Read   Shared Object Library
+    0x77fdd0b0  0x77fe5060  Yes         /home/paolo/trunk/openwrt/sysroot/lib/ld-uClibc.so.0
+    0x77fc6260  0x77fcaec0  Yes         /home/paolo/trunk/openwrt/sysroot/lib/libuci.so
+    0x77faec60  0x77fb3f00  Yes         /home/paolo/trunk/openwrt/sysroot/lib/libubox.so
+    0x77f7efc0  0x77f98900  Yes         /home/paolo/trunk/openwrt/sysroot/lib/libpthread.so.0
+    0x77f482f0  0x77f68370  Yes         /home/paolo/trunk/openwrt/sysroot/lib/libm.so.0
+    0x77e9fe10  0x77f2aa10  Yes         /home/paolo/trunk/openwrt/sysroot/lib/libc.so.0
+    0x77e756e0  0x77e83a50  Yes         /home/paolo/trunk/openwrt/sysroot/lib/libgcc_s.so.1
+    0x77e5caf0  0x77e5fe60  Yes         /home/paolo/trunk/openwrt/sysroot/lib/libdl.so.
+
+info symbol printf
+printf in section .text of /home/paolo/trunk/openwrt/sysroot/lib/libc.so.0
+
+info address printf
+Symbol "printf" is at 0x77ee5d50 in a file compiled without debugging.
+
+info function printf@plt
+All functions matching regular expression "printf@plt":
+
+Non-debugging symbols:
+0x00407510  printf@plt
+0x00407580  snprintf@plt
+0x00407670  vsnprintf@plt
+0x00407730  fprintf@plt
+0x00407960  sprintf@plt
+
+int main(int argc,char* argv[])
+{
+    printf("Hello world\n");
+    signal(SIGINT, SIGHandler);
+...
+}
+
+00401630:   save 96,ra
+ 48           printf("Hello world\n");
+00401632:   lw a0,0x4016bc <main+140>
+00401634:   jal 0x407531 <strerror@plt+1>
+00401638:   nop 
+ 50           signal(SIGINT, SIGHandler);
+0040163a:   lw a1,0x4016bc <main+140>
+0040163c:   jal 0x4077e1 <signal@plt+1>
+00401640:   li a0,2
+
+jal 0x407531 <strerror@plt+1>
+
+info register
+          zero       at       v0       v1       a0       a1       a2       a3
+ R0   00000000 77ff3027 00401631 7fff6e0c 004065c0 7fff6e04 7fff6e0c 7fff6c80 
+            t0       t1       t2       t3       t4       t5       t6       t7
+ R8   00000000 0001e77c 00000000 00077ff3 00000000 00000000 00000000 00000000 
+            s0       s1       s2       s3       s4       s5       s6       s7
+ R16  77fff000 004016e0 00000005 0000000f 00438a64 00000000 00438a64 00438a4c 
+            t8       t9       k0       k1       gp       sp       s8       ra
+ R24  00000000 00401631 00000000 00000000 77f493b0 7fff6c20 7fff6c80 77f27c00 
+            sr       lo       hi      bad    cause       pc
+      0000fc13 cccccccd 00000000 77f13f80 10800024 00401635 
+           fsr      fir
+      00000000 00000000 
+
+info registers
+          zero       at       v0       v1       a0       a1       a2       a3
+ R0   00000000 77ff3027 b2000500 7fff6e0c 004065c0 0040759c 7fff6e0c 7fff6c80 
+            t0       t1       t2       t3       t4       t5       t6       t7
+ R8   00000000 0001dea4 8253bb00 00077ff3 00000000 00000000 00000000 00000000 
+            s0       s1       s2       s3       s4       s5       s6       s7
+ R16  77fff000 004016e0 00000005 0000000f 00438a64 00000000 00438a64 00438a4c 
+            t8       t9       k0       k1       gp       sp       s8       ra
+ R24  00000000 7fff6e0c 00000000 00000000 77f493b0 7fff6c20 7fff6c80 0040163b 
+            sr       lo       hi      bad    cause       pc
+      0000fc13 cccccccd 00000000 77f13f80 30800028 7fff6e0c 
+           fsr      fir
+      00000000 00000000
+
+info function strerror
+All functions matching regular expression "strerror":
+
+File libc/string/__glibc_strerror_r.c:
+char *__GI___glibc_strerror_r(int, char *, size_t);
+
+File libc/string/__xpg_strerror_r.c:
+int __GI___xpg_strerror_r(int, char *, size_t);
+
+File libc/string/strerror.c:
+char *__GI_strerror(int);
+
+File libc/inet/herror.c:
+const char *hstrerror(int);
+
+File libc/inet/gai_strerror.c:
+const char *gai_strerror(int);
+
+Non-debugging symbols:
+0x00407530  strerror@plt

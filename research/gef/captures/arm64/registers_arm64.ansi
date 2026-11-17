@@ -1,0 +1,37 @@
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mregisters
+[?2004l[34m$x0  [0m: 0x0000fffff7ffdb50  →  0x154844b1b73fc000
+[1m[31m$x1  [0m: 0x154844b1b73fc000
+[34m$x2  [0m: [35m0x0000fffffffffd28[0m  →  [35m0x0000ffffffffff09[0m  →  [33m"HOSTNAME=47f545946d15"[0m
+[34m$x3  [0m: [31m0x0000aaaaaaaa0a00[0m  →  [90m<main+0000> sub sp,  sp,  #0xd0[0m
+[34m$x4  [0m: 0x0000fffff7ff8020  →  0x0000000000000000
+[34m$x5  [0m: 0x6b69657c0b5b1843
+[34m$x6  [0m: 0x0000fffff7fa1e60  →  0x0000000000000000
+[34m$x7  [0m: 0x0000fffff7ffcaf0  →  [33m"glibc.rtld.nns"[0m
+[34m$x8  [0m: 0xd7              
+[34m$x9  [0m: 0x28              
+[34m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[34m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[34m$x13 [0m: 0x2f              
+[34m$x14 [0m: 0x1f22b4b         
+[34m$x15 [0m: 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[34m$x16 [0m: 0x0000fffff7f9fd68  →  [31m0x0000fffff7fd0d40[0m  →  [90m<_dl_audit_preinit+0000> stp x29,  x30,  [sp,  #-80]![0m
+[34m$x17 [0m: [31m0x0000fffff7fd0d40[0m  →  [90m<_dl_audit_preinit+0000> stp x29,  x30,  [sp,  #-80]![0m
+[34m$x18 [0m: 0x3               
+[34m$x19 [0m: [35m0x0000fffffffffd18[0m  →  [35m0x0000fffffffffef8[0m  →  [33m"/work/test_arm64"[0m
+[34m$x20 [0m: 0x1               
+[34m$x21 [0m: 0x0000aaaaaaabfd60  →  [31m0x0000aaaaaaaa08c0[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x22 [0m: [31m0x0000aaaaaaaa0a00[0m  →  [90m<main+0000> sub sp,  sp,  #0xd0[0m
+[34m$x23 [0m: [35m0x0000fffffffffd28[0m  →  [35m0x0000ffffffffff09[0m  →  [33m"HOSTNAME=47f545946d15"[0m
+[34m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[34m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[34m$x27 [0m: 0x0000aaaaaaabfd60  →  [31m0x0000aaaaaaaa08c0[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[34m$x29 [0m: [35m0x0000fffffffffb90[0m  →  [35m0x0000fffffffffca0[0m  →  [35m0x0000fffffffffcb0[0m  →  0x0000000000000000
+[34m$x30 [0m: [31m0x0000fffff7e184c4[0m  →  [90m<__libc_start_call_main+0074> bl 0xfffff7e2f2f0 <__GI_exit>[0m
+[34m$sp  [0m: [35m0x0000fffffffffad0[0m  →  [35m0x0000fffffffffd18[0m  →  [35m0x0000fffffffffef8[0m  →  [33m"/work/test_arm64"[0m
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a20[0m  →  [90m<main+0020> str x1,  [sp,  #184][0m
+[34m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               

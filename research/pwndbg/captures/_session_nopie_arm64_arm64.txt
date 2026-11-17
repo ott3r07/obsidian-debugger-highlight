@@ -1,0 +1,311 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_nopie_arm64...
+------- tip of the day (disable with set show-tips off) -------
+If your program has multiple threads they will be displayed in the context display or using the context threads command
+pwndbg> checksec
+File:     /work/test_nopie_arm64
+Arch:     aarch64
+RELRO:      No RELRO
+Stack:      No canary found
+NX:         NX unknown - GNU_STACK missing
+PIE:        No PIE (0x400000)
+Stack:      Executable
+RWX:        Has RWX segments
+Stripped:   No
+Debuginfo:  Yes
+pwndbg> break vuln
+Breakpoint 1 at 0x4007a8: file test.c, line 20.
+pwndbg> run AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Starting program: /work/test_nopie_arm64 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+
+Breakpoint 1, vuln (src=0xfffffffffe6c 'A' <repeats 100 times>) at test.c:20
+20	    strcpy(buf, src);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   0xfffffffffe6c ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+ X1   0xfffff7ffdb50 (__stack_chk_guard) ◂— 0x2ca3660ff9000300
+ X2   0
+ X3   0
+ X4   0xffffffff
+ X5   0xfbad2a84
+ X6   0xfffffffffffffff0
+ X7   2
+ X8   0x40
+ X9   8
+ X10  0xa
+ X11  0xffffff80
+ X12  0xffffffc8
+ X13  0xfffffffff9d0 —▸ 0xfffffffffa10 —▸ 0xfffffffffbe0 —▸ 0xfffffffffbf0 ◂— 0
+ X14  0
+ X15  0xfffff7ff8e50 —▸ 0x400000 ◂— 0x10102464c457f
+ X16  1
+ X17  0xfffff7e86470 (malloc) ◂— stp x29, x30, [sp, #-0x40]!
+ X18  3
+ X19  0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+ X20  2
+ X21  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0x400634 (_start+52) ◂— nop 
+ X23  0xfffffffffc70 —▸ 0xfffffffffed1 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 ◂— 0
+ X27  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffff9d0 —▸ 0xfffffffffa10 —▸ 0xfffffffffbe0 —▸ 0xfffffffffbf0 ◂— 0
+ SP   0xfffffffff9d0 —▸ 0xfffffffffa10 —▸ 0xfffffffffbe0 —▸ 0xfffffffffbf0 ◂— 0
+ LR   0x4009bc (main+488) ◂— mov w0, #0
+ PC   0x4007a8 (vuln+12) ◂— add x0, sp, #0x20
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0x40079c <vuln>       stp    x29, x30, [sp, #-0x40]!
+   0x4007a0 <vuln+4>     mov    x29, sp
+   0x4007a4 <vuln+8>     str    x0, [sp, #0x18]
+b► 0x4007a8 <vuln+12>    add    x0, sp, #0x20               X0 => 0xfffffffff9f0 {buf} (0xfffffffff9d0 + 0x20)
+   0x4007ac <vuln+16>    ldr    x1, [sp, #0x18]             X1, [{src}] => 0xfffffffffe6c ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...'
+   0x4007b0 <vuln+20>    bl     strcpy@plt                  <strcpy@plt>
+ 
+   0x4007b4 <vuln+24>    add    x0, sp, #0x20
+   0x4007b8 <vuln+28>    mov    x1, x0
+   0x4007bc <vuln+32>    adrp   x0, 0x400000        X0 => 0x400000 ◂— 0x10102464c457f
+   0x4007c0 <vuln+36>    add    x0, x0, #0x9f8
+   0x4007c4 <vuln+40>    bl     printf@plt                  <printf@plt>
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:20
+   14     int r = f(x, y);
+   15     return r;
+   16 }
+   17 
+   18 void vuln(const char *src) {
+   19     char buf[32];
+ ► 20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+   24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ x13 x29 sp 0xfffffffff9d0 —▸ 0xfffffffffa10 —▸ 0xfffffffffbe0 —▸ 0xfffffffffbf0 ◂— 0
+01:0008│+008        0xfffffffff9d8 —▸ 0x4009bc (main+488) ◂— mov w0, #0
+02:0010│+010        0xfffffffff9e0 —▸ 0x410e68 (global_buf) ◂— 'global data string'
+03:0018│+018        0xfffffffff9e8 {src} —▸ 0xfffffffffe6c ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+04:0020│+020        0xfffffffff9f0 {buf} —▸ 0xfffffffffa98 ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+05:0028│+028        0xfffffffff9f8 {buf+0x8} ◂— 0x40 /* '@' */
+06:0030│+030        0xfffffffffa00 {buf+0x10} ◂— 0xd2f11494d3997a4a
+07:0038│+038        0xfffffffffa08 {buf+0x18} ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x4007a8       vuln+12
+   1 0x4009bc       main+488
+   2 0xfffff7e184c4 __libc_start_call_main+116
+   3 0xfffff7e18598 __libc_start_main+152
+   4 0x400630       _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of /work/test_nopie_arm64:
+GOT protection: No RELRO | Found 10 GOT entries passing the filter
+[0x410df0] _ITM_deregisterTMCloneTable -> 0
+[0x410df8] __gmon_start__ -> 0
+[0x410e00] _ITM_registerTMCloneTable -> 0
+[0x410e20] __libc_start_main@GLIBC_2.34 -> 0xfffff7e18500 (__libc_start_main) ◂— stp x29, x30, [sp, #-0x60]!
+[0x410e28] malloc@GLIBC_2.17 -> 0xfffff7e86470 (malloc) ◂— stp x29, x30, [sp, #-0x40]!
+[0x410e30] __gmon_start__ -> 0x400560 ◂— stp x16, x30, [sp, #-0x10]!
+[0x410e38] abort@GLIBC_2.17 -> 0x400560 ◂— stp x16, x30, [sp, #-0x10]!
+[0x410e40] free@GLIBC_2.17 -> 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+[0x410e48] strcpy@GLIBC_2.17 -> 0x400560 ◂— stp x16, x30, [sp, #-0x10]!
+[0x410e50] printf@GLIBC_2.17 -> 0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+pwndbg> plt
+Section .plt 0x400560 - 0x4005f0:
+0x400580: __libc_start_main@plt
+0x400590: malloc@plt
+0x4005a0: __gmon_start__@plt
+0x4005b0: abort@plt
+0x4005c0: free@plt
+0x4005d0: strcpy@plt
+0x4005e0: printf@plt
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+          0x400000           0x401000 r-xp     1000       0 test_nopie_arm64
+          0x410000           0x411000 rw-p     1000       0 test_nopie_arm64
+          0x411000           0x432000 rw-p    21000       0 [heap]
+    0xfffff7df0000     0xfffff7f8a000 r-xp   19a000       0 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7f8a000     0xfffff7f9d000 ---p    13000  19a000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7f9d000     0xfffff7fa0000 r--p     3000  19d000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7fa0000     0xfffff7fa2000 rw-p     2000  1a0000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7fa2000     0xfffff7fae000 rw-p     c000       0 [anon_fffff7fa2]
+    0xfffff7fbe000     0xfffff7fe5000 r-xp    27000       0 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffff7ff7000     0xfffff7ff9000 rw-p     2000       0 [anon_fffff7ff7]
+    0xfffff7ff9000     0xfffff7ffb000 r--p     2000       0 [vvar]
+    0xfffff7ffb000     0xfffff7ffc000 r-xp     1000       0 [vdso]
+    0xfffff7ffc000     0xfffff7ffe000 r--p     2000   2e000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffff7ffe000     0xfffff8000000 rw-p     2000   30000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffffffdf000    0x1000000000000 rwxp    21000       0 [stack]
+pwndbg> finish
+Run till exit from #0  vuln (src=0xfffffffffe6c 'A' <repeats 100 times>) at test.c:20
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+main (argc=0x41414141, argv=0x4141414141414141) at test.c:43
+43	    return 0;
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0x69
+ X1   0xfffff7ffdb50 (__stack_chk_guard) ◂— 0x2ca3660ff9000300
+ X2   0
+ X3   0
+*X4   0xfffffffff851 ◂— 'ack=AAAAAAAABBBBBBBBCCC'
+*X5   0x411639 ◂— 0
+*X6   0xa
+ X7   2
+ X8   0x40
+*X9   0
+ X10  0xa
+ X11  0xffffff80
+ X12  0xffffffc8
+*X13  0xfffffffff990 ◂— 0xc00000000000
+ X14  0
+ X15  0xfffff7ff8e50 —▸ 0x400000 ◂— 0x10102464c457f
+*X16  0x410e50 (printf@got[plt]) —▸ 0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+*X17  0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+ X18  3
+ X19  0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+ X20  2
+ X21  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0x400634 (_start+52) ◂— nop 
+ X23  0xfffffffffc70 —▸ 0xfffffffffed1 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 ◂— 0
+ X27  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+*X29  0xfffffffffa10 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+*SP   0xfffffffffa10 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+ LR   0x4009bc (main+488) ◂— mov w0, #0
+*PC   0x4009bc (main+488) ◂— mov w0, #0
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0x4009b0 <main+476>    adrp   x0, 0x400000       X0 => 0x400000 ◂— 0x10102464c457f
+   0x4009b4 <main+480>    add    x0, x0, #0xa50
+   0x4009b8 <main+484>    bl     vuln                        <vuln>
+ 
+ ► 0x4009bc <main+488>    mov    w0, #0                      W0 => 0
+   0x4009c0 <main+492>    ldp    x29, x30, [sp], #0xd0
+   0x4009c4 <main+496>    ret   
+ 
+   0x4009c8 <_fini>       nop   
+   0x4009cc <_fini+4>     stp    x29, x30, [sp, #-0x10]!
+   0x4009d0 <_fini+8>     mov    x29, sp
+   0x4009d4 <_fini+12>    ldp    x29, x30, [sp], #0x10
+   0x4009d8 <_fini+16>    ret   
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:43
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+   38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+ ► 43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ x29 sp 0xfffffffffa10 ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+... ↓           7 skipped
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x4009bc           main+488
+   1 0x4141414141414141
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> continue
+Continuing.
+
+Program received signal SIGBUS, Bus error.
+0x0041414141414141 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0
+ X1   0xfffff7ffdb50 (__stack_chk_guard) ◂— 0x2ca3660ff9000300
+ X2   0
+ X3   0
+ X4   0xfffffffff851 ◂— 'ack=AAAAAAAABBBBBBBBCCC'
+ X5   0x411639 ◂— 0
+ X6   0xa
+ X7   2
+ X8   0x40
+ X9   0
+ X10  0xa
+ X11  0xffffff80
+ X12  0xffffffc8
+ X13  0xfffffffff990 ◂— 0xc00000000000
+ X14  0
+ X15  0xfffff7ff8e50 —▸ 0x400000 ◂— 0x10102464c457f
+ X16  0x410e50 (printf@got[plt]) —▸ 0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+ X17  0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+ X18  3
+ X19  0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+ X20  2
+ X21  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0x400634 (_start+52) ◂— nop 
+ X23  0xfffffffffc70 —▸ 0xfffffffffed1 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 ◂— 0
+ X27  0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+*X29  0x4141414141414141 ('AAAAAAAA')
+*SP   0xfffffffffae0 —▸ 0xfffffffffb70 ◂— 0
+ LR   0x4141414141414141 ('AAAAAAAA')
+*PC   0x41414141414141
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+Invalid address 0x41414141414141
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffae0 —▸ 0xfffffffffb70 ◂— 0
+01:0008│     0xfffffffffae8 —▸ 0x400634 (_start+52) ◂— nop 
+02:0010│     0xfffffffffaf0 ◂— 0x200000000
+03:0018│     0xfffffffffaf8 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+04:0020│     0xfffffffffb00 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+05:0028│     0xfffffffffb08 ◂— 2
+06:0030│     0xfffffffffb10 —▸ 0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+07:0038│     0xfffffffffb18 —▸ 0x400634 (_start+52) ◂— nop 
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x41414141414141
+   1 0x4141414141414141
+────────────────────────────────────────────────────[ LAST SIGNAL ]─────────────────────────────────────────────────────
+Program received signal SIGBUS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> bt
+#0  0x0041414141414141 in ?? ()
+#1  0x4141414141414141 in ?? ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+pwndbg> telescope $sp 10
+00:0000│  sp 0xfffffffffae0 —▸ 0xfffffffffb70 ◂— 0
+01:0008│     0xfffffffffae8 —▸ 0x400634 (_start+52) ◂— nop 
+02:0010│     0xfffffffffaf0 ◂— 0x200000000
+03:0018│     0xfffffffffaf8 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+04:0020│     0xfffffffffb00 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+05:0028│     0xfffffffffb08 ◂— 2
+06:0030│     0xfffffffffb10 —▸ 0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+07:0038│     0xfffffffffb18 —▸ 0x400634 (_start+52) ◂— nop 
+08:0040│     0xfffffffffb20 —▸ 0xfffffffffc70 —▸ 0xfffffffffed1 ◂— 'HOSTNAME=3e37fc6690d4'
+09:0048│     0xfffffffffb28 —▸ 0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+pwndbg> cyclic -l 0x6161616161616166
+Finding cyclic pattern of 4 bytes: b'faaa' (hex: 0x66616161)
+Found at offset 20
+pwndbg> 

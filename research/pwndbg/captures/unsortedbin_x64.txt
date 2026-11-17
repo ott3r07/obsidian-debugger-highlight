@@ -1,0 +1,3 @@
+pwndbg> unsortedbin
+unsortedbin
+all:         0x55555555b5c0 —▸ 0xffff92b35b20 ◂— 0x55555555b5c0

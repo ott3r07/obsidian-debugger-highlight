@@ -1,0 +1,14 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+(gdb) run
+Starting program: /rv/rv_arm64 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+[New Thread 0xfffff7def1a0 (LWP 451)]
+[Thread 0xfffff7def1a0 (LWP 451) exited]
+
+Thread 1 "rv_arm64" hit Breakpoint 1, many_args (alpha_parameter=4369, 
+    beta_parameter=8738, 
+    gamma_string=0xaaaaaaaa0e78 "a fairly long string argument to force gdb line wrapping", delta_config=0xaaaaaaac0010 <g_cfg>, epsilon_value=21845, 
+    zeta_value=26214) at rv.c:16
+16	int many_args(long alpha_parameter, long beta_parameter, const char *gamma_string, struct cfg *delta_config, long epsilon_value, long zeta_value) {

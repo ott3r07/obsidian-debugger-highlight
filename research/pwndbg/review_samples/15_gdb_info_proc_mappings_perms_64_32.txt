@@ -1,0 +1,44 @@
+# SOURCE: https://raw.githubusercontent.com/nikosChalk/ctf-writeups/master/uiuctf23/pwn/virophage/README.md
+# DATE: 2023-07 (UIUCTF 2023, GDB 13.1)
+uiuctf-2023:/home/user# gdb ./virophage
+GNU gdb (GDB) 13.1
+(gdb) b virophage_main
+Breakpoint 1 at 0x1177: file /home/user/virophage.c, line 98.
+(gdb) r
+Starting program: /home/user/virophage
+
+Breakpoint 1, virophage_main (argc=<optimized out>, envp=<optimized out>,
+    argv=<optimized out>) at /home/user/virophage.c:267
+267             if (_vp_sys_unshare(CLONE_NEWNS) < 0)
+(gdb) info proc mappings
+process 62
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset  Perms  objfile
+      0x7fe576653000     0x7fe576654000     0x1000        0x0  r--p   /home/user/virophage
+      0x7fe576654000     0x7fe576655000     0x1000     0x1000  r-xp   /home/user/virophage
+      0x7fe576655000     0x7fe576656000     0x1000     0x2000  r--p   /home/user/virophage
+      0x7fe576656000     0x7fe576657000     0x1000     0x2000  rw-p   /home/user/virophage
+      0x7fe576657000     0x7fe576658000     0x1000        0x0  rw-p
+      0x7fff386e1000     0x7fff38702000    0x21000        0x0  rw-p   [stack]
+      0x7fff3871d000     0x7fff38721000     0x4000        0x0  r--p   [vvar]
+      0x7fff38721000     0x7fff38723000     0x2000        0x0  r-xp   [vdso]
+(gdb) c
+Continuing.
+Please enter a number in hex: 41414141
+You entered: 0x41414141
+execve...
+process 62 is executing new program: /tmp/virus
+Error in re-setting breakpoint 1: No symbol table is loaded.  Use the "file" command.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x41414141 in ?? ()
+(gdb) info proc mappings
+process 62
+Mapped address spaces:
+
+        Start Addr   End Addr       Size     Offset  Perms   objfile
+        0xf7ff8000 0xf7ffc000     0x4000        0x0  r--p   [vvar]
+        0xf7ffc000 0xf7ffe000     0x2000        0x0  r-xp   [vdso]
+        0xfffdd000 0xffffe000    0x21000        0x0  rwxp   [stack]
+(gdb)

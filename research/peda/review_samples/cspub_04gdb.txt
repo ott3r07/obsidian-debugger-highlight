@@ -1,0 +1,285 @@
+# SOURCE: https://security.cs.pub.ro/summer-school/wiki/_export/raw/session/04-gdb
+# (fenced code blocks containing PEDA output, verbatim; blocks separated by a line "# ---- block ----")
+# ---- block ----
+====== Refresher. Taming GDB ======
+
+Although it is a powerful tool, gdb is pretty cumbersome to use by itself. Even simple tasks such as execution tracing are made difficult by the lack of "friendliness".
+To overcome this, we're going to use a wrapper over gdb that greatly enhances its default functionality. This tool is called "Python Exploit Development Assistance for GDB", in short: peda.
+Even though there are lots of goodies included in it we're going to go only over what we need right now.
+
+====== Installation ======
+
+You can download peda using:
+<code bash>
+git clone https://github.com/longld/peda.git ~/peda
+</code>
+To set it up add the following to your **~/.gdbinit** file and then run **gdb** as usual:
+
+<file bash .gdbinit>
+# Source all settings from the peda dir
+source ~/peda/peda.py
+
+# These are other settings I have found useful
+
+# When inspecting large portions of code the scrollbar works better than 'less'
+set pagination off
+
+
+# Keep a history of all the commands typed. Search is possible using ctrl-r
+set history save on
+set history filename ~/.gdb_history
+set history size 32768
+set history expansion on
+
+# By default peda clears the screen after most commands, displaying a single
+# context frame at a time and allowing you to access the previous/next frame
+# using Shift+PageUp/Shift+PageDown. However, that might not work in your
+# terminal, leaving you unable to access any older information. If that is the
+# case, uncomment the following line:
+#
+#pset opt clearscr off
+</file>
+====== Basic stuff ======
+The most common actions done in gdb are: setting breakpoints, stepping through program execution and examining memory. The following are commands you need to know:
+  * ''run [args]'' => restart the program with [args] as args
+  * ''stepi'' (or simply ''si'') => execute the current instruction and go to the next one - if it's a call instruction go to that subroutine (step into)
+  * ''nexti'' (or simply ''ni'') => execute the current instruction and go to the next one - if it's a call instruction execute the whole subroutine in the background (step over)
+  * ''break'' (or simply ''b'') => set a permanent breakpoint on an address or function
+  * ''info break'' => display all current breakpoints set
+  * '' delete 2'' => delete the breakpoint with index 2 (from the list of current breakpoints)
+  * ''continue'' (or simply ''c'') => continue execution after hitting a breakpoint (or receiving a signal)
+  * ''hexdump <addr> [/NR]'' => dump NR lines of memory starting from <addr>. (by default NR is 1)
+  * ''x /s <addr>'' => dump a **string** starting from <addr> (''/100s'' would dump 100 strings)
+  * ''x /wx <addr>'' => dump a **dword** starting from <addr> (''/100wx'' would dump 100 dwords)
+
+<note info>
+
+In order to provide command line arguments to a program run under gdb we can use (assume the name of the program is ''test'' and the command line arguments are ''arg0 arg1 arg2''):
+<code bash>
+gdb test
+... # GDB banner is skipped
+gdb-peda$ run arg0 arg1 arg2 
+</code>
+
+In order to redirect both ''stdin'' and ''stdout'' to two separate files, we can use (the name of the program is still ''test'' and thetwo files that we redirect to and from are ''inputfile'' and ''outputfile''):
+<code bash>
+gdb test
+... # GDB banner is skipped
+gdb-peda$ run < inputfile > outputfile
+</code>
+
+Obviously, one could combine the two examples into one, meaning that command line arguments, standard input and standard output are all controlled from inside GDB. This is great for debugging your exploits in an automated way.
+<code bash>
+gdb test
+... # GDB banner is skipped
+gdb-peda$ run arg0 arg1 arg2 < inputfile > outputfile
+</code>
+</note>
+
+===== Practice the basic stuff =====
+Let's find out how to do these on a previous crackme from session 01.Remember that the point was that it implemented a custom ''my_strcmp'' function such that ltrace/strace did not work. We now redo that task using gdb-peda:
+
+First we start it and investigate what happens in ''main'' using ''pdis'' (the peda enhanced version of ''dis'' - disassemble)
+<code bash>
+$ gdb ./crackme3
+gdb-peda$ pdis main
+Dump of assembler code for function main:
+   0x080485a7 <+0>:	push   ebp
+   0x080485a8 <+1>:	mov    ebp,esp
+   0x080485aa <+3>:	and    esp,0xfffffff0
+   0x080485ad <+6>:	sub    esp,0x400
+   0x080485b3 <+12>:	mov    DWORD PTR [esp],0x804a02c
+   0x080485ba <+19>:	call   0x804855a <deobf>
+   0x080485bf <+24>:	mov    DWORD PTR [esp],0x80486e0
+   0x080485c6 <+31>:	call   0x80483b0 <puts@plt>
+   0x080485cb <+36>:	mov    eax,ds:0x804a044
+   0x080485d0 <+41>:	mov    DWORD PTR [esp+0x8],eax
+   0x080485d4 <+45>:	mov    DWORD PTR [esp+0x4],0x3e8
+   0x080485dc <+53>:	lea    eax,[esp+0x18]
+   0x080485e0 <+57>:	mov    DWORD PTR [esp],eax
+   0x080485e3 <+60>:	call   0x80483a0 <fgets@plt>
+   0x080485e8 <+65>:	test   eax,eax
+   0x080485ea <+67>:	jne    0x80485f8 <main+81>
+   0x080485ec <+69>:	mov    DWORD PTR [esp],0xffffffff
+   0x080485f3 <+76>:	call   0x80483d0 <exit@plt>
+   0x080485f8 <+81>:	lea    eax,[esp+0x18]
+   0x080485fc <+85>:	mov    DWORD PTR [esp],eax
+   0x080485ff <+88>:	call   0x80483e0 <strlen@plt>
+   0x08048604 <+93>:	sub    eax,0x1
+   0x08048607 <+96>:	mov    BYTE PTR [esp+eax*1+0x18],0x0
+   0x0804860c <+101>:	mov    DWORD PTR [esp+0x4],0x804a02c
+   0x08048614 <+109>:	lea    eax,[esp+0x18]
+   0x08048618 <+113>:	mov    DWORD PTR [esp],eax
+   0x0804861b <+116>:	call   0x80484fc <my_strcmp>
+   0x08048620 <+121>:	test   eax,eax
+   0x08048622 <+123>:	jne    0x8048632 <main+139>
+   0x08048624 <+125>:	mov    DWORD PTR [esp],0x80486ea
+   0x0804862b <+132>:	call   0x80483b0 <puts@plt>
+   0x08048630 <+137>:	jmp    0x804863e <main+151>
+   0x08048632 <+139>:	mov    DWORD PTR [esp],0x80486f3
+   0x08048639 <+146>:	call   0x80483b0 <puts@plt>
+   0x0804863e <+151>:	mov    eax,0x0
+   0x08048643 <+156>:	leave  
+   0x08048644 <+157>:	ret    
+End of assembler dump.
+</code>
+
+The interesting function is ''my_strcmp''. Next we set a breakpoint on it and start the program:
+<code bash>
+gdb-peda$ break *my_strcmp
+Breakpoint 1 at 0x80484fc
+gdb-peda$ run
+Password:
+bla bla bla
+[----------------------------------registers-----------------------------------]
+EAX: 0xffffc9e8 ("bla bla bla")
+EBX: 0xf7f94e54 --> 0x1a6d5c 
+ECX: 0x28 ('(')
+EDX: 0xc ('\x0c')
+ESI: 0x0 
+EDI: 0x0 
+EBP: 0xffffcdd8 --> 0x0 
+ESP: 0xffffc9cc --> 0x8048620 (<main+121>:	test   eax,eax)
+EIP: 0x80484fc (<my_strcmp>:	push   ebp)
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x80484e3:	mov    ebp,esp
+   0x80484e5:	sub    esp,0x18
+   0x80484e8:	mov    DWORD PTR [esp],0x8049f08
+   0x80484ef:	call   eax
+   0x80484f1:	leave  
+   0x80484f2:	jmp    0x8048470
+   0x80484f7:	jmp    0x8048470
+=> 0x80484fc <my_strcmp>:	push   ebp
+   0x80484fd <my_strcmp+1>:	mov    ebp,esp
+   0x80484ff <my_strcmp+3>:	sub    esp,0x28
+   0x8048502 <my_strcmp+6>:	mov    eax,DWORD PTR [ebp+0x8]
+   0x8048505 <my_strcmp+9>:	mov    DWORD PTR [esp],eax
+   0x8048508 <my_strcmp+12>:	call   0x80483e0 <strlen@plt>
+   0x804850d <my_strcmp+17>:	mov    DWORD PTR [ebp-0x10],eax
+   0x8048510 <my_strcmp+20>:	cmp    DWORD PTR [ebp-0x10],0x0
+   0x8048514 <my_strcmp+24>:	jne    0x804851d <my_strcmp+33>
+[------------------------------------stack-------------------------------------]
+0000| 0xffffc9cc --> 0x8048620 (<main+121>:	test   eax,eax)
+0004| 0xffffc9d0 --> 0xffffc9e8 ("bla bla bla")
+0008| 0xffffc9d4 --> 0x804a02c ("WXXHYIWE5yWic9vnmMGlA")
+0012| 0xffffc9d8 --> 0xf7f95a80 --> 0xfbad2288 
+0016| 0xffffc9dc --> 0x4 
+0020| 0xffffc9e0 --> 0x4 
+0024| 0xffffc9e4 --> 0x7 
+0028| 0xffffc9e8 ("bla bla bla")
+0032| 0xffffc9ec ("bla bla")
+0036| 0xffffc9f0 --> 0x616c62 ('bla')
+0040| 0xffffc9f4 --> 0x0 
+0044| 0xffffc9f8 --> 0x40 ('@')
+0048| 0xffffc9fc --> 0x4 
+0052| 0xffffca00 --> 0x4 
+0056| 0xffffca04 --> 0x6474e550 
+0060| 0xffffca08 --> 0x170960 
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, 0x080484fc in my_strcmp ()
+</code>
+If you remember from the last session, the parameters passed to a function are on the stack. Because we have just arrived at this function using a ''call'' instruction, the return address is placed at the top of the stack (0x8048620). Immediately afterwards are the two parameters to the function: with "bla bla bla" being my input and "WXXHYIWE5yWic9vnmMGlA" the correct input (obviously, the two should match, therefore your job now is to input the value that the program expects).
+
+Note that peda automatically //telescopes// addresses (dereferences and interprets the data)
+
+Returning into main we see that there is something similar to an ''if'':
+<code asm>
+   0x0804861b <+116>:	call   0x80484fc <my_strcmp>
+   0x08048620 <+121>:	test   eax,eax
+   0x08048622 <+123>:	jne    0x8048632 <main+139>
+   0x08048624 <+125>:	mov    DWORD PTR [esp],0x80486ea
+   0x0804862b <+132>:	call   0x80483b0 <puts@plt>
+   0x08048630 <+137>:	jmp    0x804863e <main+151>
+   0x08048632 <+139>:	mov    DWORD PTR [esp],0x80486f3
+   0x08048639 <+146>:	call   0x80483b0 <puts@plt>
+</code>
+If my_strcmp returns 0 then the Zero Flag is set and ''jne'' does not determine a jump. Afterwards, a parameter is pushed on the stack and ''puts'' is called. Let's dump the two strings:
+<code bash>
+gdb-peda$ x/s 0x80486ea
+0x80486ea:	"Correct!"
+gdb-peda$ x/s 0x80486f3
+0x80486f3:	"Nope!"
+</code>
+
+
+
+
+====== Dynamic analysis shortcuts ======
+In peda you have quick access to information that you would otherwise have to obtain using other tools as presented before:
+<code bash>
+gdb-peda$ vmmap
+Start      End        Perm	Name
+0x08048000 0x08049000 r-xp	/tmp/black/crackmes/crackme3
+0x08049000 0x0804a000 r--p	/tmp/black/crackmes/crackme3
+0x0804a000 0x0804b000 rw-p	/tmp/black/crackmes/crackme3
+0xf7ded000 0xf7dee000 rw-p	mapped
+0xf7dee000 0xf7f93000 r-xp	/lib32/libc-2.17.so
+0xf7f93000 0xf7f95000 r--p	/lib32/libc-2.17.so
+0xf7f95000 0xf7f96000 rw-p	/lib32/libc-2.17.so
+0xf7f96000 0xf7f99000 rw-p	mapped
+0xf7fda000 0xf7fdb000 rw-p	mapped
+0xf7fdb000 0xf7fdc000 r-xp	[vdso]
+0xf7fdc000 0xf7ffc000 r-xp	/lib32/ld-2.17.so
+0xf7ffc000 0xf7ffd000 r--p	/lib32/ld-2.17.so
+0xf7ffd000 0xf7ffe000 rw-p	/lib32/ld-2.17.so
+0xfffdd000 0xffffe000 rw-p	[stack]
+gdb-peda$ elfheader
+.interp = 0x8048174
+.note.ABI-tag = 0x8048188
+.hash = 0x80481a8
+.gnu.hash = 0x80481e0
+.dynsym = 0x8048204
+.dynstr = 0x8048294
+.gnu.version = 0x80482f6
+.gnu.version_r = 0x8048308
+.rel.dyn = 0x8048328
+.rel.plt = 0x8048338
+.init = 0x8048368
+.plt = 0x8048390
+.text = 0x8048400
+.fini = 0x80486c4
+.rodata = 0x80486d8
+.eh_frame_hdr = 0x80486fc
+.eh_frame = 0x8048738
+.init_array = 0x8049f00
+.fini_array = 0x8049f04
+.jcr = 0x8049f08
+.dynamic = 0x8049f0c
+.got = 0x8049ffc
+.got.plt = 0x804a000
+.data = 0x804a024
+.bss = 0x804a044
+gdb-peda$ elfsymbol
+Found 6 symbols
+fgets@plt = 0x80483a0
+puts@plt = 0x80483b0
+__gmon_start__@plt = 0x80483c0
+exit@plt = 0x80483d0
+strlen@plt = 0x80483e0
+__libc_start_main@plt = 0x80483f0
+</code>
+
+You can also search for strings in the mapped regions:
+<code bash>
+gdb-peda$ find "Correct"
+Searching for 'Correct' in: None ranges
+Found 2 results, display max 2 items:
+crackme3 : 0x80486ea ("Correct!")
+crackme3 : 0x80496ea ("Correct!")
+
+gdb-peda$ find "/bin/sh"
+Searching for '/bin/sh' in: None ranges
+Found 1 results, display max 1 items:
+libc : 0xf7f53be6 ("/bin/sh")
+
+</code>
+
+====== Tasks ======
+  * Download level01 from Smash the stack and solve it using peda. Break on ''*main'', step through the execution and figure out what it does and how to crack it.
+<code>
+$ scp level1@io.netgarage.org:/levels/level01 . # Password is level1
+</code>

@@ -1,0 +1,2 @@
+gef➤  memory watch $sp 0x20 qword
+[+] Adding memwatch to 0xfffffffffae0

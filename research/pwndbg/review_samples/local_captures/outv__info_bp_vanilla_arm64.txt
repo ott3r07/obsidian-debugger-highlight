@@ -1,0 +1,11 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+(gdb) info breakpoints
+Num     Type            Disp Enb Address            What
+1       breakpoint      keep y   0x0000aaaaaaaa0b08 in worker at rv.c:22
+	breakpoint already hit 1 time
+2       breakpoint      keep y   0x0000aaaaaaaa0a58 in many_args at rv.c:16
+	stop only if alpha_parameter == 0x1111
+4       hw watchpoint   keep y                      g_cfg.vals[3]
+5       read watchpoint keep y                      g_cfg.ratio
+6       acc watchpoint  keep y                      g_cfg.in.a

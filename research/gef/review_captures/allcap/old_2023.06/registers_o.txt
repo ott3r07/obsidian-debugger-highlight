@@ -1,0 +1,5 @@
+gef➤  registers $x0 $sp $pc $cpsr
+$x0  : 0x0000aaaaaaaa0af8  →  "bins ready"
+$sp  : 0x0000fffffffffae0  →  0x0000fffffffffd38  →  0x0000ffffffffff11  →  0x4f480032742f742f ("/t/t2"?)
+$pc  : 0x0000aaaaaaaa0a68  →  <main+272> ldr w0,  [sp,  #12]
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]

@@ -1,0 +1,14 @@
+pwndbg> xinfo greeting
+Extended information for virtual address 0x555555558004:
+
+  Containing mapping:
+    0x555555558000     0x555555559000 r--p     1000    2000 test_x64
+
+  Offset information:
+         Mapped Area 0x555555558004 = 0x555555558000 + 0x4
+         File (Base) 0x555555558004 = 0x555555556000 + 0x2004
+      File (Segment) 0x555555558004 = 0x555555558000 + 0x4
+         File (Disk) 0x555555558004 = /work/test_x64 + 0x2004
+
+ Containing ELF sections:
+             .rodata 0x555555558004 = 0x555555558000 + 0x4

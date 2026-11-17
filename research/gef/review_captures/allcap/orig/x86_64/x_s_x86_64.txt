@@ -1,0 +1,2 @@
+(qemu) gef➤  x/s greeting
+0x47f010:	"Hello, gef!"

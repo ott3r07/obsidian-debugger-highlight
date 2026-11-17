@@ -1,0 +1,2 @@
+(qemu) gef➤  heap arenas
+Arena(base=0x4aa240, top=0x4b4640, last_remainder=0x0, next=0x4aa240, mem=135936, mempeak=135936)

@@ -1,0 +1,145 @@
+gef➤  disassemble main
+Dump of assembler code for function main:
+   0x0000aaaaaaaa0a00 <+0>:	sub	sp, sp, #0xd0
+   0x0000aaaaaaaa0a04 <+4>:	stp	x29, x30, [sp, #192]
+   0x0000aaaaaaaa0a08 <+8>:	add	x29, sp, #0xc0
+   0x0000aaaaaaaa0a0c <+12>:	str	w0, [sp, #12]
+   0x0000aaaaaaaa0a10 <+16>:	str	x1, [sp]
+   0x0000aaaaaaaa0a14 <+20>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0a18 <+24>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0a1c <+28>:	ldr	x1, [x0]
+   0x0000aaaaaaaa0a20 <+32>:	str	x1, [sp, #184]
+   0x0000aaaaaaaa0a24 <+36>:	mov	x1, #0x0                   	// #0
+   0x0000aaaaaaaa0a28 <+40>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0a2c <+44>:	add	x0, x0, #0x918
+   0x0000aaaaaaaa0a30 <+48>:	str	x0, [sp, #24]
+   0x0000aaaaaaaa0a34 <+52>:	add	x2, sp, #0x88
+   0x0000aaaaaaaa0a38 <+56>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0a3c <+60>:	add	x1, x0, #0xc70
+   0x0000aaaaaaaa0a40 <+64>:	mov	x0, x2
+   0x0000aaaaaaaa0a44 <+68>:	ldr	q0, [x1]
+   0x0000aaaaaaaa0a48 <+72>:	str	q0, [x0]
+   0x0000aaaaaaaa0a4c <+76>:	ldur	q0, [x1, #9]
+   0x0000aaaaaaaa0a50 <+80>:	stur	q0, [x0, #9]
+   0x0000aaaaaaaa0a54 <+84>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0a58 <+88>:	b	0xaaaaaaaa0a84 <main+132>
+   0x0000aaaaaaaa0a5c <+92>:	mov	x0, #0x20                  	// #32
+   0x0000aaaaaaaa0a60 <+96>:	bl	0xaaaaaaaa0790 <malloc@plt>
+   0x0000aaaaaaaa0a64 <+100>:	mov	x2, x0
+   0x0000aaaaaaaa0a68 <+104>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0a6c <+108>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0a70 <+112>:	add	x1, sp, #0x48
+   0x0000aaaaaaaa0a74 <+116>:	str	x2, [x1, x0]
+   0x0000aaaaaaaa0a78 <+120>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0a7c <+124>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0a80 <+128>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0a84 <+132>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0a88 <+136>:	cmp	w0, #0x7
+   0x0000aaaaaaaa0a8c <+140>:	b.le	0xaaaaaaaa0a5c <main+92>
+   0x0000aaaaaaaa0a90 <+144>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0a94 <+148>:	b	0xaaaaaaaa0ac0 <main+192>
+   0x0000aaaaaaaa0a98 <+152>:	mov	x0, #0x80                  	// #128
+   0x0000aaaaaaaa0a9c <+156>:	bl	0xaaaaaaaa0790 <malloc@plt>
+   0x0000aaaaaaaa0aa0 <+160>:	mov	x2, x0
+   0x0000aaaaaaaa0aa4 <+164>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0aa8 <+168>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0aac <+172>:	add	x1, sp, #0x30
+   0x0000aaaaaaaa0ab0 <+176>:	str	x2, [x1, x0]
+   0x0000aaaaaaaa0ab4 <+180>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0ab8 <+184>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0abc <+188>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0ac0 <+192>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0ac4 <+196>:	cmp	w0, #0x2
+   0x0000aaaaaaaa0ac8 <+200>:	b.le	0xaaaaaaaa0a98 <main+152>
+   0x0000aaaaaaaa0acc <+204>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0ad0 <+208>:	b	0xaaaaaaaa0afc <main+252>
+   0x0000aaaaaaaa0ad4 <+212>:	mov	x0, #0x500                 	// #1280
+   0x0000aaaaaaaa0ad8 <+216>:	bl	0xaaaaaaaa0790 <malloc@plt>
+   0x0000aaaaaaaa0adc <+220>:	mov	x2, x0
+   0x0000aaaaaaaa0ae0 <+224>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0ae4 <+228>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0ae8 <+232>:	add	x1, sp, #0x20
+   0x0000aaaaaaaa0aec <+236>:	str	x2, [x1, x0]
+   0x0000aaaaaaaa0af0 <+240>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0af4 <+244>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0af8 <+248>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0afc <+252>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0b00 <+256>:	cmp	w0, #0x1
+   0x0000aaaaaaaa0b04 <+260>:	b.le	0xaaaaaaaa0ad4 <main+212>
+   0x0000aaaaaaaa0b08 <+264>:	ldr	x1, [sp, #72]
+   0x0000aaaaaaaa0b0c <+268>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0b10 <+272>:	add	x0, x0, #0xc90
+   0x0000aaaaaaaa0b14 <+276>:	mov	x2, x1
+   0x0000aaaaaaaa0b18 <+280>:	mov	x3, x0
+   0x0000aaaaaaaa0b1c <+284>:	ldp	x0, x1, [x3]
+   0x0000aaaaaaaa0b20 <+288>:	stp	x0, x1, [x2]
+   0x0000aaaaaaaa0b24 <+292>:	ldrb	w0, [x3, #16]
+   0x0000aaaaaaaa0b28 <+296>:	strb	w0, [x2, #16]
+   0x0000aaaaaaaa0b2c <+300>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0b30 <+304>:	b	0xaaaaaaaa0b54 <main+340>
+   0x0000aaaaaaaa0b34 <+308>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0b38 <+312>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0b3c <+316>:	add	x1, sp, #0x48
+   0x0000aaaaaaaa0b40 <+320>:	ldr	x0, [x1, x0]
+   0x0000aaaaaaaa0b44 <+324>:	bl	0xaaaaaaaa07d0 <free@plt>
+   0x0000aaaaaaaa0b48 <+328>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0b4c <+332>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0b50 <+336>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0b54 <+340>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0b58 <+344>:	cmp	w0, #0x7
+   0x0000aaaaaaaa0b5c <+348>:	b.le	0xaaaaaaaa0b34 <main+308>
+   0x0000aaaaaaaa0b60 <+352>:	ldr	x0, [sp, #48]
+   0x0000aaaaaaaa0b64 <+356>:	bl	0xaaaaaaaa07d0 <free@plt>
+   0x0000aaaaaaaa0b68 <+360>:	ldr	x0, [sp, #32]
+   0x0000aaaaaaaa0b6c <+364>:	bl	0xaaaaaaaa07d0 <free@plt>
+   0x0000aaaaaaaa0b70 <+368>:	mov	w2, #0x7                   	// #7
+   0x0000aaaaaaaa0b74 <+372>:	mov	w1, #0x6                   	// #6
+   0x0000aaaaaaaa0b78 <+376>:	ldr	x0, [sp, #24]
+   0x0000aaaaaaaa0b7c <+380>:	bl	0xaaaaaaaa0958 <compute>
+=> 0x0000aaaaaaaa0b80 <+384>:	str	w0, [sp, #20]
+   0x0000aaaaaaaa0b84 <+388>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0b88 <+392>:	add	x0, x0, #0x938
+   0x0000aaaaaaaa0b8c <+396>:	str	x0, [sp, #24]
+   0x0000aaaaaaaa0b90 <+400>:	mov	w2, #0x2                   	// #2
+   0x0000aaaaaaaa0b94 <+404>:	ldr	w1, [sp, #20]
+   0x0000aaaaaaaa0b98 <+408>:	ldr	x0, [sp, #24]
+   0x0000aaaaaaaa0b9c <+412>:	bl	0xaaaaaaaa0958 <compute>
+   0x0000aaaaaaaa0ba0 <+416>:	mov	w1, w0
+   0x0000aaaaaaaa0ba4 <+420>:	ldr	w0, [sp, #20]
+   0x0000aaaaaaaa0ba8 <+424>:	add	w0, w0, w1
+   0x0000aaaaaaaa0bac <+428>:	str	w0, [sp, #20]
+   0x0000aaaaaaaa0bb0 <+432>:	adrp	x0, 0xaaaaaaac0000
+   0x0000aaaaaaaa0bb4 <+436>:	add	x0, x0, #0x50
+   0x0000aaaaaaaa0bb8 <+440>:	ldr	x1, [x0]
+   0x0000aaaaaaaa0bbc <+444>:	add	x0, sp, #0x88
+   0x0000aaaaaaaa0bc0 <+448>:	mov	x4, x0
+   0x0000aaaaaaaa0bc4 <+452>:	ldr	w3, [sp, #20]
+   0x0000aaaaaaaa0bc8 <+456>:	adrp	x0, 0xaaaaaaac0000
+   0x0000aaaaaaaa0bcc <+460>:	add	x2, x0, #0x10
+   0x0000aaaaaaaa0bd0 <+464>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0bd4 <+468>:	add	x0, x0, #0xca8
+   0x0000aaaaaaaa0bd8 <+472>:	bl	0xaaaaaaaa07f0 <printf@plt>
+   0x0000aaaaaaaa0bdc <+476>:	ldr	w0, [sp, #12]
+   0x0000aaaaaaaa0be0 <+480>:	cmp	w0, #0x1
+   0x0000aaaaaaaa0be4 <+484>:	b.le	0xaaaaaaaa0bf4 <main+500>
+   0x0000aaaaaaaa0be8 <+488>:	ldr	x0, [sp]
+   0x0000aaaaaaaa0bec <+492>:	ldr	x0, [x0, #8]
+   0x0000aaaaaaaa0bf0 <+496>:	b	0xaaaaaaaa0bfc <main+508>
+   0x0000aaaaaaaa0bf4 <+500>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0bf8 <+504>:	add	x0, x0, #0xcc0
+   0x0000aaaaaaaa0bfc <+508>:	bl	0xaaaaaaaa098c <vuln>
+   0x0000aaaaaaaa0c00 <+512>:	mov	w0, #0x0                   	// #0
+   0x0000aaaaaaaa0c04 <+516>:	mov	w1, w0
+   0x0000aaaaaaaa0c08 <+520>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0c0c <+524>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0c10 <+528>:	ldr	x3, [sp, #184]
+   0x0000aaaaaaaa0c14 <+532>:	ldr	x2, [x0]
+   0x0000aaaaaaaa0c18 <+536>:	subs	x3, x3, x2
+   0x0000aaaaaaaa0c1c <+540>:	mov	x2, #0x0                   	// #0
+   0x0000aaaaaaaa0c20 <+544>:	b.eq	0xaaaaaaaa0c28 <main+552>  // b.none
+   0x0000aaaaaaaa0c24 <+548>:	bl	0xaaaaaaaa07a0 <__stack_chk_fail@plt>
+   0x0000aaaaaaaa0c28 <+552>:	mov	w0, w1
+   0x0000aaaaaaaa0c2c <+556>:	ldp	x29, x30, [sp, #192]
+   0x0000aaaaaaaa0c30 <+560>:	add	sp, sp, #0xd0
+   0x0000aaaaaaaa0c34 <+564>:	ret
+End of assembler dump.

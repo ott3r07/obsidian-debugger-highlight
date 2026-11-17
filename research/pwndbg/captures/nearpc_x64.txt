@@ -1,0 +1,19 @@
+pwndbg> nearpc
+   0x555555557472 <main+375>    mov    rdi, rax
+   0x555555557475 <main+378>    call   free@plt                    <free@plt>
+ 
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+b► 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+   0x5555555574b6 <main+443>    mov    ecx, dword ptr [rbp - 0xbc]
+   0x5555555574bc <main+449>    mov    rax, qword ptr [rbp - 0xb8]

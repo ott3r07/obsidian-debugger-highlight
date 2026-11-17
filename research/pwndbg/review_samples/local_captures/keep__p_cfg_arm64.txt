@@ -1,0 +1,14 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> p g_cfg
+$2 = {
+  name = 0xaaaaaaaa0e30 "review",
+  vals = {0x1, 0x2, 0x3, 0x0, 0x0, 0x0},
+  in = {
+    a = 0x7,
+    tag = "inn\000\000\000\000"
+  },
+  ratio = 0.5,
+  cb = 0xaaaaaaaa09d8 <cb>,
+  pad = '\000' <repeats 39 times>
+}

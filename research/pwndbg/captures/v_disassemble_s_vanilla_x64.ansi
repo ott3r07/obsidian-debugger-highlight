@@ -1,0 +1,22 @@
+(gdb) disassemble /s mul
+Dump of assembler code for function [33mmul[m:
+test.c:
+11	[32mint[m [01mmul[m[31m([m[32mint[m a[31m,[m [32mint[m b[31m)[m [31m{[m [01;34mreturn[m a [31m*[m b[31m;[m [31m}[m
+   [34m0x0000555555557208[m <+0>:	[32mendbr64[m
+   [34m0x000055555555720c[m <+4>:	[32mpush   [m[31mrbp[m
+   [34m0x000055555555720d[m <+5>:	[32mmov    [m[31mrbp[m,[31mrsp[m
+   [34m0x0000555555557210[m <+8>:	[32msub    [m[31mrsp[m,[34m0x20[m
+   [34m0x0000555555557214[m <+12>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0x14[m],[31medi[m
+   [34m0x0000555555557217[m <+15>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0x18[m],[31mesi[m
+   [34m0x000055555555721a[m <+18>:	[32mmov    [m[31mrax[m,QWORD PTR [31mfs[m:0x28
+   [34m0x0000555555557223[m <+27>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0x8[m],[31mrax[m
+   [34m0x0000555555557227[m <+31>:	[32mxor    [m[31meax[m,[31meax[m
+   [34m0x0000555555557229[m <+33>:	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0x14[m]
+   [34m0x000055555555722c[m <+36>:	[32mimul   [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0x18[m]
+   [34m0x0000555555557230[m <+40>:	[32mmov    [m[31mrdx[m,QWORD PTR [[31mrbp[m[34m-[m[34m0x8[m]
+   [34m0x0000555555557234[m <+44>:	[32msub    [m[31mrdx[m,QWORD PTR [31mfs[m:0x28
+   [34m0x000055555555723d[m <+53>:	[32mje     [m[34m0x555555557244[m <[33mmul[m+60>
+   [34m0x000055555555723f[m <+55>:	[32mcall   [m[34m0x5555555570b0[m <[33m__stack_chk_fail@plt[m>
+   [34m0x0000555555557244[m <+60>:	[32mleave[m
+   [34m0x0000555555557245[m <+61>:	[32mret[m
+End of assembler dump.

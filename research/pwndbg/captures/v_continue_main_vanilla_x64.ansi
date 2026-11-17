@@ -1,0 +1,5 @@
+(gdb) continue
+Continuing.
+
+Breakpoint 1, [33mmain[m ([36margc[m=1, [36margv[m=0xffff935a9cf8) at [32mtest.c[m:24
+24	[32mint[m [01mmain[m[31m([m[32mint[m argc[31m,[m [32mchar[m [31m**[margv[31m)[m [31m{[m

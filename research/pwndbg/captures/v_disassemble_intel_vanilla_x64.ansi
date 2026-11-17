@@ -1,0 +1,27 @@
+(gdb) disassemble compute
+Dump of assembler code for function [33mcompute[m:
+   [34m0x0000555555557246[m <+0>:	[32mendbr64[m
+   [34m0x000055555555724a[m <+4>:	[32mpush   [m[31mrbp[m
+   [34m0x000055555555724b[m <+5>:	[32mmov    [m[31mrbp[m,[31mrsp[m
+   [34m0x000055555555724e[m <+8>:	[32msub    [m[31mrsp[m,[34m0x20[m
+   [34m0x0000555555557252[m <+12>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0x18[m],[31mrdi[m
+   [34m0x0000555555557256[m <+16>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0x1c[m],[31mesi[m
+   [34m0x0000555555557259[m <+19>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0x20[m],[31medx[m
+   [34m0x000055555555725c[m <+22>:	[32mmov    [m[31mrax[m,QWORD PTR [31mfs[m:0x28
+   [34m0x0000555555557265[m <+31>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0x8[m],[31mrax[m
+   [34m0x0000555555557269[m <+35>:	[32mxor    [m[31meax[m,[31meax[m
+   [34m0x000055555555726b[m <+37>:	[32mmov    [m[31medx[m,DWORD PTR [[31mrbp[m[34m-[m[34m0x20[m]
+   [34m0x000055555555726e[m <+40>:	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0x1c[m]
+   [34m0x0000555555557271[m <+43>:	[32mmov    [m[31mrcx[m,QWORD PTR [[31mrbp[m[34m-[m[34m0x18[m]
+   [34m0x0000555555557275[m <+47>:	[32mmov    [m[31mesi[m,[31medx[m
+   [34m0x0000555555557277[m <+49>:	[32mmov    [m[31medi[m,[31meax[m
+   [34m0x0000555555557279[m <+51>:	[32mcall   [m[31mrcx[m
+   [34m0x000055555555727b[m <+53>:	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0xc[m],[31meax[m
+   [34m0x000055555555727e[m <+56>:	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0xc[m]
+   [34m0x0000555555557281[m <+59>:	[32mmov    [m[31mrdx[m,QWORD PTR [[31mrbp[m[34m-[m[34m0x8[m]
+   [34m0x0000555555557285[m <+63>:	[32msub    [m[31mrdx[m,QWORD PTR [31mfs[m:0x28
+   [34m0x000055555555728e[m <+72>:	[32mje     [m[34m0x555555557295[m <[33mcompute[m+79>
+   [34m0x0000555555557290[m <+74>:	[32mcall   [m[34m0x5555555570b0[m <[33m__stack_chk_fail@plt[m>
+   [34m0x0000555555557295[m <+79>:	[32mleave[m
+   [34m0x0000555555557296[m <+80>:	[32mret[m
+End of assembler dump.

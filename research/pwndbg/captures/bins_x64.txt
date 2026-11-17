@@ -1,0 +1,12 @@
+pwndbg> bins
+tcachebins
+0x30 [  7]:  0x55555555b3c0 —▸ 0x55555555b390 —▸ 0x55555555b360 —▸ 0x55555555b330 —▸ 0x55555555b300 —▸ 0x55555555b2d0 —▸ 0x55555555b2a0 ◂— 0
+0x90 [  1]:  0x55555555b420 ◂— 0
+fastbins
+0x30:        0x55555555b3e0 ◂— 0
+unsortedbin
+all:         0x55555555b5c0 —▸ 0xffff92b35b20 ◂— 0x55555555b5c0
+smallbins
+empty
+largebins
+empty

@@ -1,0 +1,2 @@
+gef➤  heap arenas
+Arena(base=0xfffff7fa0a50, top=0xaaaaaaac1fe0, last_remainder=0x0, next=0xfffff7fa0a50, mem=135168, mempeak=135168)

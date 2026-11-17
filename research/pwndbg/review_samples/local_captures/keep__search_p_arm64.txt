@@ -1,0 +1,7 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> search -p head
+Searching for a pointer-width integer: b'\x80\x13\xac\xaa\xaa\xaa\x00\x00'
+rv_arm64        0xaaaaaaac0080 0xaaaaaaac1380
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.
+[stack]         0xfffffffffa00 0xaaaaaaac1380

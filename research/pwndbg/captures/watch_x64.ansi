@@ -1,0 +1,2 @@
+[32m[1mpwndbg> [0m[32m[0m[2S[2Awatch global_buf[0]
+Hardware watchpoint 5: global_buf[0]

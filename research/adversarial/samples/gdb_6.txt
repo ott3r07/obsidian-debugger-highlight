@@ -1,0 +1,62 @@
+# SOURCE: https://stackoverflow.com/questions/66172145
+    Program received signal SIGSEGV, Segmentation fault.
+    0x0000003ff7fed850 in _dl_debug_initialize (ldbase=18446744073709551615, ns=0) at dl-debug.c:49
+    49 if (ns == LM_ID_BASE)
+    (gdb) bt
+    #0 0x0000003ff7fed850 in _dl_debug_initialize (ldbase=18446744073709551615, ns=0) at dl-debug.c:49
+    #1 0x0000003ff7fed984 in _dl_debug_vdprintf (fd=<optimized out>, tag_p=-134225776, fmt=0xffffffffffffffff <error: Cannot access memory at address 0xffffffffffffffff>, arg=0x800011e17) at dl-misc.c:120
+    #2 0x0000003ff7ec76cc in ?? ()
+    (gdb) info stack
+    #0 0x0000003ff7fed850 in _dl_debug_initialize (ldbase=18446744073709551615, ns=0) at dl-debug.c:49
+    #1 0x0000003ff7fed984 in _dl_debug_vdprintf (fd=<optimized out>, tag_p=-134225776, fmt=0xffffffffffffffff <error: Cannot access memory at address 0xffffffffffffffff>, arg=0x800011e17) at dl-misc.c:120
+    #2 0x0000003ff7ec76cc in ?? ()
+
+(gdb) l
+1    <built-in>: No such file or directory.
+(gdb) c
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+_dl_debug_initialize (ldbase=0, ns=1685382482) at dl-debug.c:54
+54      if (r->r_map == NULL || ldbase != 0)
+(gdb) bt
+#0  _dl_debug_initialize (ldbase=0, ns=1685382482) at dl-debug.c:54
+#1  0x0000003ff7fe2dc4 in dl_main (phdr=<optimized out>, phnum=<optimized out>, user_entry=<optimized out>, auxv=<optimized out>) at rtld.c:1596
+#2  0x0000003ff7ff3ea8 in _dl_sysdep_start (start_argptr=start_argptr@entry=0x3ffffffdc0, dl_main=dl_main@entry=0x3ff7fe1cb0 <dl_main>) at ../elf/dl-sysdep.c:253
+#3  0x0000003ff7fe185c in _dl_start_final (arg=0x3ffffffdc0) at rtld.c:415
+#4  _dl_start (arg=0x3ffffffdc0) at rtld.c:522
+#5  0x0000003ff7fe0ee8 in _start () from /home/qc/anaadi/archives/tools/riscv-gnu-toolchain/build-linux-ima/sysroot/lib/ld-linux-riscv64-lp64.so.1
+Backtrace stopped: frame did not save the PC
+(gdb) info r
+ra             0x3ff7fe2dc4    0x3ff7fe2dc4 <dl_main+4372>
+sp             0x3ffffffad0    0x3ffffffad0
+gp             0x140100    0x140100
+tp             0x3ff7dbc720    0x3ff7dbc720
+t0             0x3    3
+t1             0x3ff7fe0e7c    274743561852
+t2             0x6ffffeff    1879047935
+fp             0x3ffffffcf0    0x3ffffffcf0
+s1             0x0    0
+a0             0x7879c0df18    517438758680
+a1             0x6474e552    1685382482
+a2             0x6474e552    1685382482
+a3             0x3ff7fe0158    274743558488
+a4             0x0    0
+a5             0x3881c0fe20    242695077408
+a6             0x1    1
+a7             0x3ff7fffc58    274743688280
+s2             0x3ff7ffd8c8    274743679176
+s3             0x1    1
+s4             0x10    16
+s5             0x3ff7fff008    274743685128
+s6             0x0    0
+s7             0x10000    65536
+s8             0x2e    46
+s9             0x3ff7ffd908    274743679240
+s10            0x3ff7fff160    274743685472
+s11            0x3ff7fff090    274743685264
+t3             0x3ff7ff43c4    274743641028
+t4             0x4    4
+t5             0x4    4
+t6             0x4    4
+pc             0x3ff7fedabc    0x3ff7fedabc <_dl_debug_initialize+40> 

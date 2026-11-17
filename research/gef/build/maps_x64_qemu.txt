@@ -1,0 +1,11 @@
+00400000-00401000 r--p 00000000 00:00 0                                  /work/test_x64
+00401000-0047f000 r-xp 00001000 00:00 0                                  /work/test_x64
+0047f000-004a5000 r--p 0007f000 00:00 0                                  /work/test_x64
+004a5000-004ac000 rw-p 000a4000 00:00 0                                  /work/test_x64
+004ac000-004b2000 rw-p 00000000 00:00 0 
+004b2000-004d4000 rw-p 00000000 00:00 0                                  [heap]
+2aaaaaaab000-2aaaaaaac000 ---p 00000000 00:00 0 
+2aaaaaaac000-2aaaab2ac000 rw-p 00000000 00:00 0                          [stack]
+2aaaab2ac000-2aaaab2ad000 r-xp 00000000 00:00 0                          [vdso]
+2aaaab2ad000-2aaaab2af000 rw-p 00000000 00:00 0 
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]

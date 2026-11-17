@@ -1,0 +1,29 @@
+# SOURCE: https://jcxp.github.io/2019/12/05/hitcon-ctf-pwn-%E5%AD%A6%E4%B9%A0/
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+    0x555555554000     0x555555555000 r-xp     1000 0      /home/jcxp/ctf/practice/hitcon/pwn/trick_or_treat
+    0x555555754000     0x555555755000 r--p     1000 0      /home/jcxp/ctf/practice/hitcon/pwn/trick_or_treat
+    0x555555755000     0x555555756000 rw-p     1000 1000   /home/jcxp/ctf/practice/hitcon/pwn/trick_or_treat
+    0x7ffff7a0d000     0x7ffff7bcd000 r-xp   1c0000 0      /lib/x86_64-linux-gnu/libc-2.23.so
+    0x7ffff7bcd000     0x7ffff7dcd000 ---p   200000 1c0000 /lib/x86_64-linux-gnu/libc-2.23.so
+    0x7ffff7dcd000     0x7ffff7dd1000 r--p     4000 1c0000 /lib/x86_64-linux-gnu/libc-2.23.so
+    0x7ffff7dd1000     0x7ffff7dd3000 rw-p     2000 1c4000 /lib/x86_64-linux-gnu/libc-2.23.so
+    0x7ffff7dd3000     0x7ffff7dd7000 rw-p     4000 0      
+    0x7ffff7dd7000     0x7ffff7dfd000 r-xp    26000 0      /lib/x86_64-linux-gnu/ld-2.23.so
+    0x7ffff7ee7000     0x7ffff7fdf000 rw-p    f8000 0      //申请的内存
+    0x7ffff7ff7000     0x7ffff7ffa000 r--p     3000 0      [vvar]
+    0x7ffff7ffa000     0x7ffff7ffc000 r-xp     2000 0      [vdso]
+    0x7ffff7ffc000     0x7ffff7ffd000 r--p     1000 25000  /lib/x86_64-linux-gnu/ld-2.23.so
+    0x7ffff7ffd000     0x7ffff7ffe000 rw-p     1000 26000  /lib/x86_64-linux-gnu/ld-2.23.so
+    0x7ffff7ffe000     0x7ffff7fff000 rw-p     1000 0      
+    0x7ffffffde000     0x7ffffffff000 rw-p    21000 0      [stack]
+0xffffffffff600000 0xffffffffff601000 r-xp     1000 0      [vsyscall]
+pwndbg> x /10gx 0xffffffffff601000
+0xffffffffff601000:	Cannot access memory at address 0xffffffffff601000
+pwndbg> x /10gx 0x7ffff7ee7010-0x10
+0x7ffff7ee7000:	0x0000000000000000	0x00000000000f5002
+0x7ffff7ee7010:	0x0000000000000000	0x0000000000000000
+0x7ffff7ee7020:	0x0000000000000000	0x0000000000000000
+0x7ffff7ee7030:	0x0000000000000000	0x0000000000000000
+0x7ffff7ee7040:	0x0000000000000000	0x0000000000000000
+pwndbg>

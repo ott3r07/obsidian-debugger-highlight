@@ -1,0 +1,15 @@
+gef➤  heap chunks --summary
+== Chunk distribution by size ==
+ChunkBytes	Count     	TotalBytes     	Description
+125936    	1         	125936         	
+4112      	1         	4112           	
+256       	9         	2304           	
+2064      	1         	2064           	
+656       	1         	656            	
+32        	3         	96             	
+
+== Chunk distribution by flag ==
+Flag           	TotalCount	TotalBytes
+PREV_INUSE     	13        	135072
+IS_MMAPPED     	0         	0
+NON_MAIN_ARENA 	0         	0

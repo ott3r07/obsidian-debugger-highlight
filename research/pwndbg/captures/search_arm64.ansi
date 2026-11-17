@@ -1,0 +1,4 @@
+[32m[1mpwndbg> [0m[32m[0msearch "heap string"
+Searching for byte: b'heap string'
+[31mtest_arm64     [0m [31m0xaaaaaaaa0d60[0m [38;5;148madr[39m[38;5;255m [39m[38;5;81mx8[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m0xaaaaaab63a0f[39m /* 'heap string here' */
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d0a, halting search.

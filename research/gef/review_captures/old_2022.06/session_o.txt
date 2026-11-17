@@ -1,0 +1,421 @@
+Reading symbols from /t/t2...
+GEF for linux ready, type `gef' to start, `gef config' to configure
+90 commands loaded and 5 functions added for GDB 15.1 in 1.96ms using Python engine 3.12
+gef➤  break puts
+Breakpoint 1 at 0x7f0
+gef➤  run
+Starting program: /t/t2 
+[*] Failed to find objfile or not a valid file format: [Errno 2] No such file or directory: 'system-supplied DSO at 0xfffff7ffb000'
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, __GI__IO_puts (str=0xaaaaaaaa0af8 "bins ready") at ./libio/ioputs.c:35
+warning: 35	./libio/ioputs.c: No such file or directory
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0xaaaa0af8
+$x1  : 0xaaac2400
+$x2  : 0x1011    
+$x3  : 0x0       
+$x4  : 0xf7ff8620
+$x5  : 0x0       
+$x6  : 0xfffffff0
+$x7  : 0x4       
+$x8  : 0x0       
+$x9  : 0x10000   
+$x10 : 0x1ccef0  
+$x11 : 0x0       
+$x12 : 0xf7ffeb48
+$x13 : 0x2f      
+$x14 : 0x1f22b4b 
+$x15 : 0xf7ff8e70
+$x16 : 0xaaabffa8
+$x17 : 0xf7e619d0
+$x18 : 0x3       
+$x19 : 0xfffffd38
+$x20 : 0x1       
+$x21 : 0xaaabfd58
+$x22 : 0xaaaa0958
+$x23 : 0xfffffd48
+$x24 : 0xf7ffdb58
+$x25 : 0x0       
+$x26 : 0xf7ffe000
+$x27 : 0xaaabfd58
+$x28 : 0x0       
+$x29 : 0xfffffbb0
+$x30 : 0xaaaa0a68
+$sp  : 0xfffffae0
+$pc  : 0xf7e619d0
+$cpsr: [negative ZERO CARRY overflow interrupt fast]
+$fpsr: 0x0       
+$fpcr: 0x0       
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xfffffae0│+0x0000:           
+0xfffffae4│+0x0004:           
+0xfffffae8│+0x0008:           
+0xfffffaec│+0x000c:           
+0xfffffaf0│+0x0010:           
+0xfffffaf4│+0x0014:           
+0xfffffaf8│+0x0018:           
+0xfffffafc│+0x001c:           
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xfffff7e619c4 <_IO_proc_close+596> str    x25,  [sp,  #112]
+   0xfffff7e619c8 <_IO_proc_close+600> bl     0xfffff7ee9250 <__stack_chk_fail>
+   0xfffff7e619cc                  nop    
+ → 0xfffff7e619d0 <puts+0>         stp    x29,  x30,  [sp,  #-64]!
+   0xfffff7e619d4 <puts+4>         mov    x29,  sp
+   0xfffff7e619d8 <puts+8>         stp    x21,  x22,  [sp,  #32]
+   0xfffff7e619dc <puts+12>        mov    x21,  x0
+   0xfffff7e619e0 <puts+16>        adrp   x22,  0xfffff7f9f000 <_nl_C_locobj+32>
+   0xfffff7e619e4 <puts+20>        ldr    x22,  [x22,  #3600]
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2", stopped 0xfffff7e619d0 in __GI__IO_puts (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xfffff7e619d0 → __GI__IO_puts(str=0xaaaaaaaa0af8 "bins ready")
+[#1] 0xaaaaaaaa0a68 → main(argc=0x1, argv=0xfffffffffd38)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  up
+#1  0x0000aaaaaaaa0a68 in main (argc=0x1, argv=0xfffffffffd38) at /rv/t2.c:15
+15	    puts("bins ready");
+gef➤  heap chunks
+Chunk(addr=0xaaaaaaac1008, size=0x0, flags=! PREV_INUSE)
+    [0xaaaaaaac1008     91 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
+gef➤  heap bins
+────────────────────────────────────────── Tcachebins for thread 1 ──────────────────────────────────────────
+Tcachebins[idx=1, size=0x18, count=0] ←  [Corrupted chunk at 0xaaac18a0]
+Tcachebins[idx=1, size=0x18, count=0] ←  [Corrupted chunk at 0xaaaa]
+──────────────────────────────────── Fastbins for arena at 0xfffff7fa0a50 ────────────────────────────────────
+Fastbins[idx=0, size=0x10] 0x00
+Fastbins[idx=1, size=0x18] 0x00
+Fastbins[idx=2, size=0x20] 0x00
+Fastbins[idx=3, size=0x28] 0x00
+Fastbins[idx=4, size=0x30] 0x00
+Fastbins[idx=5, size=0x38] 0x00
+Fastbins[idx=6, size=0x40] 0x00
+────────────────────────────────── Unsorted Bin for arena at 0xfffff7fa0a50 ──────────────────────────────────
+[+] unsorted_bins[0]: fw=0xfffff7fa0ab0, bk=0xfffff7fa0ab0
+ →   Chunk(addr=0xfffff7fa0ab8, size=0xaaa8, flags=! PREV_INUSE|IS_MMAPPED)
+[+] Found 1 chunks in unsorted bin.
+─────────────────────────────────── Small Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] small_bins[1]: fw=0xfffff7fa0ac0, bk=0xfffff7fa0ac0
+ →   Chunk(addr=0xfffff7fa0ac8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[2]: fw=0xfffff7fa0ad0, bk=0xfffff7fa0ad0
+ →   Chunk(addr=0xfffff7fa0ad8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[3]: fw=0xfffff7fa0ae0, bk=0xfffff7fa0ae0
+ →   Chunk(addr=0xfffff7fa0ae8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[4]: fw=0xfffff7fa0af0, bk=0xfffff7fa0af0
+ →   Chunk(addr=0xfffff7fa0af8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[5]: fw=0xfffff7fa0b00, bk=0xfffff7fa0b00
+ →   Chunk(addr=0xfffff7fa0b08, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[6]: fw=0xfffff7fa0b10, bk=0xfffff7fa0b10
+ →   Chunk(addr=0xfffff7fa0b18, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[7]: fw=0xfffff7fa0b20, bk=0xfffff7fa0b20
+ →   Chunk(addr=0xfffff7fa0b28, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[8]: fw=0xfffff7fa0b30, bk=0xfffff7fa0b30
+ →   Chunk(addr=0xfffff7fa0b38, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[9]: fw=0xfffff7fa0b40, bk=0xfffff7fa0b40
+ →   Chunk(addr=0xfffff7fa0b48, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[10]: fw=0xfffff7fa0b50, bk=0xfffff7fa0b50
+ →   Chunk(addr=0xfffff7fa0b58, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[11]: fw=0xfffff7fa0b60, bk=0xfffff7fa0b60
+ →   Chunk(addr=0xfffff7fa0b68, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[12]: fw=0xfffff7fa0b70, bk=0xfffff7fa0b70
+ →   Chunk(addr=0xfffff7fa0b78, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[13]: fw=0xfffff7fa0b80, bk=0xfffff7fa0b80
+ →   Chunk(addr=0xfffff7fa0b88, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[14]: fw=0xfffff7fa0b90, bk=0xfffff7fa0b90
+ →   Chunk(addr=0xfffff7fa0b98, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[15]: fw=0xaaaaaaac1ab0, bk=0xaaaaaaac1990
+ →   Chunk(addr=0xaaaaaaac1ab8, size=0x0, flags=! PREV_INUSE)
+[+] small_bins[16]: fw=0xfffff7fa0bb0, bk=0xfffff7fa0bb0
+ →   Chunk(addr=0xfffff7fa0bb8, size=0xaaa8, flags=! PREV_INUSE|IS_MMAPPED)
+[+] small_bins[17]: fw=0xfffff7fa0bc0, bk=0xfffff7fa0bc0
+ →   Chunk(addr=0xfffff7fa0bc8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[18]: fw=0xfffff7fa0bd0, bk=0xfffff7fa0bd0
+ →   Chunk(addr=0xfffff7fa0bd8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[19]: fw=0xfffff7fa0be0, bk=0xfffff7fa0be0
+ →   Chunk(addr=0xfffff7fa0be8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[20]: fw=0xfffff7fa0bf0, bk=0xfffff7fa0bf0
+ →   Chunk(addr=0xfffff7fa0bf8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[21]: fw=0xfffff7fa0c00, bk=0xfffff7fa0c00
+ →   Chunk(addr=0xfffff7fa0c08, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[22]: fw=0xfffff7fa0c10, bk=0xfffff7fa0c10
+ →   Chunk(addr=0xfffff7fa0c18, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[23]: fw=0xfffff7fa0c20, bk=0xfffff7fa0c20
+ →   Chunk(addr=0xfffff7fa0c28, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[24]: fw=0xfffff7fa0c30, bk=0xfffff7fa0c30
+ →   Chunk(addr=0xfffff7fa0c38, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[25]: fw=0xfffff7fa0c40, bk=0xfffff7fa0c40
+ →   Chunk(addr=0xfffff7fa0c48, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[26]: fw=0xfffff7fa0c50, bk=0xfffff7fa0c50
+ →   Chunk(addr=0xfffff7fa0c58, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[27]: fw=0xfffff7fa0c60, bk=0xfffff7fa0c60
+ →   Chunk(addr=0xfffff7fa0c68, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[28]: fw=0xfffff7fa0c70, bk=0xfffff7fa0c70
+ →   Chunk(addr=0xfffff7fa0c78, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[29]: fw=0xfffff7fa0c80, bk=0xfffff7fa0c80
+ →   Chunk(addr=0xfffff7fa0c88, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[30]: fw=0xfffff7fa0c90, bk=0xfffff7fa0c90
+ →   Chunk(addr=0xfffff7fa0c98, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[31]: fw=0xfffff7fa0ca0, bk=0xfffff7fa0ca0
+ →   Chunk(addr=0xfffff7fa0ca8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[32]: fw=0xfffff7fa0cb0, bk=0xfffff7fa0cb0
+ →   Chunk(addr=0xfffff7fa0cb8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[33]: fw=0xfffff7fa0cc0, bk=0xfffff7fa0cc0
+ →   Chunk(addr=0xfffff7fa0cc8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[34]: fw=0xfffff7fa0cd0, bk=0xfffff7fa0cd0
+ →   Chunk(addr=0xfffff7fa0cd8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[35]: fw=0xfffff7fa0ce0, bk=0xfffff7fa0ce0
+ →   Chunk(addr=0xfffff7fa0ce8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[36]: fw=0xfffff7fa0cf0, bk=0xfffff7fa0cf0
+ →   Chunk(addr=0xfffff7fa0cf8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[37]: fw=0xfffff7fa0d00, bk=0xfffff7fa0d00
+ →   Chunk(addr=0xfffff7fa0d08, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[38]: fw=0xfffff7fa0d10, bk=0xfffff7fa0d10
+ →   Chunk(addr=0xfffff7fa0d18, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[39]: fw=0xfffff7fa0d20, bk=0xfffff7fa0d20
+ →   Chunk(addr=0xfffff7fa0d28, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[40]: fw=0xfffff7fa0d30, bk=0xfffff7fa0d30
+ →   Chunk(addr=0xfffff7fa0d38, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[41]: fw=0xfffff7fa0d40, bk=0xfffff7fa0d40
+ →   Chunk(addr=0xfffff7fa0d48, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[42]: fw=0xfffff7fa0d50, bk=0xfffff7fa0d50
+ →   Chunk(addr=0xfffff7fa0d58, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[43]: fw=0xfffff7fa0d60, bk=0xfffff7fa0d60
+ →   Chunk(addr=0xfffff7fa0d68, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[44]: fw=0xfffff7fa0d70, bk=0xfffff7fa0d70
+ →   Chunk(addr=0xfffff7fa0d78, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[45]: fw=0xfffff7fa0d80, bk=0xfffff7fa0d80
+ →   Chunk(addr=0xfffff7fa0d88, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[46]: fw=0xfffff7fa0d90, bk=0xfffff7fa0d90
+ →   Chunk(addr=0xfffff7fa0d98, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[47]: fw=0xfffff7fa0da0, bk=0xfffff7fa0da0
+ →   Chunk(addr=0xfffff7fa0da8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[48]: fw=0xfffff7fa0db0, bk=0xfffff7fa0db0
+ →   Chunk(addr=0xfffff7fa0db8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[49]: fw=0xfffff7fa0dc0, bk=0xfffff7fa0dc0
+ →   Chunk(addr=0xfffff7fa0dc8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[50]: fw=0xfffff7fa0dd0, bk=0xfffff7fa0dd0
+ →   Chunk(addr=0xfffff7fa0dd8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[51]: fw=0xfffff7fa0de0, bk=0xfffff7fa0de0
+ →   Chunk(addr=0xfffff7fa0de8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[52]: fw=0xfffff7fa0df0, bk=0xfffff7fa0df0
+ →   Chunk(addr=0xfffff7fa0df8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[53]: fw=0xfffff7fa0e00, bk=0xfffff7fa0e00
+ →   Chunk(addr=0xfffff7fa0e08, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[54]: fw=0xfffff7fa0e10, bk=0xfffff7fa0e10
+ →   Chunk(addr=0xfffff7fa0e18, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[55]: fw=0xfffff7fa0e20, bk=0xfffff7fa0e20
+ →   Chunk(addr=0xfffff7fa0e28, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[56]: fw=0xfffff7fa0e30, bk=0xfffff7fa0e30
+ →   Chunk(addr=0xfffff7fa0e38, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[57]: fw=0xfffff7fa0e40, bk=0xfffff7fa0e40
+ →   Chunk(addr=0xfffff7fa0e48, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[58]: fw=0xfffff7fa0e50, bk=0xfffff7fa0e50
+ →   Chunk(addr=0xfffff7fa0e58, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[59]: fw=0xfffff7fa0e60, bk=0xfffff7fa0e60
+ →   Chunk(addr=0xfffff7fa0e68, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[60]: fw=0xfffff7fa0e70, bk=0xfffff7fa0e70
+ →   Chunk(addr=0xfffff7fa0e78, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[61]: fw=0xfffff7fa0e80, bk=0xfffff7fa0e80
+ →   Chunk(addr=0xfffff7fa0e88, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] small_bins[62]: fw=0xfffff7fa0e90, bk=0xfffff7fa0e90
+ →   Chunk(addr=0xfffff7fa0e98, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] Found 62 chunks in 62 small non-empty bins.
+─────────────────────────────────── Large Bins for arena at 0xfffff7fa0a50 ───────────────────────────────────
+[+] large_bins[63]: fw=0xfffff7fa0ea0, bk=0xfffff7fa0ea0
+ →   Chunk(addr=0xfffff7fa0ea8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[64]: fw=0xfffff7fa0eb0, bk=0xfffff7fa0eb0
+ →   Chunk(addr=0xfffff7fa0eb8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[65]: fw=0xfffff7fa0ec0, bk=0xfffff7fa0ec0
+ →   Chunk(addr=0xfffff7fa0ec8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[66]: fw=0xfffff7fa0ed0, bk=0xfffff7fa0ed0
+ →   Chunk(addr=0xfffff7fa0ed8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[67]: fw=0xfffff7fa0ee0, bk=0xfffff7fa0ee0
+ →   Chunk(addr=0xfffff7fa0ee8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[68]: fw=0xfffff7fa0ef0, bk=0xfffff7fa0ef0
+ →   Chunk(addr=0xfffff7fa0ef8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[69]: fw=0xfffff7fa0f00, bk=0xfffff7fa0f00
+ →   Chunk(addr=0xfffff7fa0f08, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[70]: fw=0xfffff7fa0f10, bk=0xfffff7fa0f10
+ →   Chunk(addr=0xfffff7fa0f18, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[71]: fw=0xfffff7fa0f20, bk=0xfffff7fa0f20
+ →   Chunk(addr=0xfffff7fa0f28, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[72]: fw=0xfffff7fa0f30, bk=0xfffff7fa0f30
+ →   Chunk(addr=0xfffff7fa0f38, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[73]: fw=0xfffff7fa0f40, bk=0xfffff7fa0f40
+ →   Chunk(addr=0xfffff7fa0f48, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[74]: fw=0xfffff7fa0f50, bk=0xfffff7fa0f50
+ →   Chunk(addr=0xfffff7fa0f58, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[75]: fw=0xfffff7fa0f60, bk=0xfffff7fa0f60
+ →   Chunk(addr=0xfffff7fa0f68, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[76]: fw=0xfffff7fa0f70, bk=0xfffff7fa0f70
+ →   Chunk(addr=0xfffff7fa0f78, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[77]: fw=0xfffff7fa0f80, bk=0xfffff7fa0f80
+ →   Chunk(addr=0xfffff7fa0f88, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[78]: fw=0xfffff7fa0f90, bk=0xfffff7fa0f90
+ →   Chunk(addr=0xfffff7fa0f98, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[79]: fw=0xaaaaaaac1bd0, bk=0xaaaaaaac1bd0
+ →   Chunk(addr=0xaaaaaaac1bd8, size=0x0, flags=! PREV_INUSE)
+[+] large_bins[80]: fw=0xfffff7fa0fb0, bk=0xfffff7fa0fb0
+ →   Chunk(addr=0xfffff7fa0fb8, size=0xaaa8, flags=! PREV_INUSE|IS_MMAPPED)
+[+] large_bins[81]: fw=0xfffff7fa0fc0, bk=0xfffff7fa0fc0
+ →   Chunk(addr=0xfffff7fa0fc8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[82]: fw=0xfffff7fa0fd0, bk=0xfffff7fa0fd0
+ →   Chunk(addr=0xfffff7fa0fd8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[83]: fw=0xfffff7fa0fe0, bk=0xfffff7fa0fe0
+ →   Chunk(addr=0xfffff7fa0fe8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[84]: fw=0xfffff7fa0ff0, bk=0xfffff7fa0ff0
+ →   Chunk(addr=0xfffff7fa0ff8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[85]: fw=0xfffff7fa1000, bk=0xfffff7fa1000
+ →   Chunk(addr=0xfffff7fa1008, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[86]: fw=0xfffff7fa1010, bk=0xfffff7fa1010
+ →   Chunk(addr=0xfffff7fa1018, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[87]: fw=0xfffff7fa1020, bk=0xfffff7fa1020
+ →   Chunk(addr=0xfffff7fa1028, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[88]: fw=0xfffff7fa1030, bk=0xfffff7fa1030
+ →   Chunk(addr=0xfffff7fa1038, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[89]: fw=0xfffff7fa1040, bk=0xfffff7fa1040
+ →   Chunk(addr=0xfffff7fa1048, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[90]: fw=0xfffff7fa1050, bk=0xfffff7fa1050
+ →   Chunk(addr=0xfffff7fa1058, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[91]: fw=0xfffff7fa1060, bk=0xfffff7fa1060
+ →   Chunk(addr=0xfffff7fa1068, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[92]: fw=0xfffff7fa1070, bk=0xfffff7fa1070
+ →   Chunk(addr=0xfffff7fa1078, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[93]: fw=0xfffff7fa1080, bk=0xfffff7fa1080
+ →   Chunk(addr=0xfffff7fa1088, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[94]: fw=0xfffff7fa1090, bk=0xfffff7fa1090
+ →   Chunk(addr=0xfffff7fa1098, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[95]: fw=0xfffff7fa10a0, bk=0xfffff7fa10a0
+ →   Chunk(addr=0xfffff7fa10a8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[96]: fw=0xfffff7fa10b0, bk=0xfffff7fa10b0
+ →   Chunk(addr=0xfffff7fa10b8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[97]: fw=0xfffff7fa10c0, bk=0xfffff7fa10c0
+ →   Chunk(addr=0xfffff7fa10c8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[98]: fw=0xfffff7fa10d0, bk=0xfffff7fa10d0
+ →   Chunk(addr=0xfffff7fa10d8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[99]: fw=0xfffff7fa10e0, bk=0xfffff7fa10e0
+ →   Chunk(addr=0xfffff7fa10e8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[100]: fw=0xfffff7fa10f0, bk=0xfffff7fa10f0
+ →   Chunk(addr=0xfffff7fa10f8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[101]: fw=0xfffff7fa1100, bk=0xfffff7fa1100
+ →   Chunk(addr=0xfffff7fa1108, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[102]: fw=0xfffff7fa1110, bk=0xfffff7fa1110
+ →   Chunk(addr=0xfffff7fa1118, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[103]: fw=0xfffff7fa1120, bk=0xfffff7fa1120
+ →   Chunk(addr=0xfffff7fa1128, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[104]: fw=0xfffff7fa1130, bk=0xfffff7fa1130
+ →   Chunk(addr=0xfffff7fa1138, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[105]: fw=0xfffff7fa1140, bk=0xfffff7fa1140
+ →   Chunk(addr=0xfffff7fa1148, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[106]: fw=0xfffff7fa1150, bk=0xfffff7fa1150
+ →   Chunk(addr=0xfffff7fa1158, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[107]: fw=0xfffff7fa1160, bk=0xfffff7fa1160
+ →   Chunk(addr=0xfffff7fa1168, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[108]: fw=0xfffff7fa1170, bk=0xfffff7fa1170
+ →   Chunk(addr=0xfffff7fa1178, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[109]: fw=0xfffff7fa1180, bk=0xfffff7fa1180
+ →   Chunk(addr=0xfffff7fa1188, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[110]: fw=0xfffff7fa1190, bk=0xfffff7fa1190
+ →   Chunk(addr=0xfffff7fa1198, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[111]: fw=0xfffff7fa11a0, bk=0xfffff7fa11a0
+ →   Chunk(addr=0xfffff7fa11a8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[112]: fw=0xfffff7fa11b0, bk=0xfffff7fa11b0
+ →   Chunk(addr=0xfffff7fa11b8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[113]: fw=0xfffff7fa11c0, bk=0xfffff7fa11c0
+ →   Chunk(addr=0xfffff7fa11c8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[114]: fw=0xfffff7fa11d0, bk=0xfffff7fa11d0
+ →   Chunk(addr=0xfffff7fa11d8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[115]: fw=0xfffff7fa11e0, bk=0xfffff7fa11e0
+ →   Chunk(addr=0xfffff7fa11e8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[116]: fw=0xfffff7fa11f0, bk=0xfffff7fa11f0
+ →   Chunk(addr=0xfffff7fa11f8, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[117]: fw=0xfffff7fa1200, bk=0xfffff7fa1200
+ →   Chunk(addr=0xfffff7fa1208, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[118]: fw=0xfffff7fa1210, bk=0xfffff7fa1210
+ →   Chunk(addr=0xfffff7fa1218, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[119]: fw=0xfffff7fa1220, bk=0xfffff7fa1220
+ →   Chunk(addr=0xfffff7fa1228, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[120]: fw=0xfffff7fa1230, bk=0xfffff7fa1230
+ →   Chunk(addr=0xfffff7fa1238, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[121]: fw=0xfffff7fa1240, bk=0xfffff7fa1240
+ →   Chunk(addr=0xfffff7fa1248, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[122]: fw=0xfffff7fa1250, bk=0xfffff7fa1250
+ →   Chunk(addr=0xfffff7fa1258, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[123]: fw=0xfffff7fa1260, bk=0xfffff7fa1260
+ →   Chunk(addr=0xfffff7fa1268, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[124]: fw=0xfffff7fa1270, bk=0xfffff7fa1270
+ →   Chunk(addr=0xfffff7fa1278, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] large_bins[125]: fw=0xfffff7fa1280, bk=0xfffff7fa1280
+ →   Chunk(addr=0xfffff7fa1288, size=0xfff8, flags=PREV_INUSE|IS_MMAPPED|NON_MAIN_ARENA)
+[+] Found 63 chunks in 63 large non-empty bins.
+gef➤  heap chunk s1
+Chunk(addr=0xaaaaaaac19a0, size=0x0, flags=! PREV_INUSE)
+Chunk size: 0 (0x0)
+Usable size: 0 (0x0)
+Previous chunk size: 257 (0x101)
+PREV_INUSE flag: Off
+IS_MMAPPED flag: Off
+NON_MAIN_ARENA flag: Off
+
+Forward pointer: 0xf7fa0ba0
+Backward pointer: 0xffff
+
+gef➤  checksec
+[+] checksec for '/t/t2'
+[*] gef-2022.06.py:L8764 'checksec' is deprecated and will be removed in a feature release. Use Elf(fname).checksec()
+Canary                        : ✓ (value: 0x761ae200)
+NX                            : ✓ 
+PIE                           : ✓ 
+Fortify                       : ✘ 
+RelRO                         : Full
+gef➤  got
+[*] gef-2022.06.py:L8817 'checksec' is deprecated and will be removed in a feature release. Use Elf(fname).checksec()
+
+GOT protection: Full RelRO | GOT functions: 10
+ 
+[0xaaaaaaabff78] __libc_start_main@GLIBC_2.34  →  0xf7e18500
+[0xaaaaaaabff80] __cxa_finalize@GLIBC_2.17  →  0xf7e2eb50
+[0xaaaaaaabff88] malloc@GLIBC_2.17  →  0xf7e86470
+[0xaaaaaaabff90] __stack_chk_fail@GLIBC_2.17  →  0xf7ee9250
+[0xaaaaaaabff98] __gmon_start__  →  0x0
+[0xaaaaaaabffa0] abort@GLIBC_2.17  →  0xf7e17d0c
+[0xaaaaaaabffa8] puts@GLIBC_2.17  →  0xf7e619d0
+[0xaaaaaaabffb0] free@GLIBC_2.17  →  0xf7e86d70
+[0xaaaaaaabffb8] strcpy@GLIBC_2.17  →  0xf7e8d240
+[0xaaaaaaabffc0] printf@GLIBC_2.17  →  0xf7e40590
+gef➤  vmmap
+[ Legend:  Code | Heap | Stack ]
+Start      End        Offset     Perm Path
+0xaaaa0000 0xaaaa1000 0x000000 r-x /t/t2
+0xaaabf000 0xaaac0000 0x00f000 r-- /t/t2
+0xaaac0000 0xaaac1000 0x010000 rw- /t/t2
+0xaaac1000 0xaaae2000 0x000000 rw- [heap]
+0xf7df0000 0xf7f8a000 0x000000 r-x /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7f8a000 0xf7f9d000 0x19a000 --- /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7f9d000 0xf7fa0000 0x19d000 r-- /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7fa0000 0xf7fa2000 0x1a0000 rw- /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7fa2000 0xf7fae000 0x000000 rw- 
+0xf7fbe000 0xf7fe5000 0x000000 r-x /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0xf7ff7000 0xf7ff9000 0x000000 rw- 
+0xf7ff9000 0xf7ffb000 0x000000 r-- [vvar]
+0xf7ffb000 0xf7ffc000 0x000000 r-x [vdso]
+0xf7ffc000 0xf7ffe000 0x02e000 r-- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0xf7ffe000 0xf8000000 0x030000 rw- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0xfffdf000 0x000000 0x000000 rw- [stack]
+gef➤  telescope $sp -l 4
+0xfffffae0│+0x0000:           
+0xfffffae4│+0x0004:           
+0xfffffae8│+0x0008:           
+0xfffffaec│+0x000c:           
+gef➤  registers $x0 $sp $pc $cpsr
+$x0  : 0xaaaa0af8
+$sp  : 0xfffffae0
+$pc  : 0xaaaa0a68
+$cpsr: [negative ZERO CARRY overflow interrupt fast]
+gef➤  xinfo $sp
+───────────────────────────────────────────── xinfo: 0xfffffae0 ─────────────────────────────────────────────
+[*] Cannot reach 0xfffffae0 in memory space
+gef➤  quit
+y

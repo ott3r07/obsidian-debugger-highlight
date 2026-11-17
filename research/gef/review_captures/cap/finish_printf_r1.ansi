@@ -1,0 +1,76 @@
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mfinish
+[?2004lRun till exit from #0  [33m__printf[m ([36mformat[m=0xfffffffffb68 "%p %p %p\n") at [32m./stdio-common/printf.c[m:28
+0xaaaaaaaa0b08 0xaaaaaaaa0b10 0x1
+[33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffd38) at [32m/rv/t2.c[m:18
+18	    [01;34mreturn[m [35m0[m[31m;[m
+Value returned is $1 = 0x22
+[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: 0x22              
+[1m[31m$x1  [0m: 0x0000fffff7ffdb50  →  0x387fb66d57ee7900
+[1m[31m$x2  [0m: 0x0               
+[1m[31m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: [35m0x0000fffffffff91a[0m  →  0x15200000fffff7e5
+[1m[31m$x5  [0m: [32m0x0000aaaaaaac1c02[0m  →  0x0000000000000000
+[1m[31m$x6  [0m: 0xa               
+[1m[31m$x7  [0m: 0x1               
+[34m$x8  [0m: 0x40              
+[1m[31m$x9  [0m: 0x0               
+[1m[31m$x10 [0m: 0xa               
+[1m[31m$x11 [0m: 0xffffff80        
+[1m[31m$x12 [0m: 0xffffffc8        
+[1m[31m$x13 [0m: [35m0x0000fffffffffaa0[0m  →  [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x14 [0m: 0x0               
+[34m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[34m$x16 [0m: 0x0000aaaaaaabffc0  →  [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[34m$x17 [0m: [31m0x0000fffff7e40590[0m  →  [90m<printf+0000> sub sp,  sp,  #0x120[0m
+[34m$x18 [0m: 0x3               
+[34m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[34m$x20 [0m: 0x1               
+[34m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[34m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[34m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[34m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[34m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[34m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[34m$x30 [0m: [31m0x0000aaaaaaaa0aa0[0m  →  [90m<main+0148> mov w0,  #0x0                   	// #0[0m
+[34m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0aa0[0m  →  [90m<main+0148> mov w0,  #0x0                   	// #0[0m
+[34m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a94 <main+013c>      bl     0xaaaaaaaa0810 <strcpy@plt>[0m
+   [90m0xaaaaaaaa0a98 <main+0140>      add    x0,  sp,  #0x88[0m
+   [90m0xaaaaaaaa0a9c <main+0144>      bl     0xaaaaaaaa0820 <printf@plt>[0m
+ [32m→ 0xaaaaaaaa0aa0 <main+0148>      mov    w0,  #0x0                   	// #0[0m
+   0xaaaaaaaa0aa4 <main+014c>      mov    w1,  w0
+   0xaaaaaaaa0aa8 <main+0150>      adrp   x0,  0xaaaaaaabf000
+   0xaaaaaaaa0aac <main+0154>      ldr    x0,  [x0,  #4072]
+   0xaaaaaaaa0ab0 <main+0158>      ldr    x3,  [sp,  #200]
+   0xaaaaaaaa0ab4 <main+015c>      ldr    x2,  [x0]
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+18[0m[90m ────[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+ [90m    16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+ [90m    17	     printf(fmt);[0m
+[32m →   18	     return 0;[0m
+     19	 }
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0aa0[0m in [1m[33mmain[0m (), reason: [1m[35mTEMPORARY BREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xaaaaaaaa0aa0 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

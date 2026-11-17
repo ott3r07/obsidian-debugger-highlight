@@ -1,0 +1,63 @@
+(qemu) gef➤  si
+add (a=0x0, b=0x40f88c) at test.c:10
+10	int add(int a, int b) { return a + b; }
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x6               
+$rbx   : 0x1               
+$rcx   : 0x0000000000401865  →  <add+0000> endbr64 
+$rdx   : 0x7               
+$rsp   : 0x00002aaaab2abb68  →  0x00000000004018ba  →  <compute+0026> mov DWORD PTR [rbp-0x4], eax
+$rbp   : 0x00002aaaab2abb90  →  0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x7               
+$rdi   : 0x6               
+$rip   : 0x0000000000401865  →  <add+0000> endbr64 
+$r8    : 0x00000000004b2d10  →  0x0000000000070000
+$r9    : 0x0               
+$r10   : 0x7               
+$r11   : 0x00000000004b3a80  →  0x00000000000004b3
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abb68│+0x0000: 0x00000000004018ba  →  <compute+0026> mov DWORD PTR [rbp-0x4], eax	 ← $rsp
+0x00002aaaab2abb70│+0x0008: 0x0000000600000007
+0x00002aaaab2abb78│+0x0010: 0x0000000000401865  →  <add+0000> endbr64 
+0x00002aaaab2abb80│+0x0018: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+0x00002aaaab2abb88│+0x0020: 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+0x00002aaaab2abb90│+0x0028: 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000	 ← $rbp
+0x00002aaaab2abb98│+0x0030: 0x0000000000401acd  →  <main+01a7> mov DWORD PTR [rbp-0xbc], eax
+0x00002aaaab2abba0│+0x0038: 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x40185c <frame_dummy+002c> add    BYTE PTR [rax], al
+     0x40185e <frame_dummy+002e> add    BYTE PTR [rax], al
+     0x401860 <frame_dummy+0030> jmp    0x4017b0 <register_tm_clones>
+ →   0x401865 <add+0000>       endbr64 
+     0x401869 <add+0004>       push   rbp
+     0x40186a <add+0005>       mov    rbp, rsp
+     0x40186d <add+0008>       mov    DWORD PTR [rbp-0x4], edi
+     0x401870 <add+000b>       mov    DWORD PTR [rbp-0x8], esi
+     0x401873 <add+000e>       mov    edx, DWORD PTR [rbp-0x4]
+──────────────────────────────────────────────────────────────────────────────────────── source:test.c+10 ────
+      5	 typedef int (*op_fn)(int, int);
+      6	 
+      7	 const char *greeting = "Hello, gef!";
+      8	 char global_buf[64] = "global data string";
+      9	 
+         // a=0x0, b=0x40f88c
+ →   10	 int add(int a, int b) { return a + b; }
+     11	 int mul(int a, int b) { return a * b; }
+     12	 
+     13	 int compute(op_fn f, int x, int y) {
+     14	     int r = f(x, y);
+     15	     return r;
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x401865 in add (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x401865 → add(a=0x0, b=0x40f88c)
+[#1] 0x4018ba → compute(f=0x401865 <add>, x=0x6, y=0x7)
+[#2] 0x401acd → main(argc=0x1, argv=0x2aaaab2abd88)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

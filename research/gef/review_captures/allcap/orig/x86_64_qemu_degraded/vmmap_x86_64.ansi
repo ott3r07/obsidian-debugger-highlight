@@ -1,0 +1,5 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mvmmap
+[?2004l[ Legend:  [31mCode[0m | [35mStack[0m | [32mHeap[0m ]
+[34mStart              End                Offset             Perm Path[0m
+[31m0x0000000000000000[0m [31m0xffffffffffffffff[0m [31m0x0000000000000000[0m [4m[31mrwx[24m[0m [31m/work/test_x64[0m
+

@@ -1,0 +1,2 @@
+gef➤  kill
+[Inferior 1 (process 494) killed]

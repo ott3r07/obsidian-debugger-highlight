@@ -1,0 +1,2 @@
+gef➤  bt
+#0  0x0000aaaaaaaa084c in ?? ()

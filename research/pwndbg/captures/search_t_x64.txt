@@ -1,0 +1,14 @@
+pwndbg> search -t dword 0x41414141
+Searching for a 4-byte integer: b'AAAA'
+test_x64        0x55555555733a 0x4141414141414141 ('AAAAAAAA')
+test_x64        0x55555555733e movabs rdi, 0x4242424242424242
+libc.so.6       0xffff92b08720 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08724 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08728 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b0872c 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08730 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08734 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08738 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b0873c 0x1a1a1a1a41414141
+[stack]         0xffff9342cb90 'AAAAAAAABBBBBBBBCCCCCCCC'
+[stack]         0xffff9342cb94 'AAAABBBBBBBBCCCCCCCC'

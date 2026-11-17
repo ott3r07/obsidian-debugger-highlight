@@ -1,0 +1,55 @@
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffff9a99e550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffff9b1bdcf0 ◂— 1
+ RIP  0xffff9a99e550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffff9a99e543    call   0xffff9a98dce0              <0xffff9a98dce0>
+ 
+   0xffff9a99e548    jmp    0xffff9a99e3e2              <0xffff9a99e3e2>
+ 
+   0xffff9a99e54d    nop    dword ptr [rax]
+ ► 0xffff9a99e550    mov    rdi, rsp            RDI => 0xffff9b1bdcf0 ◂— 1
+   0xffff9a99e553    call   0xffff9a99f1e0              <0xffff9a99f1e0>
+ 
+   0xffff9a99e558    mov    r12, rax
+   0xffff9a99e55b    mov    r13, rsp
+   0xffff9a99e55e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffff9a99e564    test   edx, 2
+   0xffff9a99e56a  ? je     0xffff9a99e57d              <0xffff9a99e57d>
+ 
+   0xffff9a99e56c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9b1bdcf0 ◂— 1
+01:0008│     0xffff9b1bdcf8 —▸ 0xffff9b1bdec8 ◂— './test_x64'
+02:0010│     0xffff9b1bdd00 ◂— 0
+03:0018│     0xffff9b1bdd08 —▸ 0xffff9b1bded3 ◂— 'HOSTNAME=3e37fc6690d4'
+04:0020│     0xffff9b1bdd10 —▸ 0xffff9b1bdee9 ◂— 'PWD=/work'
+05:0028│     0xffff9b1bdd18 —▸ 0xffff9b1bdef3 ◂— '_=/usr/local/bin/qemu-x86_64'
+06:0030│     0xffff9b1bdd20 —▸ 0xffff9b1bdf10 ◂— 'LINES=50'
+07:0038│     0xffff9b1bdd28 —▸ 0xffff9b1bdf19 ◂— 'HOME=/root'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff9a99e550
+   1 0x1
+   2 0xffff9b1bdec8
+   3 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,75 @@
+[?2004l[?2004h[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: [31m0x0000aaaaaaaa0af8[0m  →  [33m"bins ready"[0m
+[1m[31m$x1  [0m: [32m0x0000aaaaaaac2400[0m  →  0x0000000000000000
+[1m[31m$x2  [0m: 0x1011            
+[34m$x3  [0m: 0x0               
+[1m[31m$x4  [0m: 0x0000fffff7ff8620  →  0x0000fffff7ff8d70  →  0x0000000000000001
+[34m$x5  [0m: 0x0               
+[1m[31m$x6  [0m: 0xfffffffffffffff0
+[1m[31m$x7  [0m: 0x4               
+[34m$x8  [0m: 0x0               
+[1m[31m$x9  [0m: 0x10000           
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x16 [0m: 0x0000aaaaaaabffa8  →  [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7e619d0[0m  →  [90m<puts+0000> stp x29,  x30,  [sp,  #-64]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0958[0m  →  [90m<main+0000> sub sp,  sp,  #0xe0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd48[0m  →  [35m0x0000ffffffffff17[0m  →  [33m"HOSTNAME=c024fe10785d"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  [31m0x0000aaaaaaaa0000[0m  →  [90m .inst 0x464c457f ; undefined[0m
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd58  →  [31m0x0000aaaaaaaa0900[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffbb0[0m  →  [35m0x0000fffffffffcc0[0m  →  [35m0x0000fffffffffcd0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffae0[0m  →  [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a68[0m  →  [90m<main+0110> ldr w0,  [sp,  #12][0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffb18[0m│+0x0038: [32m0x0000aaaaaaac1bc0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb10[0m│+0x0030: [32m0x0000aaaaaaac1ac0[0m  →  [32m0x0000aaaaaaac1990[0m  →  0x0000000000000000
+[36m0x0000fffffffffb08[0m│+0x0028: [32m0x0000aaaaaaac1aa0[0m  →  0x0000000000000000
+[36m0x0000fffffffffb00[0m│+0x0020: [32m0x0000aaaaaaac19a0[0m  →  0x0000fffff7fa0ba0  →  0x0000fffff7fa0b90  →  0x0000fffff7fa0b80  →  0x0000fffff7fa0b70  →  0x0000fffff7fa0b60  →  0x0000fffff7fa0b50
+[36m0x0000fffffffffaf8[0m│+0x0018: 0x0000000700000000
+[36m0x0000fffffffffaf0[0m│+0x0010: 0x0000000000000181
+[36m0x0000fffffffffae8[0m│+0x0008: 0x00000001fffffef8
+[36m0x0000fffffffffae0[0m│+0x0000: [35m0x0000fffffffffd38[0m  →  [35m0x0000ffffffffff11[0m  →  0x4f480032742f742f ("[33m/t/t2[0m"?)[1m[34m	 ← $sp[0m
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a5c <main+0104>      adrp   x0,  0xaaaaaaaa0000[0m
+   [90m0xaaaaaaaa0a60 <main+0108>      add    x0,  x0,  #0xaf8[0m
+   [90m0xaaaaaaaa0a64 <main+010c>      bl     0xaaaaaaaa07f0 <puts@plt>[0m
+ [32m→ 0xaaaaaaaa0a68 <main+0110>      ldr    w0,  [sp,  #12][0m
+   0xaaaaaaaa0a6c <main+0114>      cmp    w0,  #0x1
+   0xaaaaaaaa0a70 <main+0118>      b.le   0xaaaaaaaa0a80 <main+296>
+   0xaaaaaaaa0a74 <main+011c>      ldr    x0,  [sp]
+   0xaaaaaaaa0a78 <main+0120>      ldr    x0,  [x0,  #8]
+   0xaaaaaaaa0a7c <main+0124>      b      0xaaaaaaaa0a88 <main+304>
+[90m────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:/rv/t2.c+16[0m[90m ────[0m
+ [90m    11	     l1 = malloc(0x800); x = malloc(0x18);[0m
+ [90m    12	     for (i = 0; i < 7; i++) free(t[i]);[0m
+ [90m    13	     free(s1); free(s2); free(l1);[0m
+ [90m    14	     x = malloc(0x1000);              /* sorts unsorted -> small + large bins */[0m
+ [90m    15	     puts("bins ready");[0m
+             // [33margc[0m=0x1, [33margv[0m=0x0000fffffffffae0  →  [...]  →  0x4f480032742f742f ("[33m/t/t2[0m"?), [33mfmt[0m=0x0000fffffffffb68  →  0x0000000000000000
+[32m →   16	     strcpy(fmt, argc > 1 ? argv[1] : "%p %p %p\n");[0m
+     17	     printf(fmt);
+     18	     return 0;
+     19	 }
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "t2", [1m[31mstopped[0m [34m0xaaaaaaaa0a68[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[35m#0[0m] 0xfffff7e619d0 → [32m__GI__IO_puts[0m([33mstr[0m=0xaaaaaaaa0af8 "bins ready")
+[[1m[32m#1[0m] 0xaaaaaaaa0a68 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd38)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

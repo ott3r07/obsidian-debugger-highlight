@@ -1,0 +1,26 @@
+Reading symbols from [32m./test_arm64[m...
+(gdb) break test.c:38
+Breakpoint 1 at [34m0xc44[m: file [32mtest.c[m, line 38.
+(gdb) run
+Starting program: [32m/work/test_arm64[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mmain[m ([36margc[m=1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+38	    [32mint[m r [31m=[m [01mcompute[m[31m([mfp[31m,[m [35m6[m[31m,[m [35m7[m[31m);[m
+(gdb) set var fp = 0
+(gdb) continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+[34m0x0000000000000000[m in [33m??[m ()
+(gdb) bt
+#0  [34m0x0000000000000000[m in [33m??[m ()
+#1  [34m0x0000aaaaaaaa0a24[m in [33mcompute[m ([36mf[m=0x0, [36mx[m=6, [36my[m=7) at [32mtest.c[m:14
+#2  [34m0x0000aaaaaaaa0c54[m in [33mmain[m ([36margc[m=1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+(gdb) x/i $pc
+=> [34m0x0[m:	Cannot access memory at address 0x0
+(gdb) kill
+Kill the program being debugged? (y or n) y
+[Inferior 1 (process 1086) killed]
+(gdb) 

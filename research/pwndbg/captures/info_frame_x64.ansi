@@ -1,0 +1,9 @@
+[32m[1mpwndbg> [0m[32m[0minfo frame
+Stack level 0, frame at 0xffff9342cbe0:
+ rip = 0x555555557489 in main ([32mtest.c[m:38); saved rip = 0xffff9295c1ca
+ called by frame at 0xffff9342cc80
+ source language c.
+ Arglist at 0xffff9342cbd0, args: [36margc[m=0x1, [36margv[m=0xffff9342ccf8
+ Locals at 0xffff9342cbd0, Previous frame's sp is 0xffff9342cbe0
+ Saved registers:
+  rbp at 0xffff9342cbd0, rip at 0xffff9342cbd8

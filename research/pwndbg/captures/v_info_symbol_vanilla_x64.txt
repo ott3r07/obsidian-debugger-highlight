@@ -1,0 +1,2 @@
+(gdb) info symbol $pc
+main + 423 in section .text of /work/test_x64

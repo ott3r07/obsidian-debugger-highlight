@@ -1,0 +1,22 @@
+(gdb) disassemble /s mul
+Dump of assembler code for function mul:
+test.c:
+11	int mul(int a, int b) { return a * b; }
+   0x0000555555557208 <+0>:	endbr64
+   0x000055555555720c <+4>:	push   rbp
+   0x000055555555720d <+5>:	mov    rbp,rsp
+   0x0000555555557210 <+8>:	sub    rsp,0x20
+   0x0000555555557214 <+12>:	mov    DWORD PTR [rbp-0x14],edi
+   0x0000555555557217 <+15>:	mov    DWORD PTR [rbp-0x18],esi
+   0x000055555555721a <+18>:	mov    rax,QWORD PTR fs:0x28
+   0x0000555555557223 <+27>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000555555557227 <+31>:	xor    eax,eax
+   0x0000555555557229 <+33>:	mov    eax,DWORD PTR [rbp-0x14]
+   0x000055555555722c <+36>:	imul   eax,DWORD PTR [rbp-0x18]
+   0x0000555555557230 <+40>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x0000555555557234 <+44>:	sub    rdx,QWORD PTR fs:0x28
+   0x000055555555723d <+53>:	je     0x555555557244 <mul+60>
+   0x000055555555723f <+55>:	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x0000555555557244 <+60>:	leave
+   0x0000555555557245 <+61>:	ret
+End of assembler dump.

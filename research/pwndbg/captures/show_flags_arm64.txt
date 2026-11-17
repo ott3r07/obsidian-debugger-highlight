@@ -1,0 +1,2 @@
+pwndbg> set show-flags on
+Set whether to show flags registers to 'on'.

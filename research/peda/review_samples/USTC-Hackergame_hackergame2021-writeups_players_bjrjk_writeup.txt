@@ -1,0 +1,36 @@
+# SOURCE: https://github.com/USTC-Hackergame/hackergame2021-writeups/blob/HEAD/players/bjrjk/writeup.md
+# (fenced code blocks containing PEDA output, verbatim; blocks separated by a line "# ---- block ----")
+# ---- block ----
+[----------------------------------registers-----------------------------------]
+EAX: 0xf7fe7950 --> 0x565e6000 --> 0x464c457f 
+EBX: 0xf7fe7000 --> 0x28f2c 
+ECX: 0x0 
+EDX: 0xf7fce520 (push   ebp)
+ESI: 0xffc6698c --> 0xffc67f26 ("HOSTNAME=e646a85ed9d7")
+EDI: 0x565e7070 (<_start>:	add    BYTE PTR [eax],al)
+EBP: 0x0 
+ESP: 0xffc66980 --> 0x1 
+EIP: 0x565e7210 (<__libc_csu_fini>:	add    BYTE PTR [ebx-0x7d],dl)
+EFLAGS: 0x10247 (CARRY PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x565e720a:	add    BYTE PTR [eax],al
+   0x565e720c:	add    BYTE PTR [eax],al
+   0x565e720e:	add    BYTE PTR [eax],al
+=> 0x565e7210 <__libc_csu_fini>:	add    BYTE PTR [ebx-0x7d],dl
+   0x565e7213 <init_extra+2>:	in     al,dx
+   0x565e7214 <init_extra+3>:	and    al,0xe8
+   0x565e7216 <init_extra+5>:	xchg   esi,eax
+   0x565e7217 <init_extra+6>:	(bad)
+[------------------------------------stack-------------------------------------]
+0000| 0xffc66980 --> 0x1 
+0004| 0xffc66984 --> 0xffc67f1a ("/root/a.out")
+0008| 0xffc66988 --> 0x0 
+0012| 0xffc6698c --> 0xffc67f26 ("HOSTNAME=e646a85ed9d7")
+0016| 0xffc66990 --> 0xffc67f3c ("SHLVL=1")
+0020| 0xffc66994 --> 0xffc67f44 ("HOME=/root")
+0024| 0xffc66998 --> 0xffc67f4f ("OLDPWD=/")
+0028| 0xffc6699c --> 0xffc67f58 ("_=/usr/bin/gdb")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x565e7210 in __libc_csu_fini ()

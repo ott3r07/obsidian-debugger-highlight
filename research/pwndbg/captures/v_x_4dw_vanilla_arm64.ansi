@@ -1,0 +1,2 @@
+(gdb) x/4dw $sp
+[34m0xfffffffffa80[m:	-824	65535	0	1

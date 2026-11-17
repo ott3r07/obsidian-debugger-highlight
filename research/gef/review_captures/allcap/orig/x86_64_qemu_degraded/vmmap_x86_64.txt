@@ -1,0 +1,5 @@
+(qemu) gef➤  vmmap
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+0x0000000000000000 0xffffffffffffffff 0x0000000000000000 rwx /work/test_x64
+

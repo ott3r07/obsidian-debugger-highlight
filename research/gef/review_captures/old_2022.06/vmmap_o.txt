@@ -1,0 +1,19 @@
+gef➤  vmmap
+[ Legend:  Code | Heap | Stack ]
+Start      End        Offset     Perm Path
+0xaaaa0000 0xaaaa1000 0x000000 r-x /t/t2
+0xaaabf000 0xaaac0000 0x00f000 r-- /t/t2
+0xaaac0000 0xaaac1000 0x010000 rw- /t/t2
+0xaaac1000 0xaaae2000 0x000000 rw- [heap]
+0xf7df0000 0xf7f8a000 0x000000 r-x /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7f8a000 0xf7f9d000 0x19a000 --- /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7f9d000 0xf7fa0000 0x19d000 r-- /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7fa0000 0xf7fa2000 0x1a0000 rw- /usr/lib/aarch64-linux-gnu/libc.so.6
+0xf7fa2000 0xf7fae000 0x000000 rw- 
+0xf7fbe000 0xf7fe5000 0x000000 r-x /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0xf7ff7000 0xf7ff9000 0x000000 rw- 
+0xf7ff9000 0xf7ffb000 0x000000 r-- [vvar]
+0xf7ffb000 0xf7ffc000 0x000000 r-x [vdso]
+0xf7ffc000 0xf7ffe000 0x02e000 r-- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0xf7ffe000 0xf8000000 0x030000 rw- /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+0xfffdf000 0x000000 0x000000 rw- [stack]

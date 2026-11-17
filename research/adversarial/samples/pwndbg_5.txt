@@ -1,0 +1,40 @@
+# SOURCE: https://rivit.dev/posts/real-world-ctf-5th-tinyvm-pwn/
+In file: /media/sf_D_DRIVE/rwctf/tinyvm/src/tvmi.c
+    8         struct tvm_ctx *vm = tvm_vm_create();
+    9 
+   10         if (vm != NULL && tvm_vm_interpret(vm, argv[1]) == 0)
+   11                 tvm_vm_run(vm);
+   12 
+ ► 13         tvm_vm_destroy(vm);
+   14 
+   15         return 0;
+   16 }
+──────────────────────────────────────────────[ STACK ]──────────────────────────────────────────────
+00:0000│ rsp 0x7ffd7eb5bdc0 —▸ 0x55756d9422a0 (main) ◂— push r14
+01:0008│     0x7ffd7eb5bdc8 ◂— 0x0
+02:0010│     0x7ffd7eb5bdd0 —▸ 0x55756d946df0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x55756d942250 (__do_global_dtors_aux) ◂— endbr64 
+03:0018│     0x7ffd7eb5bdd8 —▸ 0x7f5f81261d90 (__libc_start_call_main+128) ◂— mov edi, eax
+04:0020│     0x7ffd7eb5bde0 ◂— 0x0
+05:0028│     0x7ffd7eb5bde8 —▸ 0x55756d9422a0 (main) ◂— push r14
+06:0030│     0x7ffd7eb5bdf0 ◂— 0x200000000
+07:0038│     0x7ffd7eb5bdf8 —▸ 0x7ffd7eb5bee8 —▸ 0x7ffd7eb5cf9f ◂— '/media/sf_D_DRIVE/rwctf/tinyvm/bin/tvmi'
+────────────────────────────────────────────[ BACKTRACE ]────────────────────────────────────────────
+ ► f 0   0x55756d9422ce main+46
+   f 1   0x7f5f81261d90 __libc_start_call_main+128
+   f 2   0x7f5f81261e40 __libc_start_main+128
+   f 3   0x55756d9421d5 _start+37
+─────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> sp
+$1 = {
+  i32 = 0x81238000,
+  i32_ptr = 0x7f5f81238000,
+  i16 = {
+    h = 0x8000,
+    l = 0x8000
+  }
+}
+pwndbg> vmmap 0x7f5f81238000
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+             Start                End Perm     Size Offset File
+    0x7f5f81238000     0x7f5f81260000 r--p    28000      0 /usr/lib/x86_64-linux-gnu/libc.so.6 +0x0
+pwndbg> 

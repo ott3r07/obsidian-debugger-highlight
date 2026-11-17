@@ -1,0 +1,11 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> telescope head
+00:0000│     0xaaaaaaac1380 —▸ 0xaaaaaaac1360 —▸ 0xaaaaaaac1340 —▸ 0xaaaaaaac1320 —▸ 0xaaaaaaac1300 —▸ ...
+01:0008│     0xaaaaaaac1388 ◂— 7
+02:0010│     0xaaaaaaac1390 ◂— 0
+03:0018│     0xaaaaaaac1398 ◂— 0x91
+04:0020│     0xaaaaaaac13a0 ◂— 0xaaaaaaac1
+05:0028│     0xaaaaaaac13a8 ◂— 0xd77cc3b958e738aa
+06:0030│     0xaaaaaaac13b0 ◂— 0
+07:0038│     0xaaaaaaac13b8 ◂— 0

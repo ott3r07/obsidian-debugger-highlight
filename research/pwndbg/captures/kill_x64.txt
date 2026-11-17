@@ -1,0 +1,3 @@
+pwndbg> kill
+qemu-x86_64: QEMU: Terminated via GDBstub
+[Inferior 1 (process 717) killed]

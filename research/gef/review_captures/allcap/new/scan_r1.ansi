@@ -1,0 +1,33 @@
+[?2004h[1;32mgef➤  [0mscan stack libc
+[?2004l[1m[34m[+][0m Searching for addresses in '[33mstack[0m' that point to '[33mlibc[0m'
+[33m[stack][0m: [36m0x0000ffffffffed50[0m│+0x1fd50: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000ffffffffed90[0m│+0x1fd90: 0x0000fffff7f9faf0  →  0x0000000000000001
+[33m[stack][0m: [36m0x0000ffffffffedc0[0m│+0x1fdc0: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff1a0[0m│+0x201a0: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff1c0[0m│+0x201c0: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff208[0m│+0x20208: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff248[0m│+0x20248: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff498[0m│+0x20498: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff4a0[0m│+0x204a0: 0x0000fffff7e0efe5  →  [33m"ld-linux-aarch64.so.1"[0m
+[33m[stack][0m: [36m0x0000fffffffff5e0[0m│+0x205e0: 0x0000fffff7e06a30  →  0x65746972775f5f00
+[33m[stack][0m: [36m0x0000fffffffff7e0[0m│+0x207e0: 0x0000fffff7dfdbc8  →  0x000c001200000eaf
+[33m[stack][0m: [36m0x0000fffffffff7f0[0m│+0x207f0: 0x0000fffff7f9fbf0  →  0x000000006ffffffc
+[33m[stack][0m: [36m0x0000fffffffff820[0m│+0x20820: 0x0000fffff7df274c  →  0x12ef9860069682ac
+[33m[stack][0m: [36m0x0000fffffffff848[0m│+0x20848: [31m0x0000fffff7e78014[0m  →  0xf9474400f0000920 ("[33m \t[0m"?)
+[33m[stack][0m: [36m0x0000fffffffff868[0m│+0x20868: [31m0x0000fffff7f2d8b8[0m  →  [90m<__libc_early_init+00c8> adrp x0,  0xfffff7f9f000 <_nl_C_locobj+32>[0m
+[33m[stack][0m: [36m0x0000fffffffff878[0m│+0x20878: [31m0x0000fffff7f2d844[0m  →  [90m<__libc_early_init+0054> mov x4,  #0x200000              	// #2097152[0m
+[33m[stack][0m: [36m0x0000fffffffff938[0m│+0x20938: [31m0x0000fffff7ed8ef8[0m  →  [90m<sbrk+00a8> tbnz w0,  #31,  0xfffff7ed8ecc <__GI___sbrk+124>[0m
+[33m[stack][0m: [36m0x0000fffffffff948[0m│+0x20948: [31m0x0000fffff7e83a2c[0m  →  [90m<__default_morecore+0018> cmn x0,  #0x1[0m
+[33m[stack][0m: [36m0x0000fffffffff950[0m│+0x20950: 0x0000fffff7fa0a50  →  0x0000000000000000
+[33m[stack][0m: [36m0x0000fffffffff978[0m│+0x20978: [31m0x0000fffff7e848b0[0m  →  [90m<sysmalloc+03d0> ldp x6,  x7,  [sp][0m
+[33m[stack][0m: [36m0x0000fffffffff9a8[0m│+0x209a8: [31m0x0000fffff7e85a3c[0m  →  [90m<_int_malloc+0de8> mov x20,  x0[0m
+[33m[stack][0m: [36m0x0000fffffffff9d0[0m│+0x209d0: 0x0000fffff7fa0ab0  →  [32m0x0000aaaaaaac3410[0m  →  0x0000000000000000
+[33m[stack][0m: [36m0x0000fffffffff9f8[0m│+0x209f8: [31m0x0000fffff7e85954[0m  →  [90m<_int_malloc+0d00> ldp x21,  x22,  [sp,  #32][0m
+[33m[stack][0m: [36m0x0000fffffffffa08[0m│+0x20a08: [31m0x0000fffff7e85ba4[0m  →  [90m<tcache_init.part+0044> mov x20,  x0[0m
+[33m[stack][0m: [36m0x0000fffffffffa10[0m│+0x20a10: 0x0000fffff7fa0a50  →  0x0000000000000000
+[33m[stack][0m: [36m0x0000fffffffffa28[0m│+0x20a28: [31m0x0000fffff7e85954[0m  →  [90m<_int_malloc+0d00> ldp x21,  x22,  [sp,  #32][0m
+[33m[stack][0m: [36m0x0000fffffffffa38[0m│+0x20a38: [31m0x0000fffff7e8668c[0m  →  [90m<malloc+021c> add x1,  x23,  #0x6f0[0m
+[33m[stack][0m: [36m0x0000fffffffffa40[0m│+0x20a40: 0x0000fffff7fa0000  →  0x0000004000000022 ("[33m"[0m"?)
+[33m[stack][0m: [36m0x0000fffffffffbb8[0m│+0x20bb8: [31m0x0000fffff7e184c4[0m  →  [90m<__libc_start_call_main+0074> bl 0xfffff7e2f2f0 <__GI_exit>[0m
+[33m[stack][0m: [36m0x0000fffffffffca8[0m│+0x20ca8: [31m0x0000fffff7e18540[0m  →  0xf9474b18f0000c38 ("[33m8[0m"?)
+[33m[stack][0m: [36m0x0000fffffffffcc8[0m│+0x20cc8: [31m0x0000fffff7e18598[0m  →  0xf947d75af0000c3a ("[33m:[0m"?)

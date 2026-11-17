@@ -1,0 +1,2 @@
+pwndbg> ds greeting
+555555558004 'Hello, pwndbg!'

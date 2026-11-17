@@ -1,0 +1,2 @@
+(qemu) gef➤  break *(compute+36)
+Breakpoint 2 at 0x4018b8: file test.c, line 14.

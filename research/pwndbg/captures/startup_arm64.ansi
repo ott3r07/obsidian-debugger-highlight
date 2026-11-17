@@ -1,0 +1,6 @@
+[31m[1mpwndbg: [0m[31m[0m[91mloaded 200 pwndbg commands. Type [35mpwndbg [filter][0m[91m for a list.[0m
+[31m[1mpwndbg: [0m[31m[0m[91mcreated 12 GDB functions (can be used with print/break). Type [35mhelp function[0m[91m to see them.[0m
+Reading symbols from [32m./test_arm64[m...
+[31m[1m------- tip of the day[0m[31m[0m[91m (disable with [35mset show-tips off[0m[91m)[0m[31m[1m -------[0m[31m[0m
+Use [33mp2p <mapping1> <mapping2>[0m to find pointer chains from one mapping to another (e.g. stack -> heap, libc -> stack)
+[31m[1mpwndbg> [0m[31m[0m

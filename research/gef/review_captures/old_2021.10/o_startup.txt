@@ -1,0 +1,5 @@
+Reading symbols from /t/t2...
+GEF for linux ready, type `gef' to start, `gef config' to configure
+91 commands loaded for GDB 15.1 using Python engine 3.12
+[*] 5 commands could not be loaded, run `gef missing` to know why.
+gef➤  

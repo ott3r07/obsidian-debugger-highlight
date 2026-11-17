@@ -1,0 +1,3 @@
+pwndbg> x/2s &global_buf
+0xaaaaaaac0010 <global_buf>:	"global data string"
+0xaaaaaaac0023 <global_buf+19>:	""

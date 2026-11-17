@@ -1,0 +1,80 @@
+(lldb) target create "/tmp/t"
+Current executable set to '/tmp/t' (arm64).
+(lldb) b main
+Breakpoint 1: where = t`main, address = 0x0000000100000460
+(lldb) run
+Process 26793 launched: '/tmp/t' (arm64)
+Process 26793 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x0000000100000460 t`main
+t`main:
+->  0x100000460 <+0>:  sub    sp, sp, #0x80
+    0x100000464 <+4>:  stp    x29, x30, [sp, #0x70]
+    0x100000468 <+8>:  add    x29, sp, #0x70
+    0x10000046c <+12>: adrp   x8, 4
+Target 0: (t) stopped.
+(lldb) register read
+General Purpose Registers:
+        x0 = 0x0000000000000001
+        x1 = 0x000000016fdfebf0
+        x2 = 0x000000016fdfec00
+        x3 = 0x000000016fdfee08
+        x4 = 0x0000000000000001
+        x5 = 0x0000000000000020
+        x6 = 0x0000000000000063
+        x7 = 0x0000000000000000
+        x8 = 0x0000000100000460  t`main
+        x9 = 0x00000001ef830f00  dyld`lsl::sPoolBytes + 3520
+       x10 = 0x000000016fdfe008
+       x11 = 0x00000001ef850140
+       x12 = 0x0000000000020000
+       x13 = 0x0000000182cc09c0  dyld`_dyld_start
+       x14 = 0x0000000000000001
+       x15 = 0x0000000000000070
+       x16 = 0x00000001830ae8c4  libsystem_platform.dylib`os_unfair_lock_unlock
+       x17 = 0x00000001f11295e8
+       x18 = 0x0000000000000000
+       x19 = 0x00000001ef830058  lsl::sMemoryManagerBuffer
+       x20 = 0x00000001ef830100  lsl::sAllocatorBuffer
+       x21 = 0x000000016fdfe608
+       x22 = 0xfffffffffffffff0
+       x23 = 0x00000001efae7a60  dyld`vm_page_mask
+       x24 = 0x0000000000000001
+       x25 = 0x000000016fdfe770
+       x26 = 0x00000001efae7a70  dyld`mach_task_self_
+       x27 = 0x0000000000000000
+       x28 = 0x0000000000000000
+        fp = 0x000000016fdfebd0
+        lr = 0x0000000182cdc4e4  dyld`start + 6992
+        sp = 0x000000016fdfe580
+        pc = 0x0000000100000460  t`main
+      cpsr = 0x60001000
+
+(lldb) bt
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+  * frame #0: 0x0000000100000460 t`main
+(lldb) disassemble
+t`main:
+->  0x100000460 <+0>:   sub    sp, sp, #0x80
+    0x100000464 <+4>:   stp    x29, x30, [sp, #0x70]
+    0x100000468 <+8>:   add    x29, sp, #0x70
+    0x10000046c <+12>:  adrp   x8, 4
+    0x100000470 <+16>:  ldr    x8, [x8]
+    0x100000474 <+20>:  ldr    x8, [x8]
+    0x100000478 <+24>:  stur   x8, [x29, #-0x8]
+    0x10000047c <+28>:  str    wzr, [sp, #0x24]
+    0x100000480 <+32>:  str    w0, [sp, #0x20]
+    0x100000484 <+36>:  str    x1, [sp, #0x18]
+    0x100000488 <+40>:  mov    x8, #0x1000               ; =4096 
+    0x10000048c <+44>:  movk   x8, #0xf7dd, lsl #16
+    0x100000490 <+48>:  movk   x8, #0x7fff, lsl #32
+    0x100000494 <+52>:  str    x8, [sp, #0x10]
+    0x100000498 <+56>:  ldr    w8, [sp, #0x20]
+    0x10000049c <+60>:  subs   w8, w8, #0x1
+    0x1000004a0 <+64>:  b.le   0x1000004c0               ; <+96>
+    0x1000004a4 <+68>:  b      0x1000004a8               ; <+72>
+    0x1000004a8 <+72>:  ldr    x8, [sp, #0x18]
+    0x1000004ac <+76>:  ldr    x1, [x8, #0x8]
+    0x1000004b0 <+80>:  add    x0, sp, #0x28
+    0x1000004b4 <+84>:  mov    x2, #0x40                 ; =64 
+    0x1000004b8 <+88>:  bl     0x100000510               ; symbol stub for: __strcpy_chk

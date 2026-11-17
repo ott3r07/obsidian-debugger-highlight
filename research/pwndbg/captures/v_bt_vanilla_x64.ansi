@@ -1,0 +1,2 @@
+(gdb) bt
+#0  [33mmain[m ([36margc[m=1, [36margv[m=0xffff935a9cf8) at [32mtest.c[m:38

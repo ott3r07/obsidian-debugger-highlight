@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <string.h>
+// main: entry point
+int main(int argc, char **argv) {
+    char buf[64];
+    int *p = (int *)0x7ffff7dd1000;   /* rsp-like constant */
+    if (argc > 1) strcpy(buf, argv[1]);
+    printf("rax=%p rbx=%d\n", (void*)p, argc);
+    return 0;
+}

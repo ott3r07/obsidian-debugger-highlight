@@ -1,0 +1,11 @@
+pwndbg> plt
+Section .plt 0x555555557020 - 0x555555557080:
+No symbols found in section .plt
+Section .plt.got 0x555555557080 - 0x555555557090:
+0x555555557080: __cxa_finalize@plt
+Section .plt.sec 0x555555557090 - 0x5555555570e0:
+0x555555557090: free@plt
+0x5555555570a0: strcpy@plt
+0x5555555570b0: __stack_chk_fail@plt
+0x5555555570c0: printf@plt
+0x5555555570d0: malloc@plt

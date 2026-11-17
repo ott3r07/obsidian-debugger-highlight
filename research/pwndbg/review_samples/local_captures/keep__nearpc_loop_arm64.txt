@@ -1,0 +1,18 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> nearpc main+40
+   0xaaaaaaaa0b64 <main+20>    str    x1, [sp]
+   0xaaaaaaaa0b68 <main+24>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0b6c <main+28>    ldr    x0, [x0, #0xfe8]
+   0xaaaaaaaa0b70 <main+32>    ldr    x1, [x0]
+   0xaaaaaaaa0b74 <main+36>    str    x1, [sp, #0x178]
+ ► 0xaaaaaaaa0b78 <main+40>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0b7c <main+44>    str    wzr, [sp, #0x14]
+   0xaaaaaaaa0b80 <main+48>    adrp   x0, data_start         X0 => 0xaaaaaaac0000 (data_start)
+   0xaaaaaaaa0b84 <main+52>    add    x0, x0, #0x10
+   0xaaaaaaaa0b88 <main+56>    adrp   x1, 0xaaaaaaaa0000     X1 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b8c <main+60>    add    x1, x1, #0x9d8
+   0xaaaaaaaa0b90 <main+64>    str    x1, [x0, #0x38]
+   0xaaaaaaaa0b94 <main+68>    adrp   x0, data_start         X0 => 0xaaaaaaac0000 (data_start)
+   0xaaaaaaaa0b98 <main+72>    add    x0, x0, #0x80
+   0xaaaaaaaa0b9c <main+76>    str    xzr, [x0]

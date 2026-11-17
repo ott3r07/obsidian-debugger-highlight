@@ -1,0 +1,23 @@
+# SOURCE: https://raw.githubusercontent.com/zhougy0717/inject_got/master/README.md
+# DATE: 2020-01
+(gdb) break _dl_start
+Function "_dl_start" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) y
+Breakpoint 1 (_dl_start) pending.
+(gdb) run
+Starting program: a.out
+
+Breakpoint 1, 0x0000003433e00fa0 in _dl_start () from /lib64/ld-linux-x86-64.so.2
+(gdb) bt
+#0  0x0000003433e00fa0 in _dl_start () from /lib64/ld-linux-x86-64.so.2
+#1  0x0000003433e00a78 in _start () from /lib64/ld-linux-x86-64.so.2
+#2  0x0000000000000001 in ?? ()
+#3  0x00007fffffffe4f2 in ?? ()
+#4  0x0000000000000000 in ?? ()
+...
+(gdb) x/10i $pc
+   0x3433e00a70 <_start>:       mov    %rsp,%rdi
+   0x3433e00a73 <_start+3>:     callq  0x3433e00fa0 <_dl_start>
+   0x3433e00a78 <_dl_start_user>:       mov    %rax,%r12
+   0x3433e00a7b <_dl_start_user+3>:     mov    0x21b30b(%rip),%eax        # 0x343401bd8c <_dl_skip_args>
+...

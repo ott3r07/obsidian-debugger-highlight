@@ -1,0 +1,2 @@
+[?2004h[1;32mgef➤  [0mhexdump byte main --size 48
+[?2004l[1m[31m[!][0m Command 'hexdump byte' failed to execute properly, reason: Cannot convert value to long.

@@ -1,0 +1,2 @@
+(qemu) gef➤  break main
+Breakpoint 1 at 0x401942: file test.c, line 24.

@@ -1,0 +1,11 @@
+(gdb) list main
+19	    char buf[32];
+20	    strcpy(buf, src);
+21	    printf("buf=%s\n", buf);
+22	}
+23	
+24	int main(int argc, char **argv) {
+25	    char stackbuf[48];
+26	    op_fn fp = add;
+27	    void *small[8], *mid[3], *big[2];
+28	    int i;

@@ -1,0 +1,11 @@
+(gdb) list main
+19	    [32mchar[m buf[31m[[m[35m32[m[31m];[m
+20	    [01mstrcpy[m[31m([mbuf[31m,[m src[31m);[m
+21	    [01mprintf[m[31m([m[31m"buf=%s[m[35m\n[m[31m"[m[31m,[m buf[31m);[m
+22	[31m}[m
+23	
+24	[32mint[m [01mmain[m[31m([m[32mint[m argc[31m,[m [32mchar[m [31m**[margv[31m)[m [31m{[m
+25	    [32mchar[m stackbuf[31m[[m[35m48[m[31m];[m
+26	    op_fn fp [31m=[m add[31m;[m
+27	    [32mvoid[m [31m*[msmall[31m[[m[35m8[m[31m],[m [31m*[mmid[31m[[m[35m3[m[31m],[m [31m*[mbig[31m[[m[35m2[m[31m];[m
+28	    [32mint[m i[31m;[m

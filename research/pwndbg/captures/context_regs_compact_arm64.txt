@@ -1,0 +1,33 @@
+pwndbg> context regs
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs on ]──────────────────────────────────
+ X0   0x510                                                    X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X1   0xffff                                                   X18  3
+ X2   ⏎                                                        X19  ⏎
+ X3   ⏎                                                        X20  1
+ X4   0x510                                                    X21  ⏎
+ X5   0x40                                                     X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X6   0x71fae20c11f79487                                       X23  ⏎
+ X7   0                                                        X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X8   ⏎                                                        X25  0
+ X9   0x28                                                     X26  ⏎
+ X10  0x1ccef0                                                 X27  ⏎
+ X11  0                                                        X28  0
+ X12  ⏎                                                        X29  ⏎
+ X13  0x2f                                                     SP   ⏎
+ X14  0x1f22b4b                                                LR   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f      PC   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+ X16  ⏎                                                       
+↪ X2   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+↪ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+↪ X3   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+↪ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+↪ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+↪ X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+↪ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+↪ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+↪ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+↪ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+↪ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+↪ X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

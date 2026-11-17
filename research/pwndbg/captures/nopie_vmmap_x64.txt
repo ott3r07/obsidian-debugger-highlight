@@ -1,0 +1,26 @@
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+          0x400000           0x401000 r--p     1000       0 test_nopie_x64
+          0x401000           0x402000 r-xp     1000    1000 test_nopie_x64
+          0x402000           0x403000 r--p     1000    2000 test_nopie_x64
+          0x403000           0x404000 rw-p     1000    2000 test_nopie_x64
+          0x404000           0x425000 rw-p    21000       0 [heap]
+    0xffffa9dd8000     0xffffa9ddb000 rw-p     3000       0 [anon_ffffa9dd8]
+    0xffffa9de3000     0xffffa9e0b000 r--p    28000       0 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9e0b000     0xffffa9f93000 r-xp   188000   28000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9f93000     0xffffa9fe2000 r--p    4f000  1b0000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9fe2000     0xffffa9fe6000 r--p     4000  1fe000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9fe6000     0xffffa9fe8000 rw-p     2000  202000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffffa9fe8000     0xffffa9ff5000 rw-p     d000       0 [anon_ffffa9fe8]
+    0xffffaa000000     0xffffaa002000 rw-p     2000       0 [anon_ffffaa000]
+    0xffffaa09a000     0xffffaa09c000 rw-p     2000       0 [anon_ffffaa09a]
+    0xffffaa09e000     0xffffaa09f000 r-xp     1000       0 [vdso]
+    0xffffaa09f000     0xffffaa0a0000 r--p     1000       0 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0a0000     0xffffaa0cb000 r-xp    2b000    1000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0cb000     0xffffaa0d5000 r--p     a000   2c000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0d5000     0xffffaa0d7000 r--p     2000   36000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0d7000     0xffffaa0d9000 rw-p     2000   38000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffffaa0dd000     0xffffaa0de000 ---p     1000       0 [anon_ffffaa0dd]
+    0xffffaa0de000     0xffffaa8de000 rwxp   800000       0 [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall]

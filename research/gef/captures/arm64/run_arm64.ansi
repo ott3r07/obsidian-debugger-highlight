@@ -1,0 +1,82 @@
+[?2004h[1;31mgef➤  [0mrun
+[?2004lStarting program: [32m/work/test_arm64[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffd18) at [32mtest.c[m:24
+24	[32mint[m [01mmain[m[31m([m[32mint[m argc[31m,[m [32mchar[m [31m**[margv[31m)[m [31m{[m
+[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$x0  [0m: 0x1               
+[1m[31m$x1  [0m: [35m0x0000fffffffffd18[0m  →  [35m0x0000fffffffffef8[0m  →  [33m"/work/test_arm64"[0m
+[1m[31m$x2  [0m: [35m0x0000fffffffffd28[0m  →  [35m0x0000ffffffffff09[0m  →  [33m"HOSTNAME=47f545946d15"[0m
+[1m[31m$x3  [0m: [31m0x0000aaaaaaaa0a00[0m  →  [90m<main+0000> sub sp,  sp,  #0xd0[0m
+[1m[31m$x4  [0m: 0x0000fffff7ff8020  →  0x0000000000000000
+[1m[31m$x5  [0m: 0x6b69657c0b5b1843
+[1m[31m$x6  [0m: 0x0000fffff7fa1e60  →  0x0000000000000000
+[1m[31m$x7  [0m: 0x0000fffff7ffcaf0  →  [33m"glibc.rtld.nns"[0m
+[1m[31m$x8  [0m: 0xd7              
+[1m[31m$x9  [0m: 0x28              
+[1m[31m$x10 [0m: 0x1ccef0          
+[34m$x11 [0m: 0x0               
+[1m[31m$x12 [0m: 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+[1m[31m$x13 [0m: 0x2f              
+[1m[31m$x14 [0m: 0x1f22b4b         
+[1m[31m$x15 [0m: 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[1m[31m$x16 [0m: 0x0000fffff7f9fd68  →  [31m0x0000fffff7fd0d40[0m  →  [90m<_dl_audit_preinit+0000> stp x29,  x30,  [sp,  #-80]![0m
+[1m[31m$x17 [0m: [31m0x0000fffff7fd0d40[0m  →  [90m<_dl_audit_preinit+0000> stp x29,  x30,  [sp,  #-80]![0m
+[1m[31m$x18 [0m: 0x3               
+[1m[31m$x19 [0m: [35m0x0000fffffffffd18[0m  →  [35m0x0000fffffffffef8[0m  →  [33m"/work/test_arm64"[0m
+[1m[31m$x20 [0m: 0x1               
+[1m[31m$x21 [0m: 0x0000aaaaaaabfd60  →  [31m0x0000aaaaaaaa08c0[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[1m[31m$x22 [0m: [31m0x0000aaaaaaaa0a00[0m  →  [90m<main+0000> sub sp,  sp,  #0xd0[0m
+[1m[31m$x23 [0m: [35m0x0000fffffffffd28[0m  →  [35m0x0000ffffffffff09[0m  →  [33m"HOSTNAME=47f545946d15"[0m
+[1m[31m$x24 [0m: 0x0000fffff7ffdb58  →  0x0000000000000000
+[34m$x25 [0m: 0x0               
+[1m[31m$x26 [0m: 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+[1m[31m$x27 [0m: 0x0000aaaaaaabfd60  →  [31m0x0000aaaaaaaa08c0[0m  →  [90m<__do_global_dtors_aux+0000> paciasp [0m
+[34m$x28 [0m: 0x0               
+[1m[31m$x29 [0m: [35m0x0000fffffffffb90[0m  →  [35m0x0000fffffffffca0[0m  →  [35m0x0000fffffffffcb0[0m  →  0x0000000000000000
+[1m[31m$x30 [0m: [31m0x0000fffff7e184c4[0m  →  [90m<__libc_start_call_main+0074> bl 0xfffff7e2f2f0 <__GI_exit>[0m
+[1m[31m$sp  [0m: [35m0x0000fffffffffad0[0m  →  [35m0x0000fffffffffd18[0m  →  [35m0x0000fffffffffef8[0m  →  [33m"/work/test_arm64"[0m
+[1m[31m$pc  [0m: [31m0x0000aaaaaaaa0a14[0m  →  [90m<main+0014> adrp x0,  0xaaaaaaabf000[0m
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt endian fast t32 m[4]]
+[34m$fpsr[0m: 0x0               
+[34m$fpcr[0m: 0x0               
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x0000fffffffffad0[0m│+0x0000: [35m0x0000fffffffffd18[0m  →  [35m0x0000fffffffffef8[0m  →  [33m"/work/test_arm64"[0m[1m[34m	 ← $sp[0m
+[36m0x0000fffffffffad8[0m│+0x0008: 0x0000000100000000
+[36m0x0000fffffffffae0[0m│+0x0010: 0x0000000000000000
+[36m0x0000fffffffffae8[0m│+0x0018: 0x0000000000000000
+[36m0x0000fffffffffaf0[0m│+0x0020: 0x0000000000000000
+[36m0x0000fffffffffaf8[0m│+0x0028: [35m0x0000ffffffffffe7[0m  →  [33m"/work/test_arm64"[0m
+[36m0x0000fffffffffb00[0m│+0x0030: 0x0000000000000000
+[36m0x0000fffffffffb08[0m│+0x0038: 0x0000fffff7ffb000  →  0x00010102464c457f
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:arm64:[0m[90m ────[0m
+   [90m0xaaaaaaaa0a08 <main+0008>      add    x29,  sp,  #0xc0[0m
+   [90m0xaaaaaaaa0a0c <main+000c>      str    w0,  [sp,  #12][0m
+   [90m0xaaaaaaaa0a10 <main+0010>      str    x1,  [sp][0m
+[31m●[0m[32m→ 0xaaaaaaaa0a14 <main+0014>      adrp   x0,  0xaaaaaaabf000[0m
+   0xaaaaaaaa0a18 <main+0018>      ldr    x0,  [x0,  #4072]
+   0xaaaaaaaa0a1c <main+001c>      ldr    x1,  [x0]
+   0xaaaaaaaa0a20 <main+0020>      str    x1,  [sp,  #184]
+   0xaaaaaaaa0a24 <main+0024>      mov    x1,  #0x0                   	// #0
+   0xaaaaaaaa0a28 <main+0028>      adrp   x0,  0xaaaaaaaa0000
+[90m──────────────────────────────────────────────────────────────────────────────────────── [0m[36msource:test.c+24[0m[90m ────[0m
+ [90m    19	     char buf[32];[0m
+ [90m    20	     strcpy(buf, src);[0m
+ [90m    21	     printf("buf=%s\n", buf);[0m
+ [90m    22	 }[0m
+ [90m    23	 [0m
+         // [33margc[0m=0x1, [33margv[0m=0x0000fffffffffad0  →  [...]  →  [33m"/work/test_arm64"[0m
+[32m →   24	 int main(int argc, char **argv) {[0m
+     25	     char stackbuf[48];
+     26	     op_fn fp = add;
+     27	     void *small[8], *mid[3], *big[2];
+     28	     int i;
+     29	 
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "test_arm64", [1m[31mstopped[0m [34m0xaaaaaaaa0a14[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[[1m[32m#0[0m] 0xaaaaaaaa0a14 → [32mmain[0m([33margc[0m=0x1, [33margv[0m=0xfffffffffd18)
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

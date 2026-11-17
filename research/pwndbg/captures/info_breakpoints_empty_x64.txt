@@ -1,0 +1,2 @@
+pwndbg> info breakpoints
+No breakpoints, watchpoints, tracepoints, or catchpoints.

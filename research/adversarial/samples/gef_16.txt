@@ -1,0 +1,14 @@
+# SOURCE: https://github.com/nikosChalk/ctf-writeups/blob/master/trx25/pwn/virtual_insanity/README.md
+   0x555555555247 <main+109>       mov    eax, 0x0
+   0x55555555524c <main+114>       leave
+ → 0x55555555524d <main+115>       ret
+   ↳  0x7ffff7c29d90 <__libc_start_call_main+128> mov    edi, eax
+      0x7ffff7c29d92 <__libc_start_call_main+130> call   0x7ffff7c455f0 <__GI_exit>
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  telescope $rsp
+0x00007fffffffd3e8│+0x0000: 0x00007ffff7c29d90  →  <__libc_start_call_main+128> mov edi, eax     ← $rsp
+0x00007fffffffd3f0│+0x0008: 0x0000000000000000
+0x00007fffffffd3f8│+0x0010: 0x00005555555551da  →  <main+0> endbr64
+0x00007fffffffd400│+0x0018: 0x0000000100000000
+0x00007fffffffd408│+0x0020: 0x00007fffffffd4f8  →  0x00007fffffffd947  →  "/home/nikos/ctfs/vm-tmp-shared/trx2025/virtual_ins[...]"
+...

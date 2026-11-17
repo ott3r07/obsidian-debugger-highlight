@@ -1,0 +1,52 @@
+# SOURCE: https://raw.githubusercontent.com/satoki/ctf_writeups/master/picoCTF_2024/high_frequency_troubles/README.md
+# DATE: 2024-03 (picoCTF 2024)
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+             Start                End Perm     Size Offset File
+    0x555555554000     0x555555555000 r--p     1000      0 /hft
+~~~
+    0x55555555a000     0x55555559d000 rw-p    43000      0 [heap]
+    0x7ffff7d90000     0x7ffff7d93000 rw-p     3000      0 [anon_7ffff7d90]
+    0x7ffff7d93000     0x7ffff7dbb000 r--p    28000      0 /libc.so.6
+~~~
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+             Start                End Perm     Size Offset File
+    0x555555554000     0x555555555000 r--p     1000      0 /hft
+~~~
+    0x55555555a000     0x55555559d000 rw-p    43000      0 [heap]
+    0x7ffff7d6e000     0x7ffff7d93000 rw-p    25000      0 [anon_7ffff7d6e]
+    0x7ffff7d93000     0x7ffff7dbb000 r--p    28000      0 /libc.so.6
+~~~
+pwndbg> telescope 0x7ffff7d6e000 20000
+00:0000│    0x7ffff7d6e000 ◂— 0x0
+01:0008│    0x7ffff7d6e008 ◂— 0x22002
+02:0010│ r9 0x7ffff7d6e010 ◂— 0x21299
+03:0018│    0x7ffff7d6e018 ◂— 0x0
+... ↓       17618 skipped
+44d6:226b0│    0x7ffff7d906b0 —▸ 0x7ffff7fad580 —▸ 0x7ffff7fa9820 —▸ 0x7ffff7f6d1d7 ◂— 0x636d656d5f5f0043 /* 'C' */
+44d7:226b8│    0x7ffff7d906b8 —▸ 0x7ffff7fb5340 (_res) ◂— 0x0
+44d8:226c0│    0x7ffff7d906c0 ◂— 0x0
+44d9:226c8│    0x7ffff7d906c8 —▸ 0x7ffff7f514c0 ◂— 0x100000000
+44da:226d0│    0x7ffff7d906d0 —▸ 0x7ffff7f51ac0 ◂— 0x100000000
+44db:226d8│    0x7ffff7d906d8 —▸ 0x7ffff7f523c0 ◂— 0x2000200020002
+44dc:226e0│    0x7ffff7d906e0 ◂— 0x0
+... ↓       2 skipped
+44df:226f8│    0x7ffff7d906f8 —▸ 0x55555555a010 ◂— 0x0
+44e0:22700│    0x7ffff7d90700 ◂— 0x0
+44e1:22708│    0x7ffff7d90708 —▸ 0x7ffff7facc80 ◂— 0x0
+44e2:22710│    0x7ffff7d90710 ◂— 0x0
+... ↓       5 skipped
+44e8:22740│    0x7ffff7d90740 ◂— 0x7ffff7d90740
+44e9:22748│    0x7ffff7d90748 —▸ 0x7ffff7d91160 ◂— 0x1
+44ea:22750│    0x7ffff7d90750 —▸ 0x7ffff7d90740 ◂— 0x7ffff7d90740
+44eb:22758│    0x7ffff7d90758 ◂— 0x0
+44ec:22760│    0x7ffff7d90760 ◂— 0x0
+44ed:22768│    0x7ffff7d90768 ◂— 0xfc4ebc0b86d9f900
+~~~
+pwndbg> vmmap 0x7ffff7d906f8
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+             Start                End Perm     Size Offset File
+    0x55555555a000     0x55555559d000 rw-p    43000      0 [heap]
+►   0x7ffff7d6e000     0x7ffff7d93000 rw-p    25000      0 [anon_7ffff7d6e] +0x226f8
+    0x7ffff7d93000     0x7ffff7dbb000 r--p    28000      0 /libc.so.6

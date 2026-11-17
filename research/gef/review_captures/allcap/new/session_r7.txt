@@ -1,0 +1,204 @@
+GEF for linux ready, type `gef' to start, `gef config' to configure
+90 commands loaded and 5 functions added for GDB 15.1 in 0.00ms using Python engine 3.12
+Reading symbols from /t/test_x86...
+gef➤  gef-remote --qemu-user --qemu-binary /t/test_x86 localhost 1235
+warning: BFD: warning: system-supplied DSO at 0x40801000 has a corrupt string table index
+0x080496f0 in _start ()
+[*] [remote] skipping 'system-supplied DSO at 0x40801000'
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x0       
+$ebx   : 0x0       
+$ecx   : 0x0       
+$edx   : 0x0       
+$esp   : 0x40800e40  →  0x00000001
+$ebp   : 0x0       
+$esi   : 0x0       
+$edi   : 0x0       
+$eip   : 0x080496f0  →  <_start+0000> xor ebp, ebp
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x2b 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x40800e40│+0x0000: 0x00000001	 ← $esp
+0x40800e44│+0x0004: 0x40800f2e  →  "/t/test_x86"
+0x40800e48│+0x0008: 0x00000000
+0x40800e4c│+0x000c: 0x40800f3a  →  "HOSTNAME=c024fe10785d"
+0x40800e50│+0x0010: 0x40800f50  →  "HOME=/root"
+0x40800e54│+0x0014: 0x40800f5b  →  "OLDPWD=/work"
+0x40800e58│+0x0018: 0x40800f68  →  "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr[...]"
+0x40800e5c│+0x001c: 0x40800faa  →  "LANG=C.UTF-8"
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x80496eb                  xchg   ax, ax
+    0x80496ed                  xchg   ax, ax
+    0x80496ef                  nop    
+ →  0x80496f0 <_start+0000>    xor    ebp, ebp
+    0x80496f2 <_start+0002>    pop    esi
+    0x80496f3 <_start+0003>    mov    ecx, esp
+    0x80496f5 <_start+0005>    and    esp, 0xfffffff0
+    0x80496f8 <_start+0008>    push   eax
+    0x80496f9 <_start+0009>    push   esp
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x80496f0 in _start (), reason: SIGTRAP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x80496f0 → _start()
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  break *0x8049ac8
+Breakpoint 1 at 0x8049ac8: file /work/test.c, line 38.
+(qemu) gef➤  continue
+Continuing.
+
+Breakpoint 1, 0x08049ac8 in main (argc=0x1, argv=0x40800e44) at /work/test.c:38
+38	    int r = compute(fp, 6, 7);
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x510     
+$ebx   : 0x080e4ff4  →  0x00000000
+$ecx   : 0x080e5198  →  0x080eac68  →  0x00000000
+$edx   : 0x511     
+$esp   : 0x40800c50  →  0x08049865  →  <add+0000> endbr32 
+$ebp   : 0x40800d08  →  0x00000001
+$esi   : 0x40800d20  →  0x00000001
+$edi   : 0x1       
+$eip   : 0x08049ac8  →  <main+019b> call 0x804989a <compute>
+$eflags: [zero carry PARITY ADJUST sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x33 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x40800c50│+0x0000: 0x08049865  →  <add+0000> endbr32 	 ← $esp
+0x40800c54│+0x0004: 0x00000006
+0x40800c58│+0x0008: 0x00000007
+0x40800c5c│+0x000c: 0x0804994c  →  <main+001f> add ebx, 0x9b6a8
+0x40800c60│+0x0010: 0x080e4ff4  →  0x00000000
+0x40800c64│+0x0014: 0x080e5198  →  0x080eac68  →  0x00000000
+0x40800c68│+0x0018: 0x080e9380  →  0x080e9380  →  [loop detected]
+0x40800c6c│+0x001c: 0x40800e44  →  0x40800f2e  →  "/t/test_x86"
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8049abe <main+0191>      push   0x7
+    0x8049ac0 <main+0193>      push   0x6
+    0x8049ac2 <main+0195>      push   DWORD PTR [ebp-0x88]
+●→  0x8049ac8 <main+019b>      call   0x804989a <compute>
+   ↳   0x804989a <compute+0000>   endbr32 
+       0x804989e <compute+0004>   push   ebp
+       0x804989f <compute+0005>   mov    ebp, esp
+       0x80498a1 <compute+0007>   sub    esp, 0x18
+       0x80498a4 <compute+000a>   call   0x8049b6e <__x86.get_pc_thunk.ax>
+       0x80498a9 <compute+000f>   add    eax, 0x9b74b
+─────────────────────────────────────────────────────────────────────────────────────────────── arguments ────
+compute (
+   op_fn var_0 = 0x08049865 → <add+0000> endbr32 ,
+   int var_1 = 0x00000006,
+   int var_2 = 0x00000007
+)
+────────────────────────────────────────────────────────────────────────────────── source:/work/test.c+38 ────
+     33	     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+     34	     strcpy((char *)small[0], "heap string here");
+     35	     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+     36	     free(mid[0]);
+     37	     free(big[0]);                             /* -> unsorted bin */
+             // r=0x8
+ →   38	     int r = compute(fp, 6, 7);
+     39	     fp = mul;
+     40	     r += compute(fp, r, 2);
+     41	     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+     42	     vuln(argc > 1 ? argv[1] : "short");
+     43	     return 0;
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x8049ac8 in main (), reason: BREAKPOINT
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x8049ac8 → main(argc=0x1, argv=0x40800e44)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  registers
+$eax   : 0x510     
+$ebx   : 0x080e4ff4  →  0x00000000
+$ecx   : 0x080e5198  →  0x080eac68  →  0x00000000
+$edx   : 0x511     
+$esp   : 0x40800c50  →  0x08049865  →  <add+0000> endbr32 
+$ebp   : 0x40800d08  →  0x00000001
+$esi   : 0x40800d20  →  0x00000001
+$edi   : 0x1       
+$eip   : 0x08049ac8  →  <main+019b> call 0x804989a <compute>
+$eflags: [zero carry PARITY ADJUST sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x33 
+(qemu) gef➤  telescope $esp -l 4
+0x40800c50│+0x0000: 0x08049865  →  <add+0000> endbr32 	 ← $esp
+0x40800c54│+0x0004: 0x00000006
+0x40800c58│+0x0008: 0x00000007
+0x40800c5c│+0x000c: 0x0804994c  →  <main+001f> add ebx, 0x9b6a8
+(qemu) gef➤  vmmap
+[ Legend:  Code | Stack | Heap ]
+Start      End        Offset     Perm Path
+0x08048000 0x08049000 0x00000000 r-- /t/test_x86
+0x08049000 0x080b0000 0x00001000 r-x /t/test_x86
+0x080b0000 0x080e2000 0x00068000 r-- /t/test_x86
+0x080e2000 0x080e5000 0x00099000 r-- /t/test_x86
+0x080e5000 0x080e6000 0x0009c000 rw- /t/test_x86
+0x080e6000 0x0810b000 0x00000000 rw- 
+0x40000000 0x40001000 0x00000000 --- 
+0x40001000 0x40801000 0x00000000 rw- [stack]
+0x40801000 0x40802000 0x00000000 r-x [vdso]
+0x40802000 0x40804000 0x00000000 rw- 
+
+(qemu) gef➤  si
+compute (f=0x8049865 <add>, x=0x6, y=0x7) at /work/test.c:13
+13	int compute(op_fn f, int x, int y) {
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x510     
+$ebx   : 0x080e4ff4  →  0x00000000
+$ecx   : 0x080e5198  →  0x080eac68  →  0x00000000
+$edx   : 0x511     
+$esp   : 0x40800c4c  →  0x08049acd  →  <main+01a0> add esp, 0x10
+$ebp   : 0x40800d08  →  0x00000001
+$esi   : 0x40800d20  →  0x00000001
+$edi   : 0x1       
+$eip   : 0x0804989a  →  <compute+0000> endbr32 
+$eflags: [zero carry PARITY ADJUST sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x33 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x40800c4c│+0x0000: 0x08049acd  →  <main+01a0> add esp, 0x10	 ← $esp
+0x40800c50│+0x0004: 0x08049865  →  <add+0000> endbr32 
+0x40800c54│+0x0008: 0x00000006
+0x40800c58│+0x000c: 0x00000007
+0x40800c5c│+0x0010: 0x0804994c  →  <main+001f> add ebx, 0x9b6a8
+0x40800c60│+0x0014: 0x080e4ff4  →  0x00000000
+0x40800c64│+0x0018: 0x080e5198  →  0x080eac68  →  0x00000000
+0x40800c68│+0x001c: 0x080e9380  →  0x080e9380  →  [loop detected]
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8049894 <mul+0014>       imul   eax, DWORD PTR [ebp+0xc]
+    0x8049898 <mul+0018>       pop    ebp
+    0x8049899 <mul+0019>       ret    
+ →  0x804989a <compute+0000>   endbr32 
+    0x804989e <compute+0004>   push   ebp
+    0x804989f <compute+0005>   mov    ebp, esp
+    0x80498a1 <compute+0007>   sub    esp, 0x18
+    0x80498a4 <compute+000a>   call   0x8049b6e <__x86.get_pc_thunk.ax>
+    0x80498a9 <compute+000f>   add    eax, 0x9b74b
+────────────────────────────────────────────────────────────────────────────────── source:/work/test.c+13 ────
+      8	 char global_buf[64] = "global data string";
+      9	 
+     10	 int add(int a, int b) { return a + b; }
+     11	 int mul(int a, int b) { return a * b; }
+     12	 
+         // x=0x6, y=0x7
+ →   13	 int compute(op_fn f, int x, int y) {
+     14	     int r = f(x, y);
+     15	     return r;
+     16	 }
+     17	 
+     18	 void vuln(const char *src) {
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x804989a in compute (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x804989a → compute(f=0x8049865 <add>, x=0x6, y=0x7)
+[#1] 0x8049acd → main(argc=0x1, argv=0x40800e44)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+(qemu) gef➤  heap chunks
+[!] Could not find heap for arena
+(qemu) gef➤  checksec
+[+] checksec for '/tmp/tmp6nxgegq8/t/test_x86'
+Canary                        : ✓ (value: 0xb7635c00)
+NX                            : ✓ 
+PIE                           : ✘ 
+Fortify                       : ✘ 
+RelRO                         : Partial
+(qemu) gef➤  quit
+y

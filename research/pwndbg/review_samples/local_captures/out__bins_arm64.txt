@@ -1,0 +1,16 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> bins
+tcachebins
+0x90 [  7]:  0xaaaaaaac17c0 —▸ 0xaaaaaaac1710 —▸ 0xaaaaaaac1660 —▸ 0xaaaaaaac15b0 —▸ 0xaaaaaaac1500 —▸ 0xaaaaaaac1450 —▸ 0xaaaaaaac13a0 ◂— 0
+fastbins
+empty
+unsortedbin
+empty
+smallbins
+0x90:        0xaaaaaaac1910 —▸ 0xaaaaaaac1860 —▸ 0xfffff7fa0b30 (main_arena+224) ◂— 0xaaaaaaac1910
+largebins
+0x500-0x530: 0xaaaaaaac19c0 —▸ 0xfffff7fa0ee0 (main_arena+1168) ◂— 0xaaaaaaac19c0
+0x540-0x570: 0xaaaaaaac1ef0 —▸ 0xfffff7fa0ef0 (main_arena+1184) ◂— 0xaaaaaaac1ef0
+0x580-0x5b0: 0xaaaaaaac2460 —▸ 0xfffff7fa0f00 (main_arena+1200) ◂— 0xaaaaaaac2460
+0x5c0-0x5f0: 0xaaaaaaac2a10 —▸ 0xfffff7fa0f10 (main_arena+1216) ◂— 0xaaaaaaac2a10

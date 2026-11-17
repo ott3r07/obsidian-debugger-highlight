@@ -1,0 +1,6 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000aaaaaaaa0d44 in main at rv.c:39
+	breakpoint already hit 1 time

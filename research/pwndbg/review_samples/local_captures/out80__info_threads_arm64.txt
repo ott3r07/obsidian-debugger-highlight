@@ -1,0 +1,8 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> info threads
+  Id   Target Id                                  Frame 
+* 1    Thread 0xfffff7ff7ee0 (LWP 422) "rv_arm64" many_args (
+    alpha_parameter=0x1111, beta_parameter=0x2222, 
+    gamma_string=0xaaaaaaaa0e78 "a fairly long string argument to force gdb line wrapping", delta_config=0xaaaaaaac0010 <g_cfg>, epsilon_value=0x5555, 
+    zeta_value=0x6666) at rv.c:16

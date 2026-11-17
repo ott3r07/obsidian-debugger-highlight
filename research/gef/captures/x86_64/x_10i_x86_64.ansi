@@ -1,0 +1,11 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mx/10i $pc
+[?2004l=> [34m0x401951[m <[33mmain[m+43>:	[32mlea    [m[31mrax[m,[[31mrip[m+[34m0xffffffffffffff0d[m][37;2m        # [m[37;2m0x401865 <add>[m
+   [34m0x401958[m <[33mmain[m+50>:	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0xb8[m],[31mrax[m
+   [34m0x40195f[m <[33mmain[m+57>:	[32mlea    [m[31mrax[m,[[31mrbp[m[34m-[m[34m0x40[m]
+   [34m0x401963[m <[33mmain[m+61>:	[32mmovabs [m[31mrsi[m,[34m0x4141414141414141[m
+   [34m0x40196d[m <[33mmain[m+71>:	[32mmovabs [m[31mrdi[m,[34m0x4242424242424242[m
+   [34m0x401977[m <[33mmain[m+81>:	[32mmov    [mQWORD PTR [[31mrax[m],[31mrsi[m
+   [34m0x40197a[m <[33mmain[m+84>:	[32mmov    [mQWORD PTR [[31mrax[m+[34m0x8[m],[31mrdi[m
+   [34m0x40197e[m <[33mmain[m+88>:	[32mmovabs [m[31mrsi[m,[34m0x4342424242424242[m
+   [34m0x401988[m <[33mmain[m+98>:	[32mmovabs [m[31mrdi[m,[34m0x43434343434343[m
+   [34m0x401992[m <[33mmain[m+108>:	[32mmov    [mQWORD PTR [[31mrax[m+[34m0x9[m],[31mrsi[m

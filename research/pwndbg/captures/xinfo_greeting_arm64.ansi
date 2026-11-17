@@ -1,0 +1,14 @@
+[32m[1mpwndbg> [0m[32m[0mxinfo greeting
+Extended information for virtual address [31m0xaaaaaaaa0d28[0m:
+
+  Containing mapping:
+[31m    0xaaaaaaaa0000     0xaaaaaaaa1000 r-xp     1000       0 test_arm64[0m
+
+  Offset information:
+         Mapped Area [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0000[0m + 0xd28
+         File (Base) [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0000[0m + 0xd28
+      File (Segment) [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0000[0m + 0xd28
+         File (Disk) [31m0xaaaaaaaa0d28[0m = /work/test_arm64 + 0xd28
+
+ Containing ELF sections:
+             .rodata [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0d20[0m + 0x8

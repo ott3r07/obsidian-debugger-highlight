@@ -1,0 +1,6 @@
+segv_target_remote|target remote :1234
+break_line_segv|break test.c:38
+segv_continue_start|continue
+set_var|set var fp = 0
+sigsegv|continue
+bt_segv|bt

@@ -1,0 +1,10 @@
+gef➤  p greeting
+$1 = 0xaaaaaaaa0c58 "Hello, gef!"
+gef➤  p/x $sp
+$2 = 0xfffffffffad0
+gef➤  p $pc
+$3 = (void (*)()) 0xaaaaaaaa0a20 <main+32>
+gef➤  p fp
+$4 = (op_fn) 0x0
+gef➤  p stackbuf
+$5 = '\000' <repeats 40 times>, "\240\374\377\377\377\377\000"

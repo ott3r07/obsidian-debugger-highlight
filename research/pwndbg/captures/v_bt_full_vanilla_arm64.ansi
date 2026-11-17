@@ -1,0 +1,10 @@
+(gdb) bt full
+#0  [33mmain[m ([36margc[m=1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+        [36mstackbuf[m = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 16 times>, "P\374\377\377\377\377\000"
+        [36mfp[m = [34m0xaaaaaaaa0918[m <[33madd[m>
+        [36msmall[m = {[34m0xaaaaaaac12a0[m, [34m0xaaaaaaac12d0[m, [34m0xaaaaaaac1300[m, [34m0xaaaaaaac1330[m, [34m0xaaaaaaac1360[m, [34m0xaaaaaaac1390[m, 
+          [34m0xaaaaaaac13c0[m, [34m0xaaaaaaac13f0[m}
+        [36mmid[m = {[34m0xaaaaaaac1420[m, [34m0xaaaaaaac14b0[m, [34m0xaaaaaaac1540[m}
+        [36mbig[m = {[34m0xaaaaaaac15d0[m, [34m0xaaaaaaac1ae0[m}
+        [36mi[m = 8
+        [36mr[m = 0

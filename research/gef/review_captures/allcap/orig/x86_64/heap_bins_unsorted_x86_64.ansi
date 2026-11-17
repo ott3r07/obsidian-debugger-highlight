@@ -1,0 +1,5 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mheap bins unsorted
+[?2004l[90m───────────────────────────────────── [0m[36mUnsorted Bin for arena at 0x4aa240[0m[90m ─────────────────────────────────────[0m
+[1m[32m[+][0m unsorted_bins[0]: fw=0x4b3c20, bk=0x4b3c20
+ →   [33m[1m[4mChunk[24m[0m(addr=0x4b3c30, size=0x510, flags=[32mPREV_INUSE[0m | [31mIS_MMAPPED[0m | [31mNON_MAIN_ARENA[0m)
+[1m[34m[+][0m Found 1 chunks in unsorted bin.

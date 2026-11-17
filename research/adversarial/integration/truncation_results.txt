@@ -1,0 +1,12 @@
+gdb: 0/1871 lines get different VISIBLE (styled) tokens when they are the last line before the viewport cut
+
+pwndbg: 2/2103 lines get different VISIBLE (styled) tokens when they are the last line before the viewport cut
+  messages.txt L4: "------- tip of the day (disable with set show-tips off) -------"
+     next: "Pwndbg resolves kernel memory maps by parsing page tables (default) or via moni
+  messages.txt L38: "------- tip of the day (disable with set show-tips off) -------"
+     next: "Use attachp <name|pid|args|/dev/...> to attach to a process by name or args (in
+gef: 1/633 lines get different VISIBLE (styled) tokens when they are the last line before the viewport cut
+  commands.txt L213: "Description:"
+     next: "\tMaximum level of pointer recursion"
+peda: 0/294 lines get different VISIBLE (styled) tokens when they are the last line before the viewport cut
+

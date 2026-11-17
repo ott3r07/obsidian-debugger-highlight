@@ -1,0 +1,46 @@
+Reading symbols from [32m./test_x64[m...
+(gdb) target remote :1234
+Remote debugging using :1234
+Reading symbols from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m...
+(No debugging symbols found in [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m)
+[34m0x0000ffff8674f550[m in [33m??[m () from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m
+(gdb) continue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+*** stack smashing detected ***: terminated
+
+Program received signal SIGABRT, Aborted.
+[34m0x0000ffff86512a8c[m in [33mpthread_kill[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+(gdb) bt
+#0  [34m0x0000ffff86512a8c[m in [33mpthread_kill[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#1  [34m0x0000ffff864b925e[m in [33mraise[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#2  [34m0x0000ffff8649c8ff[m in [33mabort[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#3  [34m0x0000ffff8649d7b6[m in [33m??[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#4  [34m0x0000ffff865aaad9[m in [33m__fortify_fail[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#5  [34m0x0000ffff865abd64[m in [33m__stack_chk_fail[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#6  [34m0x00005555555572f9[m in [33mvuln[m ([36msrc[m=0xffff86f6ee6e 'A' <repeats 100 times>) at [32mtest.c[m:22
+#7  [34m0x4141414141414141[m in [33m??[m ()
+#8  [34m0x4141414141414141[m in [33m??[m ()
+#9  [34m0x4141414141414141[m in [33m??[m ()
+#10 [34m0x4141414141414141[m in [33m??[m ()
+#11 [34m0x4141414141414141[m in [33m??[m ()
+#12 [34m0x0000550041414141[m in [33m??[m ()
+#13 [34m0x000055555555bae0[m in [33m??[m ()
+#14 [34m0x000055555555b420[m in [33m??[m ()
+#15 [34m0x000055555555b4b0[m in [33m??[m ()
+#16 [34m0x000055555555b540[m in [33m??[m ()
+#17 [34m0x0000000001080000[m in [33m??[m ()
+#18 [34m0x000055555555b2a0[m in [33m??[m ()
+#19 [34m0x000055555555b2d0[m in [33m??[m ()
+#20 [34m0x000055555555b300[m in [33m??[m ()
+#21 [34m0x000055555555b330[m in [33m??[m ()
+#22 [34m0x000055555555b360[m in [33m??[m ()
+#23 [34m0x000055555555b390[m in [33m??[m ()
+#24 [34m0x000055555555b3c0[m in [33m??[m ()
+#25 [34m0x000055555555b3f0[m in [33m??[m ()
+#26 [34m0x4141414141414141[m in [33m??[m ()
+#27 [34m0x4242424242424242[m in [33m??[m ()
+#28 [34m0x4343434343434343[m in [33m??[m ()
+#29 [34m0x0000000000000000[m in [33m??[m ()
+(gdb) 

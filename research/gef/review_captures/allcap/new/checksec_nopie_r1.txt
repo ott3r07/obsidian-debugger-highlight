@@ -1,0 +1,7 @@
+gef➤  checksec /t/t2_nopie
+[+] checksec for '/t/t2_nopie'
+Canary                        : ✓ (value: 0x387fb66d57ee7900)
+NX                            : ✓ 
+PIE                           : ✘ 
+Fortify                       : ✘ 
+RelRO                         : Partial

@@ -1,0 +1,5 @@
+(gdb) continue
+Continuing.
+
+Breakpoint 3, main (argc=1, argv=0xfffffffffcc8) at test.c:38
+38	    int r = compute(fp, 6, 7);

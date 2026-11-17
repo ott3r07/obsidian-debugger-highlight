@@ -1,0 +1,7 @@
+gef_remote	gef-remote --qemu-user --qemu-binary /work/test_x64_nossp localhost 1234
+-	python import shutil; shutil.copy('/work/maps_x64_nossp_qemu.txt', str(gef.session.remote.maps)); reset_all_caches(); print('[research] replaced fake qemu maps with real guest layout (from qemu -d page)')
+run_segv	continue
+context_segv	context
+pattern_search_rsp	pattern search $rsp
+pattern_search_rbp	pattern search $rbp
+bt_segv	bt

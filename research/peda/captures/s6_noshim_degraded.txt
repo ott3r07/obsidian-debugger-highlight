@@ -1,0 +1,130 @@
+Script started on 2026-11-17 05:28:45+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -ex echo1 -ex 'target remote :1234' ./test_static" <not executed on terminal>]
+break main
+Reading symbols from ./test_static...
+The target architecture is set to "i386:x86-64".
+Undefined command: "echo1".  Try "help".
+Remote debugging using :1234
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x2aaaab2abd10 --> 0x1 
+RIP: 0x401780 --> 0x8949ed31fa1e0ff3 
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x0 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401777 <release_registered_frames+39>:	pop    rbp
+   0x401778 <release_registered_frames+40>:	ret
+   0x401779:	nop    DWORD PTR [rax+0x0]
+=> 0x401780 <_start>:	endbr64
+   0x401784 <_start+4>:	xor    ebp,ebp
+   0x401786 <_start+6>:	mov    r9,rdx
+   0x401789 <_start+9>:	pop    rsi
+   0x40178a <_start+10>:	mov    rdx,rsp
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abd10 --> 0x1 
+0008| 0x2aaaab2abd18 --> 0x2aaaab2abedb ("./test_static")
+0016| 0x2aaaab2abd20 --> 0x0 
+0024| 0x2aaaab2abd28 --> 0x2aaaab2abee9 ("HOSTNAME=e34b95a55858")
+0032| 0x2aaaab2abd30 --> 0x2aaaab2abeff ("PWD=/work")
+0040| 0x2aaaab2abd38 --> 0x2aaaab2abf09 ("HOME=/root")
+0048| 0x2aaaab2abd40 --> 0x2aaaab2abf14 ("NOSHIM=1")
+0056| 0x2aaaab2abd48 --> 0x2aaaab2abf1d --> 0x303d4c564c4853 ('SHLVL=0')
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGTRAP
+0x0000000000401780 in _start ()
+gdb-peda$ break main
+Breakpoint 1 at 0x401967: file test.c, line 26.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x401954 --> 0xe5894855fa1e0ff3 
+RBX: 0x1 
+RCX: 0x4b58f0 --> 0x0 
+RDX: 0x2aaaab2abd28 --> 0x2aaaab2abee9 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abd18 --> 0x2aaaab2abedb ("./test_static")
+RDI: 0x1 
+RBP: 0x2aaaab2abc00 --> 0x2aaaab2abca0 --> 0x2aaaab2abcf0 --> 0x0 
+RSP: 0x2aaaab2abb90 --> 0x2aaaab2abd18 --> 0x2aaaab2abedb ("./test_static")
+RIP: 0x401967 --> 0x8d48097e029c7d83 
+R8 : 0x4ac260 --> 0x4b58f0 --> 0x0 
+R9 : 0x110 
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd18 --> 0x2aaaab2abedb ("./test_static")
+R13: 0x2aaaab2abd28 --> 0x2aaaab2abee9 ("HOSTNAME=e34b95a55858")
+R14: 0x4a7f68 --> 0x401870 --> 0x47f370b8fa1e0ff3 
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x40195c <main+8>:	sub    rsp,0x70
+   0x401960 <main+12>:	mov    DWORD PTR [rbp-0x64],edi
+   0x401963 <main+15>:	mov    QWORD PTR [rbp-0x70],rsi
+=> 0x401967 <main+19>:	cmp    DWORD PTR [rbp-0x64],0x2
+   0x40196b <main+23>:	jle    0x401976 <main+34>
+   0x40196d <main+25>:	lea    rax,[rip+0xffffffffffffff49]        # 0x4018bd <mul>
+   0x401974 <main+32>:	jmp    0x40197d <main+41>
+   0x401976 <main+34>:	lea    rax,[rip+0xffffffffffffff28]        # 0x4018a5 <add>
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb90 --> 0x2aaaab2abd18 --> 0x2aaaab2abedb ("./test_static")
+0008| 0x2aaaab2abb98 --> 0x1004ac200 
+0016| 0x2aaaab2abba0 --> 0xf 
+0024| 0x2aaaab2abba8 --> 0x0 
+0032| 0x2aaaab2abbb0 --> 0x4b3190 --> 0x4b57f0 --> 0x4 
+0040| 0x2aaaab2abbb8 --> 0x7f580 
+0048| 0x2aaaab2abbc0 --> 0x2aaaab2abbf0 --> 0x2aaaab2abc10 --> 0x2aaaab2abc90 --> 0x2aaaab2abca0 --> 0x2aaaab2abcf0 (--> ...)
+0056| 0x2aaaab2abbc8 --> 0x40f1a2 --> 0x81840fc08548 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, main (argc=0x1, argv=0x2aaaab2abd18) at test.c:26
+26	    op_fn fp = (argc > 2) ? mul : add;
+gdb-peda$ vmmap stack
+Start              End                Perm	Name
+0x0000ffffcd990000 0x0000ffffcd9b1000 rw-p	[stack]
+gdb-peda$ xinfo $rip
+0x401967 --> 0x8d48097e029c7d83 
+Virtual memory mapping:
+Start : 0x00401000
+End   : 0x00481000
+Offset: 0x967
+Perm  : r--p
+Name  : /host_virtiofs/Users/ott3r/tmp/obsidian_plugin/research/peda/build/test_static
+gdb-peda$ telescope 4
+0000| 0x2aaaab2abb90 --> 0x2aaaab2abd18 --> 0x2aaaab2abedb ("./test_static")
+0008| 0x2aaaab2abb98 --> 0x1004ac200 
+0016| 0x2aaaab2abba0 --> 0xf 
+0024| 0x2aaaab2abba8 --> 0x0 
+gdb-peda$ procinfo
+exe = /usr/bin/qemu-x86_64
+fd[0] -> /dev/null
+fd[1] -> /tmp/prog_stdout.txt
+fd[2] -> /tmp/prog_stdout.txt
+fd[3] -> /tmp/qemu_pages.log
+fd[4] -> socket:[88396]
+fd[5] -> socket:[88397]
+pid = 821
+ppid = 811
+uid = [0, 0, 0, 0]
+gid = [0, 0, 0, 0]
+gdb-peda$ quit
+
+Script done on 2026-11-17 05:28:52+00:00 [COMMAND_EXIT_CODE="0"]

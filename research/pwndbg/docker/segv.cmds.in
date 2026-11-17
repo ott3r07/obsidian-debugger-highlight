@@ -1,0 +1,6 @@
+@START@
+break_line_segv|break test.c:38
+@GO@
+set_var|set var fp = 0
+sigsegv|continue
+bt_segv|bt

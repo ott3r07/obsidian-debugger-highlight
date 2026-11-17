@@ -1,0 +1,129 @@
+# SOURCE: https://github.com/longld/peda/issues/172
+
+mjh@mjh-VirtualBox:~/hack$ gdb -q ./char_array2
+Reading symbols from ./char_array2...
+gdb-peda$ list
+1	#include <stdio.h>
+2	#include <string.h>
+3	
+4	int main() {
+5	  char str_a[20];
+6	
+7	  strcpy(str_a, "Hello, world!\n");
+8	  printf(str_a);
+9	}
+gdb-peda$ break 6
+Breakpoint 1 at 0x1184: file char_array2.c, line 7.
+gdb-peda$ break strcpy
+Function "strcpy" not defined.
+gdb-peda$ i b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000001184 in main at char_array2.c:7
+gdb-peda$ break 8
+Breakpoint 2 at 0x11a6: file char_array2.c, line 8.
+gdb-peda$ start
+[----------------------------------registers-----------------------------------]
+RAX: 0x555555555169 (<main>:	endbr64)
+RBX: 0x5555555551e0 (<__libc_csu_init>:	endbr64)
+RCX: 0x5555555551e0 (<__libc_csu_init>:	endbr64)
+RDX: 0x7fffffffe128 --> 0x7fffffffe440 ("SHELL=/bin/bash")
+RSI: 0x7fffffffe118 --> 0x7fffffffe425 ("/home/mjh/hack/char_array2")
+RDI: 0x1 
+RBP: 0x0 
+RSP: 0x7fffffffe028 --> 0x7ffff7de80b3 (<__libc_start_main+243>:	mov    edi,eax)
+RIP: 0x555555555169 (<main>:	endbr64)
+R8 : 0x0 
+R9 : 0x7ffff7fe0d50 (endbr64)
+R10: 0x0 
+R11: 0x0 
+R12: 0x555555555080 (<_start>:	endbr64)
+R13: 0x7fffffffe110 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x555555555159 <__do_global_dtors_aux+57>:	nop    DWORD PTR [rax+0x0]
+   0x555555555160 <frame_dummy>:	endbr64 
+   0x555555555164 <frame_dummy+4>:	jmp    0x5555555550e0 <register_tm_clones>
+=> 0x555555555169 <main>:	endbr64 
+   0x55555555516d <main+4>:	push   rbp
+   0x55555555516e <main+5>:	mov    rbp,rsp
+   0x555555555171 <main+8>:	sub    rsp,0x20
+   0x555555555175 <main+12>:	mov    rax,QWORD PTR fs:0x28
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffe028 --> 0x7ffff7de80b3 (<__libc_start_main+243>:	mov    edi,eax)
+0008| 0x7fffffffe030 --> 0x7ffff7ffc620 --> 0x50d1300000000 
+0016| 0x7fffffffe038 --> 0x7fffffffe118 --> 0x7fffffffe425 ("/home/mjh/hack/char_array2")
+0024| 0x7fffffffe040 --> 0x100000000 
+0032| 0x7fffffffe048 --> 0x555555555169 (<main>:	endbr64)
+0040| 0x7fffffffe050 --> 0x5555555551e0 (<__libc_csu_init>:	endbr64)
+0048| 0x7fffffffe058 --> 0x4933ce13230737fe 
+0056| 0x7fffffffe060 --> 0x555555555080 (<_start>:	endbr64)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Temporary breakpoint 3, main () at char_array2.c:4
+4	int main() {
+gdb-peda$ break strcpy
+Breakpoint 4 at gnu-indirect-function resolver at 0x7ffff7e63200
+gdb-peda$ i b
+Num     Type                   Disp Enb Address            What
+1       breakpoint             keep y   0x0000555555555184 in main at char_array2.c:7
+2       breakpoint             keep y   0x00005555555551a6 in main at char_array2.c:8
+4       STT_GNU_IFUNC resolver keep y   0x00007ffff7e63200 <strcpy_ifunc>
+gdb-peda$ step
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x5555555551e0 (<__libc_csu_init>:	endbr64)
+RCX: 0x5555555551e0 (<__libc_csu_init>:	endbr64)
+RDX: 0x7fffffffe128 --> 0x7fffffffe440 ("SHELL=/bin/bash")
+RSI: 0x7fffffffe118 --> 0x7fffffffe425 ("/home/mjh/hack/char_array2")
+RDI: 0x1 
+RBP: 0x7fffffffe020 --> 0x0 
+RSP: 0x7fffffffe000 --> 0x0 
+RIP: 0x555555555184 (<main+27>:	lea    rax,[rbp-0x20])
+R8 : 0x0 
+R9 : 0x7ffff7fe0d50 (endbr64)
+R10: 0x0 
+R11: 0x0 
+R12: 0x555555555080 (<_start>:	endbr64)
+R13: 0x7fffffffe110 --> 0x1 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x555555555175 <main+12>:	mov    rax,QWORD PTR fs:0x28
+   0x55555555517e <main+21>:	mov    QWORD PTR [rbp-0x8],rax
+   0x555555555182 <main+25>:	xor    eax,eax
+=> 0x555555555184 <main+27>:	lea    rax,[rbp-0x20]
+   0x555555555188 <main+31>:	movabs rdx,0x77202c6f6c6c6548
+   0x555555555192 <main+41>:	mov    QWORD PTR [rax],rdx
+   0x555555555195 <main+44>:	mov    DWORD PTR [rax+0x8],0x646c726f
+   0x55555555519c <main+51>:	mov    WORD PTR [rax+0xc],0xa21
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffe000 --> 0x0 
+0008| 0x7fffffffe008 --> 0x555555555080 (<_start>:	endbr64)
+0016| 0x7fffffffe010 --> 0x7fffffffe110 --> 0x1 
+0024| 0x7fffffffe018 --> 0x96b67f34bb2caa00 
+0032| 0x7fffffffe020 --> 0x0 
+0040| 0x7fffffffe028 --> 0x7ffff7de80b3 (<__libc_start_main+243>:	mov    edi,eax)
+0048| 0x7fffffffe030 --> 0x7ffff7ffc620 --> 0x50d1300000000 
+0056| 0x7fffffffe038 --> 0x7fffffffe118 --> 0x7fffffffe425 ("/home/mjh/hack/char_array2")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Aborted (core dumped)
+...Empty peda session file... 
+seems like a very simple task that is causing it to crash 
+... Normal gdb behavior for break strcpy is
+(gdb) break strcpy
+Function "strcpy" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) 
+but peda will not do this...
+mjh@mjh-VirtualBox:~/hack$ gdb -q ./char_array2
+Reading symbols from ./char_array2...
+gdb-peda$ break strcpy
+Function "strcpy" not defined.
+...It requires start command then it will allow breakpoint to be made at strcpy but then it crashes when continue used...
+
+
+

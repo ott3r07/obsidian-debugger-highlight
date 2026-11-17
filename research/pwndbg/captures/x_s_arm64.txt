@@ -1,0 +1,2 @@
+pwndbg> x/s greeting
+0xaaaaaaaa0d28:	"Hello, pwndbg!"

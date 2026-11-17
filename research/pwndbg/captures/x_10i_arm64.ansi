@@ -1,0 +1,11 @@
+[32m[1mpwndbg> [0m[32m[0mx/10i $pc
+=> [34m0xaaaaaaaa0c44[m <[33mmain[m+368>:	[32mmov[m	[31mw2[m, [34m#0x7                   [m[37;2m	// #7[m
+   [34m0xaaaaaaaa0c48[m <[33mmain[m+372>:	[32mmov[m	[31mw1[m, [34m#0x6                   [m[37;2m	// #6[m
+   [34m0xaaaaaaaa0c4c[m <[33mmain[m+376>:	[32mldr[m	[31mx0[m, [[31msp[m, [34m#24[m]
+   [34m0xaaaaaaaa0c50[m <[33mmain[m+380>:	[32mbl[m	[34m0xaaaaaaaa09e8[m <[33mcompute[m>
+   [34m0xaaaaaaaa0c54[m <[33mmain[m+384>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#20[m]
+   [34m0xaaaaaaaa0c58[m <[33mmain[m+388>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+   [34m0xaaaaaaaa0c5c[m <[33mmain[m+392>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0x980[m
+   [34m0xaaaaaaaa0c60[m <[33mmain[m+396>:	[32mstr[m	[31mx0[m, [[31msp[m, [34m#24[m]
+   [34m0xaaaaaaaa0c64[m <[33mmain[m+400>:	[32mmov[m	[31mw2[m, [34m#0x2                   [m[37;2m	// #2[m
+   [34m0xaaaaaaaa0c68[m <[33mmain[m+404>:	[32mldr[m	[31mw1[m, [[31msp[m, [34m#20[m]

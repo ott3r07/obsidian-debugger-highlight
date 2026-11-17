@@ -1,0 +1,3 @@
+gef➤  pattern search $pc
+[+] Searching for '6661616161616100'/'0061616161616166' with period=8
+[!] Pattern '$pc' not found

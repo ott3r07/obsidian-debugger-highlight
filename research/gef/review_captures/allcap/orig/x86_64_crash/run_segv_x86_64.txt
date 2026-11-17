@@ -1,0 +1,42 @@
+(qemu) gef➤  continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x6161616161616166 in ?? ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x85              
+$rbx   : 0x2               
+$rcx   : 0x0               
+$rdx   : 0x0               
+$rsp   : 0x00002aaaab2abb00  →  "gaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaama[...]"
+$rbp   : 0x6161616161616165 ("eaaaaaaa"?)
+$rsi   : 0x00000000004ab700  →  0x00000000fbad2884
+$rdi   : 0x00002aaaab2ab8e0  →  0x00000000004b4718  →  0x0000000000000000
+$rip   : 0x6161616161616166 ("faaaaaaa"?)
+$r8    : 0x73              
+$r9    : 0x0               
+$r10   : 0x0               
+$r11   : 0xffffffff        
+$r12   : 0x00002aaaab2abce8  →  0x00002aaaab2abe98  →  "/work/test_x64_nossp"
+$r13   : 0x00002aaaab2abd00  →  0x00002aaaab2abf2e  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00002aaaab2abb00│+0x0000: "gaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaama[...]"	 ← $rsp
+0x00002aaaab2abb08│+0x0008: "haaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaana[...]"
+0x00002aaaab2abb10│+0x0010: "iaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoa[...]"
+0x00002aaaab2abb18│+0x0018: "jaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapa[...]"
+0x00002aaaab2abb20│+0x0020: "kaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa"
+0x00002aaaab2abb28│+0x0028: "laaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa"
+0x00002aaaab2abb30│+0x0030: "maaaaaaanaaaaaaaoaaaaaaapaaaaaaa"
+0x00002aaaab2abb38│+0x0038: "naaaaaaaoaaaaaaapaaaaaaa"
+───────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+[!] Cannot disassemble from $PC
+[!] Cannot access memory at address 0x6161616161616166
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, stopped 0x6161616161616166 in ?? (), reason: SIGSEGV
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,573 @@
+[31m[1mpwndbg: [0m[31m[0m[91mloaded 200 pwndbg commands. Type [35mpwndbg [filter][0m[91m for a list.[0m
+[31m[1mpwndbg: [0m[31m[0m[91mcreated 12 GDB functions (can be used with print/break). Type [35mhelp function[0m[91m to see them.[0m
+Reading symbols from [32m./test_arm64[m...
+[31m[1m------- tip of the day[0m[31m[0m[91m (disable with [35mset show-tips off[0m[91m)[0m[31m[1m -------[0m[31m[0m
+Use [33mplist[0m command to dump elements of linked list
+[31m[1mpwndbg> [0m[31m[0mbreak test.c:38
+Breakpoint 1 at [34m0xc44[m: file [32mtest.c[m, line 38.
+[31m[1mpwndbg> [0m[31m[0mrun
+Starting program: [32m/work/test_arm64[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/aarch64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+38	    [32mint[m r [31m=[m [01mcompute[m[31m([mfp[31m,[m [35m6[m[31m,[m [35m7[m[31m);[m
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────[0m
+ [1mX0  [0m 0x510
+ [1mX1  [0m 0xffff
+ [1mX2  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX3  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX4  [0m 0x510
+ [1mX5  [0m 0x40
+ [1mX6  [0m 0x71fae20c11f79487
+ [1mX7  [0m 0
+ [1mX8  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX9  [0m 0x28
+ [1mX10 [0m 0x1ccef0
+ [1mX11 [0m 0
+ [1mX12 [0m [35m0xfffff7ffeb48 (_rtld_global+2888)[0m —▸ [31m0xfffff7fbe000[0m ◂— 0x10102464c457f
+ [1mX13 [0m 0x2f
+ [1mX14 [0m 0x1f22b4b
+ [1mX15 [0m [35m0xfffff7ff8e70[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX16 [0m [0m0xaaaaaaabffb0 (free@got[plt])[0m —▸ [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX17 [0m [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX18 [0m 3
+ [1mX19 [0m [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mX20 [0m 1
+ [1mX21 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX22 [0m [31m0xaaaaaaaa0ad4 (main)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+ [1mX23 [0m [33m0xfffffffffcd8[0m —▸ [33m0xfffffffffed7[0m ◂— 'HOSTNAME=3e37fc6690d4'
+ [1mX24 [0m [0m0xfffff7ffdb58 (_rtld_global_ro)[0m ◂— 0
+ [1mX25 [0m 0
+ [1mX26 [0m [35m0xfffff7ffe000 (_rtld_global)[0m —▸ [35m0xfffff7fff350[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX27 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX28 [0m 0
+ [1mX29 [0m [33m0xfffffffffb40[0m —▸ [33m0xfffffffffc50[0m —▸ [33m0xfffffffffc60[0m ◂— 0
+ [1mSP  [0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mLR  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+ [1mPC  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+[34m─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────[0m
+[90m   0xaaaaaaaa0c38 <main+356>    bl     free@plt                    <free@plt>[0m
+ 
+[90m   0xaaaaaaaa0c3c <main+360>    ldr    x0, [sp, #0x20][0m
+[90m   0xaaaaaaaa0c40 <main+364>    bl     free@plt                    <free@plt>[0m
+ 
+[31mb►[0m [1m[32m0xaaaaaaaa0c44[0m[1m[0m [1m[32m<main+368> [0m[1m[0m   [1m[32m[38;5;148mmov[39m[38;5;255m    [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m[0m[1m[0m              [31m[1mW2[0m[31m[0m => 7
+   [0m0xaaaaaaaa0c48[0m [0m<main+372> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mw1[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#6[39m              [31m[1mW1[0m[31m[0m => 6
+   [0m0xaaaaaaaa0c4c[0m [0m<main+376> [0m   [38;5;148mldr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m     [31m[1mX0[0m[31m[0m, [[33m{fp}[0m] => [31m0xaaaaaaaa0918 (add)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+   [0m0xaaaaaaaa0c50[0m [0m<main+380> [0m   [38;5;148m[1mbl[0m[39m[38;5;255m     [39m[38;5;141m[31mcompute[0m[39m                     <[31mcompute[0m>
+ 
+   [0m0xaaaaaaaa0c54[0m [0m<main+384> [0m   [38;5;148mstr[39m[38;5;255m    [39m[38;5;81mw0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x14[39m[38;5;255m][39m
+   [0m0xaaaaaaaa0c58[0m [0m<main+388> [0m   [38;5;148madrp[39m[38;5;255m   [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m0xaaaaaaaa0000[39m     [31m[1mX0[0m[31m[0m => [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+   [0m0xaaaaaaaa0c5c[0m [0m<main+392> [0m   [38;5;148madd[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x980[39m
+   [0m0xaaaaaaaa0c60[0m [0m<main+396> [0m   [38;5;148mstr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m
+[34m───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────[0m
+In file: /work/test.c:38
+   31 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m8[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x20[39m[38;5;255m)[39m[38;5;255m;[39m
+   32 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m3[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mmid[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x80[39m[38;5;255m)[39m[38;5;255m;[39m
+   33 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m2[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mbig[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x500[39m[38;5;255m)[39m[38;5;255m;[39m
+   34 [38;5;255m    [39m[38;5;255mstrcpy[39m[38;5;255m([39m[38;5;255m([39m[38;5;81mchar[39m[38;5;255m [39m[38;5;204m*[39m[38;5;255m)[39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m,[39m[38;5;255m [39m[38;5;186m"[39m[38;5;186mheap string here[39m[38;5;186m"[39m[38;5;255m)[39m[38;5;255m;[39m
+   35 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m8[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m[38;5;255m   [39m[38;5;245m/* 7 -> tcache, 1 -> fastbin */[39m
+   36 [38;5;255m    [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255mmid[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m
+   37 [38;5;255m    [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255mbig[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m[38;5;255m                             [39m[38;5;245m/* -> unsorted bin */[39m
+[1m[32m ► 38 [38;5;255m    [39m[38;5;81mint[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mcompute[39m[38;5;255m([39m[38;5;255mfp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m6[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m7[39m[38;5;255m)[39m[38;5;255m;[39m[0m[1m[0m
+   39 [38;5;255m    [39m[38;5;255mfp[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmul[39m[38;5;255m;[39m
+   40 [38;5;255m    [39m[38;5;255mr[39m[38;5;255m [39m[38;5;204m+[39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mcompute[39m[38;5;255m([39m[38;5;255mfp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m2[39m[38;5;255m)[39m[38;5;255m;[39m
+   41 [38;5;255m    [39m[38;5;255mprintf[39m[38;5;255m([39m[38;5;186m"[39m[38;5;186m%s %s r=%d stack=%s[39m[38;5;141m\n[39m[38;5;186m"[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mgreeting[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mglobal_buf[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mstackbuf[39m[38;5;255m)[39m[38;5;255m;[39m
+   42 [38;5;255m    [39m[38;5;255mvuln[39m[38;5;255m([39m[38;5;255margc[39m[38;5;255m [39m[38;5;204m>[39m[38;5;255m [39m[38;5;141m1[39m[38;5;255m [39m[38;5;204m?[39m[38;5;255m [39m[38;5;255margv[39m[38;5;255m[[39m[38;5;141m1[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m:[39m[38;5;255m [39m[38;5;186m"[39m[38;5;186mshort[39m[38;5;186m"[39m[38;5;255m)[39m[38;5;255m;[39m
+   43 [38;5;255m    [39m[38;5;81mreturn[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m
+   44 [38;5;255m}[39m
+[34m───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────[0m
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m sp[0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m-0b8 [33m0xfffffffffa88[0m ◂— 0x100000000
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m-0b0 [33m0xfffffffffa90 {i}[0m ◂— 8
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m-0a8 [33m0xfffffffffa98 {fp}[0m —▸ [31m0xaaaaaaaa0918 (add)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m-0a0 [33m0xfffffffffaa0 {big}[0m —▸ [34m0xaaaaaaac15d0[0m —▸ [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m-098 [33m0xfffffffffaa8 {big+0x8}[0m —▸ [34m0xaaaaaaac1ae0[0m ◂— 0
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m-090 [33m0xfffffffffab0 {mid}[0m —▸ [34m0xaaaaaaac1420[0m ◂— 0xaaaaaaac1
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m-088 [33m0xfffffffffab8 {mid+0x8}[0m —▸ [34m0xaaaaaaac14b0[0m ◂— 0
+[34m─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────[0m
+ ► 0 0xaaaaaaaa0c44 main+368
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[32m[1mpwndbg> [0m[32m[0mset show-flags on
+Set whether to show flags registers to 'on'.
+[32m[1mpwndbg> [0m[32m[0mcontext regs
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags on / show-compact-regs off ]──────────────────────────────────[0m
+ [1mX0  [0m 0x510
+ [1mX1  [0m 0xffff
+ [1mX2  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX3  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX4  [0m 0x510
+ [1mX5  [0m 0x40
+ [1mX6  [0m 0x71fae20c11f79487
+ [1mX7  [0m 0
+ [1mX8  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX9  [0m 0x28
+ [1mX10 [0m 0x1ccef0
+ [1mX11 [0m 0
+ [1mX12 [0m [35m0xfffff7ffeb48 (_rtld_global+2888)[0m —▸ [31m0xfffff7fbe000[0m ◂— 0x10102464c457f
+ [1mX13 [0m 0x2f
+ [1mX14 [0m 0x1f22b4b
+ [1mX15 [0m [35m0xfffff7ff8e70[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX16 [0m [0m0xaaaaaaabffb0 (free@got[plt])[0m —▸ [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX17 [0m [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX18 [0m 3
+ [1mX19 [0m [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mX20 [0m 1
+ [1mX21 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX22 [0m [31m0xaaaaaaaa0ad4 (main)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+ [1mX23 [0m [33m0xfffffffffcd8[0m —▸ [33m0xfffffffffed7[0m ◂— 'HOSTNAME=3e37fc6690d4'
+ [1mX24 [0m [0m0xfffff7ffdb58 (_rtld_global_ro)[0m ◂— 0
+ [1mX25 [0m 0
+ [1mX26 [0m [35m0xfffff7ffe000 (_rtld_global)[0m —▸ [35m0xfffff7fff350[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX27 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX28 [0m 0
+ [1mX29 [0m [33m0xfffffffffb40[0m —▸ [33m0xfffffffffc50[0m —▸ [33m0xfffffffffc60[0m ◂— 0
+ [1mSP  [0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mLR  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+ [1mPC  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+ [1mCPSR[0m 0x80001000 [ [1m[32mN[0m[1m[0m [31mz[0m [31mc[0m [31mv[0m [31mq[0m [31mpan[0m [31mil[0m [31md[0m [31ma[0m [31mi[0m [31mf[0m [31mel[0m [31msp[0m ]
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[32m[1mpwndbg> [0m[32m[0m[2S[2Aset show-flags off
+Set whether to show flags registers to 'off'.
+[32m[1mpwndbg> [0m[32m[0mset show-compact-regs on
+Set whether to show a compact register view with columns to 'on'.
+[32m[1mpwndbg> [0m[32m[0mcontext regs
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs on ]──────────────────────────────────[0m
+ [1mX0  [0m 0x510                                                    [1mX17 [0m [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX1  [0m 0xffff                                                   [1mX18 [0m 3
+ [1mX2 [37m  ⏎[0m                                                        [1mX19[37m  ⏎[0m
+ [1mX3 [37m  ⏎[0m                                                        [1mX20 [0m 1
+ [1mX4  [0m 0x510                                                    [1mX21[37m  ⏎[0m
+ [1mX5  [0m 0x40                                                     [1mX22 [0m [31m0xaaaaaaaa0ad4 (main)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+ [1mX6  [0m 0x71fae20c11f79487                                       [1mX23[37m  ⏎[0m
+ [1mX7  [0m 0                                                        [1mX24 [0m [0m0xfffff7ffdb58 (_rtld_global_ro)[0m ◂— 0
+ [1mX8 [37m  ⏎[0m                                                        [1mX25 [0m 0
+ [1mX9  [0m 0x28                                                     [1mX26[37m  ⏎[0m
+ [1mX10 [0m 0x1ccef0                                                 [1mX27[37m  ⏎[0m
+ [1mX11 [0m 0                                                        [1mX28 [0m 0
+ [1mX12[37m  ⏎[0m                                                        [1mX29[37m  ⏎[0m
+ [1mX13 [0m 0x2f                                                     [1mSP [37m  ⏎[0m
+ [1mX14 [0m 0x1f22b4b                                                [1mLR  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+ [1mX15 [0m [35m0xfffff7ff8e70[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f      [1mPC  [0m [31m0xaaaaaaaa0c44 (main+368)[0m ◂— [38;5;148mmov[39m[38;5;255m [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m
+ [1mX16[37m  ⏎[0m                                                       
+[90m↪[0m [1mX2  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[90m↪[0m [1mX19 [0m [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[90m↪[0m [1mX3  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[90m↪[0m [1mX21 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+[90m↪[0m [1mX23 [0m [33m0xfffffffffcd8[0m —▸ [33m0xfffffffffed7[0m ◂— 'HOSTNAME=3e37fc6690d4'
+[90m↪[0m [1mX8  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[90m↪[0m [1mX26 [0m [35m0xfffff7ffe000 (_rtld_global)[0m —▸ [35m0xfffff7fff350[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+[90m↪[0m [1mX27 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+[90m↪[0m [1mX12 [0m [35m0xfffff7ffeb48 (_rtld_global+2888)[0m —▸ [31m0xfffff7fbe000[0m ◂— 0x10102464c457f
+[90m↪[0m [1mX29 [0m [33m0xfffffffffb40[0m —▸ [33m0xfffffffffc50[0m —▸ [33m0xfffffffffc60[0m ◂— 0
+[90m↪[0m [1mSP  [0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[90m↪[0m [1mX16 [0m [0m0xaaaaaaabffb0 (free@got[plt])[0m —▸ [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[32m[1mpwndbg> [0m[32m[0m[2S[2Aset show-compact-regs off
+Set whether to show a compact register view with columns to 'off'.
+[32m[1mpwndbg> [0m[32m[0msearch "global data"
+Searching for byte: b'global data'
+[35mtest_arm64     [0m [35m0xaaaaaaac0010[0m 'global data string'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d0a, halting search.
+[32m[1mpwndbg> [0m[32m[0msearch -p mid[1]
+Searching for a pointer-width integer: b'\xb0\x14\xac\xaa\xaa\xaa\x00\x00'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.
+[33m[stack]        [0m [33m0xfffffffffab8[0m [34m0xaaaaaaac14b0[0m
+[32m[1mpwndbg> [0m[32m[0mgot -r
+State of the GOT of [35m/work/test_arm64[0m:
+GOT protection: [32mFull RELRO[0m | Found [33m14[0m GOT entries passing the filter
+[[0m0xaaaaaaabff80[0m] [33m__libc_start_main@GLIBC_2.34[0m -> [31m0xfffff7e18500 (__libc_start_main)[0m ◂— [38;5;148mstp[39m[38;5;255m [39m[38;5;81mx29[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx30[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#-0x60[39m[38;5;255m][39m[38;5;198;48;5;233m![39;49m
+[[0m0xaaaaaaabff88[0m] [33m__cxa_finalize@GLIBC_2.17[0m -> [31m0xfffff7e2eb50 (__cxa_finalize)[0m ◂— [38;5;148madrp[39m[38;5;255m [39m[38;5;81mx2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[0m_nl_C_locobj+32[0m[39m
+[[0m0xaaaaaaabff90[0m] [33mmalloc@GLIBC_2.17[0m -> [31m0xfffff7e86470 (malloc)[0m ◂— [38;5;148mstp[39m[38;5;255m [39m[38;5;81mx29[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx30[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#-0x40[39m[38;5;255m][39m[38;5;198;48;5;233m![39;49m
+[[0m0xaaaaaaabff98[0m] [33m__stack_chk_fail@GLIBC_2.17[0m -> [31m0xfffff7ee9250 (__stack_chk_fail)[0m ◂— [38;5;148mstp[39m[38;5;255m [39m[38;5;81mx29[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx30[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#-0x10[39m[38;5;255m][39m[38;5;198;48;5;233m![39;49m
+[[0m0xaaaaaaabffa0[0m] [33m__gmon_start__[0m -> 0
+[[0m0xaaaaaaabffa8[0m] [33mabort@GLIBC_2.17[0m -> [31m0xfffff7e17d0c (abort)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+[[0m0xaaaaaaabffb0[0m] [33mfree@GLIBC_2.17[0m -> [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+[[0m0xaaaaaaabffb8[0m] [33mstrcpy@GLIBC_2.17[0m -> [31m0xfffff7e8d240 (strcpy)[0m ◂— [38;5;148mnop[39m[38;5;255m [39m
+[[0m0xaaaaaaabffc0[0m] [33mprintf@GLIBC_2.17[0m -> [31m0xfffff7e40590 (printf)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x120[39m
+[[0m0xaaaaaaabffd0[0m] [33m_ITM_deregisterTMCloneTable[0m -> 0
+[[0m0xaaaaaaabffd8[0m] [33m__cxa_finalize@GLIBC_2.17[0m -> [31m0xfffff7e2eb50 (__cxa_finalize)[0m ◂— [38;5;148madrp[39m[38;5;255m [39m[38;5;81mx2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[0m_nl_C_locobj+32[0m[39m
+[[0m0xaaaaaaabffe0[0m] [33m__gmon_start__[0m -> 0
+[[0m0xaaaaaaabffe8[0m] [33m__stack_chk_guard@GLIBC_2.17[0m -> [0m0xfffff7ffdb50 (__stack_chk_guard)[0m ◂— 0x43e285dfeaf58100
+[[0m0xaaaaaaabfff8[0m] [33m_ITM_registerTMCloneTable[0m -> 0
+[32m[1mpwndbg> [0m[32m[0mdq $sp 4
+0000fffffffffa80     0000fffffffffcc8 0000000100000000
+0000fffffffffa90     0000000000000008 0000aaaaaaaa0918
+[32m[1mpwndbg> [0m[32m[0mdd $sp 4
+0000fffffffffa80     fffffcc8 0000ffff 00000000 00000001
+[32m[1mpwndbg> [0m[32m[0mdb $sp 16
+0000fffffffffa80     c8 fc ff ff ff ff 00 00 00 00 00 00 01 00 00 00
+[32m[1mpwndbg> [0m[32m[0mdc $sp 32
++0000 0xfffffffffa80  c8 fc [33mff[0m [33mff[0m [33mff[0m [33mff[0m [31m00[0m [31m00[0m  [31m00[0m [31m00[0m [31m00[0m [31m00[0m 01 [31m00[0m [31m00[0m [31m00[0m  │..[33m.[0m[33m.[0m[33m.[0m[33m.[0m[31m.[0m[31m.[0m│[31m.[0m[31m.[0m[31m.[0m[31m.[0m.[31m.[0m[31m.[0m[31m.[0m│
++0010 0xfffffffffa90  08 [31m00[0m [31m00[0m [31m00[0m [31m00[0m [31m00[0m [31m00[0m [31m00[0m  18 09 aa aa aa aa [31m00[0m [31m00[0m  │.[31m.[0m[31m.[0m[31m.[0m[31m.[0m[31m.[0m[31m.[0m[31m.[0m│......[31m.[0m[31m.[0m│
+[32m[1mpwndbg> [0m[32m[0mds greeting
+aaaaaaaa0d28 'Hello, pwndbg!'
+[32m[1mpwndbg> [0m[32m[0mcyclic 32
+aaaabaaacaaadaaaeaaafaaagaaahaaa
+[32m[1mpwndbg> [0m[32m[0mcyclic -l 0x6161616c
+[35mFinding cyclic pattern of 4 bytes: b'laaa' (hex: 0x6c616161)[0m
+[32mFound at offset 44[0m
+[32m[1mpwndbg> [0m[32m[0mtelescope &global_buf 4
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m   [0m [35m0xaaaaaaac0010 (global_buf)[0m ◂— 'global data string'
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m [1m   [0m [35m0xaaaaaaac0018 (global_buf+8)[0m ◂— 'ata string'
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m [1m   [0m [35m0xaaaaaaac0020 (global_buf+16)[0m ◂— 0x676e /* 'ng' */
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m [1m   [0m [35m0xaaaaaaac0028 (global_buf+24)[0m ◂— 0
+[32m[1mpwndbg> [0m[32m[0mtelescope small[7] 4
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m   [0m [34m0xaaaaaaac13f0[0m ◂— 0xaaaaaaac1
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m [1m   [0m [34m0xaaaaaaac13f8[0m ◂— 0
+[0m... ↓     2 skipped[0m
+[32m[1mpwndbg> [0m[32m[0mp $sp
+[36m$1[m = (void *[36m[m) [34m0xfffffffffa80[m
+[32m[1mpwndbg> [0m[32m[0mp/x $pc
+[36m$2[m = 0xaaaaaaaa0c44
+[32m[1mpwndbg> [0m[32m[0mp fp
+[36m$3[m = (op_fn[36m[m) [34m0xaaaaaaaa0918[m <[33madd[m>
+[32m[1mpwndbg> [0m[32m[0mx/gx $sp
+[34m0xfffffffffa80[m:	0x0000fffffffffcc8
+[32m[1mpwndbg> [0m[32m[0mx/3xg &global_buf
+[34m0xaaaaaaac0010[m <[33mglobal_buf[m>:	0x64206c61626f6c67	0x6972747320617461
+[34m0xaaaaaaac0020[m <[33mglobal_buf[m+16>:	0x000000000000676e
+[32m[1mpwndbg> [0m[32m[0mx/2i $pc
+=> [34m0xaaaaaaaa0c44[m <[33mmain[m+368>:	[32mmov[m	[31mw2[m, [34m#0x7                   [m[37;2m	// #7[m
+   [34m0xaaaaaaaa0c48[m <[33mmain[m+372>:	[32mmov[m	[31mw1[m, [34m#0x6                   [m[37;2m	// #6[m
+[32m[1mpwndbg> [0m[32m[0mx/8xb greeting
+[34m0xaaaaaaaa0d28[m:	0x48	0x65	0x6c	0x6c	0x6f	0x2c	0x20	0x70
+[32m[1mpwndbg> [0m[32m[0mx/4dw $sp
+[34m0xfffffffffa80[m:	-824	65535	0	1
+[32m[1mpwndbg> [0m[32m[0minfo proc mappings
+process 713
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset  Perms  objfile
+      0xaaaaaaaa0000     0xaaaaaaaa1000     0x1000        0x0  r-xp   /work/test_arm64
+      0xaaaaaaabf000     0xaaaaaaac0000     0x1000     0xf000  r--p   /work/test_arm64
+      0xaaaaaaac0000     0xaaaaaaac1000     0x1000    0x10000  rw-p   /work/test_arm64
+      0xaaaaaaac1000     0xaaaaaaae2000    0x21000        0x0  rw-p   [heap]
+      0xfffff7df0000     0xfffff7f8a000   0x19a000        0x0  r-xp   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7f8a000     0xfffff7f9d000    0x13000   0x19a000  ---p   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7f9d000     0xfffff7fa0000     0x3000   0x19d000  r--p   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7fa0000     0xfffff7fa2000     0x2000   0x1a0000  rw-p   /usr/lib/aarch64-linux-gnu/libc.so.6
+      0xfffff7fa2000     0xfffff7fae000     0xc000        0x0  rw-p   
+      0xfffff7fbe000     0xfffff7fe5000    0x27000        0x0  r-xp   /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+      0xfffff7ff7000     0xfffff7ff9000     0x2000        0x0  rw-p   
+      0xfffff7ff9000     0xfffff7ffb000     0x2000        0x0  r--p   [vvar]
+      0xfffff7ffb000     0xfffff7ffc000     0x1000        0x0  r-xp   [vdso]
+      0xfffff7ffc000     0xfffff7ffe000     0x2000    0x2e000  r--p   /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+      0xfffff7ffe000     0xfffff8000000     0x2000    0x30000  rw-p   /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+      0xfffffffdf000    0x1000000000000    0x21000        0x0  rw-p   [stack]
+[32m[1mpwndbg> [0m[32m[0mxinfo greeting
+Extended information for virtual address [31m0xaaaaaaaa0d28[0m:
+
+  Containing mapping:
+[31m    0xaaaaaaaa0000     0xaaaaaaaa1000 r-xp     1000       0 test_arm64[0m
+
+  Offset information:
+         Mapped Area [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0000[0m + 0xd28
+         File (Base) [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0000[0m + 0xd28
+      File (Segment) [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0000[0m + 0xd28
+         File (Disk) [31m0xaaaaaaaa0d28[0m = /work/test_arm64 + 0xd28
+
+ Containing ELF sections:
+             .rodata [31m0xaaaaaaaa0d28[0m = [31m0xaaaaaaaa0d20[0m + 0x8
+[32m[1mpwndbg> [0m[32m[0mmalloc-chunk mid[1]-0x10
+[33mAllocated chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0xaaaaaaac14a0[0m
+Size: 0x90 (with flag bits: 0x91)
+
+[32m[1mpwndbg> [0m[32m[0mtop-chunk
+[31mTop chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0xaaaaaaac1fe0[0m
+Size: 0x20020 (with flag bits: 0x20021)
+
+[32m[1mpwndbg> [0m[32m[0mvis-heap-chunks
+0xaaaaaaac1000[33m	0x0000000000000000[0m[36m	0x0000000000000291[0m	[36m................[0m
+0xaaaaaaac1010[36m	0x0000000000070000[0m[36m	0x0001000000000000[0m	[36m................[0m
+0xaaaaaaac1020[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1030[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1040[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1050[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1060[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1070[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1080[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1090[36m	0x0000000000000000[0m[36m	0x0000aaaaaaac13c0[0m	[36m................[0m
+0xaaaaaaac10a0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac10b0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac10c0[36m	0x0000000000000000[0m[36m	0x0000aaaaaaac1420[0m	[36m........ .......[0m
+0xaaaaaaac10d0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac10e0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac10f0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1100[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1110[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1120[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1130[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1140[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1150[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1160[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1170[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1180[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1190[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac11a0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac11b0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac11c0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac11d0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac11e0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac11f0[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1200[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1210[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1220[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1230[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1240[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1250[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1260[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1270[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1280[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1290[36m	0x0000000000000000[0m[35m	0x0000000000000031[0m	[35m........1.......[0m
+0xaaaaaaac12a0[35m	0x0000000aaaaaaac1[0m[35m	0x71fae20c11f79487[0m	[35m...............q[0m	 <-- tcachebins[0x30][6/7]
+0xaaaaaaac12b0[35m	0x0000000000000000[0m[35m	0x0000000000000000[0m	[35m................[0m
+0xaaaaaaac12c0[35m	0x0000000000000000[0m[32m	0x0000000000000031[0m	[32m........1.......[0m
+0xaaaaaaac12d0[32m	0x0000aaa00006b861[0m[32m	0x71fae20c11f79487[0m	[32ma..............q[0m	 <-- tcachebins[0x30][5/7]
+0xaaaaaaac12e0[32m	0x0000000000000000[0m[32m	0x0000000000000000[0m	[32m................[0m
+0xaaaaaaac12f0[32m	0x0000000000000000[0m[34m	0x0000000000000031[0m	[34m........1.......[0m
+0xaaaaaaac1300[34m	0x0000aaa00006b811[0m[34m	0x71fae20c11f79487[0m	[34m...............q[0m	 <-- tcachebins[0x30][4/7]
+0xaaaaaaac1310[34m	0x0000000000000000[0m[34m	0x0000000000000000[0m	[34m................[0m
+0xaaaaaaac1320[34m	0x0000000000000000[0m[33m	0x0000000000000031[0m	[33m........1.......[0m
+0xaaaaaaac1330[33m	0x0000aaa00006b9c1[0m[33m	0x71fae20c11f79487[0m	[33m...............q[0m	 <-- tcachebins[0x30][3/7]
+0xaaaaaaac1340[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac1350[33m	0x0000000000000000[0m[36m	0x0000000000000031[0m	[36m........1.......[0m
+0xaaaaaaac1360[36m	0x0000aaa00006b9f1[0m[36m	0x71fae20c11f79487[0m	[36m...............q[0m	 <-- tcachebins[0x30][2/7]
+0xaaaaaaac1370[36m	0x0000000000000000[0m[36m	0x0000000000000000[0m	[36m................[0m
+0xaaaaaaac1380[36m	0x0000000000000000[0m[35m	0x0000000000000031[0m	[35m........1.......[0m
+0xaaaaaaac1390[35m	0x0000aaa00006b9a1[0m[35m	0x71fae20c11f79487[0m	[35m...............q[0m	 <-- tcachebins[0x30][1/7]
+0xaaaaaaac13a0[35m	0x0000000000000000[0m[35m	0x0000000000000000[0m	[35m................[0m
+0xaaaaaaac13b0[35m	0x0000000000000000[0m[32m	0x0000000000000031[0m	[32m........1.......[0m
+0xaaaaaaac13c0[32m	0x0000aaa00006b951[0m[32m	0x71fae20c11f79487[0m	[32mQ..............q[0m	 <-- tcachebins[0x30][0/7]
+0xaaaaaaac13d0[32m	0x0000000000000000[0m[32m	0x0000000000000000[0m	[32m................[0m
+0xaaaaaaac13e0[32m	0x0000000000000000[0m[34m	0x0000000000000031[0m	[34m........1.......[0m	 <-- fastbins[0x30][0]
+0xaaaaaaac13f0[34m	0x0000000aaaaaaac1[0m[34m	0x0000000000000000[0m	[34m................[0m
+0xaaaaaaac1400[34m	0x0000000000000000[0m[34m	0x0000000000000000[0m	[34m................[0m
+0xaaaaaaac1410[34m	0x0000000000000000[0m[33m	0x0000000000000091[0m	[33m................[0m
+0xaaaaaaac1420[33m	0x0000000aaaaaaac1[0m[33m	0x71fae20c11f79487[0m	[33m...............q[0m	 <-- tcachebins[0x90][0/1]
+0xaaaaaaac1430[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac1440[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac1450[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac1460[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac1470[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac1480[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac1490[33m	0x0000000000000000[0m[33m	0x0000000000000000[0m	[33m................[0m
+0xaaaaaaac14a0[33m	0x0000000000000000[0m	                  	[33m........[0m
+[33mNot all chunks were shown, see `vis --help` for more information.[0m
+[32m[1mpwndbg> [0m[32m[0mtry-free mid[1]
+[35mGeneral checks[0m
+[35mTcache checks[0m
+[32mUsing tcache_put[0m
+[35mNot mapped checks[0m
+[35mNext chunk is not top chunk[0m
+[35mClearing next chunk's P bit[0m
+----------
+[32mFree should succeed![0m
+[32m[1mpwndbg> [0m[32m[0mfind-fake-fast &global_buf
+[35mSearching for fastbin size fields up to 0x80, starting at 0xaaaaaaabff98 resulting in an overlap of 0xaaaaaaac0010[0m
+[34mFAKE CHUNKS[0m
+[32m[1mpwndbg> [0m[32m[0mtls
+[32mThread Local Storage (TLS) base: 0xfffff7ff8620[0m
+[32mTLS is located at:[0m
+[35m    0xfffff7ff7000     0xfffff7ff9000 rw-p     2000       0 [anon_fffff7ff7][0m
+[32mDumping the address:[0m
+[35mtcbhead_t @ 0xfffff7ff8620
+    0x0000fffff7ff8620 +0x0000 dtv                  : 0xfffff7ff8d70
+    0x0000fffff7ff8628 +0x0008 private              : 0x0[0m
+[32m[1mpwndbg> [0m[32m[0merrno
+Errno 0: OK
+[32m[1mpwndbg> [0m[32m[0minfo threads
+  Id   Target Id                                    Frame 
+* 1    Thread 0xfffff7ff7ee0 (LWP 713) "test_arm64" [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+[32m[1mpwndbg> [0m[32m[0mwatch r
+Hardware watchpoint 2: r
+[32m[1mpwndbg> [0m[32m[0mcontinue
+Continuing.
+
+Hardware watchpoint 2: r
+
+Old value = 0x0
+New value = 0xd
+[33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:39
+39	    fp [31m=[m mul[31m;[m
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────[0m
+[31m*[0m[31m[1mX0  [0m[31m[0m 0xd
+[31m*[0m[31m[1mX1  [0m[31m[0m 0xd
+[31m*[0m[31m[1mX2  [0m[31m[0m 0
+[31m*[0m[31m[1mX3  [0m[31m[0m 0
+ [1mX4  [0m 0x510
+ [1mX5  [0m 0x40
+ [1mX6  [0m 0x71fae20c11f79487
+ [1mX7  [0m 0
+ [1mX8  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX9  [0m 0x28
+ [1mX10 [0m 0x1ccef0
+ [1mX11 [0m 0
+ [1mX12 [0m [35m0xfffff7ffeb48 (_rtld_global+2888)[0m —▸ [31m0xfffff7fbe000[0m ◂— 0x10102464c457f
+ [1mX13 [0m 0x2f
+ [1mX14 [0m 0x1f22b4b
+ [1mX15 [0m [35m0xfffff7ff8e70[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX16 [0m [0m0xaaaaaaabffb0 (free@got[plt])[0m —▸ [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX17 [0m [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX18 [0m 3
+ [1mX19 [0m [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mX20 [0m 1
+ [1mX21 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX22 [0m [31m0xaaaaaaaa0ad4 (main)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+ [1mX23 [0m [33m0xfffffffffcd8[0m —▸ [33m0xfffffffffed7[0m ◂— 'HOSTNAME=3e37fc6690d4'
+ [1mX24 [0m [0m0xfffff7ffdb58 (_rtld_global_ro)[0m ◂— 0
+ [1mX25 [0m 0
+ [1mX26 [0m [35m0xfffff7ffe000 (_rtld_global)[0m —▸ [35m0xfffff7fff350[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX27 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX28 [0m 0
+ [1mX29 [0m [33m0xfffffffffb40[0m —▸ [33m0xfffffffffc50[0m —▸ [33m0xfffffffffc60[0m ◂— 0
+ [1mSP  [0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mLR  [0m [31m0xaaaaaaaa0c54 (main+384)[0m ◂— [38;5;148mstr[39m[38;5;255m [39m[38;5;81mw0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x14[39m[38;5;255m][39m
+[31m*[0m[31m[1mPC  [0m[31m[0m [31m0xaaaaaaaa0c58 (main+388)[0m ◂— [38;5;148madrp[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m0xaaaaaaaa0000[39m
+[34m─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────[0m
+[31mb+[0m [31m0xaaaaaaaa0c44[0m [31m<main+368> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#7[39m              [31m[1mW2[0m[31m[0m => 7
+   [0m0xaaaaaaaa0c48[0m [0m<main+372> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mw1[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#6[39m              [31m[1mW1[0m[31m[0m => 6
+   [0m0xaaaaaaaa0c4c[0m [0m<main+376> [0m   [38;5;148mldr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m     [31m[1mX0[0m[31m[0m, [[33m{fp}[0m] => [31m0xaaaaaaaa0918 (add)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+   [0m0xaaaaaaaa0c50[0m [0m<main+380> [0m   [38;5;148m[1mbl[0m[39m[38;5;255m     [39m[38;5;141m[31mcompute[0m[39m                     <[31mcompute[0m>
+ 
+   [0m0xaaaaaaaa0c54[0m [0m<main+384> [0m   [38;5;148mstr[39m[38;5;255m    [39m[38;5;81mw0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x14[39m[38;5;255m][39m
+ ► [1m[32m0xaaaaaaaa0c58[0m[1m[0m [1m[32m<main+388> [0m[1m[0m   [1m[32m[38;5;148madrp[39m[38;5;255m   [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m0xaaaaaaaa0000[39m[0m[1m[0m     [31m[1mX0[0m[31m[0m => [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+   [0m0xaaaaaaaa0c5c[0m [0m<main+392> [0m   [38;5;148madd[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x980[39m         [31m[1mX0[0m[31m[0m => [31m0xaaaaaaaa0980 (mul)[0m (0xaaaaaaaa0000 + 0x980)
+   [0m0xaaaaaaaa0c60[0m [0m<main+396> [0m   [38;5;148mstr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m        [[33m{fp}[0m] <= [31m0xaaaaaaaa0980 (mul)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+   [0m0xaaaaaaaa0c64[0m [0m<main+400> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#2[39m                 [31m[1mW2[0m[31m[0m => 2
+   [0m0xaaaaaaaa0c68[0m [0m<main+404> [0m   [38;5;148mldr[39m[38;5;255m    [39m[38;5;81mw1[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x14[39m[38;5;255m][39m        [1mW1[0m, [[33m{r}[0m] => 0xd
+   [0m0xaaaaaaaa0c6c[0m [0m<main+408> [0m   [38;5;148mldr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m        [1mX0[0m, [[33m{fp}[0m] => [31m0xaaaaaaaa0980 (mul)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+[34m───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────[0m
+In file: /work/test.c:39
+   31 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m8[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x20[39m[38;5;255m)[39m[38;5;255m;[39m
+   32 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m3[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mmid[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x80[39m[38;5;255m)[39m[38;5;255m;[39m
+   33 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m2[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mbig[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x500[39m[38;5;255m)[39m[38;5;255m;[39m
+   34 [38;5;255m    [39m[38;5;255mstrcpy[39m[38;5;255m([39m[38;5;255m([39m[38;5;81mchar[39m[38;5;255m [39m[38;5;204m*[39m[38;5;255m)[39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m,[39m[38;5;255m [39m[38;5;186m"[39m[38;5;186mheap string here[39m[38;5;186m"[39m[38;5;255m)[39m[38;5;255m;[39m
+   35 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m8[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m[38;5;255m   [39m[38;5;245m/* 7 -> tcache, 1 -> fastbin */[39m
+   36 [38;5;255m    [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255mmid[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m
+   37 [38;5;255m    [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255mbig[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m[38;5;255m                             [39m[38;5;245m/* -> unsorted bin */[39m
+   38 [38;5;255m    [39m[38;5;81mint[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mcompute[39m[38;5;255m([39m[38;5;255mfp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m6[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m7[39m[38;5;255m)[39m[38;5;255m;[39m
+[1m[32m ► 39 [38;5;255m    [39m[38;5;255mfp[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmul[39m[38;5;255m;[39m[0m[1m[0m
+   40 [38;5;255m    [39m[38;5;255mr[39m[38;5;255m [39m[38;5;204m+[39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mcompute[39m[38;5;255m([39m[38;5;255mfp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m2[39m[38;5;255m)[39m[38;5;255m;[39m
+   41 [38;5;255m    [39m[38;5;255mprintf[39m[38;5;255m([39m[38;5;186m"[39m[38;5;186m%s %s r=%d stack=%s[39m[38;5;141m\n[39m[38;5;186m"[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mgreeting[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mglobal_buf[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mstackbuf[39m[38;5;255m)[39m[38;5;255m;[39m
+   42 [38;5;255m    [39m[38;5;255mvuln[39m[38;5;255m([39m[38;5;255margc[39m[38;5;255m [39m[38;5;204m>[39m[38;5;255m [39m[38;5;141m1[39m[38;5;255m [39m[38;5;204m?[39m[38;5;255m [39m[38;5;255margv[39m[38;5;255m[[39m[38;5;141m1[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m:[39m[38;5;255m [39m[38;5;186m"[39m[38;5;186mshort[39m[38;5;186m"[39m[38;5;255m)[39m[38;5;255m;[39m
+   43 [38;5;255m    [39m[38;5;81mreturn[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m
+   44 [38;5;255m}[39m
+[34m───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────[0m
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m sp[0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m-0b8 [33m0xfffffffffa88[0m ◂— 0x100000000
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m-0b0 [33m0xfffffffffa90 {i}[0m ◂— 0xd00000008
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m-0a8 [33m0xfffffffffa98 {fp}[0m —▸ [31m0xaaaaaaaa0918 (add)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m-0a0 [33m0xfffffffffaa0 {big}[0m —▸ [34m0xaaaaaaac15d0[0m —▸ [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m-098 [33m0xfffffffffaa8 {big+0x8}[0m —▸ [34m0xaaaaaaac1ae0[0m ◂— 0
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m-090 [33m0xfffffffffab0 {mid}[0m —▸ [34m0xaaaaaaac1420[0m ◂— 0xaaaaaaac1
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m-088 [33m0xfffffffffab8 {mid+0x8}[0m —▸ [34m0xaaaaaaac14b0[0m ◂— 0
+[34m─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────[0m
+ ► 0 0xaaaaaaaa0c58 main+388
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[32m[1mpwndbg> [0m[32m[0mdelete
+[32m[1mpwndbg> [0m[32m[0minfo breakpoints
+No breakpoints, watchpoints, tracepoints, or catchpoints.
+[32m[1mpwndbg> [0m[32m[0mdisplay/i $pc
+1: x/i $pc
+=> [34m0xaaaaaaaa0c58[m <[33mmain[m+388>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+[32m[1mpwndbg> [0m[32m[0msi
+[34m0x0000aaaaaaaa0c5c[m	39	    fp [31m=[m mul[31m;[m
+1: x/i $pc
+=> [34m0xaaaaaaaa0c5c[m <[33mmain[m+392>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0x980[m
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────[0m
+[31m*[0m[31m[1mX0  [0m[31m[0m [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX1  [0m 0xd
+ [1mX2  [0m 0
+ [1mX3  [0m 0
+ [1mX4  [0m 0x510
+ [1mX5  [0m 0x40
+ [1mX6  [0m 0x71fae20c11f79487
+ [1mX7  [0m 0
+ [1mX8  [0m [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+ [1mX9  [0m 0x28
+ [1mX10 [0m 0x1ccef0
+ [1mX11 [0m 0
+ [1mX12 [0m [35m0xfffff7ffeb48 (_rtld_global+2888)[0m —▸ [31m0xfffff7fbe000[0m ◂— 0x10102464c457f
+ [1mX13 [0m 0x2f
+ [1mX14 [0m 0x1f22b4b
+ [1mX15 [0m [35m0xfffff7ff8e70[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX16 [0m [0m0xaaaaaaabffb0 (free@got[plt])[0m —▸ [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX17 [0m [31m0xfffff7e86d70 (free)[0m ◂— [38;5;148mcbz[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[31mfree+276[0m[39m
+ [1mX18 [0m 3
+ [1mX19 [0m [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mX20 [0m 1
+ [1mX21 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX22 [0m [31m0xaaaaaaaa0ad4 (main)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0xd0[39m
+ [1mX23 [0m [33m0xfffffffffcd8[0m —▸ [33m0xfffffffffed7[0m ◂— 'HOSTNAME=3e37fc6690d4'
+ [1mX24 [0m [0m0xfffff7ffdb58 (_rtld_global_ro)[0m ◂— 0
+ [1mX25 [0m 0
+ [1mX26 [0m [35m0xfffff7ffe000 (_rtld_global)[0m —▸ [35m0xfffff7fff350[0m —▸ [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ [1mX27 [0m [0m0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry)[0m —▸ [31m0xaaaaaaaa08c0 (__do_global_dtors_aux)[0m ◂— [38;5;148mpaciasp[39m
+ [1mX28 [0m 0
+ [1mX29 [0m [33m0xfffffffffb40[0m —▸ [33m0xfffffffffc50[0m —▸ [33m0xfffffffffc60[0m ◂— 0
+ [1mSP  [0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+ [1mLR  [0m [31m0xaaaaaaaa0c54 (main+384)[0m ◂— [38;5;148mstr[39m[38;5;255m [39m[38;5;81mw0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x14[39m[38;5;255m][39m
+[31m*[0m[31m[1mPC  [0m[31m[0m [31m0xaaaaaaaa0c5c (main+392)[0m ◂— [38;5;148madd[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x980[39m
+[34m─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────[0m
+   [0m0xaaaaaaaa0c48[0m [0m<main+372> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mw1[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#6[39m              [31m[1mW1[0m[31m[0m => 6
+   [0m0xaaaaaaaa0c4c[0m [0m<main+376> [0m   [38;5;148mldr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m     [31m[1mX0[0m[31m[0m, [[33m{fp}[0m] => [31m0xaaaaaaaa0918 (add)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+   [0m0xaaaaaaaa0c50[0m [0m<main+380> [0m   [38;5;148m[1mbl[0m[39m[38;5;255m     [39m[38;5;141m[31mcompute[0m[39m                     <[31mcompute[0m>
+ 
+   [0m0xaaaaaaaa0c54[0m [0m<main+384> [0m   [38;5;148mstr[39m[38;5;255m    [39m[38;5;81mw0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x14[39m[38;5;255m][39m
+   [0m0xaaaaaaaa0c58[0m [0m<main+388> [0m   [38;5;148madrp[39m[38;5;255m   [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m0xaaaaaaaa0000[39m     [31m[1mX0[0m[31m[0m => [31m0xaaaaaaaa0000[0m ◂— 0x10102464c457f
+ ► [1m[32m0xaaaaaaaa0c5c[0m[1m[0m [1m[32m<main+392> [0m[1m[0m   [1m[32m[38;5;148madd[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x980[39m[0m[1m[0m         [31m[1mX0[0m[31m[0m => [31m0xaaaaaaaa0980 (mul)[0m (0xaaaaaaaa0000 + 0x980)
+   [0m0xaaaaaaaa0c60[0m [0m<main+396> [0m   [38;5;148mstr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m        [[33m{fp}[0m] <= [31m0xaaaaaaaa0980 (mul)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+   [0m0xaaaaaaaa0c64[0m [0m<main+400> [0m   [38;5;148mmov[39m[38;5;255m    [39m[38;5;81mw2[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#2[39m                 [31m[1mW2[0m[31m[0m => 2
+   [0m0xaaaaaaaa0c68[0m [0m<main+404> [0m   [38;5;148mldr[39m[38;5;255m    [39m[38;5;81mw1[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x14[39m[38;5;255m][39m        [1mW1[0m, [[33m{r}[0m] => 0xd
+   [0m0xaaaaaaaa0c6c[0m [0m<main+408> [0m   [38;5;148mldr[39m[38;5;255m    [39m[38;5;81mx0[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255m[[39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x18[39m[38;5;255m][39m        [1mX0[0m, [[33m{fp}[0m] => [31m0xaaaaaaaa0980 (mul)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+   [0m0xaaaaaaaa0c70[0m [0m<main+412> [0m   [38;5;148m[1mbl[0m[39m[38;5;255m     [39m[38;5;141m[31mcompute[0m[39m                     <[31mcompute[0m>
+[34m───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────[0m
+In file: /work/test.c:39
+   31 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m8[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x20[39m[38;5;255m)[39m[38;5;255m;[39m
+   32 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m3[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mmid[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x80[39m[38;5;255m)[39m[38;5;255m;[39m
+   33 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m2[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mbig[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmalloc[39m[38;5;255m([39m[38;5;141m0x500[39m[38;5;255m)[39m[38;5;255m;[39m
+   34 [38;5;255m    [39m[38;5;255mstrcpy[39m[38;5;255m([39m[38;5;255m([39m[38;5;81mchar[39m[38;5;255m [39m[38;5;204m*[39m[38;5;255m)[39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m,[39m[38;5;255m [39m[38;5;186m"[39m[38;5;186mheap string here[39m[38;5;186m"[39m[38;5;255m)[39m[38;5;255m;[39m
+   35 [38;5;255m    [39m[38;5;81mfor[39m[38;5;255m [39m[38;5;255m([39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;255m [39m[38;5;204m<[39m[38;5;255m [39m[38;5;141m8[39m[38;5;255m;[39m[38;5;255m [39m[38;5;255mi[39m[38;5;204m+[39m[38;5;204m+[39m[38;5;255m)[39m[38;5;255m [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255msmall[39m[38;5;255m[[39m[38;5;255mi[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m[38;5;255m   [39m[38;5;245m/* 7 -> tcache, 1 -> fastbin */[39m
+   36 [38;5;255m    [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255mmid[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m
+   37 [38;5;255m    [39m[38;5;255mfree[39m[38;5;255m([39m[38;5;255mbig[39m[38;5;255m[[39m[38;5;141m0[39m[38;5;255m][39m[38;5;255m)[39m[38;5;255m;[39m[38;5;255m                             [39m[38;5;245m/* -> unsorted bin */[39m
+   38 [38;5;255m    [39m[38;5;81mint[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mcompute[39m[38;5;255m([39m[38;5;255mfp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m6[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m7[39m[38;5;255m)[39m[38;5;255m;[39m
+[1m[32m ► 39 [38;5;255m    [39m[38;5;255mfp[39m[38;5;255m [39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mmul[39m[38;5;255m;[39m[0m[1m[0m
+   40 [38;5;255m    [39m[38;5;255mr[39m[38;5;255m [39m[38;5;204m+[39m[38;5;204m=[39m[38;5;255m [39m[38;5;255mcompute[39m[38;5;255m([39m[38;5;255mfp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m2[39m[38;5;255m)[39m[38;5;255m;[39m
+   41 [38;5;255m    [39m[38;5;255mprintf[39m[38;5;255m([39m[38;5;186m"[39m[38;5;186m%s %s r=%d stack=%s[39m[38;5;141m\n[39m[38;5;186m"[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mgreeting[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mglobal_buf[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mr[39m[38;5;255m,[39m[38;5;255m [39m[38;5;255mstackbuf[39m[38;5;255m)[39m[38;5;255m;[39m
+   42 [38;5;255m    [39m[38;5;255mvuln[39m[38;5;255m([39m[38;5;255margc[39m[38;5;255m [39m[38;5;204m>[39m[38;5;255m [39m[38;5;141m1[39m[38;5;255m [39m[38;5;204m?[39m[38;5;255m [39m[38;5;255margv[39m[38;5;255m[[39m[38;5;141m1[39m[38;5;255m][39m[38;5;255m [39m[38;5;204m:[39m[38;5;255m [39m[38;5;186m"[39m[38;5;186mshort[39m[38;5;186m"[39m[38;5;255m)[39m[38;5;255m;[39m
+   43 [38;5;255m    [39m[38;5;81mreturn[39m[38;5;255m [39m[38;5;141m0[39m[38;5;255m;[39m
+   44 [38;5;255m}[39m
+[34m───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────[0m
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m [1m sp[0m [33m0xfffffffffa80 {argv}[0m —▸ [33m0xfffffffffcc8[0m —▸ [33m0xfffffffffec6[0m ◂— '/work/test_arm64'
+[0m01[0m[0m:[0m[0m0008[0m[0m│[0m[0m[0m-0b8 [33m0xfffffffffa88[0m ◂— 0x100000000
+[0m02[0m[0m:[0m[0m0010[0m[0m│[0m[0m[0m-0b0 [33m0xfffffffffa90 {i}[0m ◂— 0xd00000008
+[0m03[0m[0m:[0m[0m0018[0m[0m│[0m[0m[0m-0a8 [33m0xfffffffffa98 {fp}[0m —▸ [31m0xaaaaaaaa0918 (add)[0m ◂— [38;5;148msub[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;81msp[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m#0x30[39m
+[0m04[0m[0m:[0m[0m0020[0m[0m│[0m[0m[0m-0a0 [33m0xfffffffffaa0 {big}[0m —▸ [34m0xaaaaaaac15d0[0m —▸ [35m0xfffff7fa0ab0 (main_arena+96)[0m —▸ [34m0xaaaaaaac1fe0[0m ◂— 0
+[0m05[0m[0m:[0m[0m0028[0m[0m│[0m[0m[0m-098 [33m0xfffffffffaa8 {big+0x8}[0m —▸ [34m0xaaaaaaac1ae0[0m ◂— 0
+[0m06[0m[0m:[0m[0m0030[0m[0m│[0m[0m[0m-090 [33m0xfffffffffab0 {mid}[0m —▸ [34m0xaaaaaaac1420[0m ◂— 0xaaaaaaac1
+[0m07[0m[0m:[0m[0m0038[0m[0m│[0m[0m[0m-088 [33m0xfffffffffab8 {mid+0x8}[0m —▸ [34m0xaaaaaaac14b0[0m ◂— 0
+[34m─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────[0m
+ ► 0 0xaaaaaaaa0c5c main+392
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[32m[1mpwndbg> [0m[32m[0mundisplay 1
+[32m[1mpwndbg> [0m[32m[0mkill
+[Inferior 1 (process 713) killed]
+[31m[1mpwndbg> [0m[31m[0m

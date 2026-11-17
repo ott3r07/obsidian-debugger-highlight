@@ -1,0 +1,1738 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_x64...
+------- tip of the day (disable with set show-tips off) -------
+Use the spray command to spray memory with cyclic pattern or specified value
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffff92c0d550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffff9342ccf0 ◂— 1
+ RIP  0xffff92c0d550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffff92c0d543    call   0xffff92bfcce0              <0xffff92bfcce0>
+ 
+   0xffff92c0d548    jmp    0xffff92c0d3e2              <0xffff92c0d3e2>
+ 
+   0xffff92c0d54d    nop    dword ptr [rax]
+ ► 0xffff92c0d550    mov    rdi, rsp            RDI => 0xffff9342ccf0 ◂— 1
+   0xffff92c0d553    call   0xffff92c0e1e0              <0xffff92c0e1e0>
+ 
+   0xffff92c0d558    mov    r12, rax
+   0xffff92c0d55b    mov    r13, rsp
+   0xffff92c0d55e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffff92c0d564    test   edx, 2
+   0xffff92c0d56a  ? je     0xffff92c0d57d              <0xffff92c0d57d>
+ 
+   0xffff92c0d56c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342ccf0 ◂— 1
+01:0008│     0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+02:0010│     0xffff9342cd00 ◂— 0
+03:0018│     0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+04:0020│     0xffff9342cd10 —▸ 0xffff9342cee9 ◂— 'PWD=/work'
+05:0028│     0xffff9342cd18 —▸ 0xffff9342cef3 ◂— '_=/usr/local/bin/qemu-x86_64'
+06:0030│     0xffff9342cd20 —▸ 0xffff9342cf10 ◂— 'LINES=50'
+07:0038│     0xffff9342cd28 —▸ 0xffff9342cf19 ◂— 'HOME=/root'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff92c0d550
+   1 0x1
+   2 0xffff9342cec8
+   3 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> break main
+Breakpoint 1 at 0x555555557317: file test.c, line 24.
+pwndbg> info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000555555557317 in main at test.c:24
+pwndbg> continue
+Continuing.
+
+Breakpoint 1, main (argc=0x1, argv=0xffff9342ccf8) at test.c:24
+24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x5555555572fb (main) ◂— endbr64
+*RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+*RDI  1
+*RSI  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ R8   0
+*R9   0xffff92bf3380 ◂— endbr64
+*R10  0xffff9342c8f0 ◂— 0x800000
+*R11  0xffff92c25f38 ◂— 0x6ffffff0
+*R12  1
+ R13  0
+*R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557317 (main+28) ◂— mov rax, qword ptr fs:[0x28]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557303 <main+8>     sub    rsp, 0xd0
+   0x55555555730a <main+15>    mov    dword ptr [rbp - 0xc4], edi
+   0x555555557310 <main+21>    mov    qword ptr [rbp - 0xd0], rsi
+b► 0x555555557317 <main+28>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+   0x555555557320 <main+37>    mov    qword ptr [rbp - 8], rax        [0xffff9342cbc8] <= 0x76f85efbfd30d300
+   0x555555557324 <main+41>    xor    eax, eax                        EAX => 0
+   0x555555557326 <main+43>    lea    rax, [rip - 0x164]              RAX => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555732d <main+50>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557334 <main+57>    lea    rax, [rbp - 0x40]               RAX => 0xffff9342cb90 ◂— 0
+   0x555555557338 <main+61>    movabs rsi, 0x4141414141414141         RSI => 0x4141414141414141 ('AAAAAAAA')
+   0x555555557342 <main+71>    movabs rdi, 0x4242424242424242         RDI => 0x4242424242424242 ('BBBBBBBB')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} ◂— 0x40 /* '@' */
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557317 main+28
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x5555555572fb (main) ◂— endbr64
+*RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+*RDI  1
+*RSI  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ R8   0
+*R9   0xffff92bf3380 ◂— endbr64
+*R10  0xffff9342c8f0 ◂— 0x800000
+*R11  0xffff92c25f38 ◂— 0x6ffffff0
+*R12  1
+ R13  0
+*R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+*R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557317 (main+28) ◂— mov rax, qword ptr fs:[0x28]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557303 <main+8>     sub    rsp, 0xd0
+   0x55555555730a <main+15>    mov    dword ptr [rbp - 0xc4], edi
+   0x555555557310 <main+21>    mov    qword ptr [rbp - 0xd0], rsi
+b► 0x555555557317 <main+28>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+   0x555555557320 <main+37>    mov    qword ptr [rbp - 8], rax        [0xffff9342cbc8] <= 0x76f85efbfd30d300
+   0x555555557324 <main+41>    xor    eax, eax                        EAX => 0
+   0x555555557326 <main+43>    lea    rax, [rip - 0x164]              RAX => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555732d <main+50>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557334 <main+57>    lea    rax, [rbp - 0x40]               RAX => 0xffff9342cb90 ◂— 0
+   0x555555557338 <main+61>    movabs rsi, 0x4141414141414141         RSI => 0x4141414141414141 ('AAAAAAAA')
+   0x555555557342 <main+71>    movabs rdi, 0x4242424242424242         RDI => 0x4242424242424242 ('BBBBBBBB')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} ◂— 0x40 /* '@' */
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557317 main+28
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> ni
+0x0000555555557320	24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x76f85efbfd30d300
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+ RDI  1
+ RSI  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+ RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557320 (main+37) ◂— mov qword ptr [rbp - 8], rax
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557303 <main+8>     sub    rsp, 0xd0
+   0x55555555730a <main+15>    mov    dword ptr [rbp - 0xc4], edi
+   0x555555557310 <main+21>    mov    qword ptr [rbp - 0xd0], rsi
+b+ 0x555555557317 <main+28>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+ ► 0x555555557320 <main+37>    mov    qword ptr [rbp - 8], rax        [0xffff9342cbc8] <= 0x76f85efbfd30d300
+   0x555555557324 <main+41>    xor    eax, eax                        EAX => 0
+   0x555555557326 <main+43>    lea    rax, [rip - 0x164]              RAX => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555732d <main+50>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557334 <main+57>    lea    rax, [rbp - 0x40]               RAX => 0xffff9342cb90 ◂— 0
+   0x555555557338 <main+61>    movabs rsi, 0x4141414141414141         RSI => 0x4141414141414141 ('AAAAAAAA')
+   0x555555557342 <main+71>    movabs rdi, 0x4242424242424242         RDI => 0x4242424242424242 ('BBBBBBBB')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} ◂— 0x40 /* '@' */
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557320 main+37
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> ni
+0x0000555555557324	24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0x76f85efbfd30d300
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+ RDI  1
+ RSI  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+ RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557324 (main+41) ◂— xor eax, eax
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557303 <main+8>     sub    rsp, 0xd0
+   0x55555555730a <main+15>    mov    dword ptr [rbp - 0xc4], edi
+   0x555555557310 <main+21>    mov    qword ptr [rbp - 0xd0], rsi
+b+ 0x555555557317 <main+28>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+   0x555555557320 <main+37>    mov    qword ptr [rbp - 8], rax        [0xffff9342cbc8] <= 0x76f85efbfd30d300
+ ► 0x555555557324 <main+41>    xor    eax, eax                        EAX => 0
+   0x555555557326 <main+43>    lea    rax, [rip - 0x164]              RAX => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555732d <main+50>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557334 <main+57>    lea    rax, [rbp - 0x40]               RAX => 0xffff9342cb90 ◂— 0
+   0x555555557338 <main+61>    movabs rsi, 0x4141414141414141         RSI => 0x4141414141414141 ('AAAAAAAA')
+   0x555555557342 <main+71>    movabs rdi, 0x4242424242424242         RDI => 0x4242424242424242 ('BBBBBBBB')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} ◂— 0x40 /* '@' */
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557324 main+41
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> si
+26	    op_fn fp = add;
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+ RDI  1
+ RSI  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+ RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557326 (main+43) ◂— lea rax, [rip - 0x164]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555730a <main+15>    mov    dword ptr [rbp - 0xc4], edi
+   0x555555557310 <main+21>    mov    qword ptr [rbp - 0xd0], rsi
+b+ 0x555555557317 <main+28>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+   0x555555557320 <main+37>    mov    qword ptr [rbp - 8], rax        [0xffff9342cbc8] <= 0x76f85efbfd30d300
+   0x555555557324 <main+41>    xor    eax, eax                        EAX => 0
+ ► 0x555555557326 <main+43>    lea    rax, [rip - 0x164]              RAX => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555732d <main+50>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557334 <main+57>    lea    rax, [rbp - 0x40]               RAX => 0xffff9342cb90 ◂— 0
+   0x555555557338 <main+61>    movabs rsi, 0x4141414141414141         RSI => 0x4141414141414141 ('AAAAAAAA')
+   0x555555557342 <main+71>    movabs rdi, 0x4242424242424242         RDI => 0x4242424242424242 ('BBBBBBBB')
+   0x55555555734c <main+81>    mov    qword ptr [rax], rsi            [{stackbuf}] <= 0x4141414141414141 ('AAAAAAAA')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:26
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+   24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+ ► 26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} ◂— 0x40 /* '@' */
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557326 main+43
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> ni 3
+0x0000555555557338	30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0xffff9342cb90 {stackbuf} ◂— 0
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+ RDI  1
+ RSI  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+ RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557338 (main+61) ◂— movabs rsi, 0x4141414141414141
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557320 <main+37>    mov    qword ptr [rbp - 8], rax        [0xffff9342cbc8] <= 0x76f85efbfd30d300
+   0x555555557324 <main+41>    xor    eax, eax                        EAX => 0
+   0x555555557326 <main+43>    lea    rax, [rip - 0x164]              RAX => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555732d <main+50>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557334 <main+57>    lea    rax, [rbp - 0x40]               RAX => 0xffff9342cb90 ◂— 0
+ ► 0x555555557338 <main+61>    movabs rsi, 0x4141414141414141         RSI => 0x4141414141414141 ('AAAAAAAA')
+   0x555555557342 <main+71>    movabs rdi, 0x4242424242424242         RDI => 0x4242424242424242 ('BBBBBBBB')
+   0x55555555734c <main+81>    mov    qword ptr [rax], rsi            [{stackbuf}] <= 0x4141414141414141 ('AAAAAAAA')
+   0x55555555734f <main+84>    mov    qword ptr [rax + 8], rdi        [{stackbuf+0x8}] <= 0x4242424242424242 ('BBBBBBBB')
+   0x555555557353 <main+88>    movabs rsi, 0x4342424242424242         RSI => 0x4342424242424242 ('BBBBBBBC')
+   0x55555555735d <main+98>    movabs rdi, 0x43434343434343           RDI => 0x43434343434343
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:30
+   24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+ ► 30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557338 main+61
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> next
+31	    for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0xffff9342cb90 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+*RDI  0x43434343434343
+*RSI  0x4342424242424242 ('BBBBBBBC')
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+ RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x55555555736f (main+116) ◂— mov dword ptr [rbp - 0xc0], 0
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555735d <main+98>     movabs rdi, 0x43434343434343           RDI => 0x43434343434343
+   0x555555557367 <main+108>    mov    qword ptr [rax + 9], rsi
+   0x55555555736b <main+112>    mov    qword ptr [rax + 0x11], rdi
+ ► 0x55555555736f <main+116>    mov    dword ptr [rbp - 0xc0], 0       [{i}] <= 0
+   0x555555557379 <main+126>    jmp    main+161                    <main+161>
+    ↓
+   0x55555555739c <main+161>    cmp    dword ptr [rbp - 0xc0], 7       0 - 7     EFLAGS => 0x297 [ CF PF AF zf SF IF df of iopl:00 ac ]
+   0x5555555573a3 <main+168>  ✔ jle    main+128                    <main+128>
+    ↓
+   0x55555555737b <main+128>    mov    edi, 0x20                       EDI => 0x20
+   0x555555557380 <main+133>    call   malloc@plt                  <malloc@plt>
+ 
+   0x555555557385 <main+138>    mov    rdx, rax
+   0x555555557388 <main+141>    mov    eax, dword ptr [rbp - 0xc0]
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:31
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+ ► 31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+   38     int r = compute(fp, 6, 7);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 0x10
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} ◂— 2
+05:0028│-0a8 0xffff9342cb28 {big+0x8} ◂— 0xc60000
+06:0030│-0a0 0xffff9342cb30 {mid} ◂— 0x800
+07:0038│-098 0xffff9342cb38 {mid+0x8} ◂— 0xc60000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x55555555736f main+116
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> step
+0x0000ffff929df500 in malloc () from /usr/x86_64-linux-gnu/lib/libc.so.6
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0xffff9342cb90 ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ RDX  0xffff9342cd08 —▸ 0xffff9342ced3 ◂— 'HOSTNAME=3e37fc6690d4'
+*RDI  0x20
+ RSI  0x4342424242424242 ('BBBBBBBC')
+ R8   0
+ R9   0xffff92bf3380 ◂— endbr64
+ R10  0xffff9342c8f0 ◂— 0x800000
+ R11  0xffff92c25f38 ◂— 0x6ffffff0
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342caf8 —▸ 0x555555557385 (main+138) ◂— mov rdx, rax
+*RIP  0xffff929df500 (malloc) ◂— endbr64
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+ ► 0xffff929df500 <malloc>        endbr64
+   0xffff929df504 <malloc+4>      push   rbp
+   0xffff929df505 <malloc+5>      mov    rbp, rsp                         RBP => 0xffff9342caf0 —▸ 0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 —▸ ...
+   0xffff929df508 <malloc+8>      push   r13
+   0xffff929df50a <malloc+10>     push   r12
+   0xffff929df50c <malloc+12>     push   rbx
+   0xffff929df50d <malloc+13>     mov    rbx, rdi                         RBX => 0x20
+   0xffff929df510 <malloc+16>     sub    rsp, 0x18                        RSP => 0xffff9342cac0 (0xffff9342cad8 - 0x18)
+   0xffff929df514 <malloc+20>     cmp    byte ptr [rip + 0x15cc6d], 0     0 - 0     EFLAGS => 0x246 [ cf PF af ZF sf IF df of iopl:00 ac ]
+   0xffff929df51b <malloc+27>   ✔ je     malloc+528                  <malloc+528>
+    ↓
+   0xffff929df710 <malloc+528>    call   0xffff929dbc60              <0xffff929dbc60>
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342caf8 —▸ 0x555555557385 (main+138) ◂— mov rdx, rax
+01:0008│-0d0 0xffff9342cb00 —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+02:0010│-0c8 0xffff9342cb08 ◂— 0x100000006
+03:0018│-0c0 0xffff9342cb10 ◂— 0
+04:0020│-0b8 0xffff9342cb18 —▸ 0x5555555571c9 (add) ◂— endbr64
+05:0028│-0b0 0xffff9342cb20 ◂— 2
+06:0030│-0a8 0xffff9342cb28 ◂— 0xc60000
+07:0038│-0a0 0xffff9342cb30 ◂— 0x800
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff929df500 malloc
+   1 0x555555557385 main+138
+   2 0xffff9295c1ca
+   3 0xffff9295c28b __libc_start_main+139
+   4 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> break test.c:38
+Breakpoint 2 at 0x555555557489: file test.c, line 38.
+pwndbg> continue
+Continuing.
+
+Breakpoint 2, main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0
+*RDX  0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+*RDI  0xffff92b35ac0 ◂— 0
+*RSI  0x510
+ R8   0
+*R9   0
+*R10  7
+*R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+b► 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax                        RDI => 0x5555555571c9 (add) ◂— endbr64 
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 8
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9342cb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9342cb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9342cb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x555555557489 main+398
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b000
+Size: 0x290 (with flag bits: 0x291)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b290
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55555555b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b2c0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e7fb
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b2f0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e78b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b320
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e65b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b350
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e66b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b380
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e63b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b3b0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e6cb
+
+Free chunk (fastbins) | PREV_INUSE
+Addr: 0x55555555b3e0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55555555b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b410
+Size: 0x90 (with flag bits: 0x91)
+fd: 0x55555555b
+
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b4a0
+Size: 0x90 (with flag bits: 0x91)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b530
+Size: 0x90 (with flag bits: 0x91)
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0x55555555b5c0
+Size: 0x510 (with flag bits: 0x511)
+fd: 0xffff92b35b20
+bk: 0xffff92b35b20
+
+Allocated chunk
+Addr: 0x55555555bad0
+Size: 0x510 (with flag bits: 0x510)
+
+Top chunk | PREV_INUSE
+Addr: 0x55555555bfe0
+Size: 0x20020 (with flag bits: 0x20021)
+
+pwndbg> bins
+tcachebins
+0x30 [  7]:  0x55555555b3c0 —▸ 0x55555555b390 —▸ 0x55555555b360 —▸ 0x55555555b330 —▸ 0x55555555b300 —▸ 0x55555555b2d0 —▸ 0x55555555b2a0 ◂— 0
+0x90 [  1]:  0x55555555b420 ◂— 0
+fastbins
+0x30:        0x55555555b3e0 ◂— 0
+unsortedbin
+all:         0x55555555b5c0 —▸ 0xffff92b35b20 ◂— 0x55555555b5c0
+smallbins
+empty
+largebins
+empty
+pwndbg> tcachebins
+tcachebins
+0x30 [  7]:  0x55555555b3c0 —▸ 0x55555555b390 —▸ 0x55555555b360 —▸ 0x55555555b330 —▸ 0x55555555b300 —▸ 0x55555555b2d0 —▸ 0x55555555b2a0 ◂— 0
+0x90 [  1]:  0x55555555b420 ◂— 0
+pwndbg> fastbins
+fastbins
+0x30:        0x55555555b3e0 ◂— 0
+pwndbg> unsortedbin
+unsortedbin
+all:         0x55555555b5c0 —▸ 0xffff92b35b20 ◂— 0x55555555b5c0
+pwndbg> smallbins
+smallbins
+empty
+pwndbg> vis_heap_chunks
+Undefined command: "vis_heap_chunks".  Try "help".
+pwndbg> vis 5
+0x55555555b000	0x0000000000000000	0x0000000000000291	................
+0x55555555b010	0x0000000000070000	0x0001000000000000	................
+0x55555555b020	0x0000000000000000	0x0000000000000000	................
+0x55555555b030	0x0000000000000000	0x0000000000000000	................
+0x55555555b040	0x0000000000000000	0x0000000000000000	................
+0x55555555b050	0x0000000000000000	0x0000000000000000	................
+0x55555555b060	0x0000000000000000	0x0000000000000000	................
+0x55555555b070	0x0000000000000000	0x0000000000000000	................
+0x55555555b080	0x0000000000000000	0x0000000000000000	................
+0x55555555b090	0x0000000000000000	0x000055555555b3c0	..........UUUU..
+0x55555555b0a0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0c0	0x0000000000000000	0x000055555555b420	........ .UUUU..
+0x55555555b0d0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0f0	0x0000000000000000	0x0000000000000000	................
+0x55555555b100	0x0000000000000000	0x0000000000000000	................
+0x55555555b110	0x0000000000000000	0x0000000000000000	................
+0x55555555b120	0x0000000000000000	0x0000000000000000	................
+0x55555555b130	0x0000000000000000	0x0000000000000000	................
+0x55555555b140	0x0000000000000000	0x0000000000000000	................
+0x55555555b150	0x0000000000000000	0x0000000000000000	................
+0x55555555b160	0x0000000000000000	0x0000000000000000	................
+0x55555555b170	0x0000000000000000	0x0000000000000000	................
+0x55555555b180	0x0000000000000000	0x0000000000000000	................
+0x55555555b190	0x0000000000000000	0x0000000000000000	................
+0x55555555b1a0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1c0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1d0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1f0	0x0000000000000000	0x0000000000000000	................
+0x55555555b200	0x0000000000000000	0x0000000000000000	................
+0x55555555b210	0x0000000000000000	0x0000000000000000	................
+0x55555555b220	0x0000000000000000	0x0000000000000000	................
+0x55555555b230	0x0000000000000000	0x0000000000000000	................
+0x55555555b240	0x0000000000000000	0x0000000000000000	................
+0x55555555b250	0x0000000000000000	0x0000000000000000	................
+0x55555555b260	0x0000000000000000	0x0000000000000000	................
+0x55555555b270	0x0000000000000000	0x0000000000000000	................
+0x55555555b280	0x0000000000000000	0x0000000000000000	................
+0x55555555b290	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b2a0	0x000000055555555b	0x5368e5dc04201038	[UUU....8. ...hS	 <-- tcachebins[0x30][6/7]
+0x55555555b2b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b2c0	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b2d0	0x000055500000e7fb	0x5368e5dc04201038	....PU..8. ...hS	 <-- tcachebins[0x30][5/7]
+0x55555555b2e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b2f0	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b300	0x000055500000e78b	0x5368e5dc04201038	....PU..8. ...hS	 <-- tcachebins[0x30][4/7]
+0x55555555b310	0x0000000000000000	0x0000000000000000	................
+0x55555555b320	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b330	0x000055500000e65b	0x5368e5dc04201038	[...PU..8. ...hS	 <-- tcachebins[0x30][3/7]
+0x55555555b340	0x0000000000000000	0x0000000000000000	................
+0x55555555b350	0x0000000000000000	                  	........
+pwndbg> arena
+Arena for thread 1 is located at: 0xffff92b35ac0
+{
+  mutex = 0x0,
+  flags = 0x0,
+  have_fastchunks = 0x1,
+  fastbinsY = {0x0, 0x55555555b3e0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  top = 0x55555555bfe0,
+  last_remainder = 0x0,
+  bins = {0x55555555b5c0, 0x55555555b5c0, 0xffff92b35b30, 0xffff92b35b30, 0xffff92b35b40, 0xffff92b35b40, 0xffff92b35b50, 0xffff92b35b50, 0xffff92b35b60, 0xffff92b35b60, 0xffff92b35b70, 0xffff92b35b70, 0xffff92b35b80, 0xffff92b35b80, 0xffff92b35b90, 0xffff92b35b90, 0xffff92b35ba0, 0xffff92b35ba0, 0xffff92b35bb0, 0xffff92b35bb0, 0xffff92b35bc0, 0xffff92b35bc0, 0xffff92b35bd0, 0xffff92b35bd0, 0xffff92b35be0, 0xffff92b35be0, 0xffff92b35bf0, 0xffff92b35bf0, 0xffff92b35c00, 0xffff92b35c00, 0xffff92b35c10, 0xffff92b35c10, 0xffff92b35c20, 0xffff92b35c20, 0xffff92b35c30, 0xffff92b35c30, 0xffff92b35c40, 0xffff92b35c40, 0xffff92b35c50, 0xffff92b35c50, 0xffff92b35c60, 0xffff92b35c60, 0xffff92b35c70, 0xffff92b35c70, 0xffff92b35c80, 0xffff92b35c80, 0xffff92b35c90, 0xffff92b35c90, 0xffff92b35ca0, 0xffff92b35ca0, 0xffff92b35cb0, 0xffff92b35cb0, 0xffff92b35cc0, 0xffff92b35cc0, 0xffff92b35cd0, 0xffff92b35cd0, 0xffff92b35ce0, 0xffff92b35ce0, 0xffff92b35cf0, 0xffff92b35cf0, 0xffff92b35d00, 0xffff92b35d00, 0xffff92b35d10, 0xffff92b35d10, 0xffff92b35d20, 0xffff92b35d20, 0xffff92b35d30, 0xffff92b35d30, 0xffff92b35d40, 0xffff92b35d40, 0xffff92b35d50, 0xffff92b35d50, 0xffff92b35d60, 0xffff92b35d60, 0xffff92b35d70, 0xffff92b35d70, 0xffff92b35d80, 0xffff92b35d80, 0xffff92b35d90, 0xffff92b35d90, 0xffff92b35da0, 0xffff92b35da0, 0xffff92b35db0, 0xffff92b35db0, 0xffff92b35dc0, 0xffff92b35dc0, 0xffff92b35dd0, 0xffff92b35dd0, 0xffff92b35de0, 0xffff92b35de0, 0xffff92b35df0, 0xffff92b35df0, 0xffff92b35e00, 0xffff92b35e00, 0xffff92b35e10, 0xffff92b35e10, 0xffff92b35e20, 0xffff92b35e20, 0xffff92b35e30, 0xffff92b35e30, 0xffff92b35e40, 0xffff92b35e40, 0xffff92b35e50, 0xffff92b35e50, 0xffff92b35e60, 0xffff92b35e60, 0xffff92b35e70, 0xffff92b35e70, 0xffff92b35e80, 0xffff92b35e80, 0xffff92b35e90, 0xffff92b35e90, 0xffff92b35ea0, 0xffff92b35ea0, 0xffff92b35eb0, 0xffff92b35eb0, 0xffff92b35ec0, 0xffff92b35ec0, 0xffff92b35ed0, 0xffff92b35ed0, 0xffff92b35ee0, 0xffff92b35ee0, 0xffff92b35ef0, 0xffff92b35ef0, 0xffff92b35f00, 0xffff92b35f00, 0xffff92b35f10, 0xffff92b35f10, 0xffff92b35f20, 0xffff92b35f20, 0xffff92b35f30, 0xffff92b35f30, 0xffff92b35f40, 0xffff92b35f40, 0xffff92b35f50, 0xffff92b35f50, 0xffff92b35f60, 0xffff92b35f60, 0xffff92b35f70, 0xffff92b35f70, 0xffff92b35f80, 0xffff92b35f80, 0xffff92b35f90, 0xffff92b35f90, 0xffff92b35fa0, 0xffff92b35fa0, 0xffff92b35fb0, 0xffff92b35fb0, 0xffff92b35fc0, 0xffff92b35fc0, 0xffff92b35fd0, 0xffff92b35fd0, 0xffff92b35fe0, 0xffff92b35fe0, 0xffff92b35ff0, 0xffff92b35ff0, 0xffff92b36000, 0xffff92b36000, 0xffff92b36010, 0xffff92b36010, 0xffff92b36020, 0xffff92b36020, 0xffff92b36030, 0xffff92b36030, 0xffff92b36040, 0xffff92b36040, 0xffff92b36050, 0xffff92b36050, 0xffff92b36060, 0xffff92b36060, 0xffff92b36070, 0xffff92b36070, 0xffff92b36080, 0xffff92b36080, 0xffff92b36090, 0xffff92b36090, 0xffff92b360a0, 0xffff92b360a0, 0xffff92b360b0, 0xffff92b360b0, 0xffff92b360c0, 0xffff92b360c0, 0xffff92b360d0, 0xffff92b360d0, 0xffff92b360e0, 0xffff92b360e0, 0xffff92b360f0, 0xffff92b360f0, 0xffff92b36100, 0xffff92b36100, 0xffff92b36110, 0xffff92b36110, 0xffff92b36120, 0xffff92b36120, 0xffff92b36130, 0xffff92b36130, 0xffff92b36140, 0xffff92b36140, 0xffff92b36150, 0xffff92b36150...},
+  binmap = {0x0, 0x0, 0x0, 0x0},
+  next = 0xffff92b35ac0,
+  next_free = 0x0,
+  attached_threads = 0x1,
+  system_mem = 0x21000,
+  max_system_mem = 0x21000,
+}
+pwndbg> malloc_chunk small[7]-0x10
+Undefined command: "malloc_chunk".  Try "help".
+pwndbg> top_chunk
+Undefined command: "top_chunk".  Try "help".
+pwndbg> telescope $sp 20
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 8
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9342cb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9342cb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9342cb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+08:0040│-090 0xffff9342cb40 {mid+0x10} —▸ 0x55555555b540 ◂— 0
+09:0048│-088 0xffff9342cb48 ◂— 0x1080000
+0a:0050│-080 0xffff9342cb50 {small} —▸ 0x55555555b2a0 ◂— 0x55555555b
+0b:0058│-078 0xffff9342cb58 {small+0x8} —▸ 0x55555555b2d0 ◂— 0x55500000e7fb
+0c:0060│-070 0xffff9342cb60 {small+0x10} —▸ 0x55555555b300 ◂— 0x55500000e78b
+0d:0068│-068 0xffff9342cb68 {small+0x18} —▸ 0x55555555b330 ◂— 0x55500000e65b
+0e:0070│-060 0xffff9342cb70 {small+0x20} —▸ 0x55555555b360 ◂— 0x55500000e66b
+0f:0078│-058 0xffff9342cb78 {small+0x28} —▸ 0x55555555b390 ◂— 0x55500000e63b
+10:0080│-050 0xffff9342cb80 {small+0x30} —▸ 0x55555555b3c0 ◂— 0x55500000e6cb
+11:0088│-048 0xffff9342cb88 {small+0x38} —▸ 0x55555555b3f0 ◂— 0x55555555b
+12:0090│-040 0xffff9342cb90 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+13:0098│-038 0xffff9342cb98 {stackbuf+0x8} ◂— 'BBBBBBBBCCCCCCCC'
+pwndbg> stack
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 8
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9342cb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9342cb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9342cb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+pwndbg> stack 30
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 8
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9342cb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9342cb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9342cb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+08:0040│-090 0xffff9342cb40 {mid+0x10} —▸ 0x55555555b540 ◂— 0
+09:0048│-088 0xffff9342cb48 ◂— 0x1080000
+0a:0050│-080 0xffff9342cb50 {small} —▸ 0x55555555b2a0 ◂— 0x55555555b
+0b:0058│-078 0xffff9342cb58 {small+0x8} —▸ 0x55555555b2d0 ◂— 0x55500000e7fb
+0c:0060│-070 0xffff9342cb60 {small+0x10} —▸ 0x55555555b300 ◂— 0x55500000e78b
+0d:0068│-068 0xffff9342cb68 {small+0x18} —▸ 0x55555555b330 ◂— 0x55500000e65b
+0e:0070│-060 0xffff9342cb70 {small+0x20} —▸ 0x55555555b360 ◂— 0x55500000e66b
+0f:0078│-058 0xffff9342cb78 {small+0x28} —▸ 0x55555555b390 ◂— 0x55500000e63b
+10:0080│-050 0xffff9342cb80 {small+0x30} —▸ 0x55555555b3c0 ◂— 0x55500000e6cb
+11:0088│-048 0xffff9342cb88 {small+0x38} —▸ 0x55555555b3f0 ◂— 0x55555555b
+12:0090│-040 0xffff9342cb90 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+13:0098│-038 0xffff9342cb98 {stackbuf+0x8} ◂— 'BBBBBBBBCCCCCCCC'
+14:00a0│-030 0xffff9342cba0 {stackbuf+0x10} ◂— 'CCCCCCCC'
+15:00a8│-028 0xffff9342cba8 {stackbuf+0x18} ◂— 0
+16:00b0│-020 0xffff9342cbb0 {stackbuf+0x20} ◂— 0
+17:00b8│-018 0xffff9342cbb8 {stackbuf+0x28} —▸ 0xffff92c0eb00 ◂— endbr64
+18:00c0│-010 0xffff9342cbc0 —▸ 0xffff9342ccb0 —▸ 0x5555555570e0 (_start) ◂— endbr64
+19:00c8│-008 0xffff9342cbc8 ◂— 0x76f85efbfd30d300
+1a:00d0│ rbp 0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+1b:00d8│+008 0xffff9342cbd8 —▸ 0xffff9295c1ca ◂— mov edi, eax
+1c:00e0│+010 0xffff9342cbe0 —▸ 0xffff9342cc20 —▸ 0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+1d:00e8│+018 0xffff9342cbe8 —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+pwndbg> x/20gx $sp
+0xffff9342cb00:	0x0000ffff9342ccf8	0x0000000100000006
+0xffff9342cb10:	0x0000000000000008	0x00005555555571c9
+0xffff9342cb20:	0x000055555555b5d0	0x000055555555bae0
+0xffff9342cb30:	0x000055555555b420	0x000055555555b4b0
+0xffff9342cb40:	0x000055555555b540	0x0000000001080000
+0xffff9342cb50:	0x000055555555b2a0	0x000055555555b2d0
+0xffff9342cb60:	0x000055555555b300	0x000055555555b330
+0xffff9342cb70:	0x000055555555b360	0x000055555555b390
+0xffff9342cb80:	0x000055555555b3c0	0x000055555555b3f0
+0xffff9342cb90:	0x4141414141414141	0x4242424242424242
+pwndbg> x/4wx $sp
+0xffff9342cb00:	0x9342ccf8	0x0000ffff	0x00000006	0x00000001
+pwndbg> x/8bx $sp
+0xffff9342cb00:	0xf8	0xcc	0x42	0x93	0xff	0xff	0x00	0x00
+pwndbg> x/s greeting
+0x555555558004:	"Hello, pwndbg!"
+pwndbg> x/2s &global_buf
+0x55555555a020 <global_buf>:	"global data string"
+0x55555555a033 <global_buf+19>:	""
+pwndbg> x/10i $pc
+=> 0x555555557489 <main+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x555555557490 <main+405>:	mov    edx,0x7
+   0x555555557495 <main+410>:	mov    esi,0x6
+   0x55555555749a <main+415>:	mov    rdi,rax
+   0x55555555749d <main+418>:	call   0x555555557246 <compute>
+   0x5555555574a2 <main+423>:	mov    DWORD PTR [rbp-0xbc],eax
+   0x5555555574a8 <main+429>:	lea    rax,[rip+0xfffffffffffffd59]        # 0x555555557208 <mul>
+   0x5555555574af <main+436>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x5555555574b6 <main+443>:	mov    ecx,DWORD PTR [rbp-0xbc]
+   0x5555555574bc <main+449>:	mov    rax,QWORD PTR [rbp-0xb8]
+pwndbg> info registers
+rax            0x0                 0x0
+rbx            0xffff9342ccf8      0xffff9342ccf8
+rcx            0x0                 0x0
+rdx            0xffff92b35b20      0xffff92b35b20
+rsi            0x510               0x510
+rdi            0xffff92b35ac0      0xffff92b35ac0
+rbp            0xffff9342cbd0      0xffff9342cbd0
+rsp            0xffff9342cb00      0xffff9342cb00
+r8             0x0                 0x0
+r9             0x0                 0x0
+r10            0x7                 0x7
+r11            0x55555555b420      0x55555555b420
+r12            0x1                 0x1
+r13            0x0                 0x0
+r14            0x555555559da0      0x555555559da0
+r15            0xffff92c26000      0xffff92c26000
+rip            0x555555557489      0x555555557489 <main+398>
+eflags         0x206               [ IOPL=0 IF PF ]
+cs             0x33                0x33
+ss             0x2b                0x2b
+ds             0x0                 0x0
+es             0x0                 0x0
+fs             0x0                 0x0
+gs             0x0                 0x0
+fs_base        0xffff92927740      0xffff92927740
+gs_base        0x0                 0x0
+k_gs_base      0x0                 0x0
+cr0            0x80010001          [ PG WP PE ]
+cr2            0x0                 0x0
+cr3            0x0                 [ PDBR=0 PCID=0 ]
+cr4            0x50220             [ OSXSAVE FSGSBASE OSFXSR PAE ]
+cr8            0x0                 0x0
+efer           0x500               [ LMA LME ]
+xmm0           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm1           {
+  v4_float = {0x92b35b20, 0xffff, 0x0, 0x0},
+  v2_double = {0xffff92b35b20, 0x0},
+  v16_int8 = {0x20, 0x5b, 0xb3, 0x92, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v8_int16 = {0x5b20, 0x92b3, 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x92b35b20, 0xffff, 0x0, 0x0},
+  v2_int64 = {0xffff92b35b20, 0x0},
+  uint128 = 0xffff92b35b20
+}
+xmm2           {
+  v4_float = {0x4554, 0x2a002a00, 0x2a002a00, 0x2c002b00},
+  v2_double = {0x2a002a0000004554, 0x2c002b002a002a00},
+  v16_int8 = {0x54, 0x45, 0x0, 0x0, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2b, 0x0, 0x2c},
+  v8_int16 = {0x4554, 0x0, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2b00, 0x2c00},
+  v4_int32 = {0x4554, 0x2a002a00, 0x2a002a00, 0x2c002b00},
+  v2_int64 = {0x2a002a0000004554, 0x2c002b002a002a00},
+  uint128 = 0x2c002b002a002a002a002a0000004554
+}
+xmm3           {
+  v4_float = {0x4554, 0x0, 0x0, 0x0},
+  v2_double = {0x4554, 0x0},
+  v16_int8 = {0x54, 0x45, 0x0 <repeats 14 times>},
+  v8_int16 = {0x4554, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x4554, 0x0, 0x0, 0x0},
+  v2_int64 = {0x4554, 0x0},
+  uint128 = 0x4554
+}
+xmm4           {
+  v4_float = {0x2a0000, 0x2a002a, 0x2b002a, 0x2a002c},
+  v2_double = {0x2a002a002a0000, 0x2a002c002b002a},
+  v16_int8 = {0x0, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2b, 0x0, 0x2c, 0x0, 0x2a, 0x0},
+  v8_int16 = {0x0, 0x2a, 0x2a, 0x2a, 0x2a, 0x2b, 0x2c, 0x2a},
+  v4_int32 = {0x2a0000, 0x2a002a, 0x2b002a, 0x2a002c},
+  v2_int64 = {0x2a002a002a0000, 0x2a002c002b002a},
+  uint128 = 0x2a002c002b002a002a002a002a0000
+}
+xmm5           {
+  v4_float = {0x48, 0x0, 0x0, 0x0},
+  v2_double = {0x48, 0x0},
+  v16_int8 = {0x48, 0x0 <repeats 15 times>},
+  v8_int16 = {0x48, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x48, 0x0, 0x0, 0x0},
+  v2_int64 = {0x48, 0x0},
+  uint128 = 0x48
+}
+xmm6           {
+  v4_float = {0x0, 0x0, 0xff0000, 0x0},
+  v2_double = {0x0, 0xff0000},
+  v16_int8 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0xff0000, 0x0},
+  v2_int64 = {0x0, 0xff0000},
+  uint128 = 0xff00000000000000000000
+}
+xmm7           {
+  v4_float = {0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f},
+  v2_double = {0x2f2f2f2f2f2f2f2f, 0x2f2f2f2f2f2f2f2f},
+  v16_int8 = {0x2f <repeats 16 times>},
+  v8_int16 = {0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f},
+  v4_int32 = {0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f},
+  v2_int64 = {0x2f2f2f2f2f2f2f2f, 0x2f2f2f2f2f2f2f2f},
+  uint128 = 0x2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f
+}
+xmm8           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm9           {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm10          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm11          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm12          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm13          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm14          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+xmm15          {
+  v4_float = {0x0, 0x0, 0x0, 0x0},
+  v2_double = {0x0, 0x0},
+  v16_int8 = {0x0 <repeats 16 times>},
+  v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  v4_int32 = {0x0, 0x0, 0x0, 0x0},
+  v2_int64 = {0x0, 0x0},
+  uint128 = 0x0
+}
+mxcsr          0x1f80              [ IM DM ZM OM UM PM ]
+pwndbg> regs
+*RAX  0
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0
+*RDX  0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+*RDI  0xffff92b35ac0 ◂— 0
+*RSI  0x510
+ R8   0
+*R9   0
+*R10  7
+*R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+ RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x555555557489 (main+398) ◂— mov rax, qword ptr [rbp - 0xb8]
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+    0x555555556000     0x555555557000 r--p     1000       0 test_x64
+    0x555555557000     0x555555558000 r-xp     1000    1000 test_x64
+    0x555555558000     0x555555559000 r--p     1000    2000 test_x64
+    0x555555559000     0x55555555a000 r--p     1000    2000 test_x64
+    0x55555555a000     0x55555555b000 rw-p     1000    3000 test_x64
+    0x55555555b000     0x55555557c000 rw-p    21000       0 [heap]
+    0xffff92927000     0xffff9292a000 rw-p     3000       0 [anon_ffff92927]
+    0xffff92932000     0xffff9295a000 r--p    28000       0 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffff9295a000     0xffff92ae2000 r-xp   188000   28000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffff92ae2000     0xffff92b31000 r--p    4f000  1b0000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffff92b31000     0xffff92b35000 r--p     4000  1fe000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffff92b35000     0xffff92b37000 rw-p     2000  202000 /usr/x86_64-linux-gnu/lib/libc.so.6
+    0xffff92b37000     0xffff92b44000 rw-p     d000       0 [anon_ffff92b37]
+    0xffff92b47000     0xffff92b49000 rw-p     2000       0 [anon_ffff92b47]
+    0xffff92be9000     0xffff92beb000 rw-p     2000       0 [anon_ffff92be9]
+    0xffff92bed000     0xffff92bee000 r-xp     1000       0 [vdso]
+    0xffff92bee000     0xffff92bef000 r--p     1000       0 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffff92bef000     0xffff92c1a000 r-xp    2b000    1000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffff92c1a000     0xffff92c24000 r--p     a000   2c000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffff92c24000     0xffff92c26000 r--p     2000   36000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffff92c26000     0xffff92c28000 rw-p     2000   38000 /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+    0xffff92c2c000     0xffff92c2d000 ---p     1000       0 [anon_ffff92c2c]
+    0xffff92c2d000     0xffff9342d000 rw-p   800000       0 [stack]
+0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall]
+pwndbg> vmmap stack
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+               Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+      0xffff92c2c000     0xffff92c2d000 ---p     1000       0 [anon_ffff92c2c]
+►     0xffff92c2d000     0xffff9342d000 rw-p   800000       0 [stack]
+  0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall]
+pwndbg> checksec
+File:     /work/test_x64
+Arch:     amd64
+RELRO:      Full RELRO
+Stack:      Canary found
+NX:         NX enabled
+PIE:        PIE enabled
+SHSTK:      Enabled
+IBT:        Enabled
+Stripped:   No
+Debuginfo:  Yes
+pwndbg> bt
+#0  main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+#1  0x0000ffff9295c1ca in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#2  0x0000ffff9295c28b in __libc_start_main () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#3  0x0000555555557105 in _start ()
+pwndbg> bt full
+#0  main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+        stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 17 times>, "\353\300\222\377\377\000"
+        fp = 0x5555555571c9 <add>
+        small = {0x55555555b2a0, 0x55555555b2d0, 0x55555555b300, 0x55555555b330, 0x55555555b360, 0x55555555b390, 
+          0x55555555b3c0, 0x55555555b3f0}
+        mid = {0x55555555b420, 0x55555555b4b0, 0x55555555b540}
+        big = {0x55555555b5d0, 0x55555555bae0}
+        i = 0x8
+        r = 0x0
+#1  0x0000ffff9295c1ca in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+No symbol table info available.
+#2  0x0000ffff9295c28b in __libc_start_main () from /usr/x86_64-linux-gnu/lib/libc.so.6
+No symbol table info available.
+#3  0x0000555555557105 in _start ()
+No symbol table info available.
+pwndbg> search "heap string"
+Searching for byte: b'heap string'
+pwndbg> search -t dword 0x41414141
+Searching for a 4-byte integer: b'AAAA'
+test_x64        0x55555555733a 0x4141414141414141 ('AAAAAAAA')
+test_x64        0x55555555733e movabs rdi, 0x4242424242424242
+libc.so.6       0xffff92b08720 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08724 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08728 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b0872c 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08730 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08734 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b08738 0x4141414141414141 ('AAAAAAAA')
+libc.so.6       0xffff92b0873c 0x1a1a1a1a41414141
+[stack]         0xffff9342cb90 'AAAAAAAABBBBBBBBCCCCCCCC'
+[stack]         0xffff9342cb94 'AAAABBBBBBBBCCCCCCCC'
+pwndbg> search -x 4242424242424242
+Searching for byte: b'BBBBBBBB'
+test_x64        0x555555557344 mov qword ptr [rax], rsi
+[stack]         0xffff9342cb98 'BBBBBBBBCCCCCCCC'
+pwndbg> p r
+$1 = 0x0
+pwndbg> p/x fp
+$2 = 0x5555555571c9
+pwndbg> p *small@3
+$3 = {0x55555555b2a0, 0x55555555b2d0, 0x55555555b300}
+pwndbg> p greeting
+$4 = 0x555555558004 "Hello, pwndbg!"
+pwndbg> p global_buf
+$5 = "global data string", '\000' <repeats 45 times>
+pwndbg> ptype fp
+type = int (*)(int, int)
+pwndbg> info locals
+stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 17 times>, "\353\300\222\377\377\000"
+fp = 0x5555555571c9 <add>
+small = {0x55555555b2a0, 0x55555555b2d0, 0x55555555b300, 0x55555555b330, 0x55555555b360, 0x55555555b390, 
+  0x55555555b3c0, 0x55555555b3f0}
+mid = {0x55555555b420, 0x55555555b4b0, 0x55555555b540}
+big = {0x55555555b5d0, 0x55555555bae0}
+i = 0x8
+r = 0x0
+pwndbg> info frame
+Stack level 0, frame at 0xffff9342cbe0:
+ rip = 0x555555557489 in main (test.c:38); saved rip = 0xffff9295c1ca
+ called by frame at 0xffff9342cc80
+ source language c.
+ Arglist at 0xffff9342cbd0, args: argc=0x1, argv=0xffff9342ccf8
+ Locals at 0xffff9342cbd0, Previous frame's sp is 0xffff9342cbe0
+ Saved registers:
+  rbp at 0xffff9342cbd0, rip at 0xffff9342cbd8
+pwndbg> disassemble main
+Dump of assembler code for function main:
+   0x00005555555572fb <+0>:	endbr64
+   0x00005555555572ff <+4>:	push   rbp
+   0x0000555555557300 <+5>:	mov    rbp,rsp
+   0x0000555555557303 <+8>:	sub    rsp,0xd0
+   0x000055555555730a <+15>:	mov    DWORD PTR [rbp-0xc4],edi
+   0x0000555555557310 <+21>:	mov    QWORD PTR [rbp-0xd0],rsi
+   0x0000555555557317 <+28>:	mov    rax,QWORD PTR fs:0x28
+   0x0000555555557320 <+37>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000555555557324 <+41>:	xor    eax,eax
+   0x0000555555557326 <+43>:	lea    rax,[rip+0xfffffffffffffe9c]        # 0x5555555571c9 <add>
+   0x000055555555732d <+50>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x0000555555557334 <+57>:	lea    rax,[rbp-0x40]
+   0x0000555555557338 <+61>:	movabs rsi,0x4141414141414141
+   0x0000555555557342 <+71>:	movabs rdi,0x4242424242424242
+   0x000055555555734c <+81>:	mov    QWORD PTR [rax],rsi
+   0x000055555555734f <+84>:	mov    QWORD PTR [rax+0x8],rdi
+   0x0000555555557353 <+88>:	movabs rsi,0x4342424242424242
+   0x000055555555735d <+98>:	movabs rdi,0x43434343434343
+   0x0000555555557367 <+108>:	mov    QWORD PTR [rax+0x9],rsi
+   0x000055555555736b <+112>:	mov    QWORD PTR [rax+0x11],rdi
+   0x000055555555736f <+116>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x0000555555557379 <+126>:	jmp    0x55555555739c <main+161>
+   0x000055555555737b <+128>:	mov    edi,0x20
+   0x0000555555557380 <+133>:	call   0x5555555570d0 <malloc@plt>
+   0x0000555555557385 <+138>:	mov    rdx,rax
+   0x0000555555557388 <+141>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x000055555555738e <+147>:	cdqe
+   0x0000555555557390 <+149>:	mov    QWORD PTR [rbp+rax*8-0x80],rdx
+   0x0000555555557395 <+154>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x000055555555739c <+161>:	cmp    DWORD PTR [rbp-0xc0],0x7
+   0x00005555555573a3 <+168>:	jle    0x55555555737b <main+128>
+   0x00005555555573a5 <+170>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x00005555555573af <+180>:	jmp    0x5555555573d5 <main+218>
+   0x00005555555573b1 <+182>:	mov    edi,0x80
+   0x00005555555573b6 <+187>:	call   0x5555555570d0 <malloc@plt>
+   0x00005555555573bb <+192>:	mov    rdx,rax
+   0x00005555555573be <+195>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x00005555555573c4 <+201>:	cdqe
+   0x00005555555573c6 <+203>:	mov    QWORD PTR [rbp+rax*8-0xa0],rdx
+   0x00005555555573ce <+211>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x00005555555573d5 <+218>:	cmp    DWORD PTR [rbp-0xc0],0x2
+   0x00005555555573dc <+225>:	jle    0x5555555573b1 <main+182>
+   0x00005555555573de <+227>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x00005555555573e8 <+237>:	jmp    0x55555555740e <main+275>
+   0x00005555555573ea <+239>:	mov    edi,0x500
+   0x00005555555573ef <+244>:	call   0x5555555570d0 <malloc@plt>
+   0x00005555555573f4 <+249>:	mov    rdx,rax
+   0x00005555555573f7 <+252>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x00005555555573fd <+258>:	cdqe
+   0x00005555555573ff <+260>:	mov    QWORD PTR [rbp+rax*8-0xb0],rdx
+   0x0000555555557407 <+268>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x000055555555740e <+275>:	cmp    DWORD PTR [rbp-0xc0],0x1
+   0x0000555555557415 <+282>:	jle    0x5555555573ea <main+239>
+   0x0000555555557417 <+284>:	mov    rax,QWORD PTR [rbp-0x80]
+   0x000055555555741b <+288>:	movabs rsi,0x7274732070616568
+   0x0000555555557425 <+298>:	movabs rdi,0x6572656820676e69
+   0x000055555555742f <+308>:	mov    QWORD PTR [rax],rsi
+   0x0000555555557432 <+311>:	mov    QWORD PTR [rax+0x8],rdi
+   0x0000555555557436 <+315>:	mov    BYTE PTR [rax+0x10],0x0
+   0x000055555555743a <+319>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x0000555555557444 <+329>:	jmp    0x555555557462 <main+359>
+   0x0000555555557446 <+331>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x000055555555744c <+337>:	cdqe
+   0x000055555555744e <+339>:	mov    rax,QWORD PTR [rbp+rax*8-0x80]
+   0x0000555555557453 <+344>:	mov    rdi,rax
+   0x0000555555557456 <+347>:	call   0x555555557090 <free@plt>
+   0x000055555555745b <+352>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x0000555555557462 <+359>:	cmp    DWORD PTR [rbp-0xc0],0x7
+   0x0000555555557469 <+366>:	jle    0x555555557446 <main+331>
+   0x000055555555746b <+368>:	mov    rax,QWORD PTR [rbp-0xa0]
+   0x0000555555557472 <+375>:	mov    rdi,rax
+   0x0000555555557475 <+378>:	call   0x555555557090 <free@plt>
+   0x000055555555747a <+383>:	mov    rax,QWORD PTR [rbp-0xb0]
+   0x0000555555557481 <+390>:	mov    rdi,rax
+   0x0000555555557484 <+393>:	call   0x555555557090 <free@plt>
+=> 0x0000555555557489 <+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x0000555555557490 <+405>:	mov    edx,0x7
+   0x0000555555557495 <+410>:	mov    esi,0x6
+   0x000055555555749a <+415>:	mov    rdi,rax
+   0x000055555555749d <+418>:	call   0x555555557246 <compute>
+   0x00005555555574a2 <+423>:	mov    DWORD PTR [rbp-0xbc],eax
+   0x00005555555574a8 <+429>:	lea    rax,[rip+0xfffffffffffffd59]        # 0x555555557208 <mul>
+   0x00005555555574af <+436>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x00005555555574b6 <+443>:	mov    ecx,DWORD PTR [rbp-0xbc]
+   0x00005555555574bc <+449>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x00005555555574c3 <+456>:	mov    edx,0x2
+   0x00005555555574c8 <+461>:	mov    esi,ecx
+   0x00005555555574ca <+463>:	mov    rdi,rax
+   0x00005555555574cd <+466>:	call   0x555555557246 <compute>
+   0x00005555555574d2 <+471>:	add    DWORD PTR [rbp-0xbc],eax
+   0x00005555555574d8 <+477>:	mov    rax,QWORD PTR [rip+0x2b81]        # 0x55555555a060 <greeting>
+   0x00005555555574df <+484>:	lea    rcx,[rbp-0x40]
+   0x00005555555574e3 <+488>:	mov    edx,DWORD PTR [rbp-0xbc]
+   0x00005555555574e9 <+494>:	mov    r8,rcx
+   0x00005555555574ec <+497>:	mov    ecx,edx
+   0x00005555555574ee <+499>:	lea    rdx,[rip+0x2b2b]        # 0x55555555a020 <global_buf>
+   0x00005555555574f5 <+506>:	mov    rsi,rax
+   0x00005555555574f8 <+509>:	lea    rax,[rip+0xb1c]        # 0x55555555801b
+   0x00005555555574ff <+516>:	mov    rdi,rax
+   0x0000555555557502 <+519>:	mov    eax,0x0
+   0x0000555555557507 <+524>:	call   0x5555555570c0 <printf@plt>
+   0x000055555555750c <+529>:	cmp    DWORD PTR [rbp-0xc4],0x1
+   0x0000555555557513 <+536>:	jle    0x555555557522 <main+551>
+   0x0000555555557515 <+538>:	mov    rax,QWORD PTR [rbp-0xd0]
+   0x000055555555751c <+545>:	mov    rax,QWORD PTR [rax+0x8]
+   0x0000555555557520 <+549>:	jmp    0x555555557529 <main+558>
+   0x0000555555557522 <+551>:	lea    rax,[rip+0xb07]        # 0x555555558030
+   0x0000555555557529 <+558>:	mov    rdi,rax
+   0x000055555555752c <+561>:	call   0x555555557297 <vuln>
+   0x0000555555557531 <+566>:	mov    eax,0x0
+   0x0000555555557536 <+571>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x000055555555753a <+575>:	sub    rdx,QWORD PTR fs:0x28
+   0x0000555555557543 <+584>:	je     0x55555555754a <main+591>
+   0x0000555555557545 <+586>:	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x000055555555754a <+591>:	leave
+   0x000055555555754b <+592>:	ret
+End of assembler dump.
+pwndbg> disassemble compute
+Dump of assembler code for function compute:
+   0x0000555555557246 <+0>:	endbr64
+   0x000055555555724a <+4>:	push   rbp
+   0x000055555555724b <+5>:	mov    rbp,rsp
+   0x000055555555724e <+8>:	sub    rsp,0x20
+   0x0000555555557252 <+12>:	mov    QWORD PTR [rbp-0x18],rdi
+   0x0000555555557256 <+16>:	mov    DWORD PTR [rbp-0x1c],esi
+   0x0000555555557259 <+19>:	mov    DWORD PTR [rbp-0x20],edx
+   0x000055555555725c <+22>:	mov    rax,QWORD PTR fs:0x28
+   0x0000555555557265 <+31>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000555555557269 <+35>:	xor    eax,eax
+   0x000055555555726b <+37>:	mov    edx,DWORD PTR [rbp-0x20]
+   0x000055555555726e <+40>:	mov    eax,DWORD PTR [rbp-0x1c]
+   0x0000555555557271 <+43>:	mov    rcx,QWORD PTR [rbp-0x18]
+   0x0000555555557275 <+47>:	mov    esi,edx
+   0x0000555555557277 <+49>:	mov    edi,eax
+   0x0000555555557279 <+51>:	call   rcx
+   0x000055555555727b <+53>:	mov    DWORD PTR [rbp-0xc],eax
+   0x000055555555727e <+56>:	mov    eax,DWORD PTR [rbp-0xc]
+   0x0000555555557281 <+59>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x0000555555557285 <+63>:	sub    rdx,QWORD PTR fs:0x28
+   0x000055555555728e <+72>:	je     0x555555557295 <compute+79>
+   0x0000555555557290 <+74>:	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x0000555555557295 <+79>:	leave
+   0x0000555555557296 <+80>:	ret
+End of assembler dump.
+pwndbg> hexdump $sp
++0000 0xffff9342cb00  f8 cc 42 93 ff ff 00 00  06 00 00 00 01 00 00 00  │..B.....│........│
++0010 0xffff9342cb10  08 00 00 00 00 00 00 00  c9 71 55 55 55 55 00 00  │........│.qUUUU..│
++0020 0xffff9342cb20  d0 b5 55 55 55 55 00 00  e0 ba 55 55 55 55 00 00  │..UUUU..│..UUUU..│
++0030 0xffff9342cb30  20 b4 55 55 55 55 00 00  b0 b4 55 55 55 55 00 00  │..UUUU..│..UUUU..│
+pwndbg> hexdump &global_buf 64
++0000 0x55555555a020  67 6c 6f 62 61 6c 20 64  61 74 61 20 73 74 72 69  │global.d│ata.stri│
++0010 0x55555555a030  6e 67 00 00 00 00 00 00  00 00 00 00 00 00 00 00  │ng......│........│
++0020 0x55555555a040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  │........│........│
++0030 0x55555555a050  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  │........│........│
+pwndbg> canary
+AT_RANDOM  = 0xffff9342ceb0 # points to the canary value on glibc < 2.44
+TLS Canary @ 0xffff92927768 # address where canary is stored
+Canary     = 0x76f85efbfd30d300
+Thread 1: Found valid canaries.
+00:0000│-308 0xffff9342c8c8 ◂— 0x76f85efbfd30d300
+Additional results hidden. Use --all to see them.
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of /work/test_x64:
+GOT protection: Full RELRO | Found 0 GOT entries passing the filter
+pwndbg> plt
+Section .plt 0x555555557020 - 0x555555557080:
+No symbols found in section .plt
+Section .plt.got 0x555555557080 - 0x555555557090:
+0x555555557080: __cxa_finalize@plt
+Section .plt.sec 0x555555557090 - 0x5555555570e0:
+0x555555557090: free@plt
+0x5555555570a0: strcpy@plt
+0x5555555570b0: __stack_chk_fail@plt
+0x5555555570c0: printf@plt
+0x5555555570d0: malloc@plt
+pwndbg> piebase
+Calculated VA from /work/test_x64 = 0x555555556000
+pwndbg> brva 0x1000
+Breakpoint 3 at 0x555555557000
+pwndbg> xinfo $sp
+Extended information for virtual address 0xffff9342cb00:
+
+  Containing mapping:
+    0xffff92c2d000     0xffff9342d000 rw-p   800000       0 [stack]
+
+  Offset information:
+           Stack Top 0xffff9342cb00 = 0xffff92c2d000 + 0x7ffb00
+           Stack End 0xffff9342cb00 = 0xffff9342d000 - 0x500
+       Stack Pointer 0xffff9342cb00 = 0xffff9342cb00 + 0x0
+       Frame Pointer 0xffff9342cb00 = 0xffff9342cbd0 - 0xd0
+   Next Stack Canary 0xffff9342cb00 = 0xffff9342cbc8 - 0xc8
+pwndbg> retaddr
+0xffff9342cbd8 —▸ 0xffff9295c1ca ◂— mov edi, eax
+0xffff9342cc78 —▸ 0xffff9295c28b (__libc_start_main+139) ◂— mov r15, qword ptr [rip + 0x1d8cf6]
+0xffff9342ccd8 —▸ 0x555555557105 (_start+37) ◂— hlt 
+pwndbg> distance $sp $pc
+0xffff9342cb00->0x555555557489 is -0xaaaa3ded5677 bytes (-0x155547bdaacf words)
+pwndbg> nearpc
+   0x555555557472 <main+375>    mov    rdi, rax
+   0x555555557475 <main+378>    call   free@plt                    <free@plt>
+ 
+   0x55555555747a <main+383>    mov    rax, qword ptr [rbp - 0xb0]
+   0x555555557481 <main+390>    mov    rdi, rax
+   0x555555557484 <main+393>    call   free@plt                    <free@plt>
+ 
+b► 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x5555555571c9 (add) ◂— endbr64
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+   0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax
+   0x5555555574b6 <main+443>    mov    ecx, dword ptr [rbp - 0xbc]
+   0x5555555574bc <main+449>    mov    rax, qword ptr [rbp - 0xb8]
+pwndbg> procinfo
+QEMU target detected: showing result for the qemu process - so it will be a bit inaccurate (excessive for the parts used directly by the qemu process)
+exe        './test_x64'
+cmdline    ./test_x64 ''
+cwd        '/work'
+pid        624
+tid        624
+ppid       623
+uid        [0, 0, 0, 0]
+gid        [0, 0, 0, 0]
+groups     [0]
+fd[0]      /dev/null
+fd[1]      /dev/pts/0
+fd[2]      /dev/pts/0
+fd[3]      tcp 0.0.0.0:1234 => 0.0.0.0:0 (listen)
+fd[4]      tcp 127.0.0.1:1234 => 127.0.0.1:44786 (established)
+pwndbg> aslr
+ASLR is ??? (Could not detect ASLR on QEMU targets)
+pwndbg> elfsections
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End     Perm       Size  Name
+    0x555555556318     0x555555556334      R--       0x1c  .interp
+    0x555555556338     0x555555556368      R--       0x30  .note.gnu.property
+    0x555555556368     0x55555555638c      R--       0x24  .note.gnu.build-id
+    0x55555555638c     0x5555555563ac      R--       0x20  .note.ABI-tag
+    0x5555555563b0     0x5555555563d4      R--       0x24  .gnu.hash
+    0x5555555563d8     0x5555555564e0      R--      0x108  .dynsym
+    0x5555555564e0     0x55555555659d      R--       0xbd  .dynstr
+    0x55555555659e     0x5555555565b4      R--       0x16  .gnu.version
+    0x5555555565b8     0x5555555565f8      R--       0x40  .gnu.version_r
+    0x5555555565f8     0x5555555566d0      R--       0xd8  .rela.dyn
+    0x5555555566d0     0x555555556748      R--       0x78  .rela.plt
+    0x555555557000     0x55555555701b      R-X       0x1b  .init
+    0x555555557020     0x555555557080      R-X       0x60  .plt
+    0x555555557080     0x555555557090      R-X       0x10  .plt.got
+    0x555555557090     0x5555555570e0      R-X       0x50  .plt.sec
+    0x5555555570e0     0x55555555754c      R-X      0x46c  .text
+    0x55555555754c     0x555555557559      R-X        0xd  .fini
+    0x555555558000     0x555555558036      R--       0x36  .rodata
+    0x555555558038     0x55555555808c      R--       0x54  .eh_frame_hdr
+    0x555555558090     0x5555555581bc      R--      0x12c  .eh_frame
+    0x555555559d98     0x555555559da0      R--        0x8  .init_array
+    0x555555559da0     0x555555559da8      R--        0x8  .fini_array
+    0x555555559da8     0x555555559f98      R--      0x1f0  .dynamic
+    0x555555559f98     0x55555555a000      R--       0x68  .got
+    0x55555555a000     0x55555555a068      RW-       0x68  .data
+    0x55555555a068     0x55555555a070      RW-        0x8  .bss
+pwndbg> libc
+libc: glibc
+libc version: 2.39
+linked: dynamically
+URLs:
+    project homepage:       https://sourceware.org/glibc/
+    read the source:        https://elixir.bootlin.com/glibc/glibc-2.39/source
+    download the archive:   https://ftp.gnu.org/gnu/libc/glibc-2.39.tar.gz
+    git clone               https://sourceware.org/git/glibc.git
+Mappings:
+    libc is at:             0xffff92932000
+           /usr/x86_64-linux-gnu/lib/libc.so.6
+    ld is at:               0xffff92bee000
+           /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+Symbolication:
+    has exported symbols:  yes
+    has internal symbols:  no
+    has debug info:        no
+pwndbg> break compute
+Breakpoint 4 at 0x55555555725c: file test.c, line 13.
+pwndbg> continue
+Continuing.
+
+Breakpoint 4, compute (f=0x5555555571c9 <add>, x=0x6, y=0x7) at test.c:13
+13	int compute(op_fn f, int x, int y) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0x5555555571c9 (add) ◂— endbr64
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+ RCX  0
+*RDX  7
+*RDI  0x5555555571c9 (add) ◂— endbr64
+*RSI  6
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342caf0 —▸ 0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cad0 {y} ◂— 0x600000007
+*RIP  0x55555555725c (compute+22) ◂— mov rax, qword ptr fs:[0x28]
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0x555555557252 <compute+12>    mov    qword ptr [rbp - 0x18], rdi
+   0x555555557256 <compute+16>    mov    dword ptr [rbp - 0x1c], esi
+   0x555555557259 <compute+19>    mov    dword ptr [rbp - 0x20], edx
+b► 0x55555555725c <compute+22>    mov    rax, qword ptr fs:[0x28]        RAX, [0xffff92927768] => 0x76f85efbfd30d300
+   0x555555557265 <compute+31>    mov    qword ptr [rbp - 8], rax        [0xffff9342cae8] <= 0x76f85efbfd30d300
+   0x555555557269 <compute+35>    xor    eax, eax                        EAX => 0
+   0x55555555726b <compute+37>    mov    edx, dword ptr [rbp - 0x20]     EDX, [{y}] => 7
+   0x55555555726e <compute+40>    mov    eax, dword ptr [rbp - 0x1c]     EAX, [{x}] => 6
+   0x555555557271 <compute+43>    mov    rcx, qword ptr [rbp - 0x18]     RCX, [{f}] => 0x5555555571c9 (add) ◂— endbr64 
+   0x555555557275 <compute+47>    mov    esi, edx                        ESI => 7
+   0x555555557277 <compute+49>    mov    edi, eax                        EDI => 6
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:13
+    7 const char *greeting = "Hello, pwndbg!";
+    8 char global_buf[64] = "global data string";
+    9 
+   10 int add(int a, int b) { return a + b; }
+   11 int mul(int a, int b) { return a * b; }
+   12 
+ ► 13 int compute(op_fn f, int x, int y) {
+   14     int r = f(x, y);
+   15     return r;
+   16 }
+   17 
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cad0 {y} ◂— 0x600000007
+01:0008│-018 0xffff9342cad8 {f} —▸ 0x5555555571c9 (add) ◂— endbr64
+02:0010│-010 0xffff9342cae0 ◂— 1
+03:0018│-008 0xffff9342cae8 ◂— 0
+04:0020│ rbp 0xffff9342caf0 —▸ 0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+05:0028│+008 0xffff9342caf8 —▸ 0x5555555574a2 (main+423) ◂— mov dword ptr [rbp - 0xbc], eax
+06:0030│+010 0xffff9342cb00 —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+07:0038│+018 0xffff9342cb08 ◂— 0x100000006
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x55555555725c compute+22
+   1 0x5555555574a2 main+423
+   2 0xffff9295c1ca
+   3 0xffff9295c28b __libc_start_main+139
+   4 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> bt
+#0  compute (f=0x5555555571c9 <add>, x=0x6, y=0x7) at test.c:13
+#1  0x00005555555574a2 in main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+#2  0x0000ffff9295c1ca in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#3  0x0000ffff9295c28b in __libc_start_main () from /usr/x86_64-linux-gnu/lib/libc.so.6
+#4  0x0000555555557105 in _start ()
+pwndbg> context backtrace
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x55555555725c compute+22
+   1 0x5555555574a2 main+423
+   2 0xffff9295c1ca
+   3 0xffff9295c28b __libc_start_main+139
+   4 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> finish
+Run till exit from #0  compute (f=0x5555555571c9 <add>, x=0x6, y=0x7) at test.c:13
+0x00005555555574a2 in main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+Value returned is $6 = 0xd
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0xd
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0x5555555571c9 (add) ◂— endbr64
+*RDX  0
+*RDI  6
+*RSI  7
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x5555555574a2 (main+423) ◂— mov dword ptr [rbp - 0xbc], eax
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+b+ 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+ ► 0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax     [{r}] <= 0xd
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64 
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x555555557208 (mul) ◂— endbr64 
+   0x5555555574b6 <main+443>    mov    ecx, dword ptr [rbp - 0xbc]     ECX, [{r}] => 0xd
+   0x5555555574bc <main+449>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x555555557208 (mul) ◂— endbr64 
+   0x5555555574c3 <main+456>    mov    edx, 2                          EDX => 2
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 8
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9342cb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9342cb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9342cb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x5555555574a2 main+423
+   1 0xffff9295c1ca
+   2 0xffff9295c28b __libc_start_main+139
+   3 0x555555557105 _start+37
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context regs
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*RAX  0xd
+ RBX  0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RCX  0x5555555571c9 (add) ◂— endbr64
+*RDX  0
+*RDI  6
+*RSI  7
+ R8   0
+ R9   0
+ R10  7
+ R11  0x55555555b420 ◂— 0x55555555b
+ R12  1
+ R13  0
+ R14  0x555555559da0 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555557180 (__do_global_dtors_aux) ◂— endbr64
+ R15  0xffff92c26000 (_rtld_global) —▸ 0xffff92c272e0 —▸ 0x555555556000 ◂— 0x10102464c457f
+*RBP  0xffff9342cbd0 —▸ 0xffff9342cc70 —▸ 0xffff9342ccd0 ◂— 0
+*RSP  0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+*RIP  0x5555555574a2 (main+423) ◂— mov dword ptr [rbp - 0xbc], eax
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context disasm
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+b+ 0x555555557489 <main+398>    mov    rax, qword ptr [rbp - 0xb8]
+   0x555555557490 <main+405>    mov    edx, 7                          EDX => 7
+   0x555555557495 <main+410>    mov    esi, 6                          ESI => 6
+   0x55555555749a <main+415>    mov    rdi, rax
+   0x55555555749d <main+418>    call   compute                     <compute>
+ 
+ ► 0x5555555574a2 <main+423>    mov    dword ptr [rbp - 0xbc], eax     [{r}] <= 0xd
+   0x5555555574a8 <main+429>    lea    rax, [rip - 0x2a7]              RAX => 0x555555557208 (mul) ◂— endbr64 
+   0x5555555574af <main+436>    mov    qword ptr [rbp - 0xb8], rax     [{fp}] <= 0x555555557208 (mul) ◂— endbr64 
+   0x5555555574b6 <main+443>    mov    ecx, dword ptr [rbp - 0xbc]     ECX, [{r}] => 0xd
+   0x5555555574bc <main+449>    mov    rax, qword ptr [rbp - 0xb8]     RAX, [{fp}] => 0x555555557208 (mul) ◂— endbr64 
+   0x5555555574c3 <main+456>    mov    edx, 2                          EDX => 2
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context code
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────���───────
+pwndbg> context stack
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff9342cb00 {argv} —▸ 0xffff9342ccf8 —▸ 0xffff9342cec8 ◂— './test_x64'
+01:0008│-0c8 0xffff9342cb08 ◂— 0x100000006
+02:0010│-0c0 0xffff9342cb10 {i} ◂— 8
+03:0018│-0b8 0xffff9342cb18 {fp} —▸ 0x5555555571c9 (add) ◂— endbr64
+04:0020│-0b0 0xffff9342cb20 {big} —▸ 0x55555555b5d0 —▸ 0xffff92b35b20 —▸ 0x55555555bfe0 ◂— 0
+05:0028│-0a8 0xffff9342cb28 {big+0x8} —▸ 0x55555555bae0 ◂— 0
+06:0030│-0a0 0xffff9342cb30 {mid} —▸ 0x55555555b420 ◂— 0x55555555b
+07:0038│-098 0xffff9342cb38 {mid+0x8} —▸ 0x55555555b4b0 ◂— 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> watch global_buf[0]
+Hardware watchpoint 5: global_buf[0]
+pwndbg> delete
+pwndbg> info sharedlibrary
+From                To                  Syms Read   Shared Object Library
+0x0000ffff92bef000  0x0000ffff92c19195  Yes (*)     /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+0x0000ffff9295a800  0x0000ffff92ae1b4d  Yes (*)     /usr/x86_64-linux-gnu/lib/libc.so.6
+(*): Shared library is missing debugging information.
+pwndbg> continue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=short
+[Inferior 1 (process 624) exited normally]
+pwndbg> 

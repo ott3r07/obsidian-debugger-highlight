@@ -1,0 +1,27 @@
+pwndbg> disassemble compute
+Dump of assembler code for function compute:
+   0x0000555555557246 <+0>:	endbr64
+   0x000055555555724a <+4>:	push   rbp
+   0x000055555555724b <+5>:	mov    rbp,rsp
+   0x000055555555724e <+8>:	sub    rsp,0x20
+   0x0000555555557252 <+12>:	mov    QWORD PTR [rbp-0x18],rdi
+   0x0000555555557256 <+16>:	mov    DWORD PTR [rbp-0x1c],esi
+   0x0000555555557259 <+19>:	mov    DWORD PTR [rbp-0x20],edx
+   0x000055555555725c <+22>:	mov    rax,QWORD PTR fs:0x28
+   0x0000555555557265 <+31>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000555555557269 <+35>:	xor    eax,eax
+   0x000055555555726b <+37>:	mov    edx,DWORD PTR [rbp-0x20]
+   0x000055555555726e <+40>:	mov    eax,DWORD PTR [rbp-0x1c]
+   0x0000555555557271 <+43>:	mov    rcx,QWORD PTR [rbp-0x18]
+   0x0000555555557275 <+47>:	mov    esi,edx
+   0x0000555555557277 <+49>:	mov    edi,eax
+   0x0000555555557279 <+51>:	call   rcx
+   0x000055555555727b <+53>:	mov    DWORD PTR [rbp-0xc],eax
+   0x000055555555727e <+56>:	mov    eax,DWORD PTR [rbp-0xc]
+   0x0000555555557281 <+59>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x0000555555557285 <+63>:	sub    rdx,QWORD PTR fs:0x28
+   0x000055555555728e <+72>:	je     0x555555557295 <compute+79>
+   0x0000555555557290 <+74>:	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x0000555555557295 <+79>:	leave
+   0x0000555555557296 <+80>:	ret
+End of assembler dump.

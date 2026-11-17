@@ -1,0 +1,2 @@
+pwndbg> piebase
+Calculated VA from /work/test_arm64 = 0xaaaaaaaa0000

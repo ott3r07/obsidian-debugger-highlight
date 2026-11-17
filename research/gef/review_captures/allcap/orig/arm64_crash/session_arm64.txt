@@ -1,0 +1,135 @@
+GEF for linux ready, type `gef' to start, `gef config' to configure
+90 commands loaded and 5 functions added for GDB 15.1 in 0.00ms using Python engine 3.12
+Reading symbols from /work/test_arm64_nossp...
+gef➤  run aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa
+Starting program: /work/test_arm64_nossp aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+Hello, gef! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa
+
+Program received signal SIGBUS, Bus error.
+0x0061616161616166 in ?? ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0               
+$x1  : 0x0000fffff7ffdb50  →  0x5439e11976793d00
+$x2  : 0x0               
+$x3  : 0x0               
+$x4  : 0x0000fffffffff80d  →  "aaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaa[...]"
+$x5  : 0x0000aaaaaaac1655  →  0x0000000000000000
+$x6  : 0x61616161        
+$x7  : 0x2               
+$x8  : 0x40              
+$x9  : 0x0               
+$x10 : 0xa               
+$x11 : 0xffffff80        
+$x12 : 0xffffffc8        
+$x13 : 0x0000fffffffff9b0  →  0x3303330333033303
+$x14 : 0x0               
+$x15 : 0x0000fffff7ff8e50  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+$x16 : 0x0000aaaaaaabffc8  →  0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x17 : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x18 : 0x3               
+$x19 : 0x0000fffffffffc78  →  0x0000fffffffffe6b  →  "/work/test_arm64_nossp"
+$x20 : 0x2               
+$x21 : 0x0000aaaaaaabfd80  →  0x0000aaaaaaaa0800  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0904  →  <main+0000> stp x29,  x30,  [sp,  #-208]!
+$x23 : 0x0000fffffffffc90  →  0x0000ffffffffff03  →  "HOSTNAME=47f545946d15"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+$x27 : 0x0000aaaaaaabfd80  →  0x0000aaaaaaaa0800  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x6161616161616165 ("eaaaaaaa"?)
+$x30 : 0x6161616161616166 ("faaaaaaa"?)
+$sp  : 0x0000fffffffffb00  →  0x0000fffffffffb90  →  0x0000000000000000
+$pc  : 0x61616161616166  
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffb00│+0x0000: 0x0000fffffffffb90  →  0x0000000000000000	 ← $sp
+0x0000fffffffffb08│+0x0008: 0x0000aaaaaaaa0904  →  <main+0000> stp x29,  x30,  [sp,  #-208]!
+0x0000fffffffffb10│+0x0010: 0x00000002f7ffeb48
+0x0000fffffffffb18│+0x0018: 0x0000fffffffffc78  →  0x0000fffffffffe6b  →  "/work/test_arm64_nossp"
+0x0000fffffffffb20│+0x0020: 0x0000fffffffffc78  →  0x0000fffffffffe6b  →  "/work/test_arm64_nossp"
+0x0000fffffffffb28│+0x0028: 0x0000000000000002
+0x0000fffffffffb30│+0x0030: 0x0000aaaaaaabfd80  →  0x0000aaaaaaaa0800  →  <__do_global_dtors_aux+0000> paciasp 
+0x0000fffffffffb38│+0x0038: 0x0000aaaaaaaa0904  →  <main+0000> stp x29,  x30,  [sp,  #-208]!
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+[!] Cannot disassemble from $PC
+[!] Cannot access memory at address 0x61616161616166
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "test_arm64_noss", stopped 0x61616161616166 in ?? (), reason: SIGBUS
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0               
+$x1  : 0x0000fffff7ffdb50  →  0x5439e11976793d00
+$x2  : 0x0               
+$x3  : 0x0               
+$x4  : 0x0000fffffffff80d  →  "aaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaa[...]"
+$x5  : 0x0000aaaaaaac1655  →  0x0000000000000000
+$x6  : 0x61616161        
+$x7  : 0x2               
+$x8  : 0x40              
+$x9  : 0x0               
+$x10 : 0xa               
+$x11 : 0xffffff80        
+$x12 : 0xffffffc8        
+$x13 : 0x0000fffffffff9b0  →  0x3303330333033303
+$x14 : 0x0               
+$x15 : 0x0000fffff7ff8e50  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+$x16 : 0x0000aaaaaaabffc8  →  0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x17 : 0x0000fffff7e40590  →  <printf+0000> sub sp,  sp,  #0x120
+$x18 : 0x3               
+$x19 : 0x0000fffffffffc78  →  0x0000fffffffffe6b  →  "/work/test_arm64_nossp"
+$x20 : 0x2               
+$x21 : 0x0000aaaaaaabfd80  →  0x0000aaaaaaaa0800  →  <__do_global_dtors_aux+0000> paciasp 
+$x22 : 0x0000aaaaaaaa0904  →  <main+0000> stp x29,  x30,  [sp,  #-208]!
+$x23 : 0x0000fffffffffc90  →  0x0000ffffffffff03  →  "HOSTNAME=47f545946d15"
+$x24 : 0x0000fffff7ffdb58  →  0x0000000000000000
+$x25 : 0x0               
+$x26 : 0x0000fffff7ffe000  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →  0x00010102464c457f
+$x27 : 0x0000aaaaaaabfd80  →  0x0000aaaaaaaa0800  →  <__do_global_dtors_aux+0000> paciasp 
+$x28 : 0x0               
+$x29 : 0x6161616161616165 ("eaaaaaaa"?)
+$x30 : 0x6161616161616166 ("faaaaaaa"?)
+$sp  : 0x0000fffffffffb00  →  0x0000fffffffffb90  →  0x0000000000000000
+$pc  : 0x61616161616166  
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffb00│+0x0000: 0x0000fffffffffb90  →  0x0000000000000000	 ← $sp
+0x0000fffffffffb08│+0x0008: 0x0000aaaaaaaa0904  →  <main+0000> stp x29,  x30,  [sp,  #-208]!
+0x0000fffffffffb10│+0x0010: 0x00000002f7ffeb48
+0x0000fffffffffb18│+0x0018: 0x0000fffffffffc78  →  0x0000fffffffffe6b  →  "/work/test_arm64_nossp"
+0x0000fffffffffb20│+0x0020: 0x0000fffffffffc78  →  0x0000fffffffffe6b  →  "/work/test_arm64_nossp"
+0x0000fffffffffb28│+0x0028: 0x0000000000000002
+0x0000fffffffffb30│+0x0030: 0x0000aaaaaaabfd80  →  0x0000aaaaaaaa0800  →  <__do_global_dtors_aux+0000> paciasp 
+0x0000fffffffffb38│+0x0038: 0x0000aaaaaaaa0904  →  <main+0000> stp x29,  x30,  [sp,  #-208]!
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+[!] Cannot disassemble from $PC
+[!] Cannot access memory at address 0x61616161616166
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "test_arm64_noss", stopped 0x61616161616166 in ?? (), reason: SIGBUS
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤  pattern search $pc
+[+] Searching for '6661616161616100'/'0061616161616166' with period=8
+[!] Pattern '$pc' not found
+gef➤  pattern search $sp
+[+] Searching for '90fbffffffff0000'/'0000fffffffffb90' with period=8
+[!] Pattern '$sp' not found
+gef➤  bt
+#0  0x0061616161616166 in ?? ()
+#1  0x6161616161616166 in ?? ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+gef➤  kill
+[Inferior 1 (process 481) killed]
+gef➤  quit
+y

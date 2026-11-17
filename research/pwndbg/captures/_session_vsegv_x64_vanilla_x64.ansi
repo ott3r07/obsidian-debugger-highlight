@@ -1,0 +1,30 @@
+Reading symbols from [32m./test_x64[m...
+(gdb) target remote :1234
+Remote debugging using :1234
+Reading symbols from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m...
+(No debugging symbols found in [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m)
+[34m0x0000ffffa2e56550[m in [33m??[m () from [32m/usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2[m
+(gdb) break test.c:38
+Breakpoint 1 at [34m0x555555557489[m: file [32mtest.c[m, line 38.
+(gdb) continue
+Continuing.
+
+Breakpoint 1, [33mmain[m ([36margc[m=1, [36margv[m=0xffffa3675cf8) at [32mtest.c[m:38
+38	    [32mint[m r [31m=[m [01mcompute[m[31m([mfp[31m,[m [35m6[m[31m,[m [35m7[m[31m);[m
+(gdb) set var fp = 0
+(gdb) continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+[34m0x0000000000000000[m in [33m??[m ()
+(gdb) bt
+#0  [34m0x0000000000000000[m in [33m??[m ()
+#1  [34m0x000055555555727b[m in [33mcompute[m ([36mf[m=0x0, [36mx[m=6, [36my[m=7) at [32mtest.c[m:14
+#2  [34m0x00005555555574a2[m in [33mmain[m ([36margc[m=1, [36margv[m=0xffffa3675cf8) at [32mtest.c[m:38
+(gdb) x/i $pc
+=> [34m0x0[m:	Cannot access memory at address 0x0
+(gdb) kill
+Kill the program being debugged? (y or n) y
+qemu-x86_64: QEMU: Terminated via GDBstub
+[Inferior 1 (process 1090) killed]
+(gdb) 

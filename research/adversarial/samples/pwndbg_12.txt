@@ -1,0 +1,13 @@
+# SOURCE: https://velog.io/@silvergun8291/Dreamhack-Memory-Corruption-Double-Free-Bug
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x555555602000
+Size: 0x251
+
+Allocated chunk | PREV_INUSE
+Addr: 0x555555602250
+Size: 0x61
+
+Top chunk | PREV_INUSE
+Addr: 0x5555556022b0
+Size: 0x20d51

@@ -1,0 +1,2 @@
+(gdb) x/4dw $sp
+0xfffffffffa80:	-824	65535	0	1

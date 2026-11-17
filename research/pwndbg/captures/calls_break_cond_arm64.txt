@@ -1,0 +1,2 @@
+pwndbg> break *main+140 if i == 8
+Breakpoint 1 at 0xb60: file test.c, line 31.

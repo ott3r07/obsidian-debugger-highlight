@@ -1,0 +1,11 @@
+nopie_checksec|checksec
+nopie_break_vuln|break vuln
+nopie_run|run AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+nopie_got|got
+nopie_plt|plt
+nopie_vmmap|vmmap
+nopie_finish|finish
+nopie_ret_crash|continue
+nopie_bt|bt
+nopie_tele|telescope $sp 10
+nopie_cyclic_l|cyclic -l 0x6161616161616166

@@ -1,0 +1,150 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/260
+# DATE: 2017-05-03 (pwndbg 'Loaded 106 commands', GDB 7.12)
+roman@int3pids:~/int3pids/defconctf2k17/baby/beatmeonthedl$ gdb ./beatmeonthedl
+GNU gdb (Debian 7.12-6) 7.12.0.20161007-git
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Loaded 106 commands.  Type pwndbg [filter] for a list.
+Reading symbols from ./beatmeonthedl...(no debugging symbols found)...done.
+pwndbg> r
+Starting program: /mnt/hgfs/int3pids/defconctf2k17/baby/beatmeonthedl/beatmeonthedl 
+                 __      __       .__                                  __           
+                /  \    /  \ ____ |  |   ____  ____   _____   ____   _/  |_  ____   
+                \   \/\/   // __ \|  | _/ ___\/  _ \ /     \_/ __ \  \   __\/  _ \  
+                 \        /\  ___/|  |_\  \__(  <_> )  Y Y  \  ___/   |  | (  <_> ) 
+                  \__/\  /  \___  >____/\___  >____/|__|_|  /\___  >  |__|  \____/  
+                       \/       \/          \/            \/     \/                 
+          __  .__             .__         .__                 _____    __  .__            
+        _/  |_|  |__   ____   |  | _____  |__|______    _____/ ____\ _/  |_|  |__   ____  
+        \   __\  |  \_/ __ \  |  | \__  \ |  \_  __ \  /  _ \   __\  \   __\  |  \_/ __ \ 
+         |  | |   Y  \  ___/  |  |__/ __ \|  ||  | \/ (  <_> )  |     |  | |   Y  \  ___/ 
+         |__| |___|  /\___  > |____(____  /__||__|     \____/|__|     |__| |___|  /\___  >
+                   \/     \/            \/                                      \/     \/ 
+  _________.__                .___              __________                __
+ /   _____/|  |__ _____     __| _/______  _  __ \______   \_______  ____ |  | __ ___________  ______
+ \_____  \ |  |  \\__  \   / __ |/  _ \ \/ \/ /  |    |  _/\_  __ \/  _ \|  |/ \// __ \_  __ \/  ___/
+ /        \|   Y  \/ __ \_/ /_/ (  <_> )     /   |    |   \ |  | \(  <_> )    <\  ___/|  |  \/\___ \ 
+/_______  /|___|  (____  /\____ |\____/ \/\_/    |______  / |__|   \____/|__|_ \\___  >__|    /____ >
+        \/      \/     \/      \/                       \/                    \/    \/             \/ 
+Enter username: mcfly
+Enter Pass: awesnap
+I) Request Exploit.
+II) Print Requests.
+III) Delete Request.
+IV) Change Request.
+V) Go Away.
+| 1
+Request text > aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+I) Request Exploit.
+II) Print Requests.
+III) Delete Request.
+IV) Change Request.
+V) Go Away.
+| 1
+Request text > bbbbbbbbbbbbbbbbbbbbbbbbbbb
+I) Request Exploit.
+II) Print Requests.
+III) Delete Request.
+IV) Change Request.
+V) Go Away.
+| ^C
+Program received signal SIGINT, Interrupt.
+0x00007ffff7b165a0 in __read_nocancel () at ../sysdeps/unix/syscall-template.S:84
+84      ../sysdeps/unix/syscall-template.S: No existe el fichero o el directorio.
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+[───────────────────────────────────────────────────────────────────────────────────REGISTERS───────────────────────────────────────────────────────────────────────────────────]
+*RAX  0xfffffffffffffe00
+ RBX  0x0
+*RCX  0x7ffff7b165a0 (__read_nocancel+7) ◂— cmp    rax, -0xfff
+*RDX  0xf
+ RDI  0x0
+*RSI  0x7fffffffe200 ◂— 0x0
+*R8   0x7ffff7fc5700 ◂— add    byte ptr [rdi - 4], dl /* 0x7ffff7fc5700 */
+*R9   0x2
+ R10  0x0
+*R11  0x246
+*R12  0x400c00 (_start) ◂— xor    ebp, ebp
+*R13  0x7fffffffe310 ◂— 0x1
+ R14  0x0
+ R15  0x0
+*RBP  0x7fffffffe210 —▸ 0x7fffffffe230 —▸ 0x408550 (__libc_csu_init) ◂— push   r15
+*RSP  0x7fffffffe1f8 —▸ 0x400fd3 (getsel+57) ◂— test   eax, eax
+*RIP  0x7ffff7b165a0 (__read_nocancel+7) ◂— cmp    rax, -0xfff
+[─────────────────────────────────────────────────────────────────────────────────────CODE──────────────────────────────────────────────────────────────────────────────────────]
+ ► 0x7ffff7b165a0 <__read_nocancel+7>     cmp    rax, -0xfff
+   0x7ffff7b165a6 <__read_nocancel+13>    jae    read+73                       <0x7ffff7b165d9>
+    ↓
+   0x7ffff7b165d9 <read+73>               mov    rcx, qword ptr [rip + 0x2bc898]
+   0x7ffff7b165e0 <read+80>               neg    eax
+   0x7ffff7b165e2 <read+82>               mov    dword ptr fs:[rcx], eax
+   0x7ffff7b165e5 <read+85>               or     rax, 0xffffffffffffffff
+   0x7ffff7b165e9 <read+89>               ret    
+ 
+   0x7ffff7b165ea                         nop    word ptr [rax + rax]
+   0x7ffff7b165f0 <write>                 cmp    dword ptr [rip + 0x2c2149], 0 <0x7ffff7dd8740>
+   0x7ffff7b165f7 <write+7>               jne    write+25                      <0x7ffff7b16609>
+    ↓
+   0x7ffff7b16609 <write+25>              sub    rsp, 8
+[─────────────────────────────────────────────────────────────────────────────────────CODE──────────────────────────────────────────────────────────────────────────────────────]
+79      in ../sysdeps/unix/syscall-template.S
+[─────────────────────────────────────────────────────────────────────────────────────STACK─────────────────────────────────────────────────────────────────────────────────────]
+00:0000│ rsp  0x7fffffffe1f8 —▸ 0x400fd3 (getsel+57) ◂— test   eax, eax
+01:0008│ rsi  0x7fffffffe200 ◂— 0x0
+... ↓
+03:0018│ rbp  0x7fffffffe210 —▸ 0x7fffffffe230 —▸ 0x408550 (__libc_csu_init) ◂— push   r15
+04:0020│      0x7fffffffe218 —▸ 0x401282 (main+70) ◂— mov    dword ptr [rbp - 4], eax
+05:0028│      0x7fffffffe220 —▸ 0x7fffffffe310 ◂— 0x1
+06:0030│      0x7fffffffe228 ◂— 0x100000000
+07:0038│      0x7fffffffe230 —▸ 0x408550 (__libc_csu_init) ◂— push   r15
+[───────────────────────────────────────────────────────────────────────────────────BACKTRACE───────────────────────────────────────────────────────────────────────────────────]
+ ► f 0     7ffff7b165a0 __read_nocancel+7
+   f 1           400fd3 getsel+57
+   f 2           401282 main+70
+   f 3     7ffff7a5b2b1 __libc_start_main+241
+Program received signal SIGINT
+pwndbg> heap
+Top Chunk: 0
+Last Remainder: 0
+
+pwndbg> arena
+{
+  mutex = 0, 
+  flags = 0, 
+  fastbinsY = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+  top = 0x0, 
+  last_remainder = 0x0, 
+  bins = {0x0 <repeats 254 times>}, 
+  binmap = {0, 0, 0, 0}, 
+  next = 0x7ffff7dd3b00 <main_arena>, 
+  next_free = 0x0, 
+  attached_threads = 1, 
+  system_mem = 0, 
+  max_system_mem = 0
+}
+pwndbg> bins
+fastbins
+0x20: 0x0
+0x30: 0x0
+0x40: 0x0
+0x50: 0x0
+0x60: 0x0
+0x70: 0x0
+0x80: 0x0
+unsortedbin
+all: 0x0
+smallbins
+empty
+largebins
+empty
+pwndbg>

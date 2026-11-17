@@ -1,0 +1,12 @@
+pwndbg> context stack
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

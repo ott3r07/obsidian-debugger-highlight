@@ -1,0 +1,15 @@
+# SOURCE: https://www.cnblogs.com/AdamTang/p/15423789.html
+45        Base *b_ptr = new Derive();
+(gdb) info line memory_layout.cpp:18
+Line 18 of "/home/tzy/work/tzy/project/cpp_code/slambook/cpp/memory_layout.cpp" starts at address 0x400aaa <Base::Show()> and ends at 0x400ab6 <Base::Show()+12>.  400aaa为基类函数show地址
+(gdb) print Base::Show()
+Cannot resolve method Base::Show to any overloaded instance
+(gdb) set print object on 查看当前对象的真实类别
+(gdb) p b_ptr
+$1 = (Derive *) 0x2264c20
+(gdb) p *b_ptr
+$2 = (Derive) {<Base> = {_vptr.Base = 0x400c68 <vtable for Derive+16>, b1 = 0}, d1 = 0}  虚函数表位置400c68,应该位于rodata,即为全局数据区(静态区)
+(gdb) p /a *(void**)0x400c68@2  查看对象里面的虚指针，显示指针指向的内容
+$5 = {0x400af8 <Derive::Show()>, 0x0}
+(gdb) p /a *((void**)0x400c68-1)  查看虚表的前面，会发现g++实现的时候将RTTI信息放到虚函数表的前面一点点了。反汇编查看代码其实也可以发现的，typeid会根据虚表指针偏移一下去找RTTI信息。
+$6 = 0x400c88 <typeinfo for Derive>

@@ -1,0 +1,2 @@
+pwndbg> p *small@3
+$3 = {0xaaaaaaac12a0, 0xaaaaaaac12d0, 0xaaaaaaac1300}

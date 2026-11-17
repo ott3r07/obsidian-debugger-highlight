@@ -1,0 +1,18 @@
+# SOURCE: https://stackoverflow.com/questions/67792767
+gef➤  b main
+Breakpoint 1 at 0x401014
+gef➤  r < input
+[... GEF output elided ...]
+gef➤  si 11
+[... GEF output elided ...]
+gef➤  x/5i $rip
+=> 0x401041 <main+45>:          add    $0x200,%rsp
+   0x401048 <main+52>:          xor    %eax,%eax
+   0x40104a <main+54>:          ret    
+   0x40104b <secret_func>:      mov    $0x1,%eax
+   0x401050 <secret_func+5>:    mov    $0x1,%edi
+gef➤  p/d $rax
+$2 = -14
+gef➤  shell errno 14
+EFAULT 14 Bad address
+gef➤  

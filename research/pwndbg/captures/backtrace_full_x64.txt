@@ -1,0 +1,16 @@
+pwndbg> bt full
+#0  main (argc=0x1, argv=0xffff9342ccf8) at test.c:38
+        stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 17 times>, "\353\300\222\377\377\000"
+        fp = 0x5555555571c9 <add>
+        small = {0x55555555b2a0, 0x55555555b2d0, 0x55555555b300, 0x55555555b330, 0x55555555b360, 0x55555555b390, 
+          0x55555555b3c0, 0x55555555b3f0}
+        mid = {0x55555555b420, 0x55555555b4b0, 0x55555555b540}
+        big = {0x55555555b5d0, 0x55555555bae0}
+        i = 0x8
+        r = 0x0
+#1  0x0000ffff9295c1ca in ?? () from /usr/x86_64-linux-gnu/lib/libc.so.6
+No symbol table info available.
+#2  0x0000ffff9295c28b in __libc_start_main () from /usr/x86_64-linux-gnu/lib/libc.so.6
+No symbol table info available.
+#3  0x0000555555557105 in _start ()
+No symbol table info available.

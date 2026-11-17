@@ -1,0 +1,8 @@
+(gdb) info frame
+Stack level 0, frame at 0xffff935a9be0:
+ rip = 0x555555557489 in main (test.c:38); saved rip = 0xffff92ad91ca
+ source language c.
+ Arglist at 0xffff935a9bd0, args: argc=1, argv=0xffff935a9cf8
+ Locals at 0xffff935a9bd0, Previous frame's sp is 0xffff935a9be0
+ Saved registers:
+  rbp at 0xffff935a9bd0, rip at 0xffff935a9bd8

@@ -1,0 +1,10 @@
+gef➤  vmmap --name libc
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+
+[name = 'libc']
+0x0000fffff7df0000 0x0000fffff7f8a000 0x0000000000000000 r-x /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7f8a000 0x0000fffff7f9d000 0x000000000019a000 --- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7f9d000 0x0000fffff7fa0000 0x000000000019d000 r-- /usr/lib/aarch64-linux-gnu/libc.so.6
+0x0000fffff7fa0000 0x0000fffff7fa2000 0x00000000001a0000 rw- /usr/lib/aarch64-linux-gnu/libc.so.6
+

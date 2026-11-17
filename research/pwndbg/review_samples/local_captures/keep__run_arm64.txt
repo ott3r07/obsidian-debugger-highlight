@@ -1,0 +1,91 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> run
+Starting program: /rv/rv_arm64 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+[New Thread 0xfffff7def1a0 (LWP 382)]
+[Switching to Thread 0xfffff7def1a0 (LWP 382)]
+
+Thread 2 "rv_arm64" hit Breakpoint 1, worker (arg=0x29) at rv.c:22
+22	    x += 1;                    /* bp here in thread */
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   0x29
+ X1   0
+ X2   0
+ X3   8
+ X4   0xfffff7dee900 —▸ 0xfffff75f0000 ◂— 0
+ X5   0xfffff7def1a0 ◂— 1
+ X6   0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0x87
+ X9   0
+ X10  0x32
+ X11  0xffffffd8
+ X12  0xfffff7dee8c0 —▸ 0xfffff7deea30 ◂— 0
+ X13  0x2f
+ X14  1
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  1
+ X17  0xfffff7fcef94 (__tunable_get_val) ◂— ubfiz x4, x0, #7, #0x20
+ X18  3
+ X19  0
+ X20  0xfffff7def5bc ◂— 0
+ X21  0xfffff7dee9d8 ◂— ' glibc: pthread stack: 382'
+ X22  0xfffff7ff8620 —▸ 0xfffff7ff8d70 ◂— 1
+ X23  0xfffff7e75490 (start_thread) ◂— sub sp, sp, #0x170
+ X24  0
+ X25  0xfffff75e0000 ◂— 0
+ X26  0xfffff7fa0000 (current_rtmin) ◂— 0x4000000022 /* '"' */
+ X27  0xfffff7ff7ee0 ◂— 1
+ X28  0xfffff75e0000 ◂— 0
+ X29  0xfffff7dee8e0 —▸ 0xfffff7deea30 ◂— 0
+ SP   0xfffff7dee8c0 —▸ 0xfffff7deea30 ◂— 0
+ LR   0xfffff7e7580c (start_thread+892) ◂— b start_thread+400
+ PC   0xaaaaaaaa0b08 (worker+44) ◂— ldr w0, [sp, #0x14]
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0afc <worker+32>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0b00 <worker+36>    ldr    x0, [sp, #8]
+   0xaaaaaaaa0b04 <worker+40>    str    w0, [sp, #0x14]
+b► 0xaaaaaaaa0b08 <worker+44>    ldr    w0, [sp, #0x14]        W0, [{x}] => 0x29
+   0xaaaaaaaa0b0c <worker+48>    add    w0, w0, #1             W0 => 0x2a (0x29 + 0x1)
+   0xaaaaaaaa0b10 <worker+52>    str    w0, [sp, #0x14]        [{x}] <= 0x2a
+   0xaaaaaaaa0b14 <worker+56>    ldr    w0, [sp, #0x14]        W0, [{x}] => 0x2a
+   0xaaaaaaaa0b18 <worker+60>    sxtw   x0, w0
+   0xaaaaaaaa0b1c <worker+64>    mov    x1, x0                 X1 => 0x2a
+   0xaaaaaaaa0b20 <worker+68>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0b24 <worker+72>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xb1de2a355a980000
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /rv/rv.c:22
+   16 int many_args(long alpha_parameter, long beta_parameter, const char *gamma_string, struct cfg *delta_config, long epsilon_value, long zeta_value) {
+   17     return (int)(alpha_parameter + beta_parameter + epsilon_value + zeta_value) + gamma_string[0] + delta_config->vals[0];
+   18 }
+   19 
+   20 void *worker(void *arg) {
+   21     volatile int x = (int)(long)arg;
+ ► 22     x += 1;                    /* bp here in thread */
+   23     return (void*)(long)x;
+   24 }
+   25 
+   26 int main(int argc, char **argv) {
+   27     void *small[16], *large[4], *guard[20];
+   28     int gi = 0, i;
+   29     g_cfg.cb = cb;
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ x12 sp 0xfffff7dee8c0 —▸ 0xfffff7deea30 ◂— 0
+01:0008│-018    0xfffff7dee8c8 {arg} ◂— 0x29 /* ')' */
+02:0010│-010    0xfffff7dee8d0 ◂— 0x29f7deea30
+03:0018│-008    0xfffff7dee8d8 ◂— 0xb1de2a355a980000
+04:0020│ x29    0xfffff7dee8e0 —▸ 0xfffff7deea30 ◂— 0
+05:0028│+008    0xfffff7dee8e8 —▸ 0xfffff7e7580c (start_thread+892) ◂— b start_thread+400
+06:0030│+010    0xfffff7dee8f0 ◂— 0
+07:0038│+018    0xfffff7dee8f8 —▸ 0xfffff7def1a0 ◂— 1
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0b08 worker+44
+   1 0xfffff7e7580c start_thread+892
+   2 0xfffff7edbb4c thread_start+12
+─────────────────────────────────────────────────[ THREADS (2 TOTAL) ]──────────────────────────────────────────────────
+  ► 2   "rv_arm64" stopped: 0xaaaaaaaa0b08 <worker+44> 
+    1   "rv_arm64" stopped: 0xfffff7e71d4c <__futex_abstimed_wait_cancelable64+204> 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

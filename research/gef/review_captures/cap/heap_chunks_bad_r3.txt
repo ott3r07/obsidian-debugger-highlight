@@ -1,0 +1,3 @@
+gef➤  heap chunks 0xaaaaaaaa0000
+[!] Invalid arena: Cannot access memory at address 0x0
+Arena Address: 0xaaaaaaaa0000

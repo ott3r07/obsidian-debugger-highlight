@@ -1,0 +1,5 @@
+gef➤  info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000000a14 in main at test.c:24
+2       breakpoint     keep y   0x0000000000000978 in compute at test.c:14
+3       breakpoint     keep y   0x0000000000000a8c in main at test.c:31

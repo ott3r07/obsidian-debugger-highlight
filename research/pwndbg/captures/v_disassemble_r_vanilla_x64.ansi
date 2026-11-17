@@ -1,0 +1,21 @@
+(gdb) disassemble /r add
+Dump of assembler code for function [33madd[m:
+   [34m0x00005555555571c9[m <+0>:	f3 0f 1e fa        	[32mendbr64[m
+   [34m0x00005555555571cd[m <+4>:	55                 	[32mpush   [m[31mrbp[m
+   [34m0x00005555555571ce[m <+5>:	48 89 e5           	[32mmov    [m[31mrbp[m,[31mrsp[m
+   [34m0x00005555555571d1[m <+8>:	48 83 ec 20        	[32msub    [m[31mrsp[m,[34m0x20[m
+   [34m0x00005555555571d5[m <+12>:	89 7d ec           	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0x14[m],[31medi[m
+   [34m0x00005555555571d8[m <+15>:	89 75 e8           	[32mmov    [mDWORD PTR [[31mrbp[m[34m-[m[34m0x18[m],[31mesi[m
+   [34m0x00005555555571db[m <+18>:	64 48 8b 04 25 28 00 00 00	[32mmov    [m[31mrax[m,QWORD PTR [31mfs[m:0x28
+   [34m0x00005555555571e4[m <+27>:	48 89 45 f8        	[32mmov    [mQWORD PTR [[31mrbp[m[34m-[m[34m0x8[m],[31mrax[m
+   [34m0x00005555555571e8[m <+31>:	31 c0              	[32mxor    [m[31meax[m,[31meax[m
+   [34m0x00005555555571ea[m <+33>:	8b 55 ec           	[32mmov    [m[31medx[m,DWORD PTR [[31mrbp[m[34m-[m[34m0x14[m]
+   [34m0x00005555555571ed[m <+36>:	8b 45 e8           	[32mmov    [m[31meax[m,DWORD PTR [[31mrbp[m[34m-[m[34m0x18[m]
+   [34m0x00005555555571f0[m <+39>:	01 d0              	[32madd    [m[31meax[m,[31medx[m
+   [34m0x00005555555571f2[m <+41>:	48 8b 55 f8        	[32mmov    [m[31mrdx[m,QWORD PTR [[31mrbp[m[34m-[m[34m0x8[m]
+   [34m0x00005555555571f6[m <+45>:	64 48 2b 14 25 28 00 00 00	[32msub    [m[31mrdx[m,QWORD PTR [31mfs[m:0x28
+   [34m0x00005555555571ff[m <+54>:	74 05              	[32mje     [m[34m0x555555557206[m <[33madd[m+61>
+   [34m0x0000555555557201[m <+56>:	e8 aa fe ff ff     	[32mcall   [m[34m0x5555555570b0[m <[33m__stack_chk_fail@plt[m>
+   [34m0x0000555555557206[m <+61>:	c9                 	[32mleave[m
+   [34m0x0000555555557207[m <+62>:	c3                 	[32mret[m
+End of assembler dump.

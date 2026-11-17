@@ -1,0 +1,10 @@
+[32m[1mpwndbg> [0m[32m[0mtry-free mid[1]
+[35mGeneral checks[0m
+[35mTcache checks[0m
+[32mUsing tcache_put[0m
+[33mglobal_max_fast symbol not found, using the default value: 0x80[0m
+[35mNot mapped checks[0m
+[35mNext chunk is not top chunk[0m
+[35mClearing next chunk's P bit[0m
+----------
+[32mFree should succeed![0m

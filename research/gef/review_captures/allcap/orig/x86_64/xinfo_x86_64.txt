@@ -1,0 +1,27 @@
+(qemu) gef➤  xinfo $sp
+─────────────────────────────────────────── xinfo: 0x2aaaab2abba0 ───────────────────────────────────────────
+Page: 0x00002aaaaaaac000  →  0x00002aaaab2ac000 (size=0x800000)
+Permissions: rw-
+Pathname: [stack]
+Offset (from page): 0x7ffba0
+Inode: 0
+(qemu) gef➤  xinfo $pc
+────────────────────────────────────────────── xinfo: 0x401951 ──────────────────────────────────────────────
+Page: 0x0000000000401000  →  0x000000000047f000 (size=0x7e000)
+Permissions: r-x
+Pathname: /work/test_x64
+Offset (from page): 0x951
+Inode: 0
+Segment: .text (0x0000000000401180-0x000000000047e900)
+Offset (from segment): 0x7d1
+Symbol: main+43
+(qemu) gef➤  xinfo &global_buf
+────────────────────────────────────────────── xinfo: 0x4aa0e0 ──────────────────────────────────────────────
+Page: 0x00000000004a5000  →  0x00000000004ac000 (size=0x7000)
+Permissions: rw-
+Pathname: /work/test_x64
+Offset (from page): 0x50e0
+Inode: 0
+Segment: .data (0x00000000004aa0c0-0x00000000004abaf0)
+Offset (from segment): 0x20
+Symbol: global_buf

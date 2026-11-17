@@ -1,0 +1,57 @@
+# SOURCE: https://raw.githubusercontent.com/hellogcc/100-gdb-tips/master/src/set-watchpoint.md
+# DATE: approx 2014-2015 (100-gdb-tips; markdown 4-space/tab indented code — one leading tab stripped)
+(gdb) start
+Temporary breakpoint 1 at 0x4005a8: file a.c, line 19.
+Starting program: /data2/home/nanxiao/a
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Temporary breakpoint 1, main () at a.c:19
+19              pthread_create(&t1, NULL, thread1_func, "Thread 1");
+(gdb) watch a
+Hardware watchpoint 2: a
+(gdb) r
+Starting program: /data2/home/nanxiao/a
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+[New Thread 0x7ffff782c700 (LWP 8813)]
+[Switching to Thread 0x7ffff782c700 (LWP 8813)]
+Hardware watchpoint 2: a
+
+Old value = 0
+New value = 1
+thread1_func (p_arg=0x4006d8) at a.c:11
+11                      sleep(10);
+(gdb) c
+Continuing.
+Hardware watchpoint 2: a
+
+Old value = 1
+New value = 2
+thread1_func (p_arg=0x4006d8) at a.c:11
+11                      sleep(10);
+
+(gdb) p &a
+$1 = (int *) 0x6009c8 <a>
+(gdb) watch *(int*)0x6009c8
+Hardware watchpoint 2: *(int*)0x6009c8
+(gdb) r
+Starting program: /data2/home/nanxiao/a
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+[New Thread 0x7ffff782c700 (LWP 15431)]
+[Switching to Thread 0x7ffff782c700 (LWP 15431)]
+Hardware watchpoint 2: *(int*)0x6009c8
+
+Old value = 0
+New value = 1
+thread1_func (p_arg=0x4006d8) at a.c:11
+11                      sleep(10);
+(gdb) c
+Continuing.
+Hardware watchpoint 2: *(int*)0x6009c8
+
+Old value = 1
+New value = 2
+thread1_func (p_arg=0x4006d8) at a.c:11
+11                      sleep(10);

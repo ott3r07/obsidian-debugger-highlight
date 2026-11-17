@@ -1,0 +1,13 @@
+pwndbg> procinfo
+exe        '/work/test_arm64'
+cmdline    /work/test_arm64 ''
+cwd        '/work'
+pid        620
+tid        620
+ppid       609
+uid        [0, 0, 0, 0]
+gid        [0, 0, 0, 0]
+groups     [0]
+fd[0]      /dev/pts/0
+fd[1]      /dev/pts/0
+fd[2]      /dev/pts/0

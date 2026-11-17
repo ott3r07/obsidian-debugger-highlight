@@ -1,0 +1,137 @@
+Script started on 2026-11-17 05:46:08+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./rv" <not executed on terminal>]
+break probe
+Reading symbols from ./rv...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x2aaaab2abd20 --> 0x2 
+RIP: 0x401790 (<_start>:	endbr64)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x0 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x401787 <release_registered_frames+39>:	pop    rbp
+   0x401788 <release_registered_frames+40>:	ret
+   0x401789:	nop    DWORD PTR [rax+0x0]
+=> 0x401790 <_start>:	endbr64
+   0x401794 <_start+4>:	xor    ebp,ebp
+   0x401796 <_start+6>:	mov    r9,rdx
+   0x401799 <_start+9>:	pop    rsi
+   0x40179a <_start+10>:	mov    rdx,rsp
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abd20 --> 0x2 
+0008| 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0016| 0x2aaaab2abd30 --> 0x2aaaab2abef3 --> 0x414e54534f480078 ('x')
+0024| 0x2aaaab2abd38 --> 0x0 
+0032| 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0040| 0x2aaaab2abd48 --> 0x2aaaab2abf0b --> 0x76722f3d445750 ('PWD=/rv')
+0048| 0x2aaaab2abd50 --> 0x2aaaab2abf13 ("HOME=/root")
+0056| 0x2aaaab2abd58 --> 0x2aaaab2abf1e ("DELAY=1.5")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGTRAP
+0x0000000000401790 in _start ()
+gdb-peda$ break probe
+Breakpoint 1 at 0x4018d3: file rv.c, line 10.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBX: 0x2 
+RCX: 0x2000 ('')
+RDX: 0x2aaaab2abb88 (0x00002aaaab2abb88)
+RSI: 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+RDI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBP: 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+RIP: 0x4018d3 (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+R8 : 0x4aa840 --> 0x4b3930 --> 0x0 
+R9 : 0x20 (' ')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x4018c7 <probe+18>:	mov    QWORD PTR [rbp-0x28],rsi
+   0x4018cb <probe+22>:	mov    QWORD PTR [rbp-0x30],rdx
+   0x4018cf <probe+26>:	mov    QWORD PTR [rbp-0x38],rcx
+=> 0x4018d3 <probe+30>:	mov    rax,QWORD PTR [rbp-0x38]
+   0x4018d7 <probe+34>:	mov    r12,rax
+   0x4018da <probe+37>:	mov    rax,QWORD PTR [rip+0xa87f7]        # 0x4aa0d8 <quote>
+   0x4018e1 <probe+44>:	mov    r13,rax
+   0x4018e4 <probe+47>:	mov    rax,QWORD PTR [rip+0xa87f5]        # 0x4aa0e0 <longstr>
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb50 --> 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+0016| 0x2aaaab2abb58 --> 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+0024| 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+0032| 0x2aaaab2abb68 --> 0x4019db (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)
+0040| 0x2aaaab2abb70 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0048| 0x2aaaab2abb78 --> 0x2004aa7e0 
+0056| 0x2aaaab2abb80 --> 0x100 
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, probe (buf=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", a=0x2aaaab2abb98, b=0x2aaaab2abb88, v=0x2000)
+    at rv.c:10
+10	    asm volatile("mov %0, %%r12" :: "r"(v) : "r12");
+gdb-peda$ telescope 0x4d3ff0 4
+0000| 0x4d3ff0 --> 0x0 
+0008| 0x4d3ff8 --> 0x0 
+0016| Cannot access memory address
+0024| Cannot access memory address
+gdb-peda$ set {long}($rsp+8) = 0x4d3ff8
+gdb-peda$ telescope $rsp 2
+0000| 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+0008| 0x2aaaab2abb50 --> 0x4d3ff8 --> 0x0 
+gdb-peda$ set $rax = 0x4d4100
+gdb-peda$ context reg
+[----------------------------------registers-----------------------------------]
+RAX: 0x4d4100 ('')
+RBX: 0x2 
+RCX: 0x2000 ('')
+RDX: 0x2aaaab2abb88 (0x00002aaaab2abb88)
+RSI: 0x2aaaab2abb98 --> 0x2aaaab2abb90 (0x00002aaaab2abb98)
+RDI: 0x2aaaab2abba0 ('A' <repeats 80 times>, "BBBB")
+RBP: 0x2aaaab2abb60 --> 0x2aaaab2abc10 --> 0x2aaaab2abcb0 --> 0x2aaaab2abd00 --> 0x0 
+RSP: 0x2aaaab2abb48 --> 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+RIP: 0x4018d3 (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+R8 : 0x4aa840 --> 0x4b3930 --> 0x0 
+R9 : 0x20 (' ')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2aaaab2abd28 --> 0x2aaaab2abeee --> 0x4800780076722f2e ('./rv')
+R13: 0x2aaaab2abd40 --> 0x2aaaab2abef5 ("HOSTNAME=38cc6c227b89")
+R14: 0x4a5f68 --> 0x401880 (<frame_dummy>:	endbr64)
+R15: 0x1
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ reg rax rip
+RAX: 0x4d4100 ('')
+RIP: 0x4018d3 (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+gdb-peda$ quit
+
+Script done on 2026-11-17 05:46:20+00:00 [COMMAND_EXIT_CODE="0"]

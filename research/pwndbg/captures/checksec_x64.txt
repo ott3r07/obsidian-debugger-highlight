@@ -1,0 +1,11 @@
+pwndbg> checksec
+File:     /work/test_x64
+Arch:     amd64
+RELRO:      Full RELRO
+Stack:      Canary found
+NX:         NX enabled
+PIE:        PIE enabled
+SHSTK:      Enabled
+IBT:        Enabled
+Stripped:   No
+Debuginfo:  Yes

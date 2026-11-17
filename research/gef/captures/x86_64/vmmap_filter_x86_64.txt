@@ -1,0 +1,7 @@
+(qemu) gef➤  vmmap libc
+[*] `libc` has no type specified. We guessed it was a name filter.
+[*] You can use --name or --addr before the filter value for specifying its type manually.
+
+[ Legend:  Code | Stack | Heap ]
+Start              End                Offset             Perm Path
+

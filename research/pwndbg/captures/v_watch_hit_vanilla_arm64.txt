@@ -1,0 +1,9 @@
+(gdb) continue
+Continuing.
+
+Hardware watchpoint 4: r
+
+Old value = 0
+New value = 13
+main (argc=1, argv=0xfffffffffcc8) at test.c:39
+39	    fp = mul;

@@ -1,0 +1,7 @@
+[32m[1mpwndbg> [0m[32m[0mcanary
+[35mAT_RANDOM  = 0xffff9342ceb0[0m[35m # points to the canary value on glibc < 2.44[0m
+[35mTLS Canary @ 0xffff92927768[0m[35m # address where canary is stored[0m
+[35mCanary     = 0x76f85efbfd30d300[0m
+[32mThread 1: Found valid canaries.[0m
+[0m00[0m[0m:[0m[0m0000[0m[0m│[0m[0m[0m-308 [33m0xffff9342c8c8[0m ◂— 0x76f85efbfd30d300
+[33mAdditional results hidden. Use --all to see them.[0m

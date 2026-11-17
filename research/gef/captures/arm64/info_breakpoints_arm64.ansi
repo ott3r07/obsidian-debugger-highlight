@@ -1,0 +1,5 @@
+[?2004h[1;31mgef➤  [0minfo breakpoints
+[?2004lNum     Type           Disp Enb Address            What
+1       breakpoint     keep y   [34m0x0000000000000a14[m in [33mmain[m at [32mtest.c[m:24
+2       breakpoint     keep y   [34m0x0000000000000978[m in [33mcompute[m at [32mtest.c[m:14
+3       breakpoint     keep y   [34m0x0000000000000a8c[m in [33mmain[m at [32mtest.c[m:31

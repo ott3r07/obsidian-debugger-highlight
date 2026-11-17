@@ -1,0 +1,49 @@
+# SOURCE: https://ctftime.org/writeup/24295
+$rax   : 0x0000555555fa02a0  →  0x00007f776fd29ce6  →  <execvpe+1142> mov rsi, r10
+$rbx   : 0x00007f776fe383a0  →  0x8d4c5741fa1e0ff3
+$rcx   : 0x00007f776fd53fb2  →  0x5677fffff0003d48 ("H="?)
+$rdx   : 0x2f
+$rsp   : 0x00007fff3250f9f8  →  0x00007f776fe38376  →  0x4d8b4800000000b8
+$rbp   : 0x00007fff3250fa20  →  0x0000000000000000
+$rsi   : 0x00007f776fe38376  →  0x4d8b4800000000b8
+$rdi   : 0x0000555555fa05b0  →  0x0a65657266206200
+$rip   : 0x00007f776fce08f1  →  <free+161> jmp rax
+$r8    : 0x0000555555fa05b0  →  0x0a65657266206200
+$r9    : 0x00007f776fc4a548  →  0x0000000000000000
+$r10   : 0x00007f776fe2ebe0  →  0x0000555555fa05e0  →  0x0000000000000000
+$r11   : 0x246
+$r12   : 0x00007f776fe38150  →  0x8949ed31fa1e0ff3
+$r13   : 0x00007fff3250fb08  →  0x000000000000001c
+$r14   : 0x0
+$r15   : 0x0
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
+─────────────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00007fff3250f9f8│+0x0000: 0x00007f776fe38376  →  0x4d8b4800000000b8    ← $rsp
+0x00007fff3250fa00│+0x0008: 0x00007f776fe31b28  →  0x0000555555fa02a0  →  0x00007f776fd29ce6  →  <execvpe+1142> mov rsi, r10
+0x00007fff3250fa08│+0x0010: 0x0000555555fa02a0  →  0x00007f776fd29ce6  →  <execvpe+1142> mov rsi, r10
+0x00007fff3250fa10│+0x0018: 0x0000555555fa05b0  →  0x0a65657266206200
+0x00007fff3250fa18│+0x0020: 0xececd8c03b604200
+0x00007fff3250fa20│+0x0028: 0x0000000000000000   ← $rbp
+0x00007fff3250fa28│+0x0030: 0x00007f776fc6a0b3  →  <__libc_start_main+243> mov edi, eax
+0x00007fff3250fa30│+0x0038: 0x0000000000000000
+───────────────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+   0x7f776fce08e5 <free+149>       nop    DWORD PTR [rax]
+   0x7f776fce08e8 <free+152>       mov    rsi, QWORD PTR [rsp+0x18]
+   0x7f776fce08ed <free+157>       add    rsp, 0x18
+ → 0x7f776fce08f1 <free+161>       jmp    rax
+   0x7f776fce08f3 <free+163>       nop    DWORD PTR [rax+rax*1+0x0]
+   0x7f776fce08f8 <free+168>       cmp    QWORD PTR [rip+0x151279], rsi        # 0x7f776fe31b78
+   0x7f776fce08ff <free+175>       ja     0x7f776fce090a <free+186>
+   0x7f776fce0901 <free+177>       cmp    QWORD PTR [rip+0x151268], rsi        # 0x7f776fe31b70
+   0x7f776fce0908 <free+184>       ja     0x7f776fce08cb <free+123>
+───────────────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "ld-linux-x86-64", stopped 0x7f776fce08f1 in free (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x7f776fce08f1 → free()
+[#1] 0x7f776fe38376 → mov eax, 0x0
+[#2] 0x7f776fe31b28 → __after_morecore_hook()
+[#3] 0x555555fa02a0 → out 0x9c, al
+[#4] 0x555555fa05b0 → add BYTE PTR [rdx+0x20], ah
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+gef➤

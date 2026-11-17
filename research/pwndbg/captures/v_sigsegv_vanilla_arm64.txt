@@ -1,0 +1,5 @@
+(gdb) continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000000000 in ?? ()

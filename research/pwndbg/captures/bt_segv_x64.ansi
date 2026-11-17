@@ -1,0 +1,7 @@
+[32m[1mpwndbg> [0m[32m[0mbt
+#0  [34m0x0000000000000000[m in [33m??[m ()
+#1  [34m0x000055555555727b[m in [33mcompute[m ([36mf[m=0x0, [36mx[m=0x6, [36my[m=0x7) at [32mtest.c[m:14
+#2  [34m0x00005555555574a2[m in [33mmain[m ([36margc[m=0x1, [36margv[m=0xffffafdd5cf8) at [32mtest.c[m:38
+#3  [34m0x0000ffffaf3051ca[m in [33m??[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#4  [34m0x0000ffffaf30528b[m in [33m__libc_start_main[m () from [32m/usr/x86_64-linux-gnu/lib/libc.so.6[m
+#5  [34m0x0000555555557105[m in [33m_start[m ()

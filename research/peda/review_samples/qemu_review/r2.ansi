@@ -1,0 +1,203 @@
+Script started on 2026-11-17 05:45:42+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64'  -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./rv" <not executed on terminal>]
+break probe
+Reading symbols from [32m./rv[m...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: '[1mset logging off[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled off[m'.
+
+Warning: '[1mset logging on[m', an alias for the command '[1mset logging enabled[m', is deprecated.
+Use '[1mset logging enabled on[m'.
+
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: 0x0 
+[;32mRBX[0m: 0x0 
+[;32mRCX[0m: 0x0 
+[;32mRDX[0m: 0x0 
+[;32mRSI[0m: 0x0 
+[;32mRDI[0m: 0x0 
+[;32mRBP[0m: 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abd20[0m --> 0x2 
+[;32mRIP[0m: [;31m0x401790[0m (<_start>:	endbr64)
+[;32mR8 [0m: 0x0 
+[;32mR9 [0m: 0x0 
+[;32mR10[0m: 0x0 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: 0x0 
+[;32mR13[0m: 0x0 
+[;32mR14[0m: 0x0 
+[;32mR15[0m: 0x0[0m
+[m[;32mEFLAGS[0m: 0x202 ([;32mcarry[0m [;32mparity[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x401787 <release_registered_frames+39>:[;2m	pop    rbp[0m
+   0x401788 <release_registered_frames+40>:[;2;34m	ret[0m
+   0x401789:[;2m	nop    DWORD PTR [rax+0x0][0m
+=> 0x401790 <_start>:[;1;32m	endbr64[0m
+   0x401794 <_start+4>:[m	xor    ebp,ebp[0m
+   0x401796 <_start+6>:[m	mov    r9,rdx[0m
+   0x401799 <_start+9>:[m	pop    rsi[0m
+   0x40179a <_start+10>:[m	mov    rdx,rsp[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abd20[0m --> 0x2 [0m
+[m0008| [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0016| [;34m0x2aaaab2abd30[0m --> [;34m0x2aaaab2abef3[0m --> 0x414e54534f480078 ('x')[0m
+[m0024| [;34m0x2aaaab2abd38[0m --> 0x0 [0m
+[m0032| [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")[0m
+[m0040| [;34m0x2aaaab2abd48[0m --> [;34m0x2aaaab2abf0b[0m --> 0x76722f3d445750 ('PWD=/rv')[0m
+[m0048| [;34m0x2aaaab2abd50[0m --> [;34m0x2aaaab2abf13[0m ("HOME=/root")[0m
+[m0056| [;34m0x2aaaab2abd58[0m --> [;34m0x2aaaab2abf1e[0m ("DELAY=1.5")[0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+[mStopped reason: [;31mSIGTRAP[0m[0m
+[34m0x0000000000401790[m in [33m_start[m ()
+[?2004h[;31mgdb-peda$ [0mbreak probe
+[?2004lBreakpoint 1 at [34m0x4018d3[m: file [32mrv.c[m, line 10.
+[?2004h[;31mgdb-peda$ [0mcontinue
+[?2004lContinuing.
+[2J[H[;34m[----------------------------------registers-----------------------------------][0m
+[m[;32mRAX[0m: [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+[;32mRBX[0m: 0x2 
+[;32mRCX[0m: 0x2000 ('')
+[;32mRDX[0m: [;34m0x2aaaab2abb88[0m (0x00002aaaab2abb88)
+[;32mRSI[0m: [;34m0x2aaaab2abb98[0m --> [;34m0x2aaaab2abb90[0m (0x00002aaaab2abb98)
+[;32mRDI[0m: [;34m0x2aaaab2abba0[0m ('A' <repeats 80 times>, "BBBB")
+[;32mRBP[0m: [;34m0x2aaaab2abb60[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 
+[;32mRSP[0m: [;34m0x2aaaab2abb48[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mRIP[0m: [;31m0x4018d3[0m (<probe+30>:	mov    rax,QWORD PTR [rbp-0x38])
+[;32mR8 [0m: [;34m0x4aa840[0m --> [;34m0x4b3930[0m --> 0x0 
+[;32mR9 [0m: 0x20 (' ')
+[;32mR10[0m: 0x1 
+[;32mR11[0m: 0x0 
+[;32mR12[0m: [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')
+[;32mR13[0m: [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")
+[;32mR14[0m: [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)
+[;32mR15[0m: 0x1[0m
+[m[;32mEFLAGS[0m: 0x206 ([;32mcarry[0m [;1;31mPARITY[0m [;32madjust[0m [;32mzero[0m [;32msign[0m [;32mtrap[0m [;1;31mINTERRUPT[0m [;32mdirection[0m [;32moverflow[0m)[0m
+[m[;34m[-------------------------------------code-------------------------------------][0m[0m
+[m   0x4018c7 <probe+18>:[;2m	mov    QWORD PTR [rbp-0x28],rsi[0m
+   0x4018cb <probe+22>:[;2m	mov    QWORD PTR [rbp-0x30],rdx[0m
+   0x4018cf <probe+26>:[;2m	mov    QWORD PTR [rbp-0x38],rcx[0m
+=> 0x4018d3 <probe+30>:[;1;32m	mov    rax,QWORD PTR [rbp-0x38][0m
+   0x4018d7 <probe+34>:[m	mov    r12,rax[0m
+   0x4018da <probe+37>:[m	mov    rax,QWORD PTR [rip+0xa87f7]        # 0x4aa0d8 <quote>[0m
+   0x4018e1 <probe+44>:[m	mov    r13,rax[0m
+   0x4018e4 <probe+47>:[m	mov    rax,QWORD PTR [rip+0xa87f5]        # 0x4aa0e0 <longstr>[0m[0m
+[m[;34m[------------------------------------stack-------------------------------------][0m[0m
+[m0000| [;34m0x2aaaab2abb48[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0008| [;34m0x2aaaab2abb50[0m --> [;34m0x2aaaab2abd40[0m --> [;34m0x2aaaab2abef5[0m ("HOSTNAME=38cc6c227b89")[0m
+[m0016| [;34m0x2aaaab2abb58[0m --> [;34m0x4a5f68[0m --> [;31m0x401880[0m (<frame_dummy>:	endbr64)[0m
+[m0024| [;34m0x2aaaab2abb60[0m --> [;34m0x2aaaab2abc10[0m --> [;34m0x2aaaab2abcb0[0m --> [;34m0x2aaaab2abd00[0m --> 0x0 [0m
+[m0032| [;34m0x2aaaab2abb68[0m --> [;31m0x4019db[0m (<main+214>:	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>)[0m
+[m0040| [;34m0x2aaaab2abb70[0m --> [;34m0x2aaaab2abd28[0m --> [;34m0x2aaaab2abeee[0m --> 0x4800780076722f2e ('./rv')[0m
+[m0048| [;34m0x2aaaab2abb78[0m --> 0x2004aa7e0 [0m
+[m0056| [;34m0x2aaaab2abb80[0m --> 0x100 [0m
+[;34m[------------------------------------------------------------------------------][0m
+[mLegend: [;31mcode[0m, [;34mdata[0m, [;32mrodata[0m, value[0m
+
+Breakpoint 1, [33mprobe[m ([36mbuf[m=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", [36ma[m=0x2aaaab2abb98, [36mb[m=0x2aaaab2abb88, [36mv[m=0x2000)
+    at [32mrv.c[m:10
+10	    [01;34masm[m [01;34mvolatile[m[31m([m[31m"mov %0, %%r12"[m [31m::[m [31m"r"[m[31m([mv[31m)[m [31m:[m [31m"r12"[m[31m);[m
+[?2004h[?2004l[?2004h[;31mgdb-peda$ [0mvmmap
+[?2004l[;1;34mStart              End                Perm	Name[0m
+[m0x00400000         0x00401000         r--p	/rv/rv[0m
+[m0x00401000         0x0047f000         r-xp	/rv/rv[0m
+[m0x0047f000         0x004a5000         r--p	/rv/rv[0m
+[m0x004a5000         0x004ac000         rw-p	/rv/rv[0m
+[m0x004ac000         0x004b2000         rw-p	/rv/rv[0m
+[m0x004b2000         0x004d4000         rw-p	[heap][0m
+[m0x00002aaaaaaac000 0x00002aaaab2ac000 rw-p	[stack][0m
+[m0x00002aaaab2ac000 0x00002aaaab2ad000 r-xp	mapped[0m
+[m0x00002aaaab2ad000 0x00002aaaab2af000 rw-p	mapped[0m
+[m0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall][0m
+[?2004h[;31mgdb-peda$ [0mtelescope 0xffffffffff600ff0 4
+[?2004l[m[;32mDisplay memory content at an address with smart dereferences[0m
+[;34mUsage:[0m
+    telescope [linecount] (analyze at current $SP)
+    telescope address [linecount]
+[0m
+[?2004h[;31mgdb-peda$ [0mtelescope 0x4b5ff0 4
+[?2004l[m0000| [;34m0x4b5ff0[0m --> 0x0 [0m
+[m0008| [;34m0x4b5ff8[0m --> 0x0 [0m
+[m0016| [;34m0x4b6000[0m --> 0x0 [0m
+[m0024| [;34m0x4b6008[0m --> 0x0 [0m
+[?2004h[;31mgdb-peda$ [0mxinfo 0x4b5ff8
+[?2004l[m[;34m0x4b5ff8[0m --> 0x0 
+Virtual memory mapping:
+[;32mStart : 0x004b2000
+[0m[;32mEnd   : 0x004d4000
+[0m[;33mOffset: 0x3ff8
+[0m[;31mPerm  : rw-p
+[0m[;34mName  : [heap][0m[0m
+[?2004h[;31mgdb-peda$ [0minfo frame
+[?2004lStack level 0, frame at 0x2aaaab2abb70:
+ rip = 0x4018d3 in probe ([32mrv.c[m:10); saved rip = 0x4019db
+ called by frame at 0x2aaaab2abc20
+ source language c.
+ Arglist at 0x2aaaab2abb60, args: [36mbuf[m=0x2aaaab2abba0 'A' <repeats 80 times>, "BBBB", [36ma[m=0x2aaaab2abb98, 
+    [36mb[m=0x2aaaab2abb88, [36mv[m=0x2000
+ Locals at 0x2aaaab2abb60, Previous frame's sp is 0x2aaaab2abb70
+ Saved registers:
+  rbp at 0x2aaaab2abb60, r12 at 0x2aaaab2abb48, r13 at 0x2aaaab2abb50, r14 at 0x2aaaab2abb58, rip at 0x2aaaab2abb68
+[?2004h[;31mgdb-peda$ [0mpdisass main
+[?2004l[mDump of assembler code for function main:
+   0x0000000000401905 <+0>:[m	endbr64[0m
+   0x0000000000401909 <+4>:[m	push   rbp[0m
+   0x000000000040190a <+5>:[m	mov    rbp,rsp[0m
+   0x000000000040190d <+8>:[m	sub    rsp,0xa0[0m
+   0x0000000000401914 <+15>:[m	mov    DWORD PTR [rbp-0x94],edi[0m
+   0x000000000040191a <+21>:[m	mov    QWORD PTR [rbp-0xa0],rsi[0m
+   0x0000000000401921 <+28>:[m	lea    rax,[rbp-0x70][0m
+   0x0000000000401925 <+32>:[m	mov    edx,0x50[0m
+   0x000000000040192a <+37>:[m	mov    esi,0x41[0m
+   0x000000000040192f <+42>:[m	mov    rdi,rax[0m
+   0x0000000000401932 <+45>:[;32m	call   0x401100[0m
+   0x0000000000401937 <+50>:[m	lea    rax,[rbp-0x70][0m
+   0x000000000040193b <+54>:[m	add    rax,0x50[0m
+   0x000000000040193f <+58>:[m	mov    DWORD PTR [rax],0x42424242[0m
+   0x0000000000401945 <+64>:[m	mov    BYTE PTR [rax+0x4],0x0[0m
+   0x0000000000401949 <+68>:[m	lea    rax,[rbp-0x80][0m
+   0x000000000040194d <+72>:[m	mov    QWORD PTR [rbp-0x78],rax[0m
+   0x0000000000401951 <+76>:[m	lea    rax,[rbp-0x78][0m
+   0x0000000000401955 <+80>:[m	mov    QWORD PTR [rbp-0x80],rax[0m
+   0x0000000000401959 <+84>:[m	lea    rax,[rbp-0x88][0m
+   0x0000000000401960 <+91>:[m	mov    QWORD PTR [rbp-0x88],rax[0m
+   0x0000000000401967 <+98>:[m	lea    rax,[rip+0xaa1c2]        # 0x4abb30 <gself>[0m
+   0x000000000040196e <+105>:[m	mov    QWORD PTR [rip+0xaa1bb],rax        # 0x4abb30 <gself>[0m
+   0x0000000000401975 <+112>:[m	mov    edi,0x10[0m
+   0x000000000040197a <+117>:[;32m	call   0x4100c0 <malloc>[0m
+   0x000000000040197f <+122>:[m	mov    QWORD PTR [rbp-0x8],rax[0m
+   0x0000000000401983 <+126>:[m	mov    edi,0x10[0m
+   0x0000000000401988 <+131>:[;32m	call   0x4100c0 <malloc>[0m
+   0x000000000040198d <+136>:[m	mov    QWORD PTR [rbp-0x10],rax[0m
+   0x0000000000401991 <+140>:[m	mov    rax,QWORD PTR [rbp-0x8][0m
+   0x0000000000401995 <+144>:[m	mov    rdx,QWORD PTR [rbp-0x10][0m
+   0x0000000000401999 <+148>:[m	mov    QWORD PTR [rax],rdx[0m
+   0x000000000040199c <+151>:[m	mov    rax,QWORD PTR [rbp-0x10][0m
+   0x00000000004019a0 <+155>:[m	mov    rdx,QWORD PTR [rbp-0x8][0m
+   0x00000000004019a4 <+159>:[m	mov    QWORD PTR [rax],rdx[0m
+   0x00000000004019a7 <+162>:[m	mov    rax,QWORD PTR [rbp-0x8][0m
+   0x00000000004019ab <+166>:[m	mov    QWORD PTR [rax+0x8],0x2000[0m
+   0x00000000004019b3 <+174>:[m	mov    rax,QWORD PTR [rbp-0x10][0m
+   0x00000000004019b7 <+178>:[m	mov    QWORD PTR [rax+0x8],0xa00[0m
+   0x00000000004019bf <+186>:[m	lea    rdx,[rbp-0x88][0m
+   0x00000000004019c6 <+193>:[m	lea    rsi,[rbp-0x78][0m
+   0x00000000004019ca <+197>:[m	lea    rax,[rbp-0x70][0m
+   0x00000000004019ce <+201>:[m	mov    ecx,0x2000[0m
+   0x00000000004019d3 <+206>:[m	mov    rdi,rax[0m
+   0x00000000004019d6 <+209>:[;32m	call   0x4018b5 <probe>[0m
+   0x00000000004019db <+214>:[m	mov    rax,QWORD PTR [rip+0xa86ee]        # 0x4aa0d0 <gcounter>[0m
+   0x00000000004019e2 <+221>:[m	add    rax,0x5[0m
+   0x00000000004019e6 <+225>:[m	mov    QWORD PTR [rip+0xa86e3],rax        # 0x4aa0d0 <gcounter>[0m
+   0x00000000004019ed <+232>:[m	lea    rax,[rbp-0x70][0m
+   0x00000000004019f1 <+236>:[m	mov    rdi,rax[0m
+   0x00000000004019f4 <+239>:[;32m	call   0x404e60 <puts>[0m
+   0x00000000004019f9 <+244>:[;31m	cmp    DWORD PTR [rbp-0x94],0x1[0m
+   0x0000000000401a00 <+251>:[;33m	jle    0x401a07 <main+258>[0m
+   0x0000000000401a02 <+253>:[;32m	call   0x4018f8 <spin>[0m
+   0x0000000000401a07 <+258>:[m	mov    eax,0x0[0m
+   0x0000000000401a0c <+263>:[m	leave[0m
+   0x0000000000401a0d <+264>:[;34m	ret[0m
+End of assembler dump.[0m
+[?2004h[;31mgdb-peda$ [0mquit
+[?2004l
+Script done on 2026-11-17 05:45:55+00:00 [COMMAND_EXIT_CODE="0"]

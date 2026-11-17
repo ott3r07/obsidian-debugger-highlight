@@ -1,0 +1,7 @@
+gef➤  checksec
+[+] checksec for '/work/test_arm64'
+Canary                        : ✓ (value: 0x154844b1b73fc000)
+NX                            : ✓ 
+PIE                           : ✓ 
+Fortify                       : ✘ 
+RelRO                         : Full

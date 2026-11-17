@@ -1,0 +1,16 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> context regs
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags on / show-compact-regs off ]──────────────────────────────────
+*EAX  0x8102ff4 (_GLOBAL_OFFSET_TABLE_) ◂— 0
+*EBX  0x8102ff4 (_GLOBAL_OFFSET_TABLE_) ◂— 0
+*ECX  0x8106a00 (_dl_stack_cache) —▸ 0x41004ba0 ◂— 0x8106a00 (_dl_stack_cache)
+*EDX  0x2800000
+*EDI  0x40800cb0 ◂— 1
+*ESI  0xc
+*EBP  0x40800b98 —▸ 0x40800c98 ◂— 1
+*ESP  0x40800b98 —▸ 0x40800c98 ◂— 1
+*EIP  0x8049965 (many_args+17) ◂— mov edx, dword ptr [ebp + 8]
+ EFLAGS 0x202 [ cf pf af zf sf IF df of iopl:00 ac ]
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

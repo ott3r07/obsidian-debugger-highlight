@@ -1,0 +1,7 @@
+pwndbg> canary
+AT_RANDOM  = 0xffff9342ceb0 # points to the canary value on glibc < 2.44
+TLS Canary @ 0xffff92927768 # address where canary is stored
+Canary     = 0x76f85efbfd30d300
+Thread 1: Found valid canaries.
+00:0000│-308 0xffff9342c8c8 ◂— 0x76f85efbfd30d300
+Additional results hidden. Use --all to see them.

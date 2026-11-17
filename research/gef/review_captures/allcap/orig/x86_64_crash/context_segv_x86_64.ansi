@@ -1,0 +1,38 @@
+[?2004h[?2004l[?2004h[1m(qemu) [0m[1;32mgef➤  [0mcontext
+[?2004l[H[J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[90m─────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[90m ────[0m
+[1m[31m$rax   [0m: 0x85              
+[1m[31m$rbx   [0m: 0x2               
+[34m$rcx   [0m: 0x0               
+[34m$rdx   [0m: 0x0               
+[1m[31m$rsp   [0m: [35m0x00002aaaab2abb00[0m  →  [33m"gaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaama[...]"[0m
+[1m[31m$rbp   [0m: 0x6161616161616165 ("[33meaaaaaaa[0m"?)
+[1m[31m$rsi   [0m: 0x00000000004ab700  →  0x00000000fbad2884
+[1m[31m$rdi   [0m: [35m0x00002aaaab2ab8e0[0m  →  [32m0x00000000004b4718[0m  →  0x0000000000000000
+[1m[31m$rip   [0m: 0x6161616161616166 ("[33mfaaaaaaa[0m"?)
+[1m[31m$r8    [0m: 0x73              
+[34m$r9    [0m: 0x0               
+[34m$r10   [0m: 0x0               
+[1m[31m$r11   [0m: 0xffffffff        
+[1m[31m$r12   [0m: [35m0x00002aaaab2abce8[0m  →  [35m0x00002aaaab2abe98[0m  →  [33m"/work/test_x64_nossp"[0m
+[1m[31m$r13   [0m: [35m0x00002aaaab2abd00[0m  →  [35m0x00002aaaab2abf2e[0m  →  [33m"HOSTNAME=47f545946d15"[0m
+[1m[31m$r14   [0m: 0x00000000004a5f68  →  [31m0x0000000000401830[0m  →  [90m<frame_dummy+0000> endbr64 [0m
+[1m[31m$r15   [0m: 0x1               
+[1m[31m$eflags[0m: [[1mZERO[0m carry [1mPARITY[0m adjust sign trap [1mINTERRUPT[0m direction overflow resume virtualx86 identification]
+[34m$cs[0m: 0x33 [34m$ss[0m: 0x2b [34m$ds[0m: 0x00 [34m$es[0m: 0x00 [34m$fs[0m: 0x00 [34m$gs[0m: 0x00 
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[90m ────[0m
+[36m0x00002aaaab2abb00[0m│+0x0000: [33m"gaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaama[...]"[0m[1m[34m	 ← $rsp[0m
+[36m0x00002aaaab2abb08[0m│+0x0008: [33m"haaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaana[...]"[0m
+[36m0x00002aaaab2abb10[0m│+0x0010: [33m"iaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoa[...]"[0m
+[36m0x00002aaaab2abb18[0m│+0x0018: [33m"jaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapa[...]"[0m
+[36m0x00002aaaab2abb20[0m│+0x0020: [33m"kaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa"[0m
+[36m0x00002aaaab2abb28[0m│+0x0028: [33m"laaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa"[0m
+[36m0x00002aaaab2abb30[0m│+0x0030: [33m"maaaaaaanaaaaaaaoaaaaaaapaaaaaaa"[0m
+[36m0x00002aaaab2abb38[0m│+0x0038: [33m"naaaaaaaoaaaaaaapaaaaaaa"[0m
+[90m───────────────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:x86:64[0m[90m ────[0m
+[1m[31m[!][0m Cannot disassemble from $PC
+[1m[31m[!][0m Cannot access memory at address 0x6161616161616166
+[90m───────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[90m ────[0m
+[[1m[32m#0[0m] Id 1, [1m[31mstopped[0m [34m0x6161616161616166[0m in [1m[33m??[0m (), reason: [1m[35mSIGSEGV[0m
+[90m─────────────────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[90m ────[0m
+[90m──────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

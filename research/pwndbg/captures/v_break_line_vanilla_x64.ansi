@@ -1,0 +1,2 @@
+(gdb) break test.c:38
+Breakpoint 3 at [34m0x555555557489[m: file [32mtest.c[m, line 38.

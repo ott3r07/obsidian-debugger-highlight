@@ -1,0 +1,6 @@
+[?2004h[1;31mgef➤  [0mgef config dereference
+[?2004l[90m──────────────────────────── [0m[36mGEF configuration setting: dereference.max_recursion[0m[90m ────────────────────────────[0m
+[32mdereference.max_recursion[0m (int) = [36m7[0m
+[1m[4m
+Description:[24m[0m
+	Maximum level of pointer recursion

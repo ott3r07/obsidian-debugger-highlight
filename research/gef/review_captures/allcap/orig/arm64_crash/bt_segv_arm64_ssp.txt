@@ -1,0 +1,16 @@
+gef➤  bt
+#0  __pthread_kill_implementation (threadid=0xfffff7ff7ee0, signo=signo@entry=0x6, no_tid=no_tid@entry=0x0)
+    at ./nptl/pthread_kill.c:44
+#1  0x0000fffff7e77520 in __pthread_kill_internal (signo=0x6, threadid=<optimized out>)
+    at ./nptl/pthread_kill.c:78
+#2  0x0000fffff7e2cb3c in __GI_raise (sig=sig@entry=0x6) at ../sysdeps/posix/raise.c:26
+#3  0x0000fffff7e17e00 in __GI_abort () at ./stdlib/abort.c:79
+#4  0x0000fffff7e6aac4 in __libc_message_impl (fmt=fmt@entry=0xfffff7f52c98 "*** %s ***: terminated\n")
+    at ../sysdeps/posix/libc_fatal.c:134
+#5  0x0000fffff7ee82a8 in __GI___fortify_fail (msg=msg@entry=0xfffff7f52cb0 "stack smashing detected")
+    at ./debug/fortify_fail.c:24
+#6  0x0000fffff7ee9264 in __stack_chk_fail () at ./debug/stack_chk_fail.c:24
+#7  0x0000aaaaaaaa09f4 in vuln (
+    src=0xfffffffffe88 "aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaaaaaanaaaaaaaoaaaaaaapaaaaaaa") at test.c:22
+#8  0x6161616161616167 in ?? ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)

@@ -1,0 +1,17 @@
+pwndbg> got -r
+State of the GOT of /work/test_arm64:
+GOT protection: Full RELRO | Found 14 GOT entries passing the filter
+[0xaaaaaaabff80] __libc_start_main@GLIBC_2.34 -> 0xfffff7e18500 (__libc_start_main) ◂— stp x29, x30, [sp, #-0x60]!
+[0xaaaaaaabff88] __cxa_finalize@GLIBC_2.17 -> 0xfffff7e2eb50 (__cxa_finalize) ◂— adrp x2, _nl_C_locobj+32
+[0xaaaaaaabff90] malloc@GLIBC_2.17 -> 0xfffff7e86470 (malloc) ◂— stp x29, x30, [sp, #-0x40]!
+[0xaaaaaaabff98] __stack_chk_fail@GLIBC_2.17 -> 0xfffff7ee9250 (__stack_chk_fail) ◂— stp x29, x30, [sp, #-0x10]!
+[0xaaaaaaabffa0] __gmon_start__ -> 0
+[0xaaaaaaabffa8] abort@GLIBC_2.17 -> 0xfffff7e17d0c (abort) ◂— sub sp, sp, #0xd0
+[0xaaaaaaabffb0] free@GLIBC_2.17 -> 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+[0xaaaaaaabffb8] strcpy@GLIBC_2.17 -> 0xfffff7e8d240 (strcpy) ◂— nop 
+[0xaaaaaaabffc0] printf@GLIBC_2.17 -> 0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120
+[0xaaaaaaabffd0] _ITM_deregisterTMCloneTable -> 0
+[0xaaaaaaabffd8] __cxa_finalize@GLIBC_2.17 -> 0xfffff7e2eb50 (__cxa_finalize) ◂— adrp x2, _nl_C_locobj+32
+[0xaaaaaaabffe0] __gmon_start__ -> 0
+[0xaaaaaaabffe8] __stack_chk_guard@GLIBC_2.17 -> 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0x43e285dfeaf58100
+[0xaaaaaaabfff8] _ITM_registerTMCloneTable -> 0

@@ -1,0 +1,5 @@
+(gdb) continue
+Continuing.
+
+Temporary breakpoint 2, [33mcompute[m ([36mf[m=0xaaaaaaaa0918 <add>, [36mx[m=6, [36my[m=7) at [32mtest.c[m:13
+13	[32mint[m [01mcompute[m[31m([mop_fn f[31m,[m [32mint[m x[31m,[m [32mint[m y[31m)[m [31m{[m

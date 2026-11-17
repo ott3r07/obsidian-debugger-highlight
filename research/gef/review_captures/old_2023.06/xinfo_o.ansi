@@ -1,0 +1,7 @@
+[?2004h[1;32mgef➤  [0mxinfo $sp
+[?2004l[1;38;5;240m─────────────────────────────────────────── [0m[36mxinfo: 0xfffffffffae0[0m[1;38;5;240m ───────────────────────────────────────────[0m
+Page: 0x0000fffffffdf000  →  0x0001000000000000 (size=0x21000)
+Permissions: rw-
+Pathname: [stack]
+Offset (from page): 0x20ae0
+Inode: 0

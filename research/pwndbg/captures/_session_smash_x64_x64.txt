@@ -1,0 +1,120 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_x64...
+------- tip of the day (disable with set show-tips off) -------
+break-if-taken and break-if-not-taken commands sets breakpoints after a given jump instruction was taken or not
+pwndbg> target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffff88ec2550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+ RBX  0
+ RCX  0
+ RDX  0
+ RDI  0
+ RSI  0
+ R8   0
+ R9   0
+ R10  0
+ R11  0
+ R12  0
+ R13  0
+ R14  0
+ R15  0
+ RBP  0
+ RSP  0xffff896e1c70 ◂— 2
+ RIP  0xffff88ec2550 ◂— mov rdi, rsp
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffff88ec2543    call   0xffff88eb1ce0              <0xffff88eb1ce0>
+ 
+   0xffff88ec2548    jmp    0xffff88ec23e2              <0xffff88ec23e2>
+ 
+   0xffff88ec254d    nop    dword ptr [rax]
+ ► 0xffff88ec2550    mov    rdi, rsp            RDI => 0xffff896e1c70 ◂— 2
+   0xffff88ec2553    call   0xffff88ec31e0              <0xffff88ec31e0>
+ 
+   0xffff88ec2558    mov    r12, rax
+   0xffff88ec255b    mov    r13, rsp
+   0xffff88ec255e    mov    edx, dword ptr [rip + 0x19b04]     EDX, [_rtld_global+4200]
+   0xffff88ec2564    test   edx, 2
+   0xffff88ec256a  ? je     0xffff88ec257d              <0xffff88ec257d>
+ 
+   0xffff88ec256c    mov    esi, 1                             ESI => 1
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff896e1c70 ◂— 2
+01:0008│     0xffff896e1c78 —▸ 0xffff896e1e63 ◂— './test_x64'
+02:0010│     0xffff896e1c80 —▸ 0xffff896e1e6e ◂— 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+03:0018│     0xffff896e1c88 ◂— 0
+04:0020│     0xffff896e1c90 —▸ 0xffff896e1ed3 ◂— 'HOSTNAME=3e37fc6690d4'
+05:0028│     0xffff896e1c98 —▸ 0xffff896e1ee9 ◂— 'PWD=/work'
+06:0030│     0xffff896e1ca0 —▸ 0xffff896e1ef3 ◂— '_=/usr/local/bin/qemu-x86_64'
+07:0038│     0xffff896e1ca8 —▸ 0xffff896e1f10 ◂— 'LINES=50'
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff88ec2550
+   1 0x2
+   2 0xffff896e1e63
+   3 0xffff896e1e6e
+   4 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> continue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+*** stack smashing detected ***: terminated
+
+Program received signal SIGABRT, Aborted.
+0x0000ffff88c85a8c in pthread_kill () from /usr/x86_64-linux-gnu/lib/libc.so.6
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0
+*RBX  0x2ae
+ RCX  0
+*RDX  6
+*RDI  0x2ae
+*RSI  0x2ae
+ R8   0
+*R9   0xffff88ed9440 ◂— 'glibc.malloc.mxfast'
+*R10  8
+ R11  0
+*R12  6
+*R13  0xffff896e1950 ◂— 0x3000000010
+*R14  0x16
+*R15  0xffff896e1950 ◂— 0x3000000010
+*RBP  0xffff896e1800 —▸ 0xffff896e1820 —▸ 0xffff896e18e0 —▸ 0xffff896e1a00 —▸ 0xffff896e1a10 —▸ ...
+*RSP  0xffff896e17c0 —▸ 0xffff896e1850 —▸ 0xffff896e1880 ◂— 0x414141413d667562 ('buf=AAAA')
+*RIP  0xffff88c85a8c (pthread_kill+284) ◂— mov r14d, eax
+──────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────────────────────────
+   0xffff88c85a83 <pthread_kill+275>    mov    edi, eax
+   0xffff88c85a85 <pthread_kill+277>    mov    eax, 0xea           EAX => 0xea
+   0xffff88c85a8a <pthread_kill+282>    syscall <SYS_tgkill>
+ ► 0xffff88c85a8c <pthread_kill+284>    mov    r14d, eax           R14D => 0
+   0xffff88c85a8f <pthread_kill+287>    neg    r14d
+   0xffff88c85a92 <pthread_kill+290>    cmp    eax, 0xfffff000     0x0 - 0xfffff000     EFLAGS => 0x207 [ CF PF af zf sf IF df of iopl:00 ac ]
+   0xffff88c85a97 <pthread_kill+295>    mov    eax, 0              EAX => 0
+   0xffff88c85a9c <pthread_kill+300>  ✔ cmovbe r14d, eax
+   0xffff88c85aa0 <pthread_kill+304>    jmp    pthread_kill+176            <pthread_kill+176>
+    ↓
+   0xffff88c85a20 <pthread_kill+176>    mov    rax, qword ptr [rbp - 0x38]     RAX, [0xffff896e17c8] => 0xc739f9701727ec00
+   0xffff88c85a24 <pthread_kill+180>    sub    rax, qword ptr fs:[0x28]        RAX => 0 (0xc739f9701727ec00 - 0xc739f9701727ec00)
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0xffff896e17c0 —▸ 0xffff896e1850 —▸ 0xffff896e1880 ◂— 0x414141413d667562 ('buf=AAAA')
+01:0008│-038 0xffff896e17c8 ◂— 0xc739f9701727ec00
+02:0010│-030 0xffff896e17d0 —▸ 0xffff896e1810 —▸ 0xffff896e1940 —▸ 0xffff88db576b ◂— ' ***: terminated\n'
+03:0018│-028 0xffff896e17d8 ◂— 6
+04:0020│-020 0xffff896e17e0 —▸ 0xffff88bdc740 ◂— 0xffff88bdc740
+05:0028│-018 0xffff896e17e8 —▸ 0xffff896e1950 ◂— 0x3000000010
+... ↓        2 skipped
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xffff88c85a8c     pthread_kill+284
+   1 0xffff88c2c25e     raise+30
+   2 0xffff88c0f8ff     abort+223
+   3 0xffff88c107b6
+   4 0xffff88d1dad9
+   5 0xffff88d1ed64
+   6 0x5555555572f9     vuln+98
+   7 0x4141414141414141
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> 

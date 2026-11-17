@@ -1,0 +1,2 @@
+(qemu) gef➤  heap chunks
+[!] Could not find heap for arena

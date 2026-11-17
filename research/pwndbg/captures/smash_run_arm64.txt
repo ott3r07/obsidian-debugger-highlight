@@ -1,0 +1,82 @@
+pwndbg> run AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Starting program: /work/test_arm64 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+*** stack smashing detected ***: terminated
+
+Program received signal SIGABRT, Aborted.
+__pthread_kill_implementation (threadid=0xfffff7ff7ee0, signo=signo@entry=0x6, no_tid=no_tid@entry=0x0)
+    at ./nptl/pthread_kill.c:44
+warning: 44	./nptl/pthread_kill.c: No such file or directory
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   0
+ X1   0x2aa
+ X2   6
+ X3   0xfffff7ff7ee0 ◂— 0
+ X4   0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xf5c476829010da00
+ X5   1
+ X6   0x20
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0x83
+ X9   0
+ X10  0xa
+ X11  0xffffff80
+ X12  0xffffffc8
+ X13  0xfffffffff990 —▸ 0xfffffffff851 ◂— 0xc40000fffffffff9
+ X14  0
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  1
+ X17  0xfffff7fcef94 (__tunable_get_val) ◂— ubfiz x4, x0, #7, #0x20
+ X18  3
+ X19  0x2aa
+ X20  0xfffff7ff7ee0 ◂— 0
+ X21  6
+ X22  0xfffffffff8d8 —▸ 0xfffffffff9d0 ◂— 0
+ X23  0xfffffffff8d8 —▸ 0xfffffffff9d0 ◂— 0
+ X24  0xfffffffff8d8 —▸ 0xfffffffff9d0 ◂— 0
+ X25  0x2c
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffff750 —▸ 0xfffffffff790 —▸ 0xfffffffff850 —▸ 0xfffffffff920 —▸ 0xfffffffff9b0 —▸ ...
+ SP   0xfffffffff740 {old_mask} —▸ 0xfffffffff750 —▸ 0xfffffffff790 —▸ 0xfffffffff850 —▸ 0xfffffffff920 —▸ ...
+ LR   0xfffff7e774a4 (__pthread_kill_implementation+292) ◂— mov x1, x19
+ PC   0xfffff7e774b8 (__pthread_kill_implementation+312) ◂— cmn w0, #1, lsl #12
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xfffff7e774ac <__pthread_kill_implementation+300>    sxtw   x0, w0
+   0xfffff7e774b0 <__pthread_kill_implementation+304>    mov    x8, #0x83           X8 => 0x83
+   0xfffff7e774b4 <__pthread_kill_implementation+308>    svc    #0
+ 
+ ► 0xfffff7e774b8 <__pthread_kill_implementation+312>    cmn    w0, #1, lsl #12     0x0 + 0x1000     CPSR => 0x0 [ n z c v q pan il d a i f el sp ]
+   0xfffff7e774bc <__pthread_kill_implementation+316>  ✔ csneg  w0, wzr, w0, ls     W0 => 0
+   0xfffff7e774c0 <__pthread_kill_implementation+320>    b      __pthread_kill_implementation+188 <__pthread_kill_implementation+188>
+    ↓
+   0xfffff7e7743c <__pthread_kill_implementation+188>    adrp   x1, _nl_C_locobj+32     X1 => 0xfffff7f9f000 (_nl_C_locobj+32) —▸ 0xfffff7f9d708 (_nl_C_LC_MONETARY) —▸ 0xfffff7f4c860 (_nl_C_name) —▸ ...
+   0xfffff7e77440 <__pthread_kill_implementation+192>    ldr    x1, [x1, #0xe88]        X1, [0xfffff7f9fe88] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xf5c476829010da00
+   0xfffff7e77444 <__pthread_kill_implementation+196>    ldr    x3, [sp, #8]            X3, [0xfffffffff748] => 0xf5c476829010da00
+   0xfffff7e77448 <__pthread_kill_implementation+200>    ldr    x2, [x1]                X2, [__stack_chk_guard] => 0xf5c476829010da00
+   0xfffff7e7744c <__pthread_kill_implementation+204>    subs   x3, x3, x2              X3 => 0 (0xf5c476829010da00 - 0xf5c476829010da00)
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ sp  0xfffffffff740 {old_mask} —▸ 0xfffffffff750 —▸ 0xfffffffff790 —▸ 0xfffffffff850 —▸ 0xfffffffff920 —▸ ...
+01:0008│-008 0xfffffffff748 ◂— 0xf5c476829010da00
+02:0010│ x29 0xfffffffff750 —▸ 0xfffffffff790 —▸ 0xfffffffff850 —▸ 0xfffffffff920 —▸ 0xfffffffff9b0 —▸ ...
+03:0018│+008 0xfffffffff758 —▸ 0xfffff7e2cb3c (raise+28) ◂— cbnz w0, raise+44
+04:0020│+010 0xfffffffff760 ◂— 6
+05:0028│+018 0xfffffffff768 —▸ 0xfffff7ff7ee0 ◂— 0
+06:0030│+020 0xfffffffff770 —▸ 0xfffff7fa1a20 (lock) ◂— 0
+07:0038│+028 0xfffffffff778 —▸ 0xfffffffff8d8 —▸ 0xfffffffff9d0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xfffff7e774b8 __pthread_kill_implementation+312
+   1 0xfffff7e77520 pthread_kill+32
+   2 0xfffff7e2cb3c raise+28
+   3 0xfffff7e17e00 abort+244
+   4 0xfffff7e6aac4 __libc_message_impl+516
+   5 0xfffff7ee82a8
+   6 0xfffff7ee9264
+   7 0xaaaaaaaa0ac8 vuln+104
+────────────────────────────────────────────────────[ LAST SIGNAL ]─────────────────────────────────────────────────────
+Program received signal SIGABRT
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

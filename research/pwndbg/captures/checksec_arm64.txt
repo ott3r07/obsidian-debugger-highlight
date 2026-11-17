@@ -1,0 +1,9 @@
+pwndbg> checksec
+File:     /work/test_arm64
+Arch:     aarch64
+RELRO:      Full RELRO
+Stack:      Canary found
+NX:         NX enabled
+PIE:        PIE enabled
+Stripped:   No
+Debuginfo:  Yes

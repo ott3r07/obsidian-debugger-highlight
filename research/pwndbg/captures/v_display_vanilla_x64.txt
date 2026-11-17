@@ -1,0 +1,3 @@
+(gdb) display/i $pc
+1: x/i $pc
+=> 0x555555557342 <main+71>:	movabs $0x4242424242424242,%rdi

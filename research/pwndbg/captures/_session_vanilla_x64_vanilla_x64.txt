@@ -1,0 +1,488 @@
+GNU gdb (Ubuntu 15.1-1ubuntu1~24.04.1) 15.1
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "aarch64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./test_x64...
+(gdb) set pagination off
+(gdb) target remote :1234
+Remote debugging using :1234
+Reading symbols from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2)
+0x0000ffff92d8a550 in ?? () from /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+(gdb) list main
+19	    char buf[32];
+20	    strcpy(buf, src);
+21	    printf("buf=%s\n", buf);
+22	}
+23	
+24	int main(int argc, char **argv) {
+25	    char stackbuf[48];
+26	    op_fn fp = add;
+27	    void *small[8], *mid[3], *big[2];
+28	    int i;
+(gdb) break main
+Breakpoint 1 at 0x555555557317: file test.c, line 24.
+(gdb) tbreak compute
+Temporary breakpoint 2 at 0x55555555725c: file test.c, line 13.
+(gdb) break test.c:38
+Breakpoint 3 at 0x555555557489: file test.c, line 38.
+(gdb) info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000555555557317 in main at test.c:24
+2       breakpoint     del  y   0x000055555555725c in compute at test.c:13
+3       breakpoint     keep y   0x0000555555557489 in main at test.c:38
+(gdb) continue
+Continuing.
+
+Breakpoint 1, main (argc=1, argv=0xffff935a9cf8) at test.c:24
+24	int main(int argc, char **argv) {
+(gdb) next
+26	    op_fn fp = add;
+(gdb) step
+30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+(gdb) nexti
+0x0000555555557338	30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+(gdb) stepi
+0x0000555555557342	30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+(gdb) x/i $pc
+=> 0x555555557342 <main+71>:	movabs $0x4242424242424242,%rdi
+(gdb) display/i $pc
+1: x/i $pc
+=> 0x555555557342 <main+71>:	movabs $0x4242424242424242,%rdi
+(gdb) si
+0x000055555555734c	30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+1: x/i $pc
+=> 0x55555555734c <main+81>:	mov    %rsi,(%rax)
+(gdb) undisplay 1
+(gdb) continue
+Continuing.
+
+Breakpoint 3, main (argc=1, argv=0xffff935a9cf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+(gdb) info registers
+rax            0x0                 0
+rbx            0xffff935a9cf8      281473153932536
+rcx            0x0                 0
+rdx            0xffff92cb2b20      281473144531744
+rsi            0x510               1296
+rdi            0xffff92cb2ac0      281473144531648
+rbp            0xffff935a9bd0      0xffff935a9bd0
+rsp            0xffff935a9b00      0xffff935a9b00
+r8             0x0                 0
+r9             0x0                 0
+r10            0x7                 7
+r11            0x55555555b420      93824992261152
+r12            0x1                 1
+r13            0x0                 0
+r14            0x555555559da0      93824992255392
+r15            0xffff92da3000      281473145516032
+rip            0x555555557489      0x555555557489 <main+398>
+eflags         0x206               [ IOPL=0 IF PF ]
+cs             0x33                51
+ss             0x2b                43
+ds             0x0                 0
+es             0x0                 0
+fs             0x0                 0
+gs             0x0                 0
+fs_base        0xffff92aa4740      281473142376256
+gs_base        0x0                 0
+k_gs_base      0x0                 0
+cr0            0x80010001          [ PG WP PE ]
+cr2            0x0                 0
+cr3            0x0                 [ PDBR=0 PCID=0 ]
+cr4            0x50220             [ OSXSAVE FSGSBASE OSFXSR PAE ]
+cr8            0x0                 0
+efer           0x500               [ LMA LME ]
+xmm0           {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm1           {v4_float = {0x92cb2b20, 0xffff, 0x0, 0x0}, v2_double = {0xffff92cb2b20, 0x0}, v16_int8 = {0x20, 0x2b, 0xcb, 0x92, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v8_int16 = {0x2b20, 0x92cb, 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x92cb2b20, 0xffff, 0x0, 0x0}, v2_int64 = {0xffff92cb2b20, 0x0}, uint128 = 0xffff92cb2b20}
+xmm2           {v4_float = {0x4554, 0x2a002a00, 0x2a002a00, 0x2c002b00}, v2_double = {0x2a002a0000004554, 0x2c002b002a002a00}, v16_int8 = {0x54, 0x45, 0x0, 0x0, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2b, 0x0, 0x2c}, v8_int16 = {0x4554, 0x0, 0x2a00, 0x2a00, 0x2a00, 0x2a00, 0x2b00, 0x2c00}, v4_int32 = {0x4554, 0x2a002a00, 0x2a002a00, 0x2c002b00}, v2_int64 = {0x2a002a0000004554, 0x2c002b002a002a00}, uint128 = 0x2c002b002a002a002a002a0000004554}
+xmm3           {v4_float = {0x4554, 0x0, 0x0, 0x0}, v2_double = {0x4554, 0x0}, v16_int8 = {0x54, 0x45, 0x0 <repeats 14 times>}, v8_int16 = {0x4554, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x4554, 0x0, 0x0, 0x0}, v2_int64 = {0x4554, 0x0}, uint128 = 0x4554}
+xmm4           {v4_float = {0x2a0000, 0x2a002a, 0x2b002a, 0x2a002c}, v2_double = {0x2a002a002a0000, 0x2a002c002b002a}, v16_int8 = {0x0, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2a, 0x0, 0x2b, 0x0, 0x2c, 0x0, 0x2a, 0x0}, v8_int16 = {0x0, 0x2a, 0x2a, 0x2a, 0x2a, 0x2b, 0x2c, 0x2a}, v4_int32 = {0x2a0000, 0x2a002a, 0x2b002a, 0x2a002c}, v2_int64 = {0x2a002a002a0000, 0x2a002c002b002a}, uint128 = 0x2a002c002b002a002a002a002a0000}
+xmm5           {v4_float = {0x48, 0x0, 0x0, 0x0}, v2_double = {0x48, 0x0}, v16_int8 = {0x48, 0x0 <repeats 15 times>}, v8_int16 = {0x48, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x48, 0x0, 0x0, 0x0}, v2_int64 = {0x48, 0x0}, uint128 = 0x48}
+xmm6           {v4_float = {0x0, 0x0, 0xff0000, 0x0}, v2_double = {0x0, 0xff0000}, v16_int8 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0xff, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0xff0000, 0x0}, v2_int64 = {0x0, 0xff0000}, uint128 = 0xff00000000000000000000}
+xmm7           {v4_float = {0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f}, v2_double = {0x2f2f2f2f2f2f2f2f, 0x2f2f2f2f2f2f2f2f}, v16_int8 = {0x2f <repeats 16 times>}, v8_int16 = {0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f, 0x2f2f}, v4_int32 = {0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f, 0x2f2f2f2f}, v2_int64 = {0x2f2f2f2f2f2f2f2f, 0x2f2f2f2f2f2f2f2f}, uint128 = 0x2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f2f}
+xmm8           {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm9           {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm10          {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm11          {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm12          {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm13          {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm14          {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+xmm15          {v4_float = {0x0, 0x0, 0x0, 0x0}, v2_double = {0x0, 0x0}, v16_int8 = {0x0 <repeats 16 times>}, v8_int16 = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, v4_int32 = {0x0, 0x0, 0x0, 0x0}, v2_int64 = {0x0, 0x0}, uint128 = 0x0}
+mxcsr          0x1f80              [ IM DM ZM OM UM PM ]
+(gdb) info registers rip
+rip            0x555555557489      0x555555557489 <main+398>
+(gdb) p $sp
+$1 = (void *) 0xffff935a9b00
+(gdb) p/x $pc
+$2 = 0x555555557489
+(gdb) p r
+$3 = 0
+(gdb) p fp
+$4 = (op_fn) 0x5555555571c9 <add>
+(gdb) p greeting
+$5 = 0x555555558004 "Hello, pwndbg!"
+(gdb) p global_buf
+$6 = "global data string", '\000' <repeats 45 times>
+(gdb) p small
+$7 = {0x55555555b2a0, 0x55555555b2d0, 0x55555555b300, 0x55555555b330, 0x55555555b360, 0x55555555b390, 0x55555555b3c0, 
+  0x55555555b3f0}
+(gdb) p/x 255
+$8 = 0xff
+(gdb) p/d 0x10
+$9 = 16
+(gdb) ptype fp
+type = int (*)(int, int)
+(gdb) x/20gx $sp
+0xffff935a9b00:	0x0000ffff935a9cf8	0x0000000100000006
+0xffff935a9b10:	0x0000000000000008	0x00005555555571c9
+0xffff935a9b20:	0x000055555555b5d0	0x000055555555bae0
+0xffff935a9b30:	0x000055555555b420	0x000055555555b4b0
+0xffff935a9b40:	0x000055555555b540	0x0000000001080000
+0xffff935a9b50:	0x000055555555b2a0	0x000055555555b2d0
+0xffff935a9b60:	0x000055555555b300	0x000055555555b330
+0xffff935a9b70:	0x000055555555b360	0x000055555555b390
+0xffff935a9b80:	0x000055555555b3c0	0x000055555555b3f0
+0xffff935a9b90:	0x4141414141414141	0x4242424242424242
+(gdb) x/4wx $sp
+0xffff935a9b00:	0x935a9cf8	0x0000ffff	0x00000006	0x00000001
+(gdb) x/8bx $sp
+0xffff935a9b00:	0xf8	0x9c	0x5a	0x93	0xff	0xff	0x00	0x00
+(gdb) x/s greeting
+0x555555558004:	"Hello, pwndbg!"
+(gdb) x/2s &global_buf
+0x55555555a020 <global_buf>:	"global data string"
+0x55555555a033 <global_buf+19>:	""
+(gdb) x/3xg &global_buf
+0x55555555a020 <global_buf>:	0x64206c61626f6c67	0x6972747320617461
+0x55555555a030 <global_buf+16>:	0x000000000000676e
+(gdb) x/10i $pc
+=> 0x555555557489 <main+398>:	mov    -0xb8(%rbp),%rax
+   0x555555557490 <main+405>:	mov    $0x7,%edx
+   0x555555557495 <main+410>:	mov    $0x6,%esi
+   0x55555555749a <main+415>:	mov    %rax,%rdi
+   0x55555555749d <main+418>:	call   0x555555557246 <compute>
+   0x5555555574a2 <main+423>:	mov    %eax,-0xbc(%rbp)
+   0x5555555574a8 <main+429>:	lea    -0x2a7(%rip),%rax        # 0x555555557208 <mul>
+   0x5555555574af <main+436>:	mov    %rax,-0xb8(%rbp)
+   0x5555555574b6 <main+443>:	mov    -0xbc(%rbp),%ecx
+   0x5555555574bc <main+449>:	mov    -0xb8(%rbp),%rax
+(gdb) x/4dw $sp
+0xffff935a9b00:	-1822778120	65535	6	1
+(gdb) x/8c greeting
+0x555555558004:	72 'H'	101 'e'	108 'l'	108 'l'	111 'o'	44 ','	32 ' '	112 'p'
+(gdb) disassemble main
+Dump of assembler code for function main:
+   0x00005555555572fb <+0>:	endbr64
+   0x00005555555572ff <+4>:	push   %rbp
+   0x0000555555557300 <+5>:	mov    %rsp,%rbp
+   0x0000555555557303 <+8>:	sub    $0xd0,%rsp
+   0x000055555555730a <+15>:	mov    %edi,-0xc4(%rbp)
+   0x0000555555557310 <+21>:	mov    %rsi,-0xd0(%rbp)
+   0x0000555555557317 <+28>:	mov    %fs:0x28,%rax
+   0x0000555555557320 <+37>:	mov    %rax,-0x8(%rbp)
+   0x0000555555557324 <+41>:	xor    %eax,%eax
+   0x0000555555557326 <+43>:	lea    -0x164(%rip),%rax        # 0x5555555571c9 <add>
+   0x000055555555732d <+50>:	mov    %rax,-0xb8(%rbp)
+   0x0000555555557334 <+57>:	lea    -0x40(%rbp),%rax
+   0x0000555555557338 <+61>:	movabs $0x4141414141414141,%rsi
+   0x0000555555557342 <+71>:	movabs $0x4242424242424242,%rdi
+   0x000055555555734c <+81>:	mov    %rsi,(%rax)
+   0x000055555555734f <+84>:	mov    %rdi,0x8(%rax)
+   0x0000555555557353 <+88>:	movabs $0x4342424242424242,%rsi
+   0x000055555555735d <+98>:	movabs $0x43434343434343,%rdi
+   0x0000555555557367 <+108>:	mov    %rsi,0x9(%rax)
+   0x000055555555736b <+112>:	mov    %rdi,0x11(%rax)
+   0x000055555555736f <+116>:	movl   $0x0,-0xc0(%rbp)
+   0x0000555555557379 <+126>:	jmp    0x55555555739c <main+161>
+   0x000055555555737b <+128>:	mov    $0x20,%edi
+   0x0000555555557380 <+133>:	call   0x5555555570d0 <malloc@plt>
+   0x0000555555557385 <+138>:	mov    %rax,%rdx
+   0x0000555555557388 <+141>:	mov    -0xc0(%rbp),%eax
+   0x000055555555738e <+147>:	cltq
+   0x0000555555557390 <+149>:	mov    %rdx,-0x80(%rbp,%rax,8)
+   0x0000555555557395 <+154>:	addl   $0x1,-0xc0(%rbp)
+   0x000055555555739c <+161>:	cmpl   $0x7,-0xc0(%rbp)
+   0x00005555555573a3 <+168>:	jle    0x55555555737b <main+128>
+   0x00005555555573a5 <+170>:	movl   $0x0,-0xc0(%rbp)
+   0x00005555555573af <+180>:	jmp    0x5555555573d5 <main+218>
+   0x00005555555573b1 <+182>:	mov    $0x80,%edi
+   0x00005555555573b6 <+187>:	call   0x5555555570d0 <malloc@plt>
+   0x00005555555573bb <+192>:	mov    %rax,%rdx
+   0x00005555555573be <+195>:	mov    -0xc0(%rbp),%eax
+   0x00005555555573c4 <+201>:	cltq
+   0x00005555555573c6 <+203>:	mov    %rdx,-0xa0(%rbp,%rax,8)
+   0x00005555555573ce <+211>:	addl   $0x1,-0xc0(%rbp)
+   0x00005555555573d5 <+218>:	cmpl   $0x2,-0xc0(%rbp)
+   0x00005555555573dc <+225>:	jle    0x5555555573b1 <main+182>
+   0x00005555555573de <+227>:	movl   $0x0,-0xc0(%rbp)
+   0x00005555555573e8 <+237>:	jmp    0x55555555740e <main+275>
+   0x00005555555573ea <+239>:	mov    $0x500,%edi
+   0x00005555555573ef <+244>:	call   0x5555555570d0 <malloc@plt>
+   0x00005555555573f4 <+249>:	mov    %rax,%rdx
+   0x00005555555573f7 <+252>:	mov    -0xc0(%rbp),%eax
+   0x00005555555573fd <+258>:	cltq
+   0x00005555555573ff <+260>:	mov    %rdx,-0xb0(%rbp,%rax,8)
+   0x0000555555557407 <+268>:	addl   $0x1,-0xc0(%rbp)
+   0x000055555555740e <+275>:	cmpl   $0x1,-0xc0(%rbp)
+   0x0000555555557415 <+282>:	jle    0x5555555573ea <main+239>
+   0x0000555555557417 <+284>:	mov    -0x80(%rbp),%rax
+   0x000055555555741b <+288>:	movabs $0x7274732070616568,%rsi
+   0x0000555555557425 <+298>:	movabs $0x6572656820676e69,%rdi
+   0x000055555555742f <+308>:	mov    %rsi,(%rax)
+   0x0000555555557432 <+311>:	mov    %rdi,0x8(%rax)
+   0x0000555555557436 <+315>:	movb   $0x0,0x10(%rax)
+   0x000055555555743a <+319>:	movl   $0x0,-0xc0(%rbp)
+   0x0000555555557444 <+329>:	jmp    0x555555557462 <main+359>
+   0x0000555555557446 <+331>:	mov    -0xc0(%rbp),%eax
+   0x000055555555744c <+337>:	cltq
+   0x000055555555744e <+339>:	mov    -0x80(%rbp,%rax,8),%rax
+   0x0000555555557453 <+344>:	mov    %rax,%rdi
+   0x0000555555557456 <+347>:	call   0x555555557090 <free@plt>
+   0x000055555555745b <+352>:	addl   $0x1,-0xc0(%rbp)
+   0x0000555555557462 <+359>:	cmpl   $0x7,-0xc0(%rbp)
+   0x0000555555557469 <+366>:	jle    0x555555557446 <main+331>
+   0x000055555555746b <+368>:	mov    -0xa0(%rbp),%rax
+   0x0000555555557472 <+375>:	mov    %rax,%rdi
+   0x0000555555557475 <+378>:	call   0x555555557090 <free@plt>
+   0x000055555555747a <+383>:	mov    -0xb0(%rbp),%rax
+   0x0000555555557481 <+390>:	mov    %rax,%rdi
+   0x0000555555557484 <+393>:	call   0x555555557090 <free@plt>
+=> 0x0000555555557489 <+398>:	mov    -0xb8(%rbp),%rax
+   0x0000555555557490 <+405>:	mov    $0x7,%edx
+   0x0000555555557495 <+410>:	mov    $0x6,%esi
+   0x000055555555749a <+415>:	mov    %rax,%rdi
+   0x000055555555749d <+418>:	call   0x555555557246 <compute>
+   0x00005555555574a2 <+423>:	mov    %eax,-0xbc(%rbp)
+   0x00005555555574a8 <+429>:	lea    -0x2a7(%rip),%rax        # 0x555555557208 <mul>
+   0x00005555555574af <+436>:	mov    %rax,-0xb8(%rbp)
+   0x00005555555574b6 <+443>:	mov    -0xbc(%rbp),%ecx
+   0x00005555555574bc <+449>:	mov    -0xb8(%rbp),%rax
+   0x00005555555574c3 <+456>:	mov    $0x2,%edx
+   0x00005555555574c8 <+461>:	mov    %ecx,%esi
+   0x00005555555574ca <+463>:	mov    %rax,%rdi
+   0x00005555555574cd <+466>:	call   0x555555557246 <compute>
+   0x00005555555574d2 <+471>:	add    %eax,-0xbc(%rbp)
+   0x00005555555574d8 <+477>:	mov    0x2b81(%rip),%rax        # 0x55555555a060 <greeting>
+   0x00005555555574df <+484>:	lea    -0x40(%rbp),%rcx
+   0x00005555555574e3 <+488>:	mov    -0xbc(%rbp),%edx
+   0x00005555555574e9 <+494>:	mov    %rcx,%r8
+   0x00005555555574ec <+497>:	mov    %edx,%ecx
+   0x00005555555574ee <+499>:	lea    0x2b2b(%rip),%rdx        # 0x55555555a020 <global_buf>
+   0x00005555555574f5 <+506>:	mov    %rax,%rsi
+   0x00005555555574f8 <+509>:	lea    0xb1c(%rip),%rax        # 0x55555555801b
+   0x00005555555574ff <+516>:	mov    %rax,%rdi
+   0x0000555555557502 <+519>:	mov    $0x0,%eax
+   0x0000555555557507 <+524>:	call   0x5555555570c0 <printf@plt>
+   0x000055555555750c <+529>:	cmpl   $0x1,-0xc4(%rbp)
+   0x0000555555557513 <+536>:	jle    0x555555557522 <main+551>
+   0x0000555555557515 <+538>:	mov    -0xd0(%rbp),%rax
+   0x000055555555751c <+545>:	mov    0x8(%rax),%rax
+   0x0000555555557520 <+549>:	jmp    0x555555557529 <main+558>
+   0x0000555555557522 <+551>:	lea    0xb07(%rip),%rax        # 0x555555558030
+   0x0000555555557529 <+558>:	mov    %rax,%rdi
+   0x000055555555752c <+561>:	call   0x555555557297 <vuln>
+   0x0000555555557531 <+566>:	mov    $0x0,%eax
+   0x0000555555557536 <+571>:	mov    -0x8(%rbp),%rdx
+   0x000055555555753a <+575>:	sub    %fs:0x28,%rdx
+   0x0000555555557543 <+584>:	je     0x55555555754a <main+591>
+   0x0000555555557545 <+586>:	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x000055555555754a <+591>:	leave
+   0x000055555555754b <+592>:	ret
+End of assembler dump.
+(gdb) set disassembly-flavor intel
+(gdb) disassemble compute
+Dump of assembler code for function compute:
+   0x0000555555557246 <+0>:	endbr64
+   0x000055555555724a <+4>:	push   rbp
+   0x000055555555724b <+5>:	mov    rbp,rsp
+   0x000055555555724e <+8>:	sub    rsp,0x20
+   0x0000555555557252 <+12>:	mov    QWORD PTR [rbp-0x18],rdi
+   0x0000555555557256 <+16>:	mov    DWORD PTR [rbp-0x1c],esi
+   0x0000555555557259 <+19>:	mov    DWORD PTR [rbp-0x20],edx
+   0x000055555555725c <+22>:	mov    rax,QWORD PTR fs:0x28
+   0x0000555555557265 <+31>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000555555557269 <+35>:	xor    eax,eax
+   0x000055555555726b <+37>:	mov    edx,DWORD PTR [rbp-0x20]
+   0x000055555555726e <+40>:	mov    eax,DWORD PTR [rbp-0x1c]
+   0x0000555555557271 <+43>:	mov    rcx,QWORD PTR [rbp-0x18]
+   0x0000555555557275 <+47>:	mov    esi,edx
+   0x0000555555557277 <+49>:	mov    edi,eax
+   0x0000555555557279 <+51>:	call   rcx
+   0x000055555555727b <+53>:	mov    DWORD PTR [rbp-0xc],eax
+   0x000055555555727e <+56>:	mov    eax,DWORD PTR [rbp-0xc]
+   0x0000555555557281 <+59>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x0000555555557285 <+63>:	sub    rdx,QWORD PTR fs:0x28
+   0x000055555555728e <+72>:	je     0x555555557295 <compute+79>
+   0x0000555555557290 <+74>:	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x0000555555557295 <+79>:	leave
+   0x0000555555557296 <+80>:	ret
+End of assembler dump.
+(gdb) disassemble /r add
+Dump of assembler code for function add:
+   0x00005555555571c9 <+0>:	f3 0f 1e fa        	endbr64
+   0x00005555555571cd <+4>:	55                 	push   rbp
+   0x00005555555571ce <+5>:	48 89 e5           	mov    rbp,rsp
+   0x00005555555571d1 <+8>:	48 83 ec 20        	sub    rsp,0x20
+   0x00005555555571d5 <+12>:	89 7d ec           	mov    DWORD PTR [rbp-0x14],edi
+   0x00005555555571d8 <+15>:	89 75 e8           	mov    DWORD PTR [rbp-0x18],esi
+   0x00005555555571db <+18>:	64 48 8b 04 25 28 00 00 00	mov    rax,QWORD PTR fs:0x28
+   0x00005555555571e4 <+27>:	48 89 45 f8        	mov    QWORD PTR [rbp-0x8],rax
+   0x00005555555571e8 <+31>:	31 c0              	xor    eax,eax
+   0x00005555555571ea <+33>:	8b 55 ec           	mov    edx,DWORD PTR [rbp-0x14]
+   0x00005555555571ed <+36>:	8b 45 e8           	mov    eax,DWORD PTR [rbp-0x18]
+   0x00005555555571f0 <+39>:	01 d0              	add    eax,edx
+   0x00005555555571f2 <+41>:	48 8b 55 f8        	mov    rdx,QWORD PTR [rbp-0x8]
+   0x00005555555571f6 <+45>:	64 48 2b 14 25 28 00 00 00	sub    rdx,QWORD PTR fs:0x28
+   0x00005555555571ff <+54>:	74 05              	je     0x555555557206 <add+61>
+   0x0000555555557201 <+56>:	e8 aa fe ff ff     	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x0000555555557206 <+61>:	c9                 	leave
+   0x0000555555557207 <+62>:	c3                 	ret
+End of assembler dump.
+(gdb) disassemble /s mul
+Dump of assembler code for function mul:
+test.c:
+11	int mul(int a, int b) { return a * b; }
+   0x0000555555557208 <+0>:	endbr64
+   0x000055555555720c <+4>:	push   rbp
+   0x000055555555720d <+5>:	mov    rbp,rsp
+   0x0000555555557210 <+8>:	sub    rsp,0x20
+   0x0000555555557214 <+12>:	mov    DWORD PTR [rbp-0x14],edi
+   0x0000555555557217 <+15>:	mov    DWORD PTR [rbp-0x18],esi
+   0x000055555555721a <+18>:	mov    rax,QWORD PTR fs:0x28
+   0x0000555555557223 <+27>:	mov    QWORD PTR [rbp-0x8],rax
+   0x0000555555557227 <+31>:	xor    eax,eax
+   0x0000555555557229 <+33>:	mov    eax,DWORD PTR [rbp-0x14]
+   0x000055555555722c <+36>:	imul   eax,DWORD PTR [rbp-0x18]
+   0x0000555555557230 <+40>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x0000555555557234 <+44>:	sub    rdx,QWORD PTR fs:0x28
+   0x000055555555723d <+53>:	je     0x555555557244 <mul+60>
+   0x000055555555723f <+55>:	call   0x5555555570b0 <__stack_chk_fail@plt>
+   0x0000555555557244 <+60>:	leave
+   0x0000555555557245 <+61>:	ret
+End of assembler dump.
+(gdb) bt
+#0  main (argc=1, argv=0xffff935a9cf8) at test.c:38
+(gdb) bt full
+#0  main (argc=1, argv=0xffff935a9cf8) at test.c:38
+        stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 17 times>, "\273ؒ\377\377\000"
+        fp = 0x5555555571c9 <add>
+        small = {0x55555555b2a0, 0x55555555b2d0, 0x55555555b300, 0x55555555b330, 0x55555555b360, 0x55555555b390, 
+          0x55555555b3c0, 0x55555555b3f0}
+        mid = {0x55555555b420, 0x55555555b4b0, 0x55555555b540}
+        big = {0x55555555b5d0, 0x55555555bae0}
+        i = 8
+        r = 0
+(gdb) info frame
+Stack level 0, frame at 0xffff935a9be0:
+ rip = 0x555555557489 in main (test.c:38); saved rip = 0xffff92ad91ca
+ source language c.
+ Arglist at 0xffff935a9bd0, args: argc=1, argv=0xffff935a9cf8
+ Locals at 0xffff935a9bd0, Previous frame's sp is 0xffff935a9be0
+ Saved registers:
+  rbp at 0xffff935a9bd0, rip at 0xffff935a9bd8
+(gdb) info locals
+stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 17 times>, "\273ؒ\377\377\000"
+fp = 0x5555555571c9 <add>
+small = {0x55555555b2a0, 0x55555555b2d0, 0x55555555b300, 0x55555555b330, 0x55555555b360, 0x55555555b390, 
+  0x55555555b3c0, 0x55555555b3f0}
+mid = {0x55555555b420, 0x55555555b4b0, 0x55555555b540}
+big = {0x55555555b5d0, 0x55555555bae0}
+i = 8
+r = 0
+(gdb) info args
+argc = 1
+argv = 0xffff935a9cf8
+(gdb) info proc mappings
+process 1053
+Mapped address spaces:
+
+          Start Addr           End Addr       Size     Offset  Perms  objfile
+      0x555555556000     0x555555557000     0x1000        0x0  r--p   /work/test_x64
+      0x555555557000     0x555555558000     0x1000     0x1000  r-xp   /work/test_x64
+      0x555555558000     0x555555559000     0x1000     0x2000  r--p   /work/test_x64
+      0x555555559000     0x55555555a000     0x1000     0x2000  r--p   /work/test_x64
+      0x55555555a000     0x55555555b000     0x1000     0x3000  rw-p   /work/test_x64
+      0x55555555b000     0x55555557c000    0x21000        0x0  rw-p   [heap]
+      0xffff92aa4000     0xffff92aa7000     0x3000        0x0  rw-p   
+      0xffff92aaf000     0xffff92ad7000    0x28000        0x0  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff92ad7000     0xffff92c5f000   0x188000    0x28000  r-xp   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff92c5f000     0xffff92cae000    0x4f000   0x1b0000  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff92cae000     0xffff92cb2000     0x4000   0x1fe000  r--p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff92cb2000     0xffff92cb4000     0x2000   0x202000  rw-p   /usr/x86_64-linux-gnu/lib/libc.so.6
+      0xffff92cb4000     0xffff92cc1000     0xd000        0x0  rw-p   
+      0xffff92cc4000     0xffff92cc6000     0x2000        0x0  rw-p   
+      0xffff92d66000     0xffff92d68000     0x2000        0x0  rw-p   
+      0xffff92d6a000     0xffff92d6b000     0x1000        0x0  r-xp   [vdso]
+      0xffff92d6b000     0xffff92d6c000     0x1000        0x0  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff92d6c000     0xffff92d97000    0x2b000     0x1000  r-xp   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff92d97000     0xffff92da1000     0xa000    0x2c000  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff92da1000     0xffff92da3000     0x2000    0x36000  r--p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff92da3000     0xffff92da5000     0x2000    0x38000  rw-p   /usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+      0xffff92da9000     0xffff92daa000     0x1000        0x0  ---p   
+      0xffff92daa000     0xffff935aa000   0x800000        0x0  rw-p   [stack]
+  0xffffffffff600000 0xffffffffff601000     0x1000        0x0  --xp   [vsyscall]
+(gdb) info sharedlibrary
+From                To                  Syms Read   Shared Object Library
+0x0000ffff92d6c000  0x0000ffff92d96195  Yes (*)     /usr/x86_64-linux-gnu/lib64/ld-linux-x86-64.so.2
+0x0000ffff92ad7800  0x0000ffff92c5eb4d  Yes (*)     /usr/x86_64-linux-gnu/lib/libc.so.6
+(*): Shared library is missing debugging information.
+(gdb) info threads
+  Id   Target Id                          Frame 
+* 1    Thread 1053.1053 (CPU#0 [running]) main (argc=1, argv=0xffff935a9cf8) at test.c:38
+(gdb) info inferiors
+  Num  Description       Connection           Executable        
+* 1    process 1053      1 (remote :1234)     /work/test_x64    
+(gdb) continue
+Continuing.
+
+Temporary breakpoint 2, compute (f=0x5555555571c9 <add>, x=6, y=7) at test.c:13
+13	int compute(op_fn f, int x, int y) {
+(gdb) finish
+Run till exit from #0  compute (f=0x5555555571c9 <add>, x=6, y=7) at test.c:13
+0x00005555555574a2 in main (argc=1, argv=0xffff935a9cf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+Value returned is $10 = 13
+(gdb) up
+Initial frame selected; you cannot go up.
+(gdb) frame
+#0  0x00005555555574a2 in main (argc=1, argv=0xffff935a9cf8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+(gdb) down
+Bottom (innermost) frame selected; you cannot go down.
+(gdb) watch r
+Hardware watchpoint 4: r
+(gdb) continue
+Continuing.
+Warning:
+Could not insert hardware watchpoint 4.
+Could not insert hardware breakpoints:
+You may have requested too many hardware breakpoints/watchpoints.
+
+Command aborted.
+(gdb) delete
+Delete all breakpoints, watchpoints, tracepoints, and catchpoints? (y or n) y
+(gdb) info symbol $pc
+main + 423 in section .text of /work/test_x64
+(gdb) info line *$pc
+Line 38 of "test.c" starts at address 0x555555557489 <main+398> and ends at 0x5555555574a8 <main+429>.
+(gdb) until 41
+main (argc=1, argv=0xffff935a9cf8) at test.c:41
+41	    printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+(gdb) continue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=short
+[Inferior 1 (process 1053) exited normally]
+(gdb) 

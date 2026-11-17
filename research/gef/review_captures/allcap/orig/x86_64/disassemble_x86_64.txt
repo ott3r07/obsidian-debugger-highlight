@@ -1,0 +1,119 @@
+(qemu) gef➤  disassemble main
+Dump of assembler code for function main:
+   0x0000000000401926 <+0>:	endbr64
+   0x000000000040192a <+4>:	push   rbp
+   0x000000000040192b <+5>:	mov    rbp,rsp
+   0x000000000040192e <+8>:	sub    rsp,0xd0
+   0x0000000000401935 <+15>:	mov    DWORD PTR [rbp-0xc4],edi
+   0x000000000040193b <+21>:	mov    QWORD PTR [rbp-0xd0],rsi
+   0x0000000000401942 <+28>:	mov    rax,QWORD PTR fs:0x28
+   0x000000000040194b <+37>:	mov    QWORD PTR [rbp-0x8],rax
+   0x000000000040194f <+41>:	xor    eax,eax
+   0x0000000000401951 <+43>:	lea    rax,[rip+0xffffffffffffff0d]        # 0x401865 <add>
+   0x0000000000401958 <+50>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x000000000040195f <+57>:	lea    rax,[rbp-0x40]
+   0x0000000000401963 <+61>:	movabs rsi,0x4141414141414141
+   0x000000000040196d <+71>:	movabs rdi,0x4242424242424242
+   0x0000000000401977 <+81>:	mov    QWORD PTR [rax],rsi
+   0x000000000040197a <+84>:	mov    QWORD PTR [rax+0x8],rdi
+   0x000000000040197e <+88>:	movabs rsi,0x4342424242424242
+   0x0000000000401988 <+98>:	movabs rdi,0x43434343434343
+   0x0000000000401992 <+108>:	mov    QWORD PTR [rax+0x9],rsi
+   0x0000000000401996 <+112>:	mov    QWORD PTR [rax+0x11],rdi
+   0x000000000040199a <+116>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x00000000004019a4 <+126>:	jmp    0x4019c7 <main+161>
+   0x00000000004019a6 <+128>:	mov    edi,0x20
+   0x00000000004019ab <+133>:	call   0x40f140 <malloc>
+   0x00000000004019b0 <+138>:	mov    rdx,rax
+   0x00000000004019b3 <+141>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x00000000004019b9 <+147>:	cdqe
+   0x00000000004019bb <+149>:	mov    QWORD PTR [rbp+rax*8-0x80],rdx
+   0x00000000004019c0 <+154>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x00000000004019c7 <+161>:	cmp    DWORD PTR [rbp-0xc0],0x7
+   0x00000000004019ce <+168>:	jle    0x4019a6 <main+128>
+   0x00000000004019d0 <+170>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x00000000004019da <+180>:	jmp    0x401a00 <main+218>
+   0x00000000004019dc <+182>:	mov    edi,0x80
+   0x00000000004019e1 <+187>:	call   0x40f140 <malloc>
+   0x00000000004019e6 <+192>:	mov    rdx,rax
+   0x00000000004019e9 <+195>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x00000000004019ef <+201>:	cdqe
+   0x00000000004019f1 <+203>:	mov    QWORD PTR [rbp+rax*8-0xa0],rdx
+   0x00000000004019f9 <+211>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a00 <+218>:	cmp    DWORD PTR [rbp-0xc0],0x2
+   0x0000000000401a07 <+225>:	jle    0x4019dc <main+182>
+   0x0000000000401a09 <+227>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x0000000000401a13 <+237>:	jmp    0x401a39 <main+275>
+   0x0000000000401a15 <+239>:	mov    edi,0x500
+   0x0000000000401a1a <+244>:	call   0x40f140 <malloc>
+   0x0000000000401a1f <+249>:	mov    rdx,rax
+   0x0000000000401a22 <+252>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x0000000000401a28 <+258>:	cdqe
+   0x0000000000401a2a <+260>:	mov    QWORD PTR [rbp+rax*8-0xb0],rdx
+   0x0000000000401a32 <+268>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a39 <+275>:	cmp    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a40 <+282>:	jle    0x401a15 <main+239>
+   0x0000000000401a42 <+284>:	mov    rax,QWORD PTR [rbp-0x80]
+   0x0000000000401a46 <+288>:	movabs rsi,0x7274732070616568
+   0x0000000000401a50 <+298>:	movabs rdi,0x6572656820676e69
+   0x0000000000401a5a <+308>:	mov    QWORD PTR [rax],rsi
+   0x0000000000401a5d <+311>:	mov    QWORD PTR [rax+0x8],rdi
+   0x0000000000401a61 <+315>:	mov    BYTE PTR [rax+0x10],0x0
+   0x0000000000401a65 <+319>:	mov    DWORD PTR [rbp-0xc0],0x0
+   0x0000000000401a6f <+329>:	jmp    0x401a8d <main+359>
+   0x0000000000401a71 <+331>:	mov    eax,DWORD PTR [rbp-0xc0]
+   0x0000000000401a77 <+337>:	cdqe
+   0x0000000000401a79 <+339>:	mov    rax,QWORD PTR [rbp+rax*8-0x80]
+   0x0000000000401a7e <+344>:	mov    rdi,rax
+   0x0000000000401a81 <+347>:	call   0x40f810 <free>
+   0x0000000000401a86 <+352>:	add    DWORD PTR [rbp-0xc0],0x1
+   0x0000000000401a8d <+359>:	cmp    DWORD PTR [rbp-0xc0],0x7
+   0x0000000000401a94 <+366>:	jle    0x401a71 <main+331>
+   0x0000000000401a96 <+368>:	mov    rax,QWORD PTR [rbp-0xa0]
+   0x0000000000401a9d <+375>:	mov    rdi,rax
+   0x0000000000401aa0 <+378>:	call   0x40f810 <free>
+   0x0000000000401aa5 <+383>:	mov    rax,QWORD PTR [rbp-0xb0]
+   0x0000000000401aac <+390>:	mov    rdi,rax
+   0x0000000000401aaf <+393>:	call   0x40f810 <free>
+   0x0000000000401ab4 <+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x0000000000401abb <+405>:	mov    edx,0x7
+   0x0000000000401ac0 <+410>:	mov    esi,0x6
+   0x0000000000401ac5 <+415>:	mov    rdi,rax
+   0x0000000000401ac8 <+418>:	call   0x401894 <compute>
+=> 0x0000000000401acd <+423>:	mov    DWORD PTR [rbp-0xbc],eax
+   0x0000000000401ad3 <+429>:	lea    rax,[rip+0xfffffffffffffda3]        # 0x40187d <mul>
+   0x0000000000401ada <+436>:	mov    QWORD PTR [rbp-0xb8],rax
+   0x0000000000401ae1 <+443>:	mov    ecx,DWORD PTR [rbp-0xbc]
+   0x0000000000401ae7 <+449>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x0000000000401aee <+456>:	mov    edx,0x2
+   0x0000000000401af3 <+461>:	mov    esi,ecx
+   0x0000000000401af5 <+463>:	mov    rdi,rax
+   0x0000000000401af8 <+466>:	call   0x401894 <compute>
+   0x0000000000401afd <+471>:	add    DWORD PTR [rbp-0xbc],eax
+   0x0000000000401b03 <+477>:	mov    rax,QWORD PTR [rip+0xa8616]        # 0x4aa120 <greeting>
+   0x0000000000401b0a <+484>:	lea    rcx,[rbp-0x40]
+   0x0000000000401b0e <+488>:	mov    edx,DWORD PTR [rbp-0xbc]
+   0x0000000000401b14 <+494>:	mov    r8,rcx
+   0x0000000000401b17 <+497>:	mov    ecx,edx
+   0x0000000000401b19 <+499>:	lea    rdx,[rip+0xa85c0]        # 0x4aa0e0 <global_buf>
+   0x0000000000401b20 <+506>:	mov    rsi,rax
+   0x0000000000401b23 <+509>:	lea    rax,[rip+0x7d4fa]        # 0x47f024
+   0x0000000000401b2a <+516>:	mov    rdi,rax
+   0x0000000000401b2d <+519>:	mov    eax,0x0
+   0x0000000000401b32 <+524>:	call   0x404fd0 <printf>
+   0x0000000000401b37 <+529>:	cmp    DWORD PTR [rbp-0xc4],0x1
+   0x0000000000401b3e <+536>:	jle    0x401b4d <main+551>
+   0x0000000000401b40 <+538>:	mov    rax,QWORD PTR [rbp-0xd0]
+   0x0000000000401b47 <+545>:	mov    rax,QWORD PTR [rax+0x8]
+   0x0000000000401b4b <+549>:	jmp    0x401b54 <main+558>
+   0x0000000000401b4d <+551>:	lea    rax,[rip+0x7d4e5]        # 0x47f039
+   0x0000000000401b54 <+558>:	mov    rdi,rax
+   0x0000000000401b57 <+561>:	call   0x4018c2 <vuln>
+   0x0000000000401b5c <+566>:	mov    eax,0x0
+   0x0000000000401b61 <+571>:	mov    rdx,QWORD PTR [rbp-0x8]
+   0x0000000000401b65 <+575>:	sub    rdx,QWORD PTR fs:0x28
+   0x0000000000401b6e <+584>:	je     0x401b75 <main+591>
+   0x0000000000401b70 <+586>:	call   0x41a6c0 <__stack_chk_fail_local>
+   0x0000000000401b75 <+591>:	leave
+   0x0000000000401b76 <+592>:	ret
+End of assembler dump.

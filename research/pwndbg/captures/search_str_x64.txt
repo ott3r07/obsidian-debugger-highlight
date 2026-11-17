@@ -1,0 +1,3 @@
+pwndbg> search "global data"
+Searching for byte: b'global data'
+test_x64        0x55555555a020 'global data string'

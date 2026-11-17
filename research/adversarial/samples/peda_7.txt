@@ -1,0 +1,48 @@
+# SOURCE: https://github.com/tsg-ut/sig-ctf-2017/blob/master/docs/04/README.md
+vagrant@sig-ctf-2017:~/shared-folder/problems/echo2$ gdb -q ./echo2
+Reading symbols from ./echo2...(no debugging symbols found)...done.
+gdb-peda$ disass main
+Dump of assembler code for function main:
+   0x0804851d <+0>:	push   ebp
+   0x0804851e <+1>:	mov    ebp,esp
+   0x08048520 <+3>:	and    esp,0xfffffff0
+   0x08048523 <+6>:	add    esp,0xffffff80
+   0x08048526 <+9>:	mov    DWORD PTR [esp],0x8048628
+   0x0804852d <+16>:	call   0x8048390 <printf@plt>
+   0x08048532 <+21>:	mov    eax,ds:0x804a040
+   0x08048537 <+26>:	mov    DWORD PTR [esp],eax
+   0x0804853a <+29>:	call   0x80483a0 <fflush@plt>
+   0x0804853f <+34>:	lea    eax,[esp+0x1c]
+   0x08048543 <+38>:	mov    DWORD PTR [esp],eax
+   0x08048546 <+41>:	call   0x80483b0 <gets@plt>
+   0x0804854b <+46>:	lea    eax,[esp+0x1c]
+   0x0804854f <+50>:	mov    DWORD PTR [esp+0x4],eax
+   0x08048553 <+54>:	mov    DWORD PTR [esp],0x8048650
+   0x0804855a <+61>:	call   0x8048390 <printf@plt>
+   0x0804855f <+66>:	mov    eax,ds:0x804a040
+   0x08048564 <+71>:	mov    DWORD PTR [esp],eax
+   0x08048567 <+74>:	call   0x80483a0 <fflush@plt>
+   0x0804856c <+79>:	mov    eax,0x0
+   0x08048571 <+84>:	leave
+   0x08048572 <+85>:	ret
+End of assembler dump.
+gdb-peda$ b main
+Breakpoint 1 at 0x8048520
+gdb-peda$ b *0x0804856c
+Breakpoint 2 at 0x804856c
+
+gdb-peda$ disass 0x80483c0
+Dump of assembler code for function fgets@plt:
+   0x080483c0 <+0>:	jmp    DWORD PTR ds:0x804a014
+   0x080483c6 <+6>:	push   0x10
+   0x080483cb <+11>:	jmp    0x8048390
+
+gdb-peda$ disass binsh
+Dump of assembler code for function binsh:
+   0x080484fd <+0>:	push   ebp
+   0x080484fe <+1>:	mov    ebp,esp
+   0x08048500 <+3>:	sub    esp,0x18
+   0x08048503 <+6>:	mov    DWORD PTR [esp],0x80485f0
+   0x0804850a <+13>:	call   0x80483d0 <system@plt>
+   0x0804850f <+18>:	leave
+   0x08048510 <+19>:	ret

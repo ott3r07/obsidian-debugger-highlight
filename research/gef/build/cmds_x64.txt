@@ -1,0 +1,68 @@
+gef_remote	gef-remote --qemu-user --qemu-binary /work/test_x64 localhost 1234
+-	python import shutil; shutil.copy('/work/maps_x64_qemu.txt', str(gef.session.remote.maps)); reset_all_caches(); print('[research] replaced fake qemu maps with real guest layout (from qemu -d page)')
+-	gef config gef.libc_version 2.39
+context_after_fix	context
+break_main	break main
+break_compute	break *(compute+36)
+break_branch	break *(main+168)
+info_breakpoints	info breakpoints
+continue_main	continue
+context	context
+ni	ni
+ni	ni
+si	si
+registers	registers
+registers_sel	registers $rax $rsp $rip
+info_registers	info registers
+telescope	telescope $sp -l 12
+dereference	dereference $sp -l 6
+x_20gx	x/20gx $sp
+x_s	x/s greeting
+x_10i	x/10i $pc
+vmmap	vmmap
+vmmap_filter	vmmap libc
+checksec	checksec
+elf_info	elf-info
+got	got
+canary	canary
+p	p greeting
+p	p/x $sp
+p	p $pc
+p	p fp
+p	p stackbuf
+xinfo	xinfo $sp
+xinfo	xinfo $pc
+xinfo	xinfo &global_buf
+branch_taken	continue
+ignore	ignore 3 7
+branch_not_taken	continue
+continue_bp	continue
+bt	bt
+si_call	si
+bt_nested	bt
+finish	finish
+up	up
+-	python h=gef.heap; b=int(gdb.parse_and_eval("*(unsigned long*)((char*)&mp_+96)")); [setattr(h,k,b) for k in list(vars(h)) if k.endswith("__heap_base")]; print("[research] heap base forced to mp_.sbrk_base=%#x" % b)
+heap_chunks	heap chunks
+heap_bins	heap bins
+heap_bins_tcache	heap bins tcache
+heap_bins_fast	heap bins fast
+heap_bins_unsorted	heap bins unsorted
+heap_bins_small	heap bins small
+heap_arenas	heap arenas
+heap_chunk	heap chunk mid[1]
+heap_chunk	heap chunk small[0]
+search_pattern	search-pattern "heap string"
+search_pattern	search-pattern AAAAAAAABBBB
+hexdump_byte	hexdump byte $sp --size 64
+hexdump_qword	hexdump qword $sp --size 8
+hexdump_dword	hexdump dword $sp --size 8
+pattern_create	pattern create 64
+pattern_search	pattern search 0x6161616161616167
+pattern_search	pattern search aaaaaaba
+disassemble	disassemble main
+errors	heap chunk 0x10
+errors	xinfo 0x10
+errors	nosuchcommand
+delete	delete
+continue_exit	continue

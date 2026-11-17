@@ -1,0 +1,60 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> context
+WARNING: Your register accessing on id 251 is deprecated and will get UC_ERR_ARG in the future release (2.2.0) because the accessing is either no-op or not defined. If you believe the register should be implemented or there is a bug, please submit an issue to https://github.com/unicorn-engine/unicorn. Set UC_IGNORE_REG_BREAK=1 to ignore this warning.
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*EAX  0x8102ff4 (_GLOBAL_OFFSET_TABLE_) ◂— 0
+*EBX  0x8102ff4 (_GLOBAL_OFFSET_TABLE_) ◂— 0
+*ECX  0x8106a00 (_dl_stack_cache) —▸ 0x41004ba0 ◂— 0x8106a00 (_dl_stack_cache)
+*EDX  0x2800000
+*EDI  0x40800cb0 ◂— 1
+*ESI  0xc
+*EBP  0x40800b98 —▸ 0x40800c98 ◂— 1
+*ESP  0x40800b98 —▸ 0x40800c98 ◂— 1
+*EIP  0x8049965 (many_args+17) ◂— mov edx, dword ptr [ebp + 8]
+───────────────────────────────────────────[ DISASM / i386 / set emulate on ]───────────────────────────────────────────
+   0x8049959 <many_args+5>     mov    ebp, esp
+   0x804995b <many_args+7>     call   __x86.get_pc_thunk.ax       <__x86.get_pc_thunk.ax>
+ 
+   0x8049960 <many_args+12>    add    eax, 0xb9694
+b► 0x8049965 <many_args+17>    mov    edx, dword ptr [ebp + 8]        EDX, [{alpha_parameter}] => 0x1111
+   0x8049968 <many_args+20>    mov    eax, dword ptr [ebp + 0xc]      EAX, [{beta_parameter}] => 0x2222
+   0x804996b <many_args+23>    add    edx, eax                        EDX => 0x3333 (0x1111 + 0x2222)
+   0x804996d <many_args+25>    mov    eax, dword ptr [ebp + 0x18]     EAX, [{epsilon_value}] => 0x5555
+   0x8049970 <many_args+28>    add    edx, eax                        EDX => 0x8888 (0x3333 + 0x5555)
+   0x8049972 <many_args+30>    mov    eax, dword ptr [ebp + 0x1c]     EAX, [{zeta_value}] => 0x6666
+   0x8049975 <many_args+33>    add    edx, eax                        EDX => 0xeeee (0x8888 + 0x6666)
+   0x8049977 <many_args+35>    mov    eax, dword ptr [ebp + 0x10]     EAX, [{gamma_string}] => 0x80c8030 ◂— 'a fairly long string argument to force gdb line wr...'
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /rv/rv.c:17
+   11 struct cfg g_cfg = { "review", {1,2,3,0,0,0}, {7, "inn"}, 0.5, 0, {0} };
+   12 struct node *head;
+   13 
+   14 void cb(void) { puts("cb"); }
+   15 
+   16 int many_args(long alpha_parameter, long beta_parameter, const char *gamma_string, struct cfg *delta_config, long epsilon_value, long zeta_value) {
+ ► 17     return (int)(alpha_parameter + beta_parameter + epsilon_value + zeta_value) + gamma_string[0] + delta_config->vals[0];
+   18 }
+   19 
+   20 void *worker(void *arg) {
+   21     volatile int x = (int)(long)arg;
+   22     x += 1;                    /* bp here in thread */
+   23     return (void*)(long)x;
+   24 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ ebp esp 0x40800b98 —▸ 0x40800c98 ◂— 1
+01:0004│+004     0x40800b9c —▸ 0x8049beb (main+567) ◂— add esp, 0x20
+02:0008│+008     0x40800ba0 {alpha_parameter} ◂— 0x1111
+03:000c│+00c     0x40800ba4 {beta_parameter} ◂— 0x2222 /* '""' */
+04:0010│+010     0x40800ba8 {gamma_string} —▸ 0x80c8030 ◂— 'a fairly long string argument to force gdb line wrapping'
+05:0014│+014     0x40800bac {delta_config} —▸ 0x8103080 (g_cfg) —▸ 0x80c8024 ◂— 'review'
+06:0018│+018     0x40800bb0 {epsilon_value} ◂— 0x5555 /* 'UU' */
+07:001c│+01c     0x40800bb4 {zeta_value} ◂— 0x6666 /* 'ff' */
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x8049965 many_args+17
+   1 0x8049beb main+567
+   2 0x804a0eb __libc_start_call_main+107
+   3 0x804b970 __libc_start_main_impl+2240
+   4 0x80497d8 _start+40
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

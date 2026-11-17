@@ -1,0 +1,7 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mxinfo $sp
+[?2004l[90m─────────────────────────────────────────── [0m[36mxinfo: 0x2aaaab2abb90[0m[90m ───────────────────────────────────────────[0m
+Page: 0x0000000000000000  →  0xffffffffffffffff (size=0xffffffffffffffff)
+Permissions: rwx
+Pathname: /work/test_x64
+Offset (from page): 0x2aaaab2abb90
+Inode: 0

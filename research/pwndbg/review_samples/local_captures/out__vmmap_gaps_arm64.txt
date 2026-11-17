@@ -1,0 +1,27 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> vmmap --gaps
+LEGEND: MAPPED | GUARD | GAP
+             Start                End Perm     Size      Note   Accumulated Size
+    0xaaaaaaaa0000     0xaaaaaaaa2000 r-xp     2000
+ -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -        GAP            0x1d000
+    0xaaaaaaabf000     0xaaaaaaac0000 r--p     1000
+    0xaaaaaaac0000     0xaaaaaaac1000 rw-p     1000
+    0xaaaaaaac1000     0xaaaaaaae2000 rw-p    21000  ADJACENT            0x23000
+ -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -        GAP     0x55554d30e000
+    0xfffff7df0000     0xfffff7f8a000 r-xp   19a000
+    0xfffff7f8a000     0xfffff7f9d000 ---p    13000     GUARD 
+    0xfffff7f9d000     0xfffff7fa0000 r--p     3000
+    0xfffff7fa0000     0xfffff7fa2000 rw-p     2000
+    0xfffff7fa2000     0xfffff7fae000 rw-p     c000  ADJACENT            0x11000
+ -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -        GAP            0x10000
+    0xfffff7fbe000     0xfffff7fe5000 r-xp    27000
+ -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -        GAP            0x12000
+    0xfffff7ff7000     0xfffff7ff9000 rw-p     2000
+    0xfffff7ff9000     0xfffff7ffb000 r--p     2000
+    0xfffff7ffb000     0xfffff7ffc000 r-xp     1000
+    0xfffff7ffc000     0xfffff7ffe000 r--p     2000
+    0xfffff7ffe000     0xfffff8000000 rw-p     2000  ADJACENT             0x9000
+ -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -        GAP          0x7fdf000
+    0xfffffffdf000    0x1000000000000 rw-p    21000
+Total memory mapped: 0x234000 (2 MB)

@@ -1,0 +1,2 @@
+pwndbg> dd $sp 4
+0000ffff9b1bdb00     9b1bdcf8 0000ffff 00000006 00000001

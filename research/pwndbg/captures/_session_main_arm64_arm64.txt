@@ -1,0 +1,1807 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_arm64...
+------- tip of the day (disable with set show-tips off) -------
+Use search to find bytes/strings/ints/pointers in the process memory. See search --help for filters or examples
+pwndbg> break main
+Breakpoint 1 at 0xae8: file test.c, line 24.
+pwndbg> info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000000ae8 in main at test.c:24
+pwndbg> run
+Starting program: /work/test_arm64 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=0x1, argv=0xfffffffffcc8) at test.c:24
+24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   1
+ X1   0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+ PC   0xaaaaaaaa0ae8 (main+20) ◂— adrp x0, 0xaaaaaaabf000
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0adc <main+8>     add    x29, sp, #0xc0
+   0xaaaaaaaa0ae0 <main+12>    str    w0, [sp, #0xc]
+   0xaaaaaaaa0ae4 <main+16>    str    x1, [sp]
+b► 0xaaaaaaaa0ae8 <main+20>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0aec <main+24>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+   0xaaaaaaaa0af0 <main+28>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+   0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+... ↓       2 skipped
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0ae8 main+20
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   1
+ X1   0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+ PC   0xaaaaaaaa0ae8 (main+20) ◂— adrp x0, 0xaaaaaaabf000
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0adc <main+8>     add    x29, sp, #0xc0
+   0xaaaaaaaa0ae0 <main+12>    str    w0, [sp, #0xc]
+   0xaaaaaaaa0ae4 <main+16>    str    x1, [sp]
+b► 0xaaaaaaaa0ae8 <main+20>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0aec <main+24>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+   0xaaaaaaaa0af0 <main+28>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+   0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+... ↓       2 skipped
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0ae8 main+20
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> ni
+0x0000aaaaaaaa0aec	24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xaaaaaaabf000 ◂— 0
+ X1   0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+*PC   0xaaaaaaaa0aec (main+24) ◂— ldr x0, [x0, #0xfe8]
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0adc <main+8>     add    x29, sp, #0xc0
+   0xaaaaaaaa0ae0 <main+12>    str    w0, [sp, #0xc]
+   0xaaaaaaaa0ae4 <main+16>    str    x1, [sp]
+b+ 0xaaaaaaaa0ae8 <main+20>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+ ► 0xaaaaaaaa0aec <main+24>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+   0xaaaaaaaa0af0 <main+28>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+   0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+... ↓       2 skipped
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0aec main+24
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> ni
+0x0000aaaaaaaa0af0	24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+ X1   0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+*PC   0xaaaaaaaa0af0 (main+28) ◂— ldr x1, [x0]
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0adc <main+8>     add    x29, sp, #0xc0
+   0xaaaaaaaa0ae0 <main+12>    str    w0, [sp, #0xc]
+   0xaaaaaaaa0ae4 <main+16>    str    x1, [sp]
+b+ 0xaaaaaaaa0ae8 <main+20>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0aec <main+24>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+ ► 0xaaaaaaaa0af0 <main+28>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+   0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+... ↓       2 skipped
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0af0 main+28
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> si
+0x0000aaaaaaaa0af4	24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+*X1   0xc989efb4cb5c2100
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+*PC   0xaaaaaaaa0af4 (main+32) ◂— str x1, [sp, #0xb8]
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0ae0 <main+12>    str    w0, [sp, #0xc]
+   0xaaaaaaaa0ae4 <main+16>    str    x1, [sp]
+b+ 0xaaaaaaaa0ae8 <main+20>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0aec <main+24>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+   0xaaaaaaaa0af0 <main+28>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+ ► 0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0b08 <main+52>    add    x2, sp, #0x88          X2 => 0xfffffffffb08 {stackbuf} (0xfffffffffa80 + 0x88)
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+... ↓       2 skipped
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0af4 main+32
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> ni 3
+0x0000aaaaaaaa0b00	26	    op_fn fp = add;
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xaaaaaaaa0000 ◂— 0x10102464c457f
+*X1   0
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+*PC   0xaaaaaaaa0b00 (main+44) ◂— add x0, x0, #0x918
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0aec <main+24>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+   0xaaaaaaaa0af0 <main+28>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+   0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ ► 0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0b08 <main+52>    add    x2, sp, #0x88          X2 => 0xfffffffffb08 {stackbuf} (0xfffffffffa80 + 0x88)
+   0xaaaaaaaa0b0c <main+56>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b10 <main+60>    add    x1, x0, #0xd40         X1 => 0xaaaaaaaa0d40 (0xaaaaaaaa0000 + 0xd40)
+   0xaaaaaaaa0b14 <main+64>    mov    x0, x2                 X0 => 0xfffffffffb08 ◂— 0
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:26
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+   24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+ ► 26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+... ↓       2 skipped
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0b00 main+44
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> next
+30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+ X1   0
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+*PC   0xaaaaaaaa0b08 (main+52) ◂— add x2, sp, #0x88
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+ ► 0xaaaaaaaa0b08 <main+52>    add    x2, sp, #0x88          X2 => 0xfffffffffb08 {stackbuf} (0xfffffffffa80 + 0x88)
+   0xaaaaaaaa0b0c <main+56>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b10 <main+60>    add    x1, x0, #0xd40         X1 => 0xaaaaaaaa0d40 (0xaaaaaaaa0000 + 0xd40)
+   0xaaaaaaaa0b14 <main+64>    mov    x0, x2                 X0 => 0xfffffffffb08 ◂— 0
+   0xaaaaaaaa0b18 <main+68>    ldr    q0, [x1]               Q0, [0xaaaaaaaa0d40] => 0x4141414141414141 ('AAAAAAAA')
+   0xaaaaaaaa0b1c <main+72>    str    q0, [x0]               [{stackbuf}] <= 0x4141414141414141 ('AAAAAAAA')
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:30
+   24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+ ► 30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0b08 main+52
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> step
+31	    for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xfffffffffb08 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+*X1   0xaaaaaaaa0d40 ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+*X2   0xfffffffffb08 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+*PC   0xaaaaaaaa0b28 (main+84) ◂— str wzr, [sp, #0x10]
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0b1c <main+72>     str    q0, [x0]
+   0xaaaaaaaa0b20 <main+76>     ldur   q0, [x1, #9]
+   0xaaaaaaaa0b24 <main+80>     stur   q0, [x0, #9]
+ ► 0xaaaaaaaa0b28 <main+84>     str    wzr, [sp, #0x10]     [{i}] <= 0
+   0xaaaaaaaa0b2c <main+88>     b      main+132                    <main+132>
+    ↓
+   0xaaaaaaaa0b58 <main+132>    ldr    w0, [sp, #0x10]      W0, [{i}] => 0
+   0xaaaaaaaa0b5c <main+136>    cmp    w0, #7               0 - 7     CPSR => 0x80000000 [ N z c v q pan il d a i f el sp ]
+   0xaaaaaaaa0b60 <main+140>  ✔ b.le   main+92                     <main+92>
+    ↓
+   0xaaaaaaaa0b30 <main+92>     mov    x0, #0x20            X0 => 0x20
+   0xaaaaaaaa0b34 <main+96>     bl     malloc@plt                  <malloc@plt>
+ 
+   0xaaaaaaaa0b38 <main+100>    mov    x2, x0
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:31
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+ ► 31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+   38     int r = compute(fp, 6, 7);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0b28 main+84
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> break test.c:38
+Breakpoint 2 at 0xaaaaaaaa0c44: file test.c, line 38.
+pwndbg> continue
+Continuing.
+
+Breakpoint 2, main (argc=0x1, argv=0xfffffffffcc8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0x510
+*X1   0xffff
+*X2   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+*X3   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+*X4   0x510
+*X5   0x40
+*X6   0xab3281dd83708d9
+*X7   0
+*X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+*X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+*X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+*PC   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0c38 <main+356>    bl     free@plt                    <free@plt>
+ 
+   0xaaaaaaaa0c3c <main+360>    ldr    x0, [sp, #0x20]
+   0xaaaaaaaa0c40 <main+364>    bl     free@plt                    <free@plt>
+ 
+b► 0xaaaaaaaa0c44 <main+368>    mov    w2, #7              W2 => 7
+   0xaaaaaaaa0c48 <main+372>    mov    w1, #6              W1 => 6
+   0xaaaaaaaa0c4c <main+376>    ldr    x0, [sp, #0x18]     X0, [{fp}] => 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0c50 <main+380>    bl     compute                     <compute>
+ 
+   0xaaaaaaaa0c54 <main+384>    str    w0, [sp, #0x14]
+   0xaaaaaaaa0c58 <main+388>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0c5c <main+392>    add    x0, x0, #0x980
+   0xaaaaaaaa0c60 <main+396>    str    x0, [sp, #0x18]
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0c44 main+368
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1000
+Size: 0x290 (with flag bits: 0x291)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1290
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaaaaaac1
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac12c0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaa00006b861
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac12f0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaa00006b811
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1320
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaa00006b9c1
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1350
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaa00006b9f1
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1380
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaa00006b9a1
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac13b0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaa00006b951
+
+Free chunk (fastbins) | PREV_INUSE
+Addr: 0xaaaaaaac13e0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0xaaaaaaac1
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0xaaaaaaac1410
+Size: 0x90 (with flag bits: 0x91)
+fd: 0xaaaaaaac1
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac14a0
+Size: 0x90 (with flag bits: 0x91)
+
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac1530
+Size: 0x90 (with flag bits: 0x91)
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0xaaaaaaac15c0
+Size: 0x510 (with flag bits: 0x511)
+fd: 0xfffff7fa0ab0
+bk: 0xfffff7fa0ab0
+
+Allocated chunk
+Addr: 0xaaaaaaac1ad0
+Size: 0x510 (with flag bits: 0x510)
+
+Top chunk | PREV_INUSE
+Addr: 0xaaaaaaac1fe0
+Size: 0x20020 (with flag bits: 0x20021)
+
+pwndbg> bins
+tcachebins
+0x30 [  7]:  0xaaaaaaac13c0 —▸ 0xaaaaaaac1390 —▸ 0xaaaaaaac1360 —▸ 0xaaaaaaac1330 —▸ 0xaaaaaaac1300 —▸ 0xaaaaaaac12d0 —▸ 0xaaaaaaac12a0 ◂— 0
+0x90 [  1]:  0xaaaaaaac1420 ◂— 0
+fastbins
+0x30:        0xaaaaaaac13e0 ◂— 0
+unsortedbin
+all:         0xaaaaaaac15c0 —▸ 0xfffff7fa0ab0 (main_arena+96) ◂— 0xaaaaaaac15c0
+smallbins
+empty
+largebins
+empty
+pwndbg> tcachebins
+tcachebins
+0x30 [  7]:  0xaaaaaaac13c0 —▸ 0xaaaaaaac1390 —▸ 0xaaaaaaac1360 —▸ 0xaaaaaaac1330 —▸ 0xaaaaaaac1300 —▸ 0xaaaaaaac12d0 —▸ 0xaaaaaaac12a0 ◂— 0
+0x90 [  1]:  0xaaaaaaac1420 ◂— 0
+pwndbg> fastbins
+fastbins
+0x30:        0xaaaaaaac13e0 ◂— 0
+pwndbg> unsortedbin
+unsortedbin
+all:         0xaaaaaaac15c0 —▸ 0xfffff7fa0ab0 (main_arena+96) ◂— 0xaaaaaaac15c0
+pwndbg> smallbins
+smallbins
+empty
+pwndbg> vis_heap_chunks
+Undefined command: "vis_heap_chunks".  Try "help".
+pwndbg> vis 5
+0xaaaaaaac1000	0x0000000000000000	0x0000000000000291	................
+0xaaaaaaac1010	0x0000000000070000	0x0001000000000000	................
+0xaaaaaaac1020	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1030	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1040	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1050	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1060	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1070	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1080	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1090	0x0000000000000000	0x0000aaaaaaac13c0	................
+0xaaaaaaac10a0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac10b0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac10c0	0x0000000000000000	0x0000aaaaaaac1420	........ .......
+0xaaaaaaac10d0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac10e0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac10f0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1100	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1110	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1120	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1130	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1140	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1150	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1160	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1170	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1180	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1190	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac11a0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac11b0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac11c0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac11d0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac11e0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac11f0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1200	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1210	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1220	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1230	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1240	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1250	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1260	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1270	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1280	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1290	0x0000000000000000	0x0000000000000031	........1.......
+0xaaaaaaac12a0	0x0000000aaaaaaac1	0x0ab3281dd83708d9	..........7..(..	 <-- tcachebins[0x30][6/7]
+0xaaaaaaac12b0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac12c0	0x0000000000000000	0x0000000000000031	........1.......
+0xaaaaaaac12d0	0x0000aaa00006b861	0x0ab3281dd83708d9	a.........7..(..	 <-- tcachebins[0x30][5/7]
+0xaaaaaaac12e0	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac12f0	0x0000000000000000	0x0000000000000031	........1.......
+0xaaaaaaac1300	0x0000aaa00006b811	0x0ab3281dd83708d9	..........7..(..	 <-- tcachebins[0x30][4/7]
+0xaaaaaaac1310	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1320	0x0000000000000000	0x0000000000000031	........1.......
+0xaaaaaaac1330	0x0000aaa00006b9c1	0x0ab3281dd83708d9	..........7..(..	 <-- tcachebins[0x30][3/7]
+0xaaaaaaac1340	0x0000000000000000	0x0000000000000000	................
+0xaaaaaaac1350	0x0000000000000000	                  	........
+pwndbg> arena
+Arena for thread 1 is located at: 0xfffff7fa0a50
+{
+  mutex = 0x0,
+  flags = 0x0,
+  have_fastchunks = 0x1,
+  fastbinsY = {0x0, 0xaaaaaaac13e0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+  top = 0xaaaaaaac1fe0,
+  last_remainder = 0x0,
+  bins = {0xaaaaaaac15c0, 0xaaaaaaac15c0, 0xfffff7fa0ac0 <main_arena+112>, 0xfffff7fa0ac0 <main_arena+112>, 0xfffff7fa0ad0 <main_arena+128>, 0xfffff7fa0ad0 <main_arena+128>, 0xfffff7fa0ae0 <main_arena+144>, 0xfffff7fa0ae0 <main_arena+144>, 0xfffff7fa0af0 <main_arena+160>, 0xfffff7fa0af0 <main_arena+160>, 0xfffff7fa0b00 <main_arena+176>, 0xfffff7fa0b00 <main_arena+176>, 0xfffff7fa0b10 <main_arena+192>, 0xfffff7fa0b10 <main_arena+192>, 0xfffff7fa0b20 <main_arena+208>, 0xfffff7fa0b20 <main_arena+208>, 0xfffff7fa0b30 <main_arena+224>, 0xfffff7fa0b30 <main_arena+224>, 0xfffff7fa0b40 <main_arena+240>, 0xfffff7fa0b40 <main_arena+240>, 0xfffff7fa0b50 <main_arena+256>, 0xfffff7fa0b50 <main_arena+256>, 0xfffff7fa0b60 <main_arena+272>, 0xfffff7fa0b60 <main_arena+272>, 0xfffff7fa0b70 <main_arena+288>, 0xfffff7fa0b70 <main_arena+288>, 0xfffff7fa0b80 <main_arena+304>, 0xfffff7fa0b80 <main_arena+304>, 0xfffff7fa0b90 <main_arena+320>, 0xfffff7fa0b90 <main_arena+320>, 0xfffff7fa0ba0 <main_arena+336>, 0xfffff7fa0ba0 <main_arena+336>, 0xfffff7fa0bb0 <main_arena+352>, 0xfffff7fa0bb0 <main_arena+352>, 0xfffff7fa0bc0 <main_arena+368>, 0xfffff7fa0bc0 <main_arena+368>, 0xfffff7fa0bd0 <main_arena+384>, 0xfffff7fa0bd0 <main_arena+384>, 0xfffff7fa0be0 <main_arena+400>, 0xfffff7fa0be0 <main_arena+400>, 0xfffff7fa0bf0 <main_arena+416>, 0xfffff7fa0bf0 <main_arena+416>, 0xfffff7fa0c00 <main_arena+432>, 0xfffff7fa0c00 <main_arena+432>, 0xfffff7fa0c10 <main_arena+448>, 0xfffff7fa0c10 <main_arena+448>, 0xfffff7fa0c20 <main_arena+464>, 0xfffff7fa0c20 <main_arena+464>, 0xfffff7fa0c30 <main_arena+480>, 0xfffff7fa0c30 <main_arena+480>, 0xfffff7fa0c40 <main_arena+496>, 0xfffff7fa0c40 <main_arena+496>, 0xfffff7fa0c50 <main_arena+512>, 0xfffff7fa0c50 <main_arena+512>, 0xfffff7fa0c60 <main_arena+528>, 0xfffff7fa0c60 <main_arena+528>, 0xfffff7fa0c70 <main_arena+544>, 0xfffff7fa0c70 <main_arena+544>, 0xfffff7fa0c80 <main_arena+560>, 0xfffff7fa0c80 <main_arena+560>, 0xfffff7fa0c90 <main_arena+576>, 0xfffff7fa0c90 <main_arena+576>, 0xfffff7fa0ca0 <main_arena+592>, 0xfffff7fa0ca0 <main_arena+592>, 0xfffff7fa0cb0 <main_arena+608>, 0xfffff7fa0cb0 <main_arena+608>, 0xfffff7fa0cc0 <main_arena+624>, 0xfffff7fa0cc0 <main_arena+624>, 0xfffff7fa0cd0 <main_arena+640>, 0xfffff7fa0cd0 <main_arena+640>, 0xfffff7fa0ce0 <main_arena+656>, 0xfffff7fa0ce0 <main_arena+656>, 0xfffff7fa0cf0 <main_arena+672>, 0xfffff7fa0cf0 <main_arena+672>, 0xfffff7fa0d00 <main_arena+688>, 0xfffff7fa0d00 <main_arena+688>, 0xfffff7fa0d10 <main_arena+704>, 0xfffff7fa0d10 <main_arena+704>, 0xfffff7fa0d20 <main_arena+720>, 0xfffff7fa0d20 <main_arena+720>, 0xfffff7fa0d30 <main_arena+736>, 0xfffff7fa0d30 <main_arena+736>, 0xfffff7fa0d40 <main_arena+752>, 0xfffff7fa0d40 <main_arena+752>, 0xfffff7fa0d50 <main_arena+768>, 0xfffff7fa0d50 <main_arena+768>, 0xfffff7fa0d60 <main_arena+784>, 0xfffff7fa0d60 <main_arena+784>, 0xfffff7fa0d70 <main_arena+800>, 0xfffff7fa0d70 <main_arena+800>, 0xfffff7fa0d80 <main_arena+816>, 0xfffff7fa0d80 <main_arena+816>, 0xfffff7fa0d90 <main_arena+832>, 0xfffff7fa0d90 <main_arena+832>, 0xfffff7fa0da0 <main_arena+848>, 0xfffff7fa0da0 <main_arena+848>, 0xfffff7fa0db0 <main_arena+864>, 0xfffff7fa0db0 <main_arena+864>, 0xfffff7fa0dc0 <main_arena+880>, 0xfffff7fa0dc0 <main_arena+880>, 0xfffff7fa0dd0 <main_arena+896>, 0xfffff7fa0dd0 <main_arena+896>, 0xfffff7fa0de0 <main_arena+912>, 0xfffff7fa0de0 <main_arena+912>, 0xfffff7fa0df0 <main_arena+928>, 0xfffff7fa0df0 <main_arena+928>, 0xfffff7fa0e00 <main_arena+944>, 0xfffff7fa0e00 <main_arena+944>, 0xfffff7fa0e10 <main_arena+960>, 0xfffff7fa0e10 <main_arena+960>, 0xfffff7fa0e20 <main_arena+976>, 0xfffff7fa0e20 <main_arena+976>, 0xfffff7fa0e30 <main_arena+992>, 0xfffff7fa0e30 <main_arena+992>, 0xfffff7fa0e40 <main_arena+1008>, 0xfffff7fa0e40 <main_arena+1008>, 0xfffff7fa0e50 <main_arena+1024>, 0xfffff7fa0e50 <main_arena+1024>, 0xfffff7fa0e60 <main_arena+1040>, 0xfffff7fa0e60 <main_arena+1040>, 0xfffff7fa0e70 <main_arena+1056>, 0xfffff7fa0e70 <main_arena+1056>, 0xfffff7fa0e80 <main_arena+1072>, 0xfffff7fa0e80 <main_arena+1072>, 0xfffff7fa0e90 <main_arena+1088>, 0xfffff7fa0e90 <main_arena+1088>, 0xfffff7fa0ea0 <main_arena+1104>, 0xfffff7fa0ea0 <main_arena+1104>, 0xfffff7fa0eb0 <main_arena+1120>, 0xfffff7fa0eb0 <main_arena+1120>, 0xfffff7fa0ec0 <main_arena+1136>, 0xfffff7fa0ec0 <main_arena+1136>, 0xfffff7fa0ed0 <main_arena+1152>, 0xfffff7fa0ed0 <main_arena+1152>, 0xfffff7fa0ee0 <main_arena+1168>, 0xfffff7fa0ee0 <main_arena+1168>, 0xfffff7fa0ef0 <main_arena+1184>, 0xfffff7fa0ef0 <main_arena+1184>, 0xfffff7fa0f00 <main_arena+1200>, 0xfffff7fa0f00 <main_arena+1200>, 0xfffff7fa0f10 <main_arena+1216>, 0xfffff7fa0f10 <main_arena+1216>, 0xfffff7fa0f20 <main_arena+1232>, 0xfffff7fa0f20 <main_arena+1232>, 0xfffff7fa0f30 <main_arena+1248>, 0xfffff7fa0f30 <main_arena+1248>, 0xfffff7fa0f40 <main_arena+1264>, 0xfffff7fa0f40 <main_arena+1264>, 0xfffff7fa0f50 <main_arena+1280>, 0xfffff7fa0f50 <main_arena+1280>, 0xfffff7fa0f60 <main_arena+1296>, 0xfffff7fa0f60 <main_arena+1296>, 0xfffff7fa0f70 <main_arena+1312>, 0xfffff7fa0f70 <main_arena+1312>, 0xfffff7fa0f80 <main_arena+1328>, 0xfffff7fa0f80 <main_arena+1328>, 0xfffff7fa0f90 <main_arena+1344>, 0xfffff7fa0f90 <main_arena+1344>, 0xfffff7fa0fa0 <main_arena+1360>, 0xfffff7fa0fa0 <main_arena+1360>, 0xfffff7fa0fb0 <main_arena+1376>, 0xfffff7fa0fb0 <main_arena+1376>, 0xfffff7fa0fc0 <main_arena+1392>, 0xfffff7fa0fc0 <main_arena+1392>, 0xfffff7fa0fd0 <main_arena+1408>, 0xfffff7fa0fd0 <main_arena+1408>, 0xfffff7fa0fe0 <main_arena+1424>, 0xfffff7fa0fe0 <main_arena+1424>, 0xfffff7fa0ff0 <main_arena+1440>, 0xfffff7fa0ff0 <main_arena+1440>, 0xfffff7fa1000 <main_arena+1456>, 0xfffff7fa1000 <main_arena+1456>, 0xfffff7fa1010 <main_arena+1472>, 0xfffff7fa1010 <main_arena+1472>, 0xfffff7fa1020 <main_arena+1488>, 0xfffff7fa1020 <main_arena+1488>, 0xfffff7fa1030 <main_arena+1504>, 0xfffff7fa1030 <main_arena+1504>, 0xfffff7fa1040 <main_arena+1520>, 0xfffff7fa1040 <main_arena+1520>, 0xfffff7fa1050 <main_arena+1536>, 0xfffff7fa1050 <main_arena+1536>, 0xfffff7fa1060 <main_arena+1552>, 0xfffff7fa1060 <main_arena+1552>, 0xfffff7fa1070 <main_arena+1568>, 0xfffff7fa1070 <main_arena+1568>, 0xfffff7fa1080 <main_arena+1584>, 0xfffff7fa1080 <main_arena+1584>, 0xfffff7fa1090 <main_arena+1600>, 0xfffff7fa1090 <main_arena+1600>, 0xfffff7fa10a0 <main_arena+1616>, 0xfffff7fa10a0 <main_arena+1616>, 0xfffff7fa10b0 <main_arena+1632>, 0xfffff7fa10b0 <main_arena+1632>, 0xfffff7fa10c0 <main_arena+1648>, 0xfffff7fa10c0 <main_arena+1648>, 0xfffff7fa10d0 <main_arena+1664>, 0xfffff7fa10d0 <main_arena+1664>, 0xfffff7fa10e0 <main_arena+1680>, 0xfffff7fa10e0 <main_arena+1680>...},
+  binmap = {0x0, 0x0, 0x0, 0x0},
+  next = 0xfffff7fa0a50 <main_arena>,
+  next_free = 0x0,
+  attached_threads = 0x1,
+  system_mem = 0x21000,
+  max_system_mem = 0x21000
+}
+pwndbg> malloc_chunk small[7]-0x10
+Undefined command: "malloc_chunk".  Try "help".
+pwndbg> top_chunk
+Undefined command: "top_chunk".  Try "help".
+pwndbg> telescope $sp 20
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+08:0040│-080 0xfffffffffac0 {mid+0x10} —▸ 0xaaaaaaac1540 ◂— 0
+09:0048│-078 0xfffffffffac8 {small} —▸ 0xaaaaaaac12a0 ◂— 0xaaaaaaac1
+0a:0050│-070 0xfffffffffad0 {small+0x8} —▸ 0xaaaaaaac12d0 ◂— 0xaaa00006b861
+0b:0058│-068 0xfffffffffad8 {small+0x10} —▸ 0xaaaaaaac1300 ◂— 0xaaa00006b811
+0c:0060│-060 0xfffffffffae0 {small+0x18} —▸ 0xaaaaaaac1330 ◂— 0xaaa00006b9c1
+0d:0068│-058 0xfffffffffae8 {small+0x20} —▸ 0xaaaaaaac1360 ◂— 0xaaa00006b9f1
+0e:0070│-050 0xfffffffffaf0 {small+0x28} —▸ 0xaaaaaaac1390 ◂— 0xaaa00006b9a1
+0f:0078│-048 0xfffffffffaf8 {small+0x30} —▸ 0xaaaaaaac13c0 ◂— 0xaaa00006b951
+10:0080│-040 0xfffffffffb00 {small+0x38} —▸ 0xaaaaaaac13f0 ◂— 0xaaaaaaac1
+11:0088│-038 0xfffffffffb08 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+12:0090│-030 0xfffffffffb10 {stackbuf+0x8} ◂— 'BBBBBBBBCCCCCCCC'
+13:0098│-028 0xfffffffffb18 {stackbuf+0x10} ◂— 'CCCCCCCC'
+pwndbg> stack
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+pwndbg> stack 30
+00:0000│ sp  0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+08:0040│-080 0xfffffffffac0 {mid+0x10} —▸ 0xaaaaaaac1540 ◂— 0
+09:0048│-078 0xfffffffffac8 {small} —▸ 0xaaaaaaac12a0 ◂— 0xaaaaaaac1
+0a:0050│-070 0xfffffffffad0 {small+0x8} —▸ 0xaaaaaaac12d0 ◂— 0xaaa00006b861
+0b:0058│-068 0xfffffffffad8 {small+0x10} —▸ 0xaaaaaaac1300 ◂— 0xaaa00006b811
+0c:0060│-060 0xfffffffffae0 {small+0x18} —▸ 0xaaaaaaac1330 ◂— 0xaaa00006b9c1
+0d:0068│-058 0xfffffffffae8 {small+0x20} —▸ 0xaaaaaaac1360 ◂— 0xaaa00006b9f1
+0e:0070│-050 0xfffffffffaf0 {small+0x28} —▸ 0xaaaaaaac1390 ◂— 0xaaa00006b9a1
+0f:0078│-048 0xfffffffffaf8 {small+0x30} —▸ 0xaaaaaaac13c0 ◂— 0xaaa00006b951
+10:0080│-040 0xfffffffffb00 {small+0x38} —▸ 0xaaaaaaac13f0 ◂— 0xaaaaaaac1
+11:0088│-038 0xfffffffffb08 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+12:0090│-030 0xfffffffffb10 {stackbuf+0x8} ◂— 'BBBBBBBBCCCCCCCC'
+13:0098│-028 0xfffffffffb18 {stackbuf+0x10} ◂— 'CCCCCCCC'
+14:00a0│-020 0xfffffffffb20 {stackbuf+0x18} ◂— 0
+15:00a8│-018 0xfffffffffb28 {stackbuf+0x20} ◂— 0
+16:00b0│-010 0xfffffffffb30 {stackbuf+0x28} —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+17:00b8│-008 0xfffffffffb38 ◂— 0xc989efb4cb5c2100
+18:00c0│ x29 0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+19:00c8│+008 0xfffffffffb48 —▸ 0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+1a:00d0│+010 0xfffffffffb50 —▸ 0xfffffffffbe0 ◂— 0
+1b:00d8│+018 0xfffffffffb58 —▸ 0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+1c:00e0│+020 0xfffffffffb60 ◂— 0x1f7ffeb48
+1d:00e8│+028 0xfffffffffb68 —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+pwndbg> x/20gx $sp
+0xfffffffffa80:	0x0000fffffffffcc8	0x0000000100000000
+0xfffffffffa90:	0x0000000000000008	0x0000aaaaaaaa0918
+0xfffffffffaa0:	0x0000aaaaaaac15d0	0x0000aaaaaaac1ae0
+0xfffffffffab0:	0x0000aaaaaaac1420	0x0000aaaaaaac14b0
+0xfffffffffac0:	0x0000aaaaaaac1540	0x0000aaaaaaac12a0
+0xfffffffffad0:	0x0000aaaaaaac12d0	0x0000aaaaaaac1300
+0xfffffffffae0:	0x0000aaaaaaac1330	0x0000aaaaaaac1360
+0xfffffffffaf0:	0x0000aaaaaaac1390	0x0000aaaaaaac13c0
+0xfffffffffb00:	0x0000aaaaaaac13f0	0x4141414141414141
+0xfffffffffb10:	0x4242424242424242	0x4343434343434343
+pwndbg> x/4wx $sp
+0xfffffffffa80:	0xfffffcc8	0x0000ffff	0x00000000	0x00000001
+pwndbg> x/8bx $sp
+0xfffffffffa80:	0xc8	0xfc	0xff	0xff	0xff	0xff	0x00	0x00
+pwndbg> x/s greeting
+0xaaaaaaaa0d28:	"Hello, pwndbg!"
+pwndbg> x/2s &global_buf
+0xaaaaaaac0010 <global_buf>:	"global data string"
+0xaaaaaaac0023 <global_buf+19>:	""
+pwndbg> x/10i $pc
+=> 0xaaaaaaaa0c44 <main+368>:	mov	w2, #0x7                   	// #7
+   0xaaaaaaaa0c48 <main+372>:	mov	w1, #0x6                   	// #6
+   0xaaaaaaaa0c4c <main+376>:	ldr	x0, [sp, #24]
+   0xaaaaaaaa0c50 <main+380>:	bl	0xaaaaaaaa09e8 <compute>
+   0xaaaaaaaa0c54 <main+384>:	str	w0, [sp, #20]
+   0xaaaaaaaa0c58 <main+388>:	adrp	x0, 0xaaaaaaaa0000
+   0xaaaaaaaa0c5c <main+392>:	add	x0, x0, #0x980
+   0xaaaaaaaa0c60 <main+396>:	str	x0, [sp, #24]
+   0xaaaaaaaa0c64 <main+400>:	mov	w2, #0x2                   	// #2
+   0xaaaaaaaa0c68 <main+404>:	ldr	w1, [sp, #20]
+pwndbg> info registers
+x0             0x510               0x510
+x1             0xffff              0xffff
+x2             0xfffff7fa0ab0      0xfffff7fa0ab0
+x3             0xfffff7fa0ab0      0xfffff7fa0ab0
+x4             0x510               0x510
+x5             0x40                0x40
+x6             0xab3281dd83708d9   0xab3281dd83708d9
+x7             0x0                 0x0
+x8             0xfffff7fa0ab0      0xfffff7fa0ab0
+x9             0x28                0x28
+x10            0x1ccef0            0x1ccef0
+x11            0x0                 0x0
+x12            0xfffff7ffeb48      0xfffff7ffeb48
+x13            0x2f                0x2f
+x14            0x1f22b4b           0x1f22b4b
+x15            0xfffff7ff8e70      0xfffff7ff8e70
+x16            0xaaaaaaabffb0      0xaaaaaaabffb0
+x17            0xfffff7e86d70      0xfffff7e86d70
+x18            0x3                 0x3
+x19            0xfffffffffcc8      0xfffffffffcc8
+x20            0x1                 0x1
+x21            0xaaaaaaabfd60      0xaaaaaaabfd60
+x22            0xaaaaaaaa0ad4      0xaaaaaaaa0ad4
+x23            0xfffffffffcd8      0xfffffffffcd8
+x24            0xfffff7ffdb58      0xfffff7ffdb58
+x25            0x0                 0x0
+x26            0xfffff7ffe000      0xfffff7ffe000
+x27            0xaaaaaaabfd60      0xaaaaaaabfd60
+x28            0x0                 0x0
+x29            0xfffffffffb40      0xfffffffffb40
+x30            0xaaaaaaaa0c44      0xaaaaaaaa0c44
+sp             0xfffffffffa80      0xfffffffffa80
+pc             0xaaaaaaaa0c44      0xaaaaaaaa0c44 <main+368>
+cpsr           0x80001000          [ EL=0 BTYPE=0 SSBS N ]
+fpsr           0x0                 [ ]
+fpcr           0x0                 [ Len=0 Stride=0 RMode=0 ]
+tpidr          0xfffff7ff8620      0xfffff7ff8620
+tpidr2         0x0                 0x0
+pauth_dmask    0x7f000000000000    0x7f000000000000
+pauth_cmask    0x7f000000000000    0x7f000000000000
+pwndbg> regs
+*X0   0x510
+*X1   0xffff
+*X2   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+*X3   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+*X4   0x510
+*X5   0x40
+*X6   0xab3281dd83708d9
+*X7   0
+*X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+*X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+*X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+*PC   0xaaaaaaaa0c44 (main+368) ◂— mov w2, #7
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+    0xaaaaaaaa0000     0xaaaaaaaa1000 r-xp     1000       0 test_arm64
+    0xaaaaaaabf000     0xaaaaaaac0000 r--p     1000    f000 test_arm64
+    0xaaaaaaac0000     0xaaaaaaac1000 rw-p     1000   10000 test_arm64
+    0xaaaaaaac1000     0xaaaaaaae2000 rw-p    21000       0 [heap]
+    0xfffff7df0000     0xfffff7f8a000 r-xp   19a000       0 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7f8a000     0xfffff7f9d000 ---p    13000  19a000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7f9d000     0xfffff7fa0000 r--p     3000  19d000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7fa0000     0xfffff7fa2000 rw-p     2000  1a0000 /usr/lib/aarch64-linux-gnu/libc.so.6
+    0xfffff7fa2000     0xfffff7fae000 rw-p     c000       0 [anon_fffff7fa2]
+    0xfffff7fbe000     0xfffff7fe5000 r-xp    27000       0 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffff7ff7000     0xfffff7ff9000 rw-p     2000       0 [anon_fffff7ff7]
+    0xfffff7ff9000     0xfffff7ffb000 r--p     2000       0 [vvar]
+    0xfffff7ffb000     0xfffff7ffc000 r-xp     1000       0 [vdso]
+    0xfffff7ffc000     0xfffff7ffe000 r--p     2000   2e000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffff7ffe000     0xfffff8000000 rw-p     2000   30000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+    0xfffffffdf000    0x1000000000000 rw-p    21000       0 [stack]
+pwndbg> vmmap stack
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+               Start                End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+      0xfffff7ffe000     0xfffff8000000 rw-p     2000   30000 /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+►     0xfffffffdf000    0x1000000000000 rw-p    21000       0 [stack]
+pwndbg> checksec
+File:     /work/test_arm64
+Arch:     aarch64
+RELRO:      Full RELRO
+Stack:      Canary found
+NX:         NX enabled
+PIE:        PIE enabled
+Stripped:   No
+Debuginfo:  Yes
+pwndbg> bt
+#0  main (argc=0x1, argv=0xfffffffffcc8) at test.c:38
+#1  0x0000fffff7e184c4 in __libc_start_call_main (main=main@entry=0xaaaaaaaa0ad4 <main>, argc=argc@entry=0x1, 
+    argv=argv@entry=0xfffffffffcc8) at ../sysdeps/nptl/libc_start_call_main.h:58
+#2  0x0000fffff7e18598 in __libc_start_main_impl (main=0xaaaaaaaa0ad4 <main>, argc=0x1, argv=0xfffffffffcc8, 
+    init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=<optimized out>)
+    at ../csu/libc-start.c:360
+#3  0x0000aaaaaaaa0830 in _start ()
+pwndbg> bt full
+#0  main (argc=0x1, argv=0xfffffffffcc8) at test.c:38
+        stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 16 times>, "P\374\377\377\377\377\000"
+        fp = 0xaaaaaaaa0918 <add>
+        small = {0xaaaaaaac12a0, 0xaaaaaaac12d0, 0xaaaaaaac1300, 0xaaaaaaac1330, 0xaaaaaaac1360, 0xaaaaaaac1390, 
+          0xaaaaaaac13c0, 0xaaaaaaac13f0}
+        mid = {0xaaaaaaac1420, 0xaaaaaaac14b0, 0xaaaaaaac1540}
+        big = {0xaaaaaaac15d0, 0xaaaaaaac1ae0}
+        i = 0x8
+        r = 0x0
+#1  0x0000fffff7e184c4 in __libc_start_call_main (main=main@entry=0xaaaaaaaa0ad4 <main>, argc=argc@entry=0x1, 
+    argv=argv@entry=0xfffffffffcc8) at ../sysdeps/nptl/libc_start_call_main.h:58
+        self = <optimized out>
+        result = <optimized out>
+        unwind_buf = {
+          cancel_jmp_buf = {{
+              jmp_buf = {0xfffffffffcc8, 0x1, 0xaaaaaaabfd60, 0xaaaaaaaa0ad4, 0xfffffffffcd8, 0xfffff7ffdb58, 0x0, 
+                0xfffff7ffe000, 0xaaaaaaabfd60, 0x0, 0xfffffffffc50, 0xbbbae15ae7c441e8, 0xffff00000009, 
+                0xbbbae15aefda3e3c, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+              mask_was_saved = 0x0
+            }},
+          priv = {
+            pad = {0x0, 0x0, 0xfffff7e18540 <__libc_start_main_impl+64>, 0xfffffffffcc8},
+            data = {
+              prev = 0x0,
+              cleanup = 0x0,
+              canceltype = 0xf7e18540
+            }
+          }
+        }
+        not_first_call = <optimized out>
+#2  0x0000fffff7e18598 in __libc_start_main_impl (main=0xaaaaaaaa0ad4 <main>, argc=0x1, argv=0xfffffffffcc8, 
+    init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=<optimized out>)
+    at ../csu/libc-start.c:360
+No locals.
+#3  0x0000aaaaaaaa0830 in _start ()
+No symbol table info available.
+pwndbg> search "heap string"
+Searching for byte: b'heap string'
+test_arm64      0xaaaaaaaa0d60 adr x8, 0xaaaaaab63a0f /* 'heap string here' */
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d0a, halting search.
+pwndbg> search -t dword 0x41414141
+Searching for a 4-byte integer: b'AAAA'
+test_arm64      0xaaaaaaaa0d40 'AAAAAAAABBBBBBBBCCCCCCCC'
+test_arm64      0xaaaaaaaa0d44 'AAAABBBBBBBBCCCCCCCC'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d03, halting search.
+[stack]         0xfffffffffb08 'AAAAAAAABBBBBBBBCCCCCCCC'
+[stack]         0xfffffffffb0c 'AAAABBBBBBBBCCCCCCCC'
+pwndbg> search -x 4242424242424242
+Searching for byte: b'BBBBBBBB'
+test_arm64      0xaaaaaaaa0d48 'BBBBBBBBCCCCCCCC'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.
+[stack]         0xfffffffffb10 'BBBBBBBBCCCCCCCC'
+pwndbg> p r
+$1 = 0x0
+pwndbg> p/x fp
+$2 = 0xaaaaaaaa0918
+pwndbg> p *small@3
+$3 = {0xaaaaaaac12a0, 0xaaaaaaac12d0, 0xaaaaaaac1300}
+pwndbg> p greeting
+$4 = 0xaaaaaaaa0d28 "Hello, pwndbg!"
+pwndbg> p global_buf
+$5 = "global data string", '\000' <repeats 45 times>
+pwndbg> ptype fp
+type = int (*)(int, int)
+pwndbg> info locals
+stackbuf = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 16 times>, "P\374\377\377\377\377\000"
+fp = 0xaaaaaaaa0918 <add>
+small = {0xaaaaaaac12a0, 0xaaaaaaac12d0, 0xaaaaaaac1300, 0xaaaaaaac1330, 0xaaaaaaac1360, 0xaaaaaaac1390, 
+  0xaaaaaaac13c0, 0xaaaaaaac13f0}
+mid = {0xaaaaaaac1420, 0xaaaaaaac14b0, 0xaaaaaaac1540}
+big = {0xaaaaaaac15d0, 0xaaaaaaac1ae0}
+i = 0x8
+r = 0x0
+pwndbg> info frame
+Stack level 0, frame at 0xfffffffffb50:
+ pc = 0xaaaaaaaa0c44 in main (test.c:38); saved pc = 0xfffff7e184c4
+ called by frame at 0xfffffffffc60
+ source language c.
+ Arglist at 0xfffffffffb40, args: argc=0x1, argv=0xfffffffffcc8
+ Locals at 0xfffffffffb40, Previous frame's sp is 0xfffffffffb50
+ Saved registers:
+  x29 at 0xfffffffffb40, x30 at 0xfffffffffb48
+pwndbg> disassemble main
+Dump of assembler code for function main:
+   0x0000aaaaaaaa0ad4 <+0>:	sub	sp, sp, #0xd0
+   0x0000aaaaaaaa0ad8 <+4>:	stp	x29, x30, [sp, #192]
+   0x0000aaaaaaaa0adc <+8>:	add	x29, sp, #0xc0
+   0x0000aaaaaaaa0ae0 <+12>:	str	w0, [sp, #12]
+   0x0000aaaaaaaa0ae4 <+16>:	str	x1, [sp]
+   0x0000aaaaaaaa0ae8 <+20>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0aec <+24>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0af0 <+28>:	ldr	x1, [x0]
+   0x0000aaaaaaaa0af4 <+32>:	str	x1, [sp, #184]
+   0x0000aaaaaaaa0af8 <+36>:	mov	x1, #0x0                   	// #0
+   0x0000aaaaaaaa0afc <+40>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0b00 <+44>:	add	x0, x0, #0x918
+   0x0000aaaaaaaa0b04 <+48>:	str	x0, [sp, #24]
+   0x0000aaaaaaaa0b08 <+52>:	add	x2, sp, #0x88
+   0x0000aaaaaaaa0b0c <+56>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0b10 <+60>:	add	x1, x0, #0xd40
+   0x0000aaaaaaaa0b14 <+64>:	mov	x0, x2
+   0x0000aaaaaaaa0b18 <+68>:	ldr	q0, [x1]
+   0x0000aaaaaaaa0b1c <+72>:	str	q0, [x0]
+   0x0000aaaaaaaa0b20 <+76>:	ldur	q0, [x1, #9]
+   0x0000aaaaaaaa0b24 <+80>:	stur	q0, [x0, #9]
+   0x0000aaaaaaaa0b28 <+84>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0b2c <+88>:	b	0xaaaaaaaa0b58 <main+132>
+   0x0000aaaaaaaa0b30 <+92>:	mov	x0, #0x20                  	// #32
+   0x0000aaaaaaaa0b34 <+96>:	bl	0xaaaaaaaa0790 <malloc@plt>
+   0x0000aaaaaaaa0b38 <+100>:	mov	x2, x0
+   0x0000aaaaaaaa0b3c <+104>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0b40 <+108>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0b44 <+112>:	add	x1, sp, #0x48
+   0x0000aaaaaaaa0b48 <+116>:	str	x2, [x1, x0]
+   0x0000aaaaaaaa0b4c <+120>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0b50 <+124>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0b54 <+128>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0b58 <+132>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0b5c <+136>:	cmp	w0, #0x7
+   0x0000aaaaaaaa0b60 <+140>:	b.le	0xaaaaaaaa0b30 <main+92>
+   0x0000aaaaaaaa0b64 <+144>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0b68 <+148>:	b	0xaaaaaaaa0b94 <main+192>
+   0x0000aaaaaaaa0b6c <+152>:	mov	x0, #0x80                  	// #128
+   0x0000aaaaaaaa0b70 <+156>:	bl	0xaaaaaaaa0790 <malloc@plt>
+   0x0000aaaaaaaa0b74 <+160>:	mov	x2, x0
+   0x0000aaaaaaaa0b78 <+164>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0b7c <+168>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0b80 <+172>:	add	x1, sp, #0x30
+   0x0000aaaaaaaa0b84 <+176>:	str	x2, [x1, x0]
+   0x0000aaaaaaaa0b88 <+180>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0b8c <+184>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0b90 <+188>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0b94 <+192>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0b98 <+196>:	cmp	w0, #0x2
+   0x0000aaaaaaaa0b9c <+200>:	b.le	0xaaaaaaaa0b6c <main+152>
+   0x0000aaaaaaaa0ba0 <+204>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0ba4 <+208>:	b	0xaaaaaaaa0bd0 <main+252>
+   0x0000aaaaaaaa0ba8 <+212>:	mov	x0, #0x500                 	// #1280
+   0x0000aaaaaaaa0bac <+216>:	bl	0xaaaaaaaa0790 <malloc@plt>
+   0x0000aaaaaaaa0bb0 <+220>:	mov	x2, x0
+   0x0000aaaaaaaa0bb4 <+224>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0bb8 <+228>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0bbc <+232>:	add	x1, sp, #0x20
+   0x0000aaaaaaaa0bc0 <+236>:	str	x2, [x1, x0]
+   0x0000aaaaaaaa0bc4 <+240>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0bc8 <+244>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0bcc <+248>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0bd0 <+252>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0bd4 <+256>:	cmp	w0, #0x1
+   0x0000aaaaaaaa0bd8 <+260>:	b.le	0xaaaaaaaa0ba8 <main+212>
+   0x0000aaaaaaaa0bdc <+264>:	ldr	x1, [sp, #72]
+   0x0000aaaaaaaa0be0 <+268>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0be4 <+272>:	add	x0, x0, #0xd60
+   0x0000aaaaaaaa0be8 <+276>:	mov	x2, x1
+   0x0000aaaaaaaa0bec <+280>:	mov	x3, x0
+   0x0000aaaaaaaa0bf0 <+284>:	ldp	x0, x1, [x3]
+   0x0000aaaaaaaa0bf4 <+288>:	stp	x0, x1, [x2]
+   0x0000aaaaaaaa0bf8 <+292>:	ldrb	w0, [x3, #16]
+   0x0000aaaaaaaa0bfc <+296>:	strb	w0, [x2, #16]
+   0x0000aaaaaaaa0c00 <+300>:	str	wzr, [sp, #16]
+   0x0000aaaaaaaa0c04 <+304>:	b	0xaaaaaaaa0c28 <main+340>
+   0x0000aaaaaaaa0c08 <+308>:	ldrsw	x0, [sp, #16]
+   0x0000aaaaaaaa0c0c <+312>:	lsl	x0, x0, #3
+   0x0000aaaaaaaa0c10 <+316>:	add	x1, sp, #0x48
+   0x0000aaaaaaaa0c14 <+320>:	ldr	x0, [x1, x0]
+   0x0000aaaaaaaa0c18 <+324>:	bl	0xaaaaaaaa07d0 <free@plt>
+   0x0000aaaaaaaa0c1c <+328>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0c20 <+332>:	add	w0, w0, #0x1
+   0x0000aaaaaaaa0c24 <+336>:	str	w0, [sp, #16]
+   0x0000aaaaaaaa0c28 <+340>:	ldr	w0, [sp, #16]
+   0x0000aaaaaaaa0c2c <+344>:	cmp	w0, #0x7
+   0x0000aaaaaaaa0c30 <+348>:	b.le	0xaaaaaaaa0c08 <main+308>
+   0x0000aaaaaaaa0c34 <+352>:	ldr	x0, [sp, #48]
+   0x0000aaaaaaaa0c38 <+356>:	bl	0xaaaaaaaa07d0 <free@plt>
+   0x0000aaaaaaaa0c3c <+360>:	ldr	x0, [sp, #32]
+   0x0000aaaaaaaa0c40 <+364>:	bl	0xaaaaaaaa07d0 <free@plt>
+=> 0x0000aaaaaaaa0c44 <+368>:	mov	w2, #0x7                   	// #7
+   0x0000aaaaaaaa0c48 <+372>:	mov	w1, #0x6                   	// #6
+   0x0000aaaaaaaa0c4c <+376>:	ldr	x0, [sp, #24]
+   0x0000aaaaaaaa0c50 <+380>:	bl	0xaaaaaaaa09e8 <compute>
+   0x0000aaaaaaaa0c54 <+384>:	str	w0, [sp, #20]
+   0x0000aaaaaaaa0c58 <+388>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0c5c <+392>:	add	x0, x0, #0x980
+   0x0000aaaaaaaa0c60 <+396>:	str	x0, [sp, #24]
+   0x0000aaaaaaaa0c64 <+400>:	mov	w2, #0x2                   	// #2
+   0x0000aaaaaaaa0c68 <+404>:	ldr	w1, [sp, #20]
+   0x0000aaaaaaaa0c6c <+408>:	ldr	x0, [sp, #24]
+   0x0000aaaaaaaa0c70 <+412>:	bl	0xaaaaaaaa09e8 <compute>
+   0x0000aaaaaaaa0c74 <+416>:	mov	w1, w0
+   0x0000aaaaaaaa0c78 <+420>:	ldr	w0, [sp, #20]
+   0x0000aaaaaaaa0c7c <+424>:	add	w0, w0, w1
+   0x0000aaaaaaaa0c80 <+428>:	str	w0, [sp, #20]
+   0x0000aaaaaaaa0c84 <+432>:	adrp	x0, 0xaaaaaaac0000
+   0x0000aaaaaaaa0c88 <+436>:	add	x0, x0, #0x50
+   0x0000aaaaaaaa0c8c <+440>:	ldr	x1, [x0]
+   0x0000aaaaaaaa0c90 <+444>:	add	x0, sp, #0x88
+   0x0000aaaaaaaa0c94 <+448>:	mov	x4, x0
+   0x0000aaaaaaaa0c98 <+452>:	ldr	w3, [sp, #20]
+   0x0000aaaaaaaa0c9c <+456>:	adrp	x0, 0xaaaaaaac0000
+   0x0000aaaaaaaa0ca0 <+460>:	add	x2, x0, #0x10
+   0x0000aaaaaaaa0ca4 <+464>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0ca8 <+468>:	add	x0, x0, #0xd78
+   0x0000aaaaaaaa0cac <+472>:	bl	0xaaaaaaaa07f0 <printf@plt>
+   0x0000aaaaaaaa0cb0 <+476>:	ldr	w0, [sp, #12]
+   0x0000aaaaaaaa0cb4 <+480>:	cmp	w0, #0x1
+   0x0000aaaaaaaa0cb8 <+484>:	b.le	0xaaaaaaaa0cc8 <main+500>
+   0x0000aaaaaaaa0cbc <+488>:	ldr	x0, [sp]
+   0x0000aaaaaaaa0cc0 <+492>:	ldr	x0, [x0, #8]
+   0x0000aaaaaaaa0cc4 <+496>:	b	0xaaaaaaaa0cd0 <main+508>
+   0x0000aaaaaaaa0cc8 <+500>:	adrp	x0, 0xaaaaaaaa0000
+   0x0000aaaaaaaa0ccc <+504>:	add	x0, x0, #0xd90
+   0x0000aaaaaaaa0cd0 <+508>:	bl	0xaaaaaaaa0a60 <vuln>
+   0x0000aaaaaaaa0cd4 <+512>:	mov	w0, #0x0                   	// #0
+   0x0000aaaaaaaa0cd8 <+516>:	mov	w1, w0
+   0x0000aaaaaaaa0cdc <+520>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0ce0 <+524>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0ce4 <+528>:	ldr	x3, [sp, #184]
+   0x0000aaaaaaaa0ce8 <+532>:	ldr	x2, [x0]
+   0x0000aaaaaaaa0cec <+536>:	subs	x3, x3, x2
+   0x0000aaaaaaaa0cf0 <+540>:	mov	x2, #0x0                   	// #0
+   0x0000aaaaaaaa0cf4 <+544>:	b.eq	0xaaaaaaaa0cfc <main+552>  // b.none
+   0x0000aaaaaaaa0cf8 <+548>:	bl	0xaaaaaaaa07a0 <__stack_chk_fail@plt>
+   0x0000aaaaaaaa0cfc <+552>:	mov	w0, w1
+   0x0000aaaaaaaa0d00 <+556>:	ldp	x29, x30, [sp, #192]
+   0x0000aaaaaaaa0d04 <+560>:	add	sp, sp, #0xd0
+   0x0000aaaaaaaa0d08 <+564>:	ret
+End of assembler dump.
+pwndbg> disassemble compute
+Dump of assembler code for function compute:
+   0x0000aaaaaaaa09e8 <+0>:	sub	sp, sp, #0x30
+   0x0000aaaaaaaa09ec <+4>:	stp	x29, x30, [sp, #32]
+   0x0000aaaaaaaa09f0 <+8>:	add	x29, sp, #0x20
+   0x0000aaaaaaaa09f4 <+12>:	str	x0, [sp, #8]
+   0x0000aaaaaaaa09f8 <+16>:	str	w1, [sp, #4]
+   0x0000aaaaaaaa09fc <+20>:	str	w2, [sp]
+   0x0000aaaaaaaa0a00 <+24>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0a04 <+28>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0a08 <+32>:	ldr	x1, [x0]
+   0x0000aaaaaaaa0a0c <+36>:	str	x1, [sp, #24]
+   0x0000aaaaaaaa0a10 <+40>:	mov	x1, #0x0                   	// #0
+   0x0000aaaaaaaa0a14 <+44>:	ldr	x2, [sp, #8]
+   0x0000aaaaaaaa0a18 <+48>:	ldr	w1, [sp]
+   0x0000aaaaaaaa0a1c <+52>:	ldr	w0, [sp, #4]
+   0x0000aaaaaaaa0a20 <+56>:	blr	x2
+   0x0000aaaaaaaa0a24 <+60>:	str	w0, [sp, #20]
+   0x0000aaaaaaaa0a28 <+64>:	ldr	w0, [sp, #20]
+   0x0000aaaaaaaa0a2c <+68>:	mov	w1, w0
+   0x0000aaaaaaaa0a30 <+72>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0a34 <+76>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0a38 <+80>:	ldr	x3, [sp, #24]
+   0x0000aaaaaaaa0a3c <+84>:	ldr	x2, [x0]
+   0x0000aaaaaaaa0a40 <+88>:	subs	x3, x3, x2
+   0x0000aaaaaaaa0a44 <+92>:	mov	x2, #0x0                   	// #0
+   0x0000aaaaaaaa0a48 <+96>:	b.eq	0xaaaaaaaa0a50 <compute+104>  // b.none
+   0x0000aaaaaaaa0a4c <+100>:	bl	0xaaaaaaaa07a0 <__stack_chk_fail@plt>
+   0x0000aaaaaaaa0a50 <+104>:	mov	w0, w1
+   0x0000aaaaaaaa0a54 <+108>:	ldp	x29, x30, [sp, #32]
+   0x0000aaaaaaaa0a58 <+112>:	add	sp, sp, #0x30
+   0x0000aaaaaaaa0a5c <+116>:	ret
+End of assembler dump.
+pwndbg> hexdump $sp
++0000 0xfffffffffa80  c8 fc ff ff ff ff 00 00  00 00 00 00 01 00 00 00  │........│........│
++0010 0xfffffffffa90  08 00 00 00 00 00 00 00  18 09 aa aa aa aa 00 00  │........│........│
++0020 0xfffffffffaa0  d0 15 ac aa aa aa 00 00  e0 1a ac aa aa aa 00 00  │........│........│
++0030 0xfffffffffab0  20 14 ac aa aa aa 00 00  b0 14 ac aa aa aa 00 00  │........│........│
+pwndbg> hexdump &global_buf 64
++0000 0xaaaaaaac0010  67 6c 6f 62 61 6c 20 64  61 74 61 20 73 74 72 69  │global.d│ata.stri│
++0010 0xaaaaaaac0020  6e 67 00 00 00 00 00 00  00 00 00 00 00 00 00 00  │ng......│........│
++0020 0xaaaaaaac0030  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  │........│........│
++0030 0xaaaaaaac0040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  │........│........│
+pwndbg> canary
+AT_RANDOM  = 0xfffffffffea8 # points to the canary value on glibc < 2.44
+TLS Canary @ 0xfffff7ff8648 # address where canary is stored
+Warning: TLS canary value 0xfffff7f35c40 doesn't match global canary 0xc989efb4cb5c2100!
+Canary     = 0xfffff7f35c40
+No canaries found.
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of /work/test_arm64:
+GOT protection: Full RELRO | Found 0 GOT entries passing the filter
+pwndbg> plt
+Section .plt 0xaaaaaaaa0750 - 0xaaaaaaaa0800:
+0xaaaaaaaa0770: __libc_start_main@plt
+0xaaaaaaaa0780: __cxa_finalize@plt
+0xaaaaaaaa0790: malloc@plt
+0xaaaaaaaa07a0: __stack_chk_fail@plt
+0xaaaaaaaa07b0: __gmon_start__@plt
+0xaaaaaaaa07c0: abort@plt
+0xaaaaaaaa07d0: free@plt
+0xaaaaaaaa07e0: strcpy@plt
+0xaaaaaaaa07f0: printf@plt
+pwndbg> piebase
+Calculated VA from /work/test_arm64 = 0xaaaaaaaa0000
+pwndbg> brva 0x1000
+Offset 0x1000 rebased to module /work/test_arm64 as 0xaaaaaaaa1000 is beyond module's memory pages:
+    0xaaaaaaaa0000     0xaaaaaaaa1000 r-xp     1000       0 test_arm64
+    0xaaaaaaabf000     0xaaaaaaac0000 r--p     1000    f000 test_arm64
+    0xaaaaaaac0000     0xaaaaaaac1000 rw-p     1000   10000 test_arm64
+Could not determine rebased breakpoint address on current target
+pwndbg> xinfo $sp
+Extended information for virtual address 0xfffffffffa80:
+
+  Containing mapping:
+    0xfffffffdf000    0x1000000000000 rw-p    21000       0 [stack]
+
+  Offset information:
+           Stack Top 0xfffffffffa80 = 0xfffffffdf000 + 0x20a80
+           Stack End 0xfffffffffa80 = 0x1000000000000 - 0x580
+       Stack Pointer 0xfffffffffa80 = 0xfffffffffa80 + 0x0
+       Frame Pointer 0xfffffffffa80 = 0xfffffffffb40 - 0xc0
+   Next Stack Canary 0xfffffffffa80 = 0xfffffffffb38 - 0xb8
+pwndbg> retaddr
+0xfffffffffb48 —▸ 0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+0xfffffffffc58 —▸ 0xfffff7e18598 (__libc_start_main+152) ◂— adrp x26, _nl_C_locobj+32 /* ':\x0c' */
+0xfffffffffc68 —▸ 0xaaaaaaaa0830 (_start+48) ◂— bl abort@plt
+pwndbg> distance $sp $pc
+0xfffffffffa80->0xaaaaaaaa0c44 is -0x55555555ee3c bytes (-0xaaaaaaabdc8 words)
+pwndbg> nearpc
+   0xaaaaaaaa0c30 <main+348>                    └<   b.le   main+308                    <main+308>
+                                                  
+   0xaaaaaaaa0c34 <main+352>                         ldr    x0, [sp, #0x30]
+   0xaaaaaaaa0c38 <main+356>                         bl     free@plt                    <free@plt>
+                                                  
+   0xaaaaaaaa0c3c <main+360>                         ldr    x0, [sp, #0x20]
+   0xaaaaaaaa0c40 <main+364>                         bl     free@plt                    <free@plt>
+                                                  
+b► 0xaaaaaaaa0c44 <main+368>                         mov    w2, #7              W2 => 7
+   0xaaaaaaaa0c48 <main+372>                         mov    w1, #6              W1 => 6
+   0xaaaaaaaa0c4c <main+376>                         ldr    x0, [sp, #0x18]
+   0xaaaaaaaa0c50 <main+380>                         bl     compute                     <compute>
+                                                  
+   0xaaaaaaaa0c54 <main+384>                         str    w0, [sp, #0x14]
+   0xaaaaaaaa0c58 <main+388>                         adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0c5c <main+392>                         add    x0, x0, #0x980
+   0xaaaaaaaa0c60 <main+396>                         str    x0, [sp, #0x18]
+   0xaaaaaaaa0c64 <main+400>                         mov    w2, #2                 W2 => 2
+   0xaaaaaaaa0c68 <main+404>                         ldr    w1, [sp, #0x14]
+pwndbg> procinfo
+exe        '/work/test_arm64'
+cmdline    /work/test_arm64 ''
+cwd        '/work'
+pid        620
+tid        620
+ppid       609
+uid        [0, 0, 0, 0]
+gid        [0, 0, 0, 0]
+groups     [0]
+fd[0]      /dev/pts/0
+fd[1]      /dev/pts/0
+fd[2]      /dev/pts/0
+pwndbg> aslr
+ASLR is OFF (read status from process' personality)
+pwndbg> elfsections
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End     Perm       Size  Name
+    0xaaaaaaaa0238     0xaaaaaaaa0253      R-X       0x1b  .interp
+    0xaaaaaaaa0254     0xaaaaaaaa0278      R-X       0x24  .note.gnu.build-id
+    0xaaaaaaaa0278     0xaaaaaaaa0298      R-X       0x20  .note.ABI-tag
+    0xaaaaaaaa0298     0xaaaaaaaa02b4      R-X       0x1c  .gnu.hash
+    0xaaaaaaaa02b8     0xaaaaaaaa0420      R-X      0x168  .dynsym
+    0xaaaaaaaa0420     0xaaaaaaaa0500      R-X       0xe0  .dynstr
+    0xaaaaaaaa0500     0xaaaaaaaa051e      R-X       0x1e  .gnu.version
+    0xaaaaaaaa0520     0xaaaaaaaa0570      R-X       0x50  .gnu.version_r
+    0xaaaaaaaa0570     0xaaaaaaaa0660      R-X       0xf0  .rela.dyn
+    0xaaaaaaaa0660     0xaaaaaaaa0738      R-X       0xd8  .rela.plt
+    0xaaaaaaaa0738     0xaaaaaaaa0750      R-X       0x18  .init
+    0xaaaaaaaa0750     0xaaaaaaaa0800      R-X       0xb0  .plt
+    0xaaaaaaaa0800     0xaaaaaaaa0d0c      R-X      0x50c  .text
+    0xaaaaaaaa0d0c     0xaaaaaaaa0d20      R-X       0x14  .fini
+    0xaaaaaaaa0d20     0xaaaaaaaa0d96      R-X       0x76  .rodata
+    0xaaaaaaaa0d98     0xaaaaaaaa0df4      R-X       0x5c  .eh_frame_hdr
+    0xaaaaaaaa0df8     0xaaaaaaaa0f2c      R-X      0x134  .eh_frame
+    0xaaaaaaabfd58     0xaaaaaaabfd60      R--        0x8  .init_array
+    0xaaaaaaabfd60     0xaaaaaaabfd68      R--        0x8  .fini_array
+    0xaaaaaaabfd68     0xaaaaaaabff68      R--      0x200  .dynamic
+    0xaaaaaaabff68     0xaaaaaaac0000      R--       0x98  .got
+    0xaaaaaaac0000     0xaaaaaaac0058      RW-       0x58  .data
+    0xaaaaaaac0058     0xaaaaaaac0060      RW-        0x8  .bss
+pwndbg> libc
+libc: glibc
+libc version: 2.39
+linked: dynamically
+URLs:
+    project homepage:       https://sourceware.org/glibc/
+    read the source:        https://elixir.bootlin.com/glibc/glibc-2.39/source
+    download the archive:   https://ftp.gnu.org/gnu/libc/glibc-2.39.tar.gz
+    git clone               https://sourceware.org/git/glibc.git
+Mappings:
+    libc is at:             0xfffff7df0000
+           /usr/lib/aarch64-linux-gnu/libc.so.6
+    ld is at:               0xfffff7fbe000
+           /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+Symbolication:
+    has exported symbols:  yes
+    has internal symbols:  yes
+    has debug info:        yes
+pwndbg> break compute
+Breakpoint 3 at 0xaaaaaaaa0a00: file test.c, line 13.
+pwndbg> continue
+Continuing.
+
+Breakpoint 3, compute (f=0xaaaaaaaa0918 <add>, x=0x6, y=0x7) at test.c:13
+13	int compute(op_fn f, int x, int y) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+*X1   6
+*X2   7
+ X3   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X4   0x510
+ X5   0x40
+ X6   0xab3281dd83708d9
+ X7   0
+ X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+*X29  0xfffffffffa70 —▸ 0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+*SP   0xfffffffffa50 {y} ◂— 0x600000007
+ LR   0xaaaaaaaa0c54 (main+384) ◂— str w0, [sp, #0x14]
+*PC   0xaaaaaaaa0a00 (compute+24) ◂— adrp x0, 0xaaaaaaabf000
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa09f4 <compute+12>    str    x0, [sp, #8]
+   0xaaaaaaaa09f8 <compute+16>    str    w1, [sp, #4]
+   0xaaaaaaaa09fc <compute+20>    str    w2, [sp]
+b► 0xaaaaaaaa0a00 <compute+24>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0a04 <compute+28>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+   0xaaaaaaaa0a08 <compute+32>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+   0xaaaaaaaa0a0c <compute+36>    str    x1, [sp, #0x18]        [0xfffffffffa68] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0a10 <compute+40>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0a14 <compute+44>    ldr    x2, [sp, #8]           X2, [{f}] => 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0a18 <compute+48>    ldr    w1, [sp]               W1, [{y}] => 7
+   0xaaaaaaaa0a1c <compute+52>    ldr    w0, [sp, #4]           W0, [{x}] => 6
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:13
+    7 const char *greeting = "Hello, pwndbg!";
+    8 char global_buf[64] = "global data string";
+    9 
+   10 int add(int a, int b) { return a + b; }
+   11 int mul(int a, int b) { return a * b; }
+   12 
+ ► 13 int compute(op_fn f, int x, int y) {
+   14     int r = f(x, y);
+   15     return r;
+   16 }
+   17 
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ sp  0xfffffffffa50 {y} ◂— 0x600000007
+01:0008│-018 0xfffffffffa58 {f} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+02:0010│-010 0xfffffffffa60 —▸ 0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+03:0018│-008 0xfffffffffa68 —▸ 0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+04:0020│ x29 0xfffffffffa70 —▸ 0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+05:0028│+008 0xfffffffffa78 —▸ 0xaaaaaaaa0c54 (main+384) ◂— str w0, [sp, #0x14]
+06:0030│+010 0xfffffffffa80 —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+07:0038│+018 0xfffffffffa88 ◂— 0x100000000
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0a00 compute+24
+   1 0xaaaaaaaa0c54 main+384
+   2 0xfffff7e184c4 __libc_start_call_main+116
+   3 0xfffff7e18598 __libc_start_main+152
+   4 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> bt
+#0  compute (f=0xaaaaaaaa0918 <add>, x=0x6, y=0x7) at test.c:13
+#1  0x0000aaaaaaaa0c54 in main (argc=0x1, argv=0xfffffffffcc8) at test.c:38
+#2  0x0000fffff7e184c4 in __libc_start_call_main (main=main@entry=0xaaaaaaaa0ad4 <main>, argc=argc@entry=0x1, 
+    argv=argv@entry=0xfffffffffcc8) at ../sysdeps/nptl/libc_start_call_main.h:58
+#3  0x0000fffff7e18598 in __libc_start_main_impl (main=0xaaaaaaaa0ad4 <main>, argc=0x1, argv=0xfffffffffcc8, 
+    init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=<optimized out>)
+    at ../csu/libc-start.c:360
+#4  0x0000aaaaaaaa0830 in _start ()
+pwndbg> context backtrace
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0a00 compute+24
+   1 0xaaaaaaaa0c54 main+384
+   2 0xfffff7e184c4 __libc_start_call_main+116
+   3 0xfffff7e18598 __libc_start_main+152
+   4 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> finish
+Run till exit from #0  compute (f=0xaaaaaaaa0918 <add>, x=0x6, y=0x7) at test.c:13
+0x0000aaaaaaaa0c54 in main (argc=0x1, argv=0xfffffffffcc8) at test.c:38
+38	    int r = compute(fp, 6, 7);
+Value returned is $6 = 0xd
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xd
+*X1   0xd
+*X2   0
+*X3   0
+ X4   0x510
+ X5   0x40
+ X6   0xab3281dd83708d9
+ X7   0
+ X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+*X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+*SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xaaaaaaaa0c54 (main+384) ◂— str w0, [sp, #0x14]
+*PC   0xaaaaaaaa0c54 (main+384) ◂— str w0, [sp, #0x14]
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0c40 <main+364>    bl     free@plt                    <free@plt>
+ 
+b+ 0xaaaaaaaa0c44 <main+368>    mov    w2, #7              W2 => 7
+   0xaaaaaaaa0c48 <main+372>    mov    w1, #6              W1 => 6
+   0xaaaaaaaa0c4c <main+376>    ldr    x0, [sp, #0x18]
+   0xaaaaaaaa0c50 <main+380>    bl     compute                     <compute>
+ 
+ ► 0xaaaaaaaa0c54 <main+384>    str    w0, [sp, #0x14]        [{r}] <= 0xd
+   0xaaaaaaaa0c58 <main+388>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0c5c <main+392>    add    x0, x0, #0x980         X0 => 0xaaaaaaaa0980 (mul) (0xaaaaaaaa0000 + 0x980)
+   0xaaaaaaaa0c60 <main+396>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0980 (mul) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0c64 <main+400>    mov    w2, #2                 W2 => 2
+   0xaaaaaaaa0c68 <main+404>    ldr    w1, [sp, #0x14]        W1, [{r}] => 0xd
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0c54 main+384
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context regs
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+*X0   0xd
+*X1   0xd
+*X2   0
+*X3   0
+ X4   0x510
+ X5   0x40
+ X6   0xab3281dd83708d9
+ X7   0
+ X8   0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xaaaaaaabffb0 (free@got[plt]) —▸ 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X17  0xfffff7e86d70 (free) ◂— cbz x0, free+276
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+*X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+*SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xaaaaaaaa0c54 (main+384) ◂— str w0, [sp, #0x14]
+*PC   0xaaaaaaaa0c54 (main+384) ◂— str w0, [sp, #0x14]
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context disasm
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0c40 <main+364>    bl     free@plt                    <free@plt>
+ 
+b+ 0xaaaaaaaa0c44 <main+368>    mov    w2, #7              W2 => 7
+   0xaaaaaaaa0c48 <main+372>    mov    w1, #6              W1 => 6
+   0xaaaaaaaa0c4c <main+376>    ldr    x0, [sp, #0x18]
+   0xaaaaaaaa0c50 <main+380>    bl     compute                     <compute>
+ 
+ ► 0xaaaaaaaa0c54 <main+384>    str    w0, [sp, #0x14]        [{r}] <= 0xd
+   0xaaaaaaaa0c58 <main+388>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0c5c <main+392>    add    x0, x0, #0x980         X0 => 0xaaaaaaaa0980 (mul) (0xaaaaaaaa0000 + 0x980)
+   0xaaaaaaaa0c60 <main+396>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0980 (mul) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0c64 <main+400>    mov    w2, #2                 W2 => 2
+   0xaaaaaaaa0c68 <main+404>    ldr    w1, [sp, #0x14]        W1, [{r}] => 0xd
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context code
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:38
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+   32     for (i = 0; i < 3; i++) mid[i] = malloc(0x80);
+   33     for (i = 0; i < 2; i++) big[i] = malloc(0x500);
+   34     strcpy((char *)small[0], "heap string here");
+   35     for (i = 0; i < 8; i++) free(small[i]);   /* 7 -> tcache, 1 -> fastbin */
+   36     free(mid[0]);
+   37     free(big[0]);                             /* -> unsorted bin */
+ ► 38     int r = compute(fp, 6, 7);
+   39     fp = mul;
+   40     r += compute(fp, r, 2);
+   41     printf("%s %s r=%d stack=%s\n", greeting, global_buf, r, stackbuf);
+   42     vuln(argc > 1 ? argv[1] : "short");
+   43     return 0;
+   44 }
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> context stack
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> watch global_buf[0]
+Hardware watchpoint 4: global_buf[0]
+pwndbg> delete
+pwndbg> info sharedlibrary
+From                To                  Syms Read   Shared Object Library
+0x0000fffff7fbedc0  0x0000fffff7fdae70  Yes         /lib/ld-linux-aarch64.so.1
+0x0000fffff7e17d00  0x0000fffff7f343d4  Yes         /lib/aarch64-linux-gnu/libc.so.6
+pwndbg> continue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=short
+[Inferior 1 (process 620) exited normally]
+pwndbg> 

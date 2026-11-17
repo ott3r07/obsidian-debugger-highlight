@@ -1,0 +1,2 @@
+(gdb) x/s greeting
+[34m0x555555558004[m:	"Hello, pwndbg!"

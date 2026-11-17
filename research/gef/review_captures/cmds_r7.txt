@@ -1,0 +1,9 @@
+gef_remote	gef-remote --qemu-user --qemu-binary /t/test_x86 localhost 1235
+break	break *0x8049ac8
+cont	continue
+registers	registers
+telescope	telescope $esp -l 4
+vmmap	vmmap
+si	si
+heap	heap chunks
+checksec	checksec

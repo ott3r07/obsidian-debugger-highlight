@@ -1,0 +1,4 @@
+[32m[1mpwndbg> [0m[32m[0mbt
+#0  [34m0x0041414141414141[m in [33m??[m ()
+#1  [34m0x4141414141414141[m in [33m??[m ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)

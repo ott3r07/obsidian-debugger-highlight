@@ -1,0 +1,14 @@
+checksec
+break *0x4019f0
+continue
+context code 16
+pdisass main
+pdisass 0x401a0d 3
+elfsymbol
+xrefs compute
+eflags set CF
+eflags
+p $eflags
+dumprop 0x401000 0x401200
+#SLEEP 15
+quit

@@ -1,0 +1,3 @@
+[32m[1mpwndbg> [0m[32m[0minfo threads
+  Id   Target Id                                    Frame 
+* 1    Thread 0xfffff7ff7ee0 (LWP 713) "test_arm64" [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38

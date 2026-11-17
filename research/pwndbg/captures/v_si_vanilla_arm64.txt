@@ -1,0 +1,2 @@
+(gdb) stepi
+0x0000aaaaaaaa0b10	30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");

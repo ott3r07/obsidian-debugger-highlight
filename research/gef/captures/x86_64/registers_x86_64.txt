@@ -1,0 +1,20 @@
+(qemu) gef➤  registers
+$rax   : 0x0               
+$rbx   : 0x1               
+$rcx   : 0x00000000004b38f0  →  0x0000000000000000
+$rdx   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$rsp   : 0x00002aaaab2abba0  →  0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rbp   : 0x00002aaaab2abc70  →  0x00002aaaab2abd10  →  0x00002aaaab2abd60  →  0x0000000000000000
+$rsi   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$rdi   : 0x1               
+$rip   : 0x0000000000401951  →  <main+002b> lea rax, [rip+0xffffffffffffff0d]        # 0x401865 <add>
+$r8    : 0x00000000004aa2a0  →  0x00000000004b38f0  →  0x0000000000000000
+$r9    : 0x110             
+$r10   : 0x1               
+$r11   : 0x0               
+$r12   : 0x00002aaaab2abd88  →  0x00002aaaab2abf32  →  "/work/test_x64"
+$r13   : 0x00002aaaab2abd98  →  0x00002aaaab2abf41  →  "HOSTNAME=47f545946d15"
+$r14   : 0x00000000004a5f68  →  0x0000000000401830  →  <frame_dummy+0000> endbr64 
+$r15   : 0x1               
+$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 

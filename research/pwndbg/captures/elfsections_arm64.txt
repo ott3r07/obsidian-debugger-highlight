@@ -1,0 +1,26 @@
+pwndbg> elfsections
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+             Start                End     Perm       Size  Name
+    0xaaaaaaaa0238     0xaaaaaaaa0253      R-X       0x1b  .interp
+    0xaaaaaaaa0254     0xaaaaaaaa0278      R-X       0x24  .note.gnu.build-id
+    0xaaaaaaaa0278     0xaaaaaaaa0298      R-X       0x20  .note.ABI-tag
+    0xaaaaaaaa0298     0xaaaaaaaa02b4      R-X       0x1c  .gnu.hash
+    0xaaaaaaaa02b8     0xaaaaaaaa0420      R-X      0x168  .dynsym
+    0xaaaaaaaa0420     0xaaaaaaaa0500      R-X       0xe0  .dynstr
+    0xaaaaaaaa0500     0xaaaaaaaa051e      R-X       0x1e  .gnu.version
+    0xaaaaaaaa0520     0xaaaaaaaa0570      R-X       0x50  .gnu.version_r
+    0xaaaaaaaa0570     0xaaaaaaaa0660      R-X       0xf0  .rela.dyn
+    0xaaaaaaaa0660     0xaaaaaaaa0738      R-X       0xd8  .rela.plt
+    0xaaaaaaaa0738     0xaaaaaaaa0750      R-X       0x18  .init
+    0xaaaaaaaa0750     0xaaaaaaaa0800      R-X       0xb0  .plt
+    0xaaaaaaaa0800     0xaaaaaaaa0d0c      R-X      0x50c  .text
+    0xaaaaaaaa0d0c     0xaaaaaaaa0d20      R-X       0x14  .fini
+    0xaaaaaaaa0d20     0xaaaaaaaa0d96      R-X       0x76  .rodata
+    0xaaaaaaaa0d98     0xaaaaaaaa0df4      R-X       0x5c  .eh_frame_hdr
+    0xaaaaaaaa0df8     0xaaaaaaaa0f2c      R-X      0x134  .eh_frame
+    0xaaaaaaabfd58     0xaaaaaaabfd60      R--        0x8  .init_array
+    0xaaaaaaabfd60     0xaaaaaaabfd68      R--        0x8  .fini_array
+    0xaaaaaaabfd68     0xaaaaaaabff68      R--      0x200  .dynamic
+    0xaaaaaaabff68     0xaaaaaaac0000      R--       0x98  .got
+    0xaaaaaaac0000     0xaaaaaaac0058      RW-       0x58  .data
+    0xaaaaaaac0058     0xaaaaaaac0060      RW-        0x8  .bss

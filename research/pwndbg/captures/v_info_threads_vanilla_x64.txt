@@ -1,0 +1,3 @@
+(gdb) info threads
+  Id   Target Id                          Frame 
+* 1    Thread 1053.1053 (CPU#0 [running]) main (argc=1, argv=0xffff935a9cf8) at test.c:38

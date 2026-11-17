@@ -1,0 +1,17 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+     Start        End Perm     Size  Offset File (set vmmap-prefer-relpaths on)
+ 0x8048000  0x8049000 r--p     1000       0 /host_virtiofs/private/tmp/claude-501/-Users-ott3r-tmp-obsidian-plugin/e27bd0c1-a604-4542-b4ef-de24fec957ae/scratchpad/cap/rv_i386
+ 0x8049000  0x80c8000 r-xp    7f000    1000 /host_virtiofs/private/tmp/claude-501/-Users-ott3r-tmp-obsidian-plugin/e27bd0c1-a604-4542-b4ef-de24fec957ae/scratchpad/cap/rv_i386
+ 0x80c8000  0x8100000 r--p    38000   80000 /host_virtiofs/private/tmp/claude-501/-Users-ott3r-tmp-obsidian-plugin/e27bd0c1-a604-4542-b4ef-de24fec957ae/scratchpad/cap/rv_i386
+ 0x8100000  0x8103000 r--p     3000   b8000 /host_virtiofs/private/tmp/claude-501/-Users-ott3r-tmp-obsidian-plugin/e27bd0c1-a604-4542-b4ef-de24fec957ae/scratchpad/cap/rv_i386
+ 0x8103000  0x8104000 rw-p     1000   bb000 /host_virtiofs/private/tmp/claude-501/-Users-ott3r-tmp-obsidian-plugin/e27bd0c1-a604-4542-b4ef-de24fec957ae/scratchpad/cap/rv_i386
+ 0x8104000  0x8129000 rw-p    25000       0 [anon_8104]
+0x40000000 0x40001000 ---p     1000       0 [anon_40000]
+0x40001000 0x40801000 rw-p   800000       0 [stack]
+0x40801000 0x40802000 r-xp     1000       0 [vdso]
+0x40802000 0x40804000 rw-p     2000       0 [anon_40802]
+0x40804000 0x40805000 ---p     1000       0 [anon_40804]
+0x40805000 0x41005000 rw-p   800000       0 [anon_40805]

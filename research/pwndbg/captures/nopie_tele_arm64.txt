@@ -1,0 +1,11 @@
+pwndbg> telescope $sp 10
+00:0000│  sp 0xfffffffffae0 —▸ 0xfffffffffb70 ◂— 0
+01:0008│     0xfffffffffae8 —▸ 0x400634 (_start+52) ◂— nop 
+02:0010│     0xfffffffffaf0 ◂— 0x200000000
+03:0018│     0xfffffffffaf8 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+04:0020│     0xfffffffffb00 —▸ 0xfffffffffc58 —▸ 0xfffffffffe55 ◂— '/work/test_nopie_arm64'
+05:0028│     0xfffffffffb08 ◂— 2
+06:0030│     0xfffffffffb10 —▸ 0x410c10 (__do_global_dtors_aux_fini_array_entry) —▸ 0x4006e0 (__do_global_dtors_aux) ◂— paciasp
+07:0038│     0xfffffffffb18 —▸ 0x400634 (_start+52) ◂— nop 
+08:0040│     0xfffffffffb20 —▸ 0xfffffffffc70 —▸ 0xfffffffffed1 ◂— 'HOSTNAME=3e37fc6690d4'
+09:0048│     0xfffffffffb28 —▸ 0xfffff7ffdb58 (_rtld_global_ro) ◂— 0

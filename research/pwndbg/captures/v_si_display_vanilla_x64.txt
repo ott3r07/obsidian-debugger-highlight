@@ -1,0 +1,4 @@
+(gdb) si
+0x000055555555734c	30	    strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+1: x/i $pc
+=> 0x55555555734c <main+81>:	mov    %rsi,(%rax)

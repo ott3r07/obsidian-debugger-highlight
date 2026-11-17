@@ -1,0 +1,40 @@
+
+/tmp/t:	file format mach-o arm64
+
+Disassembly of section __TEXT,__text:
+
+0000000100000460 <_main>:
+100000460:     	sub	sp, sp, #0x80
+100000464:     	stp	x29, x30, [sp, #0x70]
+100000468:     	add	x29, sp, #0x70
+10000046c:     	adrp	x8, 0x100004000 <_printf+0x100004000>
+100000470:     	ldr	x8, [x8]
+100000474:     	ldr	x8, [x8]
+100000478:     	stur	x8, [x29, #-0x8]
+10000047c:     	str	wzr, [sp, #0x24]
+100000480:     	str	w0, [sp, #0x20]
+100000484:     	str	x1, [sp, #0x18]
+100000488:     	mov	x8, #0x1000             ; =4096
+10000048c:     	movk	x8, #0xf7dd, lsl #16
+100000490:     	movk	x8, #0x7fff, lsl #32
+100000494:     	str	x8, [sp, #0x10]
+100000498:     	ldr	w8, [sp, #0x20]
+10000049c:     	subs	w8, w8, #0x1
+1000004a0:     	b.le	0x1000004c0 <_main+0x60>
+1000004a4:     	b	0x1000004a8 <_main+0x48>
+1000004a8:     	ldr	x8, [sp, #0x18]
+1000004ac:     	ldr	x1, [x8, #0x8]
+1000004b0:     	add	x0, sp, #0x28
+1000004b4:     	mov	x2, #0x40               ; =64
+1000004b8:     	bl	0x100000510 <_printf+0x100000510>
+1000004bc:     	b	0x1000004c0 <_main+0x60>
+1000004c0:     	ldr	x10, [sp, #0x10]
+1000004c4:     	ldr	w8, [sp, #0x20]
+1000004c8:     	mov	x9, sp
+1000004cc:     	str	x10, [x9]
+1000004d0:     	str	x8, [x9, #0x8]
+1000004d4:     	adrp	x0, 0x100000000 <_printf+0x100000000>
+1000004d8:     	add	x0, x0, #0x534
+1000004dc:     	bl	0x10000051c <_printf+0x10000051c>
+1000004e0:     	ldur	x9, [x29, #-0x8]
+1000004e4:     	adrp	x8, 0x100004000 <_printf+0x100004000>

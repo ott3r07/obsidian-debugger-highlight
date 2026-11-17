@@ -1,0 +1,4 @@
+pwndbg> retaddr
+0xfffffffffb48 —▸ 0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+0xfffffffffc58 —▸ 0xfffff7e18598 (__libc_start_main+152) ◂— adrp x26, _nl_C_locobj+32 /* ':\x0c' */
+0xfffffffffc68 —▸ 0xaaaaaaaa0830 (_start+48) ◂— bl abort@plt

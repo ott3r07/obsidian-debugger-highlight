@@ -1,0 +1,6 @@
+[32m[1mpwndbg> [0m[32m[0mbrva 0x1000
+Offset 0x1000 rebased to module /work/test_arm64 as 0xaaaaaaaa1000 is beyond module's memory pages:
+    0xaaaaaaaa0000     0xaaaaaaaa1000 r-xp     1000       0 test_arm64
+    0xaaaaaaabf000     0xaaaaaaac0000 r--p     1000    f000 test_arm64
+    0xaaaaaaac0000     0xaaaaaaac1000 rw-p     1000   10000 test_arm64
+[31mCould not determine rebased breakpoint address on current target[0m

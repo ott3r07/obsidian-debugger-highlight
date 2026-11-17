@@ -1,0 +1,3 @@
+(qemu) gef➤  up
+#1  0x0000000000401acd in main (argc=0x1, argv=0x2aaaab2abd88) at test.c:38
+38	    int r = compute(fp, 6, 7);

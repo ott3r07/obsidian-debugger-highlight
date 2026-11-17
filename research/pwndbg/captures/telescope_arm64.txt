@@ -1,0 +1,21 @@
+pwndbg> telescope $sp 20
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 8
+03:0018│-0a8 0xfffffffffa98 {fp} —▸ 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+04:0020│-0a0 0xfffffffffaa0 {big} —▸ 0xaaaaaaac15d0 —▸ 0xfffff7fa0ab0 (main_arena+96) —▸ 0xaaaaaaac1fe0 ◂— 0
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xaaaaaaac1ae0 ◂— 0
+06:0030│-090 0xfffffffffab0 {mid} —▸ 0xaaaaaaac1420 ◂— 0xaaaaaaac1
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xaaaaaaac14b0 ◂— 0
+08:0040│-080 0xfffffffffac0 {mid+0x10} —▸ 0xaaaaaaac1540 ◂— 0
+09:0048│-078 0xfffffffffac8 {small} —▸ 0xaaaaaaac12a0 ◂— 0xaaaaaaac1
+0a:0050│-070 0xfffffffffad0 {small+0x8} —▸ 0xaaaaaaac12d0 ◂— 0xaaa00006b861
+0b:0058│-068 0xfffffffffad8 {small+0x10} —▸ 0xaaaaaaac1300 ◂— 0xaaa00006b811
+0c:0060│-060 0xfffffffffae0 {small+0x18} —▸ 0xaaaaaaac1330 ◂— 0xaaa00006b9c1
+0d:0068│-058 0xfffffffffae8 {small+0x20} —▸ 0xaaaaaaac1360 ◂— 0xaaa00006b9f1
+0e:0070│-050 0xfffffffffaf0 {small+0x28} —▸ 0xaaaaaaac1390 ◂— 0xaaa00006b9a1
+0f:0078│-048 0xfffffffffaf8 {small+0x30} —▸ 0xaaaaaaac13c0 ◂— 0xaaa00006b951
+10:0080│-040 0xfffffffffb00 {small+0x38} —▸ 0xaaaaaaac13f0 ◂— 0xaaaaaaac1
+11:0088│-038 0xfffffffffb08 {stackbuf} ◂— 'AAAAAAAABBBBBBBBCCCCCCCC'
+12:0090│-030 0xfffffffffb10 {stackbuf+0x8} ◂— 'BBBBBBBBCCCCCCCC'
+13:0098│-028 0xfffffffffb18 {stackbuf+0x10} ◂— 'CCCCCCCC'

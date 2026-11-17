@@ -1,0 +1,39 @@
+
+/tmp/t86.o:	file format mach-o 64-bit x86-64
+
+Disassembly of section __TEXT,__text:
+
+0000000000000000 <_main>:
+       0: 55                           	push	rbp
+       1: 48 89 e5                     	mov	rbp, rsp
+       4: 48 83 ec 70                  	sub	rsp, 0x70
+       8: 48 8b 05 00 00 00 00         	mov	rax, qword ptr [rip]    ## 0xf <_main+0xf>
+       f: 48 8b 00                     	mov	rax, qword ptr [rax]
+      12: 48 89 45 f8                  	mov	qword ptr [rbp - 0x8], rax
+      16: c7 45 ac 00 00 00 00         	mov	dword ptr [rbp - 0x54], 0x0
+      1d: 89 7d a8                     	mov	dword ptr [rbp - 0x58], edi
+      20: 48 89 75 a0                  	mov	qword ptr [rbp - 0x60], rsi
+      24: 48 b8 00 10 dd f7 ff 7f 00 00	movabs	rax, 0x7ffff7dd1000
+      2e: 48 89 45 98                  	mov	qword ptr [rbp - 0x68], rax
+      32: 83 7d a8 01                  	cmp	dword ptr [rbp - 0x58], 0x1
+      36: 7e 16                        	jle	0x4e <_main+0x4e>
+      38: 48 8d 7d b0                  	lea	rdi, [rbp - 0x50]
+      3c: 48 8b 45 a0                  	mov	rax, qword ptr [rbp - 0x60]
+      40: 48 8b 70 08                  	mov	rsi, qword ptr [rax + 0x8]
+      44: ba 40 00 00 00               	mov	edx, 0x40
+      49: e8 00 00 00 00               	call	0x4e <_main+0x4e>
+      4e: 48 8b 75 98                  	mov	rsi, qword ptr [rbp - 0x68]
+      52: 8b 55 a8                     	mov	edx, dword ptr [rbp - 0x58]
+      55: 48 8d 3d 27 00 00 00         	lea	rdi, [rip + 0x27]       ## 0x83 <_main+0x83>
+      5c: b0 00                        	mov	al, 0x0
+      5e: e8 00 00 00 00               	call	0x63 <_main+0x63>
+      63: 48 8b 05 00 00 00 00         	mov	rax, qword ptr [rip]    ## 0x6a <_main+0x6a>
+      6a: 48 8b 00                     	mov	rax, qword ptr [rax]
+      6d: 48 8b 4d f8                  	mov	rcx, qword ptr [rbp - 0x8]
+      71: 48 39 c8                     	cmp	rax, rcx
+      74: 75 08                        	jne	0x7e <_main+0x7e>
+      76: 31 c0                        	xor	eax, eax
+      78: 48 83 c4 70                  	add	rsp, 0x70
+      7c: 5d                           	pop	rbp
+      7d: c3                           	ret
+      7e: e8 00 00 00 00               	call	0x83 <_main+0x83>

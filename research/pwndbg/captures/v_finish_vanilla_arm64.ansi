@@ -1,0 +1,5 @@
+(gdb) finish
+Run till exit from #0  [33mcompute[m ([36mf[m=0xaaaaaaaa0918 <add>, [36mx[m=6, [36my[m=7) at [32mtest.c[m:13
+[34m0x0000aaaaaaaa0c54[m in [33mmain[m ([36margc[m=1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+38	    [32mint[m r [31m=[m [01mcompute[m[31m([mfp[31m,[m [35m6[m[31m,[m [35m7[m[31m);[m
+Value returned is $10 = 13

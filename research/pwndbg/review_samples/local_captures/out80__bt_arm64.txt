@@ -1,0 +1,16 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> bt
+#0  many_args (alpha_parameter=0x1111, beta_parameter=0x2222, 
+    gamma_string=0xaaaaaaaa0e78 "a fairly long string argument to force gdb line wrapping", delta_config=0xaaaaaaac0010 <g_cfg>, epsilon_value=0x5555, 
+    zeta_value=0x6666) at rv.c:16
+#1  0x0000aaaaaaaa0db8 in main (argc=0x1, argv=0xfffffffffcd8) at rv.c:41
+#2  0x0000fffff7e184c4 in __libc_start_call_main (
+    main=main@entry=0xaaaaaaaa0b50 <main>, argc=argc@entry=0x1, 
+    argv=argv@entry=0xfffffffffcd8)
+    at ../sysdeps/nptl/libc_start_call_main.h:58
+#3  0x0000fffff7e18598 in __libc_start_main_impl (main=0xaaaaaaaa0b50 <main>, 
+    argc=0x1, argv=0xfffffffffcd8, init=<optimized out>, fini=<optimized out>, 
+    rtld_fini=<optimized out>, stack_end=<optimized out>)
+    at ../csu/libc-start.c:360
+#4  0x0000aaaaaaaa08f0 in _start ()

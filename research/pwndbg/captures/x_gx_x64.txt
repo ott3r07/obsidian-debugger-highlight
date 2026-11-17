@@ -1,0 +1,2 @@
+pwndbg> x/gx $sp
+0xffff9b1bdb00:	0x0000ffff9b1bdcf8

@@ -1,0 +1,2 @@
+(gdb) x/8c greeting
+[34m0xaaaaaaaa0d28[m:	72 'H'	101 'e'	108 'l'	108 'l'	111 'o'	44 ','	32 ' '	112 'p'

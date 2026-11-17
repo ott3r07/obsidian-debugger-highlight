@@ -1,0 +1,2 @@
+(gdb) set disassembly-flavor intel
+No symbol "disassembly" in current context.

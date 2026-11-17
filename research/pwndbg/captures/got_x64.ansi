@@ -1,0 +1,5 @@
+[32m[1mpwndbg> [0m[32m[0mgot
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of [35m/work/test_x64[0m:
+GOT protection: [32mFull RELRO[0m | Found [33m0[0m GOT entries passing the filter

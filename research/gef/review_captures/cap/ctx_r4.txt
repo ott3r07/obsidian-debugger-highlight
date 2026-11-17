@@ -1,0 +1,63 @@
+gef➤  context
+[ Legend: Modified register | Code | Heap | Stack | String ]
+─────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+$x0  : 0x0000fffff7fc2740  →  <_dl_fini+0000> stp x29,  x30,  [sp,  #-112]!
+$x1  : 0x0000fffff7fff930  →  0x0000000000000000
+$x2  : 0x0               
+$x3  : 0x0000fffffffffd28  →  0x0000ffffffffff0e  →  "HOSTNAME=c024fe10785d"
+$x4  : 0x0000fffff7ff76c0  →  0x0000fffff7fff350  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x5  : 0xbfffffffffffff  
+$x6  : 0x30              
+$x7  : 0x0000fffff7ffcaf0  →  "glibc.rtld.nns"
+$x8  : 0xd7              
+$x9  : 0x28              
+$x10 : 0x1ccef0          
+$x11 : 0x0               
+$x12 : 0x0000fffff7ffeb48  →  0x0000fffff7fbe000  →  0x00010102464c457f
+$x13 : 0x2f              
+$x14 : 0x1f22b4b         
+$x15 : 0x0000fffff7ff8e70  →  0x0000aaaaaaaa0000  →   .inst 0x464c457f ; undefined
+$x16 : 0x0000aaaaaaaa0840  →   nop 
+$x17 : 0x0000fffff7ed4cc0  →  <getauxval+0000> stp x29,  x30,  [sp,  #-16]!
+$x18 : 0x3               
+$x19 : 0x0               
+$x20 : 0x0               
+$x21 : 0x0000aaaaaaaa0840  →   nop 
+$x22 : 0x0               
+$x23 : 0x0               
+$x24 : 0x0               
+$x25 : 0x0               
+$x26 : 0x0               
+$x27 : 0x0               
+$x28 : 0x0               
+$x29 : 0x0               
+$x30 : 0x0               
+$sp  : 0x0000fffffffffd10  →  0x0000000000000001
+$pc  : 0x0000aaaaaaaa084c  →   mov x5,  x0
+$cpsr: [negative ZERO CARRY overflow interrupt endian fast t32 m[4]]
+$fpsr: 0x0               
+$fpcr: 0x0               
+─────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x0000fffffffffd10│+0x0000: 0x0000000000000001	 ← $sp
+0x0000fffffffffd18│+0x0008: 0x0000fffffffffeff  →  "/t/t2_stripped"
+0x0000fffffffffd20│+0x0010: 0x0000000000000000
+0x0000fffffffffd28│+0x0018: 0x0000ffffffffff0e  →  "HOSTNAME=c024fe10785d"	 ← $x3
+0x0000fffffffffd30│+0x0020: 0x0000ffffffffff24  →  "HOME=/root"
+0x0000fffffffffd38│+0x0028: 0x0000ffffffffff2f  →  "OLDPWD=/work"
+0x0000fffffffffd40│+0x0030: 0x0000ffffffffff3c  →  "TERM=xterm-256color"
+0x0000fffffffffd48│+0x0038: 0x0000ffffffffff50  →  "COLUMNS=110"
+───────────────────────────────────────────────────────────────────────────────────────────── code:arm64: ────
+   0xaaaaaaaa0840                  nop    
+   0xaaaaaaaa0844                  mov    x29,  #0x0                   	// #0
+   0xaaaaaaaa0848                  mov    x30,  #0x0                   	// #0
+ → 0xaaaaaaaa084c                  mov    x5,  x0
+   0xaaaaaaaa0850                  ldr    x1,  [sp]
+   0xaaaaaaaa0854                  add    x2,  sp,  #0x8
+   0xaaaaaaaa0858                  mov    x6,  sp
+   0xaaaaaaaa085c                  adrp   x0,  0xaaaaaaabf000
+   0xaaaaaaaa0860                  ldr    x0,  [x0,  #4080]
+───────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "t2_stripped", stopped 0xaaaaaaaa084c in ?? (), reason: SINGLE STEP
+─────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xaaaaaaaa084c → mov x5,  x0
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────

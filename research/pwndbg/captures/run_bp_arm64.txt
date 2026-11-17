@@ -1,0 +1,84 @@
+pwndbg> run
+Starting program: /work/test_arm64 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=0x1, argv=0xfffffffffcc8) at test.c:24
+24	int main(int argc, char **argv) {
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ X0   1
+ X1   0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X2   0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X3   0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X4   0xfffff7ff8020 ◂— 0
+ X5   0xbbbae15aefda3e3c
+ X6   0xfffff7fa1e60 (initial) ◂— 0
+ X7   0xfffff7ffcaf0 (tunable_list) ◂— 'glibc.rtld.nns'
+ X8   0xd7
+ X9   0x28
+ X10  0x1ccef0
+ X11  0
+ X12  0xfffff7ffeb48 (_rtld_global+2888) —▸ 0xfffff7fbe000 ◂— 0x10102464c457f
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  0xfffff7f9fd68 (_dl_audit_preinit@got.plt) —▸ 0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X17  0xfffff7fd0d40 (_dl_audit_preinit) ◂— stp x29, x30, [sp, #-0x50]!
+ X18  3
+ X19  0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ X20  1
+ X21  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0ad4 (main) ◂— sub sp, sp, #0xd0
+ X23  0xfffffffffcd8 —▸ 0xfffffffffed7 ◂— 'HOSTNAME=3e37fc6690d4'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd60 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa08c0 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffffb40 —▸ 0xfffffffffc50 —▸ 0xfffffffffc60 ◂— 0
+ SP   0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+ LR   0xfffff7e184c4 (__libc_start_call_main+116) ◂— bl exit
+ PC   0xaaaaaaaa0ae8 (main+20) ◂— adrp x0, 0xaaaaaaabf000
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0adc <main+8>     add    x29, sp, #0xc0
+   0xaaaaaaaa0ae0 <main+12>    str    w0, [sp, #0xc]
+   0xaaaaaaaa0ae4 <main+16>    str    x1, [sp]
+b► 0xaaaaaaaa0ae8 <main+20>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0aec <main+24>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0xc989efb4cb5c2100
+   0xaaaaaaaa0af0 <main+28>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0xc989efb4cb5c2100
+   0xaaaaaaaa0af4 <main+32>    str    x1, [sp, #0xb8]        [0xfffffffffb38] <= 0xc989efb4cb5c2100
+   0xaaaaaaaa0af8 <main+36>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0afc <main+40>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0b00 <main+44>    add    x0, x0, #0x918         X0 => 0xaaaaaaaa0918 (add) (0xaaaaaaaa0000 + 0x918)
+   0xaaaaaaaa0b04 <main+48>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0918 (add) ◂— sub sp, sp, #0x30
+───────────────────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────────────────
+In file: /work/test.c:24
+   18 void vuln(const char *src) {
+   19     char buf[32];
+   20     strcpy(buf, src);
+   21     printf("buf=%s\n", buf);
+   22 }
+   23 
+ ► 24 int main(int argc, char **argv) {
+   25     char stackbuf[48];
+   26     op_fn fp = add;
+   27     void *small[8], *mid[3], *big[2];
+   28     int i;
+   29 
+   30     strcpy(stackbuf, "AAAAAAAABBBBBBBBCCCCCCCC");
+   31     for (i = 0; i < 8; i++) small[i] = malloc(0x20);
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│  sp 0xfffffffffa80 {argv} —▸ 0xfffffffffcc8 —▸ 0xfffffffffec6 ◂— '/work/test_arm64'
+01:0008│-0b8 0xfffffffffa88 ◂— 0x100000000
+02:0010│-0b0 0xfffffffffa90 {i} ◂— 0
+... ↓       2 skipped
+05:0028│-098 0xfffffffffaa8 {big+0x8} —▸ 0xffffffffffe7 ◂— '/work/test_arm64'
+06:0030│-090 0xfffffffffab0 {mid} ◂— 0
+07:0038│-088 0xfffffffffab8 {mid+0x8} —▸ 0xfffff7ffb000 ◂— 0x10102464c457f
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0xaaaaaaaa0ae8 main+20
+   1 0xfffff7e184c4 __libc_start_call_main+116
+   2 0xfffff7e18598 __libc_start_main+152
+   3 0xaaaaaaaa0830 _start+48
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,10 @@
+[32m[1mpwndbg> [0m[32m[0mbt
+#0  [34m0x0000000000000000[m in [33m??[m ()
+#1  [34m0x0000aaaaaaaa0a24[m in [33mcompute[m ([36mf[m=0x0, [36mx[m=0x6, [36my[m=0x7) at [32mtest.c[m:14
+#2  [34m0x0000aaaaaaaa0c54[m in [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+#3  [34m0x0000fffff7e184c4[m in [33m__libc_start_call_main[m ([36mmain=main@entry[m=0xaaaaaaaa0ad4 <main>, [36margc=argc@entry[m=0x1, 
+    [36margv=argv@entry[m=0xfffffffffcc8) at [32m../sysdeps/nptl/libc_start_call_main.h[m:58
+#4  [34m0x0000fffff7e18598[m in [33m__libc_start_main_impl[m ([36mmain[m=0xaaaaaaaa0ad4 <main>, [36margc[m=0x1, [36margv[m=0xfffffffffcc8, 
+    [36minit[m=<optimized out>, [36mfini[m=<optimized out>, [36mrtld_fini[m=<optimized out>, [36mstack_end[m=<optimized out>)
+    at [32m../csu/libc-start.c[m:360
+#5  [34m0x0000aaaaaaaa0830[m in [33m_start[m ()

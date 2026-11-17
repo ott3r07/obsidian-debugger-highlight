@@ -1,0 +1,7 @@
+gef➤  heap chunk 0x10
+[!] Command 'heap chunk' failed to execute properly, reason: Cannot access memory at address 0x0
+gef➤  xinfo 0x10
+──────────────────────────────────────────────── xinfo: 0x10 ────────────────────────────────────────────────
+[*] Cannot reach 0x10 in memory space
+gef➤  nosuchcommand
+Undefined command: "nosuchcommand".  Try "help".

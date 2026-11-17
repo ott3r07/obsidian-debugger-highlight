@@ -1,0 +1,5 @@
+pwndbg> hexdump $sp
++0000 0xfffffffffa80  c8 fc ff ff ff ff 00 00  00 00 00 00 01 00 00 00  │........│........│
++0010 0xfffffffffa90  08 00 00 00 00 00 00 00  18 09 aa aa aa aa 00 00  │........│........│
++0020 0xfffffffffaa0  d0 15 ac aa aa aa 00 00  e0 1a ac aa aa aa 00 00  │........│........│
++0030 0xfffffffffab0  20 14 ac aa aa aa 00 00  b0 14 ac aa aa aa 00 00  │........│........│

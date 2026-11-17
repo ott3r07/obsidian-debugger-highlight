@@ -1,0 +1,4 @@
+gef➤  pattern create 64
+[+] Generating a pattern of 64 bytes (n=8)
+aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaa
+[+] Saved as '$_gef0'

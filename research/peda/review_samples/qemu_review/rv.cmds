@@ -1,0 +1,19 @@
+break probe
+continue
+finish
+telescope $rsp 24
+x/s $rsp+0x20
+info registers r12
+context reg
+xinfo &gself
+telescope &gself 2
+xinfo $r13
+pset option pagesize 0
+telescope $rsp 40
+watch gcounter
+continue
+delete
+break spin
+continue
+context code
+quit

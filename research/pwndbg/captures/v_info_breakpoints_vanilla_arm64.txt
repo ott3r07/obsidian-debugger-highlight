@@ -1,0 +1,5 @@
+(gdb) info breakpoints
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000000ae8 in main at test.c:24
+2       breakpoint     del  y   0x0000000000000a00 in compute at test.c:13
+3       breakpoint     keep y   0x0000000000000c44 in main at test.c:38

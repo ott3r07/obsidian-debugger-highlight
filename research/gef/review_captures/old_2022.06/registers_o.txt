@@ -1,0 +1,5 @@
+gef➤  registers $x0 $sp $pc $cpsr
+$x0  : 0xaaaa0af8
+$sp  : 0xfffffae0
+$pc  : 0xaaaa0a68
+$cpsr: [negative ZERO CARRY overflow interrupt fast]

@@ -1,0 +1,17 @@
+pwndbg> context disasm
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0c40 <main+364>    bl     free@plt                    <free@plt>
+ 
+b+ 0xaaaaaaaa0c44 <main+368>    mov    w2, #7              W2 => 7
+   0xaaaaaaaa0c48 <main+372>    mov    w1, #6              W1 => 6
+   0xaaaaaaaa0c4c <main+376>    ldr    x0, [sp, #0x18]
+   0xaaaaaaaa0c50 <main+380>    bl     compute                     <compute>
+ 
+ ► 0xaaaaaaaa0c54 <main+384>    str    w0, [sp, #0x14]        [{r}] <= 0xd
+   0xaaaaaaaa0c58 <main+388>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0c5c <main+392>    add    x0, x0, #0x980         X0 => 0xaaaaaaaa0980 (mul) (0xaaaaaaaa0000 + 0x980)
+   0xaaaaaaaa0c60 <main+396>    str    x0, [sp, #0x18]        [{fp}] <= 0xaaaaaaaa0980 (mul) ◂— sub sp, sp, #0x30
+   0xaaaaaaaa0c64 <main+400>    mov    w2, #2                 W2 => 2
+   0xaaaaaaaa0c68 <main+404>    ldr    w1, [sp, #0x14]        W1, [{r}] => 0xd
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

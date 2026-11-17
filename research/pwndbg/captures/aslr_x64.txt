@@ -1,0 +1,2 @@
+pwndbg> aslr
+ASLR is ??? (Could not detect ASLR on QEMU targets)

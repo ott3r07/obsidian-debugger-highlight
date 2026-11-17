@@ -1,0 +1,2 @@
+(gdb) watch r
+Hardware watchpoint 4: r

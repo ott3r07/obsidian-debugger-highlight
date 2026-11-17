@@ -1,0 +1,3 @@
+[32m[1mpwndbg> [0m[32m[0mcyclic -l 0x6161616c
+[35mFinding cyclic pattern of 4 bytes: b'laaa' (hex: 0x6c616161)[0m
+[32mFound at offset 44[0m

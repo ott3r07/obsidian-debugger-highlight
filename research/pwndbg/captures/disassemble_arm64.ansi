@@ -1,0 +1,145 @@
+[32m[1mpwndbg> [0m[32m[0mdisassemble main
+Dump of assembler code for function [33mmain[m:
+   [34m0x0000aaaaaaaa0ad4[m <+0>:	[32msub[m	[31msp[m, [31msp[m, [34m#0xd0[m
+   [34m0x0000aaaaaaaa0ad8[m <+4>:	[32mstp[m	[31mx29[m, [31mx30[m, [[31msp[m, [34m#192[m]
+   [34m0x0000aaaaaaaa0adc[m <+8>:	[32madd[m	[31mx29[m, [31msp[m, [34m#0xc0[m
+   [34m0x0000aaaaaaaa0ae0[m <+12>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#12[m]
+   [34m0x0000aaaaaaaa0ae4[m <+16>:	[32mstr[m	[31mx1[m, [[31msp[m]
+   [34m0x0000aaaaaaaa0ae8[m <+20>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaabf000[m
+   [34m0x0000aaaaaaaa0aec[m <+24>:	[32mldr[m	[31mx0[m, [[31mx0[m, [34m#4072[m]
+   [34m0x0000aaaaaaaa0af0[m <+28>:	[32mldr[m	[31mx1[m, [[31mx0[m]
+   [34m0x0000aaaaaaaa0af4[m <+32>:	[32mstr[m	[31mx1[m, [[31msp[m, [34m#184[m]
+   [34m0x0000aaaaaaaa0af8[m <+36>:	[32mmov[m	[31mx1[m, [34m#0x0                   [m[37;2m	// #0[m
+   [34m0x0000aaaaaaaa0afc[m <+40>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+   [34m0x0000aaaaaaaa0b00[m <+44>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0x918[m
+   [34m0x0000aaaaaaaa0b04[m <+48>:	[32mstr[m	[31mx0[m, [[31msp[m, [34m#24[m]
+   [34m0x0000aaaaaaaa0b08[m <+52>:	[32madd[m	[31mx2[m, [31msp[m, [34m#0x88[m
+   [34m0x0000aaaaaaaa0b0c[m <+56>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+   [34m0x0000aaaaaaaa0b10[m <+60>:	[32madd[m	[31mx1[m, [31mx0[m, [34m#0xd40[m
+   [34m0x0000aaaaaaaa0b14[m <+64>:	[32mmov[m	[31mx0[m, [31mx2[m
+   [34m0x0000aaaaaaaa0b18[m <+68>:	[32mldr[m	[31mq0[m, [[31mx1[m]
+   [34m0x0000aaaaaaaa0b1c[m <+72>:	[32mstr[m	[31mq0[m, [[31mx0[m]
+   [34m0x0000aaaaaaaa0b20[m <+76>:	[32mldur[m	[31mq0[m, [[31mx1[m, [34m#9[m]
+   [34m0x0000aaaaaaaa0b24[m <+80>:	[32mstur[m	[31mq0[m, [[31mx0[m, [34m#9[m]
+   [34m0x0000aaaaaaaa0b28[m <+84>:	[32mstr[m	[31mwzr[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b2c[m <+88>:	[32mb[m	[34m0xaaaaaaaa0b58[m <[33mmain[m+132>
+   [34m0x0000aaaaaaaa0b30[m <+92>:	[32mmov[m	[31mx0[m, [34m#0x20                  [m[37;2m	// #32[m
+   [34m0x0000aaaaaaaa0b34[m <+96>:	[32mbl[m	[34m0xaaaaaaaa0790[m <[33mmalloc@plt[m>
+   [34m0x0000aaaaaaaa0b38[m <+100>:	[32mmov[m	[31mx2[m, [31mx0[m
+   [34m0x0000aaaaaaaa0b3c[m <+104>:	[32mldrsw[m	[31mx0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b40[m <+108>:	[32mlsl[m	[31mx0[m, [31mx0[m, [34m#3[m
+   [34m0x0000aaaaaaaa0b44[m <+112>:	[32madd[m	[31mx1[m, [31msp[m, [34m#0x48[m
+   [34m0x0000aaaaaaaa0b48[m <+116>:	[32mstr[m	[31mx2[m, [[31mx1[m, [31mx0[m]
+   [34m0x0000aaaaaaaa0b4c[m <+120>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b50[m <+124>:	[32madd[m	[31mw0[m, [31mw0[m, [34m#0x1[m
+   [34m0x0000aaaaaaaa0b54[m <+128>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b58[m <+132>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b5c[m <+136>:	[32mcmp[m	[31mw0[m, [34m#0x7[m
+   [34m0x0000aaaaaaaa0b60[m <+140>:	[32mb.le[m	[34m0xaaaaaaaa0b30[m <[33mmain[m+92>
+   [34m0x0000aaaaaaaa0b64[m <+144>:	[32mstr[m	[31mwzr[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b68[m <+148>:	[32mb[m	[34m0xaaaaaaaa0b94[m <[33mmain[m+192>
+   [34m0x0000aaaaaaaa0b6c[m <+152>:	[32mmov[m	[31mx0[m, [34m#0x80                  [m[37;2m	// #128[m
+   [34m0x0000aaaaaaaa0b70[m <+156>:	[32mbl[m	[34m0xaaaaaaaa0790[m <[33mmalloc@plt[m>
+   [34m0x0000aaaaaaaa0b74[m <+160>:	[32mmov[m	[31mx2[m, [31mx0[m
+   [34m0x0000aaaaaaaa0b78[m <+164>:	[32mldrsw[m	[31mx0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b7c[m <+168>:	[32mlsl[m	[31mx0[m, [31mx0[m, [34m#3[m
+   [34m0x0000aaaaaaaa0b80[m <+172>:	[32madd[m	[31mx1[m, [31msp[m, [34m#0x30[m
+   [34m0x0000aaaaaaaa0b84[m <+176>:	[32mstr[m	[31mx2[m, [[31mx1[m, [31mx0[m]
+   [34m0x0000aaaaaaaa0b88[m <+180>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b8c[m <+184>:	[32madd[m	[31mw0[m, [31mw0[m, [34m#0x1[m
+   [34m0x0000aaaaaaaa0b90[m <+188>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b94[m <+192>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0b98[m <+196>:	[32mcmp[m	[31mw0[m, [34m#0x2[m
+   [34m0x0000aaaaaaaa0b9c[m <+200>:	[32mb.le[m	[34m0xaaaaaaaa0b6c[m <[33mmain[m+152>
+   [34m0x0000aaaaaaaa0ba0[m <+204>:	[32mstr[m	[31mwzr[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0ba4[m <+208>:	[32mb[m	[34m0xaaaaaaaa0bd0[m <[33mmain[m+252>
+   [34m0x0000aaaaaaaa0ba8[m <+212>:	[32mmov[m	[31mx0[m, [34m#0x500                 [m[37;2m	// #1280[m
+   [34m0x0000aaaaaaaa0bac[m <+216>:	[32mbl[m	[34m0xaaaaaaaa0790[m <[33mmalloc@plt[m>
+   [34m0x0000aaaaaaaa0bb0[m <+220>:	[32mmov[m	[31mx2[m, [31mx0[m
+   [34m0x0000aaaaaaaa0bb4[m <+224>:	[32mldrsw[m	[31mx0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0bb8[m <+228>:	[32mlsl[m	[31mx0[m, [31mx0[m, [34m#3[m
+   [34m0x0000aaaaaaaa0bbc[m <+232>:	[32madd[m	[31mx1[m, [31msp[m, [34m#0x20[m
+   [34m0x0000aaaaaaaa0bc0[m <+236>:	[32mstr[m	[31mx2[m, [[31mx1[m, [31mx0[m]
+   [34m0x0000aaaaaaaa0bc4[m <+240>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0bc8[m <+244>:	[32madd[m	[31mw0[m, [31mw0[m, [34m#0x1[m
+   [34m0x0000aaaaaaaa0bcc[m <+248>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0bd0[m <+252>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0bd4[m <+256>:	[32mcmp[m	[31mw0[m, [34m#0x1[m
+   [34m0x0000aaaaaaaa0bd8[m <+260>:	[32mb.le[m	[34m0xaaaaaaaa0ba8[m <[33mmain[m+212>
+   [34m0x0000aaaaaaaa0bdc[m <+264>:	[32mldr[m	[31mx1[m, [[31msp[m, [34m#72[m]
+   [34m0x0000aaaaaaaa0be0[m <+268>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+   [34m0x0000aaaaaaaa0be4[m <+272>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0xd60[m
+   [34m0x0000aaaaaaaa0be8[m <+276>:	[32mmov[m	[31mx2[m, [31mx1[m
+   [34m0x0000aaaaaaaa0bec[m <+280>:	[32mmov[m	[31mx3[m, [31mx0[m
+   [34m0x0000aaaaaaaa0bf0[m <+284>:	[32mldp[m	[31mx0[m, [31mx1[m, [[31mx3[m]
+   [34m0x0000aaaaaaaa0bf4[m <+288>:	[32mstp[m	[31mx0[m, [31mx1[m, [[31mx2[m]
+   [34m0x0000aaaaaaaa0bf8[m <+292>:	[32mldrb[m	[31mw0[m, [[31mx3[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0bfc[m <+296>:	[32mstrb[m	[31mw0[m, [[31mx2[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0c00[m <+300>:	[32mstr[m	[31mwzr[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0c04[m <+304>:	[32mb[m	[34m0xaaaaaaaa0c28[m <[33mmain[m+340>
+   [34m0x0000aaaaaaaa0c08[m <+308>:	[32mldrsw[m	[31mx0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0c0c[m <+312>:	[32mlsl[m	[31mx0[m, [31mx0[m, [34m#3[m
+   [34m0x0000aaaaaaaa0c10[m <+316>:	[32madd[m	[31mx1[m, [31msp[m, [34m#0x48[m
+   [34m0x0000aaaaaaaa0c14[m <+320>:	[32mldr[m	[31mx0[m, [[31mx1[m, [31mx0[m]
+   [34m0x0000aaaaaaaa0c18[m <+324>:	[32mbl[m	[34m0xaaaaaaaa07d0[m <[33mfree@plt[m>
+   [34m0x0000aaaaaaaa0c1c[m <+328>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0c20[m <+332>:	[32madd[m	[31mw0[m, [31mw0[m, [34m#0x1[m
+   [34m0x0000aaaaaaaa0c24[m <+336>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0c28[m <+340>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#16[m]
+   [34m0x0000aaaaaaaa0c2c[m <+344>:	[32mcmp[m	[31mw0[m, [34m#0x7[m
+   [34m0x0000aaaaaaaa0c30[m <+348>:	[32mb.le[m	[34m0xaaaaaaaa0c08[m <[33mmain[m+308>
+   [34m0x0000aaaaaaaa0c34[m <+352>:	[32mldr[m	[31mx0[m, [[31msp[m, [34m#48[m]
+   [34m0x0000aaaaaaaa0c38[m <+356>:	[32mbl[m	[34m0xaaaaaaaa07d0[m <[33mfree@plt[m>
+   [34m0x0000aaaaaaaa0c3c[m <+360>:	[32mldr[m	[31mx0[m, [[31msp[m, [34m#32[m]
+   [34m0x0000aaaaaaaa0c40[m <+364>:	[32mbl[m	[34m0xaaaaaaaa07d0[m <[33mfree@plt[m>
+=> [34m0x0000aaaaaaaa0c44[m <+368>:	[32mmov[m	[31mw2[m, [34m#0x7                   [m[37;2m	// #7[m
+   [34m0x0000aaaaaaaa0c48[m <+372>:	[32mmov[m	[31mw1[m, [34m#0x6                   [m[37;2m	// #6[m
+   [34m0x0000aaaaaaaa0c4c[m <+376>:	[32mldr[m	[31mx0[m, [[31msp[m, [34m#24[m]
+   [34m0x0000aaaaaaaa0c50[m <+380>:	[32mbl[m	[34m0xaaaaaaaa09e8[m <[33mcompute[m>
+   [34m0x0000aaaaaaaa0c54[m <+384>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#20[m]
+   [34m0x0000aaaaaaaa0c58[m <+388>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+   [34m0x0000aaaaaaaa0c5c[m <+392>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0x980[m
+   [34m0x0000aaaaaaaa0c60[m <+396>:	[32mstr[m	[31mx0[m, [[31msp[m, [34m#24[m]
+   [34m0x0000aaaaaaaa0c64[m <+400>:	[32mmov[m	[31mw2[m, [34m#0x2                   [m[37;2m	// #2[m
+   [34m0x0000aaaaaaaa0c68[m <+404>:	[32mldr[m	[31mw1[m, [[31msp[m, [34m#20[m]
+   [34m0x0000aaaaaaaa0c6c[m <+408>:	[32mldr[m	[31mx0[m, [[31msp[m, [34m#24[m]
+   [34m0x0000aaaaaaaa0c70[m <+412>:	[32mbl[m	[34m0xaaaaaaaa09e8[m <[33mcompute[m>
+   [34m0x0000aaaaaaaa0c74[m <+416>:	[32mmov[m	[31mw1[m, [31mw0[m
+   [34m0x0000aaaaaaaa0c78[m <+420>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#20[m]
+   [34m0x0000aaaaaaaa0c7c[m <+424>:	[32madd[m	[31mw0[m, [31mw0[m, [31mw1[m
+   [34m0x0000aaaaaaaa0c80[m <+428>:	[32mstr[m	[31mw0[m, [[31msp[m, [34m#20[m]
+   [34m0x0000aaaaaaaa0c84[m <+432>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaac0000[m
+   [34m0x0000aaaaaaaa0c88[m <+436>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0x50[m
+   [34m0x0000aaaaaaaa0c8c[m <+440>:	[32mldr[m	[31mx1[m, [[31mx0[m]
+   [34m0x0000aaaaaaaa0c90[m <+444>:	[32madd[m	[31mx0[m, [31msp[m, [34m#0x88[m
+   [34m0x0000aaaaaaaa0c94[m <+448>:	[32mmov[m	[31mx4[m, [31mx0[m
+   [34m0x0000aaaaaaaa0c98[m <+452>:	[32mldr[m	[31mw3[m, [[31msp[m, [34m#20[m]
+   [34m0x0000aaaaaaaa0c9c[m <+456>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaac0000[m
+   [34m0x0000aaaaaaaa0ca0[m <+460>:	[32madd[m	[31mx2[m, [31mx0[m, [34m#0x10[m
+   [34m0x0000aaaaaaaa0ca4[m <+464>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+   [34m0x0000aaaaaaaa0ca8[m <+468>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0xd78[m
+   [34m0x0000aaaaaaaa0cac[m <+472>:	[32mbl[m	[34m0xaaaaaaaa07f0[m <[33mprintf@plt[m>
+   [34m0x0000aaaaaaaa0cb0[m <+476>:	[32mldr[m	[31mw0[m, [[31msp[m, [34m#12[m]
+   [34m0x0000aaaaaaaa0cb4[m <+480>:	[32mcmp[m	[31mw0[m, [34m#0x1[m
+   [34m0x0000aaaaaaaa0cb8[m <+484>:	[32mb.le[m	[34m0xaaaaaaaa0cc8[m <[33mmain[m+500>
+   [34m0x0000aaaaaaaa0cbc[m <+488>:	[32mldr[m	[31mx0[m, [[31msp[m]
+   [34m0x0000aaaaaaaa0cc0[m <+492>:	[32mldr[m	[31mx0[m, [[31mx0[m, [34m#8[m]
+   [34m0x0000aaaaaaaa0cc4[m <+496>:	[32mb[m	[34m0xaaaaaaaa0cd0[m <[33mmain[m+508>
+   [34m0x0000aaaaaaaa0cc8[m <+500>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaaa0000[m
+   [34m0x0000aaaaaaaa0ccc[m <+504>:	[32madd[m	[31mx0[m, [31mx0[m, [34m#0xd90[m
+   [34m0x0000aaaaaaaa0cd0[m <+508>:	[32mbl[m	[34m0xaaaaaaaa0a60[m <[33mvuln[m>
+   [34m0x0000aaaaaaaa0cd4[m <+512>:	[32mmov[m	[31mw0[m, [34m#0x0                   [m[37;2m	// #0[m
+   [34m0x0000aaaaaaaa0cd8[m <+516>:	[32mmov[m	[31mw1[m, [31mw0[m
+   [34m0x0000aaaaaaaa0cdc[m <+520>:	[32madrp[m	[31mx0[m, [34m0xaaaaaaabf000[m
+   [34m0x0000aaaaaaaa0ce0[m <+524>:	[32mldr[m	[31mx0[m, [[31mx0[m, [34m#4072[m]
+   [34m0x0000aaaaaaaa0ce4[m <+528>:	[32mldr[m	[31mx3[m, [[31msp[m, [34m#184[m]
+   [34m0x0000aaaaaaaa0ce8[m <+532>:	[32mldr[m	[31mx2[m, [[31mx0[m]
+   [34m0x0000aaaaaaaa0cec[m <+536>:	[32msubs[m	[31mx3[m, [31mx3[m, [31mx2[m
+   [34m0x0000aaaaaaaa0cf0[m <+540>:	[32mmov[m	[31mx2[m, [34m#0x0                   [m[37;2m	// #0[m
+   [34m0x0000aaaaaaaa0cf4[m <+544>:	[32mb.eq[m	[34m0xaaaaaaaa0cfc[m <[33mmain[m+552>[37;2m  // b.none[m
+   [34m0x0000aaaaaaaa0cf8[m <+548>:	[32mbl[m	[34m0xaaaaaaaa07a0[m <[33m__stack_chk_fail@plt[m>
+   [34m0x0000aaaaaaaa0cfc[m <+552>:	[32mmov[m	[31mw0[m, [31mw1[m
+   [34m0x0000aaaaaaaa0d00[m <+556>:	[32mldp[m	[31mx29[m, [31mx30[m, [[31msp[m, [34m#192[m]
+   [34m0x0000aaaaaaaa0d04[m <+560>:	[32madd[m	[31msp[m, [31msp[m, [34m#0xd0[m
+   [34m0x0000aaaaaaaa0d08[m <+564>:	[32mret[m
+End of assembler dump.

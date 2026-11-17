@@ -1,0 +1,2 @@
+[32m[1mpwndbg> [0m[32m[0mbreak test.c:38
+Breakpoint 2 at [34m0xaaaaaaaa0c44[m: file [32mtest.c[m, line 38.

@@ -1,0 +1,5 @@
+[32m[1mpwndbg> [0m[32m[0mcontinue
+Continuing.
+Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC
+buf=short
+[Inferior 1 (process 620) exited normally]

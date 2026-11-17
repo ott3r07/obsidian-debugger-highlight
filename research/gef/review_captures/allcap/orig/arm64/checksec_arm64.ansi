@@ -1,0 +1,7 @@
+[?2004h[1;32mgef➤  [0mchecksec
+[?2004l[1m[34m[+][0m checksec for '/work/test_arm64'
+Canary                        : [32m[1m✓ [0m[0m(value: 0x154844b1b73fc000)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [32m[1m✓ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [32mFull[0m

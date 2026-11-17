@@ -1,0 +1,2 @@
+pwndbg> vis_heap_chunks
+Undefined command: "vis_heap_chunks".  Try "help".

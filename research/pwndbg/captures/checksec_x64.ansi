@@ -1,0 +1,11 @@
+[32m[1mpwndbg> [0m[32m[0mchecksec
+File:     /work/test_x64
+Arch:     amd64
+RELRO:      [32mFull RELRO[0m
+Stack:      [32mCanary found[0m
+NX:         [32mNX enabled[0m
+PIE:        [32mPIE enabled[0m
+SHSTK:      [32mEnabled[0m
+IBT:        [32mEnabled[0m
+Stripped:   [31mNo[0m
+Debuginfo:  [31mYes[0m

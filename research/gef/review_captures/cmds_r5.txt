@@ -1,0 +1,4 @@
+b	break puts
+run	run
+vmmap	vmmap
+heap	heap chunks

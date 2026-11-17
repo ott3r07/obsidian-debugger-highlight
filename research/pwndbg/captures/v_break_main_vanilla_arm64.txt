@@ -1,0 +1,2 @@
+(gdb) break main
+Breakpoint 1 at 0xae8: file test.c, line 24.

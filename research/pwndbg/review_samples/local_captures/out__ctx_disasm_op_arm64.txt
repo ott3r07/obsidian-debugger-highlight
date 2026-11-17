@@ -1,0 +1,18 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> context disasm
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────────────────────────
+   0xaaaaaaaa0d38 00 00 82 d2    <main+488>    mov    x0, #0x1000     X0 => 0x1000
+   0xaaaaaaaa0d3c b5 fe ff 97    <main+492>    bl     malloc@plt                  <malloc@plt>
+ 
+   0xaaaaaaaa0d40 e0 17 00 f9    <main+496>    str    x0, [sp, #0x28]
+b► 0xaaaaaaaa0d44 e2 17 40 f9    <main+500>    ldr    x2, [sp, #0x28]        X2, [{big}] => 0xaaaaaaac3010 ◂— 0
+   0xaaaaaaaa0d48 00 00 00 90    <main+504>    adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0d4c 01 00 39 91    <main+508>    add    x1, x0, #0xe40         X1 => 0xaaaaaaaa0e40 (0xaaaaaaaa0000 + 0xe40)
+   0xaaaaaaaa0d50 e0 03 02 aa    <main+512>    mov    x0, x2                 X0 => 0xaaaaaaac3010 ◂— 0
+   0xaaaaaaaa0d54 20 04 40 ad    <main+516>    ldp    q0, q1, [x1]
+   0xaaaaaaaa0d58 00 04 00 ad    <main+520>    stp    q0, q1, [x0]
+   0xaaaaaaaa0d5c 20 08 c0 3d    <main+524>    ldr    q0, [x1, #0x20]        Q0, [0xaaaaaaaa0e60] => 0x736b636162205c20 (' \\ backs')
+   0xaaaaaaaa0d60 00 08 80 3d    <main+528>    str    q0, [x0, #0x20]        [0xaaaaaaac3030] <= 0x736b636162205c20 (' \\ backs')
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

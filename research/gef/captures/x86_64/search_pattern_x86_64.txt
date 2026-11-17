@@ -1,0 +1,6 @@
+(qemu) gef➤  search-pattern "heap string"
+[+] Searching 'heap string' in memory
+(qemu) gef➤  search-pattern AAAAAAAABBBB
+[+] Searching 'AAAAAAAABBBB' in memory
+[+] In '[stack]'(0x2aaaaaaac000-0x2aaaab2ac000), permission=rw-
+  0x2aaaab2abc30 - 0x2aaaab2abc48  →   "AAAAAAAABBBBBBBBCCCCCCCC" 

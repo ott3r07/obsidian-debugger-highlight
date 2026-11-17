@@ -1,0 +1,6 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_arm64...
+------- tip of the day (disable with set show-tips off) -------
+Use p2p <mapping1> <mapping2> to find pointer chains from one mapping to another (e.g. stack -> heap, libc -> stack)
+pwndbg> 

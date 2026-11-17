@@ -1,0 +1,7 @@
+[?2004h[1m(qemu) [0m[1;32mgef➤  [0mchecksec
+[?2004l[1m[34m[+][0m checksec for '/tmp/tmp6nxgegq8/t/test_x86'
+Canary                        : [32m[1m✓ [0m[0m(value: 0xb7635c00)
+NX                            : [32m[1m✓ [0m[0m
+PIE                           : [31m[1m✘ [0m[0m
+Fortify                       : [31m[1m✘ [0m[0m
+RelRO                         : [33mPartial[0m

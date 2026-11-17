@@ -1,0 +1,2 @@
+pwndbg> break compute
+Breakpoint 3 at 0xaaaaaaaa0a00: file test.c, line 13.

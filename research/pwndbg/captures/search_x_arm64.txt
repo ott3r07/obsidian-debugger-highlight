@@ -1,0 +1,5 @@
+pwndbg> search -x 4242424242424242
+Searching for byte: b'BBBBBBBB'
+test_arm64      0xaaaaaaaa0d48 'BBBBBBBBCCCCCCCC'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.
+[stack]         0xfffffffffb10 'BBBBBBBBCCCCCCCC'

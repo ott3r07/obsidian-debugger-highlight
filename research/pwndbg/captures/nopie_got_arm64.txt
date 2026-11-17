@@ -1,0 +1,15 @@
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+State of the GOT of /work/test_nopie_arm64:
+GOT protection: No RELRO | Found 10 GOT entries passing the filter
+[0x410df0] _ITM_deregisterTMCloneTable -> 0
+[0x410df8] __gmon_start__ -> 0
+[0x410e00] _ITM_registerTMCloneTable -> 0
+[0x410e20] __libc_start_main@GLIBC_2.34 -> 0xfffff7e18500 (__libc_start_main) ◂— stp x29, x30, [sp, #-0x60]!
+[0x410e28] malloc@GLIBC_2.17 -> 0xfffff7e86470 (malloc) ◂— stp x29, x30, [sp, #-0x40]!
+[0x410e30] __gmon_start__ -> 0x400560 ◂— stp x16, x30, [sp, #-0x10]!
+[0x410e38] abort@GLIBC_2.17 -> 0x400560 ◂— stp x16, x30, [sp, #-0x10]!
+[0x410e40] free@GLIBC_2.17 -> 0xfffff7e86d70 (free) ◂— cbz x0, free+276
+[0x410e48] strcpy@GLIBC_2.17 -> 0x400560 ◂— stp x16, x30, [sp, #-0x10]!
+[0x410e50] printf@GLIBC_2.17 -> 0xfffff7e40590 (printf) ◂— sub sp, sp, #0x120

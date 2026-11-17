@@ -1,0 +1,12 @@
+break	break compute
+run	run
+deref_negoff	dereference $sp -l 4 -r $sp+0x20
+hexdump_sym	hexdump byte &global_buf --size 32
+hexdump_sym	hexdump qword &global_buf --size 4
+xinfo_fn	xinfo &add
+xinfo_libc	xinfo 0xfffff7e40590
+vmmap_name	vmmap --name libc
+heap_chunks_bad	heap chunks 0xaaaaaaaa0000
+telescope_repeat	telescope $sp -l 2
+sp_repeat	
+ctx_narrow	context

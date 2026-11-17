@@ -1,0 +1,6 @@
+[?2004h[1;32mgef➤  [0mpattern search 0x6161616161616167
+[?2004l[1m[34m[+][0m Searching for '6761616161616161'/'6161616161616167' with period=8
+[1m[32m[+][0m Found at offset 48 (little-endian search) [1m[32mlikely[0m
+[?2004h[1;32mgef➤  [0mpattern search aaaaaaba
+[?2004l[1m[34m[+][0m Searching for '6162616161616161'/'6161616161616261' with period=8
+[1m[32m[+][0m Found at offset 7 (little-endian search) [1m[32mlikely[0m

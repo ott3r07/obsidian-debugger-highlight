@@ -1,0 +1,31 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> nearpc 20
+   0xaaaaaaaa0d30 <main+480>                    ▲    cmp    w0, #3
+   0xaaaaaaaa0d34 <main+484>                    └<   b.le   main+444                    <main+444>
+                                                  
+   0xaaaaaaaa0d38 <main+488>                         mov    x0, #0x1000     X0 => 0x1000
+   0xaaaaaaaa0d3c <main+492>                         bl     malloc@plt                  <malloc@plt>
+                                                  
+   0xaaaaaaaa0d40 <main+496>                         str    x0, [sp, #0x28]
+b► 0xaaaaaaaa0d44 <main+500>                         ldr    x2, [sp, #0x28]        X2, [{big}] => 0xaaaaaaac3010 ◂— 0
+   0xaaaaaaaa0d48 <main+504>                         adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0d4c <main+508>                         add    x1, x0, #0xe40
+   0xaaaaaaaa0d50 <main+512>                         mov    x0, x2
+   0xaaaaaaaa0d54 <main+516>                         ldp    q0, q1, [x1]
+   0xaaaaaaaa0d58 <main+520>                         stp    q0, q1, [x0]
+   0xaaaaaaaa0d5c <main+524>                         ldr    q0, [x1, #0x20]
+   0xaaaaaaaa0d60 <main+528>                         str    q0, [x0, #0x20]
+   0xaaaaaaaa0d64 <main+532>                         ldr    x1, [x1, #0x30]
+   0xaaaaaaaa0d68 <main+536>                         str    x1, [x0, #0x30]
+   0xaaaaaaaa0d6c <main+540>                         add    x4, sp, #0x20
+   0xaaaaaaaa0d70 <main+544>                         mov    x3, #0x29              X3 => 0x29
+   0xaaaaaaaa0d74 <main+548>                         adrp   x0, 0xaaaaaaaa0000     X0 => 0xaaaaaaaa0000 ◂— 0x10102464c457f
+   0xaaaaaaaa0d78 <main+552>                         add    x2, x0, #0xadc
+   0xaaaaaaaa0d7c <main+556>                         mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0d80 <main+560>                         mov    x0, x4
+   0xaaaaaaaa0d84 <main+564>                         bl     pthread_create@plt          <pthread_create@plt>
+                                                  
+   0xaaaaaaaa0d88 <main+568>                         ldr    x0, [sp, #0x20]
+   0xaaaaaaaa0d8c <main+572>                         mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0d90 <main+576>                         bl     pthread_join@plt            <pthread_join@plt>

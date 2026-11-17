@@ -1,0 +1,8 @@
+# SOURCE: https://github.com/pwndbg/pwndbg/issues/4067
+# DATE: 2026-08-06 (pwndbg 2026.07.29, GDB 15.1)
+b► 0x5dd451f3a789 <main+1216>    lea    rax, [rip + 0x90b]     RAX => 0x5dd451f3b09b ◂— 0x203a7865646e49 /* 'Index: ' */
+   0x5dd451f3a790 <main+1223>    mov    rdi, rax               RDI => 0x5dd451f3b09b ◂— 0x203a7865646e49 /* 'Index: ' */
+
+
+b+ 0x5dd451f3a789 <main+1216>    lea    rax, [rip + 0x90b]     RAX => 0x5dd451f3b09b ◂— 0x203a7865646e49 /* 'Index: ' */
+ ► 0x5dd451f3a790 <main+1223>    mov    rdi, rax               RDI => 0x5dd452bfb09b

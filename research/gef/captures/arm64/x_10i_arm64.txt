@@ -1,0 +1,11 @@
+gef➤  x/10i $pc
+=> 0xaaaaaaaa0a20 <main+32>:	str	x1, [sp, #184]
+   0xaaaaaaaa0a24 <main+36>:	mov	x1, #0x0                   	// #0
+   0xaaaaaaaa0a28 <main+40>:	adrp	x0, 0xaaaaaaaa0000
+   0xaaaaaaaa0a2c <main+44>:	add	x0, x0, #0x918
+   0xaaaaaaaa0a30 <main+48>:	str	x0, [sp, #24]
+   0xaaaaaaaa0a34 <main+52>:	add	x2, sp, #0x88
+   0xaaaaaaaa0a38 <main+56>:	adrp	x0, 0xaaaaaaaa0000
+   0xaaaaaaaa0a3c <main+60>:	add	x1, x0, #0xc70
+   0xaaaaaaaa0a40 <main+64>:	mov	x0, x2
+   0xaaaaaaaa0a44 <main+68>:	ldr	q0, [x1]

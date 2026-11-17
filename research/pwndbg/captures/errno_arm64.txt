@@ -1,0 +1,2 @@
+pwndbg> errno
+Errno 0: OK

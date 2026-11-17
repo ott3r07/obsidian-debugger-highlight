@@ -1,0 +1,97 @@
+# SOURCE: https://stackoverflow.com/questions/60040389
+$ arm-none-eabi-gdb
+GNU gdb (GDB) 8.3.1
+...
+
+(gdb) target extended-remote /dev/ttyBmpGdb
+Remote debugging using /dev/ttyBmpGdb
+(gdb) attach 1
+Attaching to Remote target
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x0800448c in ?? ()
+(gdb) file target/thumbv7m-none-eabi/release/blue-pill-rust
+Reading symbols from target/thumbv7m-none-eabi/release/blue-pill-rust...
+(gdb) load
+...
+(gdb) start
+Temporary breakpoint 1 at 0x8000130: file src/main.rs, line 27.
+Starting program: /media/data/projects/rust/blue-pill-rust/target/thumbv7m-none-eabi/release/blue-pill-rust
+Note: automatically using hardware breakpoints for read-only addresses.
+
+Temporary breakpoint 1, main () at src/main.rs:27
+27      #[entry]
+(gdb) step
+blue_pill_rust::__cortex_m_rt_main () at src/main.rs:33
+33          hprintln!("hello, world!").unwrap();
+(gdb) next
+hello, world!
+warning: (Internal error: pc 0x80004d2 in read in psymtab, but not in symtab.)
+warning: (Internal error: pc 0x80004d2 in read in psymtab, but not in symtab.)
+warning: (Internal error: pc 0x80004d2 in read in psymtab, but not in symtab.)
+warning: (Internal error: pc 0x80004d2 in read in psymtab, but not in symtab.)
+warning: (Internal error: pc 0x80004d2 in read in psymtab, but not in symtab.)
+warning: (Internal error: pc 0x80004d2 in read in psymtab, but not in symtab.)
+
+36          let cp = cortex_m::Peripherals::take().unwrap();
+(gdb)
+
+(gdb) bt
+...
+#407 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+#408 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+#409 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+#410 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+#411 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+#412 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+#413 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+#414 0x08000152 in blue_pill_rust::__cortex_m_rt_main () at src/main.rs:31
+...
+
+...
+#1576 blue_pill_rust::__cortex_m_rt_main () at src/main.rs:34
+#1577 0x080001e2 in cortex_m::interrupt::enable ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:49
+#1578 cortex_m::interrupt::free (f=...)
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:75
+#1579 cortex_m::peripheral::Peripherals::take ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/mod.rs:152
+#1580 blue_pill_rust::__cortex_m_rt_main () at src/main.rs:34
+#1581 0x080001e2 in cortex_m::interrupt::enable ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:49
+#1582 cortex_m::interrupt::free (f=...)
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:75
+#1583 cortex_m::peripheral::Peripherals::take ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/mod.rs:152
+#1584 blue_pill_rust::__cortex_m_rt_main () at src/main.rs:34
+#1585 0x080001e2 in cortex_m::interrupt::enable ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:49
+#1586 cortex_m::interrupt::free (f=...)
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:75
+#1587 cortex_m::peripheral::Peripherals::take ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/mod.rs:152
+#1588 blue_pill_rust::__cortex_m_rt_main () at src/main.rs:34
+#1589 0x080001e2 in cortex_m::interrupt::enable ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:49
+#1590 cortex_m::interrupt::free (f=...)
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:75
+#1591 cortex_m::peripheral::Peripherals::take ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/mod.rs:152
+#1592 blue_pill_rust::__cortex_m_rt_main () at src/main.rs:34
+#1593 0x080001e2 in cortex_m::interrupt::enable ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:49
+#1594 cortex_m::interrupt::free (f=...)
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:75
+#1595 cortex_m::peripheral::Peripherals::take ()
+--Type <RET> for more, q to quit, c to continue without paging--
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/mod.rs:152
+#1596 blue_pill_rust::__cortex_m_rt_main () at src/main.rs:34
+#1597 0x080001e2 in cortex_m::interrupt::enable ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:49
+#1598 cortex_m::interrupt::free (f=...)
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs:75
+#1599 cortex_m::peripheral::Peripherals::take ()
+    at /home/superprower/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/mod.rs:152
+#1600 blue_pill_rust::__cortex_m_rt_main () at src/main.rs:34
+#1601 0x080001e2 in cortex_m::interrupt::enable ()
+...

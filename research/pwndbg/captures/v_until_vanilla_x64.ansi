@@ -1,0 +1,3 @@
+(gdb) until 41
+[33mmain[m ([36margc[m=1, [36margv[m=0xffff935a9cf8) at [32mtest.c[m:41
+41	    [01mprintf[m[31m([m[31m"%s %s r=%d stack=%s[m[35m\n[m[31m"[m[31m,[m greeting[31m,[m global_buf[31m,[m r[31m,[m stackbuf[31m);[m

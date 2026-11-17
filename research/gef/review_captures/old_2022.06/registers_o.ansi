@@ -1,0 +1,5 @@
+[?2004h[1;32mgef➤  [0mregisters $x0 $sp $pc $cpsr
+[?2004l[1m[31m$x0  [0m: 0xaaaa0af8
+[1m[31m$sp  [0m: 0xfffffae0
+[1m[31m$pc  [0m: 0xaaaa0a68
+[1m[31m$cpsr[0m: [negative [1mZERO[0m [1mCARRY[0m overflow interrupt fast]

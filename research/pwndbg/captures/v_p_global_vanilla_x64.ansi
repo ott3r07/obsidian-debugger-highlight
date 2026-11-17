@@ -1,0 +1,2 @@
+(gdb) p global_buf
+[36m$6[m = "global data string", '\000' <repeats 45 times>

@@ -1,0 +1,3 @@
+pwndbg> x/2i $pc
+=> 0x555555557489 <main+398>:	mov    rax,QWORD PTR [rbp-0xb8]
+   0x555555557490 <main+405>:	mov    edx,0x7

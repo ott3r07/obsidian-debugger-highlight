@@ -1,0 +1,9 @@
+pwndbg> info frame
+Stack level 0, frame at 0xffff9342cbe0:
+ rip = 0x555555557489 in main (test.c:38); saved rip = 0xffff9295c1ca
+ called by frame at 0xffff9342cc80
+ source language c.
+ Arglist at 0xffff9342cbd0, args: argc=0x1, argv=0xffff9342ccf8
+ Locals at 0xffff9342cbd0, Previous frame's sp is 0xffff9342cbe0
+ Saved registers:
+  rbp at 0xffff9342cbd0, rip at 0xffff9342cbd8

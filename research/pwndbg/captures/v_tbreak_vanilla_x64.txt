@@ -1,0 +1,2 @@
+(gdb) tbreak compute
+Temporary breakpoint 2 at 0x55555555725c: file test.c, line 13.

@@ -1,0 +1,22 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+0xaaaaaaaa0b38: b.eq worker+100 ; bl __stack_chk_fail@plt ; mov x0, x1 ; ldp x29, x30, [sp, #0x20] ; add sp, sp, #0x30 ; ret
+0xaaaaaaaa0df8: b.eq main+688 ; bl __stack_chk_fail@plt ; mov w0, w1 ; ldr x19, [sp, #0x190] ; ldp x29, x30, [sp, #0x180] ; add sp, sp, #0x1a0 ; ret
+0xaaaaaaaa09b0: bl __cxa_finalize@plt ; bl deregister_tm_clones ; mov w0, #1 ; strb w0, [x19, #0x78] ; ldr x19, [sp, #0x10] ; ldp x29, x30, [sp], #0x20 ; autiasp ; ret
+0xaaaaaaaa0a24: bl __stack_chk_fail@plt ; ldp x29, x30, [sp, #0x10] ; add sp, sp, #0x20 ; ret
+0xaaaaaaaa0ac8: bl __stack_chk_fail@plt ; mov w0, w1 ; ldp x29, x30, [sp, #0x40] ; add sp, sp, #0x50 ; ret
+0xaaaaaaaa0dfc: bl __stack_chk_fail@plt ; mov w0, w1 ; ldr x19, [sp, #0x190] ; ldp x29, x30, [sp, #0x180] ; add sp, sp, #0x1a0 ; ret
+0xaaaaaaaa0b3c: bl __stack_chk_fail@plt ; mov x0, x1 ; ldp x29, x30, [sp, #0x20] ; add sp, sp, #0x30 ; ret
+0xaaaaaaaa07c4: bl call_weak_fn ; ldp x29, x30, [sp], #0x10 ; ret
+0xaaaaaaaa07c4: bl call_weak_fn ; ldp x29, x30, [sp], #0x10 ; ret ; stp x16, x30, [sp, #-0x10]! ; adrp x16, 0xaaaaaaabf000 ; ldr x17, [x16, #0xf68] ; add x16, x16, #0xf68 ; br x17
+0xaaaaaaaa09b4: bl deregister_tm_clones ; mov w0, #1 ; strb w0, [x19, #0x78] ; ldr x19, [sp, #0x10] ; ldp x29, x30, [sp], #0x20 ; autiasp ; ret
+0xaaaaaaaa0a28: ldp x29, x30, [sp, #0x10] ; add sp, sp, #0x20 ; ret
+0xaaaaaaaa0e08: ldp x29, x30, [sp, #0x180] ; add sp, sp, #0x1a0 ; ret
+0xaaaaaaaa0e08: ldp x29, x30, [sp, #0x180] ; add sp, sp, #0x1a0 ; ret ; nop ; stp x29, x30, [sp, #-0x10]! ; mov x29, sp ; ldp x29, x30, [sp], #0x10 ; ret
+0xaaaaaaaa0b44: ldp x29, x30, [sp, #0x20] ; add sp, sp, #0x30 ; ret
+0xaaaaaaaa0ad0: ldp x29, x30, [sp, #0x40] ; add sp, sp, #0x50 ; ret
+0xaaaaaaaa07c8: ldp x29, x30, [sp], #0x10 ; ret
+0xaaaaaaaa07c8: ldp x29, x30, [sp], #0x10 ; ret ; stp x16, x30, [sp, #-0x10]! ; adrp x16, 0xaaaaaaabf000 ; ldr x17, [x16, #0xf68] ; add x16, x16, #0xf68 ; br x17
+0xaaaaaaaa09c4: ldp x29, x30, [sp], #0x20 ; autiasp ; ret
+0xaaaaaaaa0a0c: ldr x0, [x0, #0xfe8] ; ldr x2, [sp, #8] ; ldr x1, [x0] ; subs x2, x2, x1 ; mov x1, #0 ; b.eq cb+80 ; bl __stack_chk_fail@plt ; ldp x29, x30, [sp, #0x10] ; add sp, sp, #0x20 ; ret
+0xaaaaaaaa09ac: ldr x0, [x0, #8] ; bl __cxa_finalize@plt ; bl deregister_tm_clones ; mov w0, #1 ; strb w0, [x19, #0x78] ; ldr x19, [sp, #0x10] ; ldp x29, x30, [sp], #0x20 ; autiasp ; ret

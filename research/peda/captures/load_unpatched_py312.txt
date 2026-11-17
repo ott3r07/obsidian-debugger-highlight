@@ -1,0 +1,79 @@
+/tmp/peda-orig/peda.py:151: SyntaxWarning: invalid escape sequence '\['
+  p = re.compile("(.*)\[(.*)\]") # DWORD PTR [esi+eax*1]
+/tmp/peda-orig/peda.py:373: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*exec file:\s*`(.*)'")
+/tmp/peda-orig/peda.py:550: SyntaxWarning: invalid escape sequence '\d'
+  p = re.compile("^(\d*)\s*(.*breakpoint)\s*(keep|del)\s*(y|n)\s*(0x[^ ]*)\s*(.*)")
+/tmp/peda-orig/peda.py:554: SyntaxWarning: invalid escape sequence '\d'
+  p = re.compile("^(\d*)\s*(.*point)\s*(keep|del)\s*(y|n)\s*(.*)")
+/tmp/peda-orig/peda.py:567: SyntaxWarning: invalid escape sequence '\d'
+  m = re.match("in.*at(.*:\d*)", what)
+/tmp/peda-orig/peda.py:596: SyntaxWarning: invalid escape sequence '\d'
+  m = re.match("^(\d*).*", line)
+/tmp/peda-orig/peda.py:916: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile("\s*(0x[^ ]*).*?:\s*([^ ]*)\s*(.*)")
+/tmp/peda-orig/peda.py:918: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile("(.*?)\s*<.*?>\s*([^ ]*)\s*(.*)")
+/tmp/peda-orig/peda.py:937: SyntaxWarning: invalid escape sequence '\['
+  p = re.compile(".*mov.*\[esp(.*)\],")
+/tmp/peda-orig/peda.py:969: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(":\s*([^ ]*)\s*(.*),")
+/tmp/peda-orig/peda.py:1116: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*?:\s*(.*)")
+/tmp/peda-orig/peda.py:1223: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*?:\s*[^ ]*\s*(.* PTR ).*(0x[^ ]*)")
+/tmp/peda-orig/peda.py:1226: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*?:\s.*\s(0x[^ ]*|\w+)")
+/tmp/peda-orig/peda.py:1235: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*?:\s*[^ ]*\s*(.* PTR ).*\[(.*)\]")
+/tmp/peda-orig/peda.py:1430: SyntaxWarning: invalid escape sequence '\s'
+  pattern = re.compile("([^\n]*)\s*  ([0-9a-f][^-\s]*)-([^\s]*) \[.*\]\s([^/]*).*  (.*)")
+/tmp/peda-orig/peda.py:2096: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*?0x[^ ]*?\s(.*)")
+/tmp/peda-orig/peda.py:2114: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*?0x[^ ]*?\s(.*)")
+/tmp/peda-orig/peda.py:2214: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile("Entry point: ([^\s]*)")
+/tmp/peda-orig/peda.py:2242: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile("\s*(0x[^-]*)->(0x[^ ]*) at (0x[^:]*):\s*([^ ]*)\s*(.*)")
+/tmp/peda-orig/peda.py:2316: SyntaxWarning: invalid escape sequence '\s'
+  m = re.findall(".*(0x[^ ]*)\s*%s" % re.escape(symname), out)
+/tmp/peda-orig/peda.py:2416: SyntaxWarning: invalid escape sequence '\['
+  p = re.compile(".*\[.*\] (\.[^ ]*) [^0-9]* ([^ ]*) [^ ]* ([^ ]*)(.*)")
+/tmp/peda-orig/peda.py:2474: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile("[^\n]*\s*(0x[^ ]*) - (0x[^ ]*) is (\.[^ ]*) in (.*)")
+/tmp/peda-orig/peda.py:2681: SyntaxWarning: invalid escape sequence '\ '
+  if re.search(re.escape(asmcode).replace("\ ",".*").replace("\?",".*"), asmcode_rs)\
+/tmp/peda-orig/peda.py:2681: SyntaxWarning: invalid escape sequence '\?'
+  if re.search(re.escape(asmcode).replace("\ ",".*").replace("\?",".*"), asmcode_rs)\
+/tmp/peda-orig/peda.py:2832: SyntaxWarning: invalid escape sequence '\ '
+  pattern = re.compile(b'|'.join(JMPCALL).replace(b' ', b'\ '))
+/tmp/peda-orig/peda.py:3414: SyntaxWarning: invalid escape sequence '\['
+  m = re.search(".*\[(.*)\]|.*?s:(0x[^ ]*)", exp)
+/tmp/peda-orig/peda.py:3519: SyntaxWarning: invalid escape sequence '\['
+  sock = re.search("socket:\[(.*)\]", rpath)
+/tmp/peda-orig/peda.py:3529: SyntaxWarning: invalid escape sequence '\s'
+  ppid = re.search("PPid:\s*([^\s]*)", status).group(1)
+/tmp/peda-orig/peda.py:3531: SyntaxWarning: invalid escape sequence '\s'
+  uid = re.search("Uid:\s*([^\n]*)", status).group(1)
+/tmp/peda-orig/peda.py:3533: SyntaxWarning: invalid escape sequence '\s'
+  gid = re.search("Gid:\s*([^\n]*)", status).group(1)
+/tmp/peda-orig/peda.py:4125: SyntaxWarning: invalid escape sequence '\s'
+  p = re.compile(".*?:\s*[^ ]*\s*([^,]*),(.*)")
+Python Exception <class 'ModuleNotFoundError'>: No module named 'six.moves'
+Error occurred in Python: No module named 'six.moves'
+GNU gdb (Ubuntu 15.1-1ubuntu1~24.04.1) 15.1
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "aarch64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word".

@@ -1,0 +1,9 @@
+break probe
+continue
+telescope 0x4d3ff0 4
+set {long}($rsp+8) = 0x4d3ff8
+telescope $rsp 2
+set $rax = 0x4d4100
+context reg
+reg rax rip
+quit

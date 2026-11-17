@@ -1,0 +1,10 @@
+(qemu) gef➤  p greeting
+$1 = 0x47f010 "Hello, gef!"
+(qemu) gef➤  p/x $sp
+$2 = 0x2aaaab2abba0
+(qemu) gef➤  p $pc
+$3 = (void (*)()) 0x401951 <main+43>
+(qemu) gef➤  p fp
+$4 = (op_fn) 0x0
+(qemu) gef➤  p stackbuf
+$5 = "`\274*\253\252*\000\000\342\362@\000\000\000\000\000\200\262I\000\000\000\000\000\370\264J", '\000' <repeats 13 times>, "\330\021K\000\000\000\000"

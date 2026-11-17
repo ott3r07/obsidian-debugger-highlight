@@ -1,0 +1,33 @@
+(gdb) disassemble compute
+Dump of assembler code for function compute:
+   0x0000aaaaaaaa09e8 <+0>:	sub	sp, sp, #0x30
+   0x0000aaaaaaaa09ec <+4>:	stp	x29, x30, [sp, #32]
+   0x0000aaaaaaaa09f0 <+8>:	add	x29, sp, #0x20
+   0x0000aaaaaaaa09f4 <+12>:	str	x0, [sp, #8]
+   0x0000aaaaaaaa09f8 <+16>:	str	w1, [sp, #4]
+   0x0000aaaaaaaa09fc <+20>:	str	w2, [sp]
+   0x0000aaaaaaaa0a00 <+24>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0a04 <+28>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0a08 <+32>:	ldr	x1, [x0]
+   0x0000aaaaaaaa0a0c <+36>:	str	x1, [sp, #24]
+   0x0000aaaaaaaa0a10 <+40>:	mov	x1, #0x0                   	// #0
+   0x0000aaaaaaaa0a14 <+44>:	ldr	x2, [sp, #8]
+   0x0000aaaaaaaa0a18 <+48>:	ldr	w1, [sp]
+   0x0000aaaaaaaa0a1c <+52>:	ldr	w0, [sp, #4]
+   0x0000aaaaaaaa0a20 <+56>:	blr	x2
+   0x0000aaaaaaaa0a24 <+60>:	str	w0, [sp, #20]
+   0x0000aaaaaaaa0a28 <+64>:	ldr	w0, [sp, #20]
+   0x0000aaaaaaaa0a2c <+68>:	mov	w1, w0
+   0x0000aaaaaaaa0a30 <+72>:	adrp	x0, 0xaaaaaaabf000
+   0x0000aaaaaaaa0a34 <+76>:	ldr	x0, [x0, #4072]
+   0x0000aaaaaaaa0a38 <+80>:	ldr	x3, [sp, #24]
+   0x0000aaaaaaaa0a3c <+84>:	ldr	x2, [x0]
+   0x0000aaaaaaaa0a40 <+88>:	subs	x3, x3, x2
+   0x0000aaaaaaaa0a44 <+92>:	mov	x2, #0x0                   	// #0
+   0x0000aaaaaaaa0a48 <+96>:	b.eq	0xaaaaaaaa0a50 <compute+104>  // b.none
+   0x0000aaaaaaaa0a4c <+100>:	bl	0xaaaaaaaa07a0 <__stack_chk_fail@plt>
+   0x0000aaaaaaaa0a50 <+104>:	mov	w0, w1
+   0x0000aaaaaaaa0a54 <+108>:	ldp	x29, x30, [sp, #32]
+   0x0000aaaaaaaa0a58 <+112>:	add	sp, sp, #0x30
+   0x0000aaaaaaaa0a5c <+116>:	ret
+End of assembler dump.

@@ -1,0 +1,82 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+pwndbg> context
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────
+ X0   0x1111
+ X1   0x2222
+ X2   0xaaaaaaaa0e78 ◂— 'a fairly long string argument to force gdb line wrapping'
+ X3   0xaaaaaaac0010 (g_cfg) —▸ 0xaaaaaaaa0e30 ◂— ldpsw x18, x25, [x11, #-0x50] /* 'review' */
+ X4   0x5555
+ X5   0x6666
+ X6   0
+ X7   0xfffff7def8e0 —▸ 0xaaaaaaac19e0 ◂— 1
+ X8   0x62
+ X9   0
+ X10  0xfffffffff7b0 ◂— 0x3d0f00
+ X11  0xfffff7e75490 (start_thread) ◂— sub sp, sp, #0x170
+ X12  0xfffff7def1a0 ◂— 1
+ X13  0x2f
+ X14  0x1f22b4b
+ X15  0xfffff7ff8e70 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X16  1
+ X17  0xfffff7e77040 (pthread_join) ◂— stp x29, x30, [sp, #-0x10]!
+ X18  3
+ X19  0xc
+ X20  1
+ X21  0xaaaaaaabfd50 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa0980 (__do_global_dtors_aux) ◂— paciasp
+ X22  0xaaaaaaaa0b50 (main) ◂— sub sp, sp, #0x1a0
+ X23  0xfffffffffce8 —▸ 0xfffffffffee3 ◂— 'HOSTNAME=83281bbedf83'
+ X24  0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+ X25  0
+ X26  0xfffff7ffe000 (_rtld_global) —▸ 0xfffff7fff350 —▸ 0xaaaaaaaa0000 ◂— 0x10102464c457f
+ X27  0xaaaaaaabfd50 (__do_global_dtors_aux_fini_array_entry) —▸ 0xaaaaaaaa0980 (__do_global_dtors_aux) ◂— paciasp
+ X28  0
+ X29  0xfffffffff9b0 —▸ 0xfffffffffb40 —▸ 0xfffffffffc60 —▸ 0xfffffffffc70 ◂— 0
+ SP   0xfffffffff970 {zeta_value} ◂— 0x6666 /* 'ff' */
+ LR   0xaaaaaaaa0db8 (main+616) ◂— str w0, [sp, #0x1c]
+ PC   0xaaaaaaaa0a58 (many_args+36) ◂— adrp x0, 0xaaaaaaabf000
+─────────────────────[ DISASM / aarch64 / set emulate on ]──────────────────────
+   0xaaaaaaaa0a4c <many_args+24>    str    x3, [sp, #0x10]
+   0xaaaaaaaa0a50 <many_args+28>    str    x4, [sp, #8]
+   0xaaaaaaaa0a54 <many_args+32>    str    x5, [sp]
+b► 0xaaaaaaaa0a58 <many_args+36>    adrp   x0, 0xaaaaaaabf000     X0 => 0xaaaaaaabf000 ◂— 0
+   0xaaaaaaaa0a5c <many_args+40>    ldr    x0, [x0, #0xfe8]       X0, [0xaaaaaaabffe8] => 0xfffff7ffdb50 (__stack_chk_guard) ◂— 0x6eb55c1a2aa7e900
+   0xaaaaaaaa0a60 <many_args+44>    ldr    x1, [x0]               X1, [__stack_chk_guard] => 0x6eb55c1a2aa7e900
+   0xaaaaaaaa0a64 <many_args+48>    str    x1, [sp, #0x38]        [0xfffffffff9a8] <= 0x6eb55c1a2aa7e900
+   0xaaaaaaaa0a68 <many_args+52>    mov    x1, #0                 X1 => 0
+   0xaaaaaaaa0a6c <many_args+56>    ldr    x0, [sp, #0x28]        X0, [{alpha_parameter}] => 0x1111
+   0xaaaaaaaa0a70 <many_args+60>    mov    w1, w0                 W1 => 0x1111
+   0xaaaaaaaa0a74 <many_args+64>    ldr    x0, [sp, #0x20]        X0, [{beta_parameter}] => 0x2222
+───────────────────────────────[ SOURCE (CODE) ]────────────────────────────────
+In file: /rv/rv.c:16
+   10 
+   11 struct cfg g_cfg = { "review", {1,2,3,0,0,0}, {7, "inn"}, 0.5, 0, {0} };
+   12 struct node *head;
+   13 
+   14 void cb(void) { puts("cb"); }
+   15 
+ ► 16 int many_args(long alpha_parameter, long beta_parameter, const char *gamma_string, struct cfg *delta_config, long epsilon_value, long zeta_value) {
+   17     return (int)(alpha_parameter + beta_parameter + epsilon_value + zeta_value) + gamma_string[0] + delta_config->vals[0];
+   18 }
+   19 
+   20 void *worker(void *arg) {
+   21     volatile int x = (int)(long)arg;
+   22     x += 1;                    /* bp here in thread */
+   23     return (void*)(long)x;
+───────────────────────────────────[ STACK ]────────────────────────────────────
+00:0000│  sp 0xfffffffff970 {zeta_value} ◂— 0x6666 /* 'ff' */
+01:0008│-038 0xfffffffff978 {epsilon_value} ◂— 0x5555 /* 'UU' */
+02:0010│-030 0xfffffffff980 {delta_config} —▸ 0xaaaaaaac0010 (g_cfg) —▸ 0xaaaaaaaa0e30 ◂— ldpsw x18, x25, [x11, #-0x50] /* 'review' */
+03:0018│-028 0xfffffffff988 {gamma_string} —▸ 0xaaaaaaaa0e78 ◂— 'a fairly long string argument to force gdb line wrapping'
+04:0020│-020 0xfffffffff990 {beta_parameter} ◂— 0x2222 /* '""' */
+05:0028│-018 0xfffffffff998 {alpha_parameter} ◂— 0x1111
+06:0030│-010 0xfffffffff9a0 —▸ 0xfffffffffce8 —▸ 0xfffffffffee3 ◂— 'HOSTNAME=83281bbedf83'
+07:0038│-008 0xfffffffff9a8 —▸ 0xfffff7ffdb58 (_rtld_global_ro) ◂— 0
+─────────────────────────────────[ BACKTRACE ]──────────────────────────────────
+ ► 0 0xaaaaaaaa0a58 many_args+36
+   1 0xaaaaaaaa0db8 main+616
+   2 0xfffff7e184c4 __libc_start_call_main+116
+   3 0xfffff7e18598 __libc_start_main+152
+   4 0xaaaaaaaa08f0 _start+48
+────────────────────────────────────────────────────────────────────────────────

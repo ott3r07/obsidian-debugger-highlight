@@ -1,0 +1,9 @@
+[32m[1mpwndbg> [0m[32m[0mcontext backtrace
+LEGEND: [33mSTACK[0m | [34mHEAP[0m | [31mCODE[0m | [35mDATA[0m | [4m[31mWX[0m[4m[0m | [0mRODATA[0m
+[34m─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────[0m
+ ► 0 0xaaaaaaaa0a00 compute+24
+   1 0xaaaaaaaa0c54 main+384
+   2 0xfffff7e184c4 __libc_start_call_main+116
+   3 0xfffff7e18598 __libc_start_main+152
+   4 0xaaaaaaaa0830 _start+48
+[34m────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[0m

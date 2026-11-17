@@ -1,0 +1,663 @@
+Script started on 2026-11-17 05:27:29+00:00 [COMMAND="stty cols 120 rows 50; gdb-multiarch -q -ex 'set architecture i386:x86-64' -ex 'set sysroot /usr/x86_64-linux-gnu' -x /work/peda_qemu_shim.py -ex 'target remote :1234' ./test_dyn" <not executed on terminal>]
+pset option pagesize 0
+Reading symbols from ./test_dyn...
+The target architecture is set to "i386:x86-64".
+Remote debugging using :1234
+Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled off'.
+
+Warning: 'set logging on', an alias for the command 'set logging enabled', is deprecated.
+Use 'set logging enabled on'.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0 
+RBX: 0x0 
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x0 
+RDI: 0x0 
+RBP: 0x0 
+RSP: 0x2aaaab2abce0 --> 0x2 
+RIP: 0x2aaaab2cb550 (mov    rdi,rsp)
+R8 : 0x0 
+R9 : 0x0 
+R10: 0x0 
+R11: 0x0 
+R12: 0x0 
+R13: 0x0 
+R14: 0x0 
+R15: 0x0
+EFLAGS: 0x202 (carry parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x2aaaab2cb543:	call   0x2aaaab2bace0
+   0x2aaaab2cb548:	jmp    0x2aaaab2cb3e2
+   0x2aaaab2cb54d:	nop    DWORD PTR [rax]
+=> 0x2aaaab2cb550:	mov    rdi,rsp
+   0x2aaaab2cb553:	call   0x2aaaab2cc1e0
+   0x2aaaab2cb558:	mov    r12,rax
+   0x2aaaab2cb55b:	mov    r13,rsp
+   0x2aaaab2cb55e:	mov    edx,DWORD PTR [rip+0x19b04]        # 0x2aaaab2e5068
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abce0 --> 0x2 
+0008| 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0016| 0x2aaaab2abcf0 --> 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+0024| 0x2aaaab2abcf8 --> 0x0 
+0032| 0x2aaaab2abd00 --> 0x2aaaab2abec3 ("HOSTNAME=e34b95a55858")
+0040| 0x2aaaab2abd08 --> 0x2aaaab2abed9 ("PWD=/work")
+0048| 0x2aaaab2abd10 --> 0x2aaaab2abee3 ("GDB_EXTRA=-ex 'set sysroot /usr/x86_64-linux-gnu'")
+0056| 0x2aaaab2abd18 --> 0x2aaaab2abf15 ("HOME=/root")
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+Stopped reason: SIGTRAP
+0x00002aaaab2cb550 in ?? ()
+gdb-peda$ pset option pagesize 0
+pagesize = 0
+gdb-peda$ break main
+Breakpoint 1 at 0x55555555733f: file test.c, line 24.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x55555555732c (<main>:	endbr64)
+RBX: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RCX: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+RDX: 0x2aaaab2abd00 --> 0x2aaaab2abec3 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RDI: 0x2 
+RBP: 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RSP: 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RIP: 0x55555555733f (<main+19>:	mov    rax,QWORD PTR fs:0x28)
+R8 : 0x0 
+R9 : 0x2aaaab2b1380 (endbr64)
+R10: 0x2aaaab2ab8e0 --> 0x800000 
+R11: 0x2aaaab2e3f38 --> 0x6ffffff0 
+R12: 0x2 
+R13: 0x0 
+R14: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+R15: 0x2aaaab2e4000 --> 0x2aaaab2e52e0 --> 0x555555556000 --> 0x10102464c457f
+EFLAGS: 0x203 (CARRY parity adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x555555557334 <main+8>:	add    rsp,0xffffffffffffff80
+   0x555555557338 <main+12>:	mov    DWORD PTR [rbp-0x74],edi
+   0x55555555733b <main+15>:	mov    QWORD PTR [rbp-0x80],rsi
+=> 0x55555555733f <main+19>:	mov    rax,QWORD PTR fs:0x28
+   0x555555557348 <main+28>:	mov    QWORD PTR [rbp-0x8],rax
+   0x55555555734c <main+32>:	xor    eax,eax
+   0x55555555734e <main+34>:	cmp    DWORD PTR [rbp-0x74],0x2
+   0x555555557352 <main+38>:	jle    0x55555555735d <main+49>
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0008| 0x2aaaab2abb48 --> 0x200080000 
+0016| 0x2aaaab2abb50 --> 0x10000 
+0024| 0x2aaaab2abb58 --> 0x2aaaab2abb88 --> 0x0 
+0032| 0x2aaaab2abb60 --> 0x600000006 
+0040| 0x2aaaab2abb68 --> 0x0 
+0048| 0x2aaaab2abb70 --> 0x0 
+0056| 0x2aaaab2abb78 --> 0x0 
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 1, main (argc=0x2, argv=0x2aaaab2abce8) at test.c:24
+24	int main(int argc, char **argv) {
+gdb-peda$ nextcall
+Stepping through, Ctrl-C to stop...
+0x0000555555557348	24	int main(int argc, char **argv) {
+0x000055555555734c	24	int main(int argc, char **argv) {
+26	    op_fn fp = (argc > 2) ? mul : add;
+0x0000555555557352	26	    op_fn fp = (argc > 2) ? mul : add;
+0x000055555555735d	26	    op_fn fp = (argc > 2) ? mul : add;
+0x0000555555557364	26	    op_fn fp = (argc > 2) ? mul : add;
+27	    char *heap = malloc(64);
+0x000055555555736d	27	    char *heap = malloc(64);
+[----------------------------------registers-----------------------------------]
+RAX: 0x5555555571e9 (<add>:	endbr64)
+RBX: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RCX: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+RDX: 0x2aaaab2abd00 --> 0x2aaaab2abec3 ("HOSTNAME=e34b95a55858")
+RSI: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RDI: 0x40 ('@')
+RBP: 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RSP: 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RIP: 0x55555555736d (<main+65>:	call   0x5555555570f0)
+R8 : 0x0 
+R9 : 0x2aaaab2b1380 (endbr64)
+R10: 0x2aaaab2ab8e0 --> 0x800000 
+R11: 0x2aaaab2e3f38 --> 0x6ffffff0 
+R12: 0x2 
+R13: 0x0 
+R14: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+R15: 0x2aaaab2e4000 --> 0x2aaaab2e52e0 --> 0x555555556000 --> 0x10102464c457f
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x55555555735d <main+49>:	lea    rax,[rip+0xfffffffffffffe85]        # 0x5555555571e9 <add>
+   0x555555557364 <main+56>:	mov    QWORD PTR [rbp-0x60],rax
+   0x555555557368 <main+60>:	mov    edi,0x40
+=> 0x55555555736d <main+65>:	call   0x5555555570f0
+   0x555555557372 <main+70>:	mov    QWORD PTR [rbp-0x58],rax
+   0x555555557376 <main+74>:	mov    rax,QWORD PTR [rbp-0x58]
+   0x55555555737a <main+78>:	movabs rsi,0x7274732070616568
+   0x555555557384 <main+88>:	movabs rdi,0x4141414120676e69
+Guessed arguments:
+arg[0]: 0x40 ('@')
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0008| 0x2aaaab2abb48 --> 0x200080000 
+0016| 0x2aaaab2abb50 --> 0x10000 
+0024| 0x2aaaab2abb58 --> 0x2aaaab2abb88 --> 0x0 
+0032| 0x2aaaab2abb60 --> 0x5555555571e9 (<add>:	endbr64)
+0040| 0x2aaaab2abb68 --> 0x0 
+0048| 0x2aaaab2abb70 --> 0x0 
+0056| 0x2aaaab2abb78 --> 0x0 
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ nextcall
+Stepping through, Ctrl-C to stop...
+0x00005555555570f0 in ?? ()
+0x00005555555570f4 in ?? ()
+0x00002aaaab39b500 in malloc ()
+0x00002aaaab39b504 in malloc ()
+0x0000555555557372 in main (argc=0x2, argv=0x2aaaab2abce8) at test.c:27
+27	    char *heap = malloc(64);
+28	    strcpy(heap, "heap string AAAABBBB");
+0x000055555555737a	28	    strcpy(heap, "heap string AAAABBBB");
+0x0000555555557384	28	    strcpy(heap, "heap string AAAABBBB");
+0x000055555555738e	28	    strcpy(heap, "heap string AAAABBBB");
+0x0000555555557391	28	    strcpy(heap, "heap string AAAABBBB");
+0x0000555555557395	28	    strcpy(heap, "heap string AAAABBBB");
+0x000055555555739f	28	    strcpy(heap, "heap string AAAABBBB");
+29	    strncpy(stackbuf, greeting, sizeof(stackbuf));
+0x00005555555573aa	29	    strncpy(stackbuf, greeting, sizeof(stackbuf));
+0x00005555555573ae	29	    strncpy(stackbuf, greeting, sizeof(stackbuf));
+0x00005555555573b3	29	    strncpy(stackbuf, greeting, sizeof(stackbuf));
+0x00005555555573b6	29	    strncpy(stackbuf, greeting, sizeof(stackbuf));
+0x00005555555573b9	29	    strncpy(stackbuf, greeting, sizeof(stackbuf));
+[----------------------------------registers-----------------------------------]
+RAX: 0x2aaaab2abb70 --> 0x0 
+RBX: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RCX: 0x555555558004 ("Hello, PEDA highlighter!")
+RDX: 0x40 ('@')
+RSI: 0x555555558004 ("Hello, PEDA highlighter!")
+RDI: 0x2aaaab2abb70 --> 0x0 
+RBP: 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RSP: 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RIP: 0x5555555573b9 (<main+141>:	call   0x5555555570b0)
+R8 : 0x2aaaab4f1b20 --> 0x55555555b2e0 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2 
+R13: 0x0 
+R14: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+R15: 0x2aaaab2e4000 --> 0x2aaaab2e52e0 --> 0x555555556000 --> 0x10102464c457f
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555573ae <main+130>:	mov    edx,0x40
+   0x5555555573b3 <main+135>:	mov    rsi,rcx
+   0x5555555573b6 <main+138>:	mov    rdi,rax
+=> 0x5555555573b9 <main+141>:	call   0x5555555570b0
+   0x5555555573be <main+146>:	mov    rax,QWORD PTR [rbp-0x60]
+   0x5555555573c2 <main+150>:	mov    edx,0x7
+   0x5555555573c7 <main+155>:	mov    esi,0x6
+   0x5555555573cc <main+160>:	mov    rdi,rax
+Guessed arguments:
+arg[0]: 0x2aaaab2abb70 --> 0x0 
+arg[1]: 0x555555558004 ("Hello, PEDA highlighter!")
+arg[2]: 0x40 ('@')
+arg[3]: 0x555555558004 ("Hello, PEDA highlighter!")
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0008| 0x2aaaab2abb48 --> 0x200080000 
+0016| 0x2aaaab2abb50 --> 0x10000 
+0024| 0x2aaaab2abb58 --> 0x2aaaab2abb88 --> 0x0 
+0032| 0x2aaaab2abb60 --> 0x5555555571e9 (<add>:	endbr64)
+0040| 0x2aaaab2abb68 --> 0x55555555b2a0 ("heap string AAAABBBB")
+0048| 0x2aaaab2abb70 --> 0x0 
+0056| 0x2aaaab2abb78 --> 0x0 
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ nextcall
+Stepping through, Ctrl-C to stop...
+0x00005555555570b0 in ?? ()
+0x00005555555570b4 in ?? ()
+0x00002aaaab47ad40 in ?? ()
+0x00002aaaab47ad44 in ?? ()
+main (argc=0x2, argv=0x2aaaab2abce8) at test.c:30
+30	    int r = compute(fp, 6, 7);
+0x00005555555573c2	30	    int r = compute(fp, 6, 7);
+0x00005555555573c7	30	    int r = compute(fp, 6, 7);
+0x00005555555573cc	30	    int r = compute(fp, 6, 7);
+0x00005555555573cf	30	    int r = compute(fp, 6, 7);
+[----------------------------------registers-----------------------------------]
+RAX: 0x5555555571e9 (<add>:	endbr64)
+RBX: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RCX: 0x18 
+RDX: 0x7 
+RSI: 0x6 
+RDI: 0x5555555571e9 (<add>:	endbr64)
+RBP: 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RSP: 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RIP: 0x5555555573cf (<main+163>:	call   0x555555557266 <compute>)
+R8 : 0x2aaaab4f1b20 --> 0x55555555b2e0 --> 0x0 
+R9 : 0x50 ('P')
+R10: 0x1 
+R11: 0x0 
+R12: 0x2 
+R13: 0x0 
+R14: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+R15: 0x2aaaab2e4000 --> 0x2aaaab2e52e0 --> 0x555555556000 --> 0x10102464c457f
+EFLAGS: 0x287 (CARRY PARITY adjust zero SIGN trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555573c2 <main+150>:	mov    edx,0x7
+   0x5555555573c7 <main+155>:	mov    esi,0x6
+   0x5555555573cc <main+160>:	mov    rdi,rax
+=> 0x5555555573cf <main+163>:	call   0x555555557266 <compute>
+   0x5555555573d4 <main+168>:	mov    DWORD PTR [rbp-0x64],eax
+   0x5555555573d7 <main+171>:	mov    ecx,DWORD PTR [rbp-0x64]
+   0x5555555573da <main+174>:	mov    rdx,QWORD PTR [rbp-0x58]
+   0x5555555573de <main+178>:	lea    rax,[rbp-0x50]
+Guessed arguments:
+arg[0]: 0x5555555571e9 (<add>:	endbr64)
+arg[1]: 0x6 
+arg[2]: 0x7 
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0008| 0x2aaaab2abb48 --> 0x200080000 
+0016| 0x2aaaab2abb50 --> 0x10000 
+0024| 0x2aaaab2abb58 --> 0x2aaaab2abb88 --> 0x0 
+0032| 0x2aaaab2abb60 --> 0x5555555571e9 (<add>:	endbr64)
+0040| 0x2aaaab2abb68 --> 0x55555555b2a0 ("heap string AAAABBBB")
+0048| 0x2aaaab2abb70 ("Hello, PEDA highlighter!")
+0056| 0x2aaaab2abb78 ("EDA highlighter!")
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ info sharedlibrary
+No shared libraries loaded at this time.
+gdb-peda$ vmmap
+Start              End                Perm	Name
+0x00002aaaaaaac000 0x00002aaaab2ac000 rw-p	[stack]
+0x00002aaaab2ac000 0x00002aaaab2ad000 r--p	/usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+0x00002aaaab2ad000 0x00002aaaab2d8000 r-xp	/usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+0x00002aaaab2d8000 0x00002aaaab2e2000 r--p	/usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+0x00002aaaab2e2000 0x00002aaaab2e4000 r--p	/usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+0x00002aaaab2e4000 0x00002aaaab2e6000 rw-p	/usr/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2
+0x00002aaaab2e6000 0x00002aaaab2e7000 r-xp	mapped
+0x00002aaaab2e7000 0x00002aaaab2eb000 rw-p	mapped
+0x00002aaaab2ee000 0x00002aaaab316000 r--p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab316000 0x00002aaaab49e000 r-xp	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab49e000 0x00002aaaab4ed000 r--p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab4ed000 0x00002aaaab4f1000 r--p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab4f1000 0x00002aaaab4f3000 rw-p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab4f3000 0x00002aaaab503000 rw-p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x0000555555556000 0x0000555555557000 r--p	/work/test_dyn
+0x0000555555557000 0x0000555555558000 r-xp	/work/test_dyn
+0x0000555555558000 0x0000555555559000 r--p	/work/test_dyn
+0x0000555555559000 0x000055555555a000 r--p	/work/test_dyn
+0x000055555555a000 0x000055555555b000 rw-p	/work/test_dyn
+0x000055555555b000 0x000055555557c000 rw-p	[heap]
+0xffffffffff600000 0xffffffffff601000 --xp	[vsyscall]
+gdb-peda$ vmmap libc
+Start              End                Perm	Name
+0x00002aaaab2ee000 0x00002aaaab316000 r--p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab316000 0x00002aaaab49e000 r-xp	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab49e000 0x00002aaaab4ed000 r--p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab4ed000 0x00002aaaab4f1000 r--p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab4f1000 0x00002aaaab4f3000 rw-p	/usr/x86_64-linux-gnu/lib/libc.so.6
+0x00002aaaab4f3000 0x00002aaaab503000 rw-p	/usr/x86_64-linux-gnu/lib/libc.so.6
+gdb-peda$ checksec
+CANARY    : ENABLED
+FORTIFY   : disabled
+NX        : ENABLED
+PIE       : ENABLED
+RELRO     : FULL
+gdb-peda$ elfsymbol printf
+'printf': no match found
+gdb-peda$ elfsymbol
+'plt symbols': no match found
+gdb-peda$ elfheader
+.interp = 0x555555556318
+.note.gnu.property = 0x555555556338
+.note.gnu.build-id = 0x555555556368
+.note.ABI-tag = 0x55555555638c
+.gnu.hash = 0x5555555563b0
+.dynsym = 0x5555555563d8
+.dynstr = 0x5555555564f8
+.gnu.version = 0x5555555565be
+.gnu.version_r = 0x5555555565d8
+.rela.dyn = 0x555555556618
+.rela.plt = 0x5555555566f0
+.init = 0x555555557000
+.plt = 0x555555557020
+.plt.got = 0x555555557090
+.plt.sec = 0x5555555570a0
+.text = 0x555555557100
+.fini = 0x55555555743c
+.rodata = 0x555555558000
+.eh_frame_hdr = 0x555555558030
+.eh_frame = 0x555555558088
+.init_array = 0x555555559d90
+.fini_array = 0x555555559d98
+.dynamic = 0x555555559da0
+.got = 0x555555559f90
+.data = 0x55555555a000
+.bss = 0x55555555a020
+gdb-peda$ xinfo 0x2aaaab3181ca
+0x2aaaab3181ca (mov    edi,eax)
+Virtual memory mapping:
+Start : 0x00002aaaab316000
+End   : 0x00002aaaab49e000
+Offset: 0x21ca
+Perm  : r-xp
+Name  : /usr/x86_64-linux-gnu/lib/libc.so.6
+gdb-peda$ telescope $rbp 8
+0000| 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+0008| 0x2aaaab2abbc8 --> 0x2aaaab3181ca (mov    edi,eax)
+0016| 0x2aaaab2abbd0 --> 0x2aaaab2abc10 --> 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+0024| 0x2aaaab2abbd8 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0032| 0x2aaaab2abbe0 --> 0x255556040 
+0040| 0x2aaaab2abbe8 --> 0x55555555732c (<main>:	endbr64)
+0048| 0x2aaaab2abbf0 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0056| 0x2aaaab2abbf8 --> 0xa19a18a60348d6b4 
+
+gdb-peda$ telescope $rsp 16
+0000| 0x2aaaab2abb40 --> 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+0008| 0x2aaaab2abb48 --> 0x200080000 
+0016| 0x2aaaab2abb50 --> 0x10000 
+0024| 0x2aaaab2abb58 --> 0x2aaaab2abb88 --> 0x0 
+0032| 0x2aaaab2abb60 --> 0x5555555571e9 (<add>:	endbr64)
+0040| 0x2aaaab2abb68 --> 0x55555555b2a0 ("heap string AAAABBBB")
+0048| 0x2aaaab2abb70 ("Hello, PEDA highlighter!")
+0056| 0x2aaaab2abb78 ("EDA highlighter!")
+0064| 0x2aaaab2abb80 ("lighter!")
+0072| 0x2aaaab2abb88 --> 0x0 
+0080| 0x2aaaab2abb90 --> 0x0 
+0088| 0x2aaaab2abb98 --> 0x0 
+0096| 0x2aaaab2abba0 --> 0x0 
+0104| 0x2aaaab2abba8 --> 0x0 
+0112| 0x2aaaab2abbb0 --> 0x2aaaab2abca0 --> 0x555555557100 (<_start>:	endbr64)
+0120| 0x2aaaab2abbb8 --> 0x692bb476ba7e0c00 
+
+gdb-peda$ xinfo $rip
+0x5555555573cf (<main+163>:	call   0x555555557266 <compute>)
+Virtual memory mapping:
+Start : 0x0000555555557000
+End   : 0x0000555555558000
+Offset: 0x3cf
+Perm  : r-xp
+Name  : /work/test_dyn
+gdb-peda$ ropgadget libc
+addesp_0 = 0x2aaaab35b5b7
+addesp_1 = 0x2aaaab31a254
+ret = 0x2aaaab31682f
+addesp_4 = 0x2aaaab366a52
+popret = 0x2aaaab316a91
+pop2ret = 0x2aaaab316a90
+addesp_8 = 0x2aaaab31a811
+addesp_16 = 0x2aaaab335165
+addesp_20 = 0x2aaaab3466c1
+addesp_24 = 0x2aaaab31aa99
+addesp_28 = 0x2aaaab332d22
+addesp_32 = 0x2aaaab332a07
+addesp_40 = 0x2aaaab318868
+addesp_44 = 0x2aaaab34c8c2
+addesp_48 = 0x2aaaab331192
+addesp_52 = 0x2aaaab49d8e7
+addesp_56 = 0x2aaaab31a3e9
+addesp_60 = 0x2aaaab31876e
+addesp_64 = 0x2aaaab33de33
+addesp_72 = 0x2aaaab324f1e
+addesp_76 = 0x2aaaab45d675
+addesp_80 = 0x2aaaab336db0
+addesp_88 = 0x2aaaab31b56e
+addesp_92 = 0x2aaaab43146a
+addesp_104 = 0x2aaaab346e48
+addesp_108 = 0x2aaaab3dc1c4
+addesp_112 = 0x2aaaab43bd9e
+addesp_120 = 0x2aaaab32439e
+addesp_136 = 0x2aaaab354ba1
+addesp_144 = 0x2aaaab3340ba
+addesp_152 = 0x2aaaab352acd
+addesp_156 = 0x2aaaab333813
+addesp_160 = 0x2aaaab404afe
+addesp_168 = 0x2aaaab333694
+addesp_172 = 0x2aaaab3db3ee
+addesp_184 = 0x2aaaab333bc9
+addesp_188 = 0x2aaaab324167
+addesp_200 = 0x2aaaab351293
+addesp_216 = 0x2aaaab31b778
+addesp_224 = 0x2aaaab3961d2
+addesp_232 = 0x2aaaab3a1438
+addesp_236 = 0x2aaaab371737
+addesp_248 = 0x2aaaab339a34
+addesp_256 = 0x2aaaab34dd14
+addesp_264 = 0x2aaaab33ba35
+addesp_272 = 0x2aaaab433108
+addesp_280 = 0x2aaaab328884
+addesp_296 = 0x2aaaab35279f
+addesp_312 = 0x2aaaab393d6a
+addesp_328 = 0x2aaaab4243d4
+addesp_344 = 0x2aaaab355032
+addesp_352 = 0x2aaaab42da3d
+addesp_360 = 0x2aaaab3f6e8a
+addesp_376 = 0x2aaaab4309a0
+addesp_392 = 0x2aaaab394b78
+addesp_400 = 0x2aaaab40d33b
+addesp_408 = 0x2aaaab32bf25
+addesp_416 = 0x2aaaab471423
+addesp_424 = 0x2aaaab40cfed
+addesp_440 = 0x2aaaab392399
+addesp_472 = 0x2aaaab392828
+addesp_488 = 0x2aaaab34dc1f
+addesp_496 = 0x2aaaab3783d9
+addesp_504 = 0x2aaaab440214
+addesp_536 = 0x2aaaab3535c1
+addesp_552 = 0x2aaaab461aa7
+addesp_568 = 0x2aaaab422c3d
+addesp_600 = 0x2aaaab33434f
+addesp_616 = 0x2aaaab435ff2
+addesp_632 = 0x2aaaab36712b
+addesp_664 = 0x2aaaab3f4b7c
+addesp_680 = 0x2aaaab42eed4
+addesp_728 = 0x2aaaab378501
+addesp_776 = 0x2aaaab4390d7
+addesp_828 = 0x2aaaab4712db
+addesp_920 = 0x2aaaab3464af
+addesp_1048 = 0x2aaaab417c58
+addesp_1064 = 0x2aaaab316a86
+addesp_1080 = 0x2aaaab40d78e
+addesp_1096 = 0x2aaaab371436
+addesp_1112 = 0x2aaaab4270de
+addesp_1128 = 0x2aaaab3bbca5
+addesp_1144 = 0x2aaaab337c1e
+addesp_1160 = 0x2aaaab444b6f
+addesp_1176 = 0x2aaaab45ed19
+addesp_1208 = 0x2aaaab40d1cb
+addesp_1224 = 0x2aaaab459bfe
+addesp_1240 = 0x2aaaab428357
+addesp_1320 = 0x2aaaab46ef16
+addesp_1432 = 0x2aaaab3fee68
+addesp_1472 = 0x2aaaab46649a
+addesp_1912 = 0x2aaaab3309e0
+addesp_2104 = 0x2aaaab39faa8
+addesp_2120 = 0x2aaaab37db25
+addesp_2136 = 0x2aaaab3a352e
+addesp_2152 = 0x2aaaab3e1d95
+addesp_2168 = 0x2aaaab3a095d
+addesp_2280 = 0x2aaaab3e0459
+addesp_2376 = 0x2aaaab3554e2
+addesp_2408 = 0x2aaaab362e22
+addesp_3224 = 0x2aaaab334947
+addesp_4124 = 0x2aaaab354c2d
+addesp_4184 = 0x2aaaab4715a8
+addesp_4568 = 0x2aaaab471076
+addesp_8232 = 0x2aaaab43449a
+addesp_8832 = 0x2aaaab45c40d
+addesp_10472 = 0x2aaaab3de419
+addesp_10728 = 0x2aaaab45b11d
+addesp_13928 = 0x2aaaab3c1f87
+addesp_13976 = 0x2aaaab3c8289
+addesp_18728 = 0x2aaaab3f02ff
+
+gdb-peda$ readelf libc .text
+.text: 0x2aaaab316800 - 0x2aaaab49db4d (code)
+gdb-peda$ break vuln
+Breakpoint 2 at 0x5555555572d8: file test.c, line 18.
+gdb-peda$ continue
+Continuing.
+[----------------------------------registers-----------------------------------]
+RAX: 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+RBX: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RCX: 0x0 
+RDX: 0x0 
+RSI: 0x2aaaab2ab990 ("Hello, PEDA highlighter! heap string AAAABBBB 13\n")
+RDI: 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+RBP: 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RSP: 0x2aaaab2abaf0 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RIP: 0x5555555572d8 (<vuln+16>:	mov    rax,QWORD PTR fs:0x28)
+R8 : 0x2aaaab4f1b20 --> 0x55555555c2f0 --> 0x0 
+R9 : 0x0 
+R10: 0x1 
+R11: 0x3 
+R12: 0x2 
+R13: 0x0 
+R14: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+R15: 0x2aaaab2e4000 --> 0x2aaaab2e52e0 --> 0x555555556000 --> 0x10102464c457f
+EFLAGS: 0x206 (carry PARITY adjust zero sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555572cd <vuln+5>:	mov    rbp,rsp
+   0x5555555572d0 <vuln+8>:	sub    rsp,0x40
+   0x5555555572d4 <vuln+12>:	mov    QWORD PTR [rbp-0x38],rdi
+=> 0x5555555572d8 <vuln+16>:	mov    rax,QWORD PTR fs:0x28
+   0x5555555572e1 <vuln+25>:	mov    QWORD PTR [rbp-0x8],rax
+   0x5555555572e5 <vuln+29>:	xor    eax,eax
+   0x5555555572e7 <vuln+31>:	mov    rdx,QWORD PTR [rbp-0x38]
+   0x5555555572eb <vuln+35>:	lea    rax,[rbp-0x30]
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abaf0 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+0008| 0x2aaaab2abaf8 --> 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+0016| 0x2aaaab2abb00 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+0024| 0x2aaaab2abb08 --> 0x55555555729b (<compute+53>:	mov    DWORD PTR [rbp-0xc],eax)
+0032| 0x2aaaab2abb10 --> 0x600000007 
+0040| 0x2aaaab2abb18 --> 0x5555555571e9 (<add>:	endbr64)
+0048| 0x2aaaab2abb20 --> 0xd00000002 
+0056| 0x2aaaab2abb28 --> 0x692bb476ba7e0c00 
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+
+Breakpoint 2, vuln (src=0x2aaaab2abebd "hello") at test.c:18
+18	void vuln(const char *src) {
+gdb-peda$ nextcall
+Stepping through, Ctrl-C to stop...
+0x00005555555572e1	18	void vuln(const char *src) {
+0x00005555555572e5	18	void vuln(const char *src) {
+20	    strcpy(buf, src);
+0x00005555555572eb	20	    strcpy(buf, src);
+0x00005555555572ef	20	    strcpy(buf, src);
+0x00005555555572f2	20	    strcpy(buf, src);
+0x00005555555572f5	20	    strcpy(buf, src);
+[----------------------------------registers-----------------------------------]
+RAX: 0x2aaaab2abb00 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RBX: 0x2aaaab2abce8 --> 0x2aaaab2abeb2 ("./test_dyn")
+RCX: 0x0 
+RDX: 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+RSI: 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+RDI: 0x2aaaab2abb00 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RBP: 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RSP: 0x2aaaab2abaf0 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+RIP: 0x5555555572f5 (<vuln+45>:	call   0x5555555570c0)
+R8 : 0x2aaaab4f1b20 --> 0x55555555c2f0 --> 0x0 
+R9 : 0x0 
+R10: 0x1 
+R11: 0x3 
+R12: 0x2 
+R13: 0x0 
+R14: 0x555555559d98 --> 0x5555555571a0 (<__do_global_dtors_aux>:	endbr64)
+R15: 0x2aaaab2e4000 --> 0x2aaaab2e52e0 --> 0x555555556000 --> 0x10102464c457f
+EFLAGS: 0x246 (carry PARITY adjust ZERO sign trap INTERRUPT direction overflow)
+[-------------------------------------code-------------------------------------]
+   0x5555555572eb <vuln+35>:	lea    rax,[rbp-0x30]
+   0x5555555572ef <vuln+39>:	mov    rsi,rdx
+   0x5555555572f2 <vuln+42>:	mov    rdi,rax
+=> 0x5555555572f5 <vuln+45>:	call   0x5555555570c0
+   0x5555555572fa <vuln+50>:	lea    rax,[rbp-0x30]
+   0x5555555572fe <vuln+54>:	mov    rsi,rax
+   0x555555557301 <vuln+57>:	lea    rax,[rip+0xd15]        # 0x55555555801d
+   0x555555557308 <vuln+64>:	mov    rdi,rax
+Guessed arguments:
+arg[0]: 0x2aaaab2abb00 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+arg[1]: 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+arg[2]: 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+[------------------------------------stack-------------------------------------]
+0000| 0x2aaaab2abaf0 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+0008| 0x2aaaab2abaf8 --> 0x2aaaab2abebd --> 0x4f48006f6c6c6568 ('hello')
+0016| 0x2aaaab2abb00 --> 0x2aaaab2abb30 --> 0x2aaaab2abbc0 --> 0x2aaaab2abc60 --> 0x2aaaab2abcc0 --> 0x0 
+0024| 0x2aaaab2abb08 --> 0x55555555729b (<compute+53>:	mov    DWORD PTR [rbp-0xc],eax)
+0032| 0x2aaaab2abb10 --> 0x600000007 
+0040| 0x2aaaab2abb18 --> 0x5555555571e9 (<add>:	endbr64)
+0048| 0x2aaaab2abb20 --> 0xd00000002 
+0056| 0x2aaaab2abb28 --> 0x692bb476ba7e0c00 
+
+[------------------------------------------------------------------------------]
+Legend: code, data, rodata, value
+gdb-peda$ x/12i $pc
+=> 0x5555555572f5 <vuln+45>:	call   0x5555555570c0
+   0x5555555572fa <vuln+50>:	lea    rax,[rbp-0x30]
+   0x5555555572fe <vuln+54>:	mov    rsi,rax
+   0x555555557301 <vuln+57>:	lea    rax,[rip+0xd15]        # 0x55555555801d
+   0x555555557308 <vuln+64>:	mov    rdi,rax
+   0x55555555730b <vuln+67>:	mov    eax,0x0
+   0x555555557310 <vuln+72>:	call   0x5555555570e0
+   0x555555557315 <vuln+77>:	nop
+   0x555555557316 <vuln+78>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x55555555731a <vuln+82>:	sub    rax,QWORD PTR fs:0x28
+   0x555555557323 <vuln+91>:	je     0x55555555732a <vuln+98>
+   0x555555557325 <vuln+93>:	call   0x5555555570d0
+gdb-peda$ disassemble vuln
+Dump of assembler code for function vuln:
+   0x00005555555572c8 <+0>:	endbr64
+   0x00005555555572cc <+4>:	push   rbp
+   0x00005555555572cd <+5>:	mov    rbp,rsp
+   0x00005555555572d0 <+8>:	sub    rsp,0x40
+   0x00005555555572d4 <+12>:	mov    QWORD PTR [rbp-0x38],rdi
+   0x00005555555572d8 <+16>:	mov    rax,QWORD PTR fs:0x28
+   0x00005555555572e1 <+25>:	mov    QWORD PTR [rbp-0x8],rax
+   0x00005555555572e5 <+29>:	xor    eax,eax
+   0x00005555555572e7 <+31>:	mov    rdx,QWORD PTR [rbp-0x38]
+   0x00005555555572eb <+35>:	lea    rax,[rbp-0x30]
+   0x00005555555572ef <+39>:	mov    rsi,rdx
+   0x00005555555572f2 <+42>:	mov    rdi,rax
+=> 0x00005555555572f5 <+45>:	call   0x5555555570c0
+   0x00005555555572fa <+50>:	lea    rax,[rbp-0x30]
+   0x00005555555572fe <+54>:	mov    rsi,rax
+   0x0000555555557301 <+57>:	lea    rax,[rip+0xd15]        # 0x55555555801d
+   0x0000555555557308 <+64>:	mov    rdi,rax
+   0x000055555555730b <+67>:	mov    eax,0x0
+   0x0000555555557310 <+72>:	call   0x5555555570e0
+   0x0000555555557315 <+77>:	nop
+   0x0000555555557316 <+78>:	mov    rax,QWORD PTR [rbp-0x8]
+   0x000055555555731a <+82>:	sub    rax,QWORD PTR fs:0x28
+   0x0000555555557323 <+91>:	je     0x55555555732a <vuln+98>
+   0x0000555555557325 <+93>:	call   0x5555555570d0
+   0x000055555555732a <+98>:	leave
+   0x000055555555732b <+99>:	ret
+End of assembler dump.
+gdb-peda$ dumprop binary "pop"
+Warning: this can be very slow, do not run for large memory range
+Writing ROP gadgets to file: test_dyn-rop.txt ...
+0x5555555571d3: pop rbp; ret
+
+gdb-peda$ searchmem "/bin/sh" libc
+Searching for '/bin/sh' in: libc ranges
+Found 1 results, display max 1 items:
+libc.so.6 : 0x2aaaab4b942f --> 0x68732f6e69622f ('/bin/sh')
+
+gdb-peda$ continue
+Continuing.
+[Inferior 1 (process 756) exited normally]
+Warning: not running
+gdb-peda$ quit
+
+Script done on 2026-11-17 05:28:20+00:00 [COMMAND_EXIT_CODE="0"]

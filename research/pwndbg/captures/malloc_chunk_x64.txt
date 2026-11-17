@@ -1,0 +1,5 @@
+pwndbg> malloc-chunk mid[1]-0x10
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b4a0
+Size: 0x90 (with flag bits: 0x91)
+

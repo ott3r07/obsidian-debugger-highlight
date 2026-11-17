@@ -1,0 +1,3 @@
+(qemu) gef➤  pattern search $rsp
+[+] Searching for '6761616161616161'/'6161616161616167' with period=8
+[+] Found at offset 48 (little-endian search) likely

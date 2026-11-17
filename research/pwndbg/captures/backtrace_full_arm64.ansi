@@ -1,0 +1,37 @@
+[32m[1mpwndbg> [0m[32m[0mbt full
+#0  [33mmain[m ([36margc[m=0x1, [36margv[m=0xfffffffffcc8) at [32mtest.c[m:38
+        [36mstackbuf[m = "AAAAAAAABBBBBBBBCCCCCCCC", '\000' <repeats 16 times>, "P\374\377\377\377\377\000"
+        [36mfp[m = [34m0xaaaaaaaa0918[m <[33madd[m>
+        [36msmall[m = {[34m0xaaaaaaac12a0[m, [34m0xaaaaaaac12d0[m, [34m0xaaaaaaac1300[m, [34m0xaaaaaaac1330[m, [34m0xaaaaaaac1360[m, [34m0xaaaaaaac1390[m, 
+          [34m0xaaaaaaac13c0[m, [34m0xaaaaaaac13f0[m}
+        [36mmid[m = {[34m0xaaaaaaac1420[m, [34m0xaaaaaaac14b0[m, [34m0xaaaaaaac1540[m}
+        [36mbig[m = {[34m0xaaaaaaac15d0[m, [34m0xaaaaaaac1ae0[m}
+        [36mi[m = 0x8
+        [36mr[m = 0x0
+#1  [34m0x0000fffff7e184c4[m in [33m__libc_start_call_main[m ([36mmain=main@entry[m=0xaaaaaaaa0ad4 <main>, [36margc=argc@entry[m=0x1, 
+    [36margv=argv@entry[m=0xfffffffffcc8) at [32m../sysdeps/nptl/libc_start_call_main.h[m:58
+        [36mself[m = [2m<optimized out>[m
+        [36mresult[m = [2m<optimized out>[m
+        [36munwind_buf[m = {
+          [36mcancel_jmp_buf[m = {{
+              [36mjmp_buf[m = {0xfffffffffcc8, 0x1, 0xaaaaaaabfd60, 0xaaaaaaaa0ad4, 0xfffffffffcd8, 0xfffff7ffdb58, 0x0, 
+                0xfffff7ffe000, 0xaaaaaaabfd60, 0x0, 0xfffffffffc50, 0xbbbae15ae7c441e8, 0xffff00000009, 
+                0xbbbae15aefda3e3c, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+              [36mmask_was_saved[m = 0x0
+            }},
+          [36mpriv[m = {
+            [36mpad[m = {[34m0x0[m, [34m0x0[m, [34m0xfffff7e18540[m <[33m__libc_start_main_impl[m+64>, [34m0xfffffffffcc8[m},
+            [36mdata[m = {
+              [36mprev[m = [34m0x0[m,
+              [36mcleanup[m = [34m0x0[m,
+              [36mcanceltype[m = 0xf7e18540
+            }
+          }
+        }
+        [36mnot_first_call[m = [2m<optimized out>[m
+#2  [34m0x0000fffff7e18598[m in [33m__libc_start_main_impl[m ([36mmain[m=0xaaaaaaaa0ad4 <main>, [36margc[m=0x1, [36margv[m=0xfffffffffcc8, 
+    [36minit[m=<optimized out>, [36mfini[m=<optimized out>, [36mrtld_fini[m=<optimized out>, [36mstack_end[m=<optimized out>)
+    at [32m../csu/libc-start.c[m:360
+No locals.
+#3  [34m0x0000aaaaaaaa0830[m in [33m_start[m ()
+No symbol table info available.

@@ -1,0 +1,2 @@
+pwndbg> distance $sp $pc
+0xfffffffffa80->0xaaaaaaaa0c44 is -0x55555555ee3c bytes (-0xaaaaaaabdc8 words)

@@ -1,0 +1,4 @@
+pwndbg> search "heap string"
+Searching for byte: b'heap string'
+test_arm64      0xaaaaaaaa0d60 adr x8, 0xaaaaaab63a0f /* 'heap string here' */
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d0a, halting search.

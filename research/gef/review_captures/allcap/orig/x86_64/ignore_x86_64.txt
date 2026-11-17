@@ -1,0 +1,2 @@
+(qemu) gef➤  ignore 3 7
+Will ignore next 7 crossings of breakpoint 3.

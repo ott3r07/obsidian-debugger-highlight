@@ -1,0 +1,9 @@
+pwndbg> try-free mid[1]
+General checks
+Tcache checks
+Using tcache_put
+Not mapped checks
+Next chunk is not top chunk
+Clearing next chunk's P bit
+----------
+Free should succeed!

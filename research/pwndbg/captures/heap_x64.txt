@@ -1,0 +1,72 @@
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b000
+Size: 0x290 (with flag bits: 0x291)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b290
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55555555b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b2c0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e7fb
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b2f0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e78b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b320
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e65b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b350
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e66b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b380
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e63b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b3b0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e6cb
+
+Free chunk (fastbins) | PREV_INUSE
+Addr: 0x55555555b3e0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55555555b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b410
+Size: 0x90 (with flag bits: 0x91)
+fd: 0x55555555b
+
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b4a0
+Size: 0x90 (with flag bits: 0x91)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b530
+Size: 0x90 (with flag bits: 0x91)
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0x55555555b5c0
+Size: 0x510 (with flag bits: 0x511)
+fd: 0xffff92b35b20
+bk: 0xffff92b35b20
+
+Allocated chunk
+Addr: 0x55555555bad0
+Size: 0x510 (with flag bits: 0x510)
+
+Top chunk | PREV_INUSE
+Addr: 0x55555555bfe0
+Size: 0x20020 (with flag bits: 0x20021)
+

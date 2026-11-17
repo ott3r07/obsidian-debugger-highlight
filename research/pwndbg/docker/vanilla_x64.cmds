@@ -1,0 +1,65 @@
+|set pagination off
+v_target_remote|target remote :1234
+v_list|list main
+v_break_main|break main
+v_tbreak|tbreak compute
+v_break_line|break test.c:38
+v_info_breakpoints|info breakpoints
+v_continue_main|continue
+v_next|next
+v_step_into|step
+v_ni|nexti
+v_si|stepi
+v_x_i|x/i $pc
+v_display|display/i $pc
+v_si_display|si
+v_undisplay|undisplay 1
+v_continue_bp|continue
+v_info_registers|info registers
+v_info_registers_rip|info registers rip
+v_p_sp|p $sp
+v_p_pc|p/x $pc
+v_p_r|p r
+v_p_fp|p fp
+v_p_greeting|p greeting
+v_p_global|p global_buf
+v_p_arr|p small
+v_p_x|p/x 255
+v_p_d|p/d 0x10
+v_ptype|ptype fp
+v_x_20gx|x/20gx $sp
+v_x_4wx|x/4wx $sp
+v_x_8bx|x/8bx $sp
+v_x_s|x/s greeting
+v_x_2s|x/2s &global_buf
+v_x_3xg|x/3xg &global_buf
+v_x_10i|x/10i $pc
+v_x_4dw|x/4dw $sp
+v_x_c|x/8c greeting
+v_disassemble|disassemble main
+v_disassemble_intel_set|set disassembly-flavor intel
+v_disassemble_intel|disassemble compute
+v_disassemble_r|disassemble /r add
+v_disassemble_s|disassemble /s mul
+v_bt|bt
+v_bt_full|bt full
+v_info_frame|info frame
+v_info_locals|info locals
+v_info_args|info args
+v_info_proc_mappings|info proc mappings
+v_info_sharedlibrary|info sharedlibrary
+v_info_threads|info threads
+v_info_inferiors|info inferiors
+v_continue_tbreak|continue
+v_finish|finish
+v_up|up
+v_frame|frame
+v_down|down
+v_watch|watch r
+v_watch_hit|continue
+v_delete|delete
+v_delete_confirm|y
+v_info_symbol|info symbol $pc
+v_info_line|info line *$pc
+v_until|until 41
+v_continue_end|continue

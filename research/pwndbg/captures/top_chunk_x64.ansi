@@ -1,0 +1,5 @@
+[32m[1mpwndbg> [0m[32m[0mtop-chunk
+[31mTop chunk[0m | [33mPREV_INUSE[0m
+Addr: [34m0x55555555bfe0[0m
+Size: 0x20020 (with flag bits: 0x20021)
+

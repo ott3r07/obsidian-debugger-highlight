@@ -1,0 +1,2 @@
+(gdb) down
+Bottom (innermost) frame selected; you cannot go down.

@@ -1,0 +1,4 @@
+pwndbg> search -p mid[1]
+Searching for a pointer-width integer: b'\xb0\x14\xac\xaa\xaa\xaa\x00\x00'
+warning: Unable to access 16000 bytes of target memory at 0xfffff7f91d07, halting search.
+[stack]         0xfffffffffab8 0xaaaaaaac14b0

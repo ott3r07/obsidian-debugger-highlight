@@ -1,0 +1,4 @@
+gef➤  info sharedlibrary
+From                To                  Syms Read   Shared Object Library
+0x0000fffff7fbedc0  0x0000fffff7fdae70  Yes         /lib/ld-linux-aarch64.so.1
+0x0000fffff7e17d00  0x0000fffff7f343d4  Yes         /lib/aarch64-linux-gnu/libc.so.6

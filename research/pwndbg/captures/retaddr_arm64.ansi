@@ -1,0 +1,4 @@
+[32m[1mpwndbg> [0m[32m[0mretaddr
+[33m0xfffffffffb48[0m —▸ [31m0xfffff7e184c4 (__libc_start_call_main+116)[0m ◂— [38;5;148mbl[39m[38;5;255m [39m[38;5;141m[31mexit[0m[39m
+[33m0xfffffffffc58[0m —▸ [31m0xfffff7e18598 (__libc_start_main+152)[0m ◂— [38;5;148madrp[39m[38;5;255m [39m[38;5;81mx26[39m[38;5;255m,[39m[38;5;255m [39m[38;5;141m[0m_nl_C_locobj+32[0m[39m /* ':\x0c' */
+[33m0xfffffffffc68[0m —▸ [31m0xaaaaaaaa0830 (_start+48)[0m ◂— [38;5;148mbl[39m[38;5;255m [39m[38;5;141m[31mabort@plt[0m[39m
