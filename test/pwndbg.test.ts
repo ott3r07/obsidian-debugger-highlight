@@ -4,7 +4,7 @@
 // `# SOURCE:` headers). Inline lines below are copied from the same files.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import Prism from "prismjs";
 import type { Token, TokenStream } from "prismjs";
 import { pwndbg } from "../src/grammars/pwndbg.ts";
@@ -632,6 +632,8 @@ test("performance: no fixture line padded to 20k chars takes > 20 ms (no quadrat
 // Lines are verbatim from research/adversarial/samples/ and fp/ (checked by `sample()`).
 const ADV = new URL("../research/adversarial/", import.meta.url);
 function sample(file: string, text: string): string {
+	// Provenance check only: the research/ tree lives on the `research` branch.
+	if (!existsSync(ADV)) return text;
 	const ls = readFileSync(new URL(file, ADV), "utf8").replace(/\r/g, "").split("\n");
 	assert.ok(ls.includes(text), `not in ${file}: ${JSON.stringify(text)}`);
 	return text;
