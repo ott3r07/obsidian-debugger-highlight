@@ -1,0 +1,516 @@
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b000
+Size: 0x290 (with flag bits: 0x291)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b290
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55555555b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b2c0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e7fb
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b2f0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e78b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b320
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e65b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b350
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e66b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b380
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e63b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b3b0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55500000e6cb
+
+Free chunk (fastbins) | PREV_INUSE
+Addr: 0x55555555b3e0
+Size: 0x30 (with flag bits: 0x31)
+fd: 0x55555555b
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x55555555b410
+Size: 0x90 (with flag bits: 0x91)
+fd: 0x55555555b
+
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b4a0
+Size: 0x90 (with flag bits: 0x91)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x55555555b530
+Size: 0x90 (with flag bits: 0x91)
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0x55555555b5c0
+Size: 0x510 (with flag bits: 0x511)
+fd: 0xffff92b35b20
+bk: 0xffff92b35b20
+
+Allocated chunk
+Addr: 0x55555555bad0
+Size: 0x510 (with flag bits: 0x510)
+
+Top chunk | PREV_INUSE
+Addr: 0x55555555bfe0
+Size: 0x20020 (with flag bits: 0x20021)
+
+pwndbg> bins
+tcachebins
+0x30 [  7]:  0x55555555b3c0 —▸ 0x55555555b390 —▸ 0x55555555b360 —▸ 0x55555555b330 —▸ 0x55555555b300 —▸ 0x55555555b2d0 —▸ 0x55555555b2a0 ◂— 0
+0x90 [  1]:  0x55555555b420 ◂— 0
+fastbins
+0x30:        0x55555555b3e0 ◂— 0
+unsortedbin
+all:         0x55555555b5c0 —▸ 0xffff92b35b20 ◂— 0x55555555b5c0
+smallbins
+empty
+largebins
+empty
+pwndbg> vis 5
+0x55555555b000	0x0000000000000000	0x0000000000000291	................
+0x55555555b010	0x0000000000070000	0x0001000000000000	................
+0x55555555b020	0x0000000000000000	0x0000000000000000	................
+0x55555555b030	0x0000000000000000	0x0000000000000000	................
+0x55555555b040	0x0000000000000000	0x0000000000000000	................
+0x55555555b050	0x0000000000000000	0x0000000000000000	................
+0x55555555b060	0x0000000000000000	0x0000000000000000	................
+0x55555555b070	0x0000000000000000	0x0000000000000000	................
+0x55555555b080	0x0000000000000000	0x0000000000000000	................
+0x55555555b090	0x0000000000000000	0x000055555555b3c0	..........UUUU..
+0x55555555b0a0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0c0	0x0000000000000000	0x000055555555b420	........ .UUUU..
+0x55555555b0d0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b0f0	0x0000000000000000	0x0000000000000000	................
+0x55555555b100	0x0000000000000000	0x0000000000000000	................
+0x55555555b110	0x0000000000000000	0x0000000000000000	................
+0x55555555b120	0x0000000000000000	0x0000000000000000	................
+0x55555555b130	0x0000000000000000	0x0000000000000000	................
+0x55555555b140	0x0000000000000000	0x0000000000000000	................
+0x55555555b150	0x0000000000000000	0x0000000000000000	................
+0x55555555b160	0x0000000000000000	0x0000000000000000	................
+0x55555555b170	0x0000000000000000	0x0000000000000000	................
+0x55555555b180	0x0000000000000000	0x0000000000000000	................
+0x55555555b190	0x0000000000000000	0x0000000000000000	................
+0x55555555b1a0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1c0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1d0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b1f0	0x0000000000000000	0x0000000000000000	................
+0x55555555b200	0x0000000000000000	0x0000000000000000	................
+0x55555555b210	0x0000000000000000	0x0000000000000000	................
+0x55555555b220	0x0000000000000000	0x0000000000000000	................
+0x55555555b230	0x0000000000000000	0x0000000000000000	................
+0x55555555b240	0x0000000000000000	0x0000000000000000	................
+0x55555555b250	0x0000000000000000	0x0000000000000000	................
+0x55555555b260	0x0000000000000000	0x0000000000000000	................
+0x55555555b270	0x0000000000000000	0x0000000000000000	................
+0x55555555b280	0x0000000000000000	0x0000000000000000	................
+0x55555555b290	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b2a0	0x000000055555555b	0x5368e5dc04201038	[UUU....8. ...hS	 <-- tcachebins[0x30][6/7]
+0x55555555b2b0	0x0000000000000000	0x0000000000000000	................
+0x55555555b2c0	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b2d0	0x000055500000e7fb	0x5368e5dc04201038	....PU..8. ...hS	 <-- tcachebins[0x30][5/7]
+0x55555555b2e0	0x0000000000000000	0x0000000000000000	................
+0x55555555b2f0	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b300	0x000055500000e78b	0x5368e5dc04201038	....PU..8. ...hS	 <-- tcachebins[0x30][4/7]
+0x55555555b310	0x0000000000000000	0x0000000000000000	................
+0x55555555b320	0x0000000000000000	0x0000000000000031	........1.......
+0x55555555b330	0x000055500000e65b	0x5368e5dc04201038	[...PU..8. ...hS	 <-- tcachebins[0x30][3/7]
+0x55555555b340	0x0000000000000000	0x0000000000000000	................
+0x55555555b350	0x0000000000000000	                  	........
+pwndbg> malloc-chunk mid[1]-0x10
+Allocated chunk | PREV_INUSE
+Addr: 0xaaaaaaac14a0
+Size: 0x90 (with flag bits: 0x91)
+
+pwndbg> top-chunk
+Top chunk | PREV_INUSE
+Addr: 0x55555555bfe0
+Size: 0x20020 (with flag bits: 0x20021)
+
+pwndbg> bins
+tcachebins
+0x90 [  7]:  0xaaaaaaac17c0 —▸ 0xaaaaaaac1710 —▸ 0xaaaaaaac1660 —▸ 0xaaaaaaac15b0 —▸ 0xaaaaaaac1500 —▸ 0xaaaaaaac1450 —▸ 0xaaaaaaac13a0 ◂— 0
+fastbins
+empty
+unsortedbin
+empty
+smallbins
+0x90:        0xaaaaaaac1910 —▸ 0xaaaaaaac1860 —▸ 0xfffff7fa0b30 (main_arena+224) ◂— 0xaaaaaaac1910
+largebins
+0x500-0x530: 0xaaaaaaac19c0 —▸ 0xfffff7fa0ee0 (main_arena+1168) ◂— 0xaaaaaaac19c0
+0x540-0x570: 0xaaaaaaac1ef0 —▸ 0xfffff7fa0ef0 (main_arena+1184) ◂— 0xaaaaaaac1ef0
+0x580-0x5b0: 0xaaaaaaac2460 —▸ 0xfffff7fa0f00 (main_arena+1200) ◂— 0xaaaaaaac2460
+0x5c0-0x5f0: 0xaaaaaaac2a10 —▸ 0xfffff7fa0f10 (main_arena+1216) ◂— 0xaaaaaaac2a10
+pwndbg> malloc-chunk large[0]
+Allocated chunk
+Addr: 0xaaaaaaac19d0
+Size: 0xfffff7fa0ee0 (with flag bits: 0xfffff7fa0ee0)
+
+pwndbg> heap
+Top Chunk: 0x603050
+Last Remainder: 0
+
+0x603000 FASTBIN {
+  prev_size = 0, 
+  size = 33, 
+  fd = 0x603030, 
+  bk = 0x0, 
+  fd_nextsize = 0x0, 
+  bk_nextsize = 0x31
+}
+0x603020 FASTBIN {
+  prev_size = 0, 
+  size = 49, 
+  fd = 0x676e6978676e6978, 
+  bk = 0x0, 
+  fd_nextsize = 0x0, 
+  bk_nextsize = 0x0
+}
+0x603050 PREV_INUSE {
+  prev_size = 0, 
+  size = 135089, 
+  fd = 0x0, 
+  bk = 0x0, 
+  fd_nextsize = 0x0, 
+  bk_nextsize = 0x0
+}
+pwndbg> x/gx 0x603020
+0x603020:	0x0000000000000000
+pwndbg> x/10gx 0x603020
+0x603020:	0x0000000000000000	0x0000000000000031
+0x603030:	0x676e6978676e6978	0x0000000000000000
+0x603040:	0x0000000000000000	0x0000000000000000
+0x603050:	0x0000000000000000	0x0000000000020fb1
+0x603060:	0x0000000000000000	0x0000000000000000
+pwndbg> 
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x5682c008
+Size: 0x191
+
+Allocated chunk | PREV_INUSE
+Addr: 0x5682c198
+Size: 0x21
+
+Top chunk | PREV_INUSE
+Addr: 0x5682c1b8
+Size: 0x21e49
+
+pwndbg> bins
+tcachebins
+0x18 [  1]: 0x5682c1a0 ◂— 0x0
+fastbins
+0x10: 0x0
+0x18: 0x0
+0x20: 0x0
+0x28: 0x0
+0x30: 0x0
+0x38: 0x0
+0x40: 0x0
+unsortedbin
+all: 0x0
+smallbins
+empty
+largebins
+empty
+pwndbg> heap
+Allocated chunk | PREV_INUSE
+Addr: 0x5824c008
+Size: 0x191
+
+Free chunk (tcache) | PREV_INUSE
+Addr: 0x5824c198
+Size: 0x21
+fd: 0x00
+
+Top chunk | PREV_INUSE
+Addr: 0x5824c1b8
+Size: 0x21e49
+
+pwndbg> bins
+tcachebins
+0x20 [  1]: 0x5824c1a0 ◂— 0x0
+fastbins
+0x10: 0x0
+0x18: 0x0
+0x20: 0x0
+0x28: 0x0
+0x30: 0x0
+0x38: 0x0
+0x40: 0x0
+unsortedbin
+all: 0x0
+smallbins
+empty
+largebins
+empty
+pwndbg> heap
+Support for tcache large bins (a GLIBC 2.42 addition) has not been fully implemented. PR contributions are highly appreciated!
+Allocated chunk | PREV_INUSE
+Addr: 0x6159dfb06000
+Size: 0xb0 (with flag bits: 0xb1)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x6159dfb060b0
+Size: 0x1010 (with flag bits: 0x1011)
+
+Top chunk | PREV_INUSE
+Addr: 0x6159dfb070c0
+Size: 0x1ff40 (with flag bits: 0x1ff41)
+
+pwndbg> bins
+tcachebins
+0x20 [ 16]: 0
+0x30 [ 16]: 0
+0x40 [ 16]: 0x1011
+0x50 [ 16]: 0
+0x60 [ 16]: 0
+0x70 [ 16]: 0
+0x80 [ 16]: 0
+0x90 [ 16]: 0
+0xa0 [ 16]: 0
+0xb0 [ 16]: 0
+0xc0 [ 16]: 0
+0xd0 [ 16]: 0
+0xe0 [ 16]: 0
+0xf0 [ 16]: 0
+pwndbg> heap
+Support for tcache large bins (a GLIBC 2.42 addition) has not been fully implemented. PR contributions are highly appreciated!
+Allocated chunk | PREV_INUSE
+Addr: 0x6450e275d000
+Size: 0xb0 (with flag bits: 0xb1)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x6450e275d0b0
+Size: 0x1010 (with flag bits: 0x1011)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x6450e275e0c0
+Size: 0x20 (with flag bits: 0x21)
+
+Top chunk | PREV_INUSE
+Addr: 0x6450e275e0e0
+Size: 0x1ff20 (with flag bits: 0x1ff21)
+
+pwndbg> bins
+tcachebins
+0x20 [-57536]: 0
+0x30 [-57957]: 0
+0x40 [-25664]: 0x1011
+0x50 [ 16]: 0x3120636f6c6c616d ('malloc 1')
+0x60 [ 16]: 0xa36
+0x70 [ 16]: 0
+0x80 [ 16]: 0
+0x90 [ 16]: 0
+0xa0 [ 16]: 0
+0xb0 [ 16]: 0
+0xc0 [ 16]: 0
+0xd0 [ 16]: 0
+0xe0 [ 16]: 0
+0xf0 [ 16]: 0
+pwndbg> bins
+tcachebins
+0x20 [  7]: 0x55555555aff0 —▸ 0x55555555b2a0 —▸ 0x55555555a770 —▸ 0x55555555ae50 —▸ 0x55555555acb0 —▸ 0x55555555ab10 —▸ 0x55555555a6e0 ◂— 0x0
+0x70 [  7]: 0x55555555a9b0 —▸ 0x55555555ab50 —▸ 0x55555555acf0 —▸ 0x55555555ae90 —▸ 0x55555555b030 —▸ 0x55555555b1b0 —▸ 0x55555555a700 ◂— 0x0
+0x80 [  7]: 0x55555555a910 —▸ 0x55555555aa90 —▸ 0x55555555ac30 —▸ 0x55555555add0 —▸ 0x55555555af70 —▸ 0x55555555b220 —▸ 0x55555555a660 ◂— 0x0
+0xd0 [  5]: 0x55555555a190 —▸ 0x555555559e60 —▸ 0x555555559b30 —▸ 0x555555559800 —▸ 0x555555559370 ◂— 0x0
+0xf0 [  2]: 0x55555555b0a0 —▸ 0x55555555a390 ◂— 0x0
+fastbins
+0x20: 0x55555555a4b0 —▸ 0x55555555a5c0 —▸ 0x55555555a8e0 —▸ 0x55555555a980 —▸ 0x55555555ab20 ◂— ...
+0x30: 0x0
+0x40: 0x0
+0x50: 0x0
+0x60: 0x0
+0x70: 0x55555555b2b0 —▸ 0x55555555a4d0 —▸ 0x55555555a5e0 —▸ 0x55555555a7f0 —▸ 0x55555555aef0 ◂— ...
+0x80: 0x55555555a540 —▸ 0x55555555a860 ◂— 0x0
+unsortedbin
+all: 0x0
+smallbins
+empty
+largebins
+empty
+pwndbg> 
+pwndbg> x/80gx 0x555555558000
+0x555555558000:	0x0000000000000000	0x0000555555558008
+0x555555558010:	0x0000000000000000	0x0000000000000000
+0x555555558020 <stdout@@GLIBC_2.2.5>:	0x00007ffff7f8c6a0	0x0000000000000000
+0x555555558030 <stdin@@GLIBC_2.2.5>:	0x00007ffff7f8b980	0x0000000000000000
+0x555555558040 <stderr@@GLIBC_2.2.5>:	0x00007ffff7f8c5c0	0x0000000000000000
+0x555555558050 <count>:	0x00005555555592a0	0x000055555555b330　　　<- ptr変数(0x000055555555b330)
+0x555555558060:	0x0000000000000000	0x0000000000000000
+0x555555558070:	0x0000000000000000	0x0000000000000000
+pwndbg> vis_heap_chunks
+(...)
+0x564f746f6910	0x0000000000000042	0x0000000000000021	B.......!.......
+0x564f746f6920	0x0000564f746f71b0	0x0000000000000431	.qotOV..1.......
+0x564f746f6930	0x0000000000000000	0x0000000000000431	........1.......	 <-- largebins[0x0][0]
+0x564f746f6940	0x00007f57d921b0d0	0x00007f57d921b0d0	..!.W.....!.W...
+
+pwndbg> bins
+(...)
+largebins
+0x400-0x430: 0x564f746f6930 —▸ 0x7f57d921b0d0 (main_arena+1104) ◂— 0x564f746f6930 /* '0iotOV' */
+pwndbg> vmmap
+    0x55cb8b378000     0x55cb8b399000 rw-p    21000      0 [heap]
+    0x7f1389428000     0x7f13895bd000 r-xp   195000  28000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7f13895bd000     0x7f1389615000 r--p    58000 1bd000 /usr/lib/x86_64-linux-gnu/libc.so.6
+    0x7f138961a000     0x7f138961c000 rw-p     2000 219000 /usr/lib/x86_64-linux-gnu/libc.so.6
+Allocated chunk | PREV_INUSE
+Addr: 0x5d6c2a054000
+Size: 0x290 (with flag bits: 0x291)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x5d6c2a054290
+Size: 0x1010 (with flag bits: 0x1011)
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x5d6c2a0552a0
+Size: 0x50 (with flag bits: 0x51)
+fd: 0x5d6c2a055
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x5d6c2a0552f0
+Size: 0x90 (with flag bits: 0x91)
+fd: 0x5d6c2a055
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0x5d6c2a055380
+Size: 0xc60 (with flag bits: 0xc61)
+fd: 0x7e3344a19ce0
+bk: 0x7e3344a19ce0
+
+Allocated chunk
+Addr: 0x5d6c2a055fe0
+Size: 0x10 (with flag bits: 0x10)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x5d6c2a055ff0
+Size: 0x10 (with flag bits: 0x11)
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x5ef482d912a0
+Size: 0x50 (with flag bits: 0x51)
+fd: 0x5ef482d91
+
+Free chunk (tcachebins) | PREV_INUSE
+Addr: 0x5ef482d912f0
+Size: 0x90 (with flag bits: 0x91)
+fd: 0x5ef482d91
+
+Free chunk (unsortedbin) | PREV_INUSE
+Addr: 0x5ef482d91380
+Size: 0xc60 (with flag bits: 0xc61)
+fd: 0x7cb42c819ce0
+bk: 0x7cb42c819ce0
+
+Allocated chunk
+Addr: 0x5ef482d91fe0
+Size: 0x10 (with flag bits: 0x10)
+
+Allocated chunk | PREV_INUSE
+Addr: 0x5ef482d91ff0
+Size: 0x10 (with flag bits: 0x11)
+
+Allocated chunk | PREV_INUSE | IS_MMAPED
+Addr: 0x5ef482d92000
+Size: 0x30 (with flag bits: 0x33) <- 这个0x33的byte就是提前布置的
+
+Allocated chunk
+Addr: 0x5ef482d92030
+Size: 0x00 (with flag bits: 0x00)
+pwndbg> bins
+tcachebins
+empty
+fastbins
+empty
+unsortedbin
+all: 0x5fb67444a380 —▸ 0x7978dba19ce0 (main_arena+96) ◂— 0x5fb67444a380
+smallbins
+0x90: 0x5fb67444a2c0 —▸ 0x7978dba19d60 (main_arena+224) ◂— 0x5fb67444a2c0
+largebins
+empty
+smallbins
+0x90 [corrupted]
+FD: 0x5df1191ee2c0 ◂— 0x5df1191ee2c0
+BK: 0x5df1191ee2c0 —▸ 0x5df1191ee2e0 —▸ 0x5df1191ee300 —▸ 0x74294ce19d60 (main_arena+224) ◂— 0x5df1191ee2c0
+tcachebins
+0x50 [  1]: 0x61618d6c42b0 ◂— 0x0
+0x90 [  3]: 0x61618d6c42d0 —▸ 0x61618d6c4310 —▸ 0x61618d6c42f0 ◂— 0x0
+fastbins
+empty
+unsortedbin
+all [corrupted]
+FD: 0x61618d6c4380 —▸ 0x7f82b3e19ce0 (main_arena+96) ◂— 0x61618d6c4380
+BK: 0x61618d6c4380 —▸ 0x7f82b3e19ce1 (main_arena+97) ◂— 0xf0000061618d6c43
+smallbins
+empty
+largebins
+empty
+pwndbg> vis
+
+pwndbg> c
+
+
+
+
+0x555555757000	0x0000000000000000	0x0000000000000091	................
+0x555555757010	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757020	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757030	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757040	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757050	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757060	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757070	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757080	0x4141414141414141	0x4141414141414141	AAAAAAAAAAAAAAAA
+0x555555757090	0x4141414141414141	0x0000000000000091	AAAAAAAA........
+0x5555557570a0	0x0000000000000000	0x0000000000000000	................
+0x5555557570b0	0x0000000000000000	0x0000000000000000	................
+0x5555557570c0	0x0000000000000000	0x0000000000000000	................
+0x5555557570d0	0x0000000000000000	0x0000000000000000	................
+0x5555557570e0	0x0000000000000000	0x0000000000000000	................
+0x5555557570f0	0x0000000000000000	0x0000000000000000	................
+0x555555757100	0x0000000000000000	0x0000000000000000	................
+0x555555757110	0x0000000000000000	0x0000000000000000	................
+0x555555757120	0x0000000000000000	0x0000000a414140b1	.........@AA....	 <-- Top chunk
+
+pwndbg> vis
+
+0x555555757000	0x0000000000000000	0x0000000000000091	................
+0x555555757010	0x00007ffff7dd6790	0x0000555555757020	.g...... puUUU..
+0x555555757020	0x90909090909016eb	0x9090909090909090	................
+0x555555757030	0x9090909090909090	0x010101010101b848	........H.......
+0x555555757040	0x68632eb848500101	0x0431480169722e6f	..PH..cho.ri.H1.
+0x555555757050	0xf631d231e7894824	0x000000050f583b6a	$H..1.1.j;X.....
+0x555555757060	0x0000000000000000	0x0000000000000000	................
+0x555555757070	0x0000000000000000	0x0000000000000000	................
+0x555555757080	0x0000000000000000	0x0000000000000000	................
+0x555555757090	0x0000000000000090	0x0000000000000090	................
+0x5555557570a0	0x0000000000000000	0x0000000000000000	................
+0x5555557570b0	0x0000000000000000	0x0000000000000000	................
+0x5555557570c0	0x0000000000000000	0x0000000000000000	................
+0x5555557570d0	0x0000000000000000	0x0000000000000000	................
+0x5555557570e0	0x0000000000000000	0x0000000000000000	................
+0x5555557570f0	0x0000000000000000	0x0000000000000000	................
+0x555555757100	0x0000000000000000	0x0000000000000000	................
+0x555555757110	0x0000000000000000	0x0000000000000000	................
+0x555555757120	0x0000000000000000	0x0000000000020ee1	................	 <-- Top chunk
+pwndbg> p &__free_hook

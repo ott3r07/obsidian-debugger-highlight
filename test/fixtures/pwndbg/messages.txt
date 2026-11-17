@@ -1,0 +1,117 @@
+pwndbg: loaded 200 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Reading symbols from ./test_x64...
+------- tip of the day (disable with set show-tips off) -------
+Pwndbg resolves kernel memory maps by parsing page tables (default) or via monitor info mem QEMU gdbstub command (use set kernel-vmmap-via-page-tables off for that)
+pwndbg> 
+$ pidof sh
+3045846 3045818 3045733 3043008 3042910 3023265 3023258 3022148 4720
+[20:33][~]$ docker run -it alpine:edge sh
+[20:33][~]$ gdb -p '3045846'
+GNU gdb (GDB) 17.2
+Copyright (C) 2025 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+pwndbg: loaded 199 pwndbg commands. Type pwndbg [filter] for a list.
+pwndbg: created 12 GDB functions (can be used with print/break). Type help function to see them.
+Attaching to process 3045846
+
+⚠️ warning: "target:/bin/busybox": could not open as an executable file: Input/output error.
+
+⚠️ warning: `target:/bin/busybox': can't open to read symbols: Input/output error.
+
+⚠️ warning: Could not load vsyscall page because no executable was specified
+
+⚠️ warning: Target and debugger are in different PID namespaces; thread lists and other data are likely unreliable.  Connect to gdbserver inside the container.
+0x00007f54cf7bbef4 in ?? ()
+------- tip of the day (disable with set show-tips off) -------
+Use attachp <name|pid|args|/dev/...> to attach to a process by name or args (instead of running pidof in another terminal to run attach <pid|dev>)
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+─────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────────────────────────
+ RAX  0xfffffffffffffdfc
+ RBX  0x7f54cf7f8b28 ◂— 0x7f54cf7f8b28
+ RCX  0x7f54cf7bbef4 ◂— ret
+   0x7f54cf7b98c7    ret                                <0x7f54cf7b1447>
+    ↓
+   0x7f54cf7b1447    mov    rdi, rax     RDI => 0xfffffffffffffdfc
+   0x7f54cf7b144a    call   0x7f54cf7958de              <0x7f54cf7958de>
+───────────────────────────────────────────────────────[ STACK ]────────────────────────────────────────────────────────
+00:0000│ rsp 0x7ffee5743fc8 —▸ 0x7f54cf7b9868 ◂— pop rdx
+01:0008│     0x7ffee5743fd0 —▸ 0x7f54cf7f8b64 ◂— 0
+02:0010│     0x7ffee5743fd8 ◂— 0
+03:0018│     0x7ffee5743fe0 ◂— 0
+04:0020│     0x7ffee5743fe8 —▸ 0x7ffee57441c8 ◂— 0x52353b32315b00
+05:0028│     0x7ffee5743ff0 ◂— 0xffffffff
+06:0030│     0x7ffee5743ff8 —▸ 0x7f54cf7b1447 ◂— mov rdi, rax
+07:0038│     0x7ffee5744000 ◂— 0
+─────────────────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────────────────
+ ► 0 0x7f54cf7bbef4
+   1 0x7f54cf7b9868
+   2 0x7f54cf7f8b64
+   3 0x0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> got
+Filtering out read-only entries (display them with -r or --show-readonly)
+
+╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮
+│ /home/arthurd/dev/pwndbg/pwndbg/commands/__init__.py:517 in __call__                             │
+│                                                                                                  │
+│    514 │                                                                                         │
+│    515 │   def __call__(self, *args: Any, **kwargs: Any) -> str | None:                          │
+│    516 │   │   try:                                                                              │
+│ ❱  517 │   │   │   return self.function(*args, **kwargs)                                         │
+│    518 │   │   except TypeError:                                                                 │
+│    519 │   │   │   print(f"{self.command_name}: {self.description}")                             │
+│    520 │   │   │   pwndbg.exception.handle(self.function.__name__)                               │
+│                                                                                                  │
+│ /home/arthurd/dev/pwndbg/pwndbg/commands/got.py:86 in got                                        │
+│                                                                                                  │
+│    83 │   # Calculate the base address                                                           │
+│    84 │   if not path_filter:                                                                    │
+│    85 │   │   first_print = False                                                                │
+│ ❱  86 │   │   _got(pwndbg.aglib.proc.exe(), accept_readonly, symbol_filter)                      │
+│    87 │   else:                                                                                  │
+│    88 │   │   first_print = True                                                                 │
+│    89                                                                                            │
+│                                                                                                  │
+│ /home/arthurd/dev/pwndbg/pwndbg/commands/got.py:114 in _got                                      │
+│                                                                                                  │
+│   111                                                                                            │
+│   112 def _got(path: str, accept_readonly: bool, symbol_filter: str) -> None:                    │
+│   113 │   # Maybe download the file from remote                                                  │
+│ ❱ 114 │   local_path = pwndbg.aglib.file.get_file(path, try_local_path=True)                     │
+│   115 │                                                                                          │
+│   116 │   relro_status = pwndbg.wrappers.checksec.relro_status(local_path)                       │
+│   117 │   pie_status = pwndbg.wrappers.checksec.pie_status(local_path)                           │
+│                                                                                                  │
+│ /home/arthurd/dev/pwndbg/pwndbg/aglib/file.py:91 in get_file                                     │
+│                                                                                                  │
+│    88 │   local_path = path                                                                      │
+│    89 │   if not pwndbg.aglib.remote.is_remote() or pwndbg.aglib.qemu.is_qemu_kernel():          │
+│    90 │   │   if not os.path.exists(local_path):                                                 │
+pwndbg> find-fake-fast &global_buf
+global_max_fast symbol not found, using the default value: 0x80
+Searching for fastbin size fields up to 0x80, starting at 0x555555559fa8 resulting in an overlap of 0x55555555a020
+FAKE CHUNKS
+Exception occurred: malloc_chunk: Cannot access memory at address 0x555554000000 (<class 'pwndbg.dbg_mod.DebuggerError'>)
+For more info invoke `set exception-verbose on` and rerun the command
+or debug it by yourself with `set exception-debugger on`
+pwndbg> vis_heap_chunks
+Undefined command: "vis_heap_chunks".  Try "help".
+pwndbg> brva 0x1000
+Offset 0x1000 rebased to module /work/test_arm64 as 0xaaaaaaaa1000 is beyond module's memory pages:
+    0xaaaaaaaa0000     0xaaaaaaaa1000 r-xp     1000       0 test_arm64
+    0xaaaaaaabf000     0xaaaaaaac0000 r--p     1000    f000 test_arm64
+    0xaaaaaaac0000     0xaaaaaaac1000 rw-p     1000   10000 test_arm64
+Could not determine rebased breakpoint address on current target

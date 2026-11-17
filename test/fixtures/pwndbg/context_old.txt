@@ -1,0 +1,308 @@
+b► 0x5dd451f3a789 <main+1216>    lea    rax, [rip + 0x90b]     RAX => 0x5dd451f3b09b ◂— 0x203a7865646e49 /* 'Index: ' */
+   0x5dd451f3a790 <main+1223>    mov    rdi, rax               RDI => 0x5dd451f3b09b ◂— 0x203a7865646e49 /* 'Index: ' */
+
+
+b+ 0x5dd451f3a789 <main+1216>    lea    rax, [rip + 0x90b]     RAX => 0x5dd451f3b09b ◂— 0x203a7865646e49 /* 'Index: ' */
+ ► 0x5dd451f3a790 <main+1223>    mov    rdi, rax               RDI => 0x5dd452bfb09b
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+─────────────────────────────[ REGISTERS ]─────────────────────────────
+ EAX  0x0
+ EBX  0x0
+ ECX  0x0
+ EDX  0x0
+ EDI  0x0
+ ESI  0x0
+ EBP  0x0
+ ESP  0xffd3dd30 ◂— 0x1
+ EIP  0x10000 (_start) ◂— push   0x68 /* 0x2f68686a */
+──────────────────────────────[ DISASM ]───────────────────────────────
+ ► 0x10000 <_start>       push   0x68
+   0x10002 <_start+2>     push   0x732f2f2f
+   0x10007 <_start+7>     push   0x6e69622f
+   0x1000c <_start+12>    mov    ebx, esp
+   0x1000e <_start+14>    push   0x1010101
+   0x10013 <_start+19>    xor    dword ptr [esp], 0x1016972
+   0x1001a <_start+26>    xor    ecx, ecx
+   0x1001c <_start+28>    push   ecx
+   0x1001d <_start+29>    push   4
+   0x1001f <_start+31>    pop    ecx
+   0x10020 <_start+32>    add    ecx, esp
+───────────────────────────────[ STACK ]───────────────────────────────
+00:0000│ esp  0xffd3dd30 ◂— 0x1
+01:0004│      0xffd3dd34 —▸ 0xffd3ede6 ◂— 0x2d667463 ('ctf-')
+02:0008│      0xffd3dd38 ◂— 0x0
+03:000c│      0xffd3dd3c —▸ 0xffd3ee05 ◂— 0x3d202020 ('   =')
+04:0010│      0xffd3dd40 —▸ 0xffd3ee26 ◂— 0x752f3d5f ('_=/u')
+05:0014│      0xffd3dd44 —▸ 0xffd3ee3f ◂— 0x4c524550 ('PERL')
+06:0018│      0xffd3dd48 —▸ 0xffd3ee6c ◂— 0x5353454c ('LESS')
+07:001c│      0xffd3dd4c —▸ 0xffd3ee8e ◂— 0x5353454c ('LESS')
+─────────────────────────────[ BACKTRACE ]─────────────────────────────
+ ► f 0    10000 _start
+pwndbg>
+pwndbg> c
+Continuing.
+
+Program received signal SIGTRAP, Trace/breakpoint trap.
+ERROR: Could not find ELF base!
+0x1d66a090 in ?? ()
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+─────────────────────────────[ REGISTERS ]─────────────────────────────
+ EAX  0x0
+ EBX  0x0
+ ECX  0x0
+ EDX  0x0
+ EDI  0x0
+ ESI  0x0
+ EBP  0x0
+ ESP  0xd4be1680
+ EIP  0x1d66a090
+──────────────────────────────[ DISASM ]───────────────────────────────
+Invalid address 0x1d66a090
+
+
+
+
+
+
+
+
+
+
+───────────────────────────────[ STACK ]───────────────────────────────
+<Could not read memory at 0xd4be1680>
+─────────────────────────────[ BACKTRACE ]─────────────────────────────
+ ► f 0 1d66a090
+pwndbg> vmmap
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+0x561691661000 0x56169167d000 r-xp    1c000 0      /bin/dash
+0x56169187c000 0x56169187f000 rw-p     3000 1b000  /bin/dash
+0x56169187f000 0x561691881000 rw-p     2000 0
+0x7f111d669000 0x7f111d690000 r-xp    27000 0      /lib/x86_64-linux-gnu/ld-2.27.so
+0x7f111d890000 0x7f111d892000 rw-p     2000 27000  /lib/x86_64-linux-gnu/ld-2.27.so
+0x7f111d892000 0x7f111d893000 rw-p     1000 0
+0x7ffcd4bc1000 0x7ffcd4be2000 rw-p    21000 0      [stack]
+0x7ffcd4be7000 0x7ffcd4bea000 r--p     3000 0      [vvar]
+0x7ffcd4bea000 0x7ffcd4bec000 r-xp     2000 0      [vdso]
+0xffffffffff600000 0xffffffffff601000 r-xp     1000 0      [vsyscall]
+Breakpoint 1, 0x000000000040122a in main ()
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+─────────────[ REGISTERS / show-flags off / show-compact-regs off ]─────────────
+*RAX  0x7fffffffdbe0 ◂— 0x0
+*RBX  0x7fffffffdd08 —▸ 0x7fffffffe07a ◂— '/home/forregisterusehhh/work/stuff/stuff'
+*RCX  0x7ffff7c7faa0 (_IO_2_1_stdin_) ◂— 0xfbad2088
+*RDX  0x20
+*RDI  0x7fffffffdbe0 ◂— 0x0
+*RSI  0x1
+*R8   0x1999999999999999
+*R9   0x7ffff7c7faa0 (_IO_2_1_stdin_) ◂— 0xfbad2088
+*R10  0x7ffff7c29ac0 (_nl_C_LC_CTYPE_toupper+512) ◂— 0x100000000
+*R11  0x7ffff7c2a3c0 (_nl_C_LC_CTYPE_class+256) ◂— 0x2000200020002
+ R12  0x0
+*R13  0x7fffffffdd18 —▸ 0x7fffffffe0a3 ◂— 'SHELL=/bin/bash'
+*R14  0x403de8 (__do_global_dtors_aux_fini_array_entry) —▸ 0x401140 (__do_global_dtors_aux) ◂— endbr64 
+*R15  0x7ffff7ffd000 (_rtld_local) —▸ 0x7ffff7ffe2c0 ◂— 0x0
+*RBP  0x7fffffffdbf0 ◂— 0x1
+*RSP  0x7fffffffdbe0 ◂— 0x0
+*RIP  0x40122a (main+180) ◂— call 0x401070
+──────────────────────[ DISASM / x86-64 / set emulate on ]──────────────────────
+ ► 0x40122a <main+180>    call   fread@plt                      <fread@plt>
+        ptr: 0x7fffffffdbe0 ◂— 0x0
+        size: 0x1
+        n: 0x20
+        stream: 0x7ffff7c7faa0 (_IO_2_1_stdin_) ◂— 0xfbad2088
+
+   0x40122f <main+185>    mov    eax, 0
+   0x401234 <main+190>    leave  
+   0x401235 <main+191>    ret    
+
+   0x401236               add    byte ptr [rax], al
+   0x401238 <_fini>       endbr64 
+   0x40123c <_fini+4>     sub    rsp, 8
+   0x401240 <_fini+8>     add    rsp, 8
+   0x401244 <_fini+12>    ret    
+
+   0x401245               add    byte ptr [rax], al
+   0x401247               add    byte ptr [rax], al
+───────\\x80───────────────────────────[ STACK ]────────────────────────────────────
+00:0000│ rax rdi rsp 0x7fffffffdbe0 ◂— 0x0
+01:0008│             0x7fffffffdbe8 ◂— 0x2004052a0
+02:0010│ rbp         0x7fffffffdbf0 ◂— 0x1
+03:0018│             0x7fffffffdbf8 —▸ 0x7ffff7ad3510 (__libc_start_call_main+128) ◂— mov edi, eax
+04:0020│             0x7fffffffdc00 —▸ 0x7fffffffdd18 —▸ 0x7fffffffe0a3 ◂— 'SHELL=/bin/bash'
+05:0028│             0x7fffffffdc08 —▸ 0x401176 (main) ◂— push rbp
+06:0030│             0x7fffffffdc10 ◂— 0x1000011bf
+─────────────────────────────────────────────────────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]─────────────────────────────────────────────────────────────────────────────────────────
+   0x7ffff7e1e850 <execve>    endbr64
+   0x7ffff7e1e854 <execve>    mov    eax, 0x3b          EAX => 0x3b
+ _ 0x7ffff7e1e859 <execve>    syscall  <SYS_execve>
+        path: 0x402007 __ '/bin/ls'
+        argv: 0x7fffffffb6b0 __ 0x402004 __ 0x746f6f722f00736c /* 'ls' */
+        envp: 0x7fffffffb6a8 __ 0
+   0x7ffff7e1e85b <execve>    cmp    rax, -0xfff
+   0x7ffff7e1e861 <execve>    jae    execve                      <execve>
+
+   0x7ffff7e1e863 <execve>    ret
+
+   0x7ffff7e1e864 <execve>    mov    rcx, qword ptr [rip + 0x10d585]     RCX, [_GLOBAL_OFFSET_TABLE_] => 0xffffffffffffff88
+   0x7ffff7e1e86b <execve>    neg    eax
+   0x7ffff7e1e86d <execve>    mov    dword ptr fs:[rcx], eax
+   0x7ffff7e1e870 <execve>    or     rax, 0xffffffffffffffff
+   0x7ffff7e1e874 <execve>    ret
+──────────────────────────────────────────────────────────────────────────────────────────────────────[ STACK ]───────────────────────────────────────────────────────────────────────────────────────────────────────
+00:0000│ rsp 0x7fffffffb698 __ 0x401182 (main) __ mov eax, 0
+01:0008│-030 0x7fffffffb6a0 __ 0
+02:0010│ rdx 0x7fffffffb6a8 __ 0
+03:0018│ rsi 0x7fffffffb6b0 __ 0x402004 __ 0x746f6f722f00736c /* 'ls' */
+04:0020│-018 0x7fffffffb6b8 __ 0
+05:0028│-010 0x7fffffffb6c0 __ 0x7fffffffb7a0 __ 0
+06:0030│-008 0x7fffffffb6c8 __ 0xf07feb98cfa9b00
+07:0038│ rbp 0x7fffffffb6d0 __ 1
+────────────────────────────────────────────────────────────────────────────────────────────────────[ BACKTRACE ]─────────────────────────────────────────────────────────────────────────────────────────────────────
+ _ 0   0x7ffff7e1e859 execve
+   1         0x401182 main
+   2   0x7ffff7d6c27e __libc_start_call_main
+   3   0x7ffff7d6c339 __libc_start_main@@GLIBC_2.34
+pwndbg> ni
+0x00000000004013fe in vuln ()
+LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
+──────────────────────────────────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]──────────────────────────────────────────────────────────────
+ RAX  2
+ RBX  0
+ RCX  0x7ffff7dfc25c (fclose+172) ◂— add rsp, 0x10
+ RDX  2
+ RDI  0
+ RSI  0x7fffffffd4f0 —▸ 0x7fffffff0a61 ◂— 0
+ R8   0
+ R9   0
+ R10  0
+ R11  0x202
+ R12  0x7fffffffd668 —▸ 0x7fffffffdabd ◂— '/home/hyder/CTF_FILES/h7ctf/pwn/Seccomp/chal'
+ R13  1
+ R14  0x7ffff7ffd000 (_rtld_global) —▸ 0x7ffff7ffe310 ◂— 0
+ R15  0
+ RBP  0x7fffffffd530 —▸ 0x7fffffffd540 —▸ 0x7fffffffd5e0 —▸ 0x7fffffffd640 ◂— 0
+ RSP  0x7fffffffd460 ◂— 0x218c032900000002
+*RIP  0x4013fe (vuln+192) ◂— leave 
+───────────────────────────────────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]───────────────────────────────────────────────────────────────────────
+b+ 0x4013fd       <vuln+191>    nop    
+ ► 0x4013fe       <vuln+192>    leave  
+   0x4013ff       <vuln+193>    ret                                <main+58>
+    ↓
+   0x40143a       <main+58>     mov    eax, 0     EAX => 0
+   0x40143f       <main+63>     pop    rbp        RBP => 0x7fffffffd5e0
+   0x401440       <main+64>     ret                                <0x7ffff7da46b5>
+    ↓
+   0x7ffff7da46b5               mov    edi, eax     EDI => 0
+   0x7ffff7da46b7               call   exit                        <exit>
+ 
+   0x7ffff7da46bc               call   0x7ffff7e0fbe0              <0x7ffff7e0fbe0>
+ 
+   0x7ffff7da46c1               lock sub dword ptr [rip + 0x1bea07], 1
+   0x7ffff7da46c9               je     0x7ffff7da46db              <0x7ffff7da46db>
+────────────────────────────────────────────────────────────────────────────────────[ STACK ]─────────────────────────────────────────────────────────────────────────────────────
+00:0000│ rsp 0x7fffffffd460 ◂— 0x218c032900000002
+01:0008│-0c8 0x7fffffffd468 —▸ 0x4052a0 ◂— 0x405
+02:0010│-0c0 0x7fffffffd470 ◂— 0x2073692073696874 ('this is ')
+03:0018│-0b8 0x7fffffffd478 ◂— 0xa0a67616c662061 ('a flag\n\n')
+04:0020│-0b0 0x7fffffffd480 ◂— 0xffffffffffffffff
+05:0028│-0a8 0x7fffffffd488 —▸ 0x7ffff7f645c0 (_IO_2_1_stdout_) ◂— 0xfbad2887
+06:0030│-0a0 0x7fffffffd490 —▸ 0x7fffffffd4d0 —▸ 0x7fffffffd4f0 —▸ 0x7fffffff0a61 ◂— 0
+07:0038│-098 0x7fffffffd498 —▸ 0x7ffff7e0c4b1 ◂— cmp eax, -1
+──────────────────────────────────────────────────────────────────────────────────[ BACKTRACE ]───────────────────────────────────────────────────────────────────────────────────
+ ► 0         0x4013fe vuln+192
+   1         0x40143a main+58
+   2   0x7ffff7da46b5 None
+   3   0x7ffff7da4769 __libc_start_main+137
+   4         0x4011de _start+46
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+pwndbg> x/2gx 0x7fffffffd530
+0x7fffffffd530:	0x00007fffffffd540	0x000000000040143a
+Program received signal SIGINT, Interrupt.
+0x00007ffff7b165a0 in __read_nocancel () at ../sysdeps/unix/syscall-template.S:84
+84      ../sysdeps/unix/syscall-template.S: No existe el fichero o el directorio.
+LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
+[───────────────────────────────────────────────────────────────────────────────────REGISTERS───────────────────────────────────────────────────────────────────────────────────]
+*RAX  0xfffffffffffffe00
+ RBX  0x0
+*RCX  0x7ffff7b165a0 (__read_nocancel+7) ◂— cmp    rax, -0xfff
+*RDX  0xf
+ RDI  0x0
+*RSI  0x7fffffffe200 ◂— 0x0
+*R8   0x7ffff7fc5700 ◂— add    byte ptr [rdi - 4], dl /* 0x7ffff7fc5700 */
+*R9   0x2
+ R10  0x0
+*R11  0x246
+*R12  0x400c00 (_start) ◂— xor    ebp, ebp
+*R13  0x7fffffffe310 ◂— 0x1
+ R14  0x0
+ R15  0x0
+*RBP  0x7fffffffe210 —▸ 0x7fffffffe230 —▸ 0x408550 (__libc_csu_init) ◂— push   r15
+*RSP  0x7fffffffe1f8 —▸ 0x400fd3 (getsel+57) ◂— test   eax, eax
+*RIP  0x7ffff7b165a0 (__read_nocancel+7) ◂— cmp    rax, -0xfff
+[─────────────────────────────────────────────────────────────────────────────────────CODE──────────────────────────────────────────────────────────────────────────────────────]
+ ► 0x7ffff7b165a0 <__read_nocancel+7>     cmp    rax, -0xfff
+   0x7ffff7b165a6 <__read_nocancel+13>    jae    read+73                       <0x7ffff7b165d9>
+    ↓
+   0x7ffff7b165d9 <read+73>               mov    rcx, qword ptr [rip + 0x2bc898]
+   0x7ffff7b165e0 <read+80>               neg    eax
+   0x7ffff7b165e2 <read+82>               mov    dword ptr fs:[rcx], eax
+   0x7ffff7b165e5 <read+85>               or     rax, 0xffffffffffffffff
+   0x7ffff7b165e9 <read+89>               ret    
+ 
+   0x7ffff7b165ea                         nop    word ptr [rax + rax]
+   0x7ffff7b165f0 <write>                 cmp    dword ptr [rip + 0x2c2149], 0 <0x7ffff7dd8740>
+   0x7ffff7b165f7 <write+7>               jne    write+25                      <0x7ffff7b16609>
+    ↓
+   0x7ffff7b16609 <write+25>              sub    rsp, 8
+[─────────────────────────────────────────────────────────────────────────────────────CODE──────────────────────────────────────────────────────────────────────────────────────]
+79      in ../sysdeps/unix/syscall-template.S
+[─────────────────────────────────────────────────────────────────────────────────────STACK─────────────────────────────────────────────────────────────────────────────────────]
+00:0000│ rsp  0x7fffffffe1f8 —▸ 0x400fd3 (getsel+57) ◂— test   eax, eax
+01:0008│ rsi  0x7fffffffe200 ◂— 0x0
+... ↓
+03:0018│ rbp  0x7fffffffe210 —▸ 0x7fffffffe230 —▸ 0x408550 (__libc_csu_init) ◂— push   r15
+04:0020│      0x7fffffffe218 —▸ 0x401282 (main+70) ◂— mov    dword ptr [rbp - 4], eax
+05:0028│      0x7fffffffe220 —▸ 0x7fffffffe310 ◂— 0x1
+06:0030│      0x7fffffffe228 ◂— 0x100000000
+07:0038│      0x7fffffffe230 —▸ 0x408550 (__libc_csu_init) ◂— push   r15
+[───────────────────────────────────────────────────────────────────────────────────BACKTRACE───────────────────────────────────────────────────────────────────────────────────]
+ ► f 0     7ffff7b165a0 __read_nocancel+7
+   f 1           400fd3 getsel+57
+   f 2           401282 main+70
+   f 3     7ffff7a5b2b1 __libc_start_main+241
+Program received signal SIGINT
+pwndbg> heap
+Top Chunk: 0
+Last Remainder: 0
+
+pwndbg> arena
+{
+  mutex = 0, 
+  flags = 0, 
+  fastbinsY = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, 
+  top = 0x0, 
+  last_remainder = 0x0, 
+  bins = {0x0 <repeats 254 times>}, 
+  binmap = {0, 0, 0, 0}, 
+  next = 0x7ffff7dd3b00 <main_arena>, 
+  next_free = 0x0, 
+  attached_threads = 1, 
+  system_mem = 0, 
+  max_system_mem = 0
+}
+pwndbg> bins
+fastbins
+0x20: 0x0
+0x30: 0x0
+0x40: 0x0
+0x50: 0x0
+0x60: 0x0
+0x70: 0x0
+0x80: 0x0
+unsortedbin
+all: 0x0
+smallbins
+empty
+largebins
+empty
+pwndbg>
