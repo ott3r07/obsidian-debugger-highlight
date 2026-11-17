@@ -23,6 +23,8 @@ const ALIASES: Record<string, string> = {
 	"gdb-peda": "peda",
 };
 
+export const LANGUAGE_ALIASES = Object.keys(ALIASES);
+
 export function resolveLanguage(lang: string): string | undefined {
 	const l = lang.toLowerCase();
 	if (l in LANGUAGES) return l;

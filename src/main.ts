@@ -1,7 +1,7 @@
 import { loadPrism, MarkdownView, Plugin } from "obsidian";
 import type { Grammar, TokenStream } from "prismjs";
 import { PrismLike, renderTokens } from "./core/tokens.ts";
-import { LANGUAGES, resolveLanguage } from "./grammars/index.ts";
+import { LANGUAGE_ALIASES, LANGUAGES, resolveLanguage } from "./grammars/index.ts";
 import { debuggerHighlightExtension } from "./obsidian/editor.ts";
 
 const DONE_ATTR = "data-dbg-hl";
@@ -14,7 +14,11 @@ export default class DebuggerHighlightPlugin extends Plugin {
 
 		// 1) Reading view: register the grammars with Obsidian's own Prism so
 		//    native rendering (copy button, theme, wrapping) is kept as-is.
-		for (const [name, grammar] of Object.entries(LANGUAGES)) this.prism.languages[name] = grammar;
+		for (const name of this.languageNames()) this.prism.languages[name] = LANGUAGES[resolveLanguage(name)!];
+		//    Obsidian's Prism pass runs after post-processors and would emit
+		//    bare type classes (`prompt` collides with Obsidian's modal class),
+		//    so rename them the same way our own renderer does.
+		this.prism.hooks.add("wrap", this.wrapHook);
 
 		// 2) Blocks rendered before the plugin loaded (or rendered by a path
 		//    that skipped Prism) are re-highlighted in place.
@@ -35,8 +39,20 @@ export default class DebuggerHighlightPlugin extends Plugin {
 	}
 
 	onunload() {
-		for (const name of Object.keys(LANGUAGES)) delete this.prism?.languages[name];
+		if (!this.prism) return;
+		for (const name of this.languageNames()) delete this.prism.languages[name];
+		const hooks = this.prism.hooks.all["wrap"];
+		if (hooks) hooks.splice(hooks.indexOf(this.wrapHook) >>> 0, 1);
 	}
+
+	private languageNames(): string[] {
+		return [...Object.keys(LANGUAGES), ...LANGUAGE_ALIASES];
+	}
+
+	private wrapHook = (env: { language: string; type: string; classes: string[] }) => {
+		if (!resolveLanguage(env.language)) return;
+		env.classes = ["token", `dbg-${env.type}`];
+	};
 
 	private highlightRendered(root: HTMLElement) {
 		for (const code of Array.from(root.querySelectorAll<HTMLElement>("pre > code"))) {

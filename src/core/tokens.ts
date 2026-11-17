@@ -4,6 +4,7 @@ import type { Grammar, Token, TokenStream } from "prismjs";
 export interface PrismLike {
 	languages: Record<string, unknown>;
 	tokenize(text: string, grammar: Grammar): Array<string | Token>;
+	hooks: { add(name: string, fn: (env: any) => void): void; all: Record<string, Array<(env: any) => void>> };
 }
 
 /** A flat, non-overlapping highlighted span: [from, to) with the CSS classes to apply. */
@@ -13,11 +14,15 @@ export interface Segment {
 	classes: string[];
 }
 
+/**
+ * CSS classes for a token. Grammar type names (`prompt`, `section`, …) are
+ * prefixed with `dbg-` because bare names collide with host-app classes
+ * (Obsidian's `.prompt` is the command-palette modal). Prism aliases are not
+ * emitted: they exist for stock Prism themes on blogs, and inside Obsidian
+ * they would pull in the theme's colours for other languages.
+ */
 function tokenClasses(token: Token): string[] {
-	const classes = ["token", token.type];
-	const alias = token.alias;
-	if (alias) classes.push(...(Array.isArray(alias) ? alias : [alias]));
-	return classes;
+	return ["token", `dbg-${token.type}`];
 }
 
 /**
@@ -36,12 +41,10 @@ export function flatten(stream: TokenStream, base = 0, inherited: string[] = [],
 		for (const s of stream) pos = flatten(s, pos, inherited, out);
 		return pos;
 	}
-	const classes = [...inherited, ...tokenClasses(stream)];
-	return flatten(stream.content, pos, dedupe(classes), out);
-}
-
-function dedupe(xs: string[]): string[] {
-	return [...new Set(xs)];
+	// Text takes the classes of its nearest enclosing token only — the same
+	// colour it gets in reading view, where the innermost styled span wins.
+	// (Accumulating ancestors would make the result depend on CSS order.)
+	return flatten(stream.content, pos, tokenClasses(stream), out);
 }
 
 export function segmentsFor(prism: PrismLike, text: string, grammar: Grammar): Segment[] {
@@ -61,7 +64,7 @@ export function renderTokens(stream: TokenStream, parent: HTMLElement): void {
 		return;
 	}
 	const span = document.createElement("span");
-	span.className = dedupe(tokenClasses(stream)).join(" ");
+	span.className = tokenClasses(stream).join(" ");
 	renderTokens(stream.content, span);
 	parent.appendChild(span);
 }

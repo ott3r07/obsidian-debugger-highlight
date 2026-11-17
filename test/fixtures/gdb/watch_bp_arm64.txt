@@ -1,0 +1,71 @@
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+(gdb) info breakpoints
+Num     Type            Disp Enb Address            What
+1       breakpoint      keep y   0x0000aaaaaaaa0b08 in worker at rv.c:22
+	breakpoint already hit 1 time
+2       breakpoint      keep y   0x0000aaaaaaaa0a58 in many_args at rv.c:16
+	stop only if alpha_parameter == 0x1111
+	breakpoint already hit 1 time
+4       hw watchpoint   keep y                      g_cfg.vals[3]
+5       read watchpoint keep y                      g_cfg.ratio
+6       acc watchpoint  keep y                      g_cfg.in.a
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+(gdb) rwatch g_cfg.ratio
+Hardware read watchpoint 5: g_cfg.ratio
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+(gdb) awatch g_cfg.in.a
+Hardware access (read/write) watchpoint 6: g_cfg.in.a
+# SOURCE: local capture by reviewer (container review-pwndbg-main from research-pwndbg-img; pwndbg 389764e, GDB 15.1, aarch64 native unless *_i386 = qemu-i386 8.2.2; out80/outv80 = 80-column pty; outv* = gdb -nx); program rv.c
+# DATE: 2026-11-17
+Breakpoint 1 at 0xb68: file rv.c, line 26.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=1, argv=0xfffffffffd08) at rv.c:26
+26	int main(int argc, char **argv) {
+Hardware watchpoint 2: head
+
+Hardware watchpoint 2: head
+
+Old value = (struct node *) 0x0
+New value = (struct node *) 0xaaaaaaac12a0
+0x0000aaaaaaaa0be4 in main (argc=1, argv=0xfffffffffd08) at rv.c:32
+32	    for (i = 0; i < 8; i++) { struct node *n = malloc(sizeof *n); n->next = head; n->val = i; head = n; }
+
+Hardware watchpoint 2: head
+
+Old value = (struct node *) 0xaaaaaaac12a0
+New value = (struct node *) 0xaaaaaaac12c0
+0x0000aaaaaaaa0be4 in main (argc=1, argv=0xfffffffffd08) at rv.c:32
+32	    for (i = 0; i < 8; i++) { struct node *n = malloc(sizeof *n); n->next = head; n->val = i; head = n; }
+[New Thread 0xfffff7def1a0 (LWP 471)]
+r=61264
+[Thread 0xfffff7def1a0 (LWP 471) exited]
+[Inferior 1 (process 469) exited with code 01]
+=====
+Warning: _curses.error: setupterm: could not find terminfo database
+
+Terminal features will not be available.  Consider setting TERM variable to your current terminal name (or xterm).
+[31m[1mpwndbg: [0m[31m[0m[91mloaded 200 pwndbg commands. Type [35mpwndbg [filter][0m[91m for a list.[0m
+[31m[1mpwndbg: [0m[31m[0m[91mcreated 12 GDB functions (can be used with print/break). Type [35mhelp function[0m[91m to see them.[0m
+Breakpoint 1 at 0xb68: file rv.c, line 26.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=0x1, argv=0xfffffffffd08) at rv.c:26
+26	int main(int argc, char **argv) {
+Hardware watchpoint 2: head
+
+Hardware watchpoint 2: head
+
+Old value = (struct node *) 0x0
+New value = (struct node *) 0xaaaaaaac12a0
+0x0000aaaaaaaa0be4 in main (argc=0x1, argv=0xfffffffffd08) at rv.c:32
+32	    for (i = 0; i < 8; i++) { struct node *n = malloc(sizeof *n); n->next = head; n->val = i; head = n; }
+[New Thread 0xfffff7def1a0 (LWP 487)]
+r=61264
+[Thread 0xfffff7def1a0 (LWP 487) exited]
+[Inferior 1 (process 485) exited with code 01]

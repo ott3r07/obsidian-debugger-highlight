@@ -80,7 +80,9 @@ export const gdbFrame: Grammar = {
 		{ pattern: /(^ in )[^\s(].*?(?= \()/, lookbehind: true, alias: "function" },
 		{ pattern: re(`(?<![\\w$.:])${FN}(?=[\\t ]\\()`), alias: "function" },
 	],
-	address: addr,
+	// a pointer before a string is an address; other hex args stay `number` (under pwndbg's
+	// output-radix 16 even `argc=0x1` is hex, so hex alone does not mean "address")
+	address: { pattern: re(`\\b${H}(?=${W}+["'])`), alias: "number" },
 	number: { pattern: /#\d+\b|-?\b(?:0x[0-9a-fA-F]+|\d+)\b/, alias: "number" },
 	punctuation: /[(),]/,
 };
@@ -205,13 +207,15 @@ export const gdb: Grammar = {
 		number: [{ pattern: re(H), alias: "number" }, { pattern: /(=)\w+/, lookbehind: true, alias: "number" }],
 		punctuation: /[[\]=]/,
 	}),
-	"gdb-reg-ptr": wrap(String.raw`${REGNAME}${W}+${H}${W}+${H}(?:${W}+${SYM})?${W}*`, {
+	// pointer-typed registers print their natural column in hex; under pwndbg (output-radix 16)
+	// EVERY register does, so only these names (or a `<sym>` suffix) make the value an address
+	"gdb-reg-ptr": wrap(String.raw`(?:[re]?bp|fp|tpidr\w*)${W}+${H}${W}+${H}${W}*|${REGNAME}${W}+${H}${W}+${H}${W}+${SYM}${W}*`, {
 		register: regName,
 		"address-code": tokens.addressBeforeSym,
 		symbol: tokens.symbol,
 		address: addr,
 	}),
-	"gdb-reg-val": wrap(String.raw`${REGNAME}${W}+${H}${W}+${NATURAL}${W}*`, {
+	"gdb-reg-val": wrap(String.raw`${REGNAME}${W}+${H}${W}+(?:${NATURAL}|${H})${W}*`, {
 		register: regName,
 		number: num,
 	}),
@@ -234,7 +238,8 @@ export const gdb: Grammar = {
 		number: { pattern: /(\bline )\d+|\b\d+(?= locations)/, lookbehind: true, alias: "number" },
 		string: tokens.string,
 	}),
-	"gdb-watch-value": wrap(String.raw`(?:Old|New) value = .*`, { keyword: kw(String.raw`^(?:Old|New) value`), ...gdbValue }),
+	// read/access watchpoint hits print `Value = …`
+	"gdb-watch-value": wrap(String.raw`(?:Old value|New value|Value) = .*`, { keyword: kw(String.raw`^(?:Old value|New value|Value)(?= =)`), ...gdbValue }),
 	"gdb-watch-scope": wrap(
 		String.raw`Watchpoint \d+ deleted because the program has left the block in|which its expression is valid\.`,
 		rest("msg-warn", "important"),
@@ -305,6 +310,7 @@ export const gdb: Grammar = {
 	"gdb-bp-table-row": wrap(
 		String.raw`\d+(?:\.\d+)?${W}+(?:breakpoint|(?:hw |read |acc )watchpoint|catchpoint|dprintf|(?:fast |static )?tracepoint)${W}+(?:keep|del|dis|dstp)${W}+[yn].*|\d+\.\d+${W}+[yn]-?${W}+${H}.*`,
 		{
+			comment: { pattern: /<(?:PENDING|MULTIPLE)>/, alias: "comment" },
 			enabled: { pattern: /(?<=[\t ])y(?=-?[\t ]|$)/, alias: "inserted" },
 			disabled: { pattern: /(?<=[\t ])n(?=-?[\t ]|$)/, alias: "deleted" },
 			"address-code": { pattern: re(`(?<=[\\t ])${H}(?=${W}+in\\b|${W}*$)`), alias: "number" },
@@ -315,8 +321,11 @@ export const gdb: Grammar = {
 		},
 	),
 	"gdb-bp-table-sub": wrap(String.raw`${W}+(?:(?:breakpoint|catchpoint|watchpoint) already hit \d+ times?|stop only if .*|stop only in thread .*|ignore next \d+ hits)`, {
-		number: /\b\d+\b/,
-		comment: { pattern: /[a-z][a-z ]*[a-z]/, alias: "comment" },
+		comment: {
+			pattern: /\b(?:(?:breakpoint|catchpoint|watchpoint) already hit|times?$|stop only (?:if|in thread)|ignore next|hits$)/,
+			alias: "comment",
+		},
+		number: /\b(?:0x[0-9a-fA-F]+|\d+)\b/,
 	}),
 	"gdb-map-head": wrap(String.raw`${W}*Start Addr${W}+End Addr${W}+Size${W}+Offset${W}+(?:Perms${W}+)?objfile${W}*`, {
 		keyword: kw(String.raw`\S+(?: Addr)?`),
@@ -381,7 +390,8 @@ export const gdb: Grammar = {
 	}),
 
 	// ── errors, warnings, informational chatter ───────────────────────────
-	"gdb-warning": wrap(String.raw`[Ww]arning:.*`, {
+	// GDB 17 prefixes warnings with an emoji: `⚠️ warning: …`
+	"gdb-warning": wrap(String.raw`(?:\u26a0\ufe0f?${W}*)?[Ww]arning:.*`, {
 		path: tokens.path,
 		"msg-warn": { pattern: /\S(?:.*\S)?/, alias: "important" },
 	}),
@@ -445,6 +455,8 @@ export const gdb: Grammar = {
 			String.raw`Mapped address spaces:`,
 			String.raw`process \d+`,
 			String.raw`No locals\.`,
+			String.raw`No symbol table info available\.`,
+			String.raw`Please answer y or n\.`,
 			String.raw`A debugging session is active\.`,
 			String.raw`${W}*Inferior \d+ \[process \d+\] will be (?:killed|detached)\.`,
 			String.raw`Quit anyway\?.*`,

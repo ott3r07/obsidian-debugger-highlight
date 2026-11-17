@@ -73,9 +73,14 @@ export const instruction: Grammar = {
 	/** branch/call targets and rip-relative comment targets: `0x… <malloc@plt>` (before `symbol`, which it looks ahead at) */
 	"address-code": { pattern: re(`${SRC.hex}(?=[\\t ]+<)`), alias: "number" },
 	symbol: tokens.symbol,
+	/** Intel operand-size keywords: `QWORD PTR [rbp-0x8]` → keyword `QWORD`, punctuation `PTR` */
+	keyword: {
+		pattern: /\b(?:byte|[dfqt]?word|tbyte|oword|[xyz]mmword)(?=\s+ptr\b)/i,
+		alias: "keyword",
+	},
 	register: { pattern: re(String.raw`%?\b${REGISTER_NAMES}\b`, "i"), alias: "variable" },
 	number: { pattern: /[$#]?-?\b(?:0x[0-9a-fA-F]+|\d+)\b/, alias: "number" },
-	punctuation: /[[\](),!{}]|\bptr\b/,
+	punctuation: /[[\](),!{}]|\bptr\b/i,
 };
 
 /** Instruction text whose FIRST word is the mnemonic. */

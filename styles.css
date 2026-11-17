@@ -13,7 +13,7 @@ body {
 	--dbg-command: var(--text-normal);
 	--dbg-section: var(--color-cyan);
 	--dbg-legend: var(--text-faint);
-	--dbg-register: var(--color-yellow);
+	--dbg-register: var(--color-pink);
 	--dbg-flag-set: var(--color-green);
 	--dbg-flag-clear: var(--text-faint);
 	--dbg-address: var(--color-cyan);
@@ -40,37 +40,45 @@ body {
 	--dbg-heap-chunk: var(--color-blue);
 }
 
+/* Debugger output relies on column alignment: scroll instead of wrapping. */
+.dbg-hl, .dbg-hl > code {
+	white-space: pre !important;
+	overflow-wrap: normal !important;
+	word-break: normal !important;
+}
+.dbg-hl { overflow-x: auto; }
+
 :is(.dbg-hl, .markdown-source-view .cm-line) .token {
-	&.prompt { color: var(--dbg-prompt); font-weight: 600; }
-	&.command { color: var(--dbg-command); font-weight: 600; }
-	&.section { color: var(--dbg-section); }
-	&.legend { color: var(--dbg-legend); }
-	&.register { color: var(--dbg-register); }
-	&.flag-set { color: var(--dbg-flag-set); font-weight: 600; }
-	&.flag-clear { color: var(--dbg-flag-clear); }
-	&.address { color: var(--dbg-address); }
-	&.address-stack { color: var(--dbg-address-stack); }
-	&.address-heap { color: var(--dbg-address-heap); }
-	&.address-code { color: var(--dbg-address-code); }
-	&.address-data { color: var(--dbg-address-data); }
-	&.address-rodata { color: var(--dbg-address-rodata); }
-	&.number { color: var(--dbg-number); }
-	&.symbol { color: var(--dbg-symbol); }
-	&.mnemonic, &.mnemonic-branch { color: var(--dbg-mnemonic); }
-	&.mnemonic-branch { font-weight: 600; }
-	&.current { color: var(--dbg-current); font-weight: 700; }
-	&.arrow { color: var(--dbg-arrow); }
-	&.string { color: var(--dbg-string); }
-	&.comment, &.offset, &.punctuation { color: var(--dbg-comment); }
-	&.taken { color: var(--dbg-taken); font-weight: 600; }
-	&.not-taken { color: var(--dbg-not-taken); }
-	&.perm { color: var(--dbg-perm); }
-	&.path { color: var(--dbg-path); }
-	&.msg-ok, &.enabled { color: var(--dbg-ok); }
-	&.msg-info { color: var(--dbg-info); }
-	&.msg-warn { color: var(--dbg-warn); }
-	&.msg-error, &.signal, &.disabled { color: var(--dbg-error); }
-	&.signal { font-weight: 700; }
-	&.keyword { font-weight: 600; }
-	&.heap-chunk, &.bin { color: var(--dbg-heap-chunk); font-weight: 600; }
+	&.dbg-prompt { color: var(--dbg-prompt); font-weight: 600; }
+	&.dbg-command { color: var(--dbg-command); font-weight: 600; }
+	&.dbg-section { color: var(--dbg-section); }
+	&.dbg-legend { color: var(--dbg-legend); }
+	&.dbg-register { color: var(--dbg-register); }
+	&.dbg-flag-set { color: var(--dbg-flag-set); font-weight: 600; }
+	&.dbg-flag-clear { color: var(--dbg-flag-clear); }
+	&.dbg-address { color: var(--dbg-address); }
+	&.dbg-address-stack { color: var(--dbg-address-stack); }
+	&.dbg-address-heap { color: var(--dbg-address-heap); }
+	&.dbg-address-code { color: var(--dbg-address-code); }
+	&.dbg-address-data { color: var(--dbg-address-data); }
+	&.dbg-address-rodata { color: var(--dbg-address-rodata); }
+	&.dbg-number { color: var(--dbg-number); }
+	&.dbg-symbol { color: var(--dbg-symbol); }
+	&.dbg-mnemonic, &.dbg-mnemonic-branch { color: var(--dbg-mnemonic); }
+	&.dbg-mnemonic-branch { font-weight: 600; }
+	&.dbg-current { color: var(--dbg-current); font-weight: 700; }
+	&.dbg-arrow { color: var(--dbg-arrow); }
+	&.dbg-string { color: var(--dbg-string); }
+	&.dbg-comment, &.dbg-offset, &.dbg-punctuation { color: var(--dbg-comment); }
+	&.dbg-taken { color: var(--dbg-taken); font-weight: 600; }
+	&.dbg-not-taken { color: var(--dbg-not-taken); }
+	&.dbg-perm { color: var(--dbg-perm); }
+	&.dbg-path { color: var(--dbg-path); }
+	&.dbg-msg-ok, &.dbg-enabled { color: var(--dbg-ok); }
+	&.dbg-msg-info { color: var(--dbg-info); }
+	&.dbg-msg-warn { color: var(--dbg-warn); }
+	&.dbg-msg-error, &.dbg-signal, &.dbg-disabled { color: var(--dbg-error); }
+	&.dbg-signal { font-weight: 700; }
+	&.dbg-keyword { font-weight: 600; }
+	&.dbg-heap-chunk, &.dbg-bin { color: var(--dbg-heap-chunk); font-weight: 600; }
 }

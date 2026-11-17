@@ -68,7 +68,7 @@ test("breakpoint set / hit / thread hit", () => {
 	const hit = line(X64, "Breakpoint 1, main (argc=1, argv=0xffff935a9cf8) at test.c:24");
 	has(hit, "keyword", "Breakpoint");
 	has(hit, "symbol", "main");
-	has(hit, "address", "0xffff935a9cf8");
+	has(hit, "number", "0xffff935a9cf8"); // a bare hex arg: kind unknown
 	has(hit, "path", "test.c");
 
 	const t = line(PEDA, 'Thread 1 "revengme" hit Breakpoint 2, 0x0000000000488e99 in ?? ()');
@@ -358,4 +358,118 @@ test("performance: 5,000 lines of captures under 200 ms", () => {
 	const t1 = performance.now();
 	Prism.tokenize(bad, gdb);
 	assert.ok(performance.now() - t1 < 200);
+});
+
+// ── corrections from research/pwndbg/REVIEW.md §2.2 / §5 ──────────────────
+const WB = "watch_bp_arm64.txt";
+const WV = "wrap_values_arm64.txt";
+const R16 = "pwndbg_radix16.txt";
+
+test("REVIEW §5.4: watchpoint kinds, typed old/new values, `Value =`", () => {
+	has(line(WB, "Hardware read watchpoint 5: g_cfg.ratio"), "keyword", "Hardware read watchpoint");
+	has(line(WB, "Hardware access (read/write) watchpoint 6: g_cfg.in.a"), "number", "6");
+	const old = line(WB, "Old value = (struct node *) 0x0");
+	has(old, "keyword", "Old value");
+	has(old, "address", "0x0"); // pointer cast → address
+	has("Value = 0.5", "keyword", "Value"); // REVIEW §5.4 form (read/access hit)
+	has("Value = 0.5", "number", "0.5");
+	has(line(WB, "[Inferior 1 (process 469) exited with code 01]"), "number", "01");
+	has(line(WB, "[Thread 0xfffff7def1a0 (LWP 471) exited]"), "address", "0xfffff7def1a0");
+});
+
+test("REVIEW §5.5: info breakpoints — widened Type column, address-less watch rows, TAB details", () => {
+	has(line(WB, "Num     Type            Disp Enb Address            What"), "keyword", "Enb");
+	const w = line(WB, "4       hw watchpoint   keep y                      g_cfg.vals[3]");
+	has(w, "keyword", "hw watchpoint");
+	has(w, "enabled", "y");
+	has(line(WB, "5       read watchpoint keep y                      g_cfg.ratio"), "keyword", "read watchpoint");
+	has(line(WB, "6       acc watchpoint  keep y                      g_cfg.in.a"), "keyword", "acc watchpoint");
+	const cond = line(WB, "\tstop only if alpha_parameter == 0x1111");
+	has(cond, "comment", "stop only if");
+	has(cond, "number", "0x1111");
+	has(line(WB, "\tbreakpoint already hit 1 time"), "comment", "breakpoint already hit");
+	has("1       breakpoint     keep y   <PENDING>  foo", "comment", "<PENDING>"); // REVIEW §5.5 (source-described)
+	has(line(RW, "Make breakpoint pending on future shared library load? (y or [n]) y"), "prompt", "(y or [n])");
+});
+
+test("REVIEW §5.3/§5.6/C7: GDB self-wrapped bt, bt full, print and info threads", () => {
+	has(line(WV, "#0  many_args (alpha_parameter=4369, beta_parameter=8738, "), "symbol", "many_args");
+	const c = line(WV, "    delta_config=0xaaaaaaac0010 <g_cfg>, epsilon_value=21845, zeta_value=26214) at rv.c:16");
+	has(c, "address-code", "0xaaaaaaac0010");
+	has(c, "path", "rv.c");
+	has(line(WV, "    zeta_value=26214) at rv.c:16"), "number", "26214");
+	has(line(WV, '* 1    Thread 0xfffff7ff7ee0 (LWP 449) "rv_arm64" many_args ('), "symbol", "many_args");
+	has(line(WV, "          0xaaaaaaac17c0, 0xaaaaaaac1870, 0xaaaaaaac1920, 0x0, 0x0, 0x0, 0x0, 0x0, 0xfffffffffeb8, 0x181}"), "punctuation", "}");
+	const p1 = line(WV, '$1 = {name = 0xaaaaaaaa0e30 "review", vals = {1, 2, 3, 0, 0, 0}, in = {a = 7, tag = "inn\\000\\000\\000\\000"}, ');
+	has(p1, "address", "0xaaaaaaaa0e30");
+	has(p1, "string", '"inn\\000\\000\\000\\000"');
+	const p2 = line(WV, "  ratio = 0.5, cb = 0xaaaaaaaa09d8 <cb>, pad = '\\000' <repeats 39 times>}");
+	has(p2, "number", "0.5");
+	has(p2, "address-code", "0xaaaaaaaa09d8");
+	has(line(WV, "      0x0, 0x0, 0x0}}, ratio = 0x3fe0000000000000, cb = 0xaaaaaaaa09d8, pad = {0x0 <repeats 40 times>}}"), "comment", "<repeats 40 times>");
+	has(line(RW, "#0  0x0000003433e00fa0 in _dl_start () from /lib64/ld-linux-x86-64.so.2"), "path", "/lib64/ld-linux-x86-64.so.2");
+});
+
+test("REVIEW C6: `print pretty on` multi-line structs (pwndbg sessions)", () => {
+	has(line(R16, "$3 = {"), "punctuation", "{");
+	has(line(R16, "  name = 0xaaaaaaaa0e30,"), "number", "0xaaaaaaaa0e30");
+	has(line(R16, "  pad = {0x0 <repeats 40 times>}"), "comment", "<repeats 40 times>");
+	has(line(R16, "  },"), "punctuation", "}");
+});
+
+test("REVIEW §5.2: AT&T callq/retq, i386 Intel size keywords, radix-16 registers", () => {
+	const cq = line(RW, "   0x3433e00a73 <_start+3>:     callq  0x3433e00fa0 <_dl_start>");
+	has(cq, "mnemonic-branch", "callq");
+	has(cq, "address-code", "0x3433e00fa0");
+	const i = line(R16, "=> 0x8049965 <many_args+17>:\tmov    edx,DWORD PTR [ebp+0x8]");
+	has(i, "keyword", "DWORD");
+	has(i, "punctuation", "PTR");
+	has(i, "register", "ebp");
+	has(line(X64, "   0x00005555555571d5 <+12>:\t89 7d ec           \tmov    DWORD PTR [rbp-0x14],edi"), "keyword", "DWORD");
+	has("   0x1 <+1>:\tmovzx  eax,byte ptr [rax]", "punctuation", "ptr");
+	// under output-radix 16 every natural column is hex: only pointer-typed names are addresses
+	has(line(R16, "esi            0xc                 0xc"), "number", "0xc");
+	has(line(R16, "ebp            0x40800b98          0x40800b98"), "address", "0x40800b98");
+	has(line(R16, "esp            0x40800b98          0x40800b98"), "address-stack", "0x40800b98");
+	has(line(R16, "eip            0x8049965           0x8049965 <many_args+17>"), "address-code", "0x8049965");
+});
+
+test("REVIEW C15/§5.9: GDB 17 emoji warnings, old symbol reading, both pager prompts", () => {
+	const w = line("gdb17_warnings.txt", "⚠️ warning: Could not load vsyscall page because no executable was specified");
+	has(w, "msg-warn", "⚠️ warning: Could not load vsyscall page because no executable was specified");
+	has(line(PEDA, "Reading symbols from /lib/ld-linux.so.2...(no debugging symbols found)...done."), "path", "/lib/ld-linux.so.2");
+	has(line(RW, "---Type <return> to continue, or q <return> to quit---"), "comment", "---Type <return> to continue, or q <return> to quit---");
+	has("--Type <RET> for more, q to quit, c to continue without paging--", "comment", "--Type <RET> for more, q to quit, c to continue without paging--");
+	has('Thread 2 "x" received signal SIGSEGV, Segmentation fault.', "signal", 'Thread 2 "x" received signal SIGSEGV, Segmentation fault.');
+});
+
+test("REVIEW §2.2: identical tokens with TABs expanded, trailing whitespace trimmed, CRLF", () => {
+	const expand = (l: string) => {
+		let o = "";
+		for (const ch of l) o += ch === "\t" ? " ".repeat(8 - (o.length % 8)) : ch;
+		return o;
+	};
+	const sig = (t: string) => leaves(t).map(([ty, v]) => `${ty}:${v.trim()}`).join(" ");
+	let n = 0;
+	for (const lines of fixtures.values())
+		for (const l of lines) {
+			if (!l.trim()) continue;
+			const base = sig(l);
+			assert.equal(sig(expand(l)), base, `tabs: ${l}`);
+			assert.equal(sig(l.trimEnd()), base, `trim: ${l}`);
+			assert.equal(sig(l + "\r"), base, `crlf: ${l}`);
+			n++;
+		}
+	assert.ok(n > 1500);
+});
+
+test("perf: 20k-char padded lines each tokenize in < 20 ms", () => {
+	const P = " ".repeat(20000);
+	for (const l of [P, "\t".repeat(20000), P + "x", "0x1:" + P + "y", "rax" + P + "0x1" + P, "  0x1" + P + "0x2" + P + "0x3" + P, "   0x1 <+0>:" + P + "mov" + P + "rax", "x = " + "{".repeat(20000), "warning: " + "./".repeat(10000)]) {
+		Prism.tokenize(l, gdb);
+		const t0 = performance.now();
+		Prism.tokenize(l, gdb);
+		const ms = performance.now() - t0;
+		assert.ok(ms < 20, `${ms.toFixed(1)} ms for ${JSON.stringify(l.slice(0, 20))}…`);
+	}
 });
