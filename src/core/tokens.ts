@@ -26,10 +26,10 @@ function tokenClasses(token: Token): string[] {
 }
 
 /**
- * Flatten a Prism token stream into leaf segments. Nested tokens inherit
- * their ancestors' classes, so each segment carries the full class list —
- * this is what lets CodeMirror (which wants flat, sorted ranges) render the
- * same result as Prism's nested HTML in reading view.
+ * Flatten a Prism token stream into leaf segments, so CodeMirror (flat,
+ * sorted ranges) and reading view render exactly the same thing. Text takes
+ * the classes of its nearest enclosing token only — accumulating ancestors
+ * would make the colour depend on CSS rule order.
  */
 export function flatten(stream: TokenStream, base = 0, inherited: string[] = [], out: Segment[] = []): number {
 	let pos = base;
@@ -41,9 +41,6 @@ export function flatten(stream: TokenStream, base = 0, inherited: string[] = [],
 		for (const s of stream) pos = flatten(s, pos, inherited, out);
 		return pos;
 	}
-	// Text takes the classes of its nearest enclosing token only — the same
-	// colour it gets in reading view, where the innermost styled span wins.
-	// (Accumulating ancestors would make the result depend on CSS order.)
 	return flatten(stream.content, pos, tokenClasses(stream), out);
 }
 
@@ -53,18 +50,77 @@ export function segmentsFor(prism: PrismLike, text: string, grammar: Grammar): S
 	return out;
 }
 
-/** Render a token stream into DOM nodes without innerHTML. */
-export function renderTokens(stream: TokenStream, parent: HTMLElement): void {
-	if (typeof stream === "string") {
-		parent.appendChild(document.createTextNode(stream));
-		return;
+/** Longest whitespace prefix shared by all non-blank lines. */
+function commonIndent(lines: string[]): string {
+	let common: string | null = null;
+	for (const l of lines) {
+		if (!l.trim()) continue;
+		const ind = /^[\t ]*/.exec(l)![0];
+		if (common === null) common = ind;
+		else {
+			let i = 0;
+			while (i < common.length && i < ind.length && common[i] === ind[i]) i++;
+			common = common.slice(0, i);
+		}
+		if (!common) return "";
 	}
-	if (Array.isArray(stream)) {
-		for (const s of stream) renderTokens(s, parent);
-		return;
+	return common ?? "";
+}
+
+/**
+ * Highlight a code block's text, tolerating what copy/paste does to it:
+ *  - NBSP (U+00A0, from web pages / WeChat / Notion) is treated as a space;
+ *  - a uniform indent on every line (Stack Overflow, nested lists) is ignored;
+ *  - CR before LF is ignored.
+ * Returned offsets refer to the ORIGINAL text, so the caller can paint it
+ * unchanged. Segments never span a line break.
+ */
+export function blockSegments(prism: PrismLike, text: string, grammar: Grammar): Segment[] {
+	const orig = text.split("\n");
+	const indent = commonIndent(orig);
+	const cuts: number[] = [];
+	const norm = orig.map((l) => {
+		const cut = l.startsWith(indent) ? indent.length : /^[\t ]*/.exec(l)![0].length;
+		cuts.push(cut);
+		return l.slice(cut).replace(/ /g, " ").replace(/\r$/, "");
+	});
+
+	const segs = segmentsFor(prism, norm.join("\n"), grammar);
+	const out: Segment[] = [];
+	let line = 0;
+	let normStart = 0; // offset of `line` in the normalized text
+	let origStart = 0; // offset of `line` in the original text
+	for (const s of segs) {
+		let from = s.from;
+		while (from < s.to) {
+			while (line < norm.length - 1 && normStart + norm[line]!.length < from) {
+				normStart += norm[line]!.length + 1;
+				origStart += orig[line]!.length + 1;
+				line++;
+			}
+			const lineEnd = normStart + norm[line]!.length;
+			const to = Math.min(s.to, lineEnd);
+			if (to > from) {
+				const shift = origStart + cuts[line]! - normStart;
+				out.push({ from: from + shift, to: to + shift, classes: s.classes });
+			}
+			if (to >= s.to) break;
+			from = lineEnd + 1; // skip the "\n"
+		}
 	}
-	const span = document.createElement("span");
-	span.className = tokenClasses(stream).join(" ");
-	renderTokens(stream.content, span);
-	parent.appendChild(span);
+	return out;
+}
+
+/** Render `text` with segments into `parent` (no innerHTML). */
+export function renderSegments(text: string, segs: Segment[], parent: HTMLElement): void {
+	let pos = 0;
+	for (const s of segs) {
+		if (s.from > pos) parent.appendChild(document.createTextNode(text.slice(pos, s.from)));
+		const span = document.createElement("span");
+		span.className = s.classes.join(" ");
+		span.textContent = text.slice(s.from, s.to);
+		parent.appendChild(span);
+		pos = s.to;
+	}
+	if (pos < text.length) parent.appendChild(document.createTextNode(text.slice(pos)));
 }

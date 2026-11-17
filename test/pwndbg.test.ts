@@ -284,7 +284,8 @@ test("vmmap: kinds follow pwndbg's own order ([stack, x, read-only, [heap, writa
 	expectTokens("    0x55555555b000     0x55555557c000 rw-p    21000       0 [heap]", [
 		["0x55555555b000", "address-heap"], ["0x55555557c000", "address-heap"], ["rw-p", "perm"], ["21000", "number"], ["[heap]", "path"],
 	]);
-	expectTokens("    0x5576febbf000     0x5576febc0000 ---p     1000       0 [heap]", [["0x5576febbf000", "address-rodata"]]);
+	// `---p` (guard, unreadable) is not rodata (adversarial L2/W4): named → that kind, else plain
+	expectTokens("    0x5576febbf000     0x5576febc0000 ---p     1000       0 [heap]", [["0x5576febbf000", "address-heap"]]);
 	expectTokens("    0xffffaa0de000     0xffffaa8de000 rwxp   800000       0 [stack]", [["0xffffaa0de000", "address-stack"]]);
 	expectTokens("0xffffffffff600000 0xffffffffff601000 --xp     1000       0 [vsyscall]", [["0xffffffffff600000", "address-code"]]);
 	expectTokens("    0x7ffff7d93000     0x7ffff7dbb000 r--p    28000      0 /libc.so.6", [["0x7ffff7d93000", "address-rodata"], ["/libc.so.6", "path"]]);
@@ -519,7 +520,6 @@ test("plain GDB lines are left to the gdb base grammar", () => {
 
 /** fixture lines no rule should claim: program I/O, shell lines, author elisions */
 const UNCLAIMED = new Set([
-	"{",
 	"Hello, pwndbg! global data string r=39 stack=AAAAAAAABBBBBBBBCCCCCCCC",
 	"buf=short",
 	"(...)",
@@ -574,6 +574,9 @@ test("fixtures: tabs→spaces, trailing-space trim and CRLF do not change tokeni
 		const base = sig(text);
 		assert.equal(sig(text.split("\n").map(expand).join("\n")), base, `${name}: tabs→spaces`);
 		assert.equal(sig(text.split("\n").map((l) => l.replace(/[\t ]+$/, "")).join("\n")), base, `${name}: trailing trim`);
+		// Markdown hard break / blog copies (adversarial H3)
+		assert.equal(sig(text.split("\n").map((l) => (l.trim() ? l.replace(/[\t ]+$/, "") + "  " : l)).join("\n")), base, `${name}: trailing spaces`);
+		assert.equal(sig(text.split("\n").map((l) => (l.trim() ? l.replace(/[\t ]+$/, "") + "\t" : l)).join("\n")), base, `${name}: trailing tab`);
 		assert.equal(sig(text.replace(/\n/g, "\r\n")), base, `${name}: CRLF`);
 	}
 });
@@ -612,11 +615,57 @@ test("performance: no fixture line padded to 20k chars takes > 20 ms (no quadrat
 			if (!line.trim() || seen.has(shape)) continue;
 			seen.add(shape);
 			for (const v of variants(line)) {
-				const s = performance.now();
-				Prism.tokenize(v, LANGUAGES.pwndbg!);
-				const ms = performance.now() - s;
+				// best of up to 3 runs: a GC pause while the whole suite runs in parallel is not backtracking
+				let ms = Infinity;
+				for (let i = 0; i < 3 && ms > 20; i++) {
+					const s = performance.now();
+					Prism.tokenize(v, LANGUAGES.pwndbg!);
+					ms = Math.min(ms, performance.now() - s);
+				}
 				if (ms > worst) [worst, worstLine] = [ms, line];
 			}
 		}
 	assert.ok(worst < 20, `worst ${worst.toFixed(1)} ms on a padded ${JSON.stringify(worstLine)}`);
+});
+
+// ── adversarial pass (research/adversarial/REPORT.md) ──────────────────────
+// Lines are verbatim from research/adversarial/samples/ and fp/ (checked by `sample()`).
+const ADV = new URL("../research/adversarial/", import.meta.url);
+function sample(file: string, text: string): string {
+	const ls = readFileSync(new URL(file, ADV), "utf8").replace(/\r/g, "").split("\n");
+	assert.ok(ls.includes(text), `not in ${file}: ${JSON.stringify(text)}`);
+	return text;
+}
+
+test("adversarial H3: trailing blanks do not drop `$`-anchored tokens", () => {
+	// fixture lines (commands.txt) + a Markdown hard break
+	expectTokens("0x555555557090: free@plt  ", [["0x555555557090", "address-code"], ["free@plt", "symbol"]]);
+});
+
+test("adversarial L2/W4: `---p` guard mapping is not rodata", () => {
+	const l = sample("samples/pwndbg_4.txt", "    0x7ffff7bcd000     0x7ffff7dcd000 ---p   200000 1c0000 /lib/x86_64-linux-gnu/libc-2.23.so");
+	expectTokens(l, [["0x7ffff7bcd000", "address"], ["---p", "perm"]]);
+	expectTokens(sample("samples/pwndbg_4.txt", "    0x7ffff7dcd000     0x7ffff7dd1000 r--p     4000 1c0000 /lib/x86_64-linux-gnu/libc-2.23.so"), [["0x7ffff7dcd000", "address-rodata"]]);
+});
+
+test("adversarial L1/W5: r2 hexdump and section rows are not disassembly / backtrace", () => {
+	const px = sample("fp/r2_px.txt", "0x100000460  ff03 02d1 fd7b 07a9 fdc3 0191 2800 0090  .....{......(...");
+	assert.deepEqual(tok(px).filter((l) => /^(mnemonic|address-code)/.test(l.type)), [], fmt(tok(px)));
+	const is = sample("fp/r2_iS.txt", "0   0x00000460  0xb0 0x100000460   0xb0 -r-x 0x0   REGULAR          0.__TEXT.__text");
+	assert.deepEqual(tok(is).filter((l) => /^(symbol|address-code)/.test(l.type)), [], fmt(tok(is)));
+	// the real backtrace pane still matches
+	expectTokens("   1 0xfffff7e184c4 __libc_start_call_main+116", [["0xfffff7e184c4", "address-code"], ["__libc_start_call_main+116", "symbol"]]); // context_arm64.txt
+});
+
+test("adversarial L4/W8: pwntools `[x]` is progress, not an error", () => {
+	const l = sample("fp/python.txt", "[x] Starting local process './vuln'");
+	expectTokens(l, [["[x]", "msg-info"]]);
+	expectTokens(sample("fp/python.txt", "[+] Starting local process './vuln': pid 12345"), [["[+]", "msg-ok"]]);
+});
+
+test("adversarial M3/W2 + H2 (via the gdb base): annotations and data symbols in x/gx rows", () => {
+	const l = sample("samples/pwndbg_9.txt", "0x555555757270:\t0x0000000000000000\t0x0000000000000031  <- fastbins[0x30]の値（アドレス）");
+	assert.notEqual(typeOf(l, "0x0000000000000031"), "address-code");
+	expectTokens(sample("samples/pwndbg_4.txt", "    0x7ffff7dd1000     0x7ffff7dd3000 rw-p     2000 1c4000 /lib/x86_64-linux-gnu/libc-2.23.so"), [["0x7ffff7dd1000", "address-data"]]);
+	expectTokens("{", [["{", "punctuation"]]); // `arena` struct dump opening (context_old.txt)
 });

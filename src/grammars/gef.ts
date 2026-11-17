@@ -22,7 +22,7 @@
 import type { Grammar as PrismGrammar, GrammarValue, TokenObject } from "prismjs";
 
 type Grammar = Record<string, GrammarValue>;
-import { BRANCH_MNEMONIC, instruction, re, SRC } from "./shared.ts";
+import { BRANCH_MNEMONIC, instruction, re, SRC, lineSrc, trimmed } from "./shared.ts";
 
 const H = SRC.hex;
 /** end of line: tolerate trailing blanks and CR */
@@ -83,6 +83,8 @@ const insnHop: Grammar = join({ "gef-hopsym": as("symbol", re(`^${SYM_LOC}`)) },
 
 /** Dereference chain: `0x…  →  0x…  →  "str"` / `→  <sym+off> insn` / `("…"?)`. */
 const chain: Grammar = join({
+	// a value after an arrow that cannot be an address is a number (as in pwndbg/PEDA)
+	"gef-nonaddr": as("number", re(String.raw`(→[\t ]+)${SRC.nonAddr}`), true),
 	"address-code": re(String.raw`\b${H}(?=[\t ]+→[\t ]+(?:${SYM_LOC}[\t ]|[.a-z]))`),
 	"gef-insn": lb(re(String.raw`(→[\t ]+)(?:${SYM_LOC}[\t ]+\S.*|[.a-z].*)$`), { inside: insnHop }),
 	string: [/\("[^\n]*?"\?\)/, /"[^"\n]*"/, /'[^'\n]*'/],
@@ -335,8 +337,8 @@ const configLine: Grammar = {
 	number: /(?<![\w.])-?(?:0x[0-9a-fA-F]+|\d+(?:\.\d+)?)\b(?![\w.])/,
 };
 
-/** Builds `^(?:…)$`-anchored multiline regexes. */
-const line = (body: string, flags = "m") => re(`^(?:${body})${EOL}`, flags);
+/** Builds whole-line multiline regexes; trailing blanks stay outside (see shared `lineSrc`). */
+const line = (body: string, flags = "m") => re(lineSrc(body), flags);
 
 const SEARCH_HIT = String.raw`[\t ]+${H} - ${H}[\t ]+→[\t ]+[^\n]*`;
 function searchBlock(kind: "stack" | "heap"): PatternObj {
@@ -352,6 +354,13 @@ function searchBlock(kind: "stack" | "heap"): PatternObj {
 	};
 }
 
+/** a dereference/telescope row `[path: ]0x…│+0x0008: …` (no line end) */
+const DEREF_ROW = String.raw`(?:[^\n│]*?: | )?${H}│[+-]${H}:[^\n]*`;
+/** a dereference row whose slot is the stack/frame pointer (`… ← $rsp`) */
+const DEREF_SP_ROW = String.raw`(?:[^\n│]*?: | )?${H}│[+-]${H}:[^\n]*←[^\n]*\$(?:[re]?sp|[re]?bp|x29|fp|sp)\b[^\n]*`;
+/** pane banner: current `──── stack ────` and ≤2020 `────[ stack ]────` */
+const banner = (title: string) => String.raw`─* ${title} ─+|─+\[ ${title} \]─*`;
+
 const rules: Grammar = {
 	"gef-prompt": {
 		pattern: line(String.raw`(?:\((?:qemu|remote|rr|core)\) )*gef➤.*`),
@@ -361,7 +370,7 @@ const rules: Grammar = {
 	// ── stack pane: a block anchored on its header, so slot addresses are stack
 	"gef-stack-pane": {
 		pattern: re(
-			String.raw`^─* stack ─+${EOL}(?:\n(?:${H}│[+-]${H}:[^\n]*|${H}[\t ]{2,}${BYTES}[^\n]*))+`,
+			String.raw`^(?:${banner("stack")})${EOL}(?:\n(?:${H}│[+-]${H}:[^\n]*|${H}[\t ]{2,}${BYTES}[^\n]*))+`,
 			"m",
 		),
 		inside: {
@@ -371,8 +380,16 @@ const rules: Grammar = {
 		},
 	},
 
+	// `dereference $sp` without a pane banner: the rows from the `← $sp` slot on are
+	// consecutive slots of the same stack, so all of them are stack (not just the hinted one)
+	"gef-deref-sp": {
+		pattern: re(String.raw`^${DEREF_SP_ROW}(?:\r?\n${DEREF_ROW})*`, "m"),
+		inside: { "gef-deref": { pattern: re(`^${DEREF_ROW}`, "m"), inside: derefStack } },
+	},
+
 	section: [
 		line(String.raw`─* \S.*? ─+`),
+		line(banner(String.raw`[^\]\n]+`)),
 		line(String.raw`─{2,}`),
 		line(String.raw`== Chunk distribution by \w+ ==`),
 	],
@@ -394,6 +411,7 @@ const rules: Grammar = {
 		pattern: line(String.raw`(?:\$\w+[\t ]*: ${H}[\t ]*){2,}`),
 		inside: {
 			"address-stack": lb(re(String.raw`(\$[re]?sp[\t ]*:[\t ]*)${H}`)),
+			"address-code": lb(re(String.raw`(\$(?:[re]?ip|pc|lr)[\t ]*:[\t ]*)${H}`)),
 			register: /\$\w+/,
 			punctuation: /:/,
 			...value,
@@ -403,6 +421,8 @@ const rules: Grammar = {
 		pattern: line(String.raw`\$[a-z][a-z0-9_]*[\t ]*: .*`),
 		inside: join({
 			"address-stack": lb(re(String.raw`(^\$[re]?sp[\t ]*:[\t ]*)${H}`)),
+			// the program counter / link register hold code addresses, whatever they point to
+			"gef-pc": as("address-code", re(String.raw`(^\$(?:[re]?ip|pc|lr)[\t ]*:[\t ]*)${H}`), true),
 			register: /^\$\w+/,
 			punctuation: lb(/(^[\t ]*):/),
 			"gef-unavail": as("comment", /\bno value\b/),
@@ -426,7 +446,8 @@ const rules: Grammar = {
 	// ── code pane (also the `↳` branch-target preview)
 	"gef-code": {
 		pattern: line(
-			String.raw`[●\t ]*(?:[→↳][\t ]*)?${H}(?: [0-9a-fA-F]{2,}(?:\.\.\.)?(?=[\t ]{2}))?(?:[\t ]+${SYM_LOC}[\t ]+|[\t ]{2,})(?:\.?[a-z][\w.]*|\(bad\))(?:[\t ]+.*)?`,
+			// not a hexdump row (r2 `px`: `0x100000460  ff03 02d1 fd7b …`)
+			String.raw`[●\t ]*(?:[→↳][\t ]*)?${H}(?: [0-9a-fA-F]{2,}(?:\.\.\.)?(?=[\t ]{2}))?(?:[\t ]+${SYM_LOC}[\t ]+|[\t ]{2,})(?![0-9a-f]{4}(?:[\t ]+[0-9a-f]{4}){2})(?:\.?[a-z][\w.]*|\(bad\))(?:[\t ]+.*)?`,
 		),
 		inside: codeLine,
 	},
@@ -631,4 +652,13 @@ function withAliases(g: Grammar, memo = new Map<Grammar, Grammar>()): Grammar {
 	return out;
 }
 
-export const gef: PrismGrammar = withAliases(rules);
+/** Every top-level wrapper's inside first splits off trailing blanks (shared `trimmed`). */
+function trimAll(g: Grammar): Grammar {
+	const one = (v: RegExp | PatternObj): RegExp | PatternObj =>
+		v instanceof RegExp || !v.inside ? v : { ...v, inside: trimmed("gef", v.inside) };
+	return Object.fromEntries(
+		Object.entries(g).map(([k, v]) => [k, Array.isArray(v) ? (v as (RegExp | PatternObj)[]).map(one) : one(v as RegExp | PatternObj)]),
+	);
+}
+
+export const gef: PrismGrammar = withAliases(trimAll(rules));

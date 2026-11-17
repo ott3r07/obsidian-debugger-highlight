@@ -80,7 +80,7 @@ test("breakpoint set / hit / thread hit", () => {
 	has(lib, "symbol", "free");
 	has(lib, "path", "/lib/i386-linux-gnu/libc.so.6");
 	const tbp = line(X64, "Temporary breakpoint 2, compute (f=0x5555555571c9 <add>, x=6, y=7) at test.c:13");
-	has(tbp, "address-code", "0x5555555571c9");
+	has(tbp, "address", "0x5555555571c9"); // `<sym>` alone is no code evidence (adversarial H2)
 	has(tbp, "symbol", "<add>");
 });
 
@@ -107,7 +107,7 @@ test("run control, exit, signals, errors, warnings", () => {
 	has(line(A64, "Starting program: /work/test_arm64 "), "path", "/work/test_arm64");
 	has(line(X64, "Continuing."), "keyword", "Continuing.");
 	const v = line(X64, "Value returned is $10 = 13");
-	has(v, "register", "$10");
+	has(v, "offset", "$10"); // value history, not a register (adversarial L6)
 	has(v, "number", "13");
 	const rt = line(X64, "Run till exit from #0  compute (f=0x5555555571c9 <add>, x=6, y=7) at test.c:13");
 	has(rt, "keyword", "Run till exit from");
@@ -251,9 +251,9 @@ test("backtrace frames and wrapped continuations", () => {
 
 test("print values", () => {
 	has(line(X64, "$1 = (void *) 0xffff935a9b00"), "address", "0xffff935a9b00");
-	has(line(X64, "$1 = (void *) 0xffff935a9b00"), "register", "$1");
+	has(line(X64, "$1 = (void *) 0xffff935a9b00"), "offset", "$1");
 	const fp = line(X64, "$4 = (op_fn) 0x5555555571c9 <add>");
-	has(fp, "address-code", "0x5555555571c9");
+	has(fp, "address", "0x5555555571c9"); // typedef cast: no code evidence (adversarial H2)
 	has(fp, "symbol", "<add>");
 	const s = line(X64, '$5 = 0x555555558004 "Hello, pwndbg!"');
 	has(s, "address", "0x555555558004");
@@ -269,7 +269,7 @@ test("print values", () => {
 	const arr = line(X64, "  0x55555555b3f0}");
 	has(arr, "number", "0x55555555b3f0");
 	has(arr, "punctuation", "}");
-	has(line(X64, "        fp = 0x5555555571c9 <add>"), "address-code", "0x5555555571c9");
+	has(line(X64, "        fp = 0x5555555571c9 <add>"), "address", "0x5555555571c9");
 	has(line(X64, "1: x/i $pc"), "command", "x/i $pc");
 });
 
@@ -395,7 +395,7 @@ test("REVIEW §5.5: info breakpoints — widened Type column, address-less watch
 test("REVIEW §5.3/§5.6/C7: GDB self-wrapped bt, bt full, print and info threads", () => {
 	has(line(WV, "#0  many_args (alpha_parameter=4369, beta_parameter=8738, "), "symbol", "many_args");
 	const c = line(WV, "    delta_config=0xaaaaaaac0010 <g_cfg>, epsilon_value=21845, zeta_value=26214) at rv.c:16");
-	has(c, "address-code", "0xaaaaaaac0010");
+	has(c, "address", "0xaaaaaaac0010"); // `<g_cfg>` is a global: data
 	has(c, "path", "rv.c");
 	has(line(WV, "    zeta_value=26214) at rv.c:16"), "number", "26214");
 	has(line(WV, '* 1    Thread 0xfffff7ff7ee0 (LWP 449) "rv_arm64" many_args ('), "symbol", "many_args");
@@ -405,7 +405,7 @@ test("REVIEW §5.3/§5.6/C7: GDB self-wrapped bt, bt full, print and info thread
 	has(p1, "string", '"inn\\000\\000\\000\\000"');
 	const p2 = line(WV, "  ratio = 0.5, cb = 0xaaaaaaaa09d8 <cb>, pad = '\\000' <repeats 39 times>}");
 	has(p2, "number", "0.5");
-	has(p2, "address-code", "0xaaaaaaaa09d8");
+	has(p2, "address", "0xaaaaaaaa09d8");
 	has(line(WV, "      0x0, 0x0, 0x0}}, ratio = 0x3fe0000000000000, cb = 0xaaaaaaaa09d8, pad = {0x0 <repeats 40 times>}}"), "comment", "<repeats 40 times>");
 	has(line(RW, "#0  0x0000003433e00fa0 in _dl_start () from /lib64/ld-linux-x86-64.so.2"), "path", "/lib64/ld-linux-x86-64.so.2");
 });
@@ -457,6 +457,9 @@ test("REVIEW §2.2: identical tokens with TABs expanded, trailing whitespace tri
 			const base = sig(l);
 			assert.equal(sig(expand(l)), base, `tabs: ${l}`);
 			assert.equal(sig(l.trimEnd()), base, `trim: ${l}`);
+			// Markdown hard break / blog copies (adversarial H3)
+			assert.equal(sig(l.trimEnd() + "  "), base, `trailing spaces: ${l}`);
+			assert.equal(sig(l.trimEnd() + "\t"), base, `trailing tab: ${l}`);
 			assert.equal(sig(l + "\r"), base, `crlf: ${l}`);
 			n++;
 		}
@@ -472,4 +475,85 @@ test("perf: 20k-char padded lines each tokenize in < 20 ms", () => {
 		const ms = performance.now() - t0;
 		assert.ok(ms < 20, `${ms.toFixed(1)} ms for ${JSON.stringify(l.slice(0, 20))}…`);
 	}
+});
+
+// ── adversarial pass (research/adversarial/REPORT.md) ──────────────────────
+// Lines are verbatim from research/adversarial/samples/ (checked by `sample()`), unless noted.
+const SAMPLES = new URL("../research/adversarial/samples/", import.meta.url);
+function sample(file: string, text: string): string {
+	const ls = readFileSync(new URL(file, SAMPLES), "utf8").replace(/\r/g, "").split("\n");
+	assert.ok(ls.includes(text), `not in samples/${file}: ${JSON.stringify(text)}`);
+	return text;
+}
+
+test("adversarial H3: trailing blanks keep every token (incl. `$`-anchored inner rules)", () => {
+	const sig = (t: string) => leaves(t).map(([ty, v]) => `${ty}:${v.trim()}`).join(" ");
+	const l = sample("peda_4.txt", "Program terminated with signal SIGSEGV, Segmentation fault.  ");
+	has(l, "signal", "Program terminated with signal SIGSEGV, Segmentation fault.");
+	for (const base of ["Continuing.", "[Inferior 1 (process 1090) killed]", "[Thread debugging using libthread_db enabled]", "Dump of assembler code for function main:"])
+		for (const tail of ["  ", "\t", " \t "]) assert.equal(sig(base + tail), sig(base), JSON.stringify(base + tail));
+});
+
+test("adversarial H2/W1: a `<sym>` alone is no code evidence; data symbols are plain addresses", () => {
+	const vt = sample("gdb_4.txt", "$2 = (Derive) {<Base> = {_vptr.Base = 0x400c68 <vtable for Derive+16>, b1 = 0}, d1 = 0}  虚函数表位置400c68,应该位于rodata,即为全局数据区(静态区)");
+	has(vt, "address", "0x400c68");
+	has(vt, "symbol", "<vtable for Derive+16>");
+	lacks(vt, "symbol", "<Base>"); // L3: base-class label, not a symbol
+	has(sample("gdb_4.txt", "$6 = 0x400c88 <typeinfo for Derive>"), "address", "0x400c88");
+	// from the report (W1): heap x/gx row into main_arena, a FILE* cast
+	has("0x5555555592a0:\t0x00007ffff7dd1b78 <main_arena+88>\t0x00007ffff7dd1b78 <main_arena+88>", "address", "0x00007ffff7dd1b78");
+	lacks("0x5555555592a0:\t0x00007ffff7dd1b78 <main_arena+88>\t0x00007ffff7dd1b78 <main_arena+88>", "address-code", "0x00007ffff7dd1b78");
+	has("$1 = (FILE *) 0x7ffff7f9e780 <_IO_2_1_stdout_>", "address", "0x7ffff7f9e780");
+	has("$2 = 0x404040 <completed.0>", "address", "0x404040");
+	// code evidence: function type / function-pointer cast / `x/i` pc / frame pc
+	has(sample("peda_8.txt", "$1 = {<text variable, no debug info>} 0xb7e51b40 <__libc_system>"), "address-code", "0xb7e51b40");
+	has(line(PEDA, "$10 = {int (int, char **)} 0x401954 <main>"), "address-code", "0x401954");
+	has("$1 = (void (*)(int)) 0x401136 <handler>", "address-code", "0x401136");
+	const bt = sample("gdb_5.txt", "#4  0x77e93d28 in libc_start_main_stage2 (main=0x556b1ac0 <main(int, char**)>, argc=1, argv=0x7f7bf4a4)");
+	has(bt, "address-code", "0x77e93d28");
+	has(bt, "address", "0x556b1ac0");
+});
+
+test("adversarial M3/W2: a user annotation `<- …` is not a symbol", () => {
+	const l = sample("pwndbg_9.txt", "0x555555757270:\t0x0000000000000000\t0x0000000000000031  <- fastbins[0x30]の値（アドレス）");
+	lacks(l, "address-code", "0x0000000000000031");
+	has(l, "number", "0x0000000000000031");
+});
+
+test("adversarial L3/W3: a C++ template frame name is one symbol", () => {
+	// from the report (W3)
+	const l = "#2  0x0000555555555190 in std::vector<int, std::allocator<int> >::operator[] (this=0x7fffffffe2a0, __n=5) at /usr/include/c++/12/bits/stl_vector.h:1123";
+	has(l, "symbol", "std::vector<int, std::allocator<int> >::operator[]");
+	lacks(l, "symbol", "<int, std::allocator<int> >");
+	has(l, "address-code", "0x0000555555555190");
+});
+
+test("adversarial L6: coverage gaps (numeric signal, info functions/address, GDB 17 error, `{`, `$1`)", () => {
+	has(sample("gdb_10.txt", "Program terminated with signal 11, Segmentation fault."), "signal", "Program terminated with signal 11, Segmentation fault.");
+	const sym = sample("gdb_8.txt", 'Symbol "printf" is at 0x77ee5d50 in a file compiled without debugging.');
+	has(sym, "string", '"printf"');
+	has(sym, "address", "0x77ee5d50");
+	const block = [
+		'All functions matching regular expression "printf@plt":',
+		"",
+		"Non-debugging symbols:",
+		"0x00407510  printf@plt",
+		"0x00407580  snprintf@plt",
+	].map((l) => (l ? sample("gdb_8.txt", l) : l)).join("\n");
+	has(block, "keyword", "All functions matching regular expression");
+	has(block, "string", '"printf@plt"');
+	has(block, "keyword", "Non-debugging symbols");
+	has(block, "address-code", "0x00407510"); // `info functions` rows are functions
+	has(block, "symbol", "snprintf@plt");
+	const files = ['All functions matching regular expression "strerror":', "", "File libc/string/strerror.c:", "char *__GI_strerror(int);"]
+		.map((l) => (l ? sample("gdb_8.txt", l) : l)).join("\n");
+	has(files, "path", "libc/string/strerror.c");
+	has(files, "symbol", "__GI_strerror");
+	has(sample("gdb_8.txt", "0x00407510  printf@plt"), "address", "0x00407510"); // kind unknown outside the block
+	has(sample("gdb_8.txt", "Non-debugging symbols:"), "keyword", "Non-debugging symbols");
+	has('❌️ No symbol table is loaded.  Use the "file" command.', "msg-error", "❌️ No symbol table is loaded.  Use the"); // research/pwndbg/review_samples/01_*
+	has("{", "punctuation", "{"); // `set print pretty on` element opening (test/fixtures/pwndbg/context_old.txt)
+	const v = line(X64, "$1 = (void *) 0xffff935a9b00");
+	has(v, "offset", "$1");
+	lacks(v, "register", "$1");
 });

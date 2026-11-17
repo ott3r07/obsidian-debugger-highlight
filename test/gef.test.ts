@@ -491,6 +491,9 @@ test("fixtures: tabs→spaces, trailing-space trim and CRLF do not change tokeni
 		const base = sig(text);
 		assert.equal(sig(text.split("\n").map((l) => expand(l).replace(/[\t ]+$/, "")).join("\n")), base, `${name}: tabs/trim`);
 		assert.equal(sig(text.replace(/\n/g, "\r\n")), base, `${name}: CRLF`);
+		// Markdown hard break / blog copies (adversarial H3)
+		for (const tail of ["  ", "\t"])
+			assert.equal(sig(text.split("\n").map((l) => (l.trim() ? l.replace(/[\t ]+$/, "") + tail : l)).join("\n")), base, `${name}: trailing ${JSON.stringify(tail)}`);
 	}
 });
 
@@ -521,4 +524,57 @@ test("performance: 5,000 lines in < 200 ms, no catastrophic backtracking", () =>
 		Prism.tokenize(e, LANGUAGES.gef!);
 		assert.ok(performance.now() - s < 100, `slow on ${JSON.stringify(e.slice(0, 30))}`);
 	}
+});
+
+// ── adversarial pass (research/adversarial/REPORT.md) ──────────────────────
+// Lines are verbatim from research/adversarial/samples/ and fp/ (checked by `sample()`).
+const ADV = new URL("../research/adversarial/", import.meta.url);
+const advLines = (file: string) => readFileSync(new URL(file, ADV), "utf8").replace(/\r/g, "").split("\n");
+function sample(file: string, text: string): string {
+	assert.ok(advLines(file).includes(text), `not in ${file}: ${JSON.stringify(text)}`);
+	return text;
+}
+
+test("adversarial H3: a trailing-blank gdb error line keeps its tokens", () => {
+	const l = 'Undefined command: "foo".  Try "help".';
+	assert.equal(typesOf(l + "  "), typesOf(l));
+	assert.ok(typesOf(l).includes("msg-error"), typesOf(l));
+});
+
+test("adversarial M4/W6: GEF ≤2020 bracketed banners are sections; the stack pane under them is stack", () => {
+	const ls = advLines("samples/gef_10.txt");
+	const regs = ls.find((l) => l.endsWith("[ registers ]────"))!;
+	expectTokens(regs, [[regs, "section"]]);
+	const at = ls.findIndex((l) => l.endsWith("[ stack ]────"));
+	const pane = ls.slice(at, at + 9).join("\n");
+	const kinds = tok(pane).filter((l) => /^0xffffd7[0-9a-f]{2}$/.test(l.text)).map((l) => l.type);
+	assert.equal(kinds.length, 8);
+	assert.deepEqual([...new Set(kinds)], ["address-stack"]);
+	expectTokens(sample("samples/gef_10.txt", "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[ threads ]────"), [["────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────[ threads ]────", "section"]]);
+});
+
+test("adversarial M4/W7: `dereference` rows from the `← $sp` slot on are all stack", () => {
+	const ls = advLines("samples/gef_15.txt");
+	const text = ls.slice(2, 8).join("\n");
+	assert.ok(ls[2]!.endsWith("← $rsp"));
+	const slots = text.split("\n").map((l) => l.slice(0, 18));
+	for (const s of slots) assert.equal(tok(text).find((l) => l.text === s)?.type, "address-stack", s);
+	// L5: a value after an arrow that cannot be an address is a number
+	expectTokens(sample("samples/gef_15.txt", "0x000000c820051d50│+0x0008: 0x000000c820051db0  →  0x0000000000000000"), [["0x0000000000000000", "number"]]);
+	// a single row without a hint stays a plain address (REVIEW §4)
+	expectTokens("0x0000fffffffffae8│+0x0008: 0x00000001fffffef8", [["0x0000fffffffffae8", "address"]]);
+});
+
+test("adversarial L5: $pc/$lr are code; non-canonical values after an arrow are numbers", () => {
+	expectTokens(sample("samples/gef_2.txt", "$lr   : 0x8002cf7   →  0x81428368  →  0x81428368"), [["0x8002cf7", "address-code"]]);
+	expectTokens(sample("samples/gef_2.txt", "$pc   : 0x8002d44   →  0xe7ca7834  →  0xe7ca7834"), [["$pc", "register"], ["0x8002d44", "address-code"]]);
+	expectTokens(sample("samples/gef_7.txt", "$rbx   : 0x00007f776fe383a0  →  0x8d4c5741fa1e0ff3"), [["0x00007f776fe383a0", "address"], ["0x8d4c5741fa1e0ff3", "number"]]);
+	expectTokens(sample("samples/gef_2.txt", "$r0   : 0x185       →  0x00000185"), [["0x00000185", "number"]]);
+	// still an address when it is one
+	expectTokens(sample("samples/gef_15.txt", "0x000000c820051d50│+0x0008: 0x000000c820051db0  →  0x0000000000000000"), [["0x000000c820051db0", "address"]]);
+});
+
+test("adversarial L1/W5: an r2 hexdump row is not a code-pane line", () => {
+	const px = sample("fp/r2_px.txt", "0x100000460  ff03 02d1 fd7b 07a9 fdc3 0191 2800 0090  .....{......(...");
+	assert.ok(!/mnemonic|address-code/.test(typesOf(px)), typesOf(px));
 });

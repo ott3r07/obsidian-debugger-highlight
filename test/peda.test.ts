@@ -103,9 +103,9 @@ test("chain annotations: every form, left-to-right element kinds", () => {
 		["address-code", "0x4019db"], ["symbol", "<main+214>"], ["mnemonic", "mov"], ["comment", " # 0x4aa0d0 <gcounter>"], ["punctuation", ")"],
 	);
 	// bare instruction
-	has("0008| 0x2aaaab2abbc8 --> 0x2aaaab3181ca (mov    edi,eax)", ["offset", "0008|"], ["address", "0x2aaaab2abbc8"], ["address-code", "0x2aaaab3181ca"], ["mnemonic", "mov"]);
+	has("0008| 0x2aaaab2abbc8 --> 0x2aaaab3181ca (mov    edi,eax)", ["offset", "0008|"], ["address-stack", "0x2aaaab2abbc8"], ["address-code", "0x2aaaab3181ca"], ["mnemonic", "mov"]);
 	// gdb string -> address (kind unknown), value repr -> number
-	has('0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")', ["address", "0x2aaaab2abbb0"], ["string", '"Hello, PEDA highlighter!"']);
+	has('0016| 0x2aaaab2abbb0 ("Hello, PEDA highlighter!")', ["address-stack", "0x2aaaab2abbb0"], ["string", '"Hello, PEDA highlighter!"']);
 	has("RAX: 0xd ('\\r')", ["number", "0xd"], ["string", "'\\r'"]);
 	has("RCX: 0x2000 ('')", ["number", "0x2000"], ["string", "''"]);
 	has("EIP: 0x41414641 ('AFAA')", ["number", "0x41414641"], ["string", "'AFAA'"]);
@@ -245,4 +245,33 @@ test("tokenizes a 5,000-line paste in < 200 ms", () => {
 	Prism.tokenize(text, peda);
 	const ms = performance.now() - t0;
 	assert.ok(ms < 200, `${ms.toFixed(1)} ms`);
+});
+
+// ── adversarial pass (research/adversarial/REPORT.md) ──────────────────────
+// Lines are verbatim from research/adversarial/samples/ (checked by `sample()`).
+const SAMPLES = new URL("../research/adversarial/samples/", import.meta.url);
+function sample(file: string, text: string): string {
+	const ls = readFileSync(new URL(file, SAMPLES), "utf8").replace(/\r/g, "").split("\n");
+	assert.ok(ls.includes(text), `not in samples/${file}: ${JSON.stringify(text)}`);
+	return text;
+}
+
+test("adversarial H3: trailing blanks (Markdown hard break) never change the tokens", () => {
+	const sig = (l: string) => JSON.stringify(leaves(l).map(([t, x]) => [t, x.trim()]));
+	for (const l of lines((l) => l.trimEnd()))
+		for (const tail of ["  ", "\t"]) assert.equal(sig(l + tail), sig(l), JSON.stringify(l + tail));
+	has("CANARY    : ENABLED  ", ["enabled", "ENABLED"]); // commands.txt + 2 blanks
+});
+
+test("adversarial L5: RSP/ESP values and stack-pane slots are stack; non-addresses after `-->` are numbers", () => {
+	has(sample("peda_1.txt", "RSP: 0x7fffffffe028 --> 0x7ffff7de80b3 (<__libc_start_main+243>:\tmov    edi,eax)"),
+		["register", "RSP"], ["address-stack", "0x7fffffffe028"], ["address-code", "0x7ffff7de80b3"], ["mnemonic", "mov"]);
+	has(sample("peda_1.txt", "RSP: 0x7fffffffe000 --> 0x0 "), ["address-stack", "0x7fffffffe000"], ["number", "0x0"]);
+	has(sample("peda_1.txt", "0000| 0x7fffffffe028 --> 0x7ffff7de80b3 (<__libc_start_main+243>:\tmov    edi,eax)"),
+		["offset", "0000|"], ["address-stack", "0x7fffffffe028"], ["address-code", "0x7ffff7de80b3"]);
+	has(sample("peda_1.txt", "0048| 0x7fffffffe058 --> 0x4933ce13230737fe "), ["address-stack", "0x7fffffffe058"], ["number", "0x4933ce13230737fe"]);
+	has(sample("peda_1.txt", "0016| 0x7fffffffe038 --> 0x7fffffffe118 --> 0x7fffffffe425 (\"/home/mjh/hack/char_array2\")"),
+		["address-stack", "0x7fffffffe038"], ["address", "0x7fffffffe118"], ["address", "0x7fffffffe425"], ["string", '"/home/mjh/hack/char_array2"']);
+	// other registers are not inferred to be stack
+	has(sample("peda_1.txt", "R13: 0x7fffffffe110 --> 0x1 "), ["address", "0x7fffffffe110"], ["number", "0x1"]);
 });

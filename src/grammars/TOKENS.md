@@ -17,7 +17,7 @@ Obsidian styling targets the `dbg-*`-free type names inside `.dbg-hl`.
 | `address` | `number` | an address whose memory kind is unknown |
 | `address-stack` | `number` | address known (structurally) to be stack |
 | `address-heap` | `number` | address known to be heap |
-| `address-code` | `number` | address known to be code (followed by an instruction, `<sym+off>`, …) |
+| `address-code` | `number` | address known to be code: disasm / `x/i` rows, frame pc, PC/LR registers, function type or function-pointer cast (`{void (void)} 0x…`), code-pane locations, branch targets. A `<sym>` after an address is NOT enough (`<main_arena+88>`, `<vtable for X+16>` are data) |
 | `address-data` | `number` | address known to be writable data |
 | `address-rodata` | `number` | address known to be read-only data |
 | `number` | `number` | non-address numeric values, immediates, sizes, counts |
@@ -28,7 +28,7 @@ Obsidian styling targets the `dbg-*`-free type names inside `.dbg-hl`.
 | `arrow` | `operator` | pointer-chain arrows `—▸`, `◂—`, `→`, `-->`, `<-`, `↳`, `\|->` |
 | `string` | `string` | `"…"` / `'…'` decoded strings |
 | `comment` | `comment` | `; …` / `# …` annotations, filler |
-| `offset` | `comment` | stack index/offset columns: `00:0000│`, `0000\|`, `+0x0008` |
+| `offset` | `comment` | stack index/offset columns: `00:0000│`, `0000\|`, `+0x0008`; gdb value-history labels `$1` |
 | `taken` | `important` | `TAKEN`, `✔`, `JUMP is taken` |
 | `not-taken` | `comment` | `NOT taken`, `✘`, `JUMP is NOT taken` |
 | `perm` | `keyword` | `rwxp`, `r-xp`, `r--p` |
@@ -48,8 +48,11 @@ Obsidian styling targets the `dbg-*`-free type names inside `.dbg-hl`.
 Rules:
 - Line-based structure: use the `m` flag and `^`/`$`; accept `[\t ]+` wherever
   the tool emits a tab (pastes often convert tabs to spaces), never require
-  trailing whitespace, and tolerate `\r`.
+  trailing whitespace, and tolerate `\r`. Build whole-line wrappers with
+  `lineSrc()` + `trimmed()` (shared.ts) so trailing blanks never change tokens.
 - Never depend on fixed column widths or banner lengths (terminal width varies).
 - When the memory kind of an address can't be known from the text, use plain
   `address`. Prefer a neutral token over a confident wrong one.
+  Hex that cannot be an address (below 0x10000, or non-canonical 64-bit such as
+  `0x8d4c5741fa1e0ff3`) after a pointer-chain arrow is a `number` in every tool.
 - Unknown lines must pass through untouched (no catch-all that colours prose).

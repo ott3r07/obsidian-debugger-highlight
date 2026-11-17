@@ -29,12 +29,12 @@
  * else (`('…')` value repr, or nothing) it is a `number`.
  */
 import type { Grammar, GrammarValue, TokenObject } from "prismjs";
-import { SRC, instruction } from "./shared.ts";
+import { SRC, lineSrc, trimmed, instruction } from "./shared.ts";
 
 const H = String.raw`0x[0-9a-fA-F]+`;
 const W = String.raw`[\t ]`;
-/** whole-line pattern (multiline), tolerating trailing whitespace */
-const L = (src: string) => new RegExp(String.raw`^(?:${src})${W}*$`, "m");
+/** whole-line pattern (multiline); trailing blanks stay outside (see shared `lineSrc`) */
+const L = (src: string) => new RegExp(lineSrc(src), "m");
 /** inner pattern (content of a single line, no `m` flag) */
 const I = (src: string, flags = "") => new RegExp(src, flags);
 
@@ -113,6 +113,8 @@ const annOther: Grammar = {
 };
 
 const refPart = (type: string, alias: string, ann: Grammar): Grammar => ({
+	// a value that cannot be an address is a number whatever its annotation (as in pwndbg)
+	"peda-nonaddr": { pattern: I(`^${SRC.nonAddr}`), inside: { number: { pattern: /[^]+/, alias: "number" } } },
 	[type]: { pattern: I(`^${H}`), alias },
 	"peda-annotation": { pattern: /\([^]*\)$/, inside: ann },
 });
@@ -136,6 +138,23 @@ const chain: Grammar = {
 	number: { pattern: I(H), alias: "number" },
 	"msg-error": { pattern: /Cannot access memory address/, alias: "deleted" },
 };
+
+/**
+ * Chain whose first element is known to be a stack address (the `RSP:`/`ESP:`
+ * value, a `0000| 0x…` stack-pane slot). `lead` is a lookbehind source for
+ * what precedes that element.
+ */
+const stackChain = (lead: string): Grammar => ({
+	"peda-sp": {
+		pattern: I(String.raw`(${lead})${H}(?:${W}+\(.*\))?(?=${W}*$|${W}+-->)`),
+		lookbehind: true,
+		inside: {
+			"address-stack": { pattern: I(`^${H}`), alias: "number" },
+			"peda-annotation": { pattern: /\([^]*\)$/, inside: annOther },
+		},
+	},
+	...chain,
+});
 
 /** chain body as a regex fragment, for line rules */
 const CHAIN = String.raw`${H}(?:${W}+-->${W}+${H})*(?:${W}+\(.*\))?`;
@@ -168,7 +187,7 @@ const DIS_PREFIX = String.raw`(?:=>${W}*|${W}?\|->(?:=>)?${W}*|${W}?\|${W}+|${W}
 const DIS_TAIL = String.raw`${W}*:${W}+(?=[a-zA-Z])\S.*`;
 
 const rules: TokenObject[] = [];
-const line = (pattern: string, inside: Grammar) => rules.push({ pattern: L(pattern), inside });
+const line = (pattern: string, inside: Grammar) => rules.push({ pattern: L(pattern), inside: trimmed("peda", inside) });
 
 // prompt + typed command
 line(String.raw`gdb-peda\$(?:${W}.*)?`, {
@@ -192,13 +211,19 @@ line(String.raw`EFLAGS:${W}+${H}${W}+\([A-Za-z ]*\)`, {
 	"flag-clear": { pattern: /\b[a-z]{2,}\b/, alias: "comment" },
 	punctuation: /[():]/,
 });
+line(String.raw`[RE]SP${W}*:${W}+${CHAIN_OR_ERR}`, {
+	...stackChain(String.raw`^[RE]SP${W}*:${W}+`),
+	register: { pattern: /^[A-Z0-9]+/, alias: "variable" },
+	punctuation: /:/,
+});
 line(String.raw`${REG}${W}*:${W}+${CHAIN_OR_ERR}`, {
 	...chain,
 	register: { pattern: /^[A-Z0-9]+/, alias: "variable" },
 	punctuation: /:/,
 });
+// stack pane / `telescope` rows: the slot address is stack
 line(String.raw`\d{4,}\|${W}*${CHAIN_OR_ERR}`, {
-	...chain,
+	...stackChain(String.raw`^\d{4,}\|${W}*`),
 	offset: { pattern: /^\d+\|/, alias: "comment" },
 });
 line(String.raw`arg\[\d+\]:${W}+${CHAIN}`, {

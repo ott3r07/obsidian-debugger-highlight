@@ -16,16 +16,16 @@
  * research/peda/REVIEW.md §1.7/§3 and research/peda/review_samples/.
  */
 import type { Grammar, GrammarValue, TokenObject } from "prismjs";
-import { SRC, re, tokens, asmInstruction } from "./shared.ts";
+import { SRC, lineSrc, re, trimmed, tokens, asmInstruction } from "./shared.ts";
 
 const H = SRC.hex;
 const W = SRC.ws;
 const SYM = SRC.angleSym;
 
-/** whole-line wrapper regex */
-const line = (src: string): RegExp => re(`^(?:${src})$`, "m");
+/** whole-line wrapper regex; trailing blanks stay outside it (see shared `lineSrc`) */
+const line = (src: string): RegExp => re(lineSrc(src), "m");
 /** wrapper token with an inside grammar */
-const wrap = (src: string, inside: Grammar): GrammarValue => ({ pattern: line(src), inside });
+const wrap = (src: string, inside: Grammar): GrammarValue => ({ pattern: line(src), inside: trimmed("gdb", inside) });
 
 /** function name in a frame: `main`, `std::foo<int>::bar`, `??` */
 const FN = String.raw`(?:(?:[\w$~]+::)*operator(?: [A-Za-z_]\w*(?:\[\])?| ?[^\s\w(]+)|[A-Za-z_~$][\w$:~.@<>]*|\?\?)`;
@@ -41,19 +41,29 @@ const rest = (type: string, alias: string): Grammar => ({ [type]: { pattern: /\S
 /**
  * A GDB value as printed by `print`, `info locals`, `x/s`, `Value returned`…:
  * `(op_fn) 0x… <add>`, `{a = 1, b = 0x…}`, `"str", '\000' <repeats 45 times>`.
- * An address is `address-code` only when followed by `<sym>`; a pointer
- * (after a `(T *)` cast or before a string) is `address`; other hex is `number`.
+ * An address is `address-code` only with code evidence: a function type
+ * `{int (int, char **)} 0x…` / `{<text variable, no debug info>} 0x…` or a
+ * function-pointer cast `(void (*)(int)) 0x…`.
+ * A `<sym>` alone is no evidence (`<main_arena+88>`, `<_IO_2_1_stdout_>`,
+ * `<vtable for X+16>` are data), so a pointer (after a `(T *)` cast, before
+ * `<sym>` or before a string) is `address`; other hex is `number`.
  */
 export const gdbValue: Grammar = {
-	// address rules look ahead at `<sym>` / a string, so they run before those
-	"address-code": tokens.addressBeforeSym,
+	// address rules look behind at a cast / ahead at `<sym>` or a string, so they run first
+	"address-code": [
+		{ pattern: re(`(\\{(?:[^{}\\n]*\\([^{}\\n]*\\)|<text variable, no debug info>)\\}${W}*)${H}`), lookbehind: true, alias: "number" },
+		{ pattern: re(`(\\([^()\\n]*\\(\\*\\)${W}*\\([^()\\n]*\\)\\)${W}*)${H}`), lookbehind: true, alias: "number" },
+	],
 	address: [
 		{ pattern: re(`(\\*\\)${W}?)${H}`), lookbehind: true, alias: "number" },
+		tokens.addressBeforeSym,
 		{ pattern: re(`${H}(?=${W}+["'])`), alias: "number" },
 	],
 	string: tokens.string,
 	"msg-error": { pattern: /<error: [^<>\n]*>/, alias: "deleted" },
 	comment: tokens.gdbPlaceholder,
+	// a base-class subobject `{<Base> = {…}, …}` is a field label, not a symbol (unstyled)
+	"gdb-base": { pattern: /(?<=\{|, )<(?:[^<>\n]|<[^<>\n]*>)+>(?= = )/ },
 	symbol: tokens.symbol,
 	number: num,
 	punctuation: /[{}[\],]/,
@@ -72,17 +82,21 @@ export const gdbFrame: Grammar = {
 		{ pattern: /(\b(?:at|from)[\t ]+)\S+?(?=:\d+[\t ]*$)/, lookbehind: true, alias: "string" },
 		{ pattern: /(\bfrom[\t ]+)\S+(?=[\t ]*$)/, lookbehind: true, alias: "string" },
 	],
-	"address-code": [{ pattern: re(`\\b${H}(?=${W}+in\\b)`), alias: "number" }, tokens.addressBeforeSym],
+	"address-code": { pattern: re(`\\b${H}(?=${W}+in\\b)`), alias: "number" },
+	// an argument pointing at `<sym>` (data or code: `cfg=0x… <g_cfg>`) or a string is an
+	// address; other hex args stay `number` (under pwndbg's output-radix 16 even `argc=0x1`
+	// is hex, so hex alone does not mean "address")
+	address: [tokens.addressBeforeSym, { pattern: re(`\\b${H}(?=${W}+["'])`), alias: "number" }],
 	symbol: [
-		tokens.symbol,
-		// after the pc token the fragment starts with ` in `; the name may be a demangled
+		// the frame's function name first, so C++ template arguments in it are not taken for
+		// a `<sym>`: `in std::vector<int, std::allocator<int> >::operator[] (this=…)`.
+		// After the pc token the fragment starts with ` in `; the name may be a demangled
 		// C++ signature with its own parens: `in CheckPassword(Napi::CallbackInfo const&) ()`
 		{ pattern: /(^ in )[^\s(].*?(?= \()/, lookbehind: true, alias: "function" },
+		{ pattern: /(^#\d+[\t ]+)(?!0x)[A-Za-z_~$][^\s(]*(?: [^\s(]+)*?(?= \()/, lookbehind: true, alias: "function" },
 		{ pattern: re(`(?<![\\w$.:])${FN}(?=[\\t ]\\()`), alias: "function" },
+		tokens.symbol,
 	],
-	// a pointer before a string is an address; other hex args stay `number` (under pwndbg's
-	// output-radix 16 even `argc=0x1` is hex, so hex alone does not mean "address")
-	address: { pattern: re(`\\b${H}(?=${W}+["'])`), alias: "number" },
 	number: { pattern: /#\d+\b|-?\b(?:0x[0-9a-fA-F]+|\d+)\b/, alias: "number" },
 	punctuation: /[(),]/,
 };
@@ -177,11 +191,13 @@ export const gdb: Grammar = {
 	// x/FMT data rows, and `=> 0x0:\tCannot access memory at address 0x0`
 	"gdb-examine": wrap(String.raw`(?:=>${W}+)?${H}(?:${W}+${SYM})?${W}*:${W}+(?:0x|-?\d|["'<{]|Cannot access memory).*`, {
 		// the row label: the pc under `=>` (x/i) is code, a data row label is a plain address
-		"address-code": [
-			{ pattern: re(`(^=>${W}+)${H}`), lookbehind: true, alias: "number" },
-			{ pattern: re(`(?<=[\\t ,{])${H}(?=${W}+<(?!repeats \\d))`), alias: "number" },
+		// a value followed by `<sym>` may be code or data (`<main_arena+88>`): plain address
+		"address-code": { pattern: re(`(^=>${W}+)${H}`), lookbehind: true, alias: "number" },
+		address: [
+			{ pattern: re(`^${H}`), alias: "number" },
+			{ pattern: re(`(at address )${H}`), lookbehind: true, alias: "number" },
+			{ pattern: re(`(?<=[\\t ,{])${H}(?=${W}+(?!<[-=])${SYM})`), alias: "number" },
 		],
-		address: [{ pattern: re(`^${H}`), alias: "number" }, { pattern: re(`(at address )${H}`), lookbehind: true, alias: "number" }],
 		current: { pattern: /^=>/, alias: "important" },
 		"msg-error": [{ pattern: /Cannot access memory at address/, alias: "deleted" }, { pattern: /<error: [^<>\n]*>/, alias: "deleted" }],
 		string: tokens.string,
@@ -192,16 +208,16 @@ export const gdb: Grammar = {
 	}),
 
 	// ── info registers ────────────────────────────────────────────────────
-	"gdb-reg-pc": wrap(String.raw`(?:[re]?ip|pc)${W}+${H}${W}+${H}(?:${W}+${SYM})?${W}*`, {
+	"gdb-reg-pc": wrap(String.raw`(?:[re]?ip|pc)${W}+${H}${W}+${H}(?:${W}+${SYM})?`, {
 		register: regName,
 		"address-code": addrCode,
 		symbol: tokens.symbol,
 	}),
-	"gdb-reg-sp": wrap(String.raw`[re]?sp${W}+${H}${W}+${H}${W}*`, {
+	"gdb-reg-sp": wrap(String.raw`[re]?sp${W}+${H}${W}+${H}`, {
 		register: regName,
 		"address-stack": { pattern: re(H), alias: "number" },
 	}),
-	"gdb-reg-flags": wrap(String.raw`${REGNAME}${W}+${H}${W}+\[[^\]\n]*\]${W}*`, {
+	"gdb-reg-flags": wrap(String.raw`${REGNAME}${W}+${H}${W}+\[[^\]\n]*\]`, {
 		register: regName,
 		"flag-set": { pattern: /\b[A-Z][A-Z0-9_]*\b(?!=)/, alias: "important" },
 		number: [{ pattern: re(H), alias: "number" }, { pattern: /(=)\w+/, lookbehind: true, alias: "number" }],
@@ -209,17 +225,17 @@ export const gdb: Grammar = {
 	}),
 	// pointer-typed registers print their natural column in hex; under pwndbg (output-radix 16)
 	// EVERY register does, so only these names (or a `<sym>` suffix) make the value an address
-	"gdb-reg-ptr": wrap(String.raw`(?:[re]?bp|fp|tpidr\w*)${W}+${H}${W}+${H}${W}*|${REGNAME}${W}+${H}${W}+${H}${W}+${SYM}${W}*`, {
+	"gdb-reg-ptr": wrap(String.raw`(?:[re]?bp|fp|tpidr\w*)${W}+${H}${W}+${H}|${REGNAME}${W}+${H}${W}+${H}${W}+${SYM}`, {
 		register: regName,
 		"address-code": tokens.addressBeforeSym,
 		symbol: tokens.symbol,
 		address: addr,
 	}),
-	"gdb-reg-val": wrap(String.raw`${REGNAME}${W}+${H}${W}+(?:${NATURAL}|${H})${W}*`, {
+	"gdb-reg-val": wrap(String.raw`${REGNAME}${W}+${H}${W}+(?:${NATURAL}|${H})`, {
 		register: regName,
 		number: num,
 	}),
-	"gdb-reg-x87": wrap(String.raw`st[0-7]${W}+\S+${W}+\(raw ${H}\)${W}*`, {
+	"gdb-reg-x87": wrap(String.raw`st[0-7]${W}+\S+${W}+\(raw ${H}\)`, {
 		register: regName,
 		number: num,
 		punctuation: /[()]/,
@@ -245,7 +261,7 @@ export const gdb: Grammar = {
 		rest("msg-warn", "important"),
 	),
 	"gdb-signal": wrap(
-		String.raw`(?:Program|Thread \d+(?:\.\d+)?(?: "[^"\n]*")?) (?:received|terminated with) signal SIG[A-Z0-9+-]+(?:, .*)?|The program no longer exists\.`,
+		String.raw`(?:Program|Thread \d+(?:\.\d+)?(?: "[^"\n]*")?) (?:received|terminated with) signal (?:SIG[A-Z0-9+-]+|\d+)(?:, .*)?|The program no longer exists\.`,
 		rest("signal", "important"),
 	),
 	"gdb-exit": wrap(String.raw`\[Inferior \d+ \(process \d+\) (?:exited normally|exited with code \d+|killed|detached)\]`, {
@@ -263,7 +279,7 @@ export const gdb: Grammar = {
 	"gdb-run": wrap(String.raw`Continuing\.|Starting program: .*|Run till exit from .*|Value returned is .*`, {
 		// lookbehind-anchored rules first, while the line is still one fragment
 		"gdb-run-value": { pattern: /(^Value returned is \$\d+ = ).+/, lookbehind: true, inside: gdbValue },
-		register: { pattern: /(^Value returned is )\$\d+/, lookbehind: true, alias: "variable" },
+		offset: { pattern: /(^Value returned is )\$\d+/, lookbehind: true, alias: "comment" },
 		path: { pattern: /(^Starting program: )\S+/, lookbehind: true, alias: "string" },
 		"gdb-run-frame": { pattern: /(^Run till exit from ).+/, lookbehind: true, inside: gdbFrame },
 		keyword: kw(String.raw`^(?:Continuing\.|Starting program:|Run till exit from|Value returned is)`),
@@ -282,18 +298,19 @@ export const gdb: Grammar = {
 	"gdb-bt": wrap(String.raw`#\d+${W}+.*`, gdbFrame),
 	"gdb-frame-pc": wrap(String.raw`${H} in .*`, gdbFrame),
 	"gdb-frame": wrap(
-		String.raw`${FN} \(.*\)${W}+(?:at \S+:\d+|from \S+)${W}*|${FN} \([\w$.@]+=.*|${FN} \(\)`,
+		String.raw`${FN} \(.*\)${W}+(?:at \S+:\d+|from \S+)|${FN} \([\w$.@]+=.*|${FN} \(\)`,
 		gdbFrame,
 	),
 	// GDB wraps long frame lines with a 4-space indent
-	"gdb-frame-cont": wrap(String.raw`${W}{2,}(?:at \S+:\d+|from \S+)${W}*| {4}[\w$.@]+=(?! ).*`, gdbFrame),
+	"gdb-frame-cont": wrap(String.raw`${W}{2,}(?:at \S+:\d+|from \S+)| {4}[\w$.@]+=(?! ).*`, gdbFrame),
 	// `bt` pasted through Markdown loses the leading `#`: `10 0x… in f (…) at …`
 	"gdb-bt-nohash": wrap(String.raw`\d+${W}+(?:${H} in .*|${FN} \(.*\) at \S+:\d+${W}*)`, gdbFrame),
 	"gdb-bt-stop": wrap(String.raw`Backtrace stopped: .*`, rest("msg-warn", "important")),
 
 	// ── print / locals / values ───────────────────────────────────────────
 	"gdb-value": wrap(String.raw`\$\d+ = .*`, {
-		register: { pattern: /^\$\d+/, alias: "variable" },
+		// a value-history label, not a register: an index column like a frame's `#1`
+		offset: { pattern: /^\$\d+/, alias: "comment" },
 		...gdbValue,
 	}),
 	"gdb-ptype": wrap(String.raw`type = .*`, { keyword: kw(String.raw`^type(?= =)`), punctuation: /[{}]/ }),
@@ -304,7 +321,53 @@ export const gdb: Grammar = {
 	}),
 
 	// ── info tables ───────────────────────────────────────────────────────
-	"gdb-bp-table-head": wrap(String.raw`Num${W}+Type${W}+Disp${W}+Enb${W}+Address${W}+What${W}*`, {
+	// `info functions [regex]`: a block, so its address rows are known to be functions
+	"gdb-info-functions": {
+		pattern: re(
+			String.raw`^All (?:defined functions|functions matching regular expression .*):[\t ]*$(?:\r?\n(?:[\t ]*|File \S.*:|\d+:\t.*|Non-debugging symbols:|${H}${W}+\S.*|[A-Za-z_][^\n]*\);)[\t ]*$)*`,
+			"m",
+		),
+		inside: {
+			"gdb-info-head": {
+				pattern: /^(?:All (?:defined functions|functions matching regular expression .*):|Non-debugging symbols:)(?=[\t ]*$)/m,
+				inside: { keyword: kw(String.raw`^[^"]+?(?=[\t ]*(?:"|:$))`), string: tokens.string },
+			},
+			"gdb-info-file": {
+				pattern: /^File \S.*:(?=[\t ]*$)/m,
+				inside: { path: { pattern: /(^File )\S.*(?=:$)/, lookbehind: true, alias: "string" }, keyword: kw(String.raw`^File\b`) },
+			},
+			"gdb-info-fn": {
+				pattern: re(String.raw`^${H}${W}+\S(?:.*\S)?`, "m"),
+				inside: { "address-code": { pattern: re(`^${H}`), alias: "number" }, symbol: { pattern: /\S(?:.*\S)?/, alias: "function" } },
+			},
+			"gdb-info-decl": {
+				pattern: /^(?:\d+:\t)?[A-Za-z_].*\);(?=[\t ]*$)/m,
+				inside: {
+					number: { pattern: /^\d+(?=:\t)/, alias: "number" },
+					symbol: { pattern: /[\w$~:]+(?=\()/, alias: "function" },
+				},
+			},
+		},
+	},
+	// `info variables` / `info types` headers; `Non-debugging symbols:` outside the block above
+	"gdb-info-head": wrap(
+		String.raw`All (?:defined (?:variables|types)|(?:variables|types) matching regular expression .*):|Non-debugging symbols:`,
+		{ keyword: kw(String.raw`^[^"]+?(?=[\t ]*(?:"|:$))`), string: tokens.string },
+	),
+	// `Non-debugging symbols:` row outside an `info functions` block (`info variables`, a
+	// partial paste): function or data, so a plain address
+	"gdb-info-sym-row": wrap(String.raw`${H}${W}{2,}[A-Za-z_.$][\w.@$:<>~]*`, {
+		address: { pattern: re(`^${H}`), alias: "number" },
+		symbol: { pattern: /\S+$/, alias: "function" },
+	}),
+	// `info address`: a function is code; other storage is a plain address
+	"gdb-info-address": wrap(String.raw`Symbol ".*" is .*\.`, {
+		string: tokens.string,
+		"address-code": { pattern: re(`(\\ba function at address )${H}`), lookbehind: true, alias: "number" },
+		address: addr,
+		keyword: kw(String.raw`^Symbol\b`),
+	}),
+	"gdb-bp-table-head": wrap(String.raw`Num${W}+Type${W}+Disp${W}+Enb${W}+Address${W}+What`, {
 		keyword: kw(String.raw`\S+`),
 	}),
 	"gdb-bp-table-row": wrap(
@@ -327,11 +390,11 @@ export const gdb: Grammar = {
 		},
 		number: /\b(?:0x[0-9a-fA-F]+|\d+)\b/,
 	}),
-	"gdb-map-head": wrap(String.raw`${W}*Start Addr${W}+End Addr${W}+Size${W}+Offset${W}+(?:Perms${W}+)?objfile${W}*`, {
+	"gdb-map-head": wrap(String.raw`${W}*Start Addr${W}+End Addr${W}+Size${W}+Offset${W}+(?:Perms${W}+)?objfile`, {
 		keyword: kw(String.raw`\S+(?: Addr)?`),
 	}),
 	"gdb-map-row": wrap(String.raw`${W}*${H}${W}+${H}${W}+${H}${W}+${H}(?:${W}+[r-][w-][x-][ps-])?(?:${W}+.*)?`, mappingRow),
-	"gdb-solib-head": wrap(String.raw`From${W}+To${W}+Syms Read${W}+Shared Object Library${W}*`, {
+	"gdb-solib-head": wrap(String.raw`From${W}+To${W}+Syms Read${W}+Shared Object Library`, {
 		keyword: kw(String.raw`Syms Read|Shared Object Library|\S+`),
 	}),
 	"gdb-solib-row": wrap(String.raw`(?:${H}${W}+${H}${W}+|${W}+)(?:Yes|No)(?: \(\*\))?${W}+\S.*`, {
@@ -340,7 +403,7 @@ export const gdb: Grammar = {
 		comment: { pattern: /\(\*\)/, alias: "comment" },
 		path: { pattern: /\S.*?(?=[\t ]*$)/, alias: "string" },
 	}),
-	"gdb-inferior-head": wrap(String.raw`${W}*Num${W}+Description${W}+(?:Connection${W}+)?Executable${W}*`, {
+	"gdb-inferior-head": wrap(String.raw`${W}*Num${W}+Description${W}+(?:Connection${W}+)?Executable`, {
 		keyword: kw(String.raw`\S+`),
 	}),
 	"gdb-inferior-row": wrap(String.raw`${W}*(?:\*${W}+)?\d+${W}+(?:process \d+|<null>)(?:${W}+.*)?`, {
@@ -351,7 +414,7 @@ export const gdb: Grammar = {
 		comment: { pattern: /\([^()\n]*\)/, alias: "comment" },
 	}),
 
-	"gdb-thread-head": wrap(String.raw`${W}*Id${W}+Target Id${W}+Frame${W}*`, { keyword: kw(String.raw`Target Id|\S+`) }),
+	"gdb-thread-head": wrap(String.raw`${W}*Id${W}+Target Id${W}+Frame`, { keyword: kw(String.raw`Target Id|\S+`) }),
 	"gdb-thread-row": wrap(String.raw`${W}*(?:\*${W}+)?\d+${W}+(?:Thread|process|LWP|Remote target)\b.*`, {
 		current: { pattern: /^[\t ]*\*/, alias: "important" },
 		keyword: kw(String.raw`\b(?:Thread|LWP|process)\b`),
@@ -397,6 +460,8 @@ export const gdb: Grammar = {
 	}),
 	"gdb-error": wrap(
 		[
+			// GDB 17 prefixes errors with an emoji: `❌️ No symbol table is loaded.`
+			String.raw`❌️?${W}*\S.*`,
 			String.raw`Cannot access memory at address ${H}`,
 			String.raw`No symbol ".*" in current context\.`,
 			String.raw`No symbol table is loaded\..*`,
@@ -480,7 +545,7 @@ export const gdb: Grammar = {
 		"address-code": { pattern: re(`^${H}`), alias: "number" },
 		number: { pattern: /\b\d+\b/, alias: "number" },
 	}),
-	"gdb-source": wrap(String.raw`\d+${SRCSEP}.*|\d+${W}*`, {
+	"gdb-source": wrap(String.raw`\d+${SRCSEP}.*|\d+`, {
 		number: { pattern: /^\d+/, alias: "number" },
 		...sourceText,
 	}),
@@ -491,5 +556,6 @@ export const gdb: Grammar = {
 
 	// ── locals / fields / wrapped values (last: the broadest shapes) ──────
 	"gdb-local": wrap(String.raw`${W}*[A-Za-z_][\w.]*(?:\[\d+\])? = .*`, gdbValue),
-	"gdb-value-cont": wrap(String.raw`${W}+(?:${H}|-?\d|["'{]).*[,}]${W}*|${W}*\}[,;]?${W}*`, gdbValue),
+	// also a bare `{` (an element opening under `set print pretty on`)
+	"gdb-value-cont": wrap(String.raw`${W}+(?:${H}|-?\d|["'{]).*[,}]|${W}*\}[,;]?|${W}*\{`, gdbValue),
 };

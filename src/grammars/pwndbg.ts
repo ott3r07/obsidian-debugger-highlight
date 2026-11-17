@@ -39,7 +39,7 @@
  *     pwndbg could not dereference is a `number`.
  */
 import type { Grammar as PrismGrammar, GrammarValue, TokenObject } from "prismjs";
-import { BRANCH_MNEMONIC, REGISTER_NAMES, SRC, instruction, re } from "./shared.ts";
+import { BRANCH_MNEMONIC, REGISTER_NAMES, SRC, lineSrc, trimmed, instruction, re } from "./shared.ts";
 
 type Grammar = Record<string, GrammarValue>;
 type PatternObj = TokenObject;
@@ -49,8 +49,8 @@ const W = String.raw`[\t ]`;
 const SYM = SRC.angleSym;
 /** end of a whole line: trailing blanks allowed (`$` with `m` also stops before `\r`) */
 const EOL = String.raw`[\t ]*$`;
-/** whole-line pattern */
-const line = (body: string) => re(`^(?:${body})${EOL}`, "m");
+/** whole-line pattern; trailing blanks stay outside (see shared `lineSrc`) */
+const line = (body: string) => re(lineSrc(body), "m");
 
 const lb = (pattern: RegExp, extra: Partial<PatternObj> = {}): PatternObj => ({ pattern, lookbehind: true, ...extra });
 /** A structural wrapper whose whole match is one leaf token of `type` (to use a type at two rule positions). */
@@ -193,8 +193,12 @@ const DIS_HEAD = [
 	String.raw`${W}+(?:[${ART_CH}][${ART_CH} ]*?${W}+)?`, // branch-visualization column
 	String.raw`(?:[✔✘?]${W}+)?`,
 ].join("");
-/** a word that makes `0x… word …` a GDB frame/info line, not an instruction */
-const NOT_MNEM = String.raw`(?!(?:in|is|at|from|to)\b)`;
+/**
+ * a word that makes `0x… word …` a GDB frame/info line, not an instruction; and
+ * not a hexdump row (r2 `px`: `0x100000460  ff03 02d1 fd7b …`), whose first
+ * 4-hex-digit group would otherwise pass for a mnemonic
+ */
+const NOT_MNEM = String.raw`(?!(?:in|is|at|from|to)\b|[0-9a-f]{4}(?:${W}+[0-9a-f]{4}){2})`;
 
 const annotValue: Grammar = join(
 	{
@@ -343,9 +347,11 @@ const vmmapRow: Grammar = {
 	current: /^►/,
 	"address-stack": vmmapAddr(String.raw`${PERM}[^\n]*\[stack`),
 	"address-code": vmmapAddr(String.raw`[r-][w-]x`),
-	"address-rodata": vmmapAddr(String.raw`[r-]-`),
+	// `---p` (guard / reserved, not readable) is no rodata: plain address
+	"address-rodata": vmmapAddr(String.raw`r-`),
 	"address-heap": vmmapAddr(String.raw`${PERM}[^\n]*\[heap`),
 	"address-data": vmmapAddr(String.raw`[r-]w`),
+	address: vmmapAddr(PERM),
 	path: lb(
 		re(
 			String.raw`(^[^\n]*?${PERM}${W}+[0-9a-f]+${W}+[0-9a-f]+${W}+)(?!(?:ADJACENT|GUARD)\b)[^\t\n ]+(?:${W}+(?!\+0x[0-9a-f]+${W}*$)[^\t\n ]+)*`,
@@ -372,8 +378,9 @@ const checksecLine: Grammar = {
 
 const message: Grammar = {
 	"msg-ok": /^\[\+\]/,
-	"msg-info": /^\[\*\]/,
-	"msg-error": /^\[[!x-]\]/,
+	// pwntools `[x] Starting local process …` is a progress line, not a failure
+	"msg-info": /^\[[*x]\]/,
+	"msg-error": /^\[[!-]\]/,
 	path: re(String.raw`(?<=')\/[^'\n]*(?=')`),
 	string: /'[^'\n]*'|`[^`\n]*`/,
 	address: re(H),
@@ -490,7 +497,8 @@ const rules: Grammar = {
 	"pwndbg-bt": {
 		pattern: line(
 			[
-				String.raw`${W}*(?:[►_]${W}+)?(?:f${W}+)?\d+${W}+${H}(?:${W}+(?!in${W})\S.*)?`,
+				// not `0x… in f ()` (gdb) nor a table row with more numbers (r2 `iS`: `0   0x460  0xb0 …`)
+				String.raw`${W}*(?:[►_]${W}+)?(?:f${W}+)?\d+${W}+${H}(?:${W}+(?!in${W}|0x)\S.*)?`,
 				String.raw`${W}*(?:[►_]${W}+)?f${W}+\d+${W}+[0-9a-f]+(?:${W}+\S.*)?`, // ≤2020: no `0x`
 			].join("|"),
 		),
@@ -908,4 +916,13 @@ function withAliases(g: Grammar, memo = new Map<Grammar, Grammar>()): Grammar {
 	return out;
 }
 
-export const pwndbg: PrismGrammar = withAliases(rules);
+/** Every top-level wrapper's inside first splits off trailing blanks (shared `trimmed`). */
+function trimAll(g: Grammar): Grammar {
+	const one = (v: RegExp | PatternObj): RegExp | PatternObj =>
+		v instanceof RegExp || !v.inside ? v : { ...v, inside: trimmed("pwndbg", v.inside) };
+	return Object.fromEntries(
+		Object.entries(g).map(([k, v]) => [k, Array.isArray(v) ? (v as (RegExp | PatternObj)[]).map(one) : one(v as RegExp | PatternObj)]),
+	);
+}
+
+export const pwndbg: PrismGrammar = withAliases(trimAll(rules));

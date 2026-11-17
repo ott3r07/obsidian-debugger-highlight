@@ -1,19 +1,36 @@
 import { RangeSetBuilder } from "@codemirror/state";
-import { Decoration, DecorationSet, EditorView, ViewPlugin, ViewUpdate } from "@codemirror/view";
+import type { Text } from "@codemirror/state";
+import { Decoration, EditorView, ViewPlugin } from "@codemirror/view";
+import type { DecorationSet, ViewUpdate } from "@codemirror/view";
 import type { Grammar } from "prismjs";
-import { FenceBlock, LineInfo, scanFences } from "../core/fences.ts";
-import { PrismLike, Segment, segmentsFor } from "../core/tokens.ts";
+import { scanFences } from "../core/fences.ts";
+import type { FenceBlock, LineInfo } from "../core/fences.ts";
+import { blockSegments } from "../core/tokens.ts";
+import type { PrismLike, Segment } from "../core/tokens.ts";
 
 export interface EditorHighlightOptions {
 	prism: PrismLike;
 	grammarFor(lang: string): Grammar | undefined;
 }
 
+/** A located block. Segments are computed lazily, only once it is visible. */
+interface LocatedBlock {
+	from: number;
+	to: number;
+	block: FenceBlock;
+	key: string;
+	segs?: Segment[]; // absolute document offsets, filled on first paint
+}
+
 /**
  * Source mode / Live Preview highlighting. Obsidian's editor is CodeMirror 6
- * and does not use Prism, so we tokenize each matching fenced block with the
- * same Prism grammar and paint the result with mark decorations. Nothing is
- * replaced, so the block stays editable.
+ * and does not use Prism, so each matching fenced block is tokenized with the
+ * same Prism grammar and painted with mark decorations. Nothing is replaced,
+ * so the block stays editable.
+ *
+ * Cost model: fences are re-scanned only when the document changes; a block
+ * is tokenized whole, only when it is visible, and cached by (lang, text), so
+ * scrolling never re-tokenizes and typing re-tokenizes only the edited block.
  */
 export function debuggerHighlightExtension(opts: EditorHighlightOptions) {
 	const markCache = new Map<string, Decoration>();
@@ -24,82 +41,78 @@ export function debuggerHighlightExtension(opts: EditorHighlightOptions) {
 		return d;
 	};
 
-	// Tokenizing is the expensive part; cache by (lang, text).
-	let segCache = new Map<string, Segment[]>();
-
-	function* docLines(view: EditorView, upTo: number): Generator<LineInfo> {
-		const doc = view.state.doc;
-		const last = doc.lineAt(Math.min(upTo, doc.length)).number;
-		for (let n = 1; n <= last; n++) {
+	function* docLines(doc: Text): Generator<LineInfo> {
+		for (let n = 1; n <= doc.lines; n++) {
 			const l = doc.line(n);
 			yield { from: l.from, text: l.text };
 		}
 	}
 
-	function build(view: EditorView): DecorationSet {
-		const builder = new RangeSetBuilder<Decoration>();
-		const { from: vpFrom, to: vpTo } = view.viewport;
-		const blocks = scanFences(docLines(view, vpTo), (l) => !!opts.grammarFor(l));
-		const nextCache = new Map<string, Segment[]>();
+	/** Relative segments of a block's joined content, keyed by lang + text. */
+	const tokenCache = new Map<string, Segment[]>();
 
-		for (const block of blocks) {
+	function locate(doc: Text): LocatedBlock[] {
+		const out: LocatedBlock[] = [];
+		for (const block of scanFences(docLines(doc), (l) => !!opts.grammarFor(l))) {
 			if (!block.lines.length) continue;
-			const first = block.lines[0]!;
-			const lastLine = block.lines[block.lines.length - 1]!;
-			if (lastLine.from + lastLine.text.length < vpFrom || first.from > vpTo) continue;
-			paint(block, builder, nextCache, vpFrom, vpTo);
+			const last = block.lines[block.lines.length - 1]!;
+			const key = block.lang + "\0" + block.lines.map((l) => l.text).join("\n");
+			out.push({ from: block.lines[0]!.from, to: last.from + last.text.length, block, key });
 		}
-		segCache = nextCache;
-		return builder.finish();
+		// drop cache entries for blocks that no longer exist
+		const live = new Set(out.map((b) => b.key));
+		for (const k of tokenCache.keys()) if (!live.has(k)) tokenCache.delete(k);
+		return out;
 	}
 
-	function paint(
-		block: FenceBlock,
-		builder: RangeSetBuilder<Decoration>,
-		nextCache: Map<string, Segment[]>,
-		vpFrom: number,
-		vpTo: number,
-	) {
-		const grammar = opts.grammarFor(block.lang)!;
-		const text = block.lines.map((l) => l.text).join("\n");
-		const key = block.lang + "\0" + text;
-		let segs = segCache.get(key) ?? nextCache.get(key);
-		if (!segs) segs = segmentsFor(opts.prism, text, grammar);
-		nextCache.set(key, segs);
-
-		// Map offsets in the joined text back to document offsets, line by line.
-		const starts: number[] = [];
-		let acc = 0;
-		for (const l of block.lines) {
-			starts.push(acc);
-			acc += l.text.length + 1;
+	function segmentsOf(b: LocatedBlock): Segment[] {
+		if (b.segs) return b.segs;
+		let rel = tokenCache.get(b.key);
+		if (!rel) {
+			const text = b.key.slice(b.key.indexOf("\0") + 1);
+			rel = blockSegments(opts.prism, text, opts.grammarFor(b.block.lang)!);
+			tokenCache.set(b.key, rel);
 		}
+		const lines = b.block.lines;
+		const segs: Segment[] = [];
 		let li = 0;
-		for (const seg of segs) {
-			let from = seg.from;
-			while (from < seg.to) {
-				while (li + 1 < starts.length && starts[li + 1]! <= from) li++;
-				const line = block.lines[li]!;
-				const lineEnd = starts[li]! + line.text.length;
-				const to = Math.min(seg.to, lineEnd);
-				if (to > from) {
-					const a = line.from + (from - starts[li]!);
-					const b = line.from + (to - starts[li]!);
-					if (b >= vpFrom && a <= vpTo) builder.add(a, b, mark(seg.classes));
-				}
-				from = lineEnd + 1; // skip the joining "\n"
+		let start = 0; // offset of line `li` in the joined text
+		for (const s of rel) {
+			// blockSegments never spans lines
+			while (li + 1 < lines.length && start + lines[li]!.text.length < s.from) {
+				start += lines[li]!.text.length + 1;
+				li++;
+			}
+			const shift = lines[li]!.from - start;
+			segs.push({ from: s.from + shift, to: s.to + shift, classes: s.classes });
+		}
+		return (b.segs = segs);
+	}
+
+	function paint(blocks: LocatedBlock[], view: EditorView): DecorationSet {
+		const builder = new RangeSetBuilder<Decoration>();
+		const { from, to } = view.viewport;
+		for (const b of blocks) {
+			if (b.to < from || b.from > to) continue;
+			for (const s of segmentsOf(b)) {
+				if (s.to < from || s.from > to) continue;
+				builder.add(s.from, s.to, mark(s.classes));
 			}
 		}
+		return builder.finish();
 	}
 
 	return ViewPlugin.fromClass(
 		class {
+			blocks: LocatedBlock[];
 			decorations: DecorationSet;
 			constructor(view: EditorView) {
-				this.decorations = build(view);
+				this.blocks = locate(view.state.doc);
+				this.decorations = paint(this.blocks, view);
 			}
 			update(u: ViewUpdate) {
-				if (u.docChanged || u.viewportChanged) this.decorations = build(u.view);
+				if (u.docChanged) this.blocks = locate(u.view.state.doc);
+				if (u.docChanged || u.viewportChanged) this.decorations = paint(this.blocks, u.view);
 			}
 		},
 		{ decorations: (v) => v.decorations },
