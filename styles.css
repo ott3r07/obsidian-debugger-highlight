@@ -40,45 +40,53 @@ body {
 	--dbg-heap-chunk: var(--color-blue);
 }
 
-/* Debugger output relies on column alignment: scroll instead of wrapping. */
-.dbg-hl, .dbg-hl > code {
-	white-space: pre !important;
-	overflow-wrap: normal !important;
-	word-break: normal !important;
+/*
+ * Debugger output relies on column alignment: scroll instead of wrapping.
+ * Obsidian wraps code via --code-white-space on the <pre> and
+ * `code[class*=language-]` on the <code>; the selectors below are more
+ * specific than both, so they win without priority overrides.
+ */
+.markdown-rendered pre.dbg-hl {
+	--code-white-space: pre;
+	white-space: pre;
+	overflow-x: auto;
 }
-.dbg-hl { overflow-x: auto; }
+.markdown-rendered pre.dbg-hl > code[class*="language-"] {
+	white-space: pre;
+	overflow-wrap: normal;
+	word-wrap: normal;
+	word-break: normal;
+}
 
-:is(.dbg-hl, .markdown-source-view .cm-line) .token {
-	&.dbg-prompt { color: var(--dbg-prompt); font-weight: 600; }
-	&.dbg-command { color: var(--dbg-command); font-weight: 600; }
-	&.dbg-section { color: var(--dbg-section); }
-	&.dbg-legend { color: var(--dbg-legend); }
-	&.dbg-register { color: var(--dbg-register); }
-	&.dbg-flag-set { color: var(--dbg-flag-set); font-weight: 600; }
-	&.dbg-flag-clear { color: var(--dbg-flag-clear); }
-	&.dbg-address { color: var(--dbg-address); }
-	&.dbg-address-stack { color: var(--dbg-address-stack); }
-	&.dbg-address-heap { color: var(--dbg-address-heap); }
-	&.dbg-address-code { color: var(--dbg-address-code); }
-	&.dbg-address-data { color: var(--dbg-address-data); }
-	&.dbg-address-rodata { color: var(--dbg-address-rodata); }
-	&.dbg-number { color: var(--dbg-number); }
-	&.dbg-symbol { color: var(--dbg-symbol); }
-	&.dbg-mnemonic, &.dbg-mnemonic-branch { color: var(--dbg-mnemonic); }
-	&.dbg-mnemonic-branch { font-weight: 600; }
-	&.dbg-current { color: var(--dbg-current); font-weight: 700; }
-	&.dbg-arrow { color: var(--dbg-arrow); }
-	&.dbg-string { color: var(--dbg-string); }
-	&.dbg-comment, &.dbg-offset, &.dbg-punctuation { color: var(--dbg-comment); }
-	&.dbg-taken { color: var(--dbg-taken); font-weight: 600; }
-	&.dbg-not-taken { color: var(--dbg-not-taken); }
-	&.dbg-perm { color: var(--dbg-perm); }
-	&.dbg-path { color: var(--dbg-path); }
-	&.dbg-msg-ok, &.dbg-enabled { color: var(--dbg-ok); }
-	&.dbg-msg-info { color: var(--dbg-info); }
-	&.dbg-msg-warn { color: var(--dbg-warn); }
-	&.dbg-msg-error, &.dbg-signal, &.dbg-disabled { color: var(--dbg-error); }
-	&.dbg-signal { font-weight: 700; }
-	&.dbg-keyword { font-weight: 600; }
-	&.dbg-heap-chunk, &.dbg-bin { color: var(--dbg-heap-chunk); font-weight: 600; }
-}
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-prompt { color: var(--dbg-prompt); font-weight: 600; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-command { color: var(--dbg-command); font-weight: 600; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-section { color: var(--dbg-section); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-legend { color: var(--dbg-legend); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-register { color: var(--dbg-register); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-flag-set { color: var(--dbg-flag-set); font-weight: 600; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-flag-clear { color: var(--dbg-flag-clear); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-address { color: var(--dbg-address); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-address-stack { color: var(--dbg-address-stack); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-address-heap { color: var(--dbg-address-heap); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-address-code { color: var(--dbg-address-code); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-address-data { color: var(--dbg-address-data); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-address-rodata { color: var(--dbg-address-rodata); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-number { color: var(--dbg-number); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-symbol { color: var(--dbg-symbol); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-mnemonic, :is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-mnemonic-branch { color: var(--dbg-mnemonic); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-mnemonic-branch { font-weight: 600; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-current { color: var(--dbg-current); font-weight: 700; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-arrow { color: var(--dbg-arrow); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-string { color: var(--dbg-string); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-comment, :is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-offset, :is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-punctuation { color: var(--dbg-comment); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-taken { color: var(--dbg-taken); font-weight: 600; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-not-taken { color: var(--dbg-not-taken); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-perm { color: var(--dbg-perm); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-path { color: var(--dbg-path); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-msg-ok, :is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-enabled { color: var(--dbg-ok); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-msg-info { color: var(--dbg-info); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-msg-warn { color: var(--dbg-warn); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-msg-error, :is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-signal, :is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-disabled { color: var(--dbg-error); }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-signal { font-weight: 700; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-keyword { font-weight: 600; }
+:is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-heap-chunk, :is(.dbg-hl, .markdown-source-view .cm-line) .token.dbg-bin { color: var(--dbg-heap-chunk); font-weight: 600; }
