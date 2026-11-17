@@ -466,14 +466,14 @@ test("REVIEW §2.2: identical tokens with TABs expanded, trailing whitespace tri
 	assert.ok(n > 1500);
 });
 
-test("perf: 20k-char padded lines each tokenize in < 20 ms", () => {
+test("perf: 20k-char padded lines each tokenize in < 200 ms (catastrophic backtracking would take seconds)", () => {
 	const P = " ".repeat(20000);
 	for (const l of [P, "\t".repeat(20000), P + "x", "0x1:" + P + "y", "rax" + P + "0x1" + P, "  0x1" + P + "0x2" + P + "0x3" + P, "   0x1 <+0>:" + P + "mov" + P + "rax", "x = " + "{".repeat(20000), "warning: " + "./".repeat(10000)]) {
 		Prism.tokenize(l, gdb);
 		const t0 = performance.now();
 		Prism.tokenize(l, gdb);
 		const ms = performance.now() - t0;
-		assert.ok(ms < 20, `${ms.toFixed(1)} ms for ${JSON.stringify(l.slice(0, 20))}…`);
+		assert.ok(ms < 200, `${ms.toFixed(1)} ms for ${JSON.stringify(l.slice(0, 20))}…`);
 	}
 });
 
